@@ -12,15 +12,10 @@ import javax.persistence.Table;
 @Setter
 public class TaskDocument extends BaseDocument{
 
-
     private String taskOutDate;
     private String taskExecPeriod;
     private String taskResponsible;
-
-
     private String taskSignOfControl;
-
-
     private String taskControlPerson;
 
     public TaskDocument(String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String taskOutDate, String taskExecPeriod, String taskResponsible, String taskSignOfControl, String taskControlPerson) {

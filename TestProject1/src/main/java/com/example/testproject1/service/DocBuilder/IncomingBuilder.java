@@ -1,5 +1,6 @@
 package com.example.testproject1.service.DocBuilder;
 
+import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.IncomingDocument;
 
 public interface IncomingBuilder {
@@ -8,7 +9,7 @@ public interface IncomingBuilder {
 
     public IncomingBuilder fixDocumentText();
 
-    public IncomingBuilder fixDocumentRegNumber();
+    public IncomingBuilder fixDocumentRegNumber() throws DocumentExistsException;
 
     public IncomingBuilder fixDocumentData();
 

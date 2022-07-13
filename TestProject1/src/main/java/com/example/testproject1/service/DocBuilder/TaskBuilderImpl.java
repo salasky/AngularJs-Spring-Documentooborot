@@ -1,10 +1,11 @@
 package com.example.testproject1.service.DocBuilder;
 
 import com.example.testproject1.exeption.DocumentExistsException;
+import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.TaskDocument;
+import com.example.testproject1.shell.TaskDocumentShell;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,16 +24,23 @@ public class TaskBuilderImpl implements TaskBuilder{
     private String taskSignOfControl;
     private String taskControlPerson;
 
-    private List<TaskDocument> taskDocumentsList=new ArrayList<>();
-    private static List<String> docNameList=new ArrayList<>(List.of("HelloDocName", "WorldDocName","LogicDocName","CitrosDocName","IamDocName"));
-    private static List<String> docTextList=new ArrayList<>(List.of("IamDocText-Hello worl!", "IamDocText-Java","IamDocText-Text","IamDocText-Kotlin","IamDocText-Spring"));
 
-    private static List<String> docAuthorList=new ArrayList<>(List.of("Бабошин Игорь Сергеевич", "Дацюк Павел Иванович","Кучеров Никита Сергеевич","Кросби Сидни Иванович","Джобс Стив Олегович"));
+    public static List<String> docNameList=new ArrayList<>(List.of("HelloDocName", "WorldDocName","LogicDocName","CitrosDocName","IamDocName"));
 
-    private static List<String> controlList=new ArrayList<>(List.of("Подтверждение автора","Проверка тестировщика","Не назначено"));
+    public static List<String> docNameIncomingList=new ArrayList<>(List.of("Главный документ", "Отпуск","Больничный","Выходной","Увольнение"));
 
-    private static List<String> controlPersonList=new ArrayList<>(List.of("Иванов Игорь Сергеевич", "Кавальчук Алексей Иванович","Гвардиола Пеп Сергеевич"));
+    public static List<String> docNameOutgoingList=new ArrayList<>(List.of("Архив", "Отдел кадров","Отдел программирования","Отдел производства","Маркетинг"));
+    public static List<String> docTextList=new ArrayList<>(List.of("IamDocText-Hello worl!", "IamDocText-Java","IamDocText-Text","IamDocText-Kotlin","IamDocText-Spring"));
 
+    public static List<String> docAuthorList=new ArrayList<>(List.of("Бабошин Игорь Сергеевич", "Дацюк Павел Иванович","Кучеров Никита Сергеевич","Кросби Сидни Иванович","Джобс Стив Олегович"));
+
+    public static List<String> controlList=new ArrayList<>(List.of("Подтверждение автора","Проверка тестировщика","Не назначено"));
+
+    public static List<String> controlPersonList=new ArrayList<>(List.of("Иванов Игорь Сергеевич", "Кавальчук Алексей Иванович","Гвардиола Пеп Сергеевич"));
+
+    public static List<String> distinPersonList =new ArrayList<>(List.of("Иванов Иван Иванович", "Админ Админ Админовчи","Гвардиола Пеп Сергеевич","Rik Nikols Pool","Gleen Satoshi Nikamota"));
+
+    public static List<String> deliveryTypeList =new ArrayList<>(List.of("Голубями", "Email","RocketChat","Гонцом","Почтой России"));
     @Override
     public TaskBuilder fixDocumentName() {
         this.documentName=docNameList.get((int) ( Math.random() * 5 ));
@@ -49,7 +57,7 @@ public class TaskBuilderImpl implements TaskBuilder{
     public TaskBuilder fixDocumentRegNumber() throws DocumentExistsException {
         var regNumber= Long.valueOf((int) (Math.random()*100));
 
-        for (TaskDocument t:taskDocumentsList)
+        for (BaseDocument t:TaskDocumentShell.documentList)
         {
             if (t.getDocumentRegNumber() == regNumber) {
                 throw new DocumentExistsException(regNumber,"Document number "+regNumber+" exist");
@@ -106,7 +114,7 @@ public class TaskBuilderImpl implements TaskBuilder{
     public TaskDocument build() {
        var taskdoc= new TaskDocument(documentName,documentText,documentRegNumber,documentData,documentAuthor
                ,taskOutDate,taskExecPeriod,taskResponsible,taskSignOfControl,taskControlPerson);
-       taskDocumentsList.add(taskdoc);
+       TaskDocumentShell.documentList.add(taskdoc);
        return taskdoc;
     }
 }
