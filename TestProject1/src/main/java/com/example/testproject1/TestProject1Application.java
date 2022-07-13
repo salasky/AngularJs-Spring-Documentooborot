@@ -1,5 +1,9 @@
 package com.example.testproject1;
 
+import com.example.testproject1.model.BaseDocument;
+import com.example.testproject1.model.TaskDocument;
+import com.example.testproject1.service.Docfactory.DocFactory;
+import com.example.testproject1.service.Docfactory.TaskDocumentFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +11,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TestProject1Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestProject1Application.class, args);
+		var context=SpringApplication.run(TestProject1Application.class, args);
+
+
+
+		var taskfactory=context.getBean(TaskDocumentFactory.class);
+		var task=taskfactory.createDocument();
+		System.out.println(task);
 	}
 
 }
