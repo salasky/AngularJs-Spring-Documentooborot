@@ -1,15 +1,11 @@
-package com.example.testproject1.service.DocBuilder;
+package com.example.testproject1.service.docBuilder;
 
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.IncomingDocument;
-import com.example.testproject1.model.TaskDocument;
+import com.example.testproject1.service.staticList.StaticList;
 import com.example.testproject1.shell.TaskDocumentShell;
 import org.springframework.stereotype.Component;
-
-import javax.persistence.Column;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class IncomingBuilderImpl implements IncomingBuilder{
@@ -18,7 +14,6 @@ public class IncomingBuilderImpl implements IncomingBuilder{
     private Long documentRegNumber;
     private String documentData;
     private String documentAuthor;
-
     private String incomingDocumentSender;
     private String incomingDocumentDestination;
     private Long incomingDocumentNumber;
@@ -27,13 +22,13 @@ public class IncomingBuilderImpl implements IncomingBuilder{
 
     @Override
     public IncomingBuilder fixDocumentName() {
-         this.documentName=TaskBuilderImpl.docNameIncomingList.get((int) ( Math.random() * 5 ));
+         this.documentName= StaticList.docNameIncomingList.get((int) ( Math.random() * 5 ));
          return this;
     }
 
     @Override
     public IncomingBuilder fixDocumentText() {
-        this.documentText=TaskBuilderImpl.docTextList.get((int) ( Math.random() * 5 )) ;
+        this.documentText=StaticList.docTextList.get((int) ( Math.random() * 5 )) ;
         return this;
     }
 
@@ -59,7 +54,7 @@ public class IncomingBuilderImpl implements IncomingBuilder{
 
     @Override
     public IncomingBuilder fixDocumentAuthor() {
-        this.documentAuthor=TaskBuilderImpl.docAuthorList.get((int) ( Math.random() * 5 )) ;
+        this.documentAuthor=StaticList.docAuthorList.get((int) ( Math.random() * 5 )) ;
         return this;
     }
 
@@ -71,7 +66,7 @@ public class IncomingBuilderImpl implements IncomingBuilder{
 
     @Override
     public IncomingBuilder fixIncomingDocumentDestination() {
-        this.incomingDocumentDestination=TaskBuilderImpl.distinPersonList.get((int) ( Math.random() * 5 )) ;
+        this.incomingDocumentDestination=StaticList.distinPersonList.get((int) ( Math.random() * 5 )) ;
         return this;
     }
 

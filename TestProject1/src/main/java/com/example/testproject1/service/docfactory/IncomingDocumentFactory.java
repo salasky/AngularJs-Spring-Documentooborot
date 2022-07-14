@@ -1,9 +1,8 @@
-package com.example.testproject1.service.Docfactory;
+package com.example.testproject1.service.docfactory;
 
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
-import com.example.testproject1.model.IncomingDocument;
-import com.example.testproject1.service.DocBuilder.IncomingBuilder;
+import com.example.testproject1.service.docBuilder.IncomingBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,7 @@
-package com.example.testproject1.service.DocBuilder;
+package com.example.testproject1.service.docBuilder;
 
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.TaskDocument;
-import org.springframework.stereotype.Component;
 
 public interface TaskBuilder {
 

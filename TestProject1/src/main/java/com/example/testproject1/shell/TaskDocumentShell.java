@@ -8,6 +8,7 @@ import java.util.List;
 
 /*@ShellComponent*/
 public class TaskDocumentShell {
+    //Хранятся все документы.Сохранение происходят в Builder-ax (.build())
     public static List<BaseDocument> documentList=new ArrayList<>();
 
 

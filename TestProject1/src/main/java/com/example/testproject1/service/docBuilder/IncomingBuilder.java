@@ -1,4 +1,4 @@
-package com.example.testproject1.service.DocBuilder;
+package com.example.testproject1.service.docBuilder;
 
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.IncomingDocument;

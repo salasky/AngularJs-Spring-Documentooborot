@@ -1,8 +1,9 @@
-package com.example.testproject1.service.DocBuilder;
+package com.example.testproject1.service.docBuilder;
 
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.TaskDocument;
+import com.example.testproject1.service.staticList.StaticList;
 import com.example.testproject1.shell.TaskDocumentShell;
 import org.springframework.stereotype.Component;
 
@@ -25,31 +26,16 @@ public class TaskBuilderImpl implements TaskBuilder{
     private String taskControlPerson;
 
 
-    public static List<String> docNameList=new ArrayList<>(List.of("HelloDocName", "WorldDocName","LogicDocName","CitrosDocName","IamDocName"));
 
-    public static List<String> docNameIncomingList=new ArrayList<>(List.of("Главный документ", "Отпуск","Больничный","Выходной","Увольнение"));
-
-    public static List<String> docNameOutgoingList=new ArrayList<>(List.of("Архив", "Отдел кадров","Отдел программирования","Отдел производства","Маркетинг"));
-    public static List<String> docTextList=new ArrayList<>(List.of("IamDocText-Hello worl!", "IamDocText-Java","IamDocText-Text","IamDocText-Kotlin","IamDocText-Spring"));
-
-    public static List<String> docAuthorList=new ArrayList<>(List.of("Бабошин Игорь Сергеевич", "Дацюк Павел Иванович","Кучеров Никита Сергеевич","Кросби Сидни Иванович","Джобс Стив Олегович"));
-
-    public static List<String> controlList=new ArrayList<>(List.of("Подтверждение автора","Проверка тестировщика","Не назначено"));
-
-    public static List<String> controlPersonList=new ArrayList<>(List.of("Иванов Игорь Сергеевич", "Кавальчук Алексей Иванович","Гвардиола Пеп Сергеевич"));
-
-    public static List<String> distinPersonList =new ArrayList<>(List.of("Иванов Иван Иванович", "Админ Админ Админовчи","Гвардиола Пеп Сергеевич","Rik Nikols Pool","Gleen Satoshi Nikamota"));
-
-    public static List<String> deliveryTypeList =new ArrayList<>(List.of("Голубями", "Email","RocketChat","Гонцом","Почтой России"));
     @Override
     public TaskBuilder fixDocumentName() {
-        this.documentName=docNameList.get((int) ( Math.random() * 5 ));
+        this.documentName= StaticList.docNameList.get((int) ( Math.random() * 5 ));
         return this;
     }
 
     @Override
     public TaskBuilder fixDocumentText() {
-        this.documentText=docTextList.get((int) ( Math.random() * 5 )) ;
+        this.documentText=StaticList.docTextList.get((int) ( Math.random() * 5 )) ;
         return this;
     }
 
@@ -75,7 +61,7 @@ public class TaskBuilderImpl implements TaskBuilder{
 
     @Override
     public TaskBuilder fixDocumentAuthor() {
-        this.documentAuthor=docAuthorList.get((int) ( Math.random() * 5 )) ;
+        this.documentAuthor=StaticList.docAuthorList.get((int) ( Math.random() * 5 )) ;
         return this;
     }
 
@@ -94,19 +80,19 @@ public class TaskBuilderImpl implements TaskBuilder{
 
     @Override
     public TaskBuilder fixTaskResponsible() {
-        this.taskResponsible=docAuthorList.get((int) ( Math.random() * 5 )) ;
+        this.taskResponsible=StaticList.docAuthorList.get((int) ( Math.random() * 5 )) ;
         return this;
     }
 
     @Override
     public TaskBuilder fixTaskSignOfControl() {
-        this.taskSignOfControl=controlList.get((int) ( Math.random() *3 )) ;
+        this.taskSignOfControl=StaticList.controlList.get((int) ( Math.random() *3 )) ;
         return this;
     }
 
     @Override
     public TaskBuilder fixTaskControlPerson() {
-        this.taskControlPerson=controlPersonList.get((int) ( Math.random() *3 )) ;
+        this.taskControlPerson=StaticList.controlPersonList.get((int) ( Math.random() *3 )) ;
         return this;
     }
 

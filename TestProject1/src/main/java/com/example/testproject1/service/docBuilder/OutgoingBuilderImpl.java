@@ -1,8 +1,9 @@
-package com.example.testproject1.service.DocBuilder;
+package com.example.testproject1.service.docBuilder;
 
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.OutgoingDocument;
+import com.example.testproject1.service.staticList.StaticList;
 import com.example.testproject1.shell.TaskDocumentShell;
 import org.springframework.stereotype.Component;
 
@@ -19,13 +20,13 @@ public class OutgoingBuilderImpl implements OutgoingBuilder{
 
     @Override
     public OutgoingBuilder fixDocumentName() {
-        this.documentName=TaskBuilderImpl.docNameOutgoingList.get((int) ( Math.random() * 5 )) ;
+        this.documentName= StaticList.docNameOutgoingList.get((int) ( Math.random() * 5 )) ;
         return this;
     }
 
     @Override
     public OutgoingBuilder fixDocumentText() {
-        this.documentText=TaskBuilderImpl.docTextList.get((int) ( Math.random() * 5 )) ;
+        this.documentText=StaticList.docTextList.get((int) ( Math.random() * 5 )) ;
         return this;
     }
 
@@ -51,19 +52,19 @@ public class OutgoingBuilderImpl implements OutgoingBuilder{
 
     @Override
     public OutgoingBuilder fixDocumentAuthor() {
-        this.documentAuthor=TaskBuilderImpl.docAuthorList.get((int) ( Math.random() * 5 )) ;
+        this.documentAuthor=StaticList.docAuthorList.get((int) ( Math.random() * 5 )) ;
         return this;
     }
 
     @Override
     public OutgoingBuilder fixOutgoingDocumentSender() {
-        this.outgoingDocumentSender=TaskBuilderImpl.distinPersonList.get((int) ( Math.random() * 5 )) ;
+        this.outgoingDocumentSender=StaticList.distinPersonList.get((int) ( Math.random() * 5 )) ;
         return this;
     }
 
     @Override
     public OutgoingBuilder fixOutgoingDocumentDeliveryType() {
-        this.outgoingDocumentDeliveryType=TaskBuilderImpl.deliveryTypeList.get((int) ( Math.random() * 5 )) ;
+        this.outgoingDocumentDeliveryType=StaticList.deliveryTypeList.get((int) ( Math.random() * 5 )) ;
         return this;
     }
 
