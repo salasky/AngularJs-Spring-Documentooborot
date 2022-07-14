@@ -2,12 +2,7 @@ package com.example.testproject1.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
-/*@Entity
-@Table(name = "TaskDocument")*/
 @Getter
 @Setter
 public class TaskDocument extends BaseDocument{

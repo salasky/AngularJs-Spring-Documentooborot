@@ -7,7 +7,7 @@ target/
 mvnw
 mvnw.cmd
 /src/main/java/META-INF/
-
+.mvn
 ### STS ###
 .apt_generated
 .classpath

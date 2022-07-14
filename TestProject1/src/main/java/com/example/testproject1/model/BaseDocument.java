@@ -2,7 +2,7 @@ package com.example.testproject1.model;
 
 import lombok.*;
 
-import javax.persistence.*;
+
 import java.util.Comparator;
 
 /*@MappedSuperclass*/

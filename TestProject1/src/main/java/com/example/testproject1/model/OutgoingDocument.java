@@ -3,8 +3,7 @@ package com.example.testproject1.model;
 import lombok.Getter;
 import lombok.Setter;
 
-/*@Entity
-@Table(name = "OutgoingDocument")*/
+
 @Getter
 @Setter
 public class OutgoingDocument extends BaseDocument{
