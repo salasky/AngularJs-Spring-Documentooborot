@@ -2,6 +2,7 @@ package com.example.testproject1.service.docBuilder;
 
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
+import com.example.testproject1.model.IncomingDocument;
 import com.example.testproject1.model.TaskDocument;
 import com.example.testproject1.service.DocSave.DocSave;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,32 +11,75 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Класс реализующий паттерн Builder. Для создания экземпляров {@link TaskDocument}
+ */
 @Component
 public class TaskBuilderImpl implements TaskBuilder{
 
+    /**
+     * {@link TaskDocument#documentName}
+     */
     private String documentName;
+    /**
+     * {@link TaskDocument#documentText}
+     */
     private String documentText;
+    /**
+     * {@link TaskDocument#documentRegNumber}
+     */
     private Long documentRegNumber;
+    /**
+     * {@link TaskDocument#documentData}
+     */
     private String documentData;
+    /**
+     * {@link TaskDocument#documentAuthor}
+     */
     private String documentAuthor;
+    /**
+     * {@link TaskDocument#taskOutDate}
+     */
     private String taskOutDate;
+    /**
+     * {@link TaskDocument#taskExecPeriod}
+     */
     private String taskExecPeriod;
+    /**
+     * {@link TaskDocument#taskResponsible}
+     */
     private String taskResponsible;
+    /**
+     * {@link TaskDocument#taskSignOfControl}
+     */
     private String taskSignOfControl;
+    /**
+     * {@link TaskDocument#taskControlPerson}
+     */
     private String taskControlPerson;
-
+    /**
+     * Лист названий поручений из application.yaml
+     */
     @Value("${doc.documentName}")
     private List<String> newDocNameList;
-
+    /**
+     * Лист текстов поручений из application.yaml
+     */
     @Value("${doc.documentText}")
     private List<String> newDocTextList;
-
+    /**
+     * Лист авторов поручений из application.yaml
+     */
     @Value("${doc.documentAuthor}")
     private List<String> newDocAuthorList;
-
+    /**
+     * Лист признаков контроля поручений из application.yaml
+     */
     @Value("${doc.documentControl}")
     private List<String> newDocControlList;
-
+    /**
+     * Лист контролеров поручений из application.yaml
+     */
     @Value("${doc.documentControlPerson}")
     private List<String> newDocControlPersonList;
 

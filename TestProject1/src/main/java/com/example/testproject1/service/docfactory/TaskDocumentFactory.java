@@ -8,10 +8,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
-
+/**
+ * класс фабрики для {@link com.example.testproject1.model.TaskDocument}
+ */
 @Service
 public class TaskDocumentFactory extends DocFactory {
-
+    /**
+     * Автоваирим объект {@link com.example.testproject1.service.docBuilder.TaskBuilderImpl}
+     */
     @Autowired
     private TaskBuilder taskBuilder;
 

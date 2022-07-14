@@ -2,15 +2,32 @@ package com.example.testproject1.model;
 
 import lombok.*;
 
-
+/**
+ * Клас поручений. Наследник {@link BaseDocument}
+ *
+ */
 @Getter
 @Setter
 public class TaskDocument extends BaseDocument{
-
+    /**
+     * дата выдачи поручения
+     */
     private String taskOutDate;
+    /**
+     * срок исполнения поручения
+     */
     private String taskExecPeriod;
+    /**
+     * ответственный исполнитель
+     */
     private String taskResponsible;
+    /**
+     * признак контрольности
+     */
     private String taskSignOfControl;
+    /**
+     * контролер поручения
+     */
     private String taskControlPerson;
 
     public TaskDocument(String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String taskOutDate, String taskExecPeriod, String taskResponsible, String taskSignOfControl, String taskControlPerson) {

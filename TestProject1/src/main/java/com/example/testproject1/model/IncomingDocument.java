@@ -1,23 +1,31 @@
 package com.example.testproject1.model;
 
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
+/**
+ * Клас входящих документов. Наследник {@link BaseDocument}
+ *
+ */
 
 @Getter
 @Setter
 public class IncomingDocument extends BaseDocument{
-
+    /**
+     * отправитель
+     */
     private String incomingDocumentSender;
-
+    /**
+     * адресат
+     */
     private String incomingDocumentDestination;
-
+    /**
+     * исходящий номер
+     */
     private Long incomingDocumentNumber;
-
+    /**
+     * исходящая дата регистрации
+     */
     private String incomingDocumentDate;
 
     public IncomingDocument( String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String incomingDocumentSender, String incomingDocumentDestination, Long incomingDocumentNumber, String incomingDocumentDate) {

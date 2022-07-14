@@ -3,13 +3,21 @@ package com.example.testproject1.model;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Клас исходящих документов. Наследник {@link BaseDocument}
+ *
+ */
 
 @Getter
 @Setter
 public class OutgoingDocument extends BaseDocument{
-
+    /**
+     * адресат
+     */
     private String outgoingDocumentSender;
-
+    /**
+     * способ доставки
+     */
     private String outgoingDocumentDeliveryType;
 
     public OutgoingDocument( String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String outgoingDocumentSender, String outgoingDocumentDeliveryType) {

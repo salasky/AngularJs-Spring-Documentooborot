@@ -5,10 +5,14 @@ import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.service.docBuilder.OutgoingBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+/**
+ * класс фабрики для {@link com.example.testproject1.model.OutgoingDocument}
+ */
 @Service
 public class OutgoingDocumentFactory extends DocFactory{
-
+    /**
+     * Автоваирим объект {@link com.example.testproject1.service.docBuilder.OutgoingBuilderImpl}
+     */
     @Autowired
     private OutgoingBuilder outgoingBuilder;
     @Override

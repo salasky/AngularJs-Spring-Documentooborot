@@ -8,28 +8,63 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+/**
+ * Класс реализующий паттерн Builder. Для создания экземпляров {@link OutgoingDocument}
+ */
 @Component
 public class OutgoingBuilderImpl implements OutgoingBuilder{
+    /**
+     * {@link OutgoingDocument#documentName}
+     */
     private String documentName;
+    /**
+     * {@link OutgoingDocument#documentText}
+     */
     private String documentText;
+    /**
+     * {@link OutgoingDocument#documentRegNumber}
+     */
     private Long documentRegNumber;
+    /**
+     * {@link OutgoingDocument#documentData}
+     */
     private String documentData;
+    /**
+     * {@link OutgoingDocument#documentAuthor}
+     */
     private String documentAuthor;
+    /**
+     * {@link OutgoingDocument#outgoingDocumentSender}
+     */
     private String outgoingDocumentSender;
+    /**
+     * {@link OutgoingDocument#outgoingDocumentDeliveryType}
+     */
     private String outgoingDocumentDeliveryType;
+
+    /**
+     * Лист текстов исходящих документов из application.yaml
+     */
     @Value("${doc.documentText}")
     private List<String> newDocTextList;
-
+    /**
+     * Лист авторов исходящих документов из application.yaml
+     */
     @Value("${doc.documentAuthor}")
     private List<String> newDocAuthorList;
-
+    /**
+     * Лист адресатов исходящих документов из application.yaml
+     */
     @Value("${doc.documentDistPerson}")
     private List<String> newDocDistPerson;
-
+    /**
+     * Лист названий исходящих документов из application.yaml
+     */
     @Value("${doc.documentOutName}")
     private List<String> newdocNameOutgoingList;
-
+    /**
+     * Лист типа доставки исходящих документов из application.yaml
+     */
     @Value("${doc.docDeliveryType}")
     private List<String> newdocDeliveryTypeList;
 

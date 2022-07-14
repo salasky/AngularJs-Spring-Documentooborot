@@ -3,33 +3,72 @@ package com.example.testproject1.service.docBuilder;
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.IncomingDocument;
+import com.example.testproject1.model.TaskDocument;
 import com.example.testproject1.service.DocSave.DocSave;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+/**
+ * Класс реализующий паттерн Builder. Для создания экземпляров {@link IncomingDocument}
+ */
 @Component
 public class IncomingBuilderImpl implements IncomingBuilder{
+    /**
+     * {@link IncomingDocument#documentName}
+     */
     private String documentName;
+    /**
+     * {@link IncomingDocument#documentText}
+     */
     private String documentText;
+    /**
+     * {@link IncomingDocument#documentRegNumber}
+     */
     private Long documentRegNumber;
+    /**
+     * {@link IncomingDocument#documentData}
+     */
     private String documentData;
+    /**
+     * {@link IncomingDocument#documentAuthor}
+     */
     private String documentAuthor;
+    /**
+     * {@link IncomingDocument#incomingDocumentSender}
+     */
     private String incomingDocumentSender;
+    /**
+     * {@link IncomingDocument#incomingDocumentDestination}
+     */
     private String incomingDocumentDestination;
+    /**
+     * {@link IncomingDocument#incomingDocumentNumber}
+     */
     private Long incomingDocumentNumber;
+    /**
+     * {@link IncomingDocument#incomingDocumentDate}
+     */
     private String incomingDocumentDate;
 
+    /**
+     * Лист значений текстов из application.yaml
+     */
     @Value("${doc.documentText}")
     private List<String> newDocTextList;
-
+    /**
+     * Лист значений авторов из application.yaml
+     */
     @Value("${doc.documentAuthor}")
     private List<String> newDocAuthorList;
-
+    /**
+     * Лист значений названий входящих документов из application.yaml
+     */
     @Value("${doc.documentIncomingList}")
     private List<String> newDocIncomingList;
-
+    /**
+     * Лист значений адресатов из application.yaml
+     */
     @Value("${doc.documentDistPerson}")
     private List<String> newDocDistPerson;
 

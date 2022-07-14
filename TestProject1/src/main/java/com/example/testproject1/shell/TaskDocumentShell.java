@@ -17,15 +17,27 @@ import org.springframework.shell.standard.ShellOption;
 
 import java.util.*;
 
+/**
+ * Класс для работы с терминалом shell и запуска генерации документов и отчетов
+ */
 @ShellComponent
 public class TaskDocumentShell {
 
-
-
-
+    /**
+     * Объект класса {@link TaskDocumentFactory}
+     */
     private TaskDocumentFactory taskFactory;
+    /**
+     * Объект класса {@link IncomingDocumentFactory}
+     */
     private IncomingDocumentFactory incomingDocFactory;
+    /**
+     * Объект класса {@link OutgoingDocumentFactory}
+     */
     private OutgoingDocumentFactory outgoingFactory;
+    /**
+     * Объект класса {@link DocSave}
+     */
     private DocSave docSave;
     @Autowired
     public TaskDocumentShell(TaskDocumentFactory taskFactory, IncomingDocumentFactory incomingDocFactory, OutgoingDocumentFactory outgoingFactory, DocSave docSave) {
@@ -35,7 +47,12 @@ public class TaskDocumentShell {
         this.docSave = docSave;
     }
 
-
+    /**
+     *
+     * @param task Передаем количество генерируемых поручений
+     * @param incoming Передаем количество генерируемых входящих документов
+     * @param outgoing Передаем количество генерируемых исходящих
+     */
     @ShellMethod(value = "generate Param(Int taskDocCount(default=10),Int incomingDocCount(default=10),Int outgoingDocCount(default=10)", key = "generate")
     public void generate(@ShellOption(defaultValue="10") String task, @ShellOption(defaultValue="10") String incoming, @ShellOption(defaultValue="10") String outgoing) {
 

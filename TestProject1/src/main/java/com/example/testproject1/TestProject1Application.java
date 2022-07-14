@@ -13,6 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.*;
 
+/**
+ * THIS IS MY MAIN CLASS
+ */
 @SpringBootApplication
 public class TestProject1Application {
 
