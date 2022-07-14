@@ -20,19 +20,19 @@ public class OutgoingBuilderImpl implements OutgoingBuilder{
 
     @Override
     public OutgoingBuilder fixDocumentName() {
-        this.documentName= StaticList.docNameOutgoingList.get((int) ( Math.random() * 5 )) ;
+        this.documentName= StaticList.docNameOutgoingList.get((int) ( Math.random() * StaticList.docNameOutgoingList.size() )) ;
         return this;
     }
 
     @Override
     public OutgoingBuilder fixDocumentText() {
-        this.documentText=StaticList.docTextList.get((int) ( Math.random() * 5 )) ;
+        this.documentText=StaticList.docTextList.get((int) ( Math.random() * StaticList.docTextList.size() )) ;
         return this;
     }
 
     @Override
     public OutgoingBuilder fixDocumentRegNumber() throws DocumentExistsException {
-        var regNumber= Long.valueOf((int) (Math.random()*100)+200);//первые 100 номера для поручений, 100-200 для входящих,200-300 для исходящих
+        var regNumber= Long.valueOf((int) (Math.random()*102));
 
         for (BaseDocument t: TaskDocumentShell.documentList)
         {
@@ -52,19 +52,19 @@ public class OutgoingBuilderImpl implements OutgoingBuilder{
 
     @Override
     public OutgoingBuilder fixDocumentAuthor() {
-        this.documentAuthor=StaticList.docAuthorList.get((int) ( Math.random() * 5 )) ;
+        this.documentAuthor=StaticList.docAuthorList.get((int) ( Math.random() * StaticList.docAuthorList.size() )) ;
         return this;
     }
 
     @Override
     public OutgoingBuilder fixOutgoingDocumentSender() {
-        this.outgoingDocumentSender=StaticList.distinPersonList.get((int) ( Math.random() * 5 )) ;
+        this.outgoingDocumentSender=StaticList.distinPersonList.get((int) ( Math.random() * StaticList.distinPersonList.size() )) ;
         return this;
     }
 
     @Override
     public OutgoingBuilder fixOutgoingDocumentDeliveryType() {
-        this.outgoingDocumentDeliveryType=StaticList.deliveryTypeList.get((int) ( Math.random() * 5 )) ;
+        this.outgoingDocumentDeliveryType=StaticList.deliveryTypeList.get((int) ( Math.random() * StaticList.deliveryTypeList.size())) ;
         return this;
     }
 

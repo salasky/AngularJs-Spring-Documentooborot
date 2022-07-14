@@ -19,7 +19,8 @@ public class TestProject1Application {
 
 	public static void main(String[] args) {
 		var context=SpringApplication.run(TestProject1Application.class, args);
-
+	/*	System.out.println("----------------------------------------------------------------------");
+		System.out.println("---------------------Сгенерированные документы---------------------");
 		//Генерация поручений
 		var taskFactory=context.getBean(TaskDocumentFactory.class);
 		for (int i=0;i<10;i++){
@@ -42,8 +43,8 @@ public class TestProject1Application {
 				System.out.println(outgoingDoc);
 
 		}
-		System.out.println("----------------");
-		System.out.println("-----Отчет-----");
+		System.out.println("------------------------------------------------");
+		System.out.println("---------------------Отчет---------------------");
 
 		Map<String,List<String>> totalMap=new TreeMap<>();
 
@@ -91,7 +92,8 @@ public class TestProject1Application {
 
 		for (Map.Entry<String, List<String>> entry : totalMap.entrySet()) {
 			System.out.println(entry.getKey() + ":\n" + entry.getValue());
-		}
+		}*/
+
 
 
 	}

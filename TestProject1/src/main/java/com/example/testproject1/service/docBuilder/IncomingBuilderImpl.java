@@ -22,21 +22,21 @@ public class IncomingBuilderImpl implements IncomingBuilder{
 
     @Override
     public IncomingBuilder fixDocumentName() {
-         this.documentName= StaticList.docNameIncomingList.get((int) ( Math.random() * 5 ));
+         this.documentName= StaticList.docNameIncomingList.get((int) ( Math.random() * StaticList.docNameIncomingList.size() ));
          return this;
     }
 
     @Override
     public IncomingBuilder fixDocumentText() {
-        this.documentText=StaticList.docTextList.get((int) ( Math.random() * 5 )) ;
+        this.documentText=StaticList.docTextList.get((int) ( Math.random() * StaticList.docTextList.size())) ;
         return this;
     }
 
     @Override
     public IncomingBuilder fixDocumentRegNumber() throws DocumentExistsException {
-        var regNumber= Long.valueOf((int) (Math.random()*100)+100);//первые 100 номера для поручений, 100-200 для входящих
+        var regNumber= Long.valueOf((int) (Math.random()*101));
 
-        for (BaseDocument t: TaskDocumentShell.documentList)
+        for (BaseDocument t:TaskDocumentShell.documentList)
         {
             if (t.getDocumentRegNumber() == regNumber) {
                 throw new DocumentExistsException(regNumber,"Document number "+regNumber+" exist");
@@ -54,7 +54,7 @@ public class IncomingBuilderImpl implements IncomingBuilder{
 
     @Override
     public IncomingBuilder fixDocumentAuthor() {
-        this.documentAuthor=StaticList.docAuthorList.get((int) ( Math.random() * 5 )) ;
+        this.documentAuthor=StaticList.docAuthorList.get((int) ( Math.random() * StaticList.docAuthorList.size() )) ;
         return this;
     }
 
@@ -66,7 +66,7 @@ public class IncomingBuilderImpl implements IncomingBuilder{
 
     @Override
     public IncomingBuilder fixIncomingDocumentDestination() {
-        this.incomingDocumentDestination=StaticList.distinPersonList.get((int) ( Math.random() * 5 )) ;
+        this.incomingDocumentDestination=StaticList.distinPersonList.get((int) ( Math.random() * StaticList.distinPersonList.size() )) ;
         return this;
     }
 

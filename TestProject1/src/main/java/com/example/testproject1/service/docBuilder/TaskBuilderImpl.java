@@ -7,9 +7,7 @@ import com.example.testproject1.service.staticList.StaticList;
 import com.example.testproject1.shell.TaskDocumentShell;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Component
 public class TaskBuilderImpl implements TaskBuilder{
@@ -29,13 +27,13 @@ public class TaskBuilderImpl implements TaskBuilder{
 
     @Override
     public TaskBuilder fixDocumentName() {
-        this.documentName= StaticList.docNameList.get((int) ( Math.random() * 5 ));
+        this.documentName= StaticList.docNameList.get((int) ( Math.random() * StaticList.docNameList.size() ));
         return this;
     }
 
     @Override
     public TaskBuilder fixDocumentText() {
-        this.documentText=StaticList.docTextList.get((int) ( Math.random() * 5 )) ;
+        this.documentText=StaticList.docTextList.get((int) ( Math.random() * StaticList.docTextList.size())) ;
         return this;
     }
 
@@ -61,7 +59,7 @@ public class TaskBuilderImpl implements TaskBuilder{
 
     @Override
     public TaskBuilder fixDocumentAuthor() {
-        this.documentAuthor=StaticList.docAuthorList.get((int) ( Math.random() * 5 )) ;
+        this.documentAuthor=StaticList.docAuthorList.get((int) ( Math.random() * StaticList.docAuthorList.size())) ;
         return this;
     }
 
@@ -80,19 +78,19 @@ public class TaskBuilderImpl implements TaskBuilder{
 
     @Override
     public TaskBuilder fixTaskResponsible() {
-        this.taskResponsible=StaticList.docAuthorList.get((int) ( Math.random() * 5 )) ;
+        this.taskResponsible=StaticList.docAuthorList.get((int) ( Math.random() * StaticList.docAuthorList.size() )) ;
         return this;
     }
 
     @Override
     public TaskBuilder fixTaskSignOfControl() {
-        this.taskSignOfControl=StaticList.controlList.get((int) ( Math.random() *3 )) ;
+        this.taskSignOfControl=StaticList.controlList.get((int) ( Math.random() *StaticList.controlList.size() )) ;
         return this;
     }
 
     @Override
     public TaskBuilder fixTaskControlPerson() {
-        this.taskControlPerson=StaticList.controlPersonList.get((int) ( Math.random() *3 )) ;
+        this.taskControlPerson=StaticList.controlPersonList.get((int) ( Math.random() *StaticList.controlPersonList.size() )) ;
         return this;
     }
 
