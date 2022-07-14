@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+mvnw
+mvnw.cmd
+META-INF/
+
 ### STS ###
 .apt_generated
 .classpath
