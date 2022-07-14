@@ -86,7 +86,6 @@ public class IncomingBuilderImpl implements IncomingBuilder{
     public IncomingDocument build() {
         var incomingDoc=new IncomingDocument(documentName,documentText,documentRegNumber,
                 documentData,documentAuthor,incomingDocumentSender,incomingDocumentDestination,incomingDocumentNumber,incomingDocumentDate);
-        TaskDocumentShell.documentList.add(incomingDoc);
         return incomingDoc;
     }
 }

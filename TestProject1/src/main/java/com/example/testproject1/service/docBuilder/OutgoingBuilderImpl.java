@@ -72,7 +72,6 @@ public class OutgoingBuilderImpl implements OutgoingBuilder{
     public OutgoingDocument build() {
         var outgoingDock=new OutgoingDocument(documentName,documentText,documentRegNumber,documentData
                 ,documentAuthor,outgoingDocumentSender,outgoingDocumentDeliveryType);
-        TaskDocumentShell.documentList.add(outgoingDock);
         return outgoingDock;
     }
 }

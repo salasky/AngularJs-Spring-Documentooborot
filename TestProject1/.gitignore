@@ -6,7 +6,7 @@ target/
 
 mvnw
 mvnw.cmd
-META-INF/
+/src/main/java/META-INF/
 
 ### STS ###
 .apt_generated
@@ -35,3 +35,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/java/META-INF/

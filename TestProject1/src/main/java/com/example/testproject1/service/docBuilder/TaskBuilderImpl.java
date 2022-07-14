@@ -98,7 +98,6 @@ public class TaskBuilderImpl implements TaskBuilder{
     public TaskDocument build() {
        var taskdoc= new TaskDocument(documentName,documentText,documentRegNumber,documentData,documentAuthor
                ,taskOutDate,taskExecPeriod,taskResponsible,taskSignOfControl,taskControlPerson);
-       TaskDocumentShell.documentList.add(taskdoc);
        return taskdoc;
     }
 }

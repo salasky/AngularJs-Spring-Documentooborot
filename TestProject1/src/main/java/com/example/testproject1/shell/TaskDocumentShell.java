@@ -5,6 +5,7 @@ import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.IncomingDocument;
 import com.example.testproject1.model.OutgoingDocument;
 import com.example.testproject1.model.TaskDocument;
+import com.example.testproject1.service.DocSave.DocSave;
 import com.example.testproject1.service.docfactory.IncomingDocumentFactory;
 import com.example.testproject1.service.docfactory.OutgoingDocumentFactory;
 import com.example.testproject1.service.docfactory.TaskDocumentFactory;
@@ -26,6 +27,8 @@ public class TaskDocumentShell {
     private IncomingDocumentFactory incomingDocFactory;
     @Autowired
     private OutgoingDocumentFactory outgoingFactory;
+    @Autowired
+    private DocSave docSave;
     @ShellMethod(value = "generate Param(Int taskDocCount(default=10),Int incomingDocCount(default=10),Int outgoingDocCount(default=10)", key = "generate")
     public void generate(@ShellOption(defaultValue="10") String task, @ShellOption(defaultValue="10") String incoming, @ShellOption(defaultValue="10") String outgoing) {
         System.out.println("----------------------------------------------------------------------");
@@ -34,20 +37,26 @@ public class TaskDocumentShell {
 
         for (int i=0;i<Integer.valueOf(task);i++){
             BaseDocument taskDoc = taskFactory.createDocument();
-            if(taskDoc!=null)
+
+            if(taskDoc!=null){
+                docSave.docSave(taskDoc);
                 System.out.println(taskDoc);
+            }
         }
         //Генерация входящих сообщений
         for (int i=0;i<Integer.valueOf(incoming);i++){
             BaseDocument incomingDoc = incomingDocFactory.createDocument();
-            if(incomingDoc!=null)
+            if(incomingDoc!=null) {
+                docSave.docSave(incomingDoc);
                 System.out.println(incomingDoc);
+            }
         }
         //Генерация исходящих сообщений
         for (int i=0;i<Integer.valueOf(outgoing);i++){
             BaseDocument outgoingDoc = outgoingFactory.createDocument();
-            if(outgoingDoc!=null)
-                System.out.println(outgoingDoc);
+            if(outgoingDoc!=null){
+                docSave.docSave(outgoingDoc);
+                System.out.println(outgoingDoc);}
 
         }
         System.out.println("------------------------------------------------");
