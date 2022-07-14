@@ -3,9 +3,11 @@ package com.example.testproject1.service.docBuilder;
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.OutgoingDocument;
-import com.example.testproject1.service.staticList.StaticList;
-import com.example.testproject1.shell.TaskDocumentShell;
+import com.example.testproject1.service.DocSave.DocSave;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class OutgoingBuilderImpl implements OutgoingBuilder{
@@ -16,17 +18,31 @@ public class OutgoingBuilderImpl implements OutgoingBuilder{
     private String documentAuthor;
     private String outgoingDocumentSender;
     private String outgoingDocumentDeliveryType;
+    @Value("${doc.documentText}")
+    private List<String> newDocTextList;
+
+    @Value("${doc.documentAuthor}")
+    private List<String> newDocAuthorList;
+
+    @Value("${doc.documentDistPerson}")
+    private List<String> newDocDistPerson;
+
+    @Value("${doc.documentOutName}")
+    private List<String> newdocNameOutgoingList;
+
+    @Value("${doc.docDeliveryType}")
+    private List<String> newdocDeliveryTypeList;
 
 
     @Override
     public OutgoingBuilder fixDocumentName() {
-        this.documentName= StaticList.docNameOutgoingList.get((int) ( Math.random() * StaticList.docNameOutgoingList.size() )) ;
+        this.documentName= newdocNameOutgoingList.get((int) ( Math.random() *newdocNameOutgoingList.size() )) ;
         return this;
     }
 
     @Override
     public OutgoingBuilder fixDocumentText() {
-        this.documentText=StaticList.docTextList.get((int) ( Math.random() * StaticList.docTextList.size() )) ;
+        this.documentText=newDocTextList.get((int) ( Math.random() * newDocTextList.size() )) ;
         return this;
     }
 
@@ -34,7 +50,7 @@ public class OutgoingBuilderImpl implements OutgoingBuilder{
     public OutgoingBuilder fixDocumentRegNumber() throws DocumentExistsException {
         var regNumber= Long.valueOf((int) (Math.random()*102));
 
-        for (BaseDocument t: TaskDocumentShell.documentList)
+        for (BaseDocument t: DocSave.documentList)
         {
             if (t.getDocumentRegNumber() == regNumber) {
                 throw new DocumentExistsException(regNumber,"Document number "+regNumber+" exist");
@@ -52,19 +68,19 @@ public class OutgoingBuilderImpl implements OutgoingBuilder{
 
     @Override
     public OutgoingBuilder fixDocumentAuthor() {
-        this.documentAuthor=StaticList.docAuthorList.get((int) ( Math.random() * StaticList.docAuthorList.size() )) ;
+        this.documentAuthor=newDocAuthorList.get((int) ( Math.random() * newDocAuthorList.size() )) ;
         return this;
     }
 
     @Override
     public OutgoingBuilder fixOutgoingDocumentSender() {
-        this.outgoingDocumentSender=StaticList.distinPersonList.get((int) ( Math.random() * StaticList.distinPersonList.size() )) ;
+        this.outgoingDocumentSender=newDocDistPerson.get((int) ( Math.random() * newDocDistPerson.size() )) ;
         return this;
     }
 
     @Override
     public OutgoingBuilder fixOutgoingDocumentDeliveryType() {
-        this.outgoingDocumentDeliveryType=StaticList.deliveryTypeList.get((int) ( Math.random() * StaticList.deliveryTypeList.size())) ;
+        this.outgoingDocumentDeliveryType=newdocDeliveryTypeList.get((int) ( Math.random() * newdocDeliveryTypeList.size())) ;
         return this;
     }
 

@@ -10,6 +10,7 @@ import com.example.testproject1.service.docfactory.IncomingDocumentFactory;
 import com.example.testproject1.service.docfactory.OutgoingDocumentFactory;
 import com.example.testproject1.service.docfactory.TaskDocumentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
@@ -18,19 +19,27 @@ import java.util.*;
 
 @ShellComponent
 public class TaskDocumentShell {
-    //Хранятся все документы.Сохранение происходят в Builder-ax (.build())
-    public static List<BaseDocument> documentList=new ArrayList<>();
 
-    @Autowired
+
+
+
     private TaskDocumentFactory taskFactory;
-    @Autowired
     private IncomingDocumentFactory incomingDocFactory;
-    @Autowired
     private OutgoingDocumentFactory outgoingFactory;
-    @Autowired
     private DocSave docSave;
+    @Autowired
+    public TaskDocumentShell(TaskDocumentFactory taskFactory, IncomingDocumentFactory incomingDocFactory, OutgoingDocumentFactory outgoingFactory, DocSave docSave) {
+        this.taskFactory = taskFactory;
+        this.incomingDocFactory = incomingDocFactory;
+        this.outgoingFactory = outgoingFactory;
+        this.docSave = docSave;
+    }
+
+
     @ShellMethod(value = "generate Param(Int taskDocCount(default=10),Int incomingDocCount(default=10),Int outgoingDocCount(default=10)", key = "generate")
     public void generate(@ShellOption(defaultValue="10") String task, @ShellOption(defaultValue="10") String incoming, @ShellOption(defaultValue="10") String outgoing) {
+
+
         System.out.println("----------------------------------------------------------------------");
         System.out.println("---------------------Сгенерированные документы---------------------");
         //Генерация поручений
@@ -64,7 +73,7 @@ public class TaskDocumentShell {
 
         Map<String,List<String>> totalMap=new TreeMap<>();
 
-        for (BaseDocument basedoc:TaskDocumentShell.documentList
+        for (BaseDocument basedoc:DocSave.documentList
         ) {
             //Если не существует запись для данного автора
             if(!totalMap.containsKey(basedoc.getDocumentAuthor())){
@@ -109,8 +118,9 @@ public class TaskDocumentShell {
         for (Map.Entry<String, List<String>> entry : totalMap.entrySet()) {
             System.out.println(entry.getKey() + ":\n" + entry.getValue());
         }
-    }
 
+
+    }
 
 
 }
