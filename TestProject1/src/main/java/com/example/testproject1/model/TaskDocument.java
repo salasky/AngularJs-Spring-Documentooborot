@@ -1,6 +1,8 @@
 package com.example.testproject1.model;
 
 
+import java.util.Objects;
+
 /**
  * Клас поручений. Наследник {@link BaseDocument}
  */
@@ -92,5 +94,19 @@ public class TaskDocument extends BaseDocument {
                 ", taskSignOfControl='" + taskSignOfControl + '\'' +
                 ", taskControlPerson='" + taskControlPerson + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TaskDocument)) return false;
+        if (!super.equals(o)) return false;
+        TaskDocument that = (TaskDocument) o;
+        return Objects.equals(taskOutDate, that.taskOutDate) && Objects.equals(taskExecPeriod, that.taskExecPeriod) && Objects.equals(taskResponsible, that.taskResponsible) && Objects.equals(taskSignOfControl, that.taskSignOfControl) && Objects.equals(taskControlPerson, that.taskControlPerson);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson);
     }
 }

@@ -3,6 +3,8 @@ package com.example.testproject1.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 /**
  * Клас исходящих документов. Наследник {@link BaseDocument}
  */
@@ -53,5 +55,19 @@ public class OutgoingDocument extends BaseDocument {
                 "outgoingDocumentSender='" + outgoingDocumentSender + '\'' +
                 ", outgoingDocumentDeliveryType='" + outgoingDocumentDeliveryType + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OutgoingDocument)) return false;
+        if (!super.equals(o)) return false;
+        OutgoingDocument that = (OutgoingDocument) o;
+        return getOutgoingDocumentSender().equals(that.getOutgoingDocumentSender()) && getOutgoingDocumentDeliveryType().equals(that.getOutgoingDocumentDeliveryType());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getOutgoingDocumentSender(), getOutgoingDocumentDeliveryType());
     }
 }

@@ -1,5 +1,7 @@
 package com.example.testproject1.model;
 
+import java.util.Objects;
+
 /**
  * Клас входящих документов. Наследник {@link BaseDocument}
  */
@@ -78,5 +80,19 @@ public class IncomingDocument extends BaseDocument {
                 ", incomingDocumentNumber=" + incomingDocumentNumber +
                 ", incomingDocumentDate='" + incomingDocumentDate + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        IncomingDocument that = (IncomingDocument) o;
+        return Objects.equals(incomingDocumentSender, that.incomingDocumentSender) && Objects.equals(incomingDocumentDestination, that.incomingDocumentDestination) && Objects.equals(incomingDocumentNumber, that.incomingDocumentNumber) && Objects.equals(incomingDocumentDate, that.incomingDocumentDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate);
     }
 }

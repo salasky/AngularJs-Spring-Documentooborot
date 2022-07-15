@@ -1,6 +1,8 @@
 package com.example.testproject1.model;
 
 
+import java.util.Objects;
+
 /**
  * Базовый абстрактный класс документов
  *
@@ -118,6 +120,19 @@ public abstract class BaseDocument {
                 ", documentData='" + documentDate + '\'' +
                 ", documentAuthor='" + documentAuthor + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BaseDocument that = (BaseDocument) o;
+        return Objects.equals(id, that.id) && Objects.equals(documentName, that.documentName) && Objects.equals(documentText, that.documentText) && Objects.equals(documentRegNumber, that.documentRegNumber) && Objects.equals(documentDate, that.documentDate) && Objects.equals(documentAuthor, that.documentAuthor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, documentName, documentText, documentRegNumber, documentDate, documentAuthor);
     }
 }
 
