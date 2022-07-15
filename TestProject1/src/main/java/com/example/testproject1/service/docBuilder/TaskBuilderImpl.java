@@ -2,6 +2,7 @@ package com.example.testproject1.service.docBuilder;
 
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
+import com.example.testproject1.model.IncomingDocument;
 import com.example.testproject1.model.TaskDocument;
 import com.example.testproject1.service.DocSave.DocSave;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Класс реализующий паттерн Builder. Для создания экземпляров {@link TaskDocument}
@@ -18,7 +20,10 @@ import java.util.List;
  */
 @Component
 public class TaskBuilderImpl implements TaskBuilder {
-
+    /**
+     * {@link TaskDocument#id}
+     */
+    private UUID id;
     /**
      * {@link TaskDocument#documentName}
      */
@@ -84,6 +89,12 @@ public class TaskBuilderImpl implements TaskBuilder {
      */
     @Value("${doc.documentControlPerson}")
     private List<String> newDocControlPersonList;
+
+    @Override
+    public TaskBuilder fixDocumentId() {
+        this.id=UUID.randomUUID();
+        return this;
+    }
 
     @Override
     public TaskBuilder fixDocumentName() {
@@ -155,7 +166,7 @@ public class TaskBuilderImpl implements TaskBuilder {
 
     @Override
     public TaskDocument build() {
-        var taskdoc = new TaskDocument(documentName, documentText, documentRegNumber, documentDate, documentAuthor
+        var taskdoc = new TaskDocument(id,documentName, documentText, documentRegNumber, documentDate, documentAuthor
                 , taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson);
         return taskdoc;
     }

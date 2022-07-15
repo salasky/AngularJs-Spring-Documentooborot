@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 /**
  * Класс фабрики для {@link com.example.testproject1.model.IncomingDocument}
  * @author smigranov
@@ -26,7 +28,7 @@ public class IncomingDocumentFactory extends DocFactory {
     public BaseDocument createDocument() {
 
         try {
-            return incomingBuilder.fixDocumentName().fixDocumentText().fixDocumentRegNumber().fixDocumentData().fixDocumentAuthor()
+            return incomingBuilder.fixDocumentId().fixDocumentName().fixDocumentText().fixDocumentRegNumber().fixDocumentData().fixDocumentAuthor()
                     .fixIncomingDocumentSender().fixIncomingDocumentDestination().fixIncomingDocumentNumber().fixIncomingDocumentDate().build();
         } catch (DocumentExistsException e) {
             /*      throw new RuntimeException(e);//Ломать или продолжить*/

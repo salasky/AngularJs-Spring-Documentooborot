@@ -9,6 +9,13 @@ import com.example.testproject1.model.TaskDocument;
  * @version 1.0
  */
 public interface TaskBuilder {
+
+    /**
+     * Метод для записи в объект id документа
+     * @return Объект билдера
+     */
+    public TaskBuilder fixDocumentId();
+
     /**
      * Метод для записи в объект названия документа
      * @return Объект билдера

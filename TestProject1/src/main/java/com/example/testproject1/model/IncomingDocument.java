@@ -1,6 +1,7 @@
 package com.example.testproject1.model;
 
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Клас входящих документов. Наследник {@link BaseDocument}
@@ -25,13 +26,12 @@ public class IncomingDocument extends BaseDocument {
      */
     private String incomingDocumentDate;
 
-    public IncomingDocument(String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String incomingDocumentSender, String incomingDocumentDestination, Long incomingDocumentNumber, String incomingDocumentDate) {
-        super(BaseDocument.identifikator, documentName, documentText, documentRegNumber, documentData, documentAuthor);
+    public IncomingDocument(UUID id, String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String incomingDocumentSender, String incomingDocumentDestination, Long incomingDocumentNumber, String incomingDocumentDate) {
+        super(id, documentName, documentText, documentRegNumber, documentData, documentAuthor);
         this.incomingDocumentSender = incomingDocumentSender;
         this.incomingDocumentDestination = incomingDocumentDestination;
         this.incomingDocumentNumber = incomingDocumentNumber;
         this.incomingDocumentDate = incomingDocumentDate;
-        BaseDocument.identifikator++;
     }
 
     public String getIncomingDocumentSender() {

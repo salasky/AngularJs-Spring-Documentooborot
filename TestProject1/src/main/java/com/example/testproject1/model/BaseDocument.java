@@ -2,6 +2,7 @@ package com.example.testproject1.model;
 
 
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Базовый абстрактный класс документов
@@ -13,14 +14,11 @@ import java.util.Objects;
 
 
 public abstract class BaseDocument {
-    /**
-     * идентификатор документа вычисляемое
-     */
-    protected static Long identifikator = 1l;
+
     /**
      * идентификатор документа
      */
-    protected Long id;
+    protected UUID id;
     /**
      * название документа
      */
@@ -42,7 +40,7 @@ public abstract class BaseDocument {
      */
     protected String documentAuthor;
 
-    public BaseDocument(Long id, String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor) {
+    public BaseDocument(UUID id, String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor) {
         this.id = id;
         this.documentName = documentName;
         this.documentText = documentText;
@@ -54,19 +52,12 @@ public abstract class BaseDocument {
     public BaseDocument() {
     }
 
-    public static Long getIdentifikator() {
-        return identifikator;
-    }
 
-    public static void setIdentifikator(Long identifikator) {
-        BaseDocument.identifikator = identifikator;
-    }
-
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

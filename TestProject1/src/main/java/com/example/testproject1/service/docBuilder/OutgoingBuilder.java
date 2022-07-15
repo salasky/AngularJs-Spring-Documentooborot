@@ -9,6 +9,7 @@ import com.example.testproject1.model.OutgoingDocument;
  */
 public interface OutgoingBuilder {
 
+    public OutgoingBuilder fixDocId();
     /**
      * Метод для записи в объект названия документа
      * @return Объект билдера

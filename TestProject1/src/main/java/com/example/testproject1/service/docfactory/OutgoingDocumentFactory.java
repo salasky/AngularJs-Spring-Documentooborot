@@ -25,7 +25,7 @@ public class OutgoingDocumentFactory extends DocFactory {
     @Override
     public BaseDocument createDocument() {
         try {
-            return outgoingBuilder.fixDocumentName().fixDocumentText().fixDocumentRegNumber()
+            return outgoingBuilder.fixDocId().fixDocumentName().fixDocumentText().fixDocumentRegNumber()
                     .fixDocumentData().fixDocumentAuthor().fixOutgoingDocumentSender().fixOutgoingDocumentDeliveryType().build();
         } catch (DocumentExistsException e) {
             /*      throw new RuntimeException(e);//Ломать или продолжить*/

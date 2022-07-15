@@ -2,6 +2,7 @@ package com.example.testproject1.model;
 
 
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Клас поручений. Наследник {@link BaseDocument}
@@ -29,14 +30,14 @@ public class TaskDocument extends BaseDocument {
      */
     private String taskControlPerson;
 
-    public TaskDocument(String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String taskOutDate, String taskExecPeriod, String taskResponsible, String taskSignOfControl, String taskControlPerson) {
-        super(BaseDocument.identifikator, documentName, documentText, documentRegNumber, documentData, documentAuthor);
+    public TaskDocument(UUID id,String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String taskOutDate, String taskExecPeriod, String taskResponsible, String taskSignOfControl, String taskControlPerson) {
+        super(id, documentName, documentText, documentRegNumber, documentData, documentAuthor);
         this.taskOutDate = taskOutDate;
         this.taskExecPeriod = taskExecPeriod;
         this.taskResponsible = taskResponsible;
         this.taskSignOfControl = taskSignOfControl;
         this.taskControlPerson = taskControlPerson;
-        BaseDocument.identifikator++;
+        ;
     }
 
     public String getTaskOutDate() {
@@ -108,5 +109,13 @@ public class TaskDocument extends BaseDocument {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson);
+    }
+
+
+    public class TaskBuilder{
+        private TaskBuilder() {
+            // private constructor
+        }
+
     }
 }

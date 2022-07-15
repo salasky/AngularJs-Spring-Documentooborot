@@ -27,7 +27,7 @@ public class TaskDocumentFactory extends DocFactory {
     @Override
     public BaseDocument createDocument() {
         try {
-            return taskBuilder.fixDocumentName().fixDocumentText().fixDocumentRegNumber()
+            return taskBuilder.fixDocumentId().fixDocumentName().fixDocumentText().fixDocumentRegNumber()
                     .fixDocumentData().fixDocumentAuthor().fixTaskOutDate().fixTaskExecPeriod()
                     .fixTaskResponsible().fixTaskSignOfControl().fixTaskControlPerson().build();
         } catch (DocumentExistsException e) {

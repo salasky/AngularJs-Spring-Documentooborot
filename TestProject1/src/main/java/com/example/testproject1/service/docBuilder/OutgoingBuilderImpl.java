@@ -2,12 +2,14 @@ package com.example.testproject1.service.docBuilder;
 
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
+import com.example.testproject1.model.IncomingDocument;
 import com.example.testproject1.model.OutgoingDocument;
 import com.example.testproject1.service.DocSave.DocSave;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Класс реализующий паттерн Builder. Для создания экземпляров {@link OutgoingDocument}
@@ -17,6 +19,10 @@ import java.util.List;
  */
 @Component
 public class OutgoingBuilderImpl implements OutgoingBuilder {
+    /**
+     * {@link OutgoingDocument#id}
+     */
+    private UUID id;
     /**
      * {@link OutgoingDocument#documentName}
      */
@@ -74,6 +80,12 @@ public class OutgoingBuilderImpl implements OutgoingBuilder {
 
 
     @Override
+    public OutgoingBuilder fixDocId() {
+        this.id=UUID.randomUUID();
+        return this;
+    }
+
+    @Override
     public OutgoingBuilder fixDocumentName() {
         this.documentName = newdocNameOutgoingList.get((int) (Math.random() * newdocNameOutgoingList.size()));
         return this;
@@ -124,7 +136,7 @@ public class OutgoingBuilderImpl implements OutgoingBuilder {
 
     @Override
     public OutgoingDocument build() {
-        var outgoingDock = new OutgoingDocument(documentName, documentText, documentRegNumber, documentDate
+        var outgoingDock = new OutgoingDocument(id,documentName, documentText, documentRegNumber, documentDate
                 , documentAuthor, outgoingDocumentSender, outgoingDocumentDeliveryType);
         return outgoingDock;
     }

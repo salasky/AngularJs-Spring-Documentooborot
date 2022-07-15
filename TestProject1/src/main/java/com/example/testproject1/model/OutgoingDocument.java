@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Клас исходящих документов. Наследник {@link BaseDocument}
@@ -20,11 +21,10 @@ public class OutgoingDocument extends BaseDocument {
      */
     private String outgoingDocumentDeliveryType;
 
-    public OutgoingDocument(String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String outgoingDocumentSender, String outgoingDocumentDeliveryType) {
-        super(BaseDocument.identifikator, documentName, documentText, documentRegNumber, documentData, documentAuthor);
+    public OutgoingDocument(UUID id,String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String outgoingDocumentSender, String outgoingDocumentDeliveryType) {
+        super(id, documentName, documentText, documentRegNumber, documentData, documentAuthor);
         this.outgoingDocumentSender = outgoingDocumentSender;
         this.outgoingDocumentDeliveryType = outgoingDocumentDeliveryType;
-        BaseDocument.identifikator++;
     }
 
     public String getOutgoingDocumentSender() {

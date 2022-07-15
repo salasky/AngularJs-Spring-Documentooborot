@@ -9,6 +9,11 @@ import com.example.testproject1.model.IncomingDocument;
  */
 public interface IncomingBuilder {
     /**
+     * Метод для записи в объект id документа
+     * @return Объект билдера
+     */
+    public IncomingBuilder fixDocumentId();
+    /**
      * Метод для записи в объект названия документа
      * @return Объект билдера
      */

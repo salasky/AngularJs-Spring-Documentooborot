@@ -8,7 +8,7 @@ package com.example.testproject1.exeption;
  */
 public class DocumentExistsException extends Exception {
     /**
-     * Рег.номер созданного документа,который уже существует у другого документа
+     * Рег.номер или идентификатор созданного документа,который уже существует у другого документа
      */
     private Long detail;
 

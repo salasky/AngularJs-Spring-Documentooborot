@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Класс реализующий паттерн Builder. Для создания экземпляров {@link IncomingDocument}
@@ -17,6 +18,10 @@ import java.util.List;
  */
 @Component
 public class IncomingBuilderImpl implements IncomingBuilder {
+    /**
+     * {@link IncomingDocument#id}
+     */
+    private UUID id;
     /**
      * {@link IncomingDocument#documentName}
      */
@@ -75,6 +80,12 @@ public class IncomingBuilderImpl implements IncomingBuilder {
     @Value("${doc.documentDistPerson}")
     private List<String> newDocDistPerson;
 
+
+    @Override
+    public IncomingBuilder fixDocumentId() {
+        this.id=UUID.randomUUID();
+        return this;
+    }
 
     @Override
     public IncomingBuilder fixDocumentName() {
@@ -139,7 +150,7 @@ public class IncomingBuilderImpl implements IncomingBuilder {
 
     @Override
     public IncomingDocument build() {
-        var incomingDoc = new IncomingDocument(documentName, documentText, documentRegNumber,
+        var incomingDoc = new IncomingDocument(id,documentName, documentText, documentRegNumber,
                 documentDate, documentAuthor, incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate);
         return incomingDoc;
     }
