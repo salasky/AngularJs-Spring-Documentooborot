@@ -1,6 +1,7 @@
 package com.example.testproject1.shell;
 
 
+import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.IncomingDocument;
 import com.example.testproject1.model.OutgoingDocument;
@@ -71,7 +72,11 @@ public class TaskDocumentShell {
         for (int i = 0; i < Integer.valueOf(task); i++) {
             BaseDocument taskDoc = taskFactory.createDocument();
             if (taskDoc != null) {
-                docSave.docSave(taskDoc);
+                try {
+                    docSave.docSave(taskDoc);
+                } catch (DocumentExistsException e) {
+                    logger.error(e.getMessage());
+                }
                 logger.info(String.valueOf(taskDoc));
             }
         }
@@ -79,7 +84,11 @@ public class TaskDocumentShell {
         for (int i = 0; i < Integer.valueOf(incoming); i++) {
             BaseDocument incomingDoc = incomingDocFactory.createDocument();
             if (incomingDoc != null) {
-                docSave.docSave(incomingDoc);
+                try {
+                    docSave.docSave(incomingDoc);
+                } catch (DocumentExistsException e) {
+                    logger.error(e.getMessage());
+                }
                 logger.info(String.valueOf(incomingDoc));
             }
         }
@@ -87,7 +96,12 @@ public class TaskDocumentShell {
         for (int i = 0; i < Integer.valueOf(outgoing); i++) {
             BaseDocument outgoingDoc = outgoingFactory.createDocument();
             if (outgoingDoc != null) {
-                docSave.docSave(outgoingDoc);
+                try {
+                    docSave.docSave(outgoingDoc);
+                } catch (DocumentExistsException e) {
+                   /* throw new RuntimeException(e);*/
+                    logger.error(e.getMessage());
+                }
                 logger.info(String.valueOf(outgoingDoc));
             }
 

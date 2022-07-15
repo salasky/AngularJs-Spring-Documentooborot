@@ -40,6 +40,9 @@ public class TaskDocument extends BaseDocument {
         ;
     }
 
+    private TaskDocument() {
+    }
+
     public String getTaskOutDate() {
         return taskOutDate;
     }
@@ -110,12 +113,70 @@ public class TaskDocument extends BaseDocument {
     public int hashCode() {
         return Objects.hash(super.hashCode(), taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson);
     }
-
+    public static TaskBuilder newBuilder() {
+        return new TaskDocument().new TaskBuilder();
+    }
 
     public class TaskBuilder{
         private TaskBuilder() {
             // private constructor
         }
 
+        public TaskBuilder setDocId(UUID Id) {
+            TaskDocument.this.id = Id;
+            return this;
+        }
+
+        public TaskBuilder setDocName(String docName) {
+            TaskDocument.this.documentName = docName;
+            return this;
+        }
+
+        public TaskBuilder setDocText(String docText) {
+            TaskDocument.this.documentText = docText;
+            return this;
+        }
+
+        public TaskBuilder setDocRegNumber(Long docRegNumber) {
+            TaskDocument.this.documentRegNumber = docRegNumber;
+            return this;
+        }
+
+        public TaskBuilder setDocDate(String docDate) {
+            TaskDocument.this.documentDate = docDate;
+            return this;
+        }
+        public TaskBuilder setDocAuthor(String docAuthor) {
+            TaskDocument.this.documentAuthor = docAuthor;
+            return this;
+        }
+
+        public TaskBuilder setTaskDate(String taskDate) {
+            TaskDocument.this.taskOutDate = taskDate;
+            return this;
+        }
+
+        public TaskBuilder setTaskExecPeriod(String taskExecPeriod) {
+            TaskDocument.this.taskExecPeriod = taskExecPeriod;
+            return this;
+        }
+
+        public TaskBuilder setTaskResponsPerson(String taskResponsPerson) {
+            TaskDocument.this.taskResponsible = taskResponsPerson;
+            return this;
+        }
+
+        public TaskBuilder setTaskSignOfControl(String taskSignOfControl) {
+            TaskDocument.this.taskSignOfControl = taskSignOfControl;
+            return this;
+        }
+
+        public TaskBuilder setTaskControlPerson(String taskControlPerson) {
+            TaskDocument.this.taskControlPerson = taskControlPerson;
+            return this;
+        }
+        public TaskDocument build() {
+            return TaskDocument.this;
+        }
     }
 }

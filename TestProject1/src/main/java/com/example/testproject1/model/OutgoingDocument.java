@@ -27,6 +27,9 @@ public class OutgoingDocument extends BaseDocument {
         this.outgoingDocumentDeliveryType = outgoingDocumentDeliveryType;
     }
 
+    private OutgoingDocument() {
+    }
+
     public String getOutgoingDocumentSender() {
         return outgoingDocumentSender;
     }
@@ -69,5 +72,58 @@ public class OutgoingDocument extends BaseDocument {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getOutgoingDocumentSender(), getOutgoingDocumentDeliveryType());
+    }
+
+    public static OutgoingBuilder newBuilder() {
+        return new OutgoingDocument().new OutgoingBuilder();
+    }
+
+    public class OutgoingBuilder{
+        private OutgoingBuilder() {
+            // private constructor
+        }
+
+        public OutgoingBuilder setDocId(UUID Id) {
+            OutgoingDocument.this.id = Id;
+            return this;
+        }
+
+        public OutgoingBuilder setDocName(String docName) {
+            OutgoingDocument.this.documentName = docName;
+            return this;
+        }
+
+        public OutgoingBuilder setDocText(String docText) {
+            OutgoingDocument.this.documentText = docText;
+            return this;
+        }
+
+        public OutgoingBuilder setDocRegNumber(Long docRegNumber) {
+            OutgoingDocument.this.documentRegNumber = docRegNumber;
+            return this;
+        }
+
+        public OutgoingBuilder setDocDate(String docDate) {
+            OutgoingDocument.this.documentDate = docDate;
+            return this;
+        }
+        public OutgoingBuilder setDocAuthor(String docAuthor) {
+            OutgoingDocument.this.documentAuthor = docAuthor;
+            return this;
+        }
+
+        public OutgoingBuilder setDocSender(String sender) {
+            OutgoingDocument.this.outgoingDocumentSender = sender;
+            return this;
+        }
+
+        public OutgoingBuilder setDocDeliveryType(String type) {
+            OutgoingDocument.this.outgoingDocumentDeliveryType = type;
+            return this;
+        }
+
+        public OutgoingDocument build() {
+            return OutgoingDocument.this;
+        }
     }
 }
