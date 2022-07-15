@@ -3,17 +3,20 @@ package com.example.testproject1.service.docBuilder;
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.IncomingDocument;
-import com.example.testproject1.model.TaskDocument;
 import com.example.testproject1.service.DocSave.DocSave;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 /**
  * Класс реализующий паттерн Builder. Для создания экземпляров {@link IncomingDocument}
+ * implements {@link IncomingBuilder}
+ * @author smigranov
+ * @version 1.0
  */
 @Component
-public class IncomingBuilderImpl implements IncomingBuilder{
+public class IncomingBuilderImpl implements IncomingBuilder {
     /**
      * {@link IncomingDocument#documentName}
      */
@@ -75,70 +78,69 @@ public class IncomingBuilderImpl implements IncomingBuilder{
 
     @Override
     public IncomingBuilder fixDocumentName() {
-         this.documentName= newDocIncomingList.get((int) ( Math.random() *newDocIncomingList.size() ));
-         return this;
+        this.documentName = newDocIncomingList.get((int) (Math.random() * newDocIncomingList.size()));
+        return this;
     }
 
     @Override
     public IncomingBuilder fixDocumentText() {
-        this.documentText=newDocTextList.get((int) ( Math.random() * newDocTextList.size())) ;
+        this.documentText = newDocTextList.get((int) (Math.random() * newDocTextList.size()));
         return this;
     }
 
     @Override
     public IncomingBuilder fixDocumentRegNumber() throws DocumentExistsException {
-        var regNumber= Long.valueOf((int) (Math.random()*101));
+        var regNumber = Long.valueOf((int) (Math.random() * 101));
 
-        for (BaseDocument t: DocSave.documentList)
-        {
+        for (BaseDocument t : DocSave.documentList) {
             if (t.getDocumentRegNumber() == regNumber) {
-                throw new DocumentExistsException(regNumber,"Document number "+regNumber+" exist");
+                throw new DocumentExistsException(regNumber, "Document number " + regNumber + " exist");
             }
         }
-        this.documentRegNumber=regNumber;
+        this.documentRegNumber = regNumber;
         return this;
     }
 
     @Override
     public IncomingBuilder fixDocumentData() {
-        this.documentData="2022-"+(int)(Math.random()*12+1)+"-"+(int)(Math.random()*29+1);
+        this.documentData = "2022-" + (int) (Math.random() * 12 + 1) + "-" + (int) (Math.random() * 29 + 1);
         return this;
     }
 
     @Override
     public IncomingBuilder fixDocumentAuthor() {
-        this.documentAuthor=newDocAuthorList.get((int) ( Math.random() * newDocAuthorList.size() )) ;
+        this.documentAuthor = newDocAuthorList.get((int) (Math.random() * newDocAuthorList.size()));
         return this;
     }
 
     @Override
     public IncomingBuilder fixIncomingDocumentSender() {
-        this.incomingDocumentSender=documentAuthor;
+        this.incomingDocumentSender = documentAuthor;
         return this;
     }
 
     @Override
     public IncomingBuilder fixIncomingDocumentDestination() {
-        this.incomingDocumentDestination=newDocDistPerson.get((int) ( Math.random() * newDocDistPerson.size() )) ;
+        this.incomingDocumentDestination = newDocDistPerson.get((int) (Math.random() * newDocDistPerson.size()));
         return this;
     }
 
     @Override
     public IncomingBuilder fixIncomingDocumentNumber() {
-        this.incomingDocumentNumber= Long.valueOf((int) ( Math.random() * 100));
+        this.incomingDocumentNumber = Long.valueOf((int) (Math.random() * 100));
         return this;
     }
 
     @Override
     public IncomingBuilder fixIncomingDocumentDate() {
-        this.incomingDocumentDate=documentData;
+        this.incomingDocumentDate = documentData;
         return this;
     }
 
     @Override
     public IncomingDocument build() {
-        var incomingDoc=new IncomingDocument(documentName,documentText,documentRegNumber,
-                documentData,documentAuthor,incomingDocumentSender,incomingDocumentDestination,incomingDocumentNumber,incomingDocumentDate);
+        var incomingDoc = new IncomingDocument(documentName, documentText, documentRegNumber,
+                documentData, documentAuthor, incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate);
         return incomingDoc;
     }
 }

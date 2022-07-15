@@ -1,14 +1,11 @@
 package com.example.testproject1.model;
 
-import lombok.*;
 
 /**
  * Клас поручений. Наследник {@link BaseDocument}
- *
  */
-@Getter
-@Setter
-public class TaskDocument extends BaseDocument{
+
+public class TaskDocument extends BaseDocument {
     /**
      * дата выдачи поручения
      */
@@ -38,6 +35,46 @@ public class TaskDocument extends BaseDocument{
         this.taskSignOfControl = taskSignOfControl;
         this.taskControlPerson = taskControlPerson;
         BaseDocument.identifikator++;
+    }
+
+    public String getTaskOutDate() {
+        return taskOutDate;
+    }
+
+    public void setTaskOutDate(String taskOutDate) {
+        this.taskOutDate = taskOutDate;
+    }
+
+    public String getTaskExecPeriod() {
+        return taskExecPeriod;
+    }
+
+    public void setTaskExecPeriod(String taskExecPeriod) {
+        this.taskExecPeriod = taskExecPeriod;
+    }
+
+    public String getTaskResponsible() {
+        return taskResponsible;
+    }
+
+    public void setTaskResponsible(String taskResponsible) {
+        this.taskResponsible = taskResponsible;
+    }
+
+    public String getTaskSignOfControl() {
+        return taskSignOfControl;
+    }
+
+    public void setTaskSignOfControl(String taskSignOfControl) {
+        this.taskSignOfControl = taskSignOfControl;
+    }
+
+    public String getTaskControlPerson() {
+        return taskControlPerson;
+    }
+
+    public void setTaskControlPerson(String taskControlPerson) {
+        this.taskControlPerson = taskControlPerson;
     }
 
     @Override

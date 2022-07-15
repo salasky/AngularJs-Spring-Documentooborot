@@ -5,12 +5,10 @@ import lombok.Setter;
 
 /**
  * Клас исходящих документов. Наследник {@link BaseDocument}
- *
  */
 
-@Getter
-@Setter
-public class OutgoingDocument extends BaseDocument{
+
+public class OutgoingDocument extends BaseDocument {
     /**
      * адресат
      */
@@ -20,11 +18,27 @@ public class OutgoingDocument extends BaseDocument{
      */
     private String outgoingDocumentDeliveryType;
 
-    public OutgoingDocument( String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String outgoingDocumentSender, String outgoingDocumentDeliveryType) {
+    public OutgoingDocument(String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String outgoingDocumentSender, String outgoingDocumentDeliveryType) {
         super(BaseDocument.identifikator, documentName, documentText, documentRegNumber, documentData, documentAuthor);
         this.outgoingDocumentSender = outgoingDocumentSender;
         this.outgoingDocumentDeliveryType = outgoingDocumentDeliveryType;
         BaseDocument.identifikator++;
+    }
+
+    public String getOutgoingDocumentSender() {
+        return outgoingDocumentSender;
+    }
+
+    public void setOutgoingDocumentSender(String outgoingDocumentSender) {
+        this.outgoingDocumentSender = outgoingDocumentSender;
+    }
+
+    public String getOutgoingDocumentDeliveryType() {
+        return outgoingDocumentDeliveryType;
+    }
+
+    public void setOutgoingDocumentDeliveryType(String outgoingDocumentDeliveryType) {
+        this.outgoingDocumentDeliveryType = outgoingDocumentDeliveryType;
     }
 
     @Override

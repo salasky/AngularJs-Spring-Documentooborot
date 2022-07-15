@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * Абстрактный класс фабрики для {@link TaskDocumentFactory},{@link IncomingDocumentFactory},{@link OutgoingDocumentFactory}
+ * @author smigranov
+ * @version 1.0
  */
 @Service
 public abstract class DocFactory {
