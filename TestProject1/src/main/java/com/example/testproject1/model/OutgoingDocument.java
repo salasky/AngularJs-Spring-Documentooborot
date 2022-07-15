@@ -48,7 +48,7 @@ public class OutgoingDocument extends BaseDocument {
                 ", documentName='" + documentName + '\'' +
                 ", documentText='" + documentText + '\'' +
                 ", documentRegNumber=" + documentRegNumber +
-                ", documentData='" + documentData + '\'' +
+                ", documentData='" + documentDate + '\'' +
                 ", documentAuthor='" + documentAuthor + '\'' +
                 "outgoingDocumentSender='" + outgoingDocumentSender + '\'' +
                 ", outgoingDocumentDeliveryType='" + outgoingDocumentDeliveryType + '\'' +

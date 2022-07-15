@@ -71,7 +71,7 @@ public class IncomingDocument extends BaseDocument {
                 ", documentName='" + documentName + '\'' +
                 ", documentText='" + documentText + '\'' +
                 ", documentRegNumber=" + documentRegNumber +
-                ", documentData='" + documentData + '\'' +
+                ", documentData='" + documentDate + '\'' +
                 ", documentAuthor='" + documentAuthor + '\'' +
                 "incomingDocumentSender='" + incomingDocumentSender + '\'' +
                 ", incomingDocumentDestination='" + incomingDocumentDestination + '\'' +

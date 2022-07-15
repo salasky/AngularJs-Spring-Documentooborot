@@ -30,9 +30,9 @@ public class IncomingBuilderImpl implements IncomingBuilder {
      */
     private Long documentRegNumber;
     /**
-     * {@link IncomingDocument#documentData}
+     * {@link IncomingDocument#documentDate}
      */
-    private String documentData;
+    private String documentDate;
     /**
      * {@link IncomingDocument#documentAuthor}
      */
@@ -103,7 +103,7 @@ public class IncomingBuilderImpl implements IncomingBuilder {
 
     @Override
     public IncomingBuilder fixDocumentData() {
-        this.documentData = "2022-" + (int) (Math.random() * 12 + 1) + "-" + (int) (Math.random() * 29 + 1);
+        this.documentDate = "2022-" + (int) (Math.random() * 12 + 1) + "-" + (int) (Math.random() * 29 + 1);
         return this;
     }
 
@@ -133,14 +133,14 @@ public class IncomingBuilderImpl implements IncomingBuilder {
 
     @Override
     public IncomingBuilder fixIncomingDocumentDate() {
-        this.incomingDocumentDate = documentData;
+        this.incomingDocumentDate = documentDate;
         return this;
     }
 
     @Override
     public IncomingDocument build() {
         var incomingDoc = new IncomingDocument(documentName, documentText, documentRegNumber,
-                documentData, documentAuthor, incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate);
+                documentDate, documentAuthor, incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate);
         return incomingDoc;
     }
 }

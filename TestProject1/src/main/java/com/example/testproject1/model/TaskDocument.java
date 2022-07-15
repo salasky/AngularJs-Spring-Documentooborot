@@ -84,7 +84,7 @@ public class TaskDocument extends BaseDocument {
                 ", documentName='" + documentName + '\'' +
                 ", documentText='" + documentText + '\'' +
                 ", documentRegNumber=" + documentRegNumber +
-                ", documentData='" + documentData + '\'' +
+                ", documentData='" + documentDate + '\'' +
                 ", documentAuthor='" + documentAuthor + '\'' +
                 "taskOutDate='" + taskOutDate + '\'' +
                 ", taskExecPeriod='" + taskExecPeriod + '\'' +

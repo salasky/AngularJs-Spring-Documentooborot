@@ -32,9 +32,9 @@ public class TaskBuilderImpl implements TaskBuilder {
      */
     private Long documentRegNumber;
     /**
-     * {@link TaskDocument#documentData}
+     * {@link TaskDocument#documentDate}
      */
-    private String documentData;
+    private String documentDate;
     /**
      * {@link TaskDocument#documentAuthor}
      */
@@ -112,7 +112,7 @@ public class TaskBuilderImpl implements TaskBuilder {
 
     @Override
     public TaskBuilder fixDocumentData() {
-        this.documentData = "2022-" + (int) (Math.random() * 12 + 1) + "-" + (int) (Math.random() * 29 + 1);
+        this.documentDate = "2022-" + (int) (Math.random() * 12 + 1) + "-" + (int) (Math.random() * 29 + 1);
         return this;
     }
 
@@ -155,7 +155,7 @@ public class TaskBuilderImpl implements TaskBuilder {
 
     @Override
     public TaskDocument build() {
-        var taskdoc = new TaskDocument(documentName, documentText, documentRegNumber, documentData, documentAuthor
+        var taskdoc = new TaskDocument(documentName, documentText, documentRegNumber, documentDate, documentAuthor
                 , taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson);
         return taskdoc;
     }

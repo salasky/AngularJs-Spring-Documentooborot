@@ -10,42 +10,42 @@ package com.example.testproject1.model;
  */
 
 
-public class BaseDocument {
+public abstract class BaseDocument {
     /**
      * идентификатор документа вычисляемое
      */
-    public static Long identifikator = 1l;
+    protected static Long identifikator = 1l;
     /**
      * идентификатор документа
      */
-    public Long id;
+    protected Long id;
     /**
      * название документа
      */
-    public String documentName;
+    protected String documentName;
     /**
      * текст документа
      */
-    public String documentText;
+    protected String documentText;
     /**
      * регистрационный номер документа
      */
-    public Long documentRegNumber;
+    protected Long documentRegNumber;
     /**
      * дата регистрации документа
      */
-    public String documentData;
+    protected String documentDate;
     /**
      * автор документа
      */
-    public String documentAuthor;
+    protected String documentAuthor;
 
     public BaseDocument(Long id, String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor) {
         this.id = id;
         this.documentName = documentName;
         this.documentText = documentText;
         this.documentRegNumber = documentRegNumber;
-        this.documentData = documentData;
+        this.documentDate = documentData;
         this.documentAuthor = documentAuthor;
     }
 
@@ -93,11 +93,11 @@ public class BaseDocument {
     }
 
     public String getDocumentData() {
-        return documentData;
+        return documentDate;
     }
 
     public void setDocumentData(String documentData) {
-        this.documentData = documentData;
+        this.documentDate = documentData;
     }
 
     public String getDocumentAuthor() {
@@ -115,7 +115,7 @@ public class BaseDocument {
                 ", documentName='" + documentName + '\'' +
                 ", documentText='" + documentText + '\'' +
                 ", documentRegNumber=" + documentRegNumber +
-                ", documentData='" + documentData + '\'' +
+                ", documentData='" + documentDate + '\'' +
                 ", documentAuthor='" + documentAuthor + '\'' +
                 '}';
     }
