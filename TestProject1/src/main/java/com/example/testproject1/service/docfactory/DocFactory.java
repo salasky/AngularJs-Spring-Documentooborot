@@ -14,7 +14,7 @@ public abstract class DocFactory {
     /**
      *
      * @return Возвращает объект,класс которого наследуется от {@link BaseDocument}
-     * @throws  DocumentExistsException исключение при создании документа с существующим рег.номером
+     *
      */
-    public abstract BaseDocument createDocument() throws DocumentExistsException;
+    public abstract BaseDocument createDocument();
 }

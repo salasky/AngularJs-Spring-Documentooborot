@@ -1,6 +1,8 @@
 package com.example.testproject1.model;
 
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,7 +15,7 @@ import java.util.UUID;
  */
 
 
-public abstract class BaseDocument {
+public  class BaseDocument  implements Comparable<LinkedHashMap<String, Object>> {
 
     /**
      * идентификатор документа
@@ -125,6 +127,57 @@ public abstract class BaseDocument {
     public int hashCode() {
         return Objects.hash(id, documentName, documentText, documentRegNumber, documentDate, documentAuthor);
     }
+
+    @Override
+    public int compareTo(LinkedHashMap<String, Object> conditions) {
+        if (conditions == null) {
+            return 0;
+        }
+        int val = 0;
+        for (Map.Entry<String, Object> entry : conditions.entrySet()) {
+            Object value = entry.getValue();
+            switch (entry.getKey()) {
+                case ("documentRegNumber:asc"): {
+                    if (value instanceof Long) {
+                        val = this.documentRegNumber.compareTo((Long) value);
+                        if (val != 0) {
+                            return val;
+                        }
+                    }
+                    break;
+                }
+                case ("documentRegNumber:desc"): {
+                    if (value instanceof Long) {
+                        val = this.documentRegNumber.compareTo((Long) value);
+                        if (val != 0) {
+                            return val * -1;
+                        }
+                    }
+                    break;
+                }
+                case ("documentDate:asc"): {
+                    if (value instanceof String) {
+                        val = this.documentDate.compareTo((String) value);
+                        if (val != 0) {
+                            return val;
+                        }
+                    }
+                    break;
+                }
+                case ("documentDate:desc"): {
+                    if (value instanceof String) {
+                        val = this.documentDate.compareTo((String) value);
+                        if (val != 0) {
+                            return val * -1;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        return val;
+    }
+
 }
 
 

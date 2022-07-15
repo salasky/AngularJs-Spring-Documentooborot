@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OutgoingDocumentFactory extends DocFactory {
-    Logger logger = LoggerFactory.getLogger(OutgoingDocumentFactory.class);
+
     /**
      * Autowired бина {@link Randomizer}
      */

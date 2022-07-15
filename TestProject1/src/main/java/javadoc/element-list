@@ -1,8 +1,7 @@
 com.example.testproject1
 com.example.testproject1.exeption
 com.example.testproject1.model
-com.example.testproject1.model.BaseDocComporator
-com.example.testproject1.service.docBuilder
 com.example.testproject1.service.docfactory
 com.example.testproject1.service.DocSave
+com.example.testproject1.service.randomizer
 com.example.testproject1.shell
