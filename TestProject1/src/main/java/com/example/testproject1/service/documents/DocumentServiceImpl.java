@@ -1,4 +1,4 @@
-package com.example.testproject1.service.DocSave;
+package com.example.testproject1.service.documents;
 
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,13 +21,13 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Класс для работы с документами
+ * Класс для работы с документами.Генерация документов и их сохранение.Генерация отчетов.
  *
  * @author smigranov
  */
 @Service
 public class DocumentServiceImpl implements DocumentService {
-    private static final Logger logger = LoggerFactory.getLogger(DocumentServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DocumentServiceImpl.class);
     /**
      * Объект класса {@link TaskDocumentFactory}
      */
@@ -46,25 +47,21 @@ public class DocumentServiceImpl implements DocumentService {
 
 
     @Autowired
-    public DocumentServiceImpl(TaskDocumentFactory taskFactory, IncomingDocumentFactory incomingDocFactory, OutgoingDocumentFactory outgoingFactory, DocumentHolder documentHolder) {
+    public DocumentServiceImpl(TaskDocumentFactory taskFactory
+            , IncomingDocumentFactory incomingDocFactory
+            , OutgoingDocumentFactory outgoingFactory
+            , DocumentHolder documentHolder) {
         this.taskFactory = taskFactory;
         this.incomingDocFactory = incomingDocFactory;
         this.outgoingFactory = outgoingFactory;
         this.documentHolder = documentHolder;
     }
 
-    /**
-     * {@inheritDoc}
-     * Метод генерирует заданное количество документов разных типов и печатает в консоль
-     *
-     * @param task     Количество генерируемых поручений
-     * @param incoming Количество генерируемых входящих документов
-     * @param outgoing Количество генерируемых исходящих документов
-     */
 
 
     /**
      * {@inheritDoc}
+     * Метод сохранения объекта класса {@link BaseDocument}
      * @param baseDocument передаем объект наследник от {@link BaseDocument} для сохранения в {@link DocumentHolder#documentList}
      * @throws DocumentExistsException при существовании в базе указанного идентификатора или рег.номера
      */
@@ -74,61 +71,81 @@ public class DocumentServiceImpl implements DocumentService {
         for (BaseDocument bd : documentList
         ) {
             if (bd.getId() == baseDocument.getId() || bd.getDocumentRegNumber() == baseDocument.getDocumentRegNumber()) {
+
                 throw new DocumentExistsException(bd.getDocumentRegNumber(), "Document number " + bd.getDocumentRegNumber() + " exist");
             }
-
         }
         DocumentHolder.documentList.add(baseDocument);
     }
 
+
+
     /**
      * {@inheritDoc}
-     * Метод генерирует указанное количество документов
+     * Метод генерирует заданное количество документов разных типов и печатает в консоль
+     *
+     * @param task     Количество генерируемых поручений
+     * @param incoming Количество генерируемых входящих документов
+     * @param outgoing Количество генерируемых исходящих документов
      */
     @Override
     public void generateDocument(String task, String incoming, String outgoing) {
         System.out.println("----------------------------------------------------------------------");
         System.out.println("---------------------Сгенерированные документы---------------------");
         //Генерация поручений
+        generateTaskDocument(Integer.valueOf(task));
+        //Генерация входящих документов
+        generateIncomingDocument(Integer.valueOf(incoming));
+        //Генерация исходящих сообщений
+        generateOutgoingDocument(Integer.valueOf(outgoing));
+    }
+
+    //Генерация поручений
+    public void generateTaskDocument(int task){
         for (int i = 0; i < Integer.valueOf(task); i++) {
             BaseDocument taskDoc = taskFactory.createDocument();
             if (taskDoc != null) {
                 try {
                     documentAdd(taskDoc);
+                    LOGGER.info(String.valueOf(taskDoc));
                 } catch (DocumentExistsException e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                 }
-                logger.info(String.valueOf(taskDoc));
+
             }
         }
-        //Генерация входящих сообщений
+    }
+    //Генерация входящих документов
+    public void generateIncomingDocument(int incoming){
         for (int i = 0; i < Integer.valueOf(incoming); i++) {
             BaseDocument incomingDoc = incomingDocFactory.createDocument();
             if (incomingDoc != null) {
                 try {
                     documentAdd(incomingDoc);
+                    LOGGER.info(String.valueOf(incomingDoc));
                 } catch (DocumentExistsException e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                 }
-                logger.info(String.valueOf(incomingDoc));
+
             }
         }
-        //Генерация исходящих сообщений
+    }
+    //Генерация исходящих сообщений
+    public void generateOutgoingDocument(int outgoing){
         for (int i = 0; i < Integer.valueOf(outgoing); i++) {
             BaseDocument outgoingDoc = outgoingFactory.createDocument();
             if (outgoingDoc != null) {
                 try {
                     documentAdd(outgoingDoc);
+                    LOGGER.info(String.valueOf(outgoingDoc));
                 } catch (DocumentExistsException e) {
                     /* throw new RuntimeException(e);*/
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                 }
-                logger.info(String.valueOf(outgoingDoc));
-            }
 
+            }
         }
     }
-
 
     /**
      * {@inheritDoc}
@@ -179,8 +196,9 @@ public class DocumentServiceImpl implements DocumentService {
         System.out.println("------------------------------------------------");
         System.out.println("---------------------Отчет---------------------");
         for (Map.Entry<String, List<String>> entry : totalMap.entrySet()) {
-            logger.info(entry.getKey() + ":\n" + entry.getValue());
+            Object[] taskArgs = {entry.getKey(), entry.getValue()};
+            MessageFormat form = new MessageFormat("\n Автор документа {0}\n{1}");
+            LOGGER.info(form.format(taskArgs));
         }
     }
-
 }

@@ -1,6 +1,7 @@
 package com.example.testproject1.model;
 
 
+import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -81,19 +82,12 @@ public class TaskDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        return "TaskDocument{" +
-                ", id=" + id +
-                ", documentName='" + documentName + '\'' +
-                ", documentText='" + documentText + '\'' +
-                ", documentRegNumber=" + documentRegNumber +
-                ", documentData='" + documentDate + '\'' +
-                ", documentAuthor='" + documentAuthor + '\'' +
-                "taskOutDate='" + taskOutDate + '\'' +
-                ", taskExecPeriod='" + taskExecPeriod + '\'' +
-                ", taskResponsible='" + taskResponsible + '\'' +
-                ", taskSignOfControl='" + taskSignOfControl + '\'' +
-                ", taskControlPerson='" + taskControlPerson + '\'' +
-                '}';
+
+        Object[] taskArgs = {id, documentName,documentText,documentRegNumber,documentDate,documentAuthor,taskOutDate,taskExecPeriod,taskResponsible,taskSignOfControl,taskControlPerson};
+        MessageFormat form = new MessageFormat(
+                "Поручение id= {0} documentName= {1}, documentText= {2}, documentRegNumber= {3}" +
+                        ", documentData= {4}, documentAuthor= {5},  taskOutDate= {6}, taskExecPeriod= {7}, taskResponsible= {8}, taskSignOfControl= {9}, taskControlPerson= {10}  ");
+        return form.format(taskArgs);
     }
 
     /**

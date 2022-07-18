@@ -11,6 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DocumentFlow {
     public static void main(String[] args) {
-        var context = SpringApplication.run(DocumentFlow.class, args);
+        SpringApplication.run(DocumentFlow.class, args);
     }
 }

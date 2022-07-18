@@ -1,9 +1,8 @@
 package com.example.testproject1.model;
 
 
+import java.util.Comparator;
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -92,22 +91,6 @@ public class BaseDocument implements Comparable<BaseDocument> {
         this.documentAuthor = documentAuthor;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @return Метод toString для класса BaseDocument
-     */
-    @Override
-    public String toString() {
-        return "BaseDocument{" +
-                "id=" + id +
-                ", documentName='" + documentName + '\'' +
-                ", documentText='" + documentText + '\'' +
-                ", documentRegNumber=" + documentRegNumber +
-                ", documentData='" + documentDate + '\'' +
-                ", documentAuthor='" + documentAuthor + '\'' +
-                '}';
-    }
 
     /**
      * {@inheritDoc}
@@ -141,12 +124,7 @@ public class BaseDocument implements Comparable<BaseDocument> {
      */
     @Override
     public int compareTo(BaseDocument o) {
-        int i = this.getDocumentData().compareTo(o.getDocumentData());
-        if (i == 0) {
-            i = this.getDocumentRegNumber().compareTo(o.getDocumentRegNumber());
-            return i;
-        } else
-            return i;
+        return Comparator.comparing(BaseDocument::getDocumentData).thenComparing(BaseDocument::getDocumentRegNumber).compare(this,o);
     }
 }
 

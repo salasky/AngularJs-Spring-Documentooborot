@@ -1,6 +1,6 @@
 package com.example.testproject1.service.randomizer;
 
-import com.example.testproject1.model.Enum.DocumentDeliveryType;
+import com.example.testproject1.model.enums.DocumentDeliveryType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

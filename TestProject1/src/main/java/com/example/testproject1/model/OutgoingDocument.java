@@ -1,7 +1,8 @@
 package com.example.testproject1.model;
 
-import com.example.testproject1.model.Enum.DocumentDeliveryType;
+import com.example.testproject1.model.enums.DocumentDeliveryType;
 
+import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -45,16 +46,11 @@ public class OutgoingDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        return "OutgoingDocument{" +
-                ", id=" + id +
-                ", documentName='" + documentName + '\'' +
-                ", documentText='" + documentText + '\'' +
-                ", documentRegNumber=" + documentRegNumber +
-                ", documentData='" + documentDate + '\'' +
-                ", documentAuthor='" + documentAuthor + '\'' +
-                "outgoingDocumentSender='" + outgoingDocumentSender + '\'' +
-                ", outgoingDocumentDeliveryType='" + outgoingDocumentDeliveryType + '\'' +
-                '}';
+        Object[] taskArgs = {id, documentName,documentText,documentRegNumber,documentDate,documentAuthor,outgoingDocumentSender,outgoingDocumentDeliveryType};
+        MessageFormat form = new MessageFormat(
+                "Исходящий документ id= {0} documentName= {1}, documentText= {2}, documentRegNumber= {3}" +
+                        ", documentData= {4}, documentAuthor= {5},  outgoingDocumentSender= {6}, outgoingDocumentDeliveryType= {7}");
+        return form.format(taskArgs);
     }
 
     /**

@@ -1,8 +1,7 @@
 package com.example.testproject1.shell;
 
 
-import com.example.testproject1.model.Enum.DocumentDeliveryType;
-import com.example.testproject1.service.DocSave.DocumentServiceImpl;
+import com.example.testproject1.service.documents.DocumentServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ import org.springframework.shell.standard.ShellOption;
  */
 @ShellComponent
 public class TaskDocumentShell {
-    private static final Logger logger = LoggerFactory.getLogger(TaskDocumentShell.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentShell.class);
     /**
      * Autowired бина класса {@link DocumentServiceImpl}
      */
@@ -32,9 +31,9 @@ public class TaskDocumentShell {
      */
     @ShellMethod(value = "generate Param(Int taskDocCount (default = 10), Int incomingDocCount(default = 10), Int outgoingDocCount(default = 10)", key = "generate")
     public void generate(@ShellOption(defaultValue = "10") String task, @ShellOption(defaultValue = "10") String incoming, @ShellOption(defaultValue = "10") String outgoing) {
-        logger.info("Попытка сгенерировать документы");
+        LOGGER.info("Попытка сгенерировать документы");
         documentServiceImpl.generateDocument(task, incoming, outgoing);
-        logger.info("Попытка сформировать отчет по документам");
+        LOGGER.info("Попытка сформировать отчет по документам");
         documentServiceImpl.genereteReport();
     }
 }
