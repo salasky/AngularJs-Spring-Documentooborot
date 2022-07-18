@@ -1,13 +1,14 @@
 package com.example.testproject1.model;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
 /**
  * Клас входящих документов. Наследник {@link BaseDocument}
+ *
+ * @author smigranov
  */
-
-
 public class IncomingDocument extends BaseDocument {
     /**
      * отправитель
@@ -24,20 +25,11 @@ public class IncomingDocument extends BaseDocument {
     /**
      * исходящая дата регистрации
      */
-    private String incomingDocumentDate;
-
-    public IncomingDocument(UUID id, String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String incomingDocumentSender, String incomingDocumentDestination, Long incomingDocumentNumber, String incomingDocumentDate) {
-        super(id, documentName, documentText, documentRegNumber, documentData, documentAuthor);
-        this.incomingDocumentSender = incomingDocumentSender;
-        this.incomingDocumentDestination = incomingDocumentDestination;
-        this.incomingDocumentNumber = incomingDocumentNumber;
-        this.incomingDocumentDate = incomingDocumentDate;
-    }
+    private Date incomingDocumentDate;
 
     private IncomingDocument() {
 
     }
-
     public String getIncomingDocumentSender() {
         return incomingDocumentSender;
     }
@@ -62,14 +54,19 @@ public class IncomingDocument extends BaseDocument {
         this.incomingDocumentNumber = incomingDocumentNumber;
     }
 
-    public String getIncomingDocumentDate() {
+    public Date getIncomingDocumentDate() {
         return incomingDocumentDate;
     }
 
-    public void setIncomingDocumentDate(String incomingDocumentDate) {
+    public void setIncomingDocumentDate(Date incomingDocumentDate) {
         this.incomingDocumentDate = incomingDocumentDate;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "IncomingDocument{" +
@@ -86,6 +83,12 @@ public class IncomingDocument extends BaseDocument {
                 '}';
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param o Объект для сравнивания
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,15 +98,21 @@ public class IncomingDocument extends BaseDocument {
         return Objects.equals(incomingDocumentSender, that.incomingDocumentSender) && Objects.equals(incomingDocumentDestination, that.incomingDocumentDestination) && Objects.equals(incomingDocumentNumber, that.incomingDocumentNumber) && Objects.equals(incomingDocumentDate, that.incomingDocumentDate);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate);
     }
+
     public static IncomingDocumentBuilder newBuilder() {
         return new IncomingDocument().new IncomingDocumentBuilder();
     }
 
-    public class IncomingDocumentBuilder{
+    public class IncomingDocumentBuilder {
         private IncomingDocumentBuilder() {
             // private constructor
         }
@@ -128,10 +137,11 @@ public class IncomingDocument extends BaseDocument {
             return this;
         }
 
-        public IncomingDocumentBuilder setDocDate(String docDate) {
+        public IncomingDocumentBuilder setDocDate(Date docDate) {
             IncomingDocument.this.documentDate = docDate;
             return this;
         }
+
         public IncomingDocumentBuilder setDocAuthor(String docAuthor) {
             IncomingDocument.this.documentAuthor = docAuthor;
             return this;
@@ -152,13 +162,12 @@ public class IncomingDocument extends BaseDocument {
             return this;
         }
 
-        public IncomingDocumentBuilder setIncomingDocumentDate(String date) {
+        public IncomingDocumentBuilder setIncomingDocumentDate(Date date) {
             IncomingDocument.this.incomingDocumentDate = date;
             return this;
         }
-
         public IncomingDocument build() {
-          return IncomingDocument.this;
+            return IncomingDocument.this;
         }
     }
 }

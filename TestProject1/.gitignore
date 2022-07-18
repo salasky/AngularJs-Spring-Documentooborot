@@ -7,6 +7,7 @@ target/
 mvnw
 mvnw.cmd
 /src/main/java/META-INF/
+/src/main/java/javadoc/
 .mvn
 ### STS ###
 .apt_generated

@@ -1,16 +1,16 @@
 package com.example.testproject1.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.example.testproject1.model.Enum.DocumentDeliveryType;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
 /**
  * Клас исходящих документов. Наследник {@link BaseDocument}
+ *
+ * @author smigranov
  */
-
-
 public class OutgoingDocument extends BaseDocument {
     /**
      * адресат
@@ -19,13 +19,7 @@ public class OutgoingDocument extends BaseDocument {
     /**
      * способ доставки
      */
-    private String outgoingDocumentDeliveryType;
-
-    public OutgoingDocument(UUID id,String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String outgoingDocumentSender, String outgoingDocumentDeliveryType) {
-        super(id, documentName, documentText, documentRegNumber, documentData, documentAuthor);
-        this.outgoingDocumentSender = outgoingDocumentSender;
-        this.outgoingDocumentDeliveryType = outgoingDocumentDeliveryType;
-    }
+    private DocumentDeliveryType outgoingDocumentDeliveryType;
 
     private OutgoingDocument() {
     }
@@ -38,14 +32,17 @@ public class OutgoingDocument extends BaseDocument {
         this.outgoingDocumentSender = outgoingDocumentSender;
     }
 
-    public String getOutgoingDocumentDeliveryType() {
+    public DocumentDeliveryType getOutgoingDocumentDeliveryType() {
         return outgoingDocumentDeliveryType;
     }
 
-    public void setOutgoingDocumentDeliveryType(String outgoingDocumentDeliveryType) {
+    public void setOutgoingDocumentDeliveryType(DocumentDeliveryType outgoingDocumentDeliveryType) {
         this.outgoingDocumentDeliveryType = outgoingDocumentDeliveryType;
     }
-
+    /**
+     * {@inheritDoc}
+     * @return toString класса OutgoingDocument
+     */
     @Override
     public String toString() {
         return "OutgoingDocument{" +
@@ -60,6 +57,12 @@ public class OutgoingDocument extends BaseDocument {
                 '}';
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param o Объект для сравнивания
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,7 +71,11 @@ public class OutgoingDocument extends BaseDocument {
         OutgoingDocument that = (OutgoingDocument) o;
         return getOutgoingDocumentSender().equals(that.getOutgoingDocumentSender()) && getOutgoingDocumentDeliveryType().equals(that.getOutgoingDocumentDeliveryType());
     }
-
+    /**
+     * {@inheritDoc}
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getOutgoingDocumentSender(), getOutgoingDocumentDeliveryType());
@@ -78,7 +85,7 @@ public class OutgoingDocument extends BaseDocument {
         return new OutgoingDocument().new OutgoingBuilder();
     }
 
-    public class OutgoingBuilder{
+    public class OutgoingBuilder {
         private OutgoingBuilder() {
             // private constructor
         }
@@ -103,10 +110,11 @@ public class OutgoingDocument extends BaseDocument {
             return this;
         }
 
-        public OutgoingBuilder setDocDate(String docDate) {
+        public OutgoingBuilder setDocDate(Date docDate) {
             OutgoingDocument.this.documentDate = docDate;
             return this;
         }
+
         public OutgoingBuilder setDocAuthor(String docAuthor) {
             OutgoingDocument.this.documentAuthor = docAuthor;
             return this;
@@ -117,7 +125,7 @@ public class OutgoingDocument extends BaseDocument {
             return this;
         }
 
-        public OutgoingBuilder setDocDeliveryType(String type) {
+        public OutgoingBuilder setDocDeliveryType(DocumentDeliveryType type) {
             OutgoingDocument.this.outgoingDocumentDeliveryType = type;
             return this;
         }

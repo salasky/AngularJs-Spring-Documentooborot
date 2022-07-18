@@ -1,18 +1,20 @@
 package com.example.testproject1.model;
 
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
 /**
  * Клас поручений. Наследник {@link BaseDocument}
+ *
+ * @author smigranov
  */
-
 public class TaskDocument extends BaseDocument {
     /**
      * дата выдачи поручения
      */
-    private String taskOutDate;
+    private Date taskOutDate;
     /**
      * срок исполнения поручения
      */
@@ -24,30 +26,20 @@ public class TaskDocument extends BaseDocument {
     /**
      * признак контрольности
      */
-    private String taskSignOfControl;
+    private Boolean taskSignOfControl;
     /**
      * контролер поручения
      */
     private String taskControlPerson;
 
-    public TaskDocument(UUID id,String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor, String taskOutDate, String taskExecPeriod, String taskResponsible, String taskSignOfControl, String taskControlPerson) {
-        super(id, documentName, documentText, documentRegNumber, documentData, documentAuthor);
-        this.taskOutDate = taskOutDate;
-        this.taskExecPeriod = taskExecPeriod;
-        this.taskResponsible = taskResponsible;
-        this.taskSignOfControl = taskSignOfControl;
-        this.taskControlPerson = taskControlPerson;
-        ;
-    }
-
     private TaskDocument() {
     }
 
-    public String getTaskOutDate() {
+    public Date getTaskOutDate() {
         return taskOutDate;
     }
 
-    public void setTaskOutDate(String taskOutDate) {
+    public void setTaskOutDate(Date taskOutDate) {
         this.taskOutDate = taskOutDate;
     }
 
@@ -67,11 +59,11 @@ public class TaskDocument extends BaseDocument {
         this.taskResponsible = taskResponsible;
     }
 
-    public String getTaskSignOfControl() {
+    public Boolean getTaskSignOfControl() {
         return taskSignOfControl;
     }
 
-    public void setTaskSignOfControl(String taskSignOfControl) {
+    public void setTaskSignOfControl(Boolean taskSignOfControl) {
         this.taskSignOfControl = taskSignOfControl;
     }
 
@@ -83,6 +75,10 @@ public class TaskDocument extends BaseDocument {
         this.taskControlPerson = taskControlPerson;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return
+     */
     @Override
     public String toString() {
         return "TaskDocument{" +
@@ -100,6 +96,11 @@ public class TaskDocument extends BaseDocument {
                 '}';
     }
 
+    /**
+     * {@inheritDoc}
+     * @param o Объект для сравнивания
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -109,6 +110,10 @@ public class TaskDocument extends BaseDocument {
         return Objects.equals(taskOutDate, that.taskOutDate) && Objects.equals(taskExecPeriod, that.taskExecPeriod) && Objects.equals(taskResponsible, that.taskResponsible) && Objects.equals(taskSignOfControl, that.taskSignOfControl) && Objects.equals(taskControlPerson, that.taskControlPerson);
     }
 
+    /**
+     * {@inheritDoc}
+     * @return
+     */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson);
@@ -142,7 +147,7 @@ public class TaskDocument extends BaseDocument {
             return this;
         }
 
-        public TaskBuilder setDocDate(String docDate) {
+        public TaskBuilder setDocDate(Date docDate) {
             TaskDocument.this.documentDate = docDate;
             return this;
         }
@@ -151,7 +156,7 @@ public class TaskDocument extends BaseDocument {
             return this;
         }
 
-        public TaskBuilder setTaskDate(String taskDate) {
+        public TaskBuilder setTaskDate(Date taskDate) {
             TaskDocument.this.taskOutDate = taskDate;
             return this;
         }
@@ -166,7 +171,7 @@ public class TaskDocument extends BaseDocument {
             return this;
         }
 
-        public TaskBuilder setTaskSignOfControl(String taskSignOfControl) {
+        public TaskBuilder setTaskSignOfControl(Boolean taskSignOfControl) {
             TaskDocument.this.taskSignOfControl = taskSignOfControl;
             return this;
         }

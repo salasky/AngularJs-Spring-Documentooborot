@@ -4,7 +4,6 @@ package com.example.testproject1.exeption;
  * При создании документа с существующим рег.номером выбрасывается исключение DocumentExistsException
  *
  * @author smigranov
- * @version 1.0
  */
 public class DocumentExistsException extends Exception {
     /**

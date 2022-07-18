@@ -7,12 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * THIS IS MY MAIN CLASS
  *
  * @author smigranov
- * @version 1.0
  */
 @SpringBootApplication
-public class TestProject1Application {
+public class DocumentFlow {
     public static void main(String[] args) {
-        var context = SpringApplication.run(TestProject1Application.class, args);
+        var context = SpringApplication.run(DocumentFlow.class, args);
     }
-
 }

@@ -1,21 +1,18 @@
 package com.example.testproject1.model;
 
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Базовый абстрактный класс документов
+ Базовый абстрактный класс BaseDocument для {@link TaskDocument} ,{@link IncomingDocument} ,{@link OutgoingDocument}
  *
  * @author smigranov
- * @version 1.0
- * Базовый абстрактный класс BaseDocument для {@link TaskDocument} ,{@link IncomingDocument} ,{@link OutgoingDocument}
  */
-
-
-public  class BaseDocument  implements Comparable<LinkedHashMap<String, Object>> {
+public class BaseDocument implements Comparable<BaseDocument> {
 
     /**
      * идентификатор документа
@@ -36,20 +33,12 @@ public  class BaseDocument  implements Comparable<LinkedHashMap<String, Object>>
     /**
      * дата регистрации документа
      */
-    protected String documentDate;
+    protected Date documentDate;
     /**
      * автор документа
      */
     protected String documentAuthor;
 
-    public BaseDocument(UUID id, String documentName, String documentText, Long documentRegNumber, String documentData, String documentAuthor) {
-        this.id = id;
-        this.documentName = documentName;
-        this.documentText = documentText;
-        this.documentRegNumber = documentRegNumber;
-        this.documentDate = documentData;
-        this.documentAuthor = documentAuthor;
-    }
 
     public BaseDocument() {
     }
@@ -87,11 +76,11 @@ public  class BaseDocument  implements Comparable<LinkedHashMap<String, Object>>
         this.documentRegNumber = documentRegNumber;
     }
 
-    public String getDocumentData() {
+    public Date getDocumentData() {
         return documentDate;
     }
 
-    public void setDocumentData(String documentData) {
+    public void setDocumentData(Date documentData) {
         this.documentDate = documentData;
     }
 
@@ -103,6 +92,11 @@ public  class BaseDocument  implements Comparable<LinkedHashMap<String, Object>>
         this.documentAuthor = documentAuthor;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return Метод toString для класса BaseDocument
+     */
     @Override
     public String toString() {
         return "BaseDocument{" +
@@ -115,6 +109,12 @@ public  class BaseDocument  implements Comparable<LinkedHashMap<String, Object>>
                 '}';
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param o Объект для сравнивания
+     * @return Метод equals для класса BaseDocument
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -123,61 +123,31 @@ public  class BaseDocument  implements Comparable<LinkedHashMap<String, Object>>
         return Objects.equals(id, that.id) && Objects.equals(documentName, that.documentName) && Objects.equals(documentText, that.documentText) && Objects.equals(documentRegNumber, that.documentRegNumber) && Objects.equals(documentDate, that.documentDate) && Objects.equals(documentAuthor, that.documentAuthor);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return hasCode BaseDocument
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, documentName, documentText, documentRegNumber, documentDate, documentAuthor);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param o the object to be compared.
+     * @return Возвращает целое число, положительное число-текущий объект больше передваемого,0-объекты равны
+     */
     @Override
-    public int compareTo(LinkedHashMap<String, Object> conditions) {
-        if (conditions == null) {
-            return 0;
-        }
-        int val = 0;
-        for (Map.Entry<String, Object> entry : conditions.entrySet()) {
-            Object value = entry.getValue();
-            switch (entry.getKey()) {
-                case ("documentRegNumber:asc"): {
-                    if (value instanceof Long) {
-                        val = this.documentRegNumber.compareTo((Long) value);
-                        if (val != 0) {
-                            return val;
-                        }
-                    }
-                    break;
-                }
-                case ("documentRegNumber:desc"): {
-                    if (value instanceof Long) {
-                        val = this.documentRegNumber.compareTo((Long) value);
-                        if (val != 0) {
-                            return val * -1;
-                        }
-                    }
-                    break;
-                }
-                case ("documentDate:asc"): {
-                    if (value instanceof String) {
-                        val = this.documentDate.compareTo((String) value);
-                        if (val != 0) {
-                            return val;
-                        }
-                    }
-                    break;
-                }
-                case ("documentDate:desc"): {
-                    if (value instanceof String) {
-                        val = this.documentDate.compareTo((String) value);
-                        if (val != 0) {
-                            return val * -1;
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-        return val;
+    public int compareTo(BaseDocument o) {
+        int i = this.getDocumentData().compareTo(o.getDocumentData());
+        if (i == 0) {
+            i = this.getDocumentRegNumber().compareTo(o.getDocumentRegNumber());
+            return i;
+        } else
+            return i;
     }
-
 }
 
 

@@ -1,17 +1,18 @@
 package com.example.testproject1.service.randomizer;
 
-import com.example.testproject1.exeption.DocumentExistsException;
+import com.example.testproject1.model.Enum.DocumentDeliveryType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 /**
  * Класс для рандомной выдачи данных
+ *
  * @author smigranov
- * @version 1.0
  */
 @Service
 public class Randomizer {
@@ -27,11 +28,7 @@ public class Randomizer {
      */
     @Value("${doc.documentAuthor}")
     private List<String> newDocAuthorList;
-    /**
-     * Лист признаков контроля поручений из application.yaml
-     */
-    @Value("${doc.documentControl}")
-    private List<String> newDocControlList;
+
     /**
      * Лист контролеров поручений из application.yaml
      */
@@ -54,46 +51,41 @@ public class Randomizer {
      */
     @Value("${doc.documentOutName}")
     private List<String> newdocNameOutgoingList;
-    /**
-     * Лист типа доставки исходящих документов из application.yaml
-     */
-    @Value("${doc.docDeliveryType}")
-    private List<String> newdocDeliveryTypeList;
 
-    public UUID getRandUUID(){
+    public UUID getRandUUID() {
         return UUID.randomUUID();
     }
-    public String getRandDocName(){
+
+    public String getRandDocName() {
         return newDocNameList.get((int) (Math.random() * newDocNameList.size()));
     }
 
-    public String getRandDocText(){
+    public String getRandDocText() {
         return newDocTextList.get((int) (Math.random() * newDocTextList.size()));
     }
 
-
-    public Long getRandDocumentRegNumber()  {
+    public Long getRandDocumentRegNumber() {
         return Long.valueOf((int) (Math.random() * 100));
     }
 
-
-    public String getRandDocumentData() {
-        return  "2022-" + (int) (Math.random() * 12 + 1) + "-" + (int) (Math.random() * 29 + 1);
-
+    public Date getRandDocumentData() {
+        var rnd = new Random();
+        //рандомная дата в 2022 году
+        var ms = 1641027402000L + (Math.abs(rnd.nextLong()) % (1L * 365 * 24 * 60 * 60 * 1000));
+        return new Date(ms);
     }
 
     public String getRandDocumentAuthor() {
         return newDocAuthorList.get((int) (Math.random() * newDocAuthorList.size()));
     }
 
-
-    public String getRandTaskOutDate() {
+    public Date getRandTaskOutDate() {
         Date date = new Date();
-        return date.toString();
+        return date;
     }
 
     public String getRandTaskExecPeriod() {
-        return  ((int) (Math.random() * 14 + 1) + " дня");
+        return ((int) (Math.random() * 14 + 1) + " дня");
     }
 
 
@@ -101,8 +93,8 @@ public class Randomizer {
         return newDocAuthorList.get((int) (Math.random() * newDocAuthorList.size()));
     }
 
-    public String getTaskSignOfControl() {
-        return newDocControlList.get((int) (Math.random() * newDocControlList.size()));
+    public Boolean getTaskSignOfControl() {
+        return Math.random() < 0.5;
     }
 
 
@@ -125,19 +117,19 @@ public class Randomizer {
 
     }
 
-    public String getRandIncomingDocumentDate() {
-        return "2022-" + (int) (Math.random() * 12 + 1) + "-" + (int) (Math.random() * 29 + 1);
+    public Date getRandIncomingDocumentDate() {
+
+        var rnd = new Random();
+        //рандомная дата в 2022 году
+        var ms = 1641027402000L + (Math.abs(rnd.nextLong()) % (1L * 365 * 24 * 60 * 60 * 1000));
+        return new Date(ms);
     }
-
-
 
     public String getRandOutgoingDocumentSender() {
-        return  newDocDistPerson.get((int) (Math.random() * newDocDistPerson.size()));
+        return newDocDistPerson.get((int) (Math.random() * newDocDistPerson.size()));
     }
 
-
-    public String getRandOutgoingDocumentDeliveryType() {
-        return newdocDeliveryTypeList.get((int) (Math.random() * newdocDeliveryTypeList.size()));
+    public DocumentDeliveryType getRandOutgoingDocumentDeliveryType() {
+        return DocumentDeliveryType.values()[new Random().nextInt(DocumentDeliveryType.values().length)];
     }
-
 }
