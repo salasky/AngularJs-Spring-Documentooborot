@@ -17,8 +17,6 @@ public class IncomingDocumentFactory extends DocumentFactory {
     /**
      * Autowired бина {@link Randomizer}
      */
-    @Autowired
-    private Randomizer randomizer;
 
     /**
      * {@inheritDoc}

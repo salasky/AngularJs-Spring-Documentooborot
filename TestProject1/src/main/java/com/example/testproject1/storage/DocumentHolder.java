@@ -1,4 +1,4 @@
-package com.example.testproject1.service.documents;
+package com.example.testproject1.storage;
 
 import com.example.testproject1.model.BaseDocument;
 import org.springframework.stereotype.Service;

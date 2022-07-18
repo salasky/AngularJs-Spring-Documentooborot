@@ -14,11 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OutgoingDocumentFactory extends DocumentFactory {
 
-    /**
-     * Autowired бина {@link Randomizer}
-     */
-    @Autowired
-    private Randomizer randomizer;
+
 
     /**
      * {@inheritDoc}

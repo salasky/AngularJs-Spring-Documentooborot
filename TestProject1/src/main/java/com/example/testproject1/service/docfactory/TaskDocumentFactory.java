@@ -15,11 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TaskDocumentFactory extends DocumentFactory {
 
-    /**
-     * Autowired бина {@link Randomizer}
-     */
-    @Autowired
-    private Randomizer randomizer;
+
+
 
     /**
      * {@inheritDoc}
