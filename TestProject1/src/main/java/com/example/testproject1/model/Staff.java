@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Базовый класс BaseDocument для ....
+ * Базовый класс BaseDocument для {@link Person},{@link Department}, {@link Organization}
  *
  * @author smigranov
  */
