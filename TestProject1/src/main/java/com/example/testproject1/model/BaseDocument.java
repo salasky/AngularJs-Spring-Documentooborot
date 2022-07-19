@@ -22,7 +22,7 @@ public class BaseDocument implements Comparable<BaseDocument> {
      */
     protected String documentName;
     /**
-     * текст документа
+     * Tекст документа
      */
     protected String documentText;
     /**
