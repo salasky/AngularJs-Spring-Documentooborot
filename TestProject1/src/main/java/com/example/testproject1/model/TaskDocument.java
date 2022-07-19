@@ -82,9 +82,9 @@ public class TaskDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson};
+        Object[] taskArgs = {super.toString(),taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson};
         MessageFormat form = new MessageFormat(
-                "Поручение "+super.toString()+ ", taskOutDate= {6}, taskExecPeriod= {7}, taskResponsible= {8}, taskSignOfControl= {9}, taskControlPerson= {10}  ");
+                "Поручение {0} , taskOutDate= {1}, taskExecPeriod= {2}, taskResponsible= {3}, taskSignOfControl= {4}, taskControlPerson= {5}");
         return form.format(taskArgs);
     }
 

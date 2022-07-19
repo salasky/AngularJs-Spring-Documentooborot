@@ -46,11 +46,10 @@ public class OutgoingDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {outgoingDocumentSender, outgoingDocumentDeliveryType};
+        Object[] taskArgs = {super.toString(),outgoingDocumentSender, outgoingDocumentDeliveryType};
         MessageFormat form = new MessageFormat(
-                "Исходящий документ "+super.toString()+", outgoingDocumentSender= {6}, outgoingDocumentDeliveryType= {7}");
+                "Исходящий документ {0}, outgoingDocumentSender= {1}, outgoingDocumentDeliveryType= {2}");
         return form.format(taskArgs);
-
     }
 
     /**
