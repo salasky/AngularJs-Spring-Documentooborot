@@ -33,14 +33,16 @@ public class TaskDocumentShell {
         this.documentServiceImpl = documentServiceImpl;
         this.generateReportService = generateReportService;
     }
-
     /**
-     * @param task     Передаем количество генерируемых документов
+     *Shell метод генерации документов и создания отчетов по ним
+     *
+     * @param a Генерируем заданное количество документов
      */
-    @ShellMethod(value = "generate Param(Int DocгьутеCount (default = 50)", key = "generate")
-    public void generate(@ShellOption(defaultValue = "50") String task) {
+    @ShellMethod("Cmd: generate --a  (Int DocumentCount (default = 500")
+    public void generate(@ShellOption(defaultValue="500") int a) {
+        Integer countDocument=Integer.valueOf(a);
         LOGGER.info("Попытка сгенерировать документы");
-        documentServiceImpl.generateDocument(task);
+        documentServiceImpl.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
         generateReportService.genereteReport();
     }
