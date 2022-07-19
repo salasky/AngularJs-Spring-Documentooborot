@@ -1,6 +1,7 @@
 package com.example.testproject1.model;
 
 
+import java.text.MessageFormat;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
@@ -119,6 +120,15 @@ public class BaseDocument implements Comparable<BaseDocument> {
     @Override
     public int compareTo(BaseDocument o) {
         return Comparator.comparing(BaseDocument::getDocumentData).thenComparing(BaseDocument::getDocumentRegNumber).compare(this, o);
+    }
+
+    @Override
+    public String toString() {
+        Object[] taskArgs = {id, documentName, documentText, documentRegNumber, documentDate, documentAuthor};
+        MessageFormat form = new MessageFormat(
+                "id= {0} documentName= {1}, documentText= {2}, documentRegNumber= {3}" +
+                        ", documentData= {4}, documentAuthor= {5}");
+        return form.format(taskArgs);
     }
 
     /**

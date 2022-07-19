@@ -69,10 +69,9 @@ public class IncomingDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {id, documentName, documentText, documentRegNumber, documentDate, documentAuthor, incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate};
+        Object[] taskArgs = {incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate};
         MessageFormat form = new MessageFormat(
-                "Входящий документ id= {0} documentName= {1}, documentText= {2}, documentRegNumber= {3}" +
-                        ", documentData= {4}, documentAuthor= {5},  incomingDocumentSender= {6}, incomingDocumentDestination= {7}, incomingDocumentNumber= {8}, incomingDocumentDate= {9}");
+                "Входящий документ "+super.toString()+", incomingDocumentSender= {6}, incomingDocumentDestination= {7}, incomingDocumentNumber= {8}, incomingDocumentDate= {9}");
         return form.format(taskArgs);
     }
 
