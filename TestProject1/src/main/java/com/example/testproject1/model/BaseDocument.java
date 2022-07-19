@@ -26,7 +26,7 @@ public class BaseDocument implements Comparable<BaseDocument> {
      */
     protected String documentText;
     /**
-     * регистрационный номер документа
+     * Регистрационный номер документа
      */
     protected Long documentRegNumber;
     /**

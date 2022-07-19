@@ -50,10 +50,10 @@ public class GenerateDocumentImpl implements GenerateDocument {
     /**
      * Вспомогательный метод генерации документов
      *
-     * @param task количество документов
+     * @param count количество документов
      */
-    public void generateDocument(int task) {
-        for (int i = 0; i < Integer.valueOf(task); i++) {
+    public void generateDocument(Integer count) {
+        for (int i = 0; i < count; i++) {
             BaseDocument taskDoc = documentFactoryList.get(new Random().nextInt(documentFactoryList.size())).create();
             if (taskDoc != null) {
                 try {
