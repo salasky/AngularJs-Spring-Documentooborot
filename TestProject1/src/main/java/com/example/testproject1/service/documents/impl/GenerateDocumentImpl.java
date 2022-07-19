@@ -27,7 +27,7 @@ public class GenerateDocumentImpl implements GenerateDocument {
      */
     private AddDocumentService addDocumentService;
     /**
-     * Инжектим всех кто реализует интерфейс Factory
+     * Инжектим все бины классов реализующих интерфейс Factory
      */
     private List<Factory<BaseDocument>> documentFactoryList;
 
