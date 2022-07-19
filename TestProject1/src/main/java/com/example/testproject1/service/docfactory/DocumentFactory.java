@@ -17,7 +17,6 @@ public abstract class DocumentFactory<T extends BaseDocument.BaseDocumentBuilder
      */
     @Autowired
     protected Randomizer randomizer;
-
     /**
      * @return Возвращает объект,класс которого наследуется от {@link BaseDocument}
      */
