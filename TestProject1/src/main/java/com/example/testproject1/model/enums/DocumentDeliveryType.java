@@ -8,7 +8,7 @@ package com.example.testproject1.model.enums;
 public enum DocumentDeliveryType {
       TELEGRAM
     , EMAIL
-    , RocketChat
+    , ROCKET_CHAT
     , MESSENGER
     , RUSSIAN_POST
 }

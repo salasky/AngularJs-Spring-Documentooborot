@@ -4,10 +4,9 @@ package com.example.testproject1.model;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
- * Клас поручений. Наследник {@link BaseDocument}
+ * Класc поручений. Наследник {@link BaseDocument}
  *
  * @author smigranov
  */
@@ -78,12 +77,13 @@ public class TaskDocument extends BaseDocument {
 
     /**
      * {@inheritDoc}
+     *
      * @return
      */
     @Override
     public String toString() {
 
-        Object[] taskArgs = {id, documentName,documentText,documentRegNumber,documentDate,documentAuthor,taskOutDate,taskExecPeriod,taskResponsible,taskSignOfControl,taskControlPerson};
+        Object[] taskArgs = {id, documentName, documentText, documentRegNumber, documentDate, documentAuthor, taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson};
         MessageFormat form = new MessageFormat(
                 "Поручение id= {0} documentName= {1}, documentText= {2}, documentRegNumber= {3}" +
                         ", documentData= {4}, documentAuthor= {5},  taskOutDate= {6}, taskExecPeriod= {7}, taskResponsible= {8}, taskSignOfControl= {9}, taskControlPerson= {10}  ");
@@ -92,6 +92,7 @@ public class TaskDocument extends BaseDocument {
 
     /**
      * {@inheritDoc}
+     *
      * @param o Объект для сравнивания
      * @return
      */
@@ -106,48 +107,29 @@ public class TaskDocument extends BaseDocument {
 
     /**
      * {@inheritDoc}
+     *
      * @return
      */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson);
     }
+
+    /**
+     * @return возвращает объект builder
+     */
     public static TaskBuilder newBuilder() {
         return new TaskDocument().new TaskBuilder();
     }
 
-    public class TaskBuilder{
+    /**
+     * Внутренний класс Builder
+     *
+     * @author smigranov
+     */
+    public class TaskBuilder extends BaseDocumentBuilder {
         private TaskBuilder() {
             // private constructor
-        }
-
-        public TaskBuilder setDocId(UUID Id) {
-            TaskDocument.this.id = Id;
-            return this;
-        }
-
-        public TaskBuilder setDocName(String docName) {
-            TaskDocument.this.documentName = docName;
-            return this;
-        }
-
-        public TaskBuilder setDocText(String docText) {
-            TaskDocument.this.documentText = docText;
-            return this;
-        }
-
-        public TaskBuilder setDocRegNumber(Long docRegNumber) {
-            TaskDocument.this.documentRegNumber = docRegNumber;
-            return this;
-        }
-
-        public TaskBuilder setDocDate(Date docDate) {
-            TaskDocument.this.documentDate = docDate;
-            return this;
-        }
-        public TaskBuilder setDocAuthor(String docAuthor) {
-            TaskDocument.this.documentAuthor = docAuthor;
-            return this;
         }
 
         public TaskBuilder setTaskDate(Date taskDate) {
@@ -174,7 +156,8 @@ public class TaskDocument extends BaseDocument {
             TaskDocument.this.taskControlPerson = taskControlPerson;
             return this;
         }
-        public TaskDocument build() {
+
+        public TaskDocument build(BaseDocument baseDocument) {
             return TaskDocument.this;
         }
     }

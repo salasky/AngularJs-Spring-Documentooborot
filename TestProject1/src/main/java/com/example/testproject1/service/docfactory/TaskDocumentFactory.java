@@ -2,10 +2,7 @@ package com.example.testproject1.service.docfactory;
 
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.TaskDocument;
-import com.example.testproject1.service.randomizer.Randomizer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 /**
  * Класс фабрики для {@link com.example.testproject1.model.TaskDocument}
@@ -13,30 +10,19 @@ import org.springframework.stereotype.Service;
  * @author smigranov
  */
 @Service
-public class TaskDocumentFactory extends DocumentFactory {
-
-
-
-
+public class TaskDocumentFactory extends DocumentFactory<TaskDocument.TaskBuilder> {
     /**
      * {@inheritDoc}
      *
-     * @return Возвращает объект наследник класса BaseDocument
+     * @return Возвращает объект класса BaseDocument
      */
     @Override
-    public BaseDocument createDocument() {
-        return TaskDocument.newBuilder()
-                .setDocId(randomizer.getRandUUID())
-                .setDocName(randomizer.getRandDocName())
-                .setDocText(randomizer.getRandDocText())
-                .setDocRegNumber(randomizer.getRandDocumentRegNumber())
-                .setDocDate(randomizer.getRandDocumentData())
-                .setDocAuthor(randomizer.getRandDocumentAuthor())
+    public BaseDocument create() {
+        return createBaseDocument(TaskDocument.newBuilder()
                 .setTaskDate(randomizer.getRandTaskOutDate())
                 .setTaskExecPeriod(randomizer.getRandTaskExecPeriod())
                 .setTaskResponsPerson(randomizer.getRandTaskResponsible())
                 .setTaskSignOfControl(randomizer.getTaskSignOfControl())
-                .setTaskControlPerson(randomizer.getRandTaskControlPerson())
-                .build();
+                .setTaskControlPerson(randomizer.getRandTaskControlPerson()));
     }
 }

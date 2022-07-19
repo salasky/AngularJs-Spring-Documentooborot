@@ -3,10 +3,9 @@ package com.example.testproject1.model;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
- * Клас входящих документов. Наследник {@link BaseDocument}
+ * Класc входящих документов. Наследник {@link BaseDocument}
  *
  * @author smigranov
  */
@@ -29,8 +28,8 @@ public class IncomingDocument extends BaseDocument {
     private Date incomingDocumentDate;
 
     private IncomingDocument() {
-
     }
+
     public String getIncomingDocumentSender() {
         return incomingDocumentSender;
     }
@@ -70,7 +69,7 @@ public class IncomingDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {id, documentName,documentText,documentRegNumber,documentDate,documentAuthor,incomingDocumentSender,incomingDocumentDestination,incomingDocumentNumber,incomingDocumentDate};
+        Object[] taskArgs = {id, documentName, documentText, documentRegNumber, documentDate, documentAuthor, incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate};
         MessageFormat form = new MessageFormat(
                 "Входящий документ id= {0} documentName= {1}, documentText= {2}, documentRegNumber= {3}" +
                         ", documentData= {4}, documentAuthor= {5},  incomingDocumentSender= {6}, incomingDocumentDestination= {7}, incomingDocumentNumber= {8}, incomingDocumentDate= {9}");
@@ -102,43 +101,21 @@ public class IncomingDocument extends BaseDocument {
         return Objects.hash(super.hashCode(), incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate);
     }
 
+    /**
+     * @return возвращает объект builder
+     */
     public static IncomingDocumentBuilder newBuilder() {
         return new IncomingDocument().new IncomingDocumentBuilder();
     }
 
-    public class IncomingDocumentBuilder {
+    /**
+     * Внутренний класс Builder
+     *
+     * @author smigranov
+     */
+    public class IncomingDocumentBuilder extends BaseDocumentBuilder {
         private IncomingDocumentBuilder() {
             // private constructor
-        }
-
-        public IncomingDocumentBuilder setDocId(UUID Id) {
-            IncomingDocument.this.id = Id;
-            return this;
-        }
-
-        public IncomingDocumentBuilder setDocName(String docName) {
-            IncomingDocument.this.documentName = docName;
-            return this;
-        }
-
-        public IncomingDocumentBuilder setDocText(String docText) {
-            IncomingDocument.this.documentText = docText;
-            return this;
-        }
-
-        public IncomingDocumentBuilder setDocRegNumber(Long docRegNumber) {
-            IncomingDocument.this.documentRegNumber = docRegNumber;
-            return this;
-        }
-
-        public IncomingDocumentBuilder setDocDate(Date docDate) {
-            IncomingDocument.this.documentDate = docDate;
-            return this;
-        }
-
-        public IncomingDocumentBuilder setDocAuthor(String docAuthor) {
-            IncomingDocument.this.documentAuthor = docAuthor;
-            return this;
         }
 
         public IncomingDocumentBuilder setIncomingSender(String sender) {
@@ -160,6 +137,7 @@ public class IncomingDocument extends BaseDocument {
             IncomingDocument.this.incomingDocumentDate = date;
             return this;
         }
+
         public IncomingDocument build() {
             return IncomingDocument.this;
         }

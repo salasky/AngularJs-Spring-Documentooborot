@@ -11,16 +11,24 @@ import org.springframework.stereotype.Service;
  * @author smigranov
  */
 @Service
-public abstract class DocumentFactory {
+public abstract class DocumentFactory<T extends BaseDocument.BaseDocumentBuilder> implements Factory<BaseDocument> {
     /**
      * Autowired бина {@link Randomizer}
      */
     @Autowired
     protected Randomizer randomizer;
+
     /**
-     *
      * @return Возвращает объект,класс которого наследуется от {@link BaseDocument}
-     *
      */
-    public abstract BaseDocument createDocument();
+    public BaseDocument createBaseDocument(T builder) {
+        return builder
+                .setDocId(randomizer.getRandUUID())
+                .setDocName(randomizer.getRandDocName())
+                .setDocText(randomizer.getRandDocText())
+                .setDocRegNumber(randomizer.getRandDocumentRegNumber())
+                .setDocDate(randomizer.getRandDocumentData())
+                .setDocAuthor(randomizer.getRandDocumentAuthor())
+                .build();
+    }
 }

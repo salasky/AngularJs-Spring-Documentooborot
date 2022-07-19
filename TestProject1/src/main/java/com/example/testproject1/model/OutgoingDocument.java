@@ -3,12 +3,10 @@ package com.example.testproject1.model;
 import com.example.testproject1.model.enums.DocumentDeliveryType;
 
 import java.text.MessageFormat;
-import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
- * Клас исходящих документов. Наследник {@link BaseDocument}
+ * Класc исходящих документов. Наследник {@link BaseDocument}
  *
  * @author smigranov
  */
@@ -40,13 +38,15 @@ public class OutgoingDocument extends BaseDocument {
     public void setOutgoingDocumentDeliveryType(DocumentDeliveryType outgoingDocumentDeliveryType) {
         this.outgoingDocumentDeliveryType = outgoingDocumentDeliveryType;
     }
+
     /**
      * {@inheritDoc}
+     *
      * @return toString класса OutgoingDocument
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {id, documentName,documentText,documentRegNumber,documentDate,documentAuthor,outgoingDocumentSender,outgoingDocumentDeliveryType};
+        Object[] taskArgs = {id, documentName, documentText, documentRegNumber, documentDate, documentAuthor, outgoingDocumentSender, outgoingDocumentDeliveryType};
         MessageFormat form = new MessageFormat(
                 "Исходящий документ id= {0} documentName= {1}, documentText= {2}, documentRegNumber= {3}" +
                         ", documentData= {4}, documentAuthor= {5},  outgoingDocumentSender= {6}, outgoingDocumentDeliveryType= {7}");
@@ -67,6 +67,7 @@ public class OutgoingDocument extends BaseDocument {
         OutgoingDocument that = (OutgoingDocument) o;
         return getOutgoingDocumentSender().equals(that.getOutgoingDocumentSender()) && getOutgoingDocumentDeliveryType().equals(that.getOutgoingDocumentDeliveryType());
     }
+
     /**
      * {@inheritDoc}
      *
@@ -77,43 +78,21 @@ public class OutgoingDocument extends BaseDocument {
         return Objects.hash(super.hashCode(), getOutgoingDocumentSender(), getOutgoingDocumentDeliveryType());
     }
 
+    /**
+     * @return возвращает объект builder
+     */
     public static OutgoingBuilder newBuilder() {
         return new OutgoingDocument().new OutgoingBuilder();
     }
 
-    public class OutgoingBuilder {
+    /**
+     * Внутренний класс Builder
+     *
+     * @author smigranov
+     */
+    public class OutgoingBuilder extends BaseDocumentBuilder {
         private OutgoingBuilder() {
             // private constructor
-        }
-
-        public OutgoingBuilder setDocId(UUID Id) {
-            OutgoingDocument.this.id = Id;
-            return this;
-        }
-
-        public OutgoingBuilder setDocName(String docName) {
-            OutgoingDocument.this.documentName = docName;
-            return this;
-        }
-
-        public OutgoingBuilder setDocText(String docText) {
-            OutgoingDocument.this.documentText = docText;
-            return this;
-        }
-
-        public OutgoingBuilder setDocRegNumber(Long docRegNumber) {
-            OutgoingDocument.this.documentRegNumber = docRegNumber;
-            return this;
-        }
-
-        public OutgoingBuilder setDocDate(Date docDate) {
-            OutgoingDocument.this.documentDate = docDate;
-            return this;
-        }
-
-        public OutgoingBuilder setDocAuthor(String docAuthor) {
-            OutgoingDocument.this.documentAuthor = docAuthor;
-            return this;
         }
 
         public OutgoingBuilder setDocSender(String sender) {
