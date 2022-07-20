@@ -5,7 +5,7 @@ import com.example.testproject1.model.IncomingDocument;
 import com.example.testproject1.model.OutgoingDocument;
 import com.example.testproject1.model.TaskDocument;
 import com.example.testproject1.service.documents.GenerateReportService;
-import com.example.testproject1.storage.DocumentHolder;
+import com.example.testproject1.storage.DocumentHolderImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     public void genereteReport() {
         Map<String, List<String>> totalMap = new TreeMap<>();
         for (
-                BaseDocument basedoc : DocumentHolder.documentList
+                BaseDocument basedoc : DocumentHolderImpl.documentList
         ) {
             //Если не существует запись для данного автора
             if (!totalMap.containsKey(basedoc.getDocumentAuthor())) {
