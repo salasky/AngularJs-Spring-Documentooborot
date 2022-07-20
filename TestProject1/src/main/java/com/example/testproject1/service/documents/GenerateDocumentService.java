@@ -5,12 +5,11 @@ package com.example.testproject1.service.documents;
  *
  * @author smigranov
  */
-public interface GenerateDocument {
+public interface GenerateDocumentService {
     /**
      * Метод генерации документов трех типов
      *
-     * @param task     Количество генерируемых документов
+     * @param count Количество генерируемых документов
      */
-    void generateDocument(String task);
-
+    void generateDocument(Integer count);
 }

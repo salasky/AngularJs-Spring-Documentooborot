@@ -1,8 +1,9 @@
 package com.example.testproject1.shell;
 
 
+import com.example.testproject1.service.documents.GenerateDocumentService;
 import com.example.testproject1.service.documents.GenerateReportService;
-import com.example.testproject1.service.documents.impl.GenerateDocumentImpl;
+import com.example.testproject1.service.documents.impl.GenerateDocumentServiceImpl;
 import com.example.testproject1.storage.DocumentHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-
 
 /**
  * Класс для работы с терминалом shell и запуска генерации документов и отчетов
@@ -21,17 +21,17 @@ import org.springframework.shell.standard.ShellOption;
 public class TaskDocumentShell {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentShell.class);
     /**
-     * Autowired бина класса {@link GenerateDocumentImpl}
+     * Autowired бина класса {@link GenerateDocumentService}
      */
-    private GenerateDocumentImpl documentServiceImpl;
+    private GenerateDocumentService generateDocumentService;
     /**
      * Autowired бина класса {@link GenerateReportService}
      */
     private GenerateReportService generateReportService;
 
     @Autowired
-    public TaskDocumentShell(GenerateDocumentImpl documentServiceImpl, GenerateReportService generateReportService) {
-        this.documentServiceImpl = documentServiceImpl;
+    public TaskDocumentShell(GenerateDocumentService generateDocumentService, GenerateReportService generateReportService) {
+        this.generateDocumentService = generateDocumentService;
         this.generateReportService = generateReportService;
     }
     /**
@@ -43,7 +43,7 @@ public class TaskDocumentShell {
     public void generate(@ShellOption(defaultValue="500") int a) {
         Integer countDocument=Integer.valueOf(a);
         LOGGER.info("Попытка сгенерировать документы");
-        documentServiceImpl.generateDocument(countDocument);
+        generateDocumentService.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
         generateReportService.genereteReport();
         DocumentHolder.documentList.clear();
