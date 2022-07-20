@@ -6,7 +6,7 @@ import com.example.testproject1.model.BaseDocument;
 /**
  * Интерфейс добавления документов
  */
-public interface AddDocumentService {
+public interface DocumentService {
     /**
      * Метод добавления документов в базу
      *

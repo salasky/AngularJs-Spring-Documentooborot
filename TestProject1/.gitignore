@@ -9,6 +9,7 @@ mvnw.cmd
 /src/main/java/META-INF/
 /src/main/java/javadoc/
 .mvn
+**/package.html
 ### STS ###
 .apt_generated
 .classpath

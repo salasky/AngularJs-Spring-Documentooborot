@@ -40,7 +40,7 @@ public class TaskDocumentShell {
      *
      * @param a Генерируем заданное количество документов
      */
-    @ShellMethod("Cmd: generate --a  (Int DocumentCount (default = 500")
+    @ShellMethod("Cmd: generate --a  (Int DocumentCount (default = 500)")
     public void generate(@ShellOption(defaultValue="500") int a) {
         Integer countDocument=Integer.valueOf(a);
         LOGGER.info("Попытка сгенерировать документы");
