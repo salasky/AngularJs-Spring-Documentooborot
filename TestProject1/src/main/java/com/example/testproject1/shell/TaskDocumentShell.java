@@ -1,6 +1,8 @@
 package com.example.testproject1.shell;
 
 
+import com.example.testproject1.jaxb.PersonJaxbReader;
+import com.example.testproject1.model.person.Person;
 import com.example.testproject1.service.documents.GenerateDocumentService;
 import com.example.testproject1.service.documents.GenerateReportService;
 import com.example.testproject1.service.documents.impl.GenerateDocumentServiceImpl;
@@ -11,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+
+import java.util.List;
 
 /**
  * Класс для работы с терминалом shell и запуска генерации документов и отчетов
@@ -28,7 +32,8 @@ public class TaskDocumentShell {
      * Autowired бина класса {@link GenerateReportService}
      */
     private GenerateReportService generateReportService;
-
+    @Autowired
+    private PersonJaxbReader personJaxbReader;
     @Autowired
     public TaskDocumentShell(GenerateDocumentService generateDocumentService, GenerateReportService generateReportService) {
         this.generateDocumentService = generateDocumentService;
