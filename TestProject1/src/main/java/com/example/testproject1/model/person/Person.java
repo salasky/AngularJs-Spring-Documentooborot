@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.text.MessageFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -49,17 +50,6 @@ public class Person extends Staff{
 
     public Person() {
     }
-
-    public Person(String lastName, String secondName, String firstName, JobTittle jobTittle, String photo, Date birthDay, String phoneNumber) {
-        this.lastName = lastName;
-        this.secondName = secondName;
-        this.firstName = firstName;
-        this.jobTittle = jobTittle;
-        this.photo = photo;
-        this.birthDay = birthDay;
-        this.phoneNumber = phoneNumber;
-    }
-
 
     public void setId(UUID id){
         super.setId(id);
@@ -124,17 +114,16 @@ public class Person extends Staff{
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return
+     */
     @Override
     public String toString() {
-        return "Person{" +
-                ", id=" + id + " "+
-                "lastName='" + lastName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", jobTittle=" + jobTittle +
-                ", photo='" + photo + '\'' +
-                ", birthDay=" + birthDay +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+        Object[] personArgs = {id,lastName, secondName,firstName,jobTittle,photo,birthDay,phoneNumber};
+        MessageFormat form = new MessageFormat(
+                "id {0}, lastName= {1}, secondName= {2}, firstName= {3}, jobTittle= {4}, photo= {5}, birthDay= {6}, phoneNumber={7}");
+        return form.format(personArgs);
     }
 }

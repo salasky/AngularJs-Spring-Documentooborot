@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.text.MessageFormat;
 import java.util.UUID;
 
 /**
@@ -49,9 +50,9 @@ public class JobTittle {
 
     @Override
     public String toString() {
-        return "JobTittle{" +
-                "uuid=" + uuid +
-                ", jobTittleName='" + jobTittleName + '\'' +
-                '}';
+        Object[] jobTittleArgs = {uuid,jobTittleName};
+        MessageFormat form = new MessageFormat(
+                "id {0}, jobTittleName= {1}");
+        return form.format(jobTittleArgs);
     }
 }

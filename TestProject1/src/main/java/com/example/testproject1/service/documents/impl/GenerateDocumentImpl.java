@@ -37,23 +37,18 @@ public class GenerateDocumentImpl implements GenerateDocument {
         this.documentFactoryList = documentFactoryList;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void generateDocument(String task) {
-        System.out.println("----------------------------------------------------------------------");
-        System.out.println("---------------------Сгенерированные документы---------------------");
-        generateDocument(Integer.valueOf(task));
-    }
 
     /**
      * Вспомогательный метод генерации документов
      *
-     * @param count количество документов
+     * @param task количество документов
      */
-    public void generateDocument(Integer count) {
-        for (int i = 0; i < count; i++) {
+
+    @Override
+    public void generateDocument(Integer task) {
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("---------------------Сгенерированные документы---------------------");
+        for (int i = 0; i < task; i++) {
             BaseDocument taskDoc = documentFactoryList.get(new Random().nextInt(documentFactoryList.size())).create();
             if (taskDoc != null) {
                 try {

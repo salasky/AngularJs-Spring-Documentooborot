@@ -11,6 +11,6 @@ public interface GenerateDocument {
      *
      * @param task     Количество генерируемых документов
      */
-    void generateDocument(String task);
+    void generateDocument(Integer task);
 
 }

@@ -5,8 +5,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Вспомогательный класс для маршалинга класса {@link Person}
+ *
+ * @author smigranov
+ */
 @XmlRootElement
 public class Persons {
+    /**
+     * Хранит список {@link Person}
+     */
     @XmlElement(name = "person")
     private List<Person> list=new ArrayList<>();
 
