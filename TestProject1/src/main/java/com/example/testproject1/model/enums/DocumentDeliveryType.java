@@ -6,9 +6,9 @@ package com.example.testproject1.model.enums;
  * @author smigranov
  */
 public enum DocumentDeliveryType {
-      TELEGRAM
-    , EMAIL
-    , ROCKET_CHAT
-    , MESSENGER
-    , RUSSIAN_POST
+    TELEGRAM,
+    EMAIL,
+    ROCKET_CHAT,
+    MESSENGER,
+    RUSSIAN_POST
 }

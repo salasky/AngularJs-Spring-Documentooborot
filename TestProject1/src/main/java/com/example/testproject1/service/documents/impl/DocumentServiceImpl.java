@@ -2,19 +2,19 @@ package com.example.testproject1.service.documents.impl;
 
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
-import com.example.testproject1.service.documents.AddDocumentService;
+import com.example.testproject1.service.documents.DocumentService;
 import com.example.testproject1.storage.DocumentHolder;
 import com.example.testproject1.storage.DocumentHolderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Класс реализующий интерфейс {@link AddDocumentService}
+ * Класс реализующий интерфейс {@link DocumentService}
  *
  * @author smigranov
  */
 @Service
-public class AddDocumentServiceImpl implements AddDocumentService {
+public class DocumentServiceImpl implements DocumentService {
     @Autowired
     private DocumentHolder documentHolder;
 
