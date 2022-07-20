@@ -5,8 +5,7 @@ import com.example.testproject1.jaxb.PersonJaxbReader;
 import com.example.testproject1.model.person.Person;
 import com.example.testproject1.service.documents.GenerateDocumentService;
 import com.example.testproject1.service.documents.GenerateReportService;
-import com.example.testproject1.service.documents.impl.GenerateDocumentServiceImpl;
-import com.example.testproject1.storage.DocumentHolder;
+import com.example.testproject1.storage.DocumentHolderImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +50,6 @@ public class TaskDocumentShell {
         generateDocumentService.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
         generateReportService.genereteReport();
-        DocumentHolder.documentList.clear();
+        DocumentHolderImpl.documentList.clear();
     }
 }
