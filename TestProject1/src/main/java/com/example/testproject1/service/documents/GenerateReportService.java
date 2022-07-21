@@ -8,5 +8,5 @@ public interface GenerateReportService {
      * Метод генерации отчетов по документам
      *
      */
-    public void genereteReport();
+    public void generateReport();
 }

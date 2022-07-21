@@ -32,24 +32,21 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     private DocumentInspector documentInspector;
 
     @Override
-    public void genereteReport() {
+    public void generateReport() {
         Map<String, List<String>> totalMap = new TreeMap<>();
-        for (BaseDocument basedoc : DocumentHolderImpl.documentList
+        for (BaseDocument baseDocument : DocumentHolderImpl.documentList
         ) {
             //Если не существует запись для данного автора
-            if (!totalMap.containsKey(basedoc.getDocumentAuthor())) {
+            if (!totalMap.containsKey(baseDocument.getDocumentAuthor())) {
                 List<String> list = new ArrayList<>();
-
-                list.add(MessageFormat.format("{0} {1} от {2}. {3} \n"
-                        , basedoc.accept(documentInspector), basedoc.getId(), basedoc.getDocumentData(),basedoc.getDocumentName()));
-                totalMap.put(basedoc.getDocumentAuthor(), list);
+                list.add(baseDocument.accept(documentInspector));
+                totalMap.put(baseDocument.getDocumentAuthor(), list);
             } else {
                 //Ecли существуют документы данного автора
-                List<String> oldlist = totalMap.get(basedoc.getDocumentAuthor());
-                oldlist.add(MessageFormat.format("{0} {1} от {2}. {3} \n"
-                        , basedoc.accept(documentInspector), basedoc.getId(), basedoc.getDocumentData(),basedoc.getDocumentName()));
+                List<String> oldlist = totalMap.get(baseDocument.getDocumentAuthor());
+                oldlist.add(baseDocument.accept(documentInspector));
                 Collections.sort(oldlist);
-                totalMap.put(basedoc.getDocumentAuthor(), oldlist);
+                totalMap.put(baseDocument.getDocumentAuthor(), oldlist);
             }
         }
         LOGGER.info("\n         ------------------------Отчет------------------------");

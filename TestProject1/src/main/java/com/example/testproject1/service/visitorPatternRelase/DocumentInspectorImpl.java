@@ -6,6 +6,8 @@ import com.example.testproject1.model.OutgoingDocument;
 import com.example.testproject1.model.TaskDocument;
 import org.springframework.stereotype.Service;
 
+import java.text.MessageFormat;
+
 /**
  * Класс реализации интерфейса {@link DocumentInspector}
  *
@@ -15,17 +17,20 @@ import org.springframework.stereotype.Service;
 public class DocumentInspectorImpl implements DocumentInspector{
     @Override
     public String visit(TaskDocument taskDocument) {
-        return "Поручение";
+        return MessageFormat.format("Поручение {0} от {1}. {2} \n"
+                        , taskDocument.getId(), taskDocument.getDocumentData(),taskDocument.getDocumentName());
     }
 
     @Override
     public String visit(IncomingDocument incomingDocument) {
-        return "Входящий документ";
+        return MessageFormat.format("Входящий документ {0} от {1}. {2} \n"
+                , incomingDocument.getId(), incomingDocument.getDocumentData(),incomingDocument.getDocumentName());
     }
 
     @Override
     public String visit(OutgoingDocument outgoingDocument) {
-        return "Исходящий документ";
+        return MessageFormat.format("Исходящий документ {0} от {1}. {2} \n"
+                , outgoingDocument.getId(), outgoingDocument.getDocumentData(),outgoingDocument.getDocumentName());
     }
 
     @Override
