@@ -5,7 +5,7 @@ package com.example.testproject1.service.visitorPatternRelase;
  *
  * @author smigranov
  */
-public interface DocumentV {
+public interface DocumentVisitor {
     /**
      * Метод вызова нужного метода visit в зависимости от типа объекта
      * @param documentInspector

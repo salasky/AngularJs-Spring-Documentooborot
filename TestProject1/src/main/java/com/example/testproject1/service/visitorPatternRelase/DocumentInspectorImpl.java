@@ -14,23 +14,23 @@ import java.text.MessageFormat;
  * @author smigranov
  */
 @Service
-public class DocumentInspectorImpl implements DocumentInspector{
+public class DocumentInspectorImpl implements DocumentInspector {
     @Override
     public String visit(TaskDocument taskDocument) {
         return MessageFormat.format("Поручение {0} от {1}. {2} \n"
-                        , taskDocument.getId(), taskDocument.getDocumentData(),taskDocument.getDocumentName());
+                , taskDocument.getId(), taskDocument.getDocumentData(), taskDocument.getDocumentName());
     }
 
     @Override
     public String visit(IncomingDocument incomingDocument) {
         return MessageFormat.format("Входящий документ {0} от {1}. {2} \n"
-                , incomingDocument.getId(), incomingDocument.getDocumentData(),incomingDocument.getDocumentName());
+                , incomingDocument.getId(), incomingDocument.getDocumentData(), incomingDocument.getDocumentName());
     }
 
     @Override
     public String visit(OutgoingDocument outgoingDocument) {
         return MessageFormat.format("Исходящий документ {0} от {1}. {2} \n"
-                , outgoingDocument.getId(), outgoingDocument.getDocumentData(),outgoingDocument.getDocumentName());
+                , outgoingDocument.getId(), outgoingDocument.getDocumentData(), outgoingDocument.getDocumentName());
     }
 
     @Override

@@ -24,11 +24,11 @@ public class PersonHolderImpl implements PersonHolder {
      */
     public static List<Person> personList = new ArrayList<>();
 
-    @Cacheable(cacheNames="person")
+    @Cacheable(cacheNames = "person")
     @Override
     public List<Person> getPersonListList() {
         LOGGER.info("Begin find Person ");
-            personList=personJaxbReader.getPerson();
+        personList = personJaxbReader.getPerson();
         LOGGER.info("Find Person result");
         return personList;
     }

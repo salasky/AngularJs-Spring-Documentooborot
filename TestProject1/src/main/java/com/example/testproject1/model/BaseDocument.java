@@ -3,7 +3,8 @@ package com.example.testproject1.model;
 
 import com.example.testproject1.model.person.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
-import com.example.testproject1.service.visitorPatternRelase.DocumentV;
+import com.example.testproject1.service.visitorPatternRelase.DocumentVisitor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.text.MessageFormat;
 import java.util.Comparator;
@@ -16,7 +17,7 @@ import java.util.UUID;
  *
  * @author smigranov
  */
-public class BaseDocument implements Comparable<BaseDocument>, DocumentV {
+public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
     /**
      * идентификатор документа
      */
@@ -40,6 +41,7 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentV {
     /**
      * автор документа
      */
+    @JsonIgnore
     protected Person documentAuthor;
 
     public UUID getId() {
