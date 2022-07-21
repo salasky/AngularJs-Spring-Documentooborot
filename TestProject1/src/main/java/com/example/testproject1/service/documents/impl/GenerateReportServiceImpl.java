@@ -34,8 +34,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     @Override
     public void generateReport() {
         Map<String, List<String>> totalMap = new TreeMap<>();
-        for (BaseDocument baseDocument : DocumentHolderImpl.documentList
-        ) {
+        for (BaseDocument baseDocument : DocumentHolderImpl.documentList) {
             //Если не существует запись для данного автора
             if (!totalMap.containsKey(baseDocument.getDocumentAuthor())) {
                 List<String> list = new ArrayList<>();
