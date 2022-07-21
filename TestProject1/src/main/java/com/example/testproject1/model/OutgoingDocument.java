@@ -1,6 +1,7 @@
 package com.example.testproject1.model;
 
 import com.example.testproject1.model.enums.DocumentDeliveryType;
+import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
 import java.text.MessageFormat;
 import java.util.Objects;
@@ -20,7 +21,7 @@ public class OutgoingDocument extends BaseDocument {
      */
     private DocumentDeliveryType outgoingDocumentDeliveryType;
 
-    private OutgoingDocument() {
+    public OutgoingDocument() {
     }
 
     public String getOutgoingDocumentSender() {
@@ -46,7 +47,7 @@ public class OutgoingDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {super.toString(),outgoingDocumentSender, outgoingDocumentDeliveryType};
+        Object[] taskArgs = {super.toString(), outgoingDocumentSender, outgoingDocumentDeliveryType};
         MessageFormat form = new MessageFormat(
                 "Исходящий документ {0}, outgoingDocumentSender= {1}, outgoingDocumentDeliveryType= {2}");
         return form.format(taskArgs);
@@ -75,6 +76,11 @@ public class OutgoingDocument extends BaseDocument {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getOutgoingDocumentSender(), getOutgoingDocumentDeliveryType());
+    }
+
+    @Override
+    public String accept(DocumentInspector documentInspector) {
+        return documentInspector.visit(this);
     }
 
     /**

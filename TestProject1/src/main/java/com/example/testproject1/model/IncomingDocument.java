@@ -1,5 +1,7 @@
 package com.example.testproject1.model;
 
+import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
+
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -27,7 +29,7 @@ public class IncomingDocument extends BaseDocument {
      */
     private Date incomingDocumentDate;
 
-    private IncomingDocument() {
+    public IncomingDocument() {
     }
 
     public String getIncomingDocumentSender() {
@@ -69,7 +71,7 @@ public class IncomingDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {super.toString(),incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate};
+        Object[] taskArgs = {super.toString(), incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate};
         MessageFormat form = new MessageFormat(
                 "Входящий документ {0}, incomingDocumentSender= {1}, incomingDocumentDestination= {2}, incomingDocumentNumber= {3}, incomingDocumentDate= {4}");
         return form.format(taskArgs);
@@ -88,6 +90,11 @@ public class IncomingDocument extends BaseDocument {
         if (!super.equals(o)) return false;
         IncomingDocument that = (IncomingDocument) o;
         return Objects.equals(incomingDocumentSender, that.incomingDocumentSender) && Objects.equals(incomingDocumentDestination, that.incomingDocumentDestination) && Objects.equals(incomingDocumentNumber, that.incomingDocumentNumber) && Objects.equals(incomingDocumentDate, that.incomingDocumentDate);
+    }
+
+    @Override
+    public String accept(DocumentInspector documentInspector) {
+        return documentInspector.visit(this);
     }
 
     /**

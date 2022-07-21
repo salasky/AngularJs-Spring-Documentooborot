@@ -22,17 +22,14 @@ public class TaskDocumentShell {
     /**
      * Autowired бина класса {@link GenerateDocumentService}
      */
+    @Autowired
     private GenerateDocumentService generateDocumentService;
     /**
      * Autowired бина класса {@link GenerateReportService}
      */
+    @Autowired
     private GenerateReportService generateReportService;
 
-    @Autowired
-    public TaskDocumentShell(GenerateDocumentService generateDocumentService, GenerateReportService generateReportService) {
-        this.generateDocumentService = generateDocumentService;
-        this.generateReportService = generateReportService;
-    }
     /**
      *Shell метод генерации документов и создания отчетов по ним
      *

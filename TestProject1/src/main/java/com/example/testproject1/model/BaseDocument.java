@@ -1,6 +1,9 @@
 package com.example.testproject1.model;
 
 
+import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
+import com.example.testproject1.service.visitorPatternRelase.DocumentV;
+
 import java.text.MessageFormat;
 import java.util.Comparator;
 import java.util.Date;
@@ -12,7 +15,7 @@ import java.util.UUID;
  *
  * @author smigranov
  */
-public class BaseDocument implements Comparable<BaseDocument> {
+public class BaseDocument implements Comparable<BaseDocument>, DocumentV {
     /**
      * идентификатор документа
      */
@@ -37,9 +40,6 @@ public class BaseDocument implements Comparable<BaseDocument> {
      * автор документа
      */
     protected String documentAuthor;
-
-    public BaseDocument() {
-    }
 
     public UUID getId() {
         return id;
@@ -102,6 +102,7 @@ public class BaseDocument implements Comparable<BaseDocument> {
         BaseDocument that = (BaseDocument) o;
         return Objects.equals(id, that.id) && Objects.equals(documentName, that.documentName) && Objects.equals(documentText, that.documentText) && Objects.equals(documentRegNumber, that.documentRegNumber) && Objects.equals(documentDate, that.documentDate) && Objects.equals(documentAuthor, that.documentAuthor);
     }
+
     /**
      * {@inheritDoc}
      *
@@ -111,6 +112,7 @@ public class BaseDocument implements Comparable<BaseDocument> {
     public int hashCode() {
         return Objects.hash(id, documentName, documentText, documentRegNumber, documentDate, documentAuthor);
     }
+
     /**
      * {@inheritDoc}
      *
@@ -136,6 +138,17 @@ public class BaseDocument implements Comparable<BaseDocument> {
      */
     public static BaseDocument.BaseDocumentBuilder newBuilder() {
         return new BaseDocument().new BaseDocumentBuilder();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param documentInspector
+     * @return
+     */
+    @Override
+    public String accept(DocumentInspector documentInspector) {
+        return documentInspector.visit(this);
     }
 
     /**

@@ -11,11 +11,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TaskDocumentFactory extends DocumentFactory<TaskDocument.TaskBuilder> {
-    /**
-     * {@inheritDoc}
-     *
-     * @return Возвращает объект класса BaseDocument
-     */
     @Override
     public BaseDocument create() {
         return createBaseDocument(TaskDocument.newBuilder()
