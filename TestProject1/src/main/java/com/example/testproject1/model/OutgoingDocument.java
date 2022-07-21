@@ -1,6 +1,7 @@
 package com.example.testproject1.model;
 
 import com.example.testproject1.model.enums.DocumentDeliveryType;
+import com.example.testproject1.model.person.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
 import java.text.MessageFormat;
@@ -15,7 +16,7 @@ public class OutgoingDocument extends BaseDocument {
     /**
      * адресат
      */
-    private String outgoingDocumentSender;
+    private Person outgoingDocumentSender;
     /**
      * способ доставки
      */
@@ -24,11 +25,11 @@ public class OutgoingDocument extends BaseDocument {
     public OutgoingDocument() {
     }
 
-    public String getOutgoingDocumentSender() {
+    public Person getOutgoingDocumentSender() {
         return outgoingDocumentSender;
     }
 
-    public void setOutgoingDocumentSender(String outgoingDocumentSender) {
+    public void setOutgoingDocumentSender(Person outgoingDocumentSender) {
         this.outgoingDocumentSender = outgoingDocumentSender;
     }
 
@@ -100,7 +101,7 @@ public class OutgoingDocument extends BaseDocument {
             // private constructor
         }
 
-        public OutgoingBuilder setDocSender(String sender) {
+        public OutgoingBuilder setDocSender(Person sender) {
             OutgoingDocument.this.outgoingDocumentSender = sender;
             return this;
         }

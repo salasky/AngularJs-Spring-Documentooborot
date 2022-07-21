@@ -1,5 +1,6 @@
 package com.example.testproject1.model;
 
+import com.example.testproject1.model.person.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
 import java.text.MessageFormat;
@@ -15,11 +16,11 @@ public class IncomingDocument extends BaseDocument {
     /**
      * отправитель
      */
-    private String incomingDocumentSender;
+    private Person incomingDocumentSender;
     /**
      * адресат
      */
-    private String incomingDocumentDestination;
+    private Person incomingDocumentDestination;
     /**
      * исходящий номер
      */
@@ -32,19 +33,19 @@ public class IncomingDocument extends BaseDocument {
     public IncomingDocument() {
     }
 
-    public String getIncomingDocumentSender() {
+    public Person getIncomingDocumentSender() {
         return incomingDocumentSender;
     }
 
-    public void setIncomingDocumentSender(String incomingDocumentSender) {
+    public void setIncomingDocumentSender(Person incomingDocumentSender) {
         this.incomingDocumentSender = incomingDocumentSender;
     }
 
-    public String getIncomingDocumentDestination() {
+    public Person getIncomingDocumentDestination() {
         return incomingDocumentDestination;
     }
 
-    public void setIncomingDocumentDestination(String incomingDocumentDestination) {
+    public void setIncomingDocumentDestination(Person incomingDocumentDestination) {
         this.incomingDocumentDestination = incomingDocumentDestination;
     }
 
@@ -124,12 +125,12 @@ public class IncomingDocument extends BaseDocument {
             // private constructor
         }
 
-        public IncomingDocumentBuilder setIncomingSender(String sender) {
+        public IncomingDocumentBuilder setIncomingSender(Person sender) {
             IncomingDocument.this.incomingDocumentSender = sender;
             return this;
         }
 
-        public IncomingDocumentBuilder setIncomingDestination(String destination) {
+        public IncomingDocumentBuilder setIncomingDestination(Person destination) {
             IncomingDocument.this.incomingDocumentDestination = destination;
             return this;
         }

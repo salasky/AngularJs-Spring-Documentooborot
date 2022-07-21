@@ -1,6 +1,7 @@
 package com.example.testproject1.model;
 
 
+import com.example.testproject1.model.person.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
 import java.text.MessageFormat;
@@ -24,7 +25,7 @@ public class TaskDocument extends BaseDocument {
     /**
      * ответственный исполнитель
      */
-    private String taskResponsible;
+    private Person taskResponsible;
     /**
      * признак контрольности
      */
@@ -32,7 +33,7 @@ public class TaskDocument extends BaseDocument {
     /**
      * контролер поручения
      */
-    private String taskControlPerson;
+    private Person taskControlPerson;
 
     public TaskDocument() {
     }
@@ -53,11 +54,11 @@ public class TaskDocument extends BaseDocument {
         this.taskExecPeriod = taskExecPeriod;
     }
 
-    public String getTaskResponsible() {
+    public Person getTaskResponsible() {
         return taskResponsible;
     }
 
-    public void setTaskResponsible(String taskResponsible) {
+    public void setTaskResponsible(Person taskResponsible) {
         this.taskResponsible = taskResponsible;
     }
 
@@ -69,11 +70,11 @@ public class TaskDocument extends BaseDocument {
         this.taskSignOfControl = taskSignOfControl;
     }
 
-    public String getTaskControlPerson() {
+    public Person getTaskControlPerson() {
         return taskControlPerson;
     }
 
-    public void setTaskControlPerson(String taskControlPerson) {
+    public void setTaskControlPerson(Person taskControlPerson) {
         this.taskControlPerson = taskControlPerson;
     }
 
@@ -147,7 +148,7 @@ public class TaskDocument extends BaseDocument {
             return this;
         }
 
-        public TaskBuilder setTaskResponsPerson(String taskResponsPerson) {
+        public TaskBuilder setTaskResponsPerson(Person taskResponsPerson) {
             TaskDocument.this.taskResponsible = taskResponsPerson;
             return this;
         }
@@ -157,7 +158,7 @@ public class TaskDocument extends BaseDocument {
             return this;
         }
 
-        public TaskBuilder setTaskControlPerson(String taskControlPerson) {
+        public TaskBuilder setTaskControlPerson(Person taskControlPerson) {
             TaskDocument.this.taskControlPerson = taskControlPerson;
             return this;
         }

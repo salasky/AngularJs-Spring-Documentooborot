@@ -30,34 +30,6 @@ public class Randomizer {
      */
     @Value("${doc.documentText}")
     private List<String> newDocTextList;
-    /**
-     * Лист авторов поручений из application.yaml
-     */
-    @Value("${doc.documentAuthor}")
-    private List<String> newDocAuthorList;
-
-    /**
-     * Лист контролеров поручений из application.yaml
-     */
-    @Value("${doc.documentControlPerson}")
-    private List<String> newDocControlPersonList;
-
-    /**
-     * Лист значений названий входящих документов из application.yaml
-     */
-    @Value("${doc.documentIncomingList}")
-    private List<String> newDocIncomingList;
-    /**
-     * Лист значений адресатов из application.yaml
-     */
-    @Value("${doc.documentDistPerson}")
-    private List<String> newDocDistPerson;
-
-    /**
-     * Лист названий исходящих документов из application.yaml
-     */
-    @Value("${doc.documentOutName}")
-    private List<String> newdocNameOutgoingList;
 
     /**
      * Метод возврата UUID
@@ -109,7 +81,7 @@ public class Randomizer {
     /**
      * Метод возврата автора
      *
-     * @return возвращает рандомного автора из application.yaml
+     * @return возвращает рандомного автора из XML файла
      */
     public Person getRandDocumentAuthor() {
         return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
@@ -137,10 +109,10 @@ public class Randomizer {
     /**
      * Метод возврата ответственного лица
      *
-     * @return возвращает рандомного автора из application.yaml
+     * @return возвращает рандомного автора из xml файла
      */
-    public String getRandTaskResponsible() {
-        return newDocAuthorList.get((int) (Math.random() * newDocAuthorList.size()));
+    public Person getRandTaskResponsible() {
+        return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
     }
 
     /**
@@ -155,10 +127,10 @@ public class Randomizer {
     /**
      * Метод возврата контролирующего человека
      *
-     * @return возвращает рандомного контролирующего из application.yaml
+     * @return возвращает рандомного контролирующего из XML
      */
-    public String getRandTaskControlPerson() {
-        return newDocControlPersonList.get((int) (Math.random() * newDocControlPersonList.size()));
+    public Person getRandTaskControlPerson() {
+        return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
     }
 
     /**
@@ -166,19 +138,18 @@ public class Randomizer {
      *
      * @return
      */
-    public String getRandIncomingDocumentSender() {
-        return newDocAuthorList.get((int) (Math.random() * newDocAuthorList.size()));
+    public Person getRandIncomingDocumentSender() {
+        return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
     }
 
     /**
      * Метод возврата рандомного получателя
      *
-     * @return возвращает рандомного получателя из application.yaml
+     * @return возвращает рандомного получателя из XML
      */
-    public String getIncomingDocumentDestination() {
-        return newDocDistPerson.get((int) (Math.random() * newDocDistPerson.size()));
+    public Person getIncomingDocumentDestination() {
+        return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
     }
-
     /**
      * Метод возвращает рандомный номер входящего документа
      *
@@ -205,8 +176,8 @@ public class Randomizer {
      *
      * @return
      */
-    public String getRandOutgoingDocumentSender() {
-        return newDocDistPerson.get((int) (Math.random() * newDocDistPerson.size()));
+    public Person getRandOutgoingDocumentSender() {
+        return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
     }
 
     /**
