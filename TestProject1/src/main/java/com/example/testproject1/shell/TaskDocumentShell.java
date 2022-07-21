@@ -41,7 +41,7 @@ public class TaskDocumentShell {
         LOGGER.info("Попытка сгенерировать документы");
         generateDocumentService.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
-        generateReportService.genereteReport();
+        generateReportService.generateReport();
         DocumentHolderImpl.documentList.clear();
     }
 }
