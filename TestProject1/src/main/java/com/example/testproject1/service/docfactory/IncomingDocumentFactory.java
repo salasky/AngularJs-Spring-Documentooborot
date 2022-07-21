@@ -11,11 +11,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class IncomingDocumentFactory extends DocumentFactory<IncomingDocument.IncomingDocumentBuilder> {
-    /**
-     * {@inheritDoc}
-     *
-     * @return Возвращает объек класса BaseDocument
-     */
+
     @Override
     public BaseDocument create() {
         return createBaseDocument(IncomingDocument.newBuilder()

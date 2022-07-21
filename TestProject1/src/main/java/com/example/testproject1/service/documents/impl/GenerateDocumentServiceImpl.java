@@ -25,30 +25,23 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
     /**
      * Объект класса {@link DocumentService}
      */
+    @Autowired
     private DocumentService documentService;
     /**
      * Инжектим все бины классов реализующих интерфейс Factory
      */
+    @Autowired
     private List<Factory<BaseDocument>> documentFactoryList;
 
-    @Autowired
-    public GenerateDocumentServiceImpl(DocumentService documentService, List<Factory<BaseDocument>> documentFactoryList) {
-        this.documentService = documentService;
-        this.documentFactoryList = documentFactoryList;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void generateDocument(Integer count) {
         LOGGER.info("\n         ---------------------Сгенерированные документы---------------------");
         for (int i = 0; i < count; i++) {
-            BaseDocument taskDoc = documentFactoryList.get(new Random().nextInt(documentFactoryList.size())).create();
-            if (taskDoc != null) {
+            BaseDocument baseDocument = documentFactoryList.get(new Random().nextInt(documentFactoryList.size())).create();
+            if (baseDocument != null) {
                 try {
-                    documentService.documentAdd(taskDoc);
-                    LOGGER.info(String.valueOf(taskDoc));
+                    documentService.documentAdd(baseDocument);
+                    LOGGER.info(String.valueOf(baseDocument));
                 } catch (DocumentExistsException e) {
                     LOGGER.error(e.getMessage());
                 }

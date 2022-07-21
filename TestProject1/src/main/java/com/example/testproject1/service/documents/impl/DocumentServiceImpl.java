@@ -15,12 +15,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DocumentServiceImpl implements DocumentService {
+    /**
+     * Объект класса для хранения документов
+     */
     @Autowired
     private DocumentHolder documentHolder;
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void documentAdd(BaseDocument baseDocument) throws DocumentExistsException {
         var documentList = documentHolder.getDocumentList();

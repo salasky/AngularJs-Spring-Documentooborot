@@ -1,10 +1,9 @@
 package com.example.testproject1.shell;
 
 
-import com.example.testproject1.jaxb.PersonJaxbReader;
 import com.example.testproject1.service.documents.GenerateDocumentService;
 import com.example.testproject1.service.documents.GenerateReportService;
-import com.example.testproject1.storage.Impl.DocumentHolderImpl;
+import com.example.testproject1.storage.DocumentHolderImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +22,14 @@ public class TaskDocumentShell {
     /**
      * Autowired бина класса {@link GenerateDocumentService}
      */
+    @Autowired
     private GenerateDocumentService generateDocumentService;
     /**
      * Autowired бина класса {@link GenerateReportService}
      */
+    @Autowired
     private GenerateReportService generateReportService;
-    @Autowired
-    private PersonJaxbReader personJaxbReader;
-    @Autowired
-    public TaskDocumentShell(GenerateDocumentService generateDocumentService, GenerateReportService generateReportService) {
-        this.generateDocumentService = generateDocumentService;
-        this.generateReportService = generateReportService;
-    }
+
     /**
      *Shell метод генерации документов и создания отчетов по ним
      *

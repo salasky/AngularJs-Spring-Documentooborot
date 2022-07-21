@@ -1,6 +1,8 @@
 package com.example.testproject1.model;
 
 
+import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
+
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -32,7 +34,7 @@ public class TaskDocument extends BaseDocument {
      */
     private String taskControlPerson;
 
-    private TaskDocument() {
+    public TaskDocument() {
     }
 
     public Date getTaskOutDate() {
@@ -82,7 +84,7 @@ public class TaskDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {super.toString(),taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson};
+        Object[] taskArgs = {super.toString(), taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson};
         MessageFormat form = new MessageFormat(
                 "Поручение {0} , taskOutDate= {1}, taskExecPeriod= {2}, taskResponsible= {3}, taskSignOfControl= {4}, taskControlPerson= {5}");
         return form.format(taskArgs);
@@ -111,6 +113,11 @@ public class TaskDocument extends BaseDocument {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson);
+    }
+
+    @Override
+    public String accept(DocumentInspector documentInspector) {
+        return documentInspector.visit(this);
     }
 
     /**

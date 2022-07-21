@@ -19,11 +19,6 @@ public class DocumentHolderImpl implements DocumentHolder {
      */
     public static List<BaseDocument> documentList = new ArrayList<>();
 
-    /**
-     * {@inheritDoc}
-     *
-     * @return
-     */
     @Override
     public List<BaseDocument> getDocumentList() {
         return documentList;
