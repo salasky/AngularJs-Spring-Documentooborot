@@ -3,7 +3,7 @@ package com.example.testproject1.service.documents.impl;
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.service.documents.GenerateReportService;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
-import com.example.testproject1.storage.DocumentHolderImpl;
+import com.example.testproject1.storage.Impl.DocumentHolderImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -10,5 +10,5 @@ public interface PersonHolder {
      * Метод получения сохраненных документов
      * @return
      */
-    public List<String> getDocumentList();
+    public List<Person> getPersonListList();
 }
