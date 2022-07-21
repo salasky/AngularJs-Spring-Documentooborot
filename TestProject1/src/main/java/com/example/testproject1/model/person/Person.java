@@ -1,5 +1,6 @@
 package com.example.testproject1.model.person;
 
+import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.Staff;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -7,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.text.MessageFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.UUID;
 
@@ -17,7 +19,7 @@ import java.util.UUID;
  */
 @XmlRootElement
 @XmlType(name = "person",propOrder = {"secondName", "firstName", "lastName","jobTittle","birthDay","phoneNumber","photo"})
-public class Person extends Staff{
+public class Person extends Staff implements Comparable<Person>{
     /**
      * Отчество
      */
@@ -125,5 +127,10 @@ public class Person extends Staff{
         MessageFormat form = new MessageFormat(
                 "id {0}, lastName= {1}, secondName= {2}, firstName= {3}, jobTittle= {4}, photo= {5}, birthDay= {6}, phoneNumber={7}");
         return form.format(personArgs);
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        return Comparator.comparing(Person::getSecondName).thenComparing(Person::getFirstName).compare(this, o);
     }
 }

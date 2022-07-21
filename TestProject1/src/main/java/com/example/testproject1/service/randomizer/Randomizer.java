@@ -1,6 +1,9 @@
 package com.example.testproject1.service.randomizer;
 
 import com.example.testproject1.model.enums.DocumentDeliveryType;
+import com.example.testproject1.model.person.Person;
+import com.example.testproject1.storage.PersonHolder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,10 @@ import java.util.UUID;
  */
 @Service
 public class Randomizer {
+
+    @Autowired
+    private PersonHolder personHolder;
+
     @Value("${doc.documentName}")
     private List<String> newDocNameList;
     /**
@@ -104,8 +111,8 @@ public class Randomizer {
      *
      * @return возвращает рандомного автора из application.yaml
      */
-    public String getRandDocumentAuthor() {
-        return newDocAuthorList.get((int) (Math.random() * newDocAuthorList.size()));
+    public Person getRandDocumentAuthor() {
+        return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
     }
 
     /**

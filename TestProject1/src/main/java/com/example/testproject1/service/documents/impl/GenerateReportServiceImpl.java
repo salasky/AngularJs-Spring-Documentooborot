@@ -1,6 +1,7 @@
 package com.example.testproject1.service.documents.impl;
 
 import com.example.testproject1.model.BaseDocument;
+import com.example.testproject1.model.person.Person;
 import com.example.testproject1.service.documents.GenerateReportService;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 import com.example.testproject1.storage.Impl.DocumentHolderImpl;
@@ -33,7 +34,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
 
     @Override
     public void generateReport() {
-        Map<String, List<String>> totalMap = new TreeMap<>();
+        Map<Person, List<String>> totalMap = new TreeMap<>();
         for (BaseDocument baseDocument : DocumentHolderImpl.documentList
         ) {
             //Если не существует запись для данного автора
@@ -50,8 +51,8 @@ public class GenerateReportServiceImpl implements GenerateReportService {
             }
         }
         LOGGER.info("\n         ------------------------Отчет------------------------");
-        for (Map.Entry<String, List<String>> entry : totalMap.entrySet()) {
-            LOGGER.info(MessageFormat.format("\n Автор документа {0}\n{1}", entry.getKey(), entry.getValue()));
+        for (Map.Entry<Person, List<String>> entry : totalMap.entrySet()) {
+            LOGGER.info(MessageFormat.format("\n Автор документа {0}\n{1}", entry.getKey().getSecondName()+" "+entry.getKey().getFirstName(), entry.getValue()));
         }
     }
 }

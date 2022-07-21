@@ -27,9 +27,9 @@ public class PersonHolderImpl implements PersonHolder {
     @Cacheable(cacheNames="person")
     @Override
     public List<Person> getPersonListList() {
-        LOGGER.info("begin find ");
+        LOGGER.info("Begin find Person ");
             personList=personJaxbReader.getPerson();
-        LOGGER.info("find result");
+        LOGGER.info("Find Person result");
         return personList;
     }
 }

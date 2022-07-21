@@ -1,6 +1,7 @@
 package com.example.testproject1.model;
 
 
+import com.example.testproject1.model.person.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 import com.example.testproject1.service.visitorPatternRelase.DocumentV;
 
@@ -39,7 +40,7 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentV {
     /**
      * автор документа
      */
-    protected String documentAuthor;
+    protected Person documentAuthor;
 
     public UUID getId() {
         return id;
@@ -81,11 +82,11 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentV {
         this.documentDate = documentData;
     }
 
-    public String getDocumentAuthor() {
+    public Person getDocumentAuthor() {
         return documentAuthor;
     }
 
-    public void setDocumentAuthor(String documentAuthor) {
+    public void setDocumentAuthor(Person documentAuthor) {
         this.documentAuthor = documentAuthor;
     }
 
@@ -185,7 +186,7 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentV {
             return this;
         }
 
-        public BaseDocumentBuilder setDocAuthor(String docAuthor) {
+        public BaseDocumentBuilder setDocAuthor(Person docAuthor) {
             BaseDocument.this.documentAuthor = docAuthor;
             return this;
         }
