@@ -14,5 +14,6 @@ public interface DocumentHolder {
      * Метод получения сохраненных документов
      * @return
      */
-    public List<BaseDocument> getDocumentList();
+    List<BaseDocument> getAll();
+    void addAll(BaseDocument baseDocumentList);
 }

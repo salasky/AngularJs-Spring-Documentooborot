@@ -16,6 +16,10 @@ public class DocumentExistsException extends Exception {
         this.detail = detail;
     }
 
+    public DocumentExistsException() {
+
+    }
+
     @Override
     public String toString() {
         return "DocumentExistsException{" +

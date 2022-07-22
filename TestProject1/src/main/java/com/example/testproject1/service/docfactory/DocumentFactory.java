@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
  *
  * @author smigranov
  */
-@Service
 public abstract class DocumentFactory<T extends BaseDocument.BaseDocumentBuilder> implements Factory<BaseDocument> {
     /**
      * Autowired бина {@link Randomizer}

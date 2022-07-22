@@ -3,7 +3,7 @@ package com.example.testproject1.service.documents.impl;
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.service.documents.GenerateReportService;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
-import com.example.testproject1.storage.DocumentHolderImpl;
+import com.example.testproject1.storage.DocumentHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +30,18 @@ public class GenerateReportServiceImpl implements GenerateReportService {
      */
     @Autowired
     private DocumentInspector documentInspector;
-
+    /**
+     * Autowired бина класса {@link DocumentHolder}
+     */
+    @Autowired
+    private DocumentHolder documentHolder;
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void generateReport() {
         Map<String, List<String>> totalMap = new TreeMap<>();
-        for (BaseDocument baseDocument : DocumentHolderImpl.documentList) {
+        for (BaseDocument baseDocument : documentHolder.getAll()) {
             //Если не существует запись для данного автора
             if (!totalMap.containsKey(baseDocument.getDocumentAuthor())) {
                 List<String> list = new ArrayList<>();

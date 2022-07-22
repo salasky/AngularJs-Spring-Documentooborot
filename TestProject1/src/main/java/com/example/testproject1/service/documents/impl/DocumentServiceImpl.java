@@ -4,9 +4,10 @@ import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.service.documents.DocumentService;
 import com.example.testproject1.storage.DocumentHolder;
-import com.example.testproject1.storage.DocumentHolderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * Класс реализующий интерфейс {@link DocumentService}
@@ -20,16 +21,18 @@ public class DocumentServiceImpl implements DocumentService {
      */
     @Autowired
     private DocumentHolder documentHolder;
-    @Override
-    public void documentAdd(BaseDocument baseDocument) throws DocumentExistsException {
-        var documentList = documentHolder.getDocumentList();
-        for (BaseDocument bd : documentList
-        ) {
-            if (bd.getId() == baseDocument.getId() || bd.getDocumentRegNumber() == baseDocument.getDocumentRegNumber()) {
 
-                throw new DocumentExistsException(bd.getDocumentRegNumber(), "Document number " + bd.getDocumentRegNumber() + " exist");
-            }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void add(BaseDocument baseDocument) throws DocumentExistsException {
+        var documentList = documentHolder.getAll();
+            Optional<BaseDocument> optionalBaseDocument=documentList
+                    .stream().filter(s->s.getDocumentRegNumber()==baseDocument.getDocumentRegNumber()).findFirst();
+            if(optionalBaseDocument.isPresent()){
+                throw new DocumentExistsException(baseDocument.getDocumentRegNumber(), "Document number " + baseDocument.getDocumentRegNumber() + " exist");
         }
-        DocumentHolderImpl.documentList.add(baseDocument);
+        documentHolder.addAll(baseDocument);
     }
 }

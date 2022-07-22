@@ -2,7 +2,7 @@ package com.example.testproject1.model;
 
 
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
-import com.example.testproject1.service.visitorPatternRelase.DocumentV;
+import com.example.testproject1.service.visitorPatternRelase.DocumentVisitor;
 
 import java.text.MessageFormat;
 import java.util.Comparator;
@@ -15,7 +15,7 @@ import java.util.UUID;
  *
  * @author smigranov
  */
-public class BaseDocument implements Comparable<BaseDocument>, DocumentV {
+public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
     /**
      * идентификатор документа
      */

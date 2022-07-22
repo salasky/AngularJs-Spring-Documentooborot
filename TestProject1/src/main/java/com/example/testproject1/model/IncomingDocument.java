@@ -15,53 +15,53 @@ public class IncomingDocument extends BaseDocument {
     /**
      * отправитель
      */
-    private String incomingDocumentSender;
+    private String sender;
     /**
      * адресат
      */
-    private String incomingDocumentDestination;
+    private String destination;
     /**
      * исходящий номер
      */
-    private Long incomingDocumentNumber;
+    private Long documentNumber;
     /**
      * исходящая дата регистрации
      */
-    private Date incomingDocumentDate;
+    private Date date;
 
     public IncomingDocument() {
     }
 
-    public String getIncomingDocumentSender() {
-        return incomingDocumentSender;
+    public String getSender() {
+        return sender;
     }
 
-    public void setIncomingDocumentSender(String incomingDocumentSender) {
-        this.incomingDocumentSender = incomingDocumentSender;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public String getIncomingDocumentDestination() {
-        return incomingDocumentDestination;
+    public String getDestination() {
+        return destination;
     }
 
-    public void setIncomingDocumentDestination(String incomingDocumentDestination) {
-        this.incomingDocumentDestination = incomingDocumentDestination;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
-    public Long getIncomingDocumentNumber() {
-        return incomingDocumentNumber;
+    public Long getDocumentNumber() {
+        return documentNumber;
     }
 
-    public void setIncomingDocumentNumber(Long incomingDocumentNumber) {
-        this.incomingDocumentNumber = incomingDocumentNumber;
+    public void setDocumentNumber(Long documentNumber) {
+        this.documentNumber = documentNumber;
     }
 
-    public Date getIncomingDocumentDate() {
-        return incomingDocumentDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setIncomingDocumentDate(Date incomingDocumentDate) {
-        this.incomingDocumentDate = incomingDocumentDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     /**
@@ -71,7 +71,7 @@ public class IncomingDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {super.toString(), incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate};
+        Object[] taskArgs = {super.toString(), sender, destination, documentNumber, date};
         MessageFormat form = new MessageFormat(
                 "Входящий документ {0}, incomingDocumentSender= {1}, incomingDocumentDestination= {2}, incomingDocumentNumber= {3}, incomingDocumentDate= {4}");
         return form.format(taskArgs);
@@ -89,7 +89,7 @@ public class IncomingDocument extends BaseDocument {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         IncomingDocument that = (IncomingDocument) o;
-        return Objects.equals(incomingDocumentSender, that.incomingDocumentSender) && Objects.equals(incomingDocumentDestination, that.incomingDocumentDestination) && Objects.equals(incomingDocumentNumber, that.incomingDocumentNumber) && Objects.equals(incomingDocumentDate, that.incomingDocumentDate);
+        return Objects.equals(sender, that.sender) && Objects.equals(destination, that.destination) && Objects.equals(documentNumber, that.documentNumber) && Objects.equals(date, that.date);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class IncomingDocument extends BaseDocument {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), incomingDocumentSender, incomingDocumentDestination, incomingDocumentNumber, incomingDocumentDate);
+        return Objects.hash(super.hashCode(), sender, destination, documentNumber, date);
     }
 
     /**
@@ -125,22 +125,22 @@ public class IncomingDocument extends BaseDocument {
         }
 
         public IncomingDocumentBuilder setIncomingSender(String sender) {
-            IncomingDocument.this.incomingDocumentSender = sender;
+            IncomingDocument.this.sender = sender;
             return this;
         }
 
         public IncomingDocumentBuilder setIncomingDestination(String destination) {
-            IncomingDocument.this.incomingDocumentDestination = destination;
+            IncomingDocument.this.destination = destination;
             return this;
         }
 
         public IncomingDocumentBuilder setIncomingDocumentNumber(Long documentNumber) {
-            IncomingDocument.this.incomingDocumentNumber = documentNumber;
+            IncomingDocument.this.documentNumber = documentNumber;
             return this;
         }
 
         public IncomingDocumentBuilder setIncomingDocumentDate(Date date) {
-            IncomingDocument.this.incomingDocumentDate = date;
+            IncomingDocument.this.date = date;
             return this;
         }
 

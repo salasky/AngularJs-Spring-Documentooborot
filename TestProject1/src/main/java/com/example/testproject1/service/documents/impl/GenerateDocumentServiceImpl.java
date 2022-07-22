@@ -33,6 +33,9 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
     @Autowired
     private List<Factory<BaseDocument>> documentFactoryList;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void generateDocument(Integer count) {
         LOGGER.info("\n         ---------------------Сгенерированные документы---------------------");
@@ -40,7 +43,7 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
             BaseDocument baseDocument = documentFactoryList.get(new Random().nextInt(documentFactoryList.size())).create();
             if (baseDocument != null) {
                 try {
-                    documentService.documentAdd(baseDocument);
+                    documentService.add(baseDocument);
                     LOGGER.info(String.valueOf(baseDocument));
                 } catch (DocumentExistsException e) {
                     LOGGER.error(e.getMessage());
