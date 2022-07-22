@@ -60,4 +60,16 @@
         <phoneNumber>66787546346</phoneNumber>
         <photo>http//:hgh.png</photo>
     </person>
+    <person id="44b44539-e795-4b14-9dd6-519b29fd4dd5">
+        <secondName>Barabanov</secondName>
+        <firstName>Ivan</firstName>
+        <lastName>Genadyevich</lastName>
+        <jobTittle>
+            <uuid>e2944d9a-dcda-4db1-ab5a-5de4fc407947</uuid>
+            <jobTittleName>Java teamLead</jobTittleName>
+        </jobTittle>
+        <birthDay>1978-12-17T22:11:57.099+03:00</birthDay>
+        <phoneNumber>89754623346</phoneNumber>
+        <photo>http//:barabanov.png</photo>
+    </person>
 </persons>
