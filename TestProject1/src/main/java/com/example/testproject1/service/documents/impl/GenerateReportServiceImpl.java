@@ -43,16 +43,16 @@ public class GenerateReportServiceImpl implements GenerateReportService {
         Map<String, List<String>> totalMap = new TreeMap<>();
         for (BaseDocument baseDocument : documentHolder.getAll()) {
             //Если не существует запись для данного автора
-            if (!totalMap.containsKey(baseDocument.getDocumentAuthor())) {
+            if (!totalMap.containsKey(baseDocument.getAuthor())) {
                 List<String> list = new ArrayList<>();
                 list.add(baseDocument.accept(documentInspector));
-                totalMap.put(baseDocument.getDocumentAuthor(), list);
+                totalMap.put(baseDocument.getAuthor(), list);
             } else {
                 //Ecли существуют документы данного автора
-                List<String> oldlist = totalMap.get(baseDocument.getDocumentAuthor());
+                List<String> oldlist = totalMap.get(baseDocument.getAuthor());
                 oldlist.add(baseDocument.accept(documentInspector));
                 Collections.sort(oldlist);
-                totalMap.put(baseDocument.getDocumentAuthor(), oldlist);
+                totalMap.put(baseDocument.getAuthor(), oldlist);
             }
         }
         LOGGER.info("\n         ------------------------Отчет------------------------");

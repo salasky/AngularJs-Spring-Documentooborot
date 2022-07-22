@@ -1,5 +1,7 @@
 package com.example.testproject1.exeption;
 
+import java.text.MessageFormat;
+
 /**
  * При создании документа с существующим рег.номером выбрасывается исключение DocumentExistsException
  *
@@ -19,11 +21,8 @@ public class DocumentExistsException extends Exception {
     public DocumentExistsException() {
 
     }
-
     @Override
     public String toString() {
-        return "DocumentExistsException{" +
-                "RegNumber= " + detail + " exist" +
-                '}';
+        return MessageFormat.format("DocumentExistsException: RegNumber {0} exist",detail);
     }
 }

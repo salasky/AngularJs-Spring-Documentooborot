@@ -40,13 +40,13 @@ public class TaskDocumentShell {
      *
      * @param a Генерируем заданное количество документов
      */
-    @ShellMethod("Cmd: generate --a  (Int DocumentCount (default = 500)")
-    public void generate(@ShellOption(defaultValue="500") int a) {
+    @ShellMethod("Cmd: generate --a  (Int DocumentCount (default = 100)")
+    public void generate(@ShellOption(defaultValue="100") int a) {
         Integer countDocument=Integer.valueOf(a);
         LOGGER.info("Попытка сгенерировать документы");
         generateDocumentService.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
         generateReportService.generateReport();
-       documentHolder.getAll().clear();
+        documentHolder.getAll().clear();
     }
 }

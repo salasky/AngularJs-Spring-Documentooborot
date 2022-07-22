@@ -12,10 +12,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OutgoingDocumentFactory extends DocumentFactory<OutgoingDocument.OutgoingBuilder> {
+    /**
+     * {@inheritDoc}
+     * @return
+     */
     @Override
     public OutgoingDocument.OutgoingBuilder getBuilder() {
         return OutgoingDocument.newBuilder();
     }
+    /**
+     * {@inheritDoc}
+     * @return
+     */
     @Override
     public OutgoingDocument.OutgoingBuilder setFields(OutgoingDocument.OutgoingBuilder builder) {
         return builder.setDocSender(randomizer.getRandOutgoingDocumentSender())

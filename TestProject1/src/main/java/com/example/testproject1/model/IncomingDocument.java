@@ -23,7 +23,7 @@ public class IncomingDocument extends BaseDocument {
     /**
      * исходящий номер
      */
-    private Long documentNumber;
+    private Long number;
     /**
      * исходящая дата регистрации
      */
@@ -48,12 +48,12 @@ public class IncomingDocument extends BaseDocument {
         this.destination = destination;
     }
 
-    public Long getDocumentNumber() {
-        return documentNumber;
+    public Long getNumber() {
+        return number;
     }
 
-    public void setDocumentNumber(Long documentNumber) {
-        this.documentNumber = documentNumber;
+    public void setNumber(Long number) {
+        this.number = number;
     }
 
     public Date getDateOfRegistration() {
@@ -71,7 +71,7 @@ public class IncomingDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {super.toString(), sender, destination, documentNumber, dateOfRegistration};
+        Object[] taskArgs = {super.toString(), sender, destination, number, dateOfRegistration};
         MessageFormat form = new MessageFormat(
                 "Входящий документ {0}, incomingDocumentSender= {1}, incomingDocumentDestination= {2}, incomingDocumentNumber= {3}, incomingDocumentDate= {4}");
         return form.format(taskArgs);
@@ -89,7 +89,7 @@ public class IncomingDocument extends BaseDocument {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         IncomingDocument that = (IncomingDocument) o;
-        return Objects.equals(sender, that.sender) && Objects.equals(destination, that.destination) && Objects.equals(documentNumber, that.documentNumber) && Objects.equals(dateOfRegistration, that.dateOfRegistration);
+        return Objects.equals(sender, that.sender) && Objects.equals(destination, that.destination) && Objects.equals(number, that.number) && Objects.equals(dateOfRegistration, that.dateOfRegistration);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class IncomingDocument extends BaseDocument {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), sender, destination, documentNumber, dateOfRegistration);
+        return Objects.hash(super.hashCode(), sender, destination, number, dateOfRegistration);
     }
 
     /**
@@ -135,7 +135,7 @@ public class IncomingDocument extends BaseDocument {
         }
 
         public IncomingDocumentBuilder setIncomingDocumentNumber(Long documentNumber) {
-            IncomingDocument.this.documentNumber = documentNumber;
+            IncomingDocument.this.number = documentNumber;
             return this;
         }
 

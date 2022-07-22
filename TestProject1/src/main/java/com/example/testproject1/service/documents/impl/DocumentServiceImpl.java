@@ -7,6 +7,7 @@ import com.example.testproject1.storage.DocumentHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,11 +28,13 @@ public class DocumentServiceImpl implements DocumentService {
      */
     @Override
     public void add(BaseDocument baseDocument) throws DocumentExistsException {
-        var documentList = documentHolder.getAll();
-            Optional<BaseDocument> optionalBaseDocument=documentList
-                    .stream().filter(s->s.getDocumentRegNumber()==baseDocument.getDocumentRegNumber()).findFirst();
+        List<BaseDocument> documentList = documentHolder.getAll();
+        Optional<BaseDocument> optionalBaseDocument= documentList
+                    .stream()
+                    .filter(s->s.getRegNumber()==baseDocument.getRegNumber())
+                    .findFirst();
             if(optionalBaseDocument.isPresent()){
-                throw new DocumentExistsException(baseDocument.getDocumentRegNumber(), "Document number " + baseDocument.getDocumentRegNumber() + " exist");
+                throw new DocumentExistsException(baseDocument.getRegNumber(), "Document number " + baseDocument.getRegNumber() + " exist");
         }
         documentHolder.addAll(baseDocument);
     }

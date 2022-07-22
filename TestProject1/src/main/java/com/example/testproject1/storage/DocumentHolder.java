@@ -15,5 +15,10 @@ public interface DocumentHolder {
      * @return
      */
     List<BaseDocument> getAll();
+
+    /**
+     * Метод добавления документов в базу
+     * @param baseDocumentList
+     */
     void addAll(BaseDocument baseDocumentList);
 }

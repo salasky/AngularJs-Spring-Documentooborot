@@ -27,7 +27,6 @@ public abstract class DocumentFactory<T extends BaseDocument.BaseDocumentBuilder
      * @return
      */
     public abstract T setFields(T builder);
-
     /**
      * Собирает готовый документ с полями базового класса
      * @param builder
@@ -43,7 +42,6 @@ public abstract class DocumentFactory<T extends BaseDocument.BaseDocumentBuilder
                 .setDocAuthor(randomizer.getRandDocumentAuthor())
                 .build();
     }
-
     /**
      * {@inheritDoc}
      */
