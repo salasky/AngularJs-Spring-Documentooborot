@@ -16,7 +16,7 @@ public class DocumentHolderImpl implements DocumentHolder {
     /**
      * Лист для сохранения объектов унаследованных от {@link BaseDocument}
      */
-    private static List<BaseDocument> documentList = new ArrayList<>();
+    private List<BaseDocument> documentList = new ArrayList<>();
     /**
      * {@inheritDoc}
      */
