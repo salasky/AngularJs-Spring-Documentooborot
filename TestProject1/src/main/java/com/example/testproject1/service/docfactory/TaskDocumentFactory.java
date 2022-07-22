@@ -11,13 +11,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TaskDocumentFactory extends DocumentFactory<TaskDocument.TaskBuilder> {
+
+
     @Override
-    public BaseDocument create() {
-        return createBaseDocument(TaskDocument.newBuilder()
-                .setTaskDate(randomizer.getRandTaskOutDate())
+    public TaskDocument.TaskBuilder getBuilder() {
+        return TaskDocument.newBuilder();
+    }
+
+    @Override
+    public TaskDocument.TaskBuilder setFields(TaskDocument.TaskBuilder builder) {
+        return builder.setTaskDate(randomizer.getRandTaskOutDate())
                 .setTaskExecPeriod(randomizer.getRandTaskExecPeriod())
                 .setTaskResponsPerson(randomizer.getRandTaskResponsible())
                 .setTaskSignOfControl(randomizer.getTaskSignOfControl())
-                .setTaskControlPerson(randomizer.getRandTaskControlPerson()));
+                .setTaskControlPerson(randomizer.getRandTaskControlPerson());
     }
 }

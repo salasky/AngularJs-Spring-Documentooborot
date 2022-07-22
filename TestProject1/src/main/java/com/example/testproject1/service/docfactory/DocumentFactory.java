@@ -3,7 +3,6 @@ package com.example.testproject1.service.docfactory;
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.service.randomizer.Randomizer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * Абстрактный класс фабрики для {@link TaskDocumentFactory},{@link IncomingDocumentFactory},{@link OutgoingDocumentFactory}
@@ -18,9 +17,23 @@ public abstract class DocumentFactory<T extends BaseDocument.BaseDocumentBuilder
     protected Randomizer randomizer;
 
     /**
-     * @return Возвращает объект,класс которого наследуется от {@link BaseDocument}
+     * @return Возвращает экземпляр нужно билдера
      */
-    public BaseDocument createBaseDocument(T builder) {
+    public abstract T getBuilder();
+
+    /**
+     *  Метод который заполняет особенности конкретной реализации
+     * @param builder
+     * @return
+     */
+    public abstract T setFields(T builder);
+
+    /**
+     * Собирает готовый документ с полями базового класса
+     * @param builder
+     * @return
+     */
+    public BaseDocument createDocument(T builder) {
         return builder
                 .setDocId(randomizer.getRandUUID())
                 .setDocName(randomizer.getRandDocName())
@@ -29,5 +42,13 @@ public abstract class DocumentFactory<T extends BaseDocument.BaseDocumentBuilder
                 .setDocDate(randomizer.getRandDocumentData())
                 .setDocAuthor(randomizer.getRandDocumentAuthor())
                 .build();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BaseDocument create() {
+        return createDocument(setFields(getBuilder()));
     }
 }

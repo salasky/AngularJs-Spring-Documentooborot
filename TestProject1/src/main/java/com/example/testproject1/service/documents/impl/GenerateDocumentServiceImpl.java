@@ -2,6 +2,7 @@ package com.example.testproject1.service.documents.impl;
 
 import com.example.testproject1.exeption.DocumentExistsException;
 import com.example.testproject1.model.BaseDocument;
+import com.example.testproject1.service.docfactory.DocumentFactory;
 import com.example.testproject1.service.docfactory.Factory;
 import com.example.testproject1.service.documents.DocumentService;
 import com.example.testproject1.service.documents.GenerateDocumentService;
@@ -32,7 +33,6 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
      */
     @Autowired
     private List<Factory<BaseDocument>> documentFactoryList;
-
     /**
      * {@inheritDoc}
      */

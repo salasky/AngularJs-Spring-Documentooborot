@@ -12,21 +12,21 @@ import com.example.testproject1.model.TaskDocument;
  */
 public interface DocumentInspector {
     /**
-     * Метод возвращает имя класса TaskDocument
+     * Метод возвращает информацию о экземпляре класса TaskDocument для формирования отчета
      * @param taskDocument
      * @return
      */
     String visit(TaskDocument taskDocument);
 
     /**
-     * Метод возвращает имя класса IncomingDocument
+     * Метод возвращает информацию о экземпляре класса IncomingDocument для формирования отчета
      * @param incomingDocument
      * @return
      */
     String visit(IncomingDocument incomingDocument);
 
     /**
-     * Метод возвращает имя класса OutgoingDocument
+     * Метод возвращает информацию о экземпляре класса OutgoingDocument для формирования отчета
      * @param outgoingDocument
      * @return
      */
