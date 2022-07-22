@@ -27,7 +27,7 @@ public class IncomingDocument extends BaseDocument {
     /**
      * исходящая дата регистрации
      */
-    private Date date;
+    private Date dateOfRegistration;
 
     public IncomingDocument() {
     }
@@ -56,12 +56,12 @@ public class IncomingDocument extends BaseDocument {
         this.documentNumber = documentNumber;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDateOfRegistration() {
+        return dateOfRegistration;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateOfRegistration(Date dateOfRegistration) {
+        this.dateOfRegistration = dateOfRegistration;
     }
 
     /**
@@ -71,7 +71,7 @@ public class IncomingDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {super.toString(), sender, destination, documentNumber, date};
+        Object[] taskArgs = {super.toString(), sender, destination, documentNumber, dateOfRegistration};
         MessageFormat form = new MessageFormat(
                 "Входящий документ {0}, incomingDocumentSender= {1}, incomingDocumentDestination= {2}, incomingDocumentNumber= {3}, incomingDocumentDate= {4}");
         return form.format(taskArgs);
@@ -89,7 +89,7 @@ public class IncomingDocument extends BaseDocument {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         IncomingDocument that = (IncomingDocument) o;
-        return Objects.equals(sender, that.sender) && Objects.equals(destination, that.destination) && Objects.equals(documentNumber, that.documentNumber) && Objects.equals(date, that.date);
+        return Objects.equals(sender, that.sender) && Objects.equals(destination, that.destination) && Objects.equals(documentNumber, that.documentNumber) && Objects.equals(dateOfRegistration, that.dateOfRegistration);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class IncomingDocument extends BaseDocument {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), sender, destination, documentNumber, date);
+        return Objects.hash(super.hashCode(), sender, destination, documentNumber, dateOfRegistration);
     }
 
     /**
@@ -140,7 +140,7 @@ public class IncomingDocument extends BaseDocument {
         }
 
         public IncomingDocumentBuilder setIncomingDocumentDate(Date date) {
-            IncomingDocument.this.date = date;
+            IncomingDocument.this.dateOfRegistration = date;
             return this;
         }
 
