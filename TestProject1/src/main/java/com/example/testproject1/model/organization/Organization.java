@@ -72,15 +72,4 @@ public class Organization extends Staff{
     public void setOrganizationContactNumber(String organizationContactNumber) {
         OrganizationContactNumber = organizationContactNumber;
     }
-
-    @Override
-    public String toString() {
-        return "Organization{" +
-                ", id=" + id +" " +
-                "OrganizationFullName='" + OrganizationFullName + '\'' +
-                ", OrganizationShortName='" + OrganizationShortName + '\'' +
-                ", OrganizationSupervisor='" + OrganizationSupervisor + '\'' +
-                ", OrganizationContactNumber='" + OrganizationContactNumber + '\'' +
-                '}';
-    }
 }

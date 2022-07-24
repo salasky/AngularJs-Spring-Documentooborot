@@ -72,15 +72,4 @@ public class Department extends Staff{
     public void setDepartmentContactNumber(String departmentContactNumber) {
         DepartmentContactNumber = departmentContactNumber;
     }
-
-    @Override
-    public String toString() {
-        return "Department{" +
-                ", id=" + id+" " +
-                "DepartmentFullName='" + DepartmentFullName + '\'' +
-                ", DepartmentShortName='" + DepartmentShortName + '\'' +
-                ", DepartmentSupervisor='" + DepartmentSupervisor + '\'' +
-                ", DepartmentContactNumber='" + DepartmentContactNumber + '\'' +
-                '}';
-    }
 }

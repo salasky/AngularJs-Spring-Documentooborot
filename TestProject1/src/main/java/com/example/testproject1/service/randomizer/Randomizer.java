@@ -64,7 +64,7 @@ public class Randomizer {
      * @return возвращает рандомный рег.номер
      */
     public Long getRandDocumentRegNumber() {
-        return Long.valueOf((int) (Math.random() * 100));
+        return Long.valueOf((int) (Math.random() * 10000));
     }
 
     /**

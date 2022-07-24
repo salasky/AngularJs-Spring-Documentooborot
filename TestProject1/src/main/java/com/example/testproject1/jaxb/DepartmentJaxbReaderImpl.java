@@ -25,8 +25,6 @@ public class DepartmentJaxbReaderImpl implements DepartmentJaxbReader {
     /**
      * {@inheritDoc}
      *
-     * Метод реализующий {@link DepartmentJaxbReader#getDepartment()}
-     *
      * @return
      */
     @Override

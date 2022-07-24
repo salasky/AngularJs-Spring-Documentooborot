@@ -9,15 +9,32 @@
       "jobTittleName" : "QA"
     },
     "photo" : "http//:dsd.png",
-    "birthDay" : -715359695601,
+    "birthDay" : "1947-05-02T08:58:24.399+00:00",
     "phoneNumber" : "86436346"
   },
   "documentList" : [ {
-    "id" : "cae53cee-1009-430e-95b5-ace81d3bbcc9",
-    "documentName" : "Положение",
-    "documentText" : "Значимость этих проблем",
-    "documentRegNumber" : 9535,
-    "outgoingDocumentSender" : {
+    "id" : "9d55a61e-6fcd-4acc-a5f5-ea96a56514d7",
+    "name" : "Устав",
+    "text" : "Количественный рост",
+    "regNumber" : 4726,
+    "creatingDate" : "2022-06-26T13:13:57.497+00:00",
+    "outDate" : "2022-07-24T17:15:56.360+00:00",
+    "execPeriod" : "7 дня",
+    "responsible" : {
+      "id" : "0f8fb8fb-d017-40ca-8863-1881aa083b9a",
+      "lastName" : "Petrovich",
+      "secondName" : "Kondratyuk",
+      "firstName" : "Aleksandr",
+      "jobTittle" : {
+        "uuid" : "11aa7f92-3cca-46a3-85ed-4d4bc6f266e2",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:dsd.png",
+      "birthDay" : "1947-05-02T08:58:24.399+00:00",
+      "phoneNumber" : "86436346"
+    },
+    "signOfControl" : false,
+    "controlPerson" : {
       "id" : "44b44539-e795-4b14-9dd6-519b29fd4dd5",
       "lastName" : "Genadyevich",
       "secondName" : "Barabanov",
@@ -27,65 +44,28 @@
         "jobTittleName" : "Java teamLead"
       },
       "photo" : "http//:barabanov.png",
-      "birthDay" : 282769917099,
+      "birthDay" : "1978-12-17T19:11:57.099+00:00",
+      "phoneNumber" : "89754623346"
+    }
+  }, {
+    "id" : "65799bfb-a7f7-4345-9090-94f6dc990adf",
+    "name" : "Должностная инструкция",
+    "text" : "Системы обучения кадров",
+    "regNumber" : 9522,
+    "creatingDate" : "2022-12-19T16:09:22.199+00:00",
+    "sender" : {
+      "id" : "44b44539-e795-4b14-9dd6-519b29fd4dd5",
+      "lastName" : "Genadyevich",
+      "secondName" : "Barabanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "e2944d9a-dcda-4db1-ab5a-5de4fc407947",
+        "jobTittleName" : "Java teamLead"
+      },
+      "photo" : "http//:barabanov.png",
+      "birthDay" : "1978-12-17T19:11:57.099+00:00",
       "phoneNumber" : "89754623346"
     },
-    "outgoingDocumentDeliveryType" : "EMAIL",
-    "documentData" : 1642980852770
-  }, {
-    "id" : "1eea8aee-8ea6-43eb-b17c-99c291efdfa3",
-    "documentName" : "Приказ",
-    "documentText" : "Количественный рост",
-    "documentRegNumber" : 8243,
-    "taskOutDate" : 1658472128011,
-    "taskExecPeriod" : "8 дня",
-    "taskResponsible" : {
-      "id" : "8d228043-b513-4159-8746-f7afed38df70",
-      "lastName" : "Uralovich",
-      "secondName" : "Petrosyan",
-      "firstName" : "Sergey",
-      "jobTittle" : {
-        "uuid" : "b40aefa3-a73b-443d-8547-e14e886e9b77",
-        "jobTittleName" : "Alfresco junior"
-      },
-      "photo" : "http//:hgh.png",
-      "birthDay" : 153513627598,
-      "phoneNumber" : "66787546346"
-    },
-    "taskSignOfControl" : false,
-    "taskControlPerson" : {
-      "id" : "8d228043-b513-4159-8746-f7afed38df70",
-      "lastName" : "Uralovich",
-      "secondName" : "Petrosyan",
-      "firstName" : "Sergey",
-      "jobTittle" : {
-        "uuid" : "b40aefa3-a73b-443d-8547-e14e886e9b77",
-        "jobTittleName" : "Alfresco junior"
-      },
-      "photo" : "http//:hgh.png",
-      "birthDay" : 153513627598,
-      "phoneNumber" : "66787546346"
-    },
-    "documentData" : 1666295212401
-  }, {
-    "id" : "e0797db0-543a-455c-8e53-94bb310f79ce",
-    "documentName" : "Должностная инструкция",
-    "documentText" : "Количественный рост",
-    "documentRegNumber" : 8091,
-    "outgoingDocumentSender" : {
-      "id" : "8d228043-b513-4159-8746-f7afed38df70",
-      "lastName" : "Uralovich",
-      "secondName" : "Petrosyan",
-      "firstName" : "Sergey",
-      "jobTittle" : {
-        "uuid" : "b40aefa3-a73b-443d-8547-e14e886e9b77",
-        "jobTittleName" : "Alfresco junior"
-      },
-      "photo" : "http//:hgh.png",
-      "birthDay" : 153513627598,
-      "phoneNumber" : "66787546346"
-    },
-    "outgoingDocumentDeliveryType" : "RUSSIAN_POST",
-    "documentData" : 1667437754223
+    "deliveryType" : "ROCKET_CHAT"
   } ]
 }

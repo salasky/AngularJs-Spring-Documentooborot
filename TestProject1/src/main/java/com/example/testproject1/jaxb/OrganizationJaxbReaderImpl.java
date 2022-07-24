@@ -26,7 +26,6 @@ public class OrganizationJaxbReaderImpl implements OrganizationJaxbReader{
     /**
      * {@inheritDoc}
      *
-     * Метод реализует {@link OrganizationJaxbReader#getOrganization()}
      * @return
      */
     @Override

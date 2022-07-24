@@ -13,58 +13,27 @@
     "phoneNumber" : "687546346"
   },
   "documentList" : [ {
-    "id" : "9e33c18f-b188-4fe5-8ec8-923a79c55346",
-    "documentName" : "Положение",
-    "documentText" : "Повышение уровня гражданского сознания",
-    "documentRegNumber" : 5014,
-    "incomingDocumentSender" : {
-      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
-      "lastName" : "Vagizovich",
-      "secondName" : "Migranov",
-      "firstName" : "Salavat",
+    "id" : "bf829a5f-0696-481c-b8d8-921cdc578929",
+    "name" : "Устав",
+    "text" : "Повышение уровня гражданского сознания",
+    "regNumber" : 6765,
+    "outDate" : 1658682237532,
+    "execPeriod" : "8 дня",
+    "responsible" : {
+      "id" : "0f8fb8fb-d017-40ca-8863-1881aa083b9a",
+      "lastName" : "Petrovich",
+      "secondName" : "Kondratyuk",
+      "firstName" : "Aleksandr",
       "jobTittle" : {
-        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
-        "jobTittleName" : "Java junior"
+        "uuid" : "11aa7f92-3cca-46a3-85ed-4d4bc6f266e2",
+        "jobTittleName" : "QA"
       },
-      "photo" : "http//:migsal.png",
-      "birthDay" : 219697917099,
-      "phoneNumber" : "897546346"
+      "photo" : "http//:dsd.png",
+      "birthDay" : -715359695601,
+      "phoneNumber" : "86436346"
     },
-    "incomingDocumentDestination" : {
-      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
-      "lastName" : "Vagizovich",
-      "secondName" : "Migranov",
-      "firstName" : "Salavat",
-      "jobTittle" : {
-        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
-        "jobTittleName" : "Java junior"
-      },
-      "photo" : "http//:migsal.png",
-      "birthDay" : 219697917099,
-      "phoneNumber" : "897546346"
-    },
-    "incomingDocumentNumber" : 5788,
-    "incomingDocumentDate" : 1655887583459,
-    "documentData" : 1659630651925
-  }, {
-    "id" : "ae4b031e-6d91-408a-a608-f0d6e2c3f894",
-    "documentName" : "Приказ",
-    "documentText" : "Значимость этих проблем",
-    "documentRegNumber" : 1712,
-    "incomingDocumentSender" : {
-      "id" : "6f76bdf2-1bb4-4ed4-86af-afc648e9e634",
-      "lastName" : "Yurevich",
-      "secondName" : "Yushko",
-      "firstName" : "Oleg",
-      "jobTittle" : {
-        "uuid" : "4741a084-34c1-48e9-b6a2-a358d268f3a8",
-        "jobTittleName" : "QA junior"
-      },
-      "photo" : "http//:sdsf.png",
-      "birthDay" : 1259077127972,
-      "phoneNumber" : "45345323"
-    },
-    "incomingDocumentDestination" : {
+    "signOfControl" : false,
+    "controlPerson" : {
       "id" : "44b44539-e795-4b14-9dd6-519b29fd4dd5",
       "lastName" : "Genadyevich",
       "secondName" : "Barabanov",
@@ -77,8 +46,6 @@
       "birthDay" : 282769917099,
       "phoneNumber" : "89754623346"
     },
-    "incomingDocumentNumber" : 6703,
-    "incomingDocumentDate" : 1670874098837,
-    "documentData" : 1663939393941
+    "documentData" : 1659224334259
   } ]
 }

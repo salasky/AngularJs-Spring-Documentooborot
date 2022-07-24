@@ -4,8 +4,7 @@ import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.ReportForJson;
 import com.example.testproject1.model.person.Person;
 import com.example.testproject1.service.documents.GenerateReportService;
-import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
-import com.example.testproject1.storage.Impl.DocumentHolderImpl;
+import com.example.testproject1.storage.DocumentHolder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;
@@ -34,27 +33,31 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     private static String SHORTPATH="C:\\Users\\smigranov\\Desktop\\TestProject\\TestProject\\testrepo\\TestProject1\\src\\main\\resources\\";
     private static final Logger LOGGER = LoggerFactory.getLogger(GenerateReportServiceImpl.class);
 
+
     /**
-     * Вспомогательный объект класса DocumentInspector для реализации паттерна посетитель
+     * Autowired бина класса {@link DocumentHolder}
      */
     @Autowired
-    private DocumentInspector documentInspector;
+    private DocumentHolder documentHolder;
+    /**
+     * {@inheritDoc}
+     */
 
     @Override
     public void generateReport() {
         Map<Person, List<BaseDocument>> totalMap = new HashMap<>();
-        for (BaseDocument baseDocument : DocumentHolderImpl.documentList) {
+        for (BaseDocument baseDocument : documentHolder.getAll()) {
             //Если не существует запись для данного автора
-            if (!totalMap.containsKey(baseDocument.getDocumentAuthor())) {
+            if (!totalMap.containsKey(baseDocument.getAuthor())) {
                 List<BaseDocument> list = new ArrayList<>();
                 list.add(baseDocument);
-                totalMap.put(baseDocument.getDocumentAuthor(), list);
+                totalMap.put(baseDocument.getAuthor(), list);
             } else {
                 //Ecли существуют документы данного автора
-                List<BaseDocument> oldlist = totalMap.get(baseDocument.getDocumentAuthor());
+                List<BaseDocument> oldlist = totalMap.get(baseDocument.getAuthor());
                 oldlist.add(baseDocument);
                 Collections.sort(oldlist);
-                totalMap.put(baseDocument.getDocumentAuthor(), oldlist);
+                totalMap.put(baseDocument.getAuthor(), oldlist);
             }
         }
 
@@ -64,6 +67,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
                                         .setDocumentList(entry.getValue())
                                         .build();
             ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
             String secondName=entry.getKey().getSecondName();
             //Полный путь к файлу

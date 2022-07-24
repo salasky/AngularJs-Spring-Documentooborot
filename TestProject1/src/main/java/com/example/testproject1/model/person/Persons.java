@@ -25,18 +25,16 @@ public class Persons {
         this.list = list;
     }
 
+    /**
+     * Метод получения списка Person
+     */
     public List<Person> getPersonList() {
         return list;
     }
-
+    /**
+     * Метод добавления в список Person
+     */
     public boolean add(Person person){
         return list.add(person);
-    }
-
-    @Override
-    public String toString() {
-        return "Persons{" +
-                "list=" + list +
-                '}';
     }
 }

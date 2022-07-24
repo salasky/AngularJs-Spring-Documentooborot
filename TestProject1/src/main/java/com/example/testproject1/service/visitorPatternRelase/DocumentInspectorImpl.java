@@ -21,7 +21,7 @@ public class DocumentInspectorImpl implements DocumentInspector{
     @Override
     public String visit(TaskDocument taskDocument) {
         return MessageFormat.format("Поручение {0} от {1}. {2} \n"
-                        , taskDocument.getId(), taskDocument.getDocumentData(),taskDocument.getName());
+                        , taskDocument.getId(), taskDocument.getCreatingDate(),taskDocument.getName());
     }
 
     /**
@@ -30,7 +30,7 @@ public class DocumentInspectorImpl implements DocumentInspector{
     @Override
     public String visit(IncomingDocument incomingDocument) {
         return MessageFormat.format("Входящий документ {0} от {1}. {2} \n"
-                , incomingDocument.getId(), incomingDocument.getDocumentData(),incomingDocument.getName());
+                , incomingDocument.getId(), incomingDocument.getCreatingDate(),incomingDocument.getName());
     }
     /**
      * {@inheritDoc}
@@ -38,7 +38,7 @@ public class DocumentInspectorImpl implements DocumentInspector{
     @Override
     public String visit(OutgoingDocument outgoingDocument) {
         return MessageFormat.format("Исходящий документ {0} от {1}. {2} \n"
-                , outgoingDocument.getId(), outgoingDocument.getDocumentData(),outgoingDocument.getName());
+                , outgoingDocument.getId(), outgoingDocument.getCreatingDate(),outgoingDocument.getName());
     }
     /**
      * {@inheritDoc}

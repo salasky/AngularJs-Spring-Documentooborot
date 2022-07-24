@@ -118,8 +118,6 @@ public class Person extends Staff implements Comparable<Person>{
 
     /**
      * {@inheritDoc}
-     *
-     * @return
      */
     @Override
     public String toString() {
@@ -129,6 +127,9 @@ public class Person extends Staff implements Comparable<Person>{
         return form.format(personArgs);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int compareTo(Person o) {
         return Comparator.comparing(Person::getSecondName).thenComparing(Person::getFirstName).compare(this, o);

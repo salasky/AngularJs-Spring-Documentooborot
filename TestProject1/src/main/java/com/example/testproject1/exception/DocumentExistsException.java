@@ -1,4 +1,4 @@
-package com.example.testproject1.exeption;
+package com.example.testproject1.exception;
 
 import java.text.MessageFormat;
 

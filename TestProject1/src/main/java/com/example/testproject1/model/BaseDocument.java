@@ -5,7 +5,6 @@ import com.example.testproject1.model.person.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 import com.example.testproject1.service.visitorPatternRelase.DocumentVisitor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.example.testproject1.service.visitorPatternRelase.DocumentVisitor;
 
 import java.text.MessageFormat;
 import java.util.Comparator;
@@ -77,19 +76,19 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
         this.regNumber = regNumber;
     }
 
-    public Date getDocumentData() {
+    public Date getCreatingDate() {
         return creatingDate;
     }
 
-    public void setDocumentData(Date documentData) {
+    public void setCreatingDate(Date documentData) {
         this.creatingDate = documentData;
     }
 
-    public Person getDocumentAuthor() {
+    public Person getAuthor() {
         return author;
     }
 
-    public void setDocumentAuthor(Person documentAuthor) {
+    public void setAuthor(Person documentAuthor) {
         this.author = documentAuthor;
     }
 
@@ -102,9 +101,9 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof BaseDocument)) return false;
         BaseDocument that = (BaseDocument) o;
-        return Objects.equals(id, that.id) && Objects.equals(documentName, that.documentName) && Objects.equals(documentText, that.documentText) && Objects.equals(documentRegNumber, that.documentRegNumber) && Objects.equals(documentDate, that.documentDate) && Objects.equals(documentAuthor, that.documentAuthor);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(text, that.text) && Objects.equals(regNumber, that.regNumber) && Objects.equals(creatingDate, that.creatingDate) && Objects.equals(author, that.author);
     }
 
     /**
@@ -125,7 +124,7 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
      */
     @Override
     public int compareTo(BaseDocument o) {
-        return Comparator.comparing(BaseDocument::getDocumentData).thenComparing(BaseDocument::getRegNumber).compare(this, o);
+        return Comparator.comparing(BaseDocument::getCreatingDate).thenComparing(BaseDocument::getRegNumber).compare(this, o);
     }
 
     @Override
