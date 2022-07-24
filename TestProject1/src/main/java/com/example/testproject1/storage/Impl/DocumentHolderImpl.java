@@ -17,10 +17,21 @@ public class DocumentHolderImpl implements DocumentHolder {
     /**
      * Лист для сохранения объектов унаследованных от {@link BaseDocument}
      */
-    public static List<BaseDocument> documentList = new ArrayList<>();
-
+    private List<BaseDocument> documentList = new ArrayList<>();
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<BaseDocument> getDocumentList() {
+    public List<BaseDocument> getAll() {
         return documentList;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @param baseDocumentList
+     */
+    @Override
+    public void addAll(BaseDocument baseDocumentList) {
+        documentList.add(baseDocumentList);
     }
 }

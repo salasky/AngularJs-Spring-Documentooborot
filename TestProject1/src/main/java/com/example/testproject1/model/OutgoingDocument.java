@@ -16,29 +16,29 @@ public class OutgoingDocument extends BaseDocument {
     /**
      * адресат
      */
-    private Person outgoingDocumentSender;
+    private Person sender;
     /**
      * способ доставки
      */
-    private DocumentDeliveryType outgoingDocumentDeliveryType;
+    private DocumentDeliveryType deliveryType;
 
     public OutgoingDocument() {
     }
 
-    public Person getOutgoingDocumentSender() {
-        return outgoingDocumentSender;
+    public Person getSender() {
+        return sender;
     }
 
-    public void setOutgoingDocumentSender(Person outgoingDocumentSender) {
-        this.outgoingDocumentSender = outgoingDocumentSender;
+    public void setSender(Person sender) {
+        this.sender = sender;
     }
 
-    public DocumentDeliveryType getOutgoingDocumentDeliveryType() {
-        return outgoingDocumentDeliveryType;
+    public DocumentDeliveryType getDeliveryType() {
+        return deliveryType;
     }
 
-    public void setOutgoingDocumentDeliveryType(DocumentDeliveryType outgoingDocumentDeliveryType) {
-        this.outgoingDocumentDeliveryType = outgoingDocumentDeliveryType;
+    public void setDeliveryType(DocumentDeliveryType deliveryType) {
+        this.deliveryType = deliveryType;
     }
 
     /**
@@ -48,7 +48,7 @@ public class OutgoingDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {super.toString(), outgoingDocumentSender, outgoingDocumentDeliveryType};
+        Object[] taskArgs = {super.toString(), sender, deliveryType};
         MessageFormat form = new MessageFormat(
                 "Исходящий документ {0}, outgoingDocumentSender= {1}, outgoingDocumentDeliveryType= {2}");
         return form.format(taskArgs);
@@ -66,7 +66,7 @@ public class OutgoingDocument extends BaseDocument {
         if (!(o instanceof OutgoingDocument)) return false;
         if (!super.equals(o)) return false;
         OutgoingDocument that = (OutgoingDocument) o;
-        return getOutgoingDocumentSender().equals(that.getOutgoingDocumentSender()) && getOutgoingDocumentDeliveryType().equals(that.getOutgoingDocumentDeliveryType());
+        return getSender().equals(that.getSender()) && getDeliveryType().equals(that.getDeliveryType());
     }
 
     /**
@@ -76,7 +76,7 @@ public class OutgoingDocument extends BaseDocument {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getOutgoingDocumentSender(), getOutgoingDocumentDeliveryType());
+        return Objects.hash(super.hashCode(), getSender(), getDeliveryType());
     }
 
     @Override
@@ -102,12 +102,12 @@ public class OutgoingDocument extends BaseDocument {
         }
 
         public OutgoingBuilder setDocSender(Person sender) {
-            OutgoingDocument.this.outgoingDocumentSender = sender;
+            OutgoingDocument.this.sender = sender;
             return this;
         }
 
         public OutgoingBuilder setDocDeliveryType(DocumentDeliveryType type) {
-            OutgoingDocument.this.outgoingDocumentDeliveryType = type;
+            OutgoingDocument.this.deliveryType = type;
             return this;
         }
 

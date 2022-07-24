@@ -1,0 +1,146 @@
+{
+  "person" : {
+    "id" : "8d228043-b513-4159-8746-f7afed38df70",
+    "lastName" : "Uralovich",
+    "secondName" : "Petrosyan",
+    "firstName" : "Sergey",
+    "jobTittle" : {
+      "uuid" : "b40aefa3-a73b-443d-8547-e14e886e9b77",
+      "jobTittleName" : "Alfresco junior"
+    },
+    "photo" : "http//:hgh.png",
+    "birthDay" : 153513627598,
+    "phoneNumber" : "66787546346"
+  },
+  "documentList" : [ {
+    "id" : "fd6f63c4-a90a-403c-9731-6bdd0842520c",
+    "documentName" : "Штатное расписание",
+    "documentText" : "Системы обучения кадров",
+    "documentRegNumber" : 8340,
+    "outgoingDocumentSender" : {
+      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:migsal.png",
+      "birthDay" : 219697917099,
+      "phoneNumber" : "897546346"
+    },
+    "outgoingDocumentDeliveryType" : "RUSSIAN_POST",
+    "documentData" : 1643625928239
+  }, {
+    "id" : "4a95d090-a637-466a-9956-d8dba6cc1e0f",
+    "documentName" : "Положение",
+    "documentText" : "Соображения высшего порядка",
+    "documentRegNumber" : 7040,
+    "outgoingDocumentSender" : {
+      "id" : "0f8fb8fb-d017-40ca-8863-1881aa083b9a",
+      "lastName" : "Petrovich",
+      "secondName" : "Kondratyuk",
+      "firstName" : "Aleksandr",
+      "jobTittle" : {
+        "uuid" : "11aa7f92-3cca-46a3-85ed-4d4bc6f266e2",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:dsd.png",
+      "birthDay" : -715359695601,
+      "phoneNumber" : "86436346"
+    },
+    "outgoingDocumentDeliveryType" : "EMAIL",
+    "documentData" : 1644767457582
+  }, {
+    "id" : "f4828d33-5d2b-4b6e-a8a6-07ad3e514c9a",
+    "documentName" : "Штатное расписание",
+    "documentText" : "Повышение уровня гражданского сознания",
+    "documentRegNumber" : 637,
+    "outgoingDocumentSender" : {
+      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:migsal.png",
+      "birthDay" : 219697917099,
+      "phoneNumber" : "897546346"
+    },
+    "outgoingDocumentDeliveryType" : "RUSSIAN_POST",
+    "documentData" : 1650933356252
+  }, {
+    "id" : "66b5033d-a1ec-45b1-9116-42a1d564c825",
+    "documentName" : "Устав",
+    "documentText" : "Количественный рост",
+    "documentRegNumber" : 3334,
+    "taskOutDate" : 1658472127994,
+    "taskExecPeriod" : "4 дня",
+    "taskResponsible" : {
+      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : 294352805360,
+      "phoneNumber" : "687546346"
+    },
+    "taskSignOfControl" : false,
+    "taskControlPerson" : {
+      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : 294352805360,
+      "phoneNumber" : "687546346"
+    },
+    "documentData" : 1661676556288
+  }, {
+    "id" : "94e8398c-e4d7-4588-a800-5bba059105fc",
+    "documentName" : "Устав",
+    "documentText" : "Соображения высшего порядка",
+    "documentRegNumber" : 5292,
+    "taskOutDate" : 1658472128001,
+    "taskExecPeriod" : "8 дня",
+    "taskResponsible" : {
+      "id" : "8d228043-b513-4159-8746-f7afed38df70",
+      "lastName" : "Uralovich",
+      "secondName" : "Petrosyan",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "b40aefa3-a73b-443d-8547-e14e886e9b77",
+        "jobTittleName" : "Alfresco junior"
+      },
+      "photo" : "http//:hgh.png",
+      "birthDay" : 153513627598,
+      "phoneNumber" : "66787546346"
+    },
+    "taskSignOfControl" : false,
+    "taskControlPerson" : {
+      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:migsal.png",
+      "birthDay" : 219697917099,
+      "phoneNumber" : "897546346"
+    },
+    "documentData" : 1662922162605
+  } ]
+}

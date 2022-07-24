@@ -13,5 +13,5 @@ public interface DocumentService {
      * @param baseDocument передаем объект класса BaseDocument
      * @throws DocumentExistsException если такой объект с данным рег.номером в базе уже существет
      */
-    void documentAdd(BaseDocument baseDocument) throws DocumentExistsException;
+    void add(BaseDocument baseDocument) throws DocumentExistsException;
 }

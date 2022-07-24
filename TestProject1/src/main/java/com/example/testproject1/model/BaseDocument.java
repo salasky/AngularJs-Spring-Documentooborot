@@ -5,6 +5,7 @@ import com.example.testproject1.model.person.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 import com.example.testproject1.service.visitorPatternRelase.DocumentVisitor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.testproject1.service.visitorPatternRelase.DocumentVisitor;
 
 import java.text.MessageFormat;
 import java.util.Comparator;
@@ -25,24 +26,24 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
     /**
      * название документа
      */
-    protected String documentName;
+    protected String name;
     /**
      * Tекст документа
      */
-    protected String documentText;
+    protected String text;
     /**
      * Регистрационный номер документа
      */
-    protected Long documentRegNumber;
+    protected Long regNumber;
     /**
      * дата регистрации документа
      */
-    protected Date documentDate;
+    protected Date creatingDate;
     /**
      * автор документа
      */
     @JsonIgnore
-    protected Person documentAuthor;
+    protected Person author;
 
     public UUID getId() {
         return id;
@@ -52,44 +53,44 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
         this.id = id;
     }
 
-    public String getDocumentName() {
-        return documentName;
+    public String getName() {
+        return name;
     }
 
-    public void setDocumentName(String documentName) {
-        this.documentName = documentName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDocumentText() {
-        return documentText;
+    public String getText() {
+        return text;
     }
 
-    public void setDocumentText(String documentText) {
-        this.documentText = documentText;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public Long getDocumentRegNumber() {
-        return documentRegNumber;
+    public Long getRegNumber() {
+        return regNumber;
     }
 
-    public void setDocumentRegNumber(Long documentRegNumber) {
-        this.documentRegNumber = documentRegNumber;
+    public void setRegNumber(Long regNumber) {
+        this.regNumber = regNumber;
     }
 
     public Date getDocumentData() {
-        return documentDate;
+        return creatingDate;
     }
 
     public void setDocumentData(Date documentData) {
-        this.documentDate = documentData;
+        this.creatingDate = documentData;
     }
 
     public Person getDocumentAuthor() {
-        return documentAuthor;
+        return author;
     }
 
     public void setDocumentAuthor(Person documentAuthor) {
-        this.documentAuthor = documentAuthor;
+        this.author = documentAuthor;
     }
 
     /**
@@ -113,7 +114,7 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(id, documentName, documentText, documentRegNumber, documentDate, documentAuthor);
+        return Objects.hash(id, name, text, regNumber, creatingDate, author);
     }
 
     /**
@@ -124,12 +125,12 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
      */
     @Override
     public int compareTo(BaseDocument o) {
-        return Comparator.comparing(BaseDocument::getDocumentData).thenComparing(BaseDocument::getDocumentRegNumber).compare(this, o);
+        return Comparator.comparing(BaseDocument::getDocumentData).thenComparing(BaseDocument::getRegNumber).compare(this, o);
     }
 
     @Override
     public String toString() {
-        Object[] taskArgs = {id, documentName, documentText, documentRegNumber, documentDate, documentAuthor};
+        Object[] taskArgs = {id, name, text, regNumber, creatingDate, author};
         MessageFormat form = new MessageFormat(
                 "id= {0} documentName= {1}, documentText= {2}, documentRegNumber= {3}" +
                         ", documentData= {4}, documentAuthor= {5}");
@@ -169,27 +170,27 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
         }
 
         public BaseDocumentBuilder setDocName(String docName) {
-            BaseDocument.this.documentName = docName;
+            BaseDocument.this.name = docName;
             return this;
         }
 
         public BaseDocumentBuilder setDocText(String docText) {
-            BaseDocument.this.documentText = docText;
+            BaseDocument.this.text = docText;
             return this;
         }
 
         public BaseDocumentBuilder setDocRegNumber(Long docRegNumber) {
-            BaseDocument.this.documentRegNumber = docRegNumber;
+            BaseDocument.this.regNumber = docRegNumber;
             return this;
         }
 
         public BaseDocumentBuilder setDocDate(Date docDate) {
-            BaseDocument.this.documentDate = docDate;
+            BaseDocument.this.creatingDate = docDate;
             return this;
         }
 
         public BaseDocumentBuilder setDocAuthor(Person docAuthor) {
-            BaseDocument.this.documentAuthor = docAuthor;
+            BaseDocument.this.author = docAuthor;
             return this;
         }
 

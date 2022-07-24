@@ -17,65 +17,65 @@ public class TaskDocument extends BaseDocument {
     /**
      * дата выдачи поручения
      */
-    private Date taskOutDate;
+    private Date outDate;
     /**
      * срок исполнения поручения
      */
-    private String taskExecPeriod;
+    private String execPeriod;
     /**
      * ответственный исполнитель
      */
-    private Person taskResponsible;
+    private Person responsible;
     /**
      * признак контрольности
      */
-    private Boolean taskSignOfControl;
+    private Boolean signOfControl;
     /**
      * контролер поручения
      */
-    private Person taskControlPerson;
+    private Person controlPerson;
 
     public TaskDocument() {
     }
 
-    public Date getTaskOutDate() {
-        return taskOutDate;
+    public Date getOutDate() {
+        return outDate;
     }
 
-    public void setTaskOutDate(Date taskOutDate) {
-        this.taskOutDate = taskOutDate;
+    public void setOutDate(Date outDate) {
+        this.outDate = outDate;
     }
 
-    public String getTaskExecPeriod() {
-        return taskExecPeriod;
+    public String getExecPeriod() {
+        return execPeriod;
     }
 
-    public void setTaskExecPeriod(String taskExecPeriod) {
-        this.taskExecPeriod = taskExecPeriod;
+    public void setExecPeriod(String execPeriod) {
+        this.execPeriod = execPeriod;
     }
 
-    public Person getTaskResponsible() {
-        return taskResponsible;
+    public Person getResponsible() {
+        return responsible;
     }
 
-    public void setTaskResponsible(Person taskResponsible) {
-        this.taskResponsible = taskResponsible;
+    public void setResponsible(Person responsible) {
+        this.responsible = responsible;
     }
 
-    public Boolean getTaskSignOfControl() {
-        return taskSignOfControl;
+    public Boolean getSignOfControl() {
+        return signOfControl;
     }
 
-    public void setTaskSignOfControl(Boolean taskSignOfControl) {
-        this.taskSignOfControl = taskSignOfControl;
+    public void setSignOfControl(Boolean signOfControl) {
+        this.signOfControl = signOfControl;
     }
 
-    public Person getTaskControlPerson() {
-        return taskControlPerson;
+    public Person getControlPerson() {
+        return controlPerson;
     }
 
-    public void setTaskControlPerson(Person taskControlPerson) {
-        this.taskControlPerson = taskControlPerson;
+    public void setControlPerson(Person controlPerson) {
+        this.controlPerson = controlPerson;
     }
 
     /**
@@ -85,7 +85,7 @@ public class TaskDocument extends BaseDocument {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {super.toString(), taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson};
+        Object[] taskArgs = {super.toString(), outDate, execPeriod, responsible, signOfControl, controlPerson};
         MessageFormat form = new MessageFormat(
                 "Поручение {0} , taskOutDate= {1}, taskExecPeriod= {2}, taskResponsible= {3}, taskSignOfControl= {4}, taskControlPerson= {5}");
         return form.format(taskArgs);
@@ -103,7 +103,7 @@ public class TaskDocument extends BaseDocument {
         if (!(o instanceof TaskDocument)) return false;
         if (!super.equals(o)) return false;
         TaskDocument that = (TaskDocument) o;
-        return Objects.equals(taskOutDate, that.taskOutDate) && Objects.equals(taskExecPeriod, that.taskExecPeriod) && Objects.equals(taskResponsible, that.taskResponsible) && Objects.equals(taskSignOfControl, that.taskSignOfControl) && Objects.equals(taskControlPerson, that.taskControlPerson);
+        return Objects.equals(outDate, that.outDate) && Objects.equals(execPeriod, that.execPeriod) && Objects.equals(responsible, that.responsible) && Objects.equals(signOfControl, that.signOfControl) && Objects.equals(controlPerson, that.controlPerson);
     }
 
     /**
@@ -113,7 +113,7 @@ public class TaskDocument extends BaseDocument {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), taskOutDate, taskExecPeriod, taskResponsible, taskSignOfControl, taskControlPerson);
+        return Objects.hash(super.hashCode(), outDate, execPeriod, responsible, signOfControl, controlPerson);
     }
 
     @Override
@@ -139,27 +139,27 @@ public class TaskDocument extends BaseDocument {
         }
 
         public TaskBuilder setTaskDate(Date taskDate) {
-            TaskDocument.this.taskOutDate = taskDate;
+            TaskDocument.this.outDate = taskDate;
             return this;
         }
 
         public TaskBuilder setTaskExecPeriod(String taskExecPeriod) {
-            TaskDocument.this.taskExecPeriod = taskExecPeriod;
+            TaskDocument.this.execPeriod = taskExecPeriod;
             return this;
         }
 
         public TaskBuilder setTaskResponsPerson(Person taskResponsPerson) {
-            TaskDocument.this.taskResponsible = taskResponsPerson;
+            TaskDocument.this.responsible = taskResponsPerson;
             return this;
         }
 
         public TaskBuilder setTaskSignOfControl(Boolean taskSignOfControl) {
-            TaskDocument.this.taskSignOfControl = taskSignOfControl;
+            TaskDocument.this.signOfControl = taskSignOfControl;
             return this;
         }
 
         public TaskBuilder setTaskControlPerson(Person taskControlPerson) {
-            TaskDocument.this.taskControlPerson = taskControlPerson;
+            TaskDocument.this.controlPerson = taskControlPerson;
             return this;
         }
 

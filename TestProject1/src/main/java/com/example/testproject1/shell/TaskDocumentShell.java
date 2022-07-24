@@ -4,6 +4,7 @@ package com.example.testproject1.shell;
 import com.example.testproject1.service.documents.GenerateDocumentService;
 import com.example.testproject1.service.documents.GenerateReportService;
 import com.example.testproject1.storage.Impl.DocumentHolderImpl;
+import com.example.testproject1.storage.DocumentHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,19 +30,24 @@ public class TaskDocumentShell {
      */
     @Autowired
     private GenerateReportService generateReportService;
+    /**
+     * Autowired бина класса {@link DocumentHolder}
+     */
+    @Autowired
+    private DocumentHolder documentHolder;
 
     /**
-     * Shell метод генерации документов и создания отчетов по ним
+     *Shell метод генерации документов и создания отчетов по ним
      *
      * @param a Генерируем заданное количество документов
      */
-    @ShellMethod("Cmd: generate --a  (Int DocumentCount (default = 500)")
-    public void generate(@ShellOption(defaultValue = "500") int a) {
-        Integer countDocument = Integer.valueOf(a);
+    @ShellMethod("Cmd: generate --a  (Int DocumentCount (default = 100)")
+    public void generate(@ShellOption(defaultValue="100") int a) {
+        Integer countDocument=Integer.valueOf(a);
         LOGGER.info("Попытка сгенерировать документы");
         generateDocumentService.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
         generateReportService.generateReport();
-        DocumentHolderImpl.documentList.clear();
+        documentHolder.getAll().clear();
     }
 }

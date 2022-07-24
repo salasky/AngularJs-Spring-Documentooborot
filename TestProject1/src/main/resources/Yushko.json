@@ -1,0 +1,126 @@
+{
+  "person" : {
+    "id" : "6f76bdf2-1bb4-4ed4-86af-afc648e9e634",
+    "lastName" : "Yurevich",
+    "secondName" : "Yushko",
+    "firstName" : "Oleg",
+    "jobTittle" : {
+      "uuid" : "4741a084-34c1-48e9-b6a2-a358d268f3a8",
+      "jobTittleName" : "QA junior"
+    },
+    "photo" : "http//:sdsf.png",
+    "birthDay" : 1259077127972,
+    "phoneNumber" : "45345323"
+  },
+  "documentList" : [ {
+    "id" : "62672327-aca9-4ed2-8f1c-0d889e402954",
+    "documentName" : "Приказ",
+    "documentText" : "Значимость этих проблем",
+    "documentRegNumber" : 5154,
+    "outgoingDocumentSender" : {
+      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:migsal.png",
+      "birthDay" : 219697917099,
+      "phoneNumber" : "897546346"
+    },
+    "outgoingDocumentDeliveryType" : "ROCKET_CHAT",
+    "documentData" : 1643206665112
+  }, {
+    "id" : "3e129226-bb71-48db-bf9d-507496df75fe",
+    "documentName" : "Положение",
+    "documentText" : "Системы обучения кадров",
+    "documentRegNumber" : 5276,
+    "outgoingDocumentSender" : {
+      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:migsal.png",
+      "birthDay" : 219697917099,
+      "phoneNumber" : "897546346"
+    },
+    "outgoingDocumentDeliveryType" : "TELEGRAM",
+    "documentData" : 1644938580421
+  }, {
+    "id" : "b3e7447f-08cd-48f8-ae85-3a63231a67af",
+    "documentName" : "Положение",
+    "documentText" : "Соображения высшего порядка",
+    "documentRegNumber" : 3918,
+    "taskOutDate" : 1658472128005,
+    "taskExecPeriod" : "2 дня",
+    "taskResponsible" : {
+      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : 294352805360,
+      "phoneNumber" : "687546346"
+    },
+    "taskSignOfControl" : false,
+    "taskControlPerson" : {
+      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:migsal.png",
+      "birthDay" : 219697917099,
+      "phoneNumber" : "897546346"
+    },
+    "documentData" : 1664442546818
+  }, {
+    "id" : "ef42964b-6c3c-4f72-8e43-58df55171354",
+    "documentName" : "Должностная инструкция",
+    "documentText" : "Значимость этих проблем",
+    "documentRegNumber" : 4422,
+    "taskOutDate" : 1658472127991,
+    "taskExecPeriod" : "11 дня",
+    "taskResponsible" : {
+      "id" : "8d228043-b513-4159-8746-f7afed38df70",
+      "lastName" : "Uralovich",
+      "secondName" : "Petrosyan",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "b40aefa3-a73b-443d-8547-e14e886e9b77",
+        "jobTittleName" : "Alfresco junior"
+      },
+      "photo" : "http//:hgh.png",
+      "birthDay" : 153513627598,
+      "phoneNumber" : "66787546346"
+    },
+    "taskSignOfControl" : false,
+    "taskControlPerson" : {
+      "id" : "0f8fb8fb-d017-40ca-8863-1881aa083b9a",
+      "lastName" : "Petrovich",
+      "secondName" : "Kondratyuk",
+      "firstName" : "Aleksandr",
+      "jobTittle" : {
+        "uuid" : "11aa7f92-3cca-46a3-85ed-4d4bc6f266e2",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:dsd.png",
+      "birthDay" : -715359695601,
+      "phoneNumber" : "86436346"
+    },
+    "documentData" : 1671357740147
+  } ]
+}

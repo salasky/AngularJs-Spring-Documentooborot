@@ -1,0 +1,70 @@
+{
+  "person" : {
+    "id" : "44b44539-e795-4b14-9dd6-519b29fd4dd5",
+    "lastName" : "Genadyevich",
+    "secondName" : "Barabanov",
+    "firstName" : "Ivan",
+    "jobTittle" : {
+      "uuid" : "e2944d9a-dcda-4db1-ab5a-5de4fc407947",
+      "jobTittleName" : "Java teamLead"
+    },
+    "photo" : "http//:barabanov.png",
+    "birthDay" : 282769917099,
+    "phoneNumber" : "89754623346"
+  },
+  "documentList" : [ {
+    "id" : "2c0015c8-7d1d-48f9-8157-c159b7ddb28d",
+    "documentName" : "Должностная инструкция",
+    "documentText" : "Значимость этих проблем",
+    "documentRegNumber" : 1943,
+    "incomingDocumentSender" : {
+      "id" : "8d228043-b513-4159-8746-f7afed38df70",
+      "lastName" : "Uralovich",
+      "secondName" : "Petrosyan",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "b40aefa3-a73b-443d-8547-e14e886e9b77",
+        "jobTittleName" : "Alfresco junior"
+      },
+      "photo" : "http//:hgh.png",
+      "birthDay" : 153513627598,
+      "phoneNumber" : "66787546346"
+    },
+    "incomingDocumentDestination" : {
+      "id" : "6f76bdf2-1bb4-4ed4-86af-afc648e9e634",
+      "lastName" : "Yurevich",
+      "secondName" : "Yushko",
+      "firstName" : "Oleg",
+      "jobTittle" : {
+        "uuid" : "4741a084-34c1-48e9-b6a2-a358d268f3a8",
+        "jobTittleName" : "QA junior"
+      },
+      "photo" : "http//:sdsf.png",
+      "birthDay" : 1259077127972,
+      "phoneNumber" : "45345323"
+    },
+    "incomingDocumentNumber" : 5564,
+    "incomingDocumentDate" : 1668440162510,
+    "documentData" : 1664921448319
+  }, {
+    "id" : "bd73fa93-e081-445d-a546-304da9d17766",
+    "documentName" : "Положение",
+    "documentText" : "Системы обучения кадров",
+    "documentRegNumber" : 3804,
+    "outgoingDocumentSender" : {
+      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : 294352805360,
+      "phoneNumber" : "687546346"
+    },
+    "outgoingDocumentDeliveryType" : "RUSSIAN_POST",
+    "documentData" : 1666499458172
+  } ]
+}
