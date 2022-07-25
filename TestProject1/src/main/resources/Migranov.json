@@ -1,71 +1,1240 @@
 {
   "person" : {
-    "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
+    "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
     "lastName" : "Vagizovich",
     "secondName" : "Migranov",
     "firstName" : "Salavat",
     "jobTittle" : {
-      "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
+      "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
       "jobTittleName" : "Java junior"
     },
-    "photo" : "http//:migsal.png",
-    "birthDay" : "17-12-1976",
-    "phoneNumber" : "897546346"
+    "photo" : "http//:salmig.png",
+    "birthDay" : "14-01-2007",
+    "phoneNumber" : "84827546346",
+    "department" : {
+      "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+      "fullName" : "Information Technology",
+      "shortName" : "IT",
+      "supervisor" : "Rakhimov Ural",
+      "contactNumber" : "8965444556",
+      "organization" : {
+        "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+        "fullName" : "Oil and Gas Systems",
+        "shortName" : "OGS",
+        "supervisor" : "Nikulin Andrey",
+        "contactNumber" : "7566543567"
+      }
+    }
   },
   "documentList" : [ {
-    "id" : "134204de-e481-463e-9ed2-d988183221a9",
+    "id" : "fd59bd22-5d0e-4847-9c29-00a0ace6fb30",
+    "name" : "Положение",
+    "text" : "Системы обучения кадров",
+    "regNumber" : 5978,
+    "creatingDate" : "05-01-2022 10:23",
+    "sender" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01-09-2000",
+      "phoneNumber" : "84243546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    },
+    "destination" : {
+      "id" : "61930184-4ef8-4fab-b3a8-1f4ca15e7f37",
+      "lastName" : "Nikolayevich",
+      "secondName" : "Nikin",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "c10e0744-feb7-4be2-8e8b-62403dbb7d34",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:sddf.png",
+      "birthDay" : "17-06-1957",
+      "phoneNumber" : "6827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "number" : 4950,
+    "dateOfRegistration" : "2022-06-03T09:26:28.089+00:00"
+  }, {
+    "id" : "a33bec65-234a-4cf8-81b2-e28a70c7af97",
+    "name" : "Штатное расписание",
+    "text" : "Значимость этих проблем",
+    "regNumber" : 563,
+    "creatingDate" : "03-02-2022 12:50",
+    "sender" : {
+      "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:salmig.png",
+      "birthDay" : "14-01-2007",
+      "phoneNumber" : "84827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "deliveryType" : "RUSSIAN_POST"
+  }, {
+    "id" : "789dd5f4-902e-4331-a7dd-2a13639392a1",
+    "name" : "Приказ",
+    "text" : "Количественный рост",
+    "regNumber" : 4482,
+    "creatingDate" : "14-03-2022 11:36",
+    "outDate" : "2022-07-25T09:09:54.796+00:00",
+    "execPeriod" : "8 дня",
+    "responsible" : {
+      "id" : "61930184-4ef8-4fab-b3a8-1f4ca15e7f37",
+      "lastName" : "Nikolayevich",
+      "secondName" : "Nikin",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "c10e0744-feb7-4be2-8e8b-62403dbb7d34",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:sddf.png",
+      "birthDay" : "17-06-1957",
+      "phoneNumber" : "6827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "signOfControl" : true,
+    "controlPerson" : {
+      "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:salmig.png",
+      "birthDay" : "14-01-2007",
+      "phoneNumber" : "84827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    }
+  }, {
+    "id" : "ec443988-47d8-4a06-a785-27a328e4f5cb",
+    "name" : "Штатное расписание",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 5775,
+    "creatingDate" : "19-03-2022 06:56",
+    "outDate" : "2022-07-25T09:09:54.848+00:00",
+    "execPeriod" : "6 дня",
+    "responsible" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01-09-2000",
+      "phoneNumber" : "84243546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    },
+    "signOfControl" : true,
+    "controlPerson" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01-09-2000",
+      "phoneNumber" : "84243546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    }
+  }, {
+    "id" : "b65a6ac2-894d-4be5-824d-a9831a07fe68",
+    "name" : "Штатное расписание",
+    "text" : "Системы обучения кадров",
+    "regNumber" : 1510,
+    "creatingDate" : "01-04-2022 07:10",
+    "sender" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01-09-2000",
+      "phoneNumber" : "84243546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    },
+    "deliveryType" : "RUSSIAN_POST"
+  }, {
+    "id" : "64ec4c08-ba6b-42b3-abac-5bce7f7f4706",
     "name" : "Должностная инструкция",
     "text" : "Системы обучения кадров",
-    "regNumber" : 9727,
-    "creatingDate" : "14-02-2022 07:24",
-    "sender" : {
-      "id" : "6f76bdf2-1bb4-4ed4-86af-afc648e9e634",
-      "lastName" : "Yurevich",
-      "secondName" : "Yushko",
-      "firstName" : "Oleg",
-      "jobTittle" : {
-        "uuid" : "4741a084-34c1-48e9-b6a2-a358d268f3a8",
-        "jobTittleName" : "QA junior"
-      },
-      "photo" : "http//:sdsf.png",
-      "birthDay" : "24-11-2009",
-      "phoneNumber" : "45345323"
-    },
-    "deliveryType" : "MESSENGER"
-  }, {
-    "id" : "659267e0-4afb-4e75-bd3c-142d040a2f63",
-    "name" : "Штатное расписание",
-    "text" : "Количественный рост",
-    "regNumber" : 7486,
-    "creatingDate" : "11-05-2022 09:28",
-    "outDate" : "2022-07-25T05:08:57.492+00:00",
-    "execPeriod" : "11 дня",
+    "regNumber" : 3640,
+    "creatingDate" : "15-04-2022 03:29",
+    "outDate" : "2022-07-25T09:09:54.794+00:00",
+    "execPeriod" : "2 дня",
     "responsible" : {
-      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
+      "id" : "9245da16-15fa-4eed-a1b7-37aa78216e23",
       "lastName" : "Ivanovich",
       "secondName" : "Ivanov",
       "firstName" : "Ivan",
       "jobTittle" : {
-        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
+        "uuid" : "6a3178ec-7c64-43cc-ae14-661fbaab02e4",
         "jobTittleName" : "Java middle"
       },
       "photo" : "http//:dssf.png",
-      "birthDay" : "30-04-1979",
-      "phoneNumber" : "687546346"
+      "birthDay" : "14-03-1973",
+      "phoneNumber" : "687546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
     },
     "signOfControl" : true,
     "controlPerson" : {
-      "id" : "44b44539-e795-4b14-9dd6-519b29fd4dd5",
-      "lastName" : "Genadyevich",
-      "secondName" : "Barabanov",
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01-09-2000",
+      "phoneNumber" : "84243546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    }
+  }, {
+    "id" : "3feb7f2f-8a90-4893-9ced-aba0a22cf20b",
+    "name" : "Должностная инструкция",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 3127,
+    "creatingDate" : "30-04-2022 10:25",
+    "sender" : {
+      "id" : "5141b394-d5bd-4d4b-9a0e-ed456a571966",
+      "lastName" : "Kinigaleevich",
+      "secondName" : "Gubaidullin",
+      "firstName" : "Idel",
+      "jobTittle" : {
+        "uuid" : "08a5ef70-73c6-4124-b3bc-547c5e50e4ef",
+        "jobTittleName" : "JS junior"
+      },
+      "photo" : "http//:guba.png",
+      "birthDay" : "03-06-2009",
+      "phoneNumber" : "8423546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "deliveryType" : "ROCKET_CHAT"
+  }, {
+    "id" : "045c1c3f-5cf2-4f16-95b4-e066eab69d93",
+    "name" : "Должностная инструкция",
+    "text" : "Системы обучения кадров",
+    "regNumber" : 9012,
+    "creatingDate" : "19-05-2022 11:57",
+    "sender" : {
+      "id" : "5141b394-d5bd-4d4b-9a0e-ed456a571966",
+      "lastName" : "Kinigaleevich",
+      "secondName" : "Gubaidullin",
+      "firstName" : "Idel",
+      "jobTittle" : {
+        "uuid" : "08a5ef70-73c6-4124-b3bc-547c5e50e4ef",
+        "jobTittleName" : "JS junior"
+      },
+      "photo" : "http//:guba.png",
+      "birthDay" : "03-06-2009",
+      "phoneNumber" : "8423546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "deliveryType" : "MESSENGER"
+  }, {
+    "id" : "8fafda57-1482-4288-a90e-80796e567eaa",
+    "name" : "Положение",
+    "text" : "Количественный рост",
+    "regNumber" : 8703,
+    "creatingDate" : "21-06-2022 05:14",
+    "sender" : {
+      "id" : "61930184-4ef8-4fab-b3a8-1f4ca15e7f37",
+      "lastName" : "Nikolayevich",
+      "secondName" : "Nikin",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "c10e0744-feb7-4be2-8e8b-62403dbb7d34",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:sddf.png",
+      "birthDay" : "17-06-1957",
+      "phoneNumber" : "6827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "destination" : {
+      "id" : "5141b394-d5bd-4d4b-9a0e-ed456a571966",
+      "lastName" : "Kinigaleevich",
+      "secondName" : "Gubaidullin",
+      "firstName" : "Idel",
+      "jobTittle" : {
+        "uuid" : "08a5ef70-73c6-4124-b3bc-547c5e50e4ef",
+        "jobTittleName" : "JS junior"
+      },
+      "photo" : "http//:guba.png",
+      "birthDay" : "03-06-2009",
+      "phoneNumber" : "8423546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "number" : 3978,
+    "dateOfRegistration" : "2022-04-15T10:47:41.595+00:00"
+  }, {
+    "id" : "c87cf071-1db3-4326-b526-758df5a014f0",
+    "name" : "Приказ",
+    "text" : "Повышение уровня гражданского сознания",
+    "regNumber" : 8357,
+    "creatingDate" : "30-06-2022 08:23",
+    "sender" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01-09-2000",
+      "phoneNumber" : "84243546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    },
+    "destination" : {
+      "id" : "5141b394-d5bd-4d4b-9a0e-ed456a571966",
+      "lastName" : "Kinigaleevich",
+      "secondName" : "Gubaidullin",
+      "firstName" : "Idel",
+      "jobTittle" : {
+        "uuid" : "08a5ef70-73c6-4124-b3bc-547c5e50e4ef",
+        "jobTittleName" : "JS junior"
+      },
+      "photo" : "http//:guba.png",
+      "birthDay" : "03-06-2009",
+      "phoneNumber" : "8423546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "number" : 3068,
+    "dateOfRegistration" : "2022-03-11T00:52:31.694+00:00"
+  }, {
+    "id" : "9a1bb0c8-5762-40b6-9778-512c60d4aaf1",
+    "name" : "Должностная инструкция",
+    "text" : "Системы обучения кадров",
+    "regNumber" : 3950,
+    "creatingDate" : "30-06-2022 05:57",
+    "sender" : {
+      "id" : "9245da16-15fa-4eed-a1b7-37aa78216e23",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
       "firstName" : "Ivan",
       "jobTittle" : {
-        "uuid" : "e2944d9a-dcda-4db1-ab5a-5de4fc407947",
-        "jobTittleName" : "Java teamLead"
+        "uuid" : "6a3178ec-7c64-43cc-ae14-661fbaab02e4",
+        "jobTittleName" : "Java middle"
       },
-      "photo" : "http//:barabanov.png",
-      "birthDay" : "17-12-1978",
-      "phoneNumber" : "89754623346"
+      "photo" : "http//:dssf.png",
+      "birthDay" : "14-03-1973",
+      "phoneNumber" : "687546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    },
+    "deliveryType" : "ROCKET_CHAT"
+  }, {
+    "id" : "f039aae6-29ca-429d-9fca-07497a1c9d68",
+    "name" : "Устав",
+    "text" : "Значимость этих проблем",
+    "regNumber" : 9326,
+    "creatingDate" : "17-07-2022 04:20",
+    "sender" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01-09-2000",
+      "phoneNumber" : "84243546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    },
+    "deliveryType" : "EMAIL"
+  }, {
+    "id" : "8062f9f1-ee60-4ad2-af45-99f411335fe9",
+    "name" : "Должностная инструкция",
+    "text" : "Системы обучения кадров",
+    "regNumber" : 6793,
+    "creatingDate" : "12-08-2022 10:10",
+    "outDate" : "2022-07-25T09:09:54.885+00:00",
+    "execPeriod" : "6 дня",
+    "responsible" : {
+      "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:salmig.png",
+      "birthDay" : "14-01-2007",
+      "phoneNumber" : "84827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "signOfControl" : false,
+    "controlPerson" : {
+      "id" : "5141b394-d5bd-4d4b-9a0e-ed456a571966",
+      "lastName" : "Kinigaleevich",
+      "secondName" : "Gubaidullin",
+      "firstName" : "Idel",
+      "jobTittle" : {
+        "uuid" : "08a5ef70-73c6-4124-b3bc-547c5e50e4ef",
+        "jobTittleName" : "JS junior"
+      },
+      "photo" : "http//:guba.png",
+      "birthDay" : "03-06-2009",
+      "phoneNumber" : "8423546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    }
+  }, {
+    "id" : "65458728-47c1-4f19-8d78-fbf65b494547",
+    "name" : "Приказ",
+    "text" : "Повышение уровня гражданского сознания",
+    "regNumber" : 7841,
+    "creatingDate" : "17-08-2022 11:03",
+    "sender" : {
+      "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:salmig.png",
+      "birthDay" : "14-01-2007",
+      "phoneNumber" : "84827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "destination" : {
+      "id" : "9245da16-15fa-4eed-a1b7-37aa78216e23",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "6a3178ec-7c64-43cc-ae14-661fbaab02e4",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "14-03-1973",
+      "phoneNumber" : "687546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    },
+    "number" : 4753,
+    "dateOfRegistration" : "2022-02-16T01:39:48.228+00:00"
+  }, {
+    "id" : "62c99ee6-733b-442a-b029-14074b538735",
+    "name" : "Штатное расписание",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 176,
+    "creatingDate" : "26-09-2022 06:14",
+    "sender" : {
+      "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:salmig.png",
+      "birthDay" : "14-01-2007",
+      "phoneNumber" : "84827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "destination" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01-09-2000",
+      "phoneNumber" : "84243546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    },
+    "number" : 4966,
+    "dateOfRegistration" : "2022-03-14T15:59:23.482+00:00"
+  }, {
+    "id" : "4e094050-229b-4b14-a40c-20678001e397",
+    "name" : "Штатное расписание",
+    "text" : "Системы обучения кадров",
+    "regNumber" : 5258,
+    "creatingDate" : "01-10-2022 11:14",
+    "sender" : {
+      "id" : "61930184-4ef8-4fab-b3a8-1f4ca15e7f37",
+      "lastName" : "Nikolayevich",
+      "secondName" : "Nikin",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "c10e0744-feb7-4be2-8e8b-62403dbb7d34",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:sddf.png",
+      "birthDay" : "17-06-1957",
+      "phoneNumber" : "6827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "destination" : {
+      "id" : "61930184-4ef8-4fab-b3a8-1f4ca15e7f37",
+      "lastName" : "Nikolayevich",
+      "secondName" : "Nikin",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "c10e0744-feb7-4be2-8e8b-62403dbb7d34",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:sddf.png",
+      "birthDay" : "17-06-1957",
+      "phoneNumber" : "6827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "number" : 8479,
+    "dateOfRegistration" : "2022-07-06T05:26:44.511+00:00"
+  }, {
+    "id" : "320b179d-8a3c-4372-b22d-5ef2e77b857e",
+    "name" : "Положение",
+    "text" : "Повышение уровня гражданского сознания",
+    "regNumber" : 8095,
+    "creatingDate" : "27-11-2022 05:12",
+    "sender" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01-09-2000",
+      "phoneNumber" : "84243546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    },
+    "deliveryType" : "EMAIL"
+  }, {
+    "id" : "0f1e1e04-cbaf-4e4a-b548-7c03d00fa6ea",
+    "name" : "Штатное расписание",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 5780,
+    "creatingDate" : "28-11-2022 02:16",
+    "outDate" : "2022-07-25T09:09:54.881+00:00",
+    "execPeriod" : "2 дня",
+    "responsible" : {
+      "id" : "5141b394-d5bd-4d4b-9a0e-ed456a571966",
+      "lastName" : "Kinigaleevich",
+      "secondName" : "Gubaidullin",
+      "firstName" : "Idel",
+      "jobTittle" : {
+        "uuid" : "08a5ef70-73c6-4124-b3bc-547c5e50e4ef",
+        "jobTittleName" : "JS junior"
+      },
+      "photo" : "http//:guba.png",
+      "birthDay" : "03-06-2009",
+      "phoneNumber" : "8423546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "signOfControl" : true,
+    "controlPerson" : {
+      "id" : "9245da16-15fa-4eed-a1b7-37aa78216e23",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "6a3178ec-7c64-43cc-ae14-661fbaab02e4",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "14-03-1973",
+      "phoneNumber" : "687546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    }
+  }, {
+    "id" : "f296254d-aa44-4d55-bc4a-3ce7d8b9ba7b",
+    "name" : "Положение",
+    "text" : "Повышение уровня гражданского сознания",
+    "regNumber" : 914,
+    "creatingDate" : "29-11-2022 02:24",
+    "outDate" : "2022-07-25T09:09:54.854+00:00",
+    "execPeriod" : "10 дня",
+    "responsible" : {
+      "id" : "9245da16-15fa-4eed-a1b7-37aa78216e23",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "6a3178ec-7c64-43cc-ae14-661fbaab02e4",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "14-03-1973",
+      "phoneNumber" : "687546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    },
+    "signOfControl" : false,
+    "controlPerson" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01-09-2000",
+      "phoneNumber" : "84243546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    }
+  }, {
+    "id" : "db557068-4152-4259-8eee-2f3ae2041ebc",
+    "name" : "Штатное расписание",
+    "text" : "Системы обучения кадров",
+    "regNumber" : 9571,
+    "creatingDate" : "03-12-2022 09:23",
+    "outDate" : "2022-07-25T09:09:54.823+00:00",
+    "execPeriod" : "8 дня",
+    "responsible" : {
+      "id" : "9245da16-15fa-4eed-a1b7-37aa78216e23",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "6a3178ec-7c64-43cc-ae14-661fbaab02e4",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "14-03-1973",
+      "phoneNumber" : "687546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    },
+    "signOfControl" : false,
+    "controlPerson" : {
+      "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:salmig.png",
+      "birthDay" : "14-01-2007",
+      "phoneNumber" : "84827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    }
+  }, {
+    "id" : "a8620d05-9865-4b99-bbab-5b09d52897bd",
+    "name" : "Положение",
+    "text" : "Количественный рост",
+    "regNumber" : 4318,
+    "creatingDate" : "03-12-2022 10:47",
+    "sender" : {
+      "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:salmig.png",
+      "birthDay" : "14-01-2007",
+      "phoneNumber" : "84827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "destination" : {
+      "id" : "5141b394-d5bd-4d4b-9a0e-ed456a571966",
+      "lastName" : "Kinigaleevich",
+      "secondName" : "Gubaidullin",
+      "firstName" : "Idel",
+      "jobTittle" : {
+        "uuid" : "08a5ef70-73c6-4124-b3bc-547c5e50e4ef",
+        "jobTittleName" : "JS junior"
+      },
+      "photo" : "http//:guba.png",
+      "birthDay" : "03-06-2009",
+      "phoneNumber" : "8423546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "number" : 8542,
+    "dateOfRegistration" : "2022-02-27T15:06:25.320+00:00"
+  }, {
+    "id" : "e1d52c84-e87f-4f5c-8271-9b5eeb8f1c73",
+    "name" : "Должностная инструкция",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 3586,
+    "creatingDate" : "13-12-2022 09:28",
+    "sender" : {
+      "id" : "61930184-4ef8-4fab-b3a8-1f4ca15e7f37",
+      "lastName" : "Nikolayevich",
+      "secondName" : "Nikin",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "c10e0744-feb7-4be2-8e8b-62403dbb7d34",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:sddf.png",
+      "birthDay" : "17-06-1957",
+      "phoneNumber" : "6827546346",
+      "department" : {
+        "id" : "0b75a556-9b7e-4f89-b2f8-d1a10e991a0a",
+        "fullName" : "Information Technology",
+        "shortName" : "IT",
+        "supervisor" : "Rakhimov Ural",
+        "contactNumber" : "8965444556",
+        "organization" : {
+          "id" : "e0624899-1ce6-48bc-9ec5-009026bc3282",
+          "fullName" : "Oil and Gas Systems",
+          "shortName" : "OGS",
+          "supervisor" : "Nikulin Andrey",
+          "contactNumber" : "7566543567"
+        }
+      }
+    },
+    "deliveryType" : "MESSENGER"
+  }, {
+    "id" : "aceb01a3-e15e-4387-b42a-e3c5e1ba6bf6",
+    "name" : "Штатное расписание",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 652,
+    "creatingDate" : "16-12-2022 12:45",
+    "outDate" : "2022-07-25T09:09:54.802+00:00",
+    "execPeriod" : "3 дня",
+    "responsible" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01-09-2000",
+      "phoneNumber" : "84243546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
+    },
+    "signOfControl" : false,
+    "controlPerson" : {
+      "id" : "9245da16-15fa-4eed-a1b7-37aa78216e23",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "6a3178ec-7c64-43cc-ae14-661fbaab02e4",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "14-03-1973",
+      "phoneNumber" : "687546346",
+      "department" : {
+        "id" : "00210db1-6e32-4096-b662-85d8b4aeaebb",
+        "fullName" : "Market-based",
+        "shortName" : "Mk",
+        "supervisor" : "Tom Hanks",
+        "contactNumber" : "89654456",
+        "organization" : {
+          "id" : "9d5be39c-78ce-47a3-aead-54c2594383ee",
+          "fullName" : "Nefteaftomatoika",
+          "shortName" : "Nft",
+          "supervisor" : "Petrov Ivan",
+          "contactNumber" : "876543567"
+        }
+      }
     }
   } ]
 }

@@ -1,8 +1,4 @@
-package com.example.testproject1.model;
-
-import com.example.testproject1.model.department.Department;
-import com.example.testproject1.model.organization.Organization;
-import com.example.testproject1.model.person.Person;
+package com.example.testproject1.model.person;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;

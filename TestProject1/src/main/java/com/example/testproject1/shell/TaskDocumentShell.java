@@ -3,7 +3,6 @@ package com.example.testproject1.shell;
 
 import com.example.testproject1.service.documents.GenerateDocumentService;
 import com.example.testproject1.service.documents.GenerateReportService;
-import com.example.testproject1.storage.Impl.DocumentHolderImpl;
 import com.example.testproject1.storage.DocumentHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,13 +36,13 @@ public class TaskDocumentShell {
     private DocumentHolder documentHolder;
 
     /**
-     *Shell метод генерации документов и создания отчетов по ним
+     * Shell метод генерации документов и создания отчетов по ним
      *
      * @param a Генерируем заданное количество документов
      */
     @ShellMethod("Cmd: generate --a  (Int DocumentCount (default = 100)")
-    public void generate(@ShellOption(defaultValue="100") int a) {
-        Integer countDocument=Integer.valueOf(a);
+    public void generate(@ShellOption(defaultValue = "100") int a) {
+        Integer countDocument = Integer.valueOf(a);
         LOGGER.info("Попытка сгенерировать документы");
         generateDocumentService.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");

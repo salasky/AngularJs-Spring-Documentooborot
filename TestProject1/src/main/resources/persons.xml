@@ -1,75 +1,123 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <persons>
-    <person id="ed4ba0e9-5b5d-499d-90de-d054a4b728a8">
+    <person id="9245da16-15fa-4eed-a1b7-37aa78216e23">
         <secondName>Ivanov</secondName>
         <firstName>Ivan</firstName>
         <lastName>Ivanovich</lastName>
         <jobTittle>
-            <uuid>bc074d88-bd04-4b34-833b-ea2fb7a9139a</uuid>
+            <uuid>6a3178ec-7c64-43cc-ae14-661fbaab02e4</uuid>
             <jobTittleName>Java middle</jobTittleName>
         </jobTittle>
-        <birthDay>1979-04-30T23:40:05.360+03:00</birthDay>
+        <birthDay>1973-03-14T07:01:11.385+03:00</birthDay>
         <phoneNumber>687546346</phoneNumber>
         <photo>http//:dssf.png</photo>
+        <department id="00210db1-6e32-4096-b662-85d8b4aeaebb">
+            <contactNumber>89654456</contactNumber>
+            <fullName>Market-based</fullName>
+            <shortName>Mk</shortName>
+            <supervisor>Tom Hanks</supervisor>
+            <organization id="9d5be39c-78ce-47a3-aead-54c2594383ee">
+                <contactNumber>876543567</contactNumber>
+                <fullName>Nefteaftomatoika</fullName>
+                <shortName>Nft</shortName>
+                <supervisor>Petrov Ivan</supervisor>
+            </organization>
+        </department>
     </person>
-    <person id="32b44539-e795-4b14-9dd6-519b29fd4dd5">
+    <person id="61930184-4ef8-4fab-b3a8-1f4ca15e7f37">
+        <secondName>Nikin</secondName>
+        <firstName>Sergey</firstName>
+        <lastName>Nikolayevich</lastName>
+        <jobTittle>
+            <uuid>c10e0744-feb7-4be2-8e8b-62403dbb7d34</uuid>
+            <jobTittleName>Java junior</jobTittleName>
+        </jobTittle>
+        <birthDay>1957-06-17T11:31:29.589+03:00</birthDay>
+        <phoneNumber>6827546346</phoneNumber>
+        <photo>http//:sddf.png</photo>
+        <department id="0b75a556-9b7e-4f89-b2f8-d1a10e991a0a">
+            <contactNumber>8965444556</contactNumber>
+            <fullName>Information Technology</fullName>
+            <shortName>IT</shortName>
+            <supervisor>Rakhimov Ural</supervisor>
+            <organization id="e0624899-1ce6-48bc-9ec5-009026bc3282">
+                <contactNumber>7566543567</contactNumber>
+                <fullName>Oil and Gas Systems</fullName>
+                <shortName>OGS</shortName>
+                <supervisor>Nikulin Andrey</supervisor>
+            </organization>
+        </department>
+    </person>
+    <person id="3fb25459-dbea-49f0-85d5-d9f7ad4f675f">
         <secondName>Migranov</secondName>
         <firstName>Salavat</firstName>
         <lastName>Vagizovich</lastName>
         <jobTittle>
-            <uuid>e29ded9a-dcda-4db1-ab5a-5de4fc407947</uuid>
+            <uuid>90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e</uuid>
             <jobTittleName>Java junior</jobTittleName>
         </jobTittle>
-        <birthDay>1976-12-17T22:11:57.099+03:00</birthDay>
-        <phoneNumber>897546346</phoneNumber>
-        <photo>http//:migsal.png</photo>
+        <birthDay>2007-01-14T12:38:50.446+03:00</birthDay>
+        <phoneNumber>84827546346</phoneNumber>
+        <photo>http//:salmig.png</photo>
+        <department id="0b75a556-9b7e-4f89-b2f8-d1a10e991a0a">
+            <contactNumber>8965444556</contactNumber>
+            <fullName>Information Technology</fullName>
+            <shortName>IT</shortName>
+            <supervisor>Rakhimov Ural</supervisor>
+            <organization id="e0624899-1ce6-48bc-9ec5-009026bc3282">
+                <contactNumber>7566543567</contactNumber>
+                <fullName>Oil and Gas Systems</fullName>
+                <shortName>OGS</shortName>
+                <supervisor>Nikulin Andrey</supervisor>
+            </organization>
+        </department>
     </person>
-    <person id="0f8fb8fb-d017-40ca-8863-1881aa083b9a">
-        <secondName>Kondratyuk</secondName>
-        <firstName>Aleksandr</firstName>
+    <person id="5141b394-d5bd-4d4b-9a0e-ed456a571966">
+        <secondName>Gubaidullin</secondName>
+        <firstName>Idel</firstName>
+        <lastName>Kinigaleevich</lastName>
+        <jobTittle>
+            <uuid>08a5ef70-73c6-4124-b3bc-547c5e50e4ef</uuid>
+            <jobTittleName>JS junior</jobTittleName>
+        </jobTittle>
+        <birthDay>2009-06-03T16:25:05.479+04:00</birthDay>
+        <phoneNumber>8423546346</phoneNumber>
+        <photo>http//:guba.png</photo>
+        <department id="0b75a556-9b7e-4f89-b2f8-d1a10e991a0a">
+            <contactNumber>8965444556</contactNumber>
+            <fullName>Information Technology</fullName>
+            <shortName>IT</shortName>
+            <supervisor>Rakhimov Ural</supervisor>
+            <organization id="e0624899-1ce6-48bc-9ec5-009026bc3282">
+                <contactNumber>7566543567</contactNumber>
+                <fullName>Oil and Gas Systems</fullName>
+                <shortName>OGS</shortName>
+                <supervisor>Nikulin Andrey</supervisor>
+            </organization>
+        </department>
+    </person>
+    <person id="3471feff-1bca-4f62-a148-91f03a26e7f5">
+        <secondName>Petrov</secondName>
+        <firstName>Petr</firstName>
         <lastName>Petrovich</lastName>
         <jobTittle>
-            <uuid>11aa7f92-3cca-46a3-85ed-4d4bc6f266e2</uuid>
+            <uuid>4c7e2780-6b60-492d-9ccf-95940d4a300d</uuid>
             <jobTittleName>QA</jobTittleName>
         </jobTittle>
-        <birthDay>1947-05-02T11:58:24.399+03:00</birthDay>
-        <phoneNumber>86436346</phoneNumber>
-        <photo>http//:dsd.png</photo>
-    </person>
-    <person id="6f76bdf2-1bb4-4ed4-86af-afc648e9e634">
-        <secondName>Yushko</secondName>
-        <firstName>Oleg</firstName>
-        <lastName>Yurevich</lastName>
-        <jobTittle>
-            <uuid>4741a084-34c1-48e9-b6a2-a358d268f3a8</uuid>
-            <jobTittleName>QA junior</jobTittleName>
-        </jobTittle>
-        <birthDay>2009-11-24T18:38:47.972+03:00</birthDay>
-        <phoneNumber>45345323</phoneNumber>
-        <photo>http//:sdsf.png</photo>
-    </person>
-    <person id="8d228043-b513-4159-8746-f7afed38df70">
-        <secondName>Petrosyan</secondName>
-        <firstName>Sergey</firstName>
-        <lastName>Uralovich</lastName>
-        <jobTittle>
-            <uuid>b40aefa3-a73b-443d-8547-e14e886e9b77</uuid>
-            <jobTittleName>Alfresco junior</jobTittleName>
-        </jobTittle>
-        <birthDay>1974-11-12T21:40:27.598+03:00</birthDay>
-        <phoneNumber>66787546346</phoneNumber>
-        <photo>http//:hgh.png</photo>
-    </person>
-    <person id="44b44539-e795-4b14-9dd6-519b29fd4dd5">
-        <secondName>Barabanov</secondName>
-        <firstName>Ivan</firstName>
-        <lastName>Genadyevich</lastName>
-        <jobTittle>
-            <uuid>e2944d9a-dcda-4db1-ab5a-5de4fc407947</uuid>
-            <jobTittleName>Java teamLead</jobTittleName>
-        </jobTittle>
-        <birthDay>1978-12-17T22:11:57.099+03:00</birthDay>
-        <phoneNumber>89754623346</phoneNumber>
-        <photo>http//:barabanov.png</photo>
+        <birthDay>2000-09-01T12:29:15.873+04:00</birthDay>
+        <phoneNumber>84243546346</phoneNumber>
+        <photo>http//:hdf.png</photo>
+        <department id="00210db1-6e32-4096-b662-85d8b4aeaebb">
+            <contactNumber>89654456</contactNumber>
+            <fullName>Market-based</fullName>
+            <shortName>Mk</shortName>
+            <supervisor>Tom Hanks</supervisor>
+            <organization id="9d5be39c-78ce-47a3-aead-54c2594383ee">
+                <contactNumber>876543567</contactNumber>
+                <fullName>Nefteaftomatoika</fullName>
+                <shortName>Nft</shortName>
+                <supervisor>Petrov Ivan</supervisor>
+            </organization>
+        </department>
     </person>
 </persons>

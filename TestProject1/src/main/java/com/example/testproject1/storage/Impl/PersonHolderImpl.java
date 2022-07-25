@@ -1,6 +1,6 @@
 package com.example.testproject1.storage.Impl;
 
-import com.example.testproject1.jaxb.PersonJaxbReader;
+import com.example.testproject1.service.jaxb.PersonJaxbReader;
 import com.example.testproject1.model.person.Person;
 import com.example.testproject1.storage.PersonHolder;
 import org.slf4j.Logger;

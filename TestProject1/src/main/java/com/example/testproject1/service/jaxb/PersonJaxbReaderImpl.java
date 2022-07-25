@@ -1,4 +1,4 @@
-package com.example.testproject1.jaxb;
+package com.example.testproject1.service.jaxb;
 
 import com.example.testproject1.model.person.Person;
 import com.example.testproject1.model.person.Persons;

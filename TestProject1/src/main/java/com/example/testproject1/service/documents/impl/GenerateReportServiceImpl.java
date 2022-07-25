@@ -53,10 +53,10 @@ public class GenerateReportServiceImpl implements GenerateReportService {
                 totalMap.put(baseDocument.getAuthor(), list);
             } else {
                 //Ecли существуют документы данного автора
-                List<BaseDocument> oldlist = totalMap.get(baseDocument.getAuthor());
-                oldlist.add(baseDocument);
-                Collections.sort(oldlist);
-                totalMap.put(baseDocument.getAuthor(), oldlist);
+                List<BaseDocument> oldList = totalMap.get(baseDocument.getAuthor());
+                oldList.add(baseDocument);
+                Collections.sort(oldList);
+                totalMap.put(baseDocument.getAuthor(), oldList);
             }
         }
 
