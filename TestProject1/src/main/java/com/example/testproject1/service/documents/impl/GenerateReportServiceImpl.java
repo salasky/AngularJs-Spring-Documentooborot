@@ -30,9 +30,14 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     /**
      * Путь к папке с json файлами
      */
-    private static String SHORTPATH="C:\\Users\\smigranov\\Desktop\\TestProject\\TestProject\\testrepo\\TestProject1\\src\\main\\resources\\";
+    private static String SHORTPATH="./src/main/resources/";
     private static final Logger LOGGER = LoggerFactory.getLogger(GenerateReportServiceImpl.class);
-
+    /**
+     * Объект для библиотеки Fasterxml Jackson
+     * с настройками даты
+     */
+    ObjectMapper objectMapper = new ObjectMapper().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+            .enable(SerializationFeature.INDENT_OUTPUT);
 
     /**
      * Autowired бина класса {@link DocumentHolder}
@@ -61,25 +66,22 @@ public class GenerateReportServiceImpl implements GenerateReportService {
         }
 
         for (Map.Entry<Person, List<BaseDocument>> entry : totalMap.entrySet()) {
-            ReportForJson reportForJson=ReportForJson.newBuilder()
-                                        .setPerson(entry.getKey())
-                                        .setDocumentList(entry.getValue())
-                                        .build();
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            String secondName=entry.getKey().getSecondName();
-            //Полный путь к файлу
-            String filepathFull=SHORTPATH+secondName+".json";
-            LOGGER.info("Создаем файл "+secondName+".json");
-            try {
-                objectMapper.writeValue(new File(filepathFull),reportForJson);
-                //Для удобства так же выводим в консоль
-                String json=objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(reportForJson);
-                System.out.println(json);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            writeReportInFile(entry);
+        }
+    }
+    public void writeReportInFile(Map.Entry<Person, List<BaseDocument>> entry){
+        ReportForJson reportForJson=ReportForJson.newBuilder()
+                .setPerson(entry.getKey())
+                .setDocumentList(entry.getValue())
+                .build();
+        String secondName=entry.getKey().getSecondName();
+        //Полный путь к файлу
+        String filepathFull=SHORTPATH+secondName+".json";
+        LOGGER.info("Создаем файл "+secondName+".json");
+        try {
+            objectMapper.writeValue(new File(filepathFull),reportForJson);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

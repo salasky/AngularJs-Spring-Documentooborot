@@ -2,19 +2,17 @@ package com.example.testproject1.service.jaxb;
 
 import com.example.testproject1.model.person.Person;
 
-import java.io.FileNotFoundException;
-import java.util.List;
-
 /**
  * Интерфейс анмаршализации объктов класса {@link Person}
  *
  * @author smigranov
  */
-public interface PersonJaxbReader {
-
+public interface JaxbReader {
     /**
-     * Метод получения {@link Person} из xml файла
+     * Метод получения объектов из xml файла
      * @return
      */
-    public List<Person> getPerson();
+     <T> T jaxbXMLToObject(String xmlData, Class<T> clazz);
+
+
 }

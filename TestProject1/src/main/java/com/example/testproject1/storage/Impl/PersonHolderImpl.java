@@ -1,6 +1,7 @@
 package com.example.testproject1.storage.Impl;
 
-import com.example.testproject1.service.jaxb.PersonJaxbReader;
+import com.example.testproject1.model.person.Persons;
+import com.example.testproject1.service.jaxb.JaxbReader;
 import com.example.testproject1.model.person.Person;
 import com.example.testproject1.storage.PersonHolder;
 import org.slf4j.Logger;
@@ -19,7 +20,7 @@ public class PersonHolderImpl implements PersonHolder {
      * Бин для чтения информации из xml файла
      */
     @Autowired
-    private PersonJaxbReader personJaxbReader;
+    private JaxbReader jaxbReader;
     /**
      * Лист для сохранения объектов унаследованных от {@link com.example.testproject1.model.person.Person}
      */
@@ -32,7 +33,9 @@ public class PersonHolderImpl implements PersonHolder {
     @Override
     public List<Person> getPersonListList() {
         LOGGER.info("Begin find Person ");
-        personList = personJaxbReader.getPerson();
+        Persons persons = jaxbReader.jaxbXMLToObject(this.getClass().getClassLoader()
+                .getResource("persons.xml").getPath(), Persons.class);
+        personList=persons.getPersonList();
         LOGGER.info("Find Person result");
         return personList;
     }
