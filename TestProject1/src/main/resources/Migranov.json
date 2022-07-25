@@ -9,122 +9,52 @@
       "jobTittleName" : "Java junior"
     },
     "photo" : "http//:migsal.png",
-    "birthDay" : "1976-12-17T19:11:57.099+00:00",
+    "birthDay" : "17-12-1976",
     "phoneNumber" : "897546346"
   },
   "documentList" : [ {
-    "id" : "c70ad177-dd9f-426b-b945-fe661e2b47fb",
-    "name" : "Устав",
-    "text" : "Соображения высшего порядка",
-    "regNumber" : 5671,
-    "creatingDate" : "2022-03-07T15:10:37.029+00:00",
-    "outDate" : "2022-07-24T17:15:56.208+00:00",
-    "execPeriod" : "2 дня",
-    "responsible" : {
-      "id" : "0f8fb8fb-d017-40ca-8863-1881aa083b9a",
-      "lastName" : "Petrovich",
-      "secondName" : "Kondratyuk",
-      "firstName" : "Aleksandr",
+    "id" : "134204de-e481-463e-9ed2-d988183221a9",
+    "name" : "Должностная инструкция",
+    "text" : "Системы обучения кадров",
+    "regNumber" : 9727,
+    "creatingDate" : "14-02-2022 07:24",
+    "sender" : {
+      "id" : "6f76bdf2-1bb4-4ed4-86af-afc648e9e634",
+      "lastName" : "Yurevich",
+      "secondName" : "Yushko",
+      "firstName" : "Oleg",
       "jobTittle" : {
-        "uuid" : "11aa7f92-3cca-46a3-85ed-4d4bc6f266e2",
-        "jobTittleName" : "QA"
+        "uuid" : "4741a084-34c1-48e9-b6a2-a358d268f3a8",
+        "jobTittleName" : "QA junior"
       },
-      "photo" : "http//:dsd.png",
-      "birthDay" : "1947-05-02T08:58:24.399+00:00",
-      "phoneNumber" : "86436346"
+      "photo" : "http//:sdsf.png",
+      "birthDay" : "24-11-2009",
+      "phoneNumber" : "45345323"
+    },
+    "deliveryType" : "MESSENGER"
+  }, {
+    "id" : "659267e0-4afb-4e75-bd3c-142d040a2f63",
+    "name" : "Штатное расписание",
+    "text" : "Количественный рост",
+    "regNumber" : 7486,
+    "creatingDate" : "11-05-2022 09:28",
+    "outDate" : "2022-07-25T05:08:57.492+00:00",
+    "execPeriod" : "11 дня",
+    "responsible" : {
+      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "30-04-1979",
+      "phoneNumber" : "687546346"
     },
     "signOfControl" : true,
     "controlPerson" : {
-      "id" : "6f76bdf2-1bb4-4ed4-86af-afc648e9e634",
-      "lastName" : "Yurevich",
-      "secondName" : "Yushko",
-      "firstName" : "Oleg",
-      "jobTittle" : {
-        "uuid" : "4741a084-34c1-48e9-b6a2-a358d268f3a8",
-        "jobTittleName" : "QA junior"
-      },
-      "photo" : "http//:sdsf.png",
-      "birthDay" : "2009-11-24T15:38:47.972+00:00",
-      "phoneNumber" : "45345323"
-    }
-  }, {
-    "id" : "f01d9717-d72e-40a3-841f-fce354625740",
-    "name" : "Штатное расписание",
-    "text" : "Повышение уровня гражданского сознания",
-    "regNumber" : 7318,
-    "creatingDate" : "2022-05-25T05:34:07.294+00:00",
-    "outDate" : "2022-07-24T17:15:56.358+00:00",
-    "execPeriod" : "4 дня",
-    "responsible" : {
-      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
-      "lastName" : "Ivanovich",
-      "secondName" : "Ivanov",
-      "firstName" : "Ivan",
-      "jobTittle" : {
-        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
-        "jobTittleName" : "Java middle"
-      },
-      "photo" : "http//:dssf.png",
-      "birthDay" : "1979-04-30T20:40:05.360+00:00",
-      "phoneNumber" : "687546346"
-    },
-    "signOfControl" : false,
-    "controlPerson" : {
-      "id" : "6f76bdf2-1bb4-4ed4-86af-afc648e9e634",
-      "lastName" : "Yurevich",
-      "secondName" : "Yushko",
-      "firstName" : "Oleg",
-      "jobTittle" : {
-        "uuid" : "4741a084-34c1-48e9-b6a2-a358d268f3a8",
-        "jobTittleName" : "QA junior"
-      },
-      "photo" : "http//:sdsf.png",
-      "birthDay" : "2009-11-24T15:38:47.972+00:00",
-      "phoneNumber" : "45345323"
-    }
-  }, {
-    "id" : "b334f8d9-567f-401b-978a-a04a0a8aae3d",
-    "name" : "Штатное расписание",
-    "text" : "Значимость этих проблем",
-    "regNumber" : 1426,
-    "creatingDate" : "2022-06-13T08:38:48.257+00:00",
-    "sender" : {
-      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
-      "lastName" : "Ivanovich",
-      "secondName" : "Ivanov",
-      "firstName" : "Ivan",
-      "jobTittle" : {
-        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
-        "jobTittleName" : "Java middle"
-      },
-      "photo" : "http//:dssf.png",
-      "birthDay" : "1979-04-30T20:40:05.360+00:00",
-      "phoneNumber" : "687546346"
-    },
-    "destination" : {
-      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
-      "lastName" : "Ivanovich",
-      "secondName" : "Ivanov",
-      "firstName" : "Ivan",
-      "jobTittle" : {
-        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
-        "jobTittleName" : "Java middle"
-      },
-      "photo" : "http//:dssf.png",
-      "birthDay" : "1979-04-30T20:40:05.360+00:00",
-      "phoneNumber" : "687546346"
-    },
-    "number" : 158,
-    "dateOfRegistration" : "2022-05-18T13:10:32.541+00:00"
-  }, {
-    "id" : "791d7ef6-d17e-40bc-9a82-83c239046811",
-    "name" : "Устав",
-    "text" : "Значимость этих проблем",
-    "regNumber" : 3361,
-    "creatingDate" : "2022-12-11T23:57:19.952+00:00",
-    "outDate" : "2022-07-24T17:15:56.356+00:00",
-    "execPeriod" : "11 дня",
-    "responsible" : {
       "id" : "44b44539-e795-4b14-9dd6-519b29fd4dd5",
       "lastName" : "Genadyevich",
       "secondName" : "Barabanov",
@@ -134,22 +64,8 @@
         "jobTittleName" : "Java teamLead"
       },
       "photo" : "http//:barabanov.png",
-      "birthDay" : "1978-12-17T19:11:57.099+00:00",
+      "birthDay" : "17-12-1978",
       "phoneNumber" : "89754623346"
-    },
-    "signOfControl" : true,
-    "controlPerson" : {
-      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
-      "lastName" : "Vagizovich",
-      "secondName" : "Migranov",
-      "firstName" : "Salavat",
-      "jobTittle" : {
-        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
-        "jobTittleName" : "Java junior"
-      },
-      "photo" : "http//:migsal.png",
-      "birthDay" : "1976-12-17T19:11:57.099+00:00",
-      "phoneNumber" : "897546346"
     }
   } ]
 }

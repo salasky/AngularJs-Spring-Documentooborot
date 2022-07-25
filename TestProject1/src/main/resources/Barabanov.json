@@ -9,16 +9,18 @@
       "jobTittleName" : "Java teamLead"
     },
     "photo" : "http//:barabanov.png",
-    "birthDay" : "1978-12-17T19:11:57.099+00:00",
+    "birthDay" : "17-12-1978",
     "phoneNumber" : "89754623346"
   },
   "documentList" : [ {
-    "id" : "9b213f2d-ac92-4f07-87a6-307102e2b5d0",
-    "name" : "Должностная инструкция",
-    "text" : "Повышение уровня гражданского сознания",
-    "regNumber" : 5775,
-    "creatingDate" : "2022-07-02T20:03:59.729+00:00",
-    "sender" : {
+    "id" : "5ed1ff0d-5d79-45f9-8e4e-137b610fb70b",
+    "name" : "Устав",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 5958,
+    "creatingDate" : "19-02-2022 07:21",
+    "outDate" : "2022-07-25T05:23:42.575+00:00",
+    "execPeriod" : "3 дня",
+    "responsible" : {
       "id" : "6f76bdf2-1bb4-4ed4-86af-afc648e9e634",
       "lastName" : "Yurevich",
       "secondName" : "Yushko",
@@ -28,10 +30,11 @@
         "jobTittleName" : "QA junior"
       },
       "photo" : "http//:sdsf.png",
-      "birthDay" : "2009-11-24T15:38:47.972+00:00",
+      "birthDay" : "24-11-2009",
       "phoneNumber" : "45345323"
     },
-    "destination" : {
+    "signOfControl" : false,
+    "controlPerson" : {
       "id" : "0f8fb8fb-d017-40ca-8863-1881aa083b9a",
       "lastName" : "Petrovich",
       "secondName" : "Kondratyuk",
@@ -41,10 +44,8 @@
         "jobTittleName" : "QA"
       },
       "photo" : "http//:dsd.png",
-      "birthDay" : "1947-05-02T08:58:24.399+00:00",
+      "birthDay" : "02-05-1947",
       "phoneNumber" : "86436346"
-    },
-    "number" : 5321,
-    "dateOfRegistration" : "2022-06-16T04:26:01.227+00:00"
+    }
   } ]
 }

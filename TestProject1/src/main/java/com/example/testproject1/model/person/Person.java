@@ -2,6 +2,7 @@ package com.example.testproject1.model.person;
 
 import com.example.testproject1.model.BaseDocument;
 import com.example.testproject1.model.Staff;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -43,6 +44,9 @@ public class Person extends Staff implements Comparable<Person>{
     /**
      * Дата рождения
      */
+
+    @JsonFormat
+            (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date birthDay;
     /**
      * Номер телефона

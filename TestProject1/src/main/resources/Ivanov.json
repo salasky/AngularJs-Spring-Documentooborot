@@ -9,31 +9,29 @@
       "jobTittleName" : "Java middle"
     },
     "photo" : "http//:dssf.png",
-    "birthDay" : 294352805360,
+    "birthDay" : "30-04-1979",
     "phoneNumber" : "687546346"
   },
   "documentList" : [ {
-    "id" : "bf829a5f-0696-481c-b8d8-921cdc578929",
-    "name" : "Устав",
+    "id" : "93aa29d9-d112-4647-a4c6-4e92b797cc07",
+    "name" : "Положение",
     "text" : "Повышение уровня гражданского сознания",
-    "regNumber" : 6765,
-    "outDate" : 1658682237532,
-    "execPeriod" : "8 дня",
-    "responsible" : {
-      "id" : "0f8fb8fb-d017-40ca-8863-1881aa083b9a",
-      "lastName" : "Petrovich",
-      "secondName" : "Kondratyuk",
-      "firstName" : "Aleksandr",
+    "regNumber" : 4900,
+    "creatingDate" : "06-07-2022 06:52",
+    "sender" : {
+      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
       "jobTittle" : {
-        "uuid" : "11aa7f92-3cca-46a3-85ed-4d4bc6f266e2",
-        "jobTittleName" : "QA"
+        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
+        "jobTittleName" : "Java middle"
       },
-      "photo" : "http//:dsd.png",
-      "birthDay" : -715359695601,
-      "phoneNumber" : "86436346"
+      "photo" : "http//:dssf.png",
+      "birthDay" : "30-04-1979",
+      "phoneNumber" : "687546346"
     },
-    "signOfControl" : false,
-    "controlPerson" : {
+    "destination" : {
       "id" : "44b44539-e795-4b14-9dd6-519b29fd4dd5",
       "lastName" : "Genadyevich",
       "secondName" : "Barabanov",
@@ -43,9 +41,10 @@
         "jobTittleName" : "Java teamLead"
       },
       "photo" : "http//:barabanov.png",
-      "birthDay" : 282769917099,
+      "birthDay" : "17-12-1978",
       "phoneNumber" : "89754623346"
     },
-    "documentData" : 1659224334259
+    "number" : 8238,
+    "dateOfRegistration" : "2022-07-24T12:21:28.797+00:00"
   } ]
 }

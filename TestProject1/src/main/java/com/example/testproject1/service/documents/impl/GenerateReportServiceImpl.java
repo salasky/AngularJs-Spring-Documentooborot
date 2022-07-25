@@ -42,7 +42,6 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     /**
      * {@inheritDoc}
      */
-
     @Override
     public void generateReport() {
         Map<Person, List<BaseDocument>> totalMap = new HashMap<>();

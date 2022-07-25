@@ -9,63 +9,28 @@
       "jobTittleName" : "QA"
     },
     "photo" : "http//:dsd.png",
-    "birthDay" : "1947-05-02T08:58:24.399+00:00",
+    "birthDay" : "02-05-1947",
     "phoneNumber" : "86436346"
   },
   "documentList" : [ {
-    "id" : "9d55a61e-6fcd-4acc-a5f5-ea96a56514d7",
-    "name" : "Устав",
-    "text" : "Количественный рост",
-    "regNumber" : 4726,
-    "creatingDate" : "2022-06-26T13:13:57.497+00:00",
-    "outDate" : "2022-07-24T17:15:56.360+00:00",
-    "execPeriod" : "7 дня",
-    "responsible" : {
-      "id" : "0f8fb8fb-d017-40ca-8863-1881aa083b9a",
-      "lastName" : "Petrovich",
-      "secondName" : "Kondratyuk",
-      "firstName" : "Aleksandr",
-      "jobTittle" : {
-        "uuid" : "11aa7f92-3cca-46a3-85ed-4d4bc6f266e2",
-        "jobTittleName" : "QA"
-      },
-      "photo" : "http//:dsd.png",
-      "birthDay" : "1947-05-02T08:58:24.399+00:00",
-      "phoneNumber" : "86436346"
-    },
-    "signOfControl" : false,
-    "controlPerson" : {
-      "id" : "44b44539-e795-4b14-9dd6-519b29fd4dd5",
-      "lastName" : "Genadyevich",
-      "secondName" : "Barabanov",
-      "firstName" : "Ivan",
-      "jobTittle" : {
-        "uuid" : "e2944d9a-dcda-4db1-ab5a-5de4fc407947",
-        "jobTittleName" : "Java teamLead"
-      },
-      "photo" : "http//:barabanov.png",
-      "birthDay" : "1978-12-17T19:11:57.099+00:00",
-      "phoneNumber" : "89754623346"
-    }
-  }, {
-    "id" : "65799bfb-a7f7-4345-9090-94f6dc990adf",
-    "name" : "Должностная инструкция",
-    "text" : "Системы обучения кадров",
-    "regNumber" : 9522,
-    "creatingDate" : "2022-12-19T16:09:22.199+00:00",
+    "id" : "b5afd60c-fc2a-4d28-bea6-112a904f60cf",
+    "name" : "Штатное расписание",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 9170,
+    "creatingDate" : "17-09-2022 02:01",
     "sender" : {
-      "id" : "44b44539-e795-4b14-9dd6-519b29fd4dd5",
-      "lastName" : "Genadyevich",
-      "secondName" : "Barabanov",
-      "firstName" : "Ivan",
+      "id" : "6f76bdf2-1bb4-4ed4-86af-afc648e9e634",
+      "lastName" : "Yurevich",
+      "secondName" : "Yushko",
+      "firstName" : "Oleg",
       "jobTittle" : {
-        "uuid" : "e2944d9a-dcda-4db1-ab5a-5de4fc407947",
-        "jobTittleName" : "Java teamLead"
+        "uuid" : "4741a084-34c1-48e9-b6a2-a358d268f3a8",
+        "jobTittleName" : "QA junior"
       },
-      "photo" : "http//:barabanov.png",
-      "birthDay" : "1978-12-17T19:11:57.099+00:00",
-      "phoneNumber" : "89754623346"
+      "photo" : "http//:sdsf.png",
+      "birthDay" : "24-11-2009",
+      "phoneNumber" : "45345323"
     },
-    "deliveryType" : "ROCKET_CHAT"
+    "deliveryType" : "TELEGRAM"
   } ]
 }

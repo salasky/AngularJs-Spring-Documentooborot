@@ -9,32 +9,119 @@
       "jobTittleName" : "Alfresco junior"
     },
     "photo" : "http//:hgh.png",
-    "birthDay" : 153513627598,
+    "birthDay" : "12-11-1974",
     "phoneNumber" : "66787546346"
   },
   "documentList" : [ {
-    "id" : "83e947b9-52a8-4670-882f-2d4add71296e",
-    "name" : "Штатное расписание",
-    "text" : "Повышение уровня гражданского сознания",
-    "regNumber" : 9641,
-    "creatingDate" : 1664935017065,
-    "outDate" : 1658682897234,
-    "execPeriod" : "13 дня",
-    "responsible" : {
-      "id" : "8d228043-b513-4159-8746-f7afed38df70",
-      "lastName" : "Uralovich",
-      "secondName" : "Petrosyan",
-      "firstName" : "Sergey",
+    "id" : "2d668f6a-caa5-49f4-9263-df68094ca9e1",
+    "name" : "Устав",
+    "text" : "Значимость этих проблем",
+    "regNumber" : 2386,
+    "creatingDate" : "14-01-2022 09:57",
+    "sender" : {
+      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
       "jobTittle" : {
-        "uuid" : "b40aefa3-a73b-443d-8547-e14e886e9b77",
-        "jobTittleName" : "Alfresco junior"
+        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
+        "jobTittleName" : "Java junior"
       },
-      "photo" : "http//:hgh.png",
-      "birthDay" : 153513627598,
-      "phoneNumber" : "66787546346"
+      "photo" : "http//:migsal.png",
+      "birthDay" : "17-12-1976",
+      "phoneNumber" : "897546346"
+    },
+    "destination" : {
+      "id" : "44b44539-e795-4b14-9dd6-519b29fd4dd5",
+      "lastName" : "Genadyevich",
+      "secondName" : "Barabanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "e2944d9a-dcda-4db1-ab5a-5de4fc407947",
+        "jobTittleName" : "Java teamLead"
+      },
+      "photo" : "http//:barabanov.png",
+      "birthDay" : "17-12-1978",
+      "phoneNumber" : "89754623346"
+    },
+    "number" : 4588,
+    "dateOfRegistration" : "2022-08-14T00:07:10.974+00:00"
+  }, {
+    "id" : "cef3ef52-9790-4a8a-9d8c-1701c12127f0",
+    "name" : "Положение",
+    "text" : "Значимость этих проблем",
+    "regNumber" : 7036,
+    "creatingDate" : "14-02-2022 09:10",
+    "sender" : {
+      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "30-04-1979",
+      "phoneNumber" : "687546346"
+    },
+    "destination" : {
+      "id" : "0f8fb8fb-d017-40ca-8863-1881aa083b9a",
+      "lastName" : "Petrovich",
+      "secondName" : "Kondratyuk",
+      "firstName" : "Aleksandr",
+      "jobTittle" : {
+        "uuid" : "11aa7f92-3cca-46a3-85ed-4d4bc6f266e2",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:dsd.png",
+      "birthDay" : "02-05-1947",
+      "phoneNumber" : "86436346"
+    },
+    "number" : 9691,
+    "dateOfRegistration" : "2022-01-23T11:15:12.217+00:00"
+  }, {
+    "id" : "3336dbb5-9b53-4e72-9fb2-fbaf15aaa0f7",
+    "name" : "Устав",
+    "text" : "Повышение уровня гражданского сознания",
+    "regNumber" : 8543,
+    "creatingDate" : "25-02-2022 07:56",
+    "outDate" : "2022-07-25T05:23:42.570+00:00",
+    "execPeriod" : "11 дня",
+    "responsible" : {
+      "id" : "6f76bdf2-1bb4-4ed4-86af-afc648e9e634",
+      "lastName" : "Yurevich",
+      "secondName" : "Yushko",
+      "firstName" : "Oleg",
+      "jobTittle" : {
+        "uuid" : "4741a084-34c1-48e9-b6a2-a358d268f3a8",
+        "jobTittleName" : "QA junior"
+      },
+      "photo" : "http//:sdsf.png",
+      "birthDay" : "24-11-2009",
+      "phoneNumber" : "45345323"
     },
     "signOfControl" : true,
     "controlPerson" : {
+      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:migsal.png",
+      "birthDay" : "17-12-1976",
+      "phoneNumber" : "897546346"
+    }
+  }, {
+    "id" : "98b99a0d-0a0f-410f-8cd3-de4c65b815d1",
+    "name" : "Должностная инструкция",
+    "text" : "Повышение уровня гражданского сознания",
+    "regNumber" : 725,
+    "creatingDate" : "24-03-2022 01:32",
+    "sender" : {
       "id" : "8d228043-b513-4159-8746-f7afed38df70",
       "lastName" : "Uralovich",
       "secondName" : "Petrosyan",
@@ -44,8 +131,99 @@
         "jobTittleName" : "Alfresco junior"
       },
       "photo" : "http//:hgh.png",
-      "birthDay" : 153513627598,
+      "birthDay" : "12-11-1974",
       "phoneNumber" : "66787546346"
+    },
+    "deliveryType" : "ROCKET_CHAT"
+  }, {
+    "id" : "dc64f48a-56ed-4c6b-9951-3cc6d3292737",
+    "name" : "Устав",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 9825,
+    "creatingDate" : "19-04-2022 09:09",
+    "sender" : {
+      "id" : "8d228043-b513-4159-8746-f7afed38df70",
+      "lastName" : "Uralovich",
+      "secondName" : "Petrosyan",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "b40aefa3-a73b-443d-8547-e14e886e9b77",
+        "jobTittleName" : "Alfresco junior"
+      },
+      "photo" : "http//:hgh.png",
+      "birthDay" : "12-11-1974",
+      "phoneNumber" : "66787546346"
+    },
+    "deliveryType" : "TELEGRAM"
+  }, {
+    "id" : "964ffc13-d44e-4bfd-9742-9f0a1e4ac8cc",
+    "name" : "Штатное расписание",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 6429,
+    "creatingDate" : "11-06-2022 01:14",
+    "outDate" : "2022-07-25T05:23:42.578+00:00",
+    "execPeriod" : "12 дня",
+    "responsible" : {
+      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "30-04-1979",
+      "phoneNumber" : "687546346"
+    },
+    "signOfControl" : true,
+    "controlPerson" : {
+      "id" : "0f8fb8fb-d017-40ca-8863-1881aa083b9a",
+      "lastName" : "Petrovich",
+      "secondName" : "Kondratyuk",
+      "firstName" : "Aleksandr",
+      "jobTittle" : {
+        "uuid" : "11aa7f92-3cca-46a3-85ed-4d4bc6f266e2",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:dsd.png",
+      "birthDay" : "02-05-1947",
+      "phoneNumber" : "86436346"
+    }
+  }, {
+    "id" : "e4b28035-035c-4198-a2db-d1b3a12c8f09",
+    "name" : "Приказ",
+    "text" : "Повышение уровня гражданского сознания",
+    "regNumber" : 9655,
+    "creatingDate" : "31-10-2022 04:44",
+    "outDate" : "2022-07-25T05:23:42.574+00:00",
+    "execPeriod" : "6 дня",
+    "responsible" : {
+      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "30-04-1979",
+      "phoneNumber" : "687546346"
+    },
+    "signOfControl" : false,
+    "controlPerson" : {
+      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:migsal.png",
+      "birthDay" : "17-12-1976",
+      "phoneNumber" : "897546346"
     }
   } ]
 }

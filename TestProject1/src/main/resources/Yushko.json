@@ -9,52 +9,16 @@
       "jobTittleName" : "QA junior"
     },
     "photo" : "http//:sdsf.png",
-    "birthDay" : "2009-11-24T15:38:47.972+00:00",
+    "birthDay" : "24-11-2009",
     "phoneNumber" : "45345323"
   },
   "documentList" : [ {
-    "id" : "5adac472-3dbc-49ad-b287-5bc92b8f66e8",
+    "id" : "823fa7c0-c682-47cd-b1cc-882868c6725f",
     "name" : "Штатное расписание",
-    "text" : "Системы обучения кадров",
-    "regNumber" : 3060,
-    "creatingDate" : "2022-04-07T16:10:29.276+00:00",
+    "text" : "Количественный рост",
+    "regNumber" : 9432,
+    "creatingDate" : "27-05-2022 11:52",
     "sender" : {
-      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
-      "lastName" : "Ivanovich",
-      "secondName" : "Ivanov",
-      "firstName" : "Ivan",
-      "jobTittle" : {
-        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
-        "jobTittleName" : "Java middle"
-      },
-      "photo" : "http//:dssf.png",
-      "birthDay" : "1979-04-30T20:40:05.360+00:00",
-      "phoneNumber" : "687546346"
-    },
-    "destination" : {
-      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
-      "lastName" : "Ivanovich",
-      "secondName" : "Ivanov",
-      "firstName" : "Ivan",
-      "jobTittle" : {
-        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
-        "jobTittleName" : "Java middle"
-      },
-      "photo" : "http//:dssf.png",
-      "birthDay" : "1979-04-30T20:40:05.360+00:00",
-      "phoneNumber" : "687546346"
-    },
-    "number" : 6007,
-    "dateOfRegistration" : "2022-07-16T08:19:55.205+00:00"
-  }, {
-    "id" : "d7782f88-d5c5-4c84-b553-c8175f8a93ec",
-    "name" : "Должностная инструкция",
-    "text" : "Значимость этих проблем",
-    "regNumber" : 9986,
-    "creatingDate" : "2022-07-23T11:32:20.553+00:00",
-    "outDate" : "2022-07-24T17:15:56.353+00:00",
-    "execPeriod" : "13 дня",
-    "responsible" : {
       "id" : "8d228043-b513-4159-8746-f7afed38df70",
       "lastName" : "Uralovich",
       "secondName" : "Petrosyan",
@@ -64,42 +28,9 @@
         "jobTittleName" : "Alfresco junior"
       },
       "photo" : "http//:hgh.png",
-      "birthDay" : "1974-11-12T18:40:27.598+00:00",
+      "birthDay" : "12-11-1974",
       "phoneNumber" : "66787546346"
     },
-    "signOfControl" : false,
-    "controlPerson" : {
-      "id" : "32b44539-e795-4b14-9dd6-519b29fd4dd5",
-      "lastName" : "Vagizovich",
-      "secondName" : "Migranov",
-      "firstName" : "Salavat",
-      "jobTittle" : {
-        "uuid" : "e29ded9a-dcda-4db1-ab5a-5de4fc407947",
-        "jobTittleName" : "Java junior"
-      },
-      "photo" : "http//:migsal.png",
-      "birthDay" : "1976-12-17T19:11:57.099+00:00",
-      "phoneNumber" : "897546346"
-    }
-  }, {
-    "id" : "23911b70-63cc-408e-afab-0f2b4e72f4ef",
-    "name" : "Штатное расписание",
-    "text" : "Соображения высшего порядка",
-    "regNumber" : 7021,
-    "creatingDate" : "2022-08-28T10:35:21.371+00:00",
-    "sender" : {
-      "id" : "ed4ba0e9-5b5d-499d-90de-d054a4b728a8",
-      "lastName" : "Ivanovich",
-      "secondName" : "Ivanov",
-      "firstName" : "Ivan",
-      "jobTittle" : {
-        "uuid" : "bc074d88-bd04-4b34-833b-ea2fb7a9139a",
-        "jobTittleName" : "Java middle"
-      },
-      "photo" : "http//:dssf.png",
-      "birthDay" : "1979-04-30T20:40:05.360+00:00",
-      "phoneNumber" : "687546346"
-    },
-    "deliveryType" : "TELEGRAM"
+    "deliveryType" : "MESSENGER"
   } ]
 }

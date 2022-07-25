@@ -4,6 +4,7 @@ package com.example.testproject1.model;
 import com.example.testproject1.model.person.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 import com.example.testproject1.service.visitorPatternRelase.DocumentVisitor;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.text.MessageFormat;
@@ -37,6 +38,8 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
     /**
      * дата регистрации документа
      */
+    @JsonFormat
+            (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm")
     protected Date creatingDate;
     /**
      * автор документа
