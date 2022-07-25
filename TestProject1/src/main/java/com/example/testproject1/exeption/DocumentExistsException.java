@@ -21,8 +21,9 @@ public class DocumentExistsException extends Exception {
     public DocumentExistsException() {
 
     }
+
     @Override
     public String toString() {
-        return MessageFormat.format("DocumentExistsException: RegNumber {0} exist",detail);
+        return MessageFormat.format("DocumentExistsException: RegNumber {0} exist", detail);
     }
 }

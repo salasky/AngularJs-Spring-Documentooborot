@@ -78,6 +78,9 @@ public class OutgoingDocument extends BaseDocument {
         return Objects.hash(super.hashCode(), getSender(), getDeliveryType());
     }
 
+    /**
+     * Метод для реализации паттерна посетитель
+     */
     @Override
     public String accept(DocumentInspector documentInspector) {
         return documentInspector.visit(this);

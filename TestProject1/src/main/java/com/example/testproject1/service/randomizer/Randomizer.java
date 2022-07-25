@@ -16,10 +16,13 @@ import java.util.UUID;
  */
 @Service
 public class Randomizer {
+    /**
+     * Лист названий документов из application.yaml
+     */
     @Value("${doc.documentName}")
     private List<String> newDocNameList;
     /**
-     * Лист текстов поручений из application.yaml
+     * Лист текстов документов из application.yaml
      */
     @Value("${doc.documentText}")
     private List<String> newDocTextList;
