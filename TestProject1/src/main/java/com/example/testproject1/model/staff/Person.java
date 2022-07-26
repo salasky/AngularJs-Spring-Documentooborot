@@ -1,16 +1,15 @@
 package com.example.testproject1.model.staff;
 
 import com.example.testproject1.service.jaxb.DateSQLTimeAdapter;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.sql.Date;
 import java.text.MessageFormat;
 import java.util.Comparator;
-import java.sql.Date;
 import java.util.UUID;
 /**
  * Класс Person наследуется от {@link Staff}

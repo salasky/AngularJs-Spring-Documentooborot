@@ -82,7 +82,6 @@ public class TaskDocument extends BaseDocument {
     /**
      * {@inheritDoc}
      *
-     * @return
      */
     @Override
     public String toString() {
@@ -96,7 +95,6 @@ public class TaskDocument extends BaseDocument {
      * {@inheritDoc}
      *
      * @param o Объект для сравнивания
-     * @return
      */
     @Override
     public boolean equals(Object o) {
@@ -110,7 +108,6 @@ public class TaskDocument extends BaseDocument {
     /**
      * {@inheritDoc}
      *
-     * @return
      */
     @Override
     public int hashCode() {

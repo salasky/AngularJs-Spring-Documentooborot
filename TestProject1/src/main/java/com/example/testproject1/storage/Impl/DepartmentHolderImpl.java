@@ -32,7 +32,6 @@ public class DepartmentHolderImpl implements DepartmentHolder {
 
     /**
      * {@inheritDoc}
-     * @return
      */
     @Cacheable(cacheNames = "department")
     @Override

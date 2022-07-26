@@ -95,7 +95,7 @@ public class Randomizer {
     /**
      * Метод возварата текущей даты
      *
-     * @return объект класса {@link Date} с текущим временем
+     * @return объект класса {@link Timestamp} с текущим временем
      */
     public Timestamp getRandTaskOutDate() {
         Timestamp date = new Timestamp(System.currentTimeMillis());
@@ -167,7 +167,7 @@ public class Randomizer {
     /**
      * Метод возвращает рандомную дату в 2022 году
      *
-     * @return объект класса {@link Date} в 2022 году
+     * @return объект класса {@link Timestamp} в 2022 году
      */
     public Timestamp getRandIncomingDocumentDate() {
         var rnd = new Random();

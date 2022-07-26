@@ -58,7 +58,6 @@ public class OutgoingDocument extends BaseDocument {
      * {@inheritDoc}
      *
      * @param o Объект для сравнивания
-     * @return
      */
     @Override
     public boolean equals(Object o) {
@@ -72,7 +71,6 @@ public class OutgoingDocument extends BaseDocument {
     /**
      * {@inheritDoc}
      *
-     * @return
      */
     @Override
     public int hashCode() {
