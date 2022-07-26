@@ -14,28 +14,28 @@ public interface DocumentInspector {
     /**
      * Метод возвращает информацию о экземпляре класса TaskDocument для формирования отчета
      * @param taskDocument
-     * @return
+     * @return объект класса {@link String} неполную информацию о документе для отчета
      */
     String visit(TaskDocument taskDocument);
 
     /**
      * Метод возвращает информацию о экземпляре класса IncomingDocument для формирования отчета
      * @param incomingDocument
-     * @return
+     * @return объект класса {@link String} неполную информацию о документе для отчета
      */
     String visit(IncomingDocument incomingDocument);
 
     /**
      * Метод возвращает информацию о экземпляре класса OutgoingDocument для формирования отчета
      * @param outgoingDocument
-     * @return
+     * @return объект класса {@link String} неполную информацию о документе для отчета
      */
     String visit(OutgoingDocument outgoingDocument);
 
     /**
      * Метод возвращает имя класса BaseDocument
      * @param baseDocument
-     * @return
+     * @return объект класса {@link String} неполную информацию о документе для отчета
      */
     String visit(BaseDocument baseDocument);
 }

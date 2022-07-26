@@ -14,7 +14,7 @@ public interface DepartmentHolder {
     /**
      * Метод получения сохраненных department
      *
-     * @return
+     * @return объект {@link List} содержащий объекты класса {@link Department}
      */
     List<Department> getDepartmentList();
 }

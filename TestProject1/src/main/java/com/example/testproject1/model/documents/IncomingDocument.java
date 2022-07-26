@@ -69,7 +69,6 @@ public class IncomingDocument extends BaseDocument {
     /**
      * {@inheritDoc}
      *
-     * @return
      */
     @Override
     public String toString() {
@@ -82,8 +81,6 @@ public class IncomingDocument extends BaseDocument {
     /**
      * {@inheritDoc}
      *
-     * @param o Объект для сравнивания
-     * @return
      */
     @Override
     public boolean equals(Object o) {
@@ -95,9 +92,9 @@ public class IncomingDocument extends BaseDocument {
     }
 
     /**
-     * Метод для реализации паттерна посетитель
-     * @param documentInspector
-     * @return
+     * {@inheritDoc}
+     * @param documentInspector принимает объект класса {@link DocumentInspector}
+     * @return Возвращает объект класса String, содержащий не полную информацию о документе для отчета
      */
     @Override
     public String accept(DocumentInspector documentInspector) {
@@ -149,7 +146,10 @@ public class IncomingDocument extends BaseDocument {
             IncomingDocument.this.dateOfRegistration = date;
             return this;
         }
-
+        /**
+         * Метод build
+         * @return возвращает объект класса {@link IncomingDocument}
+         */
         public IncomingDocument build() {
             return IncomingDocument.this;
         }

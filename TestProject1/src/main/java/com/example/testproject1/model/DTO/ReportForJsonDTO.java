@@ -6,7 +6,7 @@ import com.example.testproject1.model.staff.Person;
 import java.util.List;
 
 /**
- * Класс дял десериализации документов в json
+ * Класс для десериализации документов в json
  *
  * @author smigranov
  */
@@ -62,6 +62,10 @@ public class ReportForJsonDTO {
             return this;
         }
 
+        /**
+         * Метод build
+         * @return Возвращает объект класса {@link ReportForJsonDTO}
+         */
         public ReportForJsonDTO build() {
             return ReportForJsonDTO.this;
         }

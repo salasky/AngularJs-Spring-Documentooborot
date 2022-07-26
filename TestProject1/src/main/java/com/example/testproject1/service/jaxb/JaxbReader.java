@@ -12,7 +12,7 @@ public interface JaxbReader {
      * Метод получения объектов из xml файла
      * @param clazz Класс,который хотим получить
      * @return Возвращает объект класса, который передали
-     * @param <T>
+     * @param <T> класс для анмаршализации
      */
      <T> T jaxbXMLToObject(Class<T> clazz);
 }

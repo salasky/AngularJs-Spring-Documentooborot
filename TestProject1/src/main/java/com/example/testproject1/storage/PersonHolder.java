@@ -11,7 +11,7 @@ public interface PersonHolder {
     /**
      * Метод получения сохраненных документов
      *
-     * @return
+     * @return объект {@link List} содержащий объекты класса {@link Person}
      */
     List<Person> getPersonListList();
 }

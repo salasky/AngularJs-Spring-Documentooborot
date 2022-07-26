@@ -98,7 +98,7 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
      * {@inheritDoc}
      *
      * @param o Объект для сравнивания
-     * @return Метод equals для класса BaseDocument
+     * @return объект класса boolean
      */
     @Override
     public boolean equals(Object o) {
@@ -131,7 +131,6 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
 
     /**
      * {@inheritDoc}
-     * @return
      */
     @Override
     public String toString() {
@@ -143,7 +142,8 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
     }
 
     /**
-     * @return возвращает объект builder
+     * Статический метод для создания builder для {@link BaseDocument}
+     * @return возвращает объект builder для {@link BaseDocument}
      */
     public static BaseDocument.BaseDocumentBuilder newBuilder() {
         return new BaseDocument().new BaseDocumentBuilder();
@@ -152,8 +152,8 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
     /**
      * {@inheritDoc}
      *
-     * @param documentInspector
-     * @return
+     * @param documentInspector принимает объект класса {@link DocumentInspector}
+     * @return Возвращает объект класса String, содержащий не полную информацию о документе для отчета
      */
     @Override
     public String accept(DocumentInspector documentInspector) {
@@ -199,6 +199,10 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
             return this;
         }
 
+        /**
+         * Метод build
+         * @return возвращает объект класса {@link BaseDocument}
+         */
         public BaseDocument build() {
             return BaseDocument.this;
         }

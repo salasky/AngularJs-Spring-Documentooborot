@@ -8,8 +8,8 @@ package com.example.testproject1.service.visitorPatternRelase;
 public interface DocumentVisitor {
     /**
      * Метод вызова нужного метода visit в зависимости от типа объекта
-     * @param documentInspector
-     * @return
+     * @param documentInspector объект класса {@link DocumentInspector}
+     * @return объект класса {@link String} неполную информацию о документе для отчета
      */
     String accept(DocumentInspector documentInspector);
 }
