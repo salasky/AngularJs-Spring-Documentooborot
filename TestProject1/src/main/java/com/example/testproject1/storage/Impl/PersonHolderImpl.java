@@ -33,8 +33,7 @@ public class PersonHolderImpl implements PersonHolder {
     @Override
     public List<Person> getPersonListList() {
         LOGGER.info("Begin find Person ");
-        Persons persons = jaxbReader.jaxbXMLToObject(this.getClass().getClassLoader()
-                .getResource("persons.xml").getPath(), Persons.class);
+        Persons persons = jaxbReader.jaxbXMLToObject(Persons.class);
         personList=persons.getPersonList();
         LOGGER.info("Find Person result");
         return personList;

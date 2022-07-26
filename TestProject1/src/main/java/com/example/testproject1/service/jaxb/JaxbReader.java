@@ -10,10 +10,9 @@ import com.example.testproject1.model.person.Person;
 public interface JaxbReader {
     /**
      * Метод получения объектов из xml файла
-     * @param xmlData Путь к файлу для анмаршалинга
      * @param clazz Класс,который хотим получить
      * @return Возвращает объект класса, который передали
      * @param <T>
      */
-     <T> T jaxbXMLToObject(String xmlData, Class<T> clazz);
+     <T> T jaxbXMLToObject(Class<T> clazz);
 }
