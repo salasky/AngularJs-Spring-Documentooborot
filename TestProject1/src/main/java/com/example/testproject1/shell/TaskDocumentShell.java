@@ -1,6 +1,7 @@
 package com.example.testproject1.shell;
 
 
+import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.documents.GenerateDocumentService;
 import com.example.testproject1.service.documents.GenerateReportService;
 import com.example.testproject1.storage.DepartmentHolder;
@@ -12,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * Класс для работы с терминалом shell и запуска генерации документов и отчетов

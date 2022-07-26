@@ -1,24 +1,24 @@
 package com.example.testproject1.model.staff;
 
+import com.example.testproject1.service.jaxb.DateSQLTimeAdapter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.text.MessageFormat;
 import java.util.Comparator;
-import java.util.Date;
+import java.sql.Date;
 import java.util.UUID;
-
 /**
  * Класс Person наследуется от {@link Staff}
  *
  * @author smigranov
  */
 @XmlRootElement
-@XmlType(name = "person",propOrder = {"secondName", "firstName", "lastName","jobTittle","birthDay","phoneNumber","photo"})
+@XmlType(name = "person",propOrder = {"secondName", "firstName", "lastName","jobTittle","birthDay","phoneNumber","photo","department"})
 public class Person extends Staff implements Comparable<Person>{
     /**
      * Отчество
@@ -43,14 +43,23 @@ public class Person extends Staff implements Comparable<Person>{
     /**
      * Дата рождения
      */
-    @JsonFormat
-            (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date birthDay;
     /**
      * Номер телефона
      */
     private String phoneNumber;
+    /**
+     * Департамент работника
+     */
+    private Department department;
+    @XmlElement(name = "department")
+    public Department getDepartment() {
+        return department;
+    }
 
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
     public Person() {
     }
@@ -100,7 +109,9 @@ public class Person extends Staff implements Comparable<Person>{
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
     @XmlElement(name = "birthDay")
+    @XmlJavaTypeAdapter(DateSQLTimeAdapter.class)
     public Date getBirthDay() {
         return birthDay;
     }
@@ -108,6 +119,7 @@ public class Person extends Staff implements Comparable<Person>{
     public void setBirthDay(Date birthDay) {
         this.birthDay = birthDay;
     }
+
     @XmlElement(name = "phoneNumber")
     public String getPhoneNumber() {
         return phoneNumber;

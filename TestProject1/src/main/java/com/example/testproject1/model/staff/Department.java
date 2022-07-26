@@ -12,7 +12,7 @@ import java.util.UUID;
  * @author smigranov
  */
 @XmlRootElement
-@XmlType(name = "department",propOrder = {"fullName","shortName","supervisor","contactNumber"})
+@XmlType(name = "department",propOrder = {"fullName","shortName","supervisor","contactNumber","organization"})
 public class Department extends Staff{
     /**
      * Полное название департамента
@@ -30,6 +30,18 @@ public class Department extends Staff{
      * Контактный телефон департамента
      */
     private String contactNumber;
+    /**
+     * Организация подразделения
+     */
+    private Organization organization;
+    @XmlElement(name = "organization")
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
 
     public void setId(UUID id){
         super.setId(id);
