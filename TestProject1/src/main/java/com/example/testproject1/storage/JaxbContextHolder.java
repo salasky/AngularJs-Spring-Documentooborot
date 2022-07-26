@@ -10,7 +10,7 @@ import javax.xml.bind.JAXBContext;
 public interface JaxbContextHolder {
     /**
      * Метод получения контекста jaxb
-     * @return
+     * @return объект класса {@link JAXBContext}
      */
     public JAXBContext getContext();
 }

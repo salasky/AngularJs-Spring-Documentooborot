@@ -1,5 +1,6 @@
 package com.example.testproject1.model.DTO;
 
+import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Person;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Вспомогательный класс для маршалинга класса {@link Person}
+ * Класс для работы с JAXB для маршалинга класса {@link Person}
  *
  * @author smigranov
  */
@@ -29,14 +30,10 @@ public class PersonListXmlDTO {
 
     /**
      * Метод получения списка Person
+     * @return @return {@link List} объектов {@link Person}
      */
     public List<Person> getPersonList() {
         return list;
     }
-    /**
-     * Метод добавления в список Person
-     */
-    public boolean add(Person person){
-        return list.add(person);
-    }
+
 }

@@ -65,7 +65,7 @@ public class Randomizer {
     /**
      * Метод возврата рандомного регистрационного номера
      *
-     * @return возвращает рандомный рег.номер
+     * @return возвращает рандомный рег.номер типа {@link Long} в промежутке от 0 до 10000
      */
     public Long getRandDocumentRegNumber() {
         return Long.valueOf((int) (Math.random() * 10000));
@@ -94,7 +94,7 @@ public class Randomizer {
     /**
      * Метод возварата текущей даты
      *
-     * @return
+     * @return объект класса {@link Date} с текущим временем
      */
     public Date getRandTaskOutDate() {
         Date date = new Date();
@@ -104,7 +104,7 @@ public class Randomizer {
     /**
      * Метод возврата рандомного количества дней в промежутке от 1 до 14
      *
-     * @return
+     * @return объект класса {@link String} содержащий количество дней от 1 до 14 в формате: X дня
      */
     public String getRandTaskExecPeriod() {
         return ((int) (Math.random() * 14 + 1) + " дня");
@@ -122,7 +122,7 @@ public class Randomizer {
     /**
      * Метод рандомно выдает true или false.Отслеживается документ или нет.
      *
-     * @return
+     * @return объект класса {@link Boolean} с рандомным значением true или false
      */
     public Boolean getTaskSignOfControl() {
         return Math.random() < 0.5;
@@ -138,9 +138,9 @@ public class Randomizer {
     }
 
     /**
-     * Метод возвращает ранддомного отправителя из application.yaml
+     * Метод возвращает ранддомного отправителя из persons.xml
      *
-     * @return
+     * @return рандомный объект класса {@link Person} из persons.xml
      */
     public Person getRandIncomingDocumentSender() {
         return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
@@ -157,17 +157,16 @@ public class Randomizer {
     /**
      * Метод возвращает рандомный номер входящего документа
      *
-     * @return
+     * @return рандомный объект класса {@link Long} в промежутке от 0 до 10000
      */
     public Long getIncomingDocumentNumber() {
         return Long.valueOf((int) (Math.random() * 10000));
-
     }
 
     /**
      * Метод возвращает рандомную дату в 2022 году
      *
-     * @return
+     * @return объект класса {@link Date} в 2022 году
      */
     public Date getRandIncomingDocumentDate() {
         var rnd = new Random();
@@ -178,7 +177,7 @@ public class Randomizer {
     /**
      * Метод возвращает рандомного адресата
      *
-     * @return
+     *  @return рандомный объект класса {@link Person} из person.xml
      */
     public Person getRandOutgoingDocumentSender() {
         return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
@@ -187,7 +186,7 @@ public class Randomizer {
     /**
      * Метод возвращает рандомный способ доставки из enum
      *
-     * @return
+     * @return рандомное значение из {@link DocumentDeliveryType}
      */
     public DocumentDeliveryType getRandOutgoingDocumentDeliveryType() {
         return DocumentDeliveryType.values()[new Random().nextInt(DocumentDeliveryType.values().length)];

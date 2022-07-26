@@ -1,5 +1,6 @@
 package com.example.testproject1.storage;
 
+import com.example.testproject1.model.documents.BaseDocument;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Organization;
 
@@ -14,7 +15,7 @@ public interface OrganizationHolder {
     /**
      * Метод получения сохраненных organization
      *
-     * @return
+     * @return объект {@link List} содержащий объекты класса {@link Organization}
      */
     List<Organization> getOrganizationList();
 }

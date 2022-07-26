@@ -1,6 +1,7 @@
 package com.example.testproject1.storage;
 
 import com.example.testproject1.model.documents.BaseDocument;
+import com.example.testproject1.model.staff.Department;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public interface DocumentHolder {
     /**
      * Метод получения сохраненных документов
-     * @return
+     * @return объект {@link List} содержащий объекты класса {@link BaseDocument}
      */
     List<BaseDocument> getAll();
 

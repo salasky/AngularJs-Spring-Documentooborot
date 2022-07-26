@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс для работы с JAXB
+ * Класс для работы с JAXB для маршалинга класса {@link Department}
  *
  * @author smigranov
  */
@@ -29,18 +29,10 @@ public class DepartmentListXmlDTO {
 
     /**
      * Метод получения списка подразделений
-     * @return
+     * @return {@link List} объектов {@link Department}
      */
     public List<Department> getDepartmentList() {
         return list;
     }
 
-    /**
-     * Метод добавления подразделений в list
-     * @param department
-     * @return
-     */
-    public boolean add(Department department){
-        return list.add(department);
-    }
 }

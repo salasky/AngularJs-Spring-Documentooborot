@@ -28,7 +28,6 @@ public class JaxbReaderImpl implements JaxbReader {
     private JaxbContextHolder jaxbContextHolder;
     /**
      * {@inheritDoc}
-     * @return
      */
     @Override
     public  <T> T jaxbXMLToObject(Class<T> clazz) {
