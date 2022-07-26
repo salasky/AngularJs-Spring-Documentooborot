@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -76,10 +77,10 @@ public class Randomizer {
      *
      * @return возвращает рандомную дату в 2022 году
      */
-    public Date getRandDocumentData() {
+    public Timestamp getRandDocumentData() {
         Random rnd = new Random();
         Long ms = 1641027402000L + (Math.abs(rnd.nextLong()) % (1L * 365 * 24 * 60 * 60 * 1000));
-        return new Date(ms);
+        return new Timestamp(ms);
     }
 
     /**
@@ -96,8 +97,8 @@ public class Randomizer {
      *
      * @return
      */
-    public Date getRandTaskOutDate() {
-        Date date = new Date();
+    public Timestamp getRandTaskOutDate() {
+        Timestamp date = new Timestamp(System.currentTimeMillis());
         return date;
     }
 
@@ -169,10 +170,10 @@ public class Randomizer {
      *
      * @return
      */
-    public Date getRandIncomingDocumentDate() {
+    public Timestamp getRandIncomingDocumentDate() {
         var rnd = new Random();
         var ms = 1641027402000L + (Math.abs(rnd.nextLong()) % (1L * 365 * 24 * 60 * 60 * 1000));
-        return new Date(ms);
+        return new Timestamp(ms);
     }
 
     /**

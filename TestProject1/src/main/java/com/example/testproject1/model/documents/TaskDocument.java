@@ -4,6 +4,7 @@ package com.example.testproject1.model.documents;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
+import java.sql.Timestamp;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -17,7 +18,7 @@ public class TaskDocument extends BaseDocument {
     /**
      * дата выдачи поручения
      */
-    private Date outDate;
+    private Timestamp outDate;
     /**
      * срок исполнения поручения
      */
@@ -38,11 +39,11 @@ public class TaskDocument extends BaseDocument {
     public TaskDocument() {
     }
 
-    public Date getOutDate() {
+    public Timestamp getOutDate() {
         return outDate;
     }
 
-    public void setOutDate(Date outDate) {
+    public void setOutDate(Timestamp outDate) {
         this.outDate = outDate;
     }
 
@@ -140,7 +141,7 @@ public class TaskDocument extends BaseDocument {
             // private constructor
         }
 
-        public TaskBuilder setTaskDate(Date taskDate) {
+        public TaskBuilder setTaskDate(Timestamp taskDate) {
             TaskDocument.this.outDate = taskDate;
             return this;
         }

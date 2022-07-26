@@ -15,6 +15,7 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 /**

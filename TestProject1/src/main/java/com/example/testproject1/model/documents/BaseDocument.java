@@ -7,6 +7,7 @@ import com.example.testproject1.service.visitorPatternRelase.DocumentVisitor;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.sql.Timestamp;
 import java.text.MessageFormat;
 import java.util.Comparator;
 import java.util.Date;
@@ -38,9 +39,7 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
     /**
      * дата регистрации документа
      */
-    @JsonFormat
-            (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm")
-    protected Date creatingDate;
+    protected Timestamp creatingDate;
     /**
      * автор документа
      */
@@ -79,11 +78,11 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
         this.regNumber = regNumber;
     }
 
-    public Date getCreatingDate() {
+    public Timestamp getCreatingDate() {
         return creatingDate;
     }
 
-    public void setCreatingDate(Date documentData) {
+    public void setCreatingDate(Timestamp documentData) {
         this.creatingDate = documentData;
     }
 
@@ -190,7 +189,7 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
             return this;
         }
 
-        public BaseDocumentBuilder setDocDate(Date docDate) {
+        public BaseDocumentBuilder setDocDate(Timestamp docDate) {
             BaseDocument.this.creatingDate = docDate;
             return this;
         }

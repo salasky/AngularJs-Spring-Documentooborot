@@ -3,6 +3,7 @@ package com.example.testproject1.model.documents;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
+import java.sql.Timestamp;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -28,7 +29,7 @@ public class IncomingDocument extends BaseDocument {
     /**
      * исходящая дата регистрации
      */
-    private Date dateOfRegistration;
+    private Timestamp dateOfRegistration;
 
     public IncomingDocument() {
     }
@@ -57,11 +58,11 @@ public class IncomingDocument extends BaseDocument {
         this.number = number;
     }
 
-    public Date getDateOfRegistration() {
+    public Timestamp getDateOfRegistration() {
         return dateOfRegistration;
     }
 
-    public void setDateOfRegistration(Date dateOfRegistration) {
+    public void setDateOfRegistration(Timestamp dateOfRegistration) {
         this.dateOfRegistration = dateOfRegistration;
     }
 
@@ -144,7 +145,7 @@ public class IncomingDocument extends BaseDocument {
             return this;
         }
 
-        public IncomingDocumentBuilder setIncomingDocumentDate(Date date) {
+        public IncomingDocumentBuilder setIncomingDocumentDate(Timestamp date) {
             IncomingDocument.this.dateOfRegistration = date;
             return this;
         }
