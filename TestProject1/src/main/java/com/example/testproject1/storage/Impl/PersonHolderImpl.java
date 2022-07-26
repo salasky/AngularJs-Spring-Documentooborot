@@ -1,6 +1,6 @@
 package com.example.testproject1.storage.Impl;
 
-import com.example.testproject1.model.person.Persons;
+import com.example.testproject1.model.person.PersonListXmlDTO;
 import com.example.testproject1.service.jaxb.JaxbReader;
 import com.example.testproject1.model.person.Person;
 import com.example.testproject1.storage.PersonHolder;
@@ -33,8 +33,8 @@ public class PersonHolderImpl implements PersonHolder {
     @Override
     public List<Person> getPersonListList() {
         LOGGER.info("Begin find Person ");
-        Persons persons = jaxbReader.jaxbXMLToObject(Persons.class);
-        personList=persons.getPersonList();
+        PersonListXmlDTO personListXmlDTO = jaxbReader.jaxbXMLToObject(PersonListXmlDTO.class);
+        personList= personListXmlDTO.getPersonList();
         LOGGER.info("Find Person result");
         return personList;
     }

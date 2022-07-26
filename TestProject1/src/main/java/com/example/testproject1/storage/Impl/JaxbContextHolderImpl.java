@@ -3,7 +3,7 @@ package com.example.testproject1.storage.Impl;
 import com.example.testproject1.model.person.Department;
 import com.example.testproject1.model.person.Organization;
 import com.example.testproject1.model.person.Person;
-import com.example.testproject1.model.person.Persons;
+import com.example.testproject1.model.person.PersonListXmlDTO;
 import com.example.testproject1.storage.JaxbContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +27,7 @@ public class JaxbContextHolderImpl implements JaxbContextHolder {
     @PostConstruct
     private void initContext(){
         try {
-            jaxbContext = JAXBContext.newInstance(Persons.class, Department.class, Organization.class, Person.class);
+            jaxbContext = JAXBContext.newInstance(PersonListXmlDTO.class, Department.class, Organization.class, Person.class);
         } catch (JAXBException e) {
             throw new RuntimeException(e);
         }

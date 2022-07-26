@@ -11,14 +11,14 @@ import java.util.List;
  * @author smigranov
  */
 @XmlRootElement
-public class Persons {
+public class PersonListXmlDTO {
     /**
      * Хранит список {@link Person}
      */
     @XmlElement(name = "person")
     private List<Person> list=new ArrayList<>();
 
-    public Persons() {
+    public PersonListXmlDTO() {
     }
 
     public void setList(List<Person> list) {
