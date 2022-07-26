@@ -1,12 +1,10 @@
 package com.example.testproject1.service.docfactory;
 
-import com.example.testproject1.model.BaseDocument;
-import com.example.testproject1.model.IncomingDocument;
-import com.example.testproject1.model.OutgoingDocument;
+import com.example.testproject1.model.documents.OutgoingDocument;
 import org.springframework.stereotype.Service;
 
 /**
- * Класс фабрики для {@link com.example.testproject1.model.OutgoingDocument}
+ * Класс фабрики для {@link OutgoingDocument}
  *
  * @author smigranov
  */
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 public class OutgoingDocumentFactory extends DocumentFactory<OutgoingDocument.OutgoingBuilder> {
     /**
      * {@inheritDoc}
-     * @return
      */
     @Override
     public OutgoingDocument.OutgoingBuilder getBuilder() {
@@ -22,7 +19,6 @@ public class OutgoingDocumentFactory extends DocumentFactory<OutgoingDocument.Ou
     }
     /**
      * {@inheritDoc}
-     * @return
      */
     @Override
     public OutgoingDocument.OutgoingBuilder setFields(OutgoingDocument.OutgoingBuilder builder) {

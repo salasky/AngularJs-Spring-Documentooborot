@@ -1,7 +1,7 @@
 package com.example.testproject1.service.randomizer;
 
 import com.example.testproject1.model.enums.DocumentDeliveryType;
-import com.example.testproject1.model.person.Person;
+import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.storage.PersonHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

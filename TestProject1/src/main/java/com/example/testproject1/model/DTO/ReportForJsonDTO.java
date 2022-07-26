@@ -1,6 +1,7 @@
-package com.example.testproject1.model;
+package com.example.testproject1.model.DTO;
 
-import com.example.testproject1.model.person.Person;
+import com.example.testproject1.model.documents.BaseDocument;
+import com.example.testproject1.model.staff.Person;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @author smigranov
  */
-public class ReportForJson {
+public class ReportForJsonDTO {
     /**
      * Автор документа
      */
@@ -19,7 +20,7 @@ public class ReportForJson {
      */
     private List<BaseDocument> documentList;
 
-    public ReportForJson() {
+    public ReportForJsonDTO() {
     }
 
     public Person getPerson() {
@@ -38,7 +39,7 @@ public class ReportForJson {
         this.documentList = documentList;
     }
     public static ReporBuilder newBuilder() {
-        return new ReportForJson().new ReporBuilder();
+        return new ReportForJsonDTO().new ReporBuilder();
     }
 
     /**
@@ -52,17 +53,17 @@ public class ReportForJson {
         }
 
         public ReporBuilder setPerson(Person person) {
-            ReportForJson.this.person = person;
+            ReportForJsonDTO.this.person = person;
             return this;
         }
 
         public ReporBuilder setDocumentList(List<BaseDocument> baseDocumentsList) {
-            ReportForJson.this.documentList = baseDocumentsList;
+            ReportForJsonDTO.this.documentList = baseDocumentsList;
             return this;
         }
 
-        public ReportForJson build() {
-            return ReportForJson.this;
+        public ReportForJsonDTO build() {
+            return ReportForJsonDTO.this;
         }
     }
 }

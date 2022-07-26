@@ -1,6 +1,6 @@
 package com.example.testproject1.storage;
 
-import com.example.testproject1.model.BaseDocument;
+import com.example.testproject1.model.documents.BaseDocument;
 
 import java.util.List;
 

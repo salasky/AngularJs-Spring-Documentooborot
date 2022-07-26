@@ -1,7 +1,7 @@
-package com.example.testproject1.model;
+package com.example.testproject1.model.documents;
 
 import com.example.testproject1.model.enums.DocumentDeliveryType;
-import com.example.testproject1.model.person.Person;
+import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
 import java.text.MessageFormat;
@@ -79,6 +79,9 @@ public class OutgoingDocument extends BaseDocument {
         return Objects.hash(super.hashCode(), getSender(), getDeliveryType());
     }
 
+    /**
+     * Метод для реализации паттерна посетитель
+     */
     @Override
     public String accept(DocumentInspector documentInspector) {
         return documentInspector.visit(this);

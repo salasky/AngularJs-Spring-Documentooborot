@@ -1,7 +1,7 @@
-package com.example.testproject1.model;
+package com.example.testproject1.model.documents;
 
 
-import com.example.testproject1.model.person.Person;
+import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
 import java.text.MessageFormat;
@@ -115,7 +115,9 @@ public class TaskDocument extends BaseDocument {
     public int hashCode() {
         return Objects.hash(super.hashCode(), outDate, execPeriod, responsible, signOfControl, controlPerson);
     }
-
+    /**
+     *  Метод для реализации паттерна посетитель
+     */
     @Override
     public String accept(DocumentInspector documentInspector) {
         return documentInspector.visit(this);

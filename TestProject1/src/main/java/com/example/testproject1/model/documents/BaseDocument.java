@@ -1,7 +1,7 @@
-package com.example.testproject1.model;
+package com.example.testproject1.model.documents;
 
 
-import com.example.testproject1.model.person.Person;
+import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 import com.example.testproject1.service.visitorPatternRelase.DocumentVisitor;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -130,6 +130,10 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
         return Comparator.comparing(BaseDocument::getCreatingDate).thenComparing(BaseDocument::getRegNumber).compare(this, o);
     }
 
+    /**
+     * {@inheritDoc}
+     * @return
+     */
     @Override
     public String toString() {
         Object[] taskArgs = {id, name, text, regNumber, creatingDate, author};

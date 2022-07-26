@@ -1,8 +1,5 @@
 package com.example.testproject1.storage;
 
-import com.example.testproject1.model.person.Department;
-import com.example.testproject1.model.person.Persons;
-
 import javax.xml.bind.JAXBContext;
 
 /**

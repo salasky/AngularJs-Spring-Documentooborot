@@ -1,8 +1,8 @@
 package com.example.testproject1.service.jaxb;
 
-import com.example.testproject1.model.person.Person;
 import com.example.testproject1.storage.JaxbContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBContext;
@@ -17,9 +17,10 @@ import java.io.FileReader;
 @Service
 public class JaxbReaderImpl implements JaxbReader {
     /**
-     * Путь к xml файлу с объектами {@link Person}
+     * Путь к xml файлу с объектами
      */
-    private final String PATH= this.getClass().getClassLoader().getResource("persons.xml").getPath();
+    @Value("${jaxb.path}")
+    private String path;
     /**
      * Бин jaxb context-а
      */
@@ -30,8 +31,8 @@ public class JaxbReaderImpl implements JaxbReader {
      * @return
      */
     @Override
-    public  <T> T jaxbXMLToObject(String xmlData, Class<T> clazz) {
-        try (FileReader reader=new FileReader(xmlData)) {
+    public  <T> T jaxbXMLToObject(Class<T> clazz) {
+        try (FileReader reader=new FileReader(path)) {
             T result = null;
             JAXBContext context = JAXBContext.newInstance(clazz);
             Unmarshaller unmarshaller = context.createUnmarshaller();

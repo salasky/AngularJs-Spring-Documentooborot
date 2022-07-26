@@ -1,4 +1,6 @@
-package com.example.testproject1.model.person;
+package com.example.testproject1.model.DTO;
+
+import com.example.testproject1.model.staff.Person;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,14 +13,14 @@ import java.util.List;
  * @author smigranov
  */
 @XmlRootElement
-public class Persons {
+public class PersonListXmlDTO {
     /**
      * Хранит список {@link Person}
      */
     @XmlElement(name = "person")
     private List<Person> list=new ArrayList<>();
 
-    public Persons() {
+    public PersonListXmlDTO() {
     }
 
     public void setList(List<Person> list) {
