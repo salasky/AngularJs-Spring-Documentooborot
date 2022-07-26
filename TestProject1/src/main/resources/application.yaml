@@ -2,6 +2,17 @@ spring:
   main:
     allow-circular-references: true
 
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    username: postgres
+    password: qwerty
+    driverClassName: org.postgresql.Driver
+
 
 doc:
   documentName: Устав, Должностная инструкция , Положение, Штатное расписание,Приказ

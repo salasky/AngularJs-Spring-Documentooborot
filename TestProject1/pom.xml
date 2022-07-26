@@ -18,6 +18,19 @@
 		<spring-shell.version>2.1.0-M5</spring-shell.version>
 	</properties>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core -->
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>4.10.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.3.6</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
@@ -65,6 +78,20 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>4.0.0</version>
+				<configuration>
+					<driver>org.postgresql.Driver</driver>
+					<url>jdbc:postgresql://localhost:5432/test</url>
+					<username>postgres</username>
+					<password>qwerty</password>
+					<changeLogFile>
+						./src/main/resources/db/migration/master.xml
+					</changeLogFile>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<repositories>
