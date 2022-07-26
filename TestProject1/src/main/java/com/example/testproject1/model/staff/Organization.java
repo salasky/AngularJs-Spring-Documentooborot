@@ -1,56 +1,44 @@
-package com.example.testproject1.model.person;
+package com.example.testproject1.model.staff;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.UUID;
 
 /**
- * Класс подразделение. Наследуется от {@link Staff}
+ * Класс Организации.Наследуется от {@link Staff}
  *
  * @author smigranov
  */
 @XmlRootElement
-@XmlType(name = "department",propOrder = {"fullName","shortName","supervisor","contactNumber","organization"})
-public class Department extends Staff{
+@XmlType(name = "organization",propOrder = {"fullName","shortName","supervisor","contactNumber"})
+public class Organization extends Staff{
     /**
-     * Полное название департамента
+     * Полное название организации
      */
     private String fullName;
     /**
-     * Короткое название департамента
+     * Короткое название организации
      */
     private String shortName;
     /**
-     * Руководитель департамента
+     * Руководитель организации
      */
     private String supervisor;
     /**
-     * Контактный телефон департамента
+     * Контактный телефон организации
      */
     private String contactNumber;
-    /**
-     * Организация к которой принадлежит подразделение
-     */
-    private Organization organization;
-
-    public Organization getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
-    }
-
-    public void setId(UUID id){
-        super.setId(id);
-    }
-
     @XmlAttribute(name = "id")
     public UUID getId(){
         return super.getId();
     }
+    public void setId(UUID id){
+        super.setId(id);
+    }
 
+    @XmlElement(name = "fullName")
     public String getFullName() {
         return fullName;
     }
@@ -58,7 +46,7 @@ public class Department extends Staff{
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-
+    @XmlElement(name = "shortName")
     public String getShortName() {
         return shortName;
     }
@@ -66,7 +54,7 @@ public class Department extends Staff{
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
-
+    @XmlElement(name = "supervisor")
     public String getSupervisor() {
         return supervisor;
     }
@@ -74,7 +62,7 @@ public class Department extends Staff{
     public void setSupervisor(String supervisor) {
         this.supervisor = supervisor;
     }
-
+    @XmlElement(name = "contactNumber")
     public String getContactNumber() {
         return contactNumber;
     }

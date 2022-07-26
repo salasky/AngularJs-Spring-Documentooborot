@@ -1,10 +1,11 @@
-package com.example.testproject1.model.person;
+package com.example.testproject1.model.staff;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.text.MessageFormat;
 import java.util.Comparator;
@@ -17,7 +18,7 @@ import java.util.UUID;
  * @author smigranov
  */
 @XmlRootElement
-@XmlType(name = "person",propOrder = {"secondName", "firstName", "lastName","jobTittle","birthDay","phoneNumber","photo","department"})
+@XmlType(name = "person",propOrder = {"secondName", "firstName", "lastName","jobTittle","birthDay","phoneNumber","photo"})
 public class Person extends Staff implements Comparable<Person>{
     /**
      * Отчество
@@ -49,10 +50,7 @@ public class Person extends Staff implements Comparable<Person>{
      * Номер телефона
      */
     private String phoneNumber;
-    /**
-     * Подразделение работника
-     */
-    private Department department;
+
 
     public Person() {
     }
@@ -113,13 +111,6 @@ public class Person extends Staff implements Comparable<Person>{
     @XmlElement(name = "phoneNumber")
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-    @XmlElement(name = "department")
-    public Department getDepartment() {
-        return department;
-    }
-    public void setDepartment(Department department) {
-        this.department = department;
     }
 
     public void setPhoneNumber(String phoneNumber) {

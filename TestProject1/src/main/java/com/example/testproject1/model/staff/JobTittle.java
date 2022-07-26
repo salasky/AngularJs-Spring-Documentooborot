@@ -1,9 +1,6 @@
-package com.example.testproject1.model.person;
+package com.example.testproject1.model.staff;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.text.MessageFormat;
 import java.util.UUID;

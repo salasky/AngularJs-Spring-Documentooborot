@@ -1,6 +1,6 @@
 package com.example.testproject1.service.docfactory;
 
-import com.example.testproject1.model.BaseDocument;
+import com.example.testproject1.model.documents.BaseDocument;
 
 /**
  * Интерфейс фабрик
@@ -8,9 +8,9 @@ import com.example.testproject1.model.BaseDocument;
  */
 public interface Factory<T> {
     /**
-     * Метод создания {@link com.example.testproject1.model.BaseDocument}
+     * Метод создания {@link BaseDocument}
      *
-     * @return объект {@link com.example.testproject1.model.BaseDocument}
+     * @return объект {@link BaseDocument}
      */
     T create();
 

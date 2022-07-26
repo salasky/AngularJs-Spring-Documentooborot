@@ -1,11 +1,10 @@
 package com.example.testproject1.service.docfactory;
 
-import com.example.testproject1.model.BaseDocument;
-import com.example.testproject1.model.TaskDocument;
+import com.example.testproject1.model.documents.TaskDocument;
 import org.springframework.stereotype.Service;
 
 /**
- * Класс фабрики для {@link com.example.testproject1.model.TaskDocument}
+ * Класс фабрики для {@link TaskDocument}
  *
  * @author smigranov
  */

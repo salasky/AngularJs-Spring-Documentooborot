@@ -1,6 +1,6 @@
-package com.example.testproject1.model;
+package com.example.testproject1.model.documents;
 
-import com.example.testproject1.model.person.Person;
+import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
 import java.text.MessageFormat;

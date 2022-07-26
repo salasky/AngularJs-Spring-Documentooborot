@@ -1,4 +1,4 @@
-package com.example.testproject1.model.person;
+package com.example.testproject1.model.staff;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;

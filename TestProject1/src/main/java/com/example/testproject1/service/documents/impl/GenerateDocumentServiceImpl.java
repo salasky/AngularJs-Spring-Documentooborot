@@ -1,7 +1,7 @@
 package com.example.testproject1.service.documents.impl;
 
 import com.example.testproject1.exception.DocumentExistsException;
-import com.example.testproject1.model.BaseDocument;
+import com.example.testproject1.model.documents.BaseDocument;
 import com.example.testproject1.service.docfactory.Factory;
 import com.example.testproject1.service.documents.DocumentService;
 import com.example.testproject1.service.documents.GenerateDocumentService;

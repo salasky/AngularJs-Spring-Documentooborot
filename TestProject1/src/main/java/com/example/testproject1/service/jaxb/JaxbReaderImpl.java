@@ -1,6 +1,5 @@
 package com.example.testproject1.service.jaxb;
 
-import com.example.testproject1.model.person.Person;
 import com.example.testproject1.storage.JaxbContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import java.io.FileReader;
-import java.util.List;
 
 /**
  * Класс реализующий интерфейс {@link JaxbReader}

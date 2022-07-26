@@ -1,6 +1,6 @@
 package com.example.testproject1.service.jaxb;
 
-import com.example.testproject1.model.person.Person;
+import com.example.testproject1.model.staff.Person;
 
 /**
  * Интерфейс анмаршализации объктов класса {@link Person}

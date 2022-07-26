@@ -1,6 +1,6 @@
 package com.example.testproject1.storage;
 
-import com.example.testproject1.model.person.Person;
+import com.example.testproject1.model.staff.Person;
 
 import java.util.List;
 

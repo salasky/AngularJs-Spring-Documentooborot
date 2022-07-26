@@ -1,4 +1,6 @@
-package com.example.testproject1.model.person;
+package com.example.testproject1.model.DTO;
+
+import com.example.testproject1.model.staff.Person;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

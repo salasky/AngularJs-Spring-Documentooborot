@@ -1,9 +1,9 @@
 package com.example.testproject1.service.visitorPatternRelase;
 
-import com.example.testproject1.model.BaseDocument;
-import com.example.testproject1.model.IncomingDocument;
-import com.example.testproject1.model.OutgoingDocument;
-import com.example.testproject1.model.TaskDocument;
+import com.example.testproject1.model.documents.BaseDocument;
+import com.example.testproject1.model.documents.IncomingDocument;
+import com.example.testproject1.model.documents.OutgoingDocument;
+import com.example.testproject1.model.documents.TaskDocument;
 
 /**
  * Интерфейс возврата имени класса

@@ -1,8 +1,8 @@
 package com.example.testproject1.service.documents.impl;
 
-import com.example.testproject1.model.BaseDocument;
-import com.example.testproject1.model.ReportForJson;
-import com.example.testproject1.model.person.Person;
+import com.example.testproject1.model.documents.BaseDocument;
+import com.example.testproject1.model.DTO.ReportForJsonDTO;
+import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.documents.GenerateReportService;
 import com.example.testproject1.storage.DocumentHolder;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -70,7 +70,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
         }
     }
     public void writeReportInFile(Map.Entry<Person, List<BaseDocument>> entry){
-        ReportForJson reportForJson=ReportForJson.newBuilder()
+        ReportForJsonDTO reportForJsonDTO = ReportForJsonDTO.newBuilder()
                 .setPerson(entry.getKey())
                 .setDocumentList(entry.getValue())
                 .build();
@@ -79,7 +79,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
         String filepathFull=SHORTPATH+secondName+".json";
         LOGGER.info("Создаем файл "+secondName+".json");
         try {
-            objectMapper.writeValue(new File(filepathFull),reportForJson);
+            objectMapper.writeValue(new File(filepathFull), reportForJsonDTO);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
