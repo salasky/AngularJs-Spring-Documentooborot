@@ -41,7 +41,6 @@ public class JaxbContextHolderImpl implements JaxbContextHolder {
     }
     /**
      * {@inheritDoc}
-     * @return
      */
     @Override
     public JAXBContext getContext() {

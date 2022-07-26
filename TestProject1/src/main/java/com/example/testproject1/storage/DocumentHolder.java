@@ -19,7 +19,7 @@ public interface DocumentHolder {
 
     /**
      * Метод добавления документов в базу
-     * @param baseDocumentList
+     * @param baseDocumentList объект класса {@link BaseDocument}
      */
     void addAll(BaseDocument baseDocumentList);
 }

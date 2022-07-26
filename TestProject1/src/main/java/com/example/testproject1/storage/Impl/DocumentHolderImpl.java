@@ -28,7 +28,6 @@ public class DocumentHolderImpl implements DocumentHolder {
 
     /**
      * {@inheritDoc}
-     * @param baseDocumentList
      */
     @Override
     public void addAll(BaseDocument baseDocumentList) {

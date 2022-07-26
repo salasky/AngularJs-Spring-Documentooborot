@@ -35,7 +35,6 @@ public class OrganizationHolderImpl implements OrganizationHolder {
 
     /**
      * {@inheritDoc}
-     * @return
      */
     @Cacheable(cacheNames = "organization")
     @Override
