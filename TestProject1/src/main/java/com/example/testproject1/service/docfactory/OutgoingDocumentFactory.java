@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 public class OutgoingDocumentFactory extends DocumentFactory<OutgoingDocument.OutgoingBuilder> {
     /**
      * {@inheritDoc}
-     * @return
      */
     @Override
     public OutgoingDocument.OutgoingBuilder getBuilder() {
@@ -22,7 +21,6 @@ public class OutgoingDocumentFactory extends DocumentFactory<OutgoingDocument.Ou
     }
     /**
      * {@inheritDoc}
-     * @return
      */
     @Override
     public OutgoingDocument.OutgoingBuilder setFields(OutgoingDocument.OutgoingBuilder builder) {

@@ -93,6 +93,11 @@ public class IncomingDocument extends BaseDocument {
         return Objects.equals(sender, that.sender) && Objects.equals(destination, that.destination) && Objects.equals(number, that.number) && Objects.equals(dateOfRegistration, that.dateOfRegistration);
     }
 
+    /**
+     * Метод для реализации паттерна посетитель
+     * @param documentInspector
+     * @return
+     */
     @Override
     public String accept(DocumentInspector documentInspector) {
         return documentInspector.visit(this);
@@ -101,7 +106,6 @@ public class IncomingDocument extends BaseDocument {
     /**
      * {@inheritDoc}
      *
-     * @return
      */
     @Override
     public int hashCode() {

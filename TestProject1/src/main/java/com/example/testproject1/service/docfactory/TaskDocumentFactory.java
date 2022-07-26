@@ -14,7 +14,6 @@ public class TaskDocumentFactory extends DocumentFactory<TaskDocument.TaskBuilde
 
     /**
      * {@inheritDoc}
-     * @return
      */
     @Override
     public TaskDocument.TaskBuilder getBuilder() {
@@ -22,7 +21,6 @@ public class TaskDocumentFactory extends DocumentFactory<TaskDocument.TaskBuilde
     }
     /**
      * {@inheritDoc}
-     * @return
      */
     @Override
     public TaskDocument.TaskBuilder setFields(TaskDocument.TaskBuilder builder) {

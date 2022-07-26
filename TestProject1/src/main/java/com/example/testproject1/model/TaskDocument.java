@@ -115,7 +115,9 @@ public class TaskDocument extends BaseDocument {
     public int hashCode() {
         return Objects.hash(super.hashCode(), outDate, execPeriod, responsible, signOfControl, controlPerson);
     }
-
+    /**
+     *  Метод для реализации паттерна посетитель
+     */
     @Override
     public String accept(DocumentInspector documentInspector) {
         return documentInspector.visit(this);

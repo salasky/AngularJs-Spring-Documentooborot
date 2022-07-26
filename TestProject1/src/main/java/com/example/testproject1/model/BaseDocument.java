@@ -130,6 +130,10 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
         return Comparator.comparing(BaseDocument::getCreatingDate).thenComparing(BaseDocument::getRegNumber).compare(this, o);
     }
 
+    /**
+     * {@inheritDoc}
+     * @return
+     */
     @Override
     public String toString() {
         Object[] taskArgs = {id, name, text, regNumber, creatingDate, author};
