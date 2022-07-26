@@ -20,7 +20,9 @@ public class JaxbReaderImpl implements JaxbReader {
      * Путь к xml файлу с объектами {@link Person}
      */
     private final String PATH= this.getClass().getClassLoader().getResource("persons.xml").getPath();
-
+    /**
+     * Бин jaxb context-а
+     */
     @Autowired
     private JaxbContextHolder jaxbContextHolder;
     /**
@@ -34,7 +36,7 @@ public class JaxbReaderImpl implements JaxbReader {
             JAXBContext context = JAXBContext.newInstance(clazz);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             result= (T) unmarshaller.unmarshal(reader);
-            return result; // Ofcourse this is after conversion
+            return result;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
