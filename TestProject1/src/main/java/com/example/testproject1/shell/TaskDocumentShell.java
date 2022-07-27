@@ -12,10 +12,6 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
-import java.util.Date;
-import java.util.Random;
-import java.util.UUID;
-
 /**
  * Класс для работы с терминалом shell и запуска генерации документов и отчетов
  *

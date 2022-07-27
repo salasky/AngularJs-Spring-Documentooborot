@@ -1,4 +1,4 @@
-package com.example.testproject1.service.storage;
+package com.example.testproject1.service.documentService;
 
 import com.example.testproject1.model.documents.BaseDocument;
 

@@ -1,7 +1,7 @@
-package com.example.testproject1.service.storage.Impl;
+package com.example.testproject1.service.documentService.impl;
 
 import com.example.testproject1.model.documents.BaseDocument;
-import com.example.testproject1.service.storage.DocumentStorageService;
+import com.example.testproject1.service.documentService.DocumentStorageService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

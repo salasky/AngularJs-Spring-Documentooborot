@@ -1,4 +1,4 @@
-package com.example.testproject1.service.documents;
+package com.example.testproject1.service.documentService;
 
 import com.example.testproject1.exception.DocumentExistsException;
 import com.example.testproject1.model.documents.BaseDocument;

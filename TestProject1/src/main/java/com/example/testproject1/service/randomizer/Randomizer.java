@@ -2,7 +2,7 @@ package com.example.testproject1.service.randomizer;
 
 import com.example.testproject1.model.enums.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.storage.PersonStorageService;
+import com.example.testproject1.service.staffService.PersonStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -66,7 +66,7 @@ public class Randomizer {
     /**
      * Метод возврата рандомного регистрационного номера
      *
-     * @return возвращает рандомный рег.номер типа {@link Long} в промежутке от 0 до 10000
+     * @return возвращает рандомный рег.номер типа {@link Long} в промежутке от 0 до 10000 с использованием {@link Math#random()}
      */
     public Long getRandDocumentRegNumber() {
         return Long.valueOf((int) (Math.random() * 10000));
@@ -158,7 +158,7 @@ public class Randomizer {
     /**
      * Метод возвращает рандомный номер входящего документа
      *
-     * @return рандомный объект класса {@link Long} в промежутке от 0 до 10000
+     * @return рандомный объект класса {@link Long} в промежутке от 0 до 10000 с использованием {@link Math#random()}
      */
     public Long getIncomingDocumentNumber() {
         return Long.valueOf((int) (Math.random() * 10000));
