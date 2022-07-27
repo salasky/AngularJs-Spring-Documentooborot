@@ -111,10 +111,18 @@
         <rollback>
             <dropTable tableName="person"></dropTable>
         </rollback>
+    </changeSet>
 
+    <changeSet author="smigranov" id="6">
+        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="person" constraintName="FK_PERSON_DEPARTMENT"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="department" validate="true"/>
+    </changeSet>
 
-
-
+    <changeSet author="smigranov" id="7">
+        <addForeignKeyConstraint baseColumnNames="jobTittle_id" baseTableName="person" constraintName="FK_PERSON_JOBTITTLE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="jobTittle" validate="true"/>
     </changeSet>
 
 

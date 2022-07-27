@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+
+    <changeSet author="smigranov" id="10">
+        <createTable tableName="baseDocument">
+            <column name="id" type="VARCHAR(64)" autoIncrement="false">
+                <constraints primaryKey="true" primaryKeyName="PK_BASEDOCUMENT"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="regNumber" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creatingDate" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="baseDocument"></dropTable>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="smigranov" id="11">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="baseDocument" constraintName="FK_BASEDOCUMENT_PERSONAUTHOR"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="person" validate="true"/>
+    </changeSet>
+
+
+
+
+    <changeSet author="smigranov" id="8">
+        <createTable tableName="taskDocument">
+            <column name="baseDocument_id" type="VARCHAR(64)" autoIncrement="false">
+                <constraints primaryKey="true" primaryKeyName="PK_TASKDOCUMENT"/>
+            </column>
+            <column name="outDate" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="execPeriod" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="responsible_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="signOfControl" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="controlPerson_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="taskDocument"></dropTable>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="smigranov" id="9">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="taskDocument" constraintName="FK_TASK_PERSONAUTHOR"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="person" validate="true"/>
+    </changeSet>
+
+    <changeSet author="smigranov" id="10">
+        <addForeignKeyConstraint baseColumnNames="responsible_id" baseTableName="taskDocument" constraintName="FK_TASK_PERSONRESPONSIBLE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="person" validate="true"/>
+    </changeSet>
+
+    <changeSet author="smigranov" id="11">
+        <addForeignKeyConstraint baseColumnNames="controlPerson_id" baseTableName="taskDocument" constraintName="FK_TASK_PERSONCONTROL"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="person" validate="true"/>
+    </changeSet>
+
+
+
+
+
+    <changeSet author="smigranov" id="12">
+        <createTable tableName="incomingDocument">
+            <column name="id" type="VARCHAR(64)" autoIncrement="false">
+                <constraints primaryKey="true" primaryKeyName="PK_INCOMINGDOCUMENT"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="regNumber" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creatingDate" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sender_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="destination_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="number" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dateOfRegistration" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="taskDocument"></dropTable>
+        </rollback>
+    </changeSet>
+
+
+
+</databaseChangeLog>
