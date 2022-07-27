@@ -3,8 +3,7 @@ package com.example.testproject1.shell;
 
 import com.example.testproject1.service.documents.GenerateDocumentService;
 import com.example.testproject1.service.documents.GenerateReportService;
-import com.example.testproject1.storage.DocumentHolder;
-import com.example.testproject1.storage.OrganizationHolder;
+import com.example.testproject1.service.storage.DocumentStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +30,10 @@ public class TaskDocumentShell {
     @Autowired
     private GenerateReportService generateReportService;
     /**
-     * Autowired бина класса {@link DocumentHolder}
+     * Autowired бина класса {@link DocumentStorageService}
      */
     @Autowired
-    private DocumentHolder documentHolder;
+    private DocumentStorageService documentStorageService;
     /**
      * Shell метод генерации документов и создания отчетов по ним
      *
@@ -47,6 +46,6 @@ public class TaskDocumentShell {
         generateDocumentService.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
         generateReportService.generateReport();
-        documentHolder.getAll().clear();
+        documentStorageService.getAll().clear();
     }
 }

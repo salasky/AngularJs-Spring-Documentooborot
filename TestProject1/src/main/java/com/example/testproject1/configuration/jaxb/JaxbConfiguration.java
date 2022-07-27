@@ -1,4 +1,4 @@
-package com.example.testproject1.configuration;
+package com.example.testproject1.configuration.jaxb;
 
 import com.example.testproject1.model.DTO.DepartmentListXmlDTO;
 import com.example.testproject1.model.DTO.OrganizationListXmlDTO;

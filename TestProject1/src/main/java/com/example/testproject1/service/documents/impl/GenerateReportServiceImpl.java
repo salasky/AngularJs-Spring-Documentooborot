@@ -4,7 +4,7 @@ import com.example.testproject1.model.documents.BaseDocument;
 import com.example.testproject1.model.DTO.ReportForJsonDTO;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.documents.GenerateReportService;
-import com.example.testproject1.storage.DocumentHolder;
+import com.example.testproject1.service.storage.DocumentStorageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;
@@ -40,17 +40,17 @@ public class GenerateReportServiceImpl implements GenerateReportService {
             .enable(SerializationFeature.INDENT_OUTPUT);
 
     /**
-     * Autowired бина класса {@link DocumentHolder}
+     * Autowired бина класса {@link DocumentStorageService}
      */
     @Autowired
-    private DocumentHolder documentHolder;
+    private DocumentStorageService documentStorageService;
     /**
      * {@inheritDoc}
      */
     @Override
     public void generateReport() {
         Map<Person, List<BaseDocument>> totalMap = new HashMap<>();
-        for (BaseDocument baseDocument : documentHolder.getAll()) {
+        for (BaseDocument baseDocument : documentStorageService.getAll()) {
             //Если не существует запись для данного автора
             if (!totalMap.containsKey(baseDocument.getAuthor())) {
                 List<BaseDocument> list = new ArrayList<>();

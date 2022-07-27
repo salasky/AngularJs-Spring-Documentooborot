@@ -1,7 +1,6 @@
-package com.example.testproject1.storage;
+package com.example.testproject1.service.storage;
 
 import com.example.testproject1.model.documents.BaseDocument;
-import com.example.testproject1.model.staff.Department;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
  *
  * @author smigranov
  */
-public interface DocumentHolder {
+public interface DocumentStorageService {
     /**
      * Метод получения сохраненных документов
      * @return объект {@link List} содержащий объекты класса {@link BaseDocument}

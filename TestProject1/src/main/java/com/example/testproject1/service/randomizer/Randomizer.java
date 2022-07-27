@@ -2,7 +2,7 @@ package com.example.testproject1.service.randomizer;
 
 import com.example.testproject1.model.enums.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.storage.PersonHolder;
+import com.example.testproject1.service.storage.PersonStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class Randomizer {
      *Бин для получения списка пользователей
      */
     @Autowired
-    private PersonHolder personHolder;
+    private PersonStorageService personStorageService;
     /**
      * Лист названий документов из application.yaml
      */
@@ -88,7 +88,7 @@ public class Randomizer {
      * @return возвращает рандомного автора из XML файла
      */
     public Person getRandDocumentAuthor() {
-        return personHolder.getPersonList().get((int) (Math.random() * personHolder.getPersonList().size()));
+        return personStorageService.getPersonList().get((int) (Math.random() * personStorageService.getPersonList().size()));
     }
 
     /**
@@ -116,7 +116,7 @@ public class Randomizer {
      * @return возвращает рандомного автора из xml файла
      */
     public Person getRandTaskResponsible() {
-        return personHolder.getPersonList().get((int) (Math.random() * personHolder.getPersonList().size()));
+        return personStorageService.getPersonList().get((int) (Math.random() * personStorageService.getPersonList().size()));
     }
 
     /**
@@ -134,7 +134,7 @@ public class Randomizer {
      * @return возвращает рандомного контролирующего из XML
      */
     public Person getRandTaskControlPerson() {
-        return personHolder.getPersonList().get((int) (Math.random() * personHolder.getPersonList().size()));
+        return personStorageService.getPersonList().get((int) (Math.random() * personStorageService.getPersonList().size()));
     }
 
     /**
@@ -143,7 +143,7 @@ public class Randomizer {
      * @return рандомный объект класса {@link Person} из persons.xml
      */
     public Person getRandIncomingDocumentSender() {
-        return personHolder.getPersonList().get((int) (Math.random() * personHolder.getPersonList().size()));
+        return personStorageService.getPersonList().get((int) (Math.random() * personStorageService.getPersonList().size()));
     }
 
     /**
@@ -152,7 +152,7 @@ public class Randomizer {
      * @return возвращает рандомного получателя из XML
      */
     public Person getIncomingDocumentDestination() {
-        return personHolder.getPersonList().get((int) (Math.random() * personHolder.getPersonList().size()));
+        return personStorageService.getPersonList().get((int) (Math.random() * personStorageService.getPersonList().size()));
     }
     /**
      * Метод возвращает рандомный номер входящего документа
@@ -180,7 +180,7 @@ public class Randomizer {
      *  @return рандомный объект класса {@link Person} из person.xml
      */
     public Person getRandOutgoingDocumentSender() {
-        return personHolder.getPersonList().get((int) (Math.random() * personHolder.getPersonList().size()));
+        return personStorageService.getPersonList().get((int) (Math.random() * personStorageService.getPersonList().size()));
     }
 
     /**

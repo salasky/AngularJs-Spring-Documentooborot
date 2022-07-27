@@ -1,11 +1,10 @@
-package com.example.testproject1.storage.Impl;
+package com.example.testproject1.service.storage.Impl;
 
-import com.example.testproject1.model.DTO.DepartmentListXmlDTO;
+import com.example.testproject1.configuration.cache.CaffeineConfig;
 import com.example.testproject1.model.DTO.OrganizationListXmlDTO;
-import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.jaxb.JaxbReader;
-import com.example.testproject1.storage.OrganizationHolder;
+import com.example.testproject1.service.storage.OrganizationStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,8 @@ import java.util.List;
  * @author smigranov
  */
 @Service
-public class OrganizationHolderImpl implements OrganizationHolder {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationHolderImpl.class);
+public class OrganizationStorageServiceImpl implements OrganizationStorageService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationStorageServiceImpl.class);
     /**
      * Бин для чтения информации из xml файла
      */
@@ -35,6 +34,7 @@ public class OrganizationHolderImpl implements OrganizationHolder {
 
     /**
      * {@inheritDoc}
+     * Конфигурая кэширования в классе {@link CaffeineConfig}
      */
     @Cacheable(cacheNames = "organization")
     @Override

@@ -1,7 +1,6 @@
-package com.example.testproject1.storage;
+package com.example.testproject1.service.storage;
 
 import com.example.testproject1.model.staff.Department;
-import com.example.testproject1.model.staff.Person;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
  *
  * @author smigranov
  */
-public interface DepartmentHolder {
+public interface DepartmentStorageService {
     /**
      * Метод получения сохраненных department
      *
