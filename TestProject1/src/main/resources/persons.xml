@@ -60,4 +60,16 @@
         <phoneNumber>84243546346</phoneNumber>
         <photo>http//:hdf.png</photo>
     </person>
+    <person id="2871feff-1bca-4f62-a148-91f03a26e7f5">
+        <secondName>Petrova</secondName>
+        <firstName>Anna</firstName>
+        <lastName>Nikolayevna</lastName>
+        <jobTittle>
+            <uuid>5c7e2780-6b60-492d-9ccf-95940d4a300d</uuid>
+            <jobTittleName>QA</jobTittleName>
+        </jobTittle>
+        <birthDay>1995-09-11T12:29:15.873+04:00</birthDay>
+        <phoneNumber>842433546346</phoneNumber>
+        <photo>http//:hrdrf.png</photo>
+    </person>
 </personListXmlDTO>
