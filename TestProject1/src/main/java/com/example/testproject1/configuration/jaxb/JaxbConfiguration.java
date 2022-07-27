@@ -12,11 +12,15 @@ import org.springframework.context.annotation.Configuration;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
+/**
+ * Класс для инициализации JAXBContext
+ *
+ * @author smigranov
+ */
 @Configuration
 public class JaxbConfiguration {
     @Bean(name = "BeanJaxbContext")
-    public JAXBContext getContext()
-    {
+    public JAXBContext getContext() {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(PersonListXmlDTO.class, DepartmentListXmlDTO.class
                     , OrganizationListXmlDTO.class, Person.class, Department.class, Organization.class);

@@ -1,10 +1,10 @@
-package com.example.testproject1.service.documents.impl;
+package com.example.testproject1.service.documentService.impl;
 
 import com.example.testproject1.model.documents.BaseDocument;
 import com.example.testproject1.model.DTO.ReportForJsonDTO;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.documents.GenerateReportService;
-import com.example.testproject1.service.storage.DocumentStorageService;
+import com.example.testproject1.service.documentService.GenerateReportService;
+import com.example.testproject1.service.documentService.DocumentStorageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;

@@ -1,10 +1,10 @@
-package com.example.testproject1.service.documents.impl;
+package com.example.testproject1.service.documentService.impl;
 
 import com.example.testproject1.exception.DocumentExistsException;
 import com.example.testproject1.model.documents.BaseDocument;
 import com.example.testproject1.service.docfactory.Factory;
-import com.example.testproject1.service.documents.DocumentService;
-import com.example.testproject1.service.documents.GenerateDocumentService;
+import com.example.testproject1.service.documentService.DocumentService;
+import com.example.testproject1.service.documentService.GenerateDocumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

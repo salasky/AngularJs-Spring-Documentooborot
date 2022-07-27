@@ -1,17 +1,16 @@
-package com.example.testproject1.service.storage.Impl;
+package com.example.testproject1.service.staffService.Impl;
 
 import com.example.testproject1.configuration.cache.CaffeineConfig;
 import com.example.testproject1.model.DTO.DepartmentListXmlDTO;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.jaxb.JaxbReader;
-import com.example.testproject1.service.storage.DepartmentStorageService;
+import com.example.testproject1.service.staffService.DepartmentStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 /**
  * Класс сохранения и получения объектов {@link Department}
@@ -26,10 +25,6 @@ public class DepartmentStorageServiceImpl implements DepartmentStorageService {
      */
     @Autowired
     private JaxbReader jaxbReader;
-    /**
-     * Лист для сохранения объектов {@link Department}
-     */
-    public List<Department> departmentListList = new ArrayList<>();
 
     /**
      * {@inheritDoc}
@@ -40,8 +35,8 @@ public class DepartmentStorageServiceImpl implements DepartmentStorageService {
     public List<Department> getDepartmentList() {
         LOGGER.info("Begin find Department ");
         DepartmentListXmlDTO departmentListXmlDTO = jaxbReader.jaxbXMLToObject();
-        departmentListList= departmentListXmlDTO.getDepartmentList();
+        List<Department> departmentList= departmentListXmlDTO.getDepartmentList();
         LOGGER.info("Find Department result");
-        return departmentListList;
+        return departmentList;
     }
 }
