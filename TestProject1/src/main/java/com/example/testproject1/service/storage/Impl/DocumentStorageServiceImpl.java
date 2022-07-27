@@ -1,7 +1,7 @@
-package com.example.testproject1.storage.Impl;
+package com.example.testproject1.service.storage.Impl;
 
 import com.example.testproject1.model.documents.BaseDocument;
-import com.example.testproject1.storage.DocumentHolder;
+import com.example.testproject1.service.storage.DocumentStorageService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
  * @author smigranov
  */
 @Service
-public class DocumentHolderImpl implements DocumentHolder {
+public class DocumentStorageServiceImpl implements DocumentStorageService {
     /**
      * Лист для сохранения объектов унаследованных от {@link BaseDocument}
      */

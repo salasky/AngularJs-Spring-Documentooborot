@@ -1,6 +1,5 @@
 package com.example.testproject1.service.jaxb;
 
-import com.example.testproject1.storage.JaxbContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,24 +16,24 @@ import java.io.FileReader;
 @Service
 public class JaxbReaderImpl implements JaxbReader {
     /**
-     * Путь к xml файлу с объектами
+     * Имя xml файла
      */
-    @Value("${jaxb.path}")
-    private String path;
+    @Value("${jaxb.fileName}")
+    private String fileName;
     /**
      * Бин jaxb context-а
      */
     @Autowired
-    private JaxbContextHolder jaxbContextHolder;
+    private JAXBContext jaxbContext;
     /**
      * {@inheritDoc}
      */
     @Override
-    public  <T> T jaxbXMLToObject(Class<T> clazz) {
+    public  <T> T jaxbXMLToObject() {
+        String path=this.getClass().getClassLoader().getResource(fileName).getPath();
         try (FileReader reader=new FileReader(path)) {
             T result = null;
-            JAXBContext context = JAXBContext.newInstance(clazz);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             result= (T) unmarshaller.unmarshal(reader);
             return result;
         } catch (Exception e) {

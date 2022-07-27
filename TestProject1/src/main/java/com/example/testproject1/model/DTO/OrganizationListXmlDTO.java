@@ -5,6 +5,7 @@ import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class OrganizationListXmlDTO {
      * List Организаций
      */
     @XmlElement(name = "organization")
+    @XmlElementWrapper(name = "organizationList")
     private List<Organization> list=new ArrayList<>();
     /**
      * Метод получения списка организаций
