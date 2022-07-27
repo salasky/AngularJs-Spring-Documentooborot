@@ -88,7 +88,7 @@ public class Randomizer {
      * @return возвращает рандомного автора из XML файла
      */
     public Person getRandDocumentAuthor() {
-        return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
+        return personHolder.getPersonList().get((int) (Math.random() * personHolder.getPersonList().size()));
     }
 
     /**
@@ -116,7 +116,7 @@ public class Randomizer {
      * @return возвращает рандомного автора из xml файла
      */
     public Person getRandTaskResponsible() {
-        return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
+        return personHolder.getPersonList().get((int) (Math.random() * personHolder.getPersonList().size()));
     }
 
     /**
@@ -134,7 +134,7 @@ public class Randomizer {
      * @return возвращает рандомного контролирующего из XML
      */
     public Person getRandTaskControlPerson() {
-        return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
+        return personHolder.getPersonList().get((int) (Math.random() * personHolder.getPersonList().size()));
     }
 
     /**
@@ -143,7 +143,7 @@ public class Randomizer {
      * @return рандомный объект класса {@link Person} из persons.xml
      */
     public Person getRandIncomingDocumentSender() {
-        return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
+        return personHolder.getPersonList().get((int) (Math.random() * personHolder.getPersonList().size()));
     }
 
     /**
@@ -152,7 +152,7 @@ public class Randomizer {
      * @return возвращает рандомного получателя из XML
      */
     public Person getIncomingDocumentDestination() {
-        return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
+        return personHolder.getPersonList().get((int) (Math.random() * personHolder.getPersonList().size()));
     }
     /**
      * Метод возвращает рандомный номер входящего документа
@@ -180,7 +180,7 @@ public class Randomizer {
      *  @return рандомный объект класса {@link Person} из person.xml
      */
     public Person getRandOutgoingDocumentSender() {
-        return personHolder.getPersonListList().get((int) (Math.random() * personHolder.getPersonListList().size()));
+        return personHolder.getPersonList().get((int) (Math.random() * personHolder.getPersonList().size()));
     }
 
     /**

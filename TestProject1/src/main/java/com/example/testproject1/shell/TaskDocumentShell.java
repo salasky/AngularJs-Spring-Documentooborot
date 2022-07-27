@@ -3,7 +3,6 @@ package com.example.testproject1.shell;
 
 import com.example.testproject1.service.documents.GenerateDocumentService;
 import com.example.testproject1.service.documents.GenerateReportService;
-import com.example.testproject1.storage.DepartmentHolder;
 import com.example.testproject1.storage.DocumentHolder;
 import com.example.testproject1.storage.OrganizationHolder;
 import org.slf4j.Logger;
@@ -36,8 +35,6 @@ public class TaskDocumentShell {
      */
     @Autowired
     private DocumentHolder documentHolder;
-    @Autowired
-    private OrganizationHolder organizationHolder;
     /**
      * Shell метод генерации документов и создания отчетов по ним
      *

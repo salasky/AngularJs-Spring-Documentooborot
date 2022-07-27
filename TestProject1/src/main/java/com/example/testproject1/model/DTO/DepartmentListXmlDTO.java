@@ -3,6 +3,7 @@ package com.example.testproject1.model.DTO;
 import com.example.testproject1.model.staff.Department;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class DepartmentListXmlDTO {
     /**
      * List Подразделений
      */
+    @XmlElementWrapper(name = "departmentList")
     @XmlElement(name = "department")
     private List<Department> list=new ArrayList<>();
 

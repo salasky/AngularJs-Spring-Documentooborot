@@ -36,9 +36,9 @@ public class PersonHolderImpl implements PersonHolder {
      */
     @Cacheable(cacheNames = "person")
     @Override
-    public List<Person> getPersonListList() {
+    public List<Person> getPersonList() {
         LOGGER.info("Begin find Person ");
-        PersonListXmlDTO personListXmlDTO = jaxbReader.jaxbXMLToObject(PersonListXmlDTO.class);
+        PersonListXmlDTO personListXmlDTO = jaxbReader.jaxbXMLToObject();
         personList= personListXmlDTO.getPersonList();
         LOGGER.info("Find Person result");
         return personList;

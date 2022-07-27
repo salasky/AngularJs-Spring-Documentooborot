@@ -37,7 +37,7 @@ public class DepartmentHolderImpl implements DepartmentHolder {
     @Override
     public List<Department> getDepartmentList() {
         LOGGER.info("Begin find Department ");
-        DepartmentListXmlDTO departmentListXmlDTO = jaxbReader.jaxbXMLToObject(DepartmentListXmlDTO.class);
+        DepartmentListXmlDTO departmentListXmlDTO = jaxbReader.jaxbXMLToObject();
         departmentListList= departmentListXmlDTO.getDepartmentList();
         LOGGER.info("Find Department result");
         return departmentListList;

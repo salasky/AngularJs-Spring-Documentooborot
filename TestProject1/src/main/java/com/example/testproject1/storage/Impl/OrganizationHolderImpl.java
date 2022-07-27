@@ -40,7 +40,7 @@ public class OrganizationHolderImpl implements OrganizationHolder {
     @Override
     public List<Organization> getOrganizationList() {
         LOGGER.info("Begin find Organization ");
-        OrganizationListXmlDTO organizationListXmlDTO = jaxbReader.jaxbXMLToObject(OrganizationListXmlDTO.class);
+        OrganizationListXmlDTO organizationListXmlDTO = jaxbReader.jaxbXMLToObject();
         organizationListList= organizationListXmlDTO.getOrganizationList();
         LOGGER.info("Find Organization result");
         return organizationListList;

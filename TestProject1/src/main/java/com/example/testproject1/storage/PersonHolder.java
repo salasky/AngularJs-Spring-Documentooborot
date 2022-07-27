@@ -13,5 +13,5 @@ public interface PersonHolder {
      *
      * @return объект {@link List} содержащий объекты класса {@link Person}
      */
-    List<Person> getPersonListList();
+    List<Person> getPersonList();
 }

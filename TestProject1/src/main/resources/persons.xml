@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <personListXmlDTO>
+    <personList>
     <person id="9245da16-15fa-4eed-a1b7-37aa78216e23">
         <secondName>Ivanov</secondName>
         <firstName>Ivan</firstName>
@@ -72,4 +73,5 @@
         <phoneNumber>842433546346</phoneNumber>
         <photo>http//:hrdrf.png</photo>
     </person>
+</personList>
 </personListXmlDTO>

@@ -8,4 +8,4 @@ doc:
   documentText: Повышение уровня гражданского сознания, Системы обучения кадров, Количественный рост, Значимость этих проблем ,Соображения высшего порядка
 
 jaxb:
-  path: C:\\Users\\smigranov\\Desktop\\TestProject\\TestProject\\testrepo\\TestProject1\\src\\main\\resources\\persons.xml
+  fileName: persons.xml
