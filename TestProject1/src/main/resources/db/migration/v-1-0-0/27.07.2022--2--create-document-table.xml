@@ -40,10 +40,7 @@
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
-
-
-
-    <changeSet author="smigranov" id="8">
+    <changeSet author="smigranov" id="12">
         <createTable tableName="taskDocument">
             <column name="baseDocument_id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_TASKDOCUMENT"/>
@@ -69,47 +66,30 @@
         </rollback>
     </changeSet>
 
-    <changeSet author="smigranov" id="9">
-        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="taskDocument" constraintName="FK_TASK_PERSONAUTHOR"
+    <changeSet author="smigranov" id="13">
+        <addForeignKeyConstraint baseColumnNames="baseDocument_id" baseTableName="taskDocument" constraintName="FK_TASK_BASEDOCUMENT"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-                                 referencedColumnNames="id" referencedTableName="person" validate="true"/>
+                                 referencedColumnNames="id" referencedTableName="baseDocument" validate="true"/>
     </changeSet>
 
-    <changeSet author="smigranov" id="10">
+    <changeSet author="smigranov" id="14">
         <addForeignKeyConstraint baseColumnNames="responsible_id" baseTableName="taskDocument" constraintName="FK_TASK_PERSONRESPONSIBLE"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
-    <changeSet author="smigranov" id="11">
-        <addForeignKeyConstraint baseColumnNames="controlPerson_id" baseTableName="taskDocument" constraintName="FK_TASK_PERSONCONTROL"
+    <changeSet author="smigranov" id="15">
+        <addForeignKeyConstraint baseColumnNames="controlPerson_id" baseTableName="taskDocument" constraintName="FK_TASKDOCUMENT_PERSONCONTROL"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
 
 
-
-
-    <changeSet author="smigranov" id="12">
+    <changeSet author="smigranov" id="16">
         <createTable tableName="incomingDocument">
-            <column name="id" type="VARCHAR(64)" autoIncrement="false">
+            <column name="baseDocument_id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_INCOMINGDOCUMENT"/>
-            </column>
-            <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="text" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="regNumber" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="creatingDate" type="TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
-            <column name="author_id" type="VARCHAR(64)">
-                <constraints nullable="false"/>
             </column>
             <column name="sender_id" type="VARCHAR(64)">
                 <constraints nullable="false"/>
@@ -125,10 +105,63 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="taskDocument"></dropTable>
+            <dropTable tableName="incomingDocument"></dropTable>
         </rollback>
     </changeSet>
 
 
+
+
+    <changeSet author="smigranov" id="17">
+        <addForeignKeyConstraint baseColumnNames="baseDocument_id" baseTableName="incomingDocument" constraintName="FK_INCOMINGDOCUMENT_BASEDOCUMENT"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="baseDocument" validate="true"/>
+    </changeSet>
+
+    <changeSet author="smigranov" id="18">
+        <addForeignKeyConstraint baseColumnNames="sender_id" baseTableName="incomingDocument" constraintName="FK_INCOMINGDOCUMENT_PERSONSENDER"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="person" validate="true"/>
+    </changeSet>
+
+    <changeSet author="smigranov" id="19">
+        <addForeignKeyConstraint baseColumnNames="destination_id" baseTableName="incomingDocument" constraintName="FK_INCOMINGDOCUMENT_PERSONDESTINATION"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="person" validate="true"/>
+    </changeSet>
+
+
+
+    <changeSet author="smigranov" id="20">
+        <createTable tableName="outgoingDocument">
+            <column name="baseDocument_id" type="VARCHAR(64)" autoIncrement="false">
+                <constraints primaryKey="true" primaryKeyName="PK_OUTGOINGDOCUMENT"/>
+            </column>
+            <column name="sender_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deliveryType" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="outgoingDocument"></dropTable>
+        </rollback>
+    </changeSet>
+
+
+
+
+    <changeSet author="smigranov" id="21">
+        <addForeignKeyConstraint baseColumnNames="baseDocument_id" baseTableName="outgoingDocument" constraintName="FK_OUTGOINGDOCUMENT_BASEDOCUMENT"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="baseDocument" validate="true"/>
+    </changeSet>
+
+    <changeSet author="smigranov" id="22">
+        <addForeignKeyConstraint baseColumnNames="sender_id" baseTableName="outgoingDocument" constraintName="FK_OUTGOINGDOCUMENT_PERSONSENDER"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="person" validate="true"/>
+    </changeSet>
 
 </databaseChangeLog>

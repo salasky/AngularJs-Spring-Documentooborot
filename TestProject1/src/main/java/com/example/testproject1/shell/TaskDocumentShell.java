@@ -1,10 +1,10 @@
 package com.example.testproject1.shell;
 
 
-import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.documents.GenerateDocumentService;
-import com.example.testproject1.service.documents.GenerateReportService;
-import com.example.testproject1.service.storage.DocumentStorageService;
+
+import com.example.testproject1.service.documentService.DocumentStorageService;
+import com.example.testproject1.service.documentService.GenerateDocumentService;
+import com.example.testproject1.service.documentService.GenerateReportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

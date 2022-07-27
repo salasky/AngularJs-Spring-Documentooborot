@@ -23,7 +23,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="contactNumber" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
         <rollback>
@@ -46,7 +46,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="contactNumber" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="organization_id" type="VARCHAR(64)">
                 <constraints nullable="false"/>
@@ -101,7 +101,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="phoneNumber" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
 
             <column name="birthDay" type="date">
@@ -124,7 +124,5 @@
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="jobTittle" validate="true"/>
     </changeSet>
-
-
 
 </databaseChangeLog>

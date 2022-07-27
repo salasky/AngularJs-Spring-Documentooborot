@@ -19,7 +19,7 @@ import javax.xml.bind.JAXBException;
  */
 @Configuration
 public class JaxbConfiguration {
-    @Bean(name = "BeanJaxbContext")
+    @Bean
     public JAXBContext getContext() {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(PersonListXmlDTO.class, DepartmentListXmlDTO.class
