@@ -7,7 +7,7 @@
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
       http://www.liquibase.org/xml/ns/pro
       http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
-    <include file="src/main/resources/db/migration/v-1-0-0/26.07.2022--1--create-staff-table.xml"/>
-    <include file="src/main/resources/db/migration/v-1-0-0/27.07.2022--2--create-document-table.xml"/>
+    <include file="26.07.2022--1--create-staff-table.xml"  relativeToChangelogFile="true"/>
+    <include file="27.07.2022--2--create-document-table.xml"  relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

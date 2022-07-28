@@ -36,7 +36,7 @@
             <column name="id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_DEPARTMENT"/>
             </column>
-            <column name="fullName" type="VARCHAR(255)">
+            <column name="fullname" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="shortName" type="VARCHAR(64)">

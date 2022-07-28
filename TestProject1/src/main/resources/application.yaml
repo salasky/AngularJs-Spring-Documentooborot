@@ -2,16 +2,17 @@ spring:
   main:
     allow-circular-references: true
 
-  jpa:
-    database: POSTGRESQL
-    show-sql: true
-    hibernate:
-      ddl-auto: none
   datasource:
     url: jdbc:postgresql://localhost:5432/test
     username: postgres
     password: qwerty
     driverClassName: org.postgresql.Driver
+
+  liquibase:
+    enabled: true
+    drop-first: false
+    change-log: classpath:db/migration/master.xml
+    default-schema: public
 
 
 doc:

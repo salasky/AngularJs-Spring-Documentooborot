@@ -1,5 +1,6 @@
 package com.example.testproject1.model.staff;
 
+import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -19,6 +20,7 @@ public class Department extends Staff {
     /**
      * Полное название департамента
      */
+    @Column(name ="fullname")
     private String fullName;
     /**
      * Короткое название департамента
@@ -107,10 +109,10 @@ public class Department extends Staff {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {id, fullName, shortName, supervisor, contactNumber};
+        Object[] taskArgs = {id, fullName, shortName, supervisor, contactNumber,organization};
         MessageFormat form = new MessageFormat(
                 "Department id= {0} fullName= {1}, shortName= {2}, supervisor= {3}" +
-                        ", contactNumber= {4}");
+                        ", contactNumber= {4},organization = {5}");
         return form.format(taskArgs);
     }
 }

@@ -84,8 +84,6 @@
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
-
-
     <changeSet author="smigranov" id="16">
         <createTable tableName="incomingDocument">
             <column name="baseDocument_id" type="VARCHAR(64)" autoIncrement="false">
@@ -109,9 +107,6 @@
         </rollback>
     </changeSet>
 
-
-
-
     <changeSet author="smigranov" id="17">
         <addForeignKeyConstraint baseColumnNames="baseDocument_id" baseTableName="incomingDocument" constraintName="FK_INCOMINGDOCUMENT_BASEDOCUMENT"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
@@ -130,8 +125,6 @@
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
-
-
     <changeSet author="smigranov" id="20">
         <createTable tableName="outgoingDocument">
             <column name="baseDocument_id" type="VARCHAR(64)" autoIncrement="false">
@@ -148,9 +141,6 @@
             <dropTable tableName="outgoingDocument"></dropTable>
         </rollback>
     </changeSet>
-
-
-
 
     <changeSet author="smigranov" id="21">
         <addForeignKeyConstraint baseColumnNames="baseDocument_id" baseTableName="outgoingDocument" constraintName="FK_OUTGOINGDOCUMENT_BASEDOCUMENT"
