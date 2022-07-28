@@ -30,7 +30,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     /**
      * Путь к папке с json файлами
      */
-    private static String SHORTPATH="./src/main/resources/";
+    private static String SHORTPATH = "./src/main/resources/";
     private static final Logger LOGGER = LoggerFactory.getLogger(GenerateReportServiceImpl.class);
     /**
      * Объект для библиотеки Fasterxml Jackson
@@ -44,6 +44,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
      */
     @Autowired
     private DocumentStorageService documentStorageService;
+
     /**
      * {@inheritDoc}
      */
@@ -69,15 +70,16 @@ public class GenerateReportServiceImpl implements GenerateReportService {
             writeReportInFile(entry);
         }
     }
-    public void writeReportInFile(Map.Entry<Person, List<BaseDocument>> entry){
+
+    public void writeReportInFile(Map.Entry<Person, List<BaseDocument>> entry) {
         ReportForJsonDTO reportForJsonDTO = ReportForJsonDTO.newBuilder()
                 .setPerson(entry.getKey())
                 .setDocumentList(entry.getValue())
                 .build();
-        String secondName=entry.getKey().getSecondName();
+        String secondName = entry.getKey().getSecondName();
         //Полный путь к файлу
-        String filepathFull=SHORTPATH+secondName+".json";
-        LOGGER.info("Создаем файл "+secondName+".json");
+        String filepathFull = SHORTPATH + secondName + ".json";
+        LOGGER.info("Создаем файл " + secondName + ".json");
         try {
             objectMapper.writeValue(new File(filepathFull), reportForJsonDTO);
         } catch (IOException e) {

@@ -18,6 +18,7 @@ public class TaskDocumentFactory extends DocumentFactory<TaskDocument.TaskBuilde
     public TaskDocument.TaskBuilder getBuilder() {
         return TaskDocument.newBuilder();
     }
+
     /**
      * {@inheritDoc}
      */

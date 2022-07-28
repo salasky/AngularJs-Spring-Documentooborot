@@ -38,10 +38,6 @@ public class Organization extends Staff {
         return super.getId();
     }
 
-    public void setId(UUID id) {
-        super.setId(id);
-    }
-
     @XmlElement(name = "fullName")
     public String getFullName() {
         return fullName;

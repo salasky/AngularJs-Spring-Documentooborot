@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Интерфейс для получения списка {@link Person}
+ *
+ * @author smigranov
  */
 public interface PersonStorageService {
     /**

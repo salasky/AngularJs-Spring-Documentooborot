@@ -15,19 +15,23 @@ public abstract class DocumentFactory<T extends BaseDocument.BaseDocumentBuilder
      */
     @Autowired
     protected Randomizer randomizer;
+
     /**
      * @return Возвращает экземпляр нужно билдера
      */
     public abstract T getBuilder();
 
     /**
-     *  Метод который заполняет особенности конкретной реализации
+     * Метод который заполняет особенности конкретной реализации
+     *
      * @param builder
      * @return
      */
     public abstract T setFields(T builder);
+
     /**
      * Собирает готовый документ с полями базового класса
+     *
      * @param builder
      * @return
      */
@@ -41,6 +45,7 @@ public abstract class DocumentFactory<T extends BaseDocument.BaseDocumentBuilder
                 .setDocAuthor(randomizer.getRandDocumentAuthor())
                 .build();
     }
+
     /**
      * {@inheritDoc}
      */

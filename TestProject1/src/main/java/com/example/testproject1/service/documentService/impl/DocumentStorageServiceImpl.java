@@ -18,6 +18,7 @@ public class DocumentStorageServiceImpl implements DocumentStorageService {
      * Лист для сохранения объектов унаследованных от {@link BaseDocument}
      */
     private List<BaseDocument> documentList = new ArrayList<>();
+
     /**
      * {@inheritDoc}
      */

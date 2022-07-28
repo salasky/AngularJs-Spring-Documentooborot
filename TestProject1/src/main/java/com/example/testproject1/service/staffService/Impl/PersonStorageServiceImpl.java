@@ -26,6 +26,7 @@ public class PersonStorageServiceImpl implements PersonStorageService {
      */
     @Autowired
     private JaxbReader jaxbReader;
+
     /**
      * {@inheritDoc}
      * Конфигурая кэширования в классе {@link CaffeineConfig}

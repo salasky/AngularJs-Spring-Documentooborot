@@ -30,12 +30,12 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public void add(BaseDocument baseDocument) throws DocumentExistsException {
         List<BaseDocument> documentList = documentStorageService.getAll();
-        Optional<BaseDocument> optionalBaseDocument= documentList
+        Optional<BaseDocument> optionalBaseDocument = documentList
                 .stream()
-                .filter(s->s.getRegNumber()==baseDocument.getRegNumber())
+                .filter(s -> s.getRegNumber() == baseDocument.getRegNumber())
                 .findFirst();
-        if(optionalBaseDocument.isPresent()){
-            throw new DocumentExistsException(baseDocument.getRegNumber(), MessageFormat.format("Document number {0}} exist",baseDocument.getRegNumber()));
+        if (optionalBaseDocument.isPresent()) {
+            throw new DocumentExistsException(baseDocument.getRegNumber(), MessageFormat.format("Document number {0}} exist", baseDocument.getRegNumber()));
         }
         documentStorageService.addAll(baseDocument);
     }

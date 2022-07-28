@@ -32,6 +32,7 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
      */
     @Autowired
     private List<Factory<BaseDocument>> documentFactoryList;
+
     /**
      * {@inheritDoc}
      */

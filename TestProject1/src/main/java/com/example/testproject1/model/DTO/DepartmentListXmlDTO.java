@@ -20,7 +20,7 @@ public class DepartmentListXmlDTO {
      */
     @XmlElementWrapper(name = "departmentList")
     @XmlElement(name = "department")
-    private List<Department> list=new ArrayList<>();
+    private List<Department> list = new ArrayList<>();
 
     public DepartmentListXmlDTO() {
     }
@@ -31,6 +31,7 @@ public class DepartmentListXmlDTO {
 
     /**
      * Метод получения списка подразделений
+     *
      * @return {@link List} объектов {@link Department}
      */
     public List<Department> getDepartmentList() {

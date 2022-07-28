@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 /**
  * Класс сохранения и получения объектов {@link Department}
  *
@@ -35,7 +36,7 @@ public class DepartmentStorageServiceImpl implements DepartmentStorageService {
     public List<Department> getDepartmentList() {
         LOGGER.info("Begin find Department ");
         DepartmentListXmlDTO departmentListXmlDTO = jaxbReader.jaxbXMLToObject();
-        List<Department> departmentList= departmentListXmlDTO.getDepartmentList();
+        List<Department> departmentList = departmentListXmlDTO.getDepartmentList();
         LOGGER.info("Find Department result");
         return departmentList;
     }

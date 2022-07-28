@@ -38,8 +38,9 @@ public class ReportForJsonDTO {
     public void setDocumentList(List<BaseDocument> documentList) {
         this.documentList = documentList;
     }
-    public static ReporBuilder newBuilder() {
-        return new ReportForJsonDTO().new ReporBuilder();
+
+    public static ReportBuilder newBuilder() {
+        return new ReportForJsonDTO().new ReportBuilder();
     }
 
     /**
@@ -47,23 +48,24 @@ public class ReportForJsonDTO {
      *
      * @author smigranov
      */
-    public class ReporBuilder {
-        private ReporBuilder() {
+    public class ReportBuilder {
+        private ReportBuilder() {
             // private constructor
         }
 
-        public ReporBuilder setPerson(Person person) {
+        public ReportBuilder setPerson(Person person) {
             ReportForJsonDTO.this.person = person;
             return this;
         }
 
-        public ReporBuilder setDocumentList(List<BaseDocument> baseDocumentsList) {
+        public ReportBuilder setDocumentList(List<BaseDocument> baseDocumentsList) {
             ReportForJsonDTO.this.documentList = baseDocumentsList;
             return this;
         }
 
         /**
          * Метод build
+         *
          * @return Возвращает объект класса {@link ReportForJsonDTO}
          */
         public ReportForJsonDTO build() {

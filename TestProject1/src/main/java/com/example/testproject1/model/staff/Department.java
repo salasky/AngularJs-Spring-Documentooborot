@@ -33,10 +33,6 @@ public class Department extends Staff {
      */
     private String contactNumber;
 
-    public void setId(UUID id) {
-        super.setId(id);
-    }
-
     @XmlAttribute(name = "id")
     public UUID getId() {
         return super.getId();

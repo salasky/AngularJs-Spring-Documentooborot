@@ -20,7 +20,7 @@ import java.util.UUID;
 @Service
 public class Randomizer {
     /**
-     *Бин для получения списка пользователей
+     * Бин для получения списка пользователей
      */
     @Autowired
     private PersonStorageService personStorageService;
@@ -154,6 +154,7 @@ public class Randomizer {
     public Person getIncomingDocumentDestination() {
         return personStorageService.getPersonList().get((int) (Math.random() * personStorageService.getPersonList().size()));
     }
+
     /**
      * Метод возвращает рандомный номер входящего документа
      *
@@ -177,7 +178,7 @@ public class Randomizer {
     /**
      * Метод возвращает рандомного адресата
      *
-     *  @return рандомный объект класса {@link Person} из person.xml
+     * @return рандомный объект класса {@link Person} из person.xml
      */
     public Person getRandOutgoingDocumentSender() {
         return personStorageService.getPersonList().get((int) (Math.random() * personStorageService.getPersonList().size()));

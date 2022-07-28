@@ -17,6 +17,7 @@ public class IncomingDocumentFactory extends DocumentFactory<IncomingDocument.In
     public IncomingDocument.IncomingDocumentBuilder getBuilder() {
         return IncomingDocument.newBuilder();
     }
+
     /**
      * {@inheritDoc}
      */
