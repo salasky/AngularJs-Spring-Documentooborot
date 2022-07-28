@@ -22,9 +22,11 @@ public class OrganizationListXmlDTO {
      */
     @XmlElement(name = "organization")
     @XmlElementWrapper(name = "organizationList")
-    private List<Organization> list=new ArrayList<>();
+    private List<Organization> list = new ArrayList<>();
+
     /**
      * Метод получения списка организаций
+     *
      * @return {@link List} объектов {@link Organization}
      */
     public List<Organization> getOrganizationList() {

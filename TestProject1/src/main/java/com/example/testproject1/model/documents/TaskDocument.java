@@ -113,8 +113,10 @@ public class TaskDocument extends BaseDocument {
     public int hashCode() {
         return Objects.hash(super.hashCode(), outDate, execPeriod, responsible, signOfControl, controlPerson);
     }
+
     /**
      * {@inheritDoc}
+     *
      * @param documentInspector принимает объект класса {@link DocumentInspector}
      * @return Возвращает объект класса String, содержащий не полную информацию о документе для отчета
      */
@@ -164,8 +166,10 @@ public class TaskDocument extends BaseDocument {
             TaskDocument.this.controlPerson = taskControlPerson;
             return this;
         }
+
         /**
          * Метод build
+         *
          * @return возвращает объект класса {@link TaskDocument}
          */
         public TaskDocument build(BaseDocument baseDocument) {

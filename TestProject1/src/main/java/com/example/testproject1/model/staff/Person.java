@@ -1,23 +1,28 @@
 package com.example.testproject1.model.staff;
 
 import com.example.testproject1.service.jaxb.DateSQLTimeAdapter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.sql.Date;
 import java.text.MessageFormat;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
+
 /**
  * Класс Person наследуется от {@link Staff}
  *
  * @author smigranov
  */
 @XmlRootElement
-@XmlType(name = "person",propOrder = {"secondName", "firstName", "lastName","jobTittle","birthDay","phoneNumber","photo","department"})
+
+@XmlType(name = "person",propOrder = {"secondName", "firstName", "lastName", "jobTittle", "birthDay", "phoneNumber", "photo", "department"})
 public class Person extends Staff implements Comparable<Person>{
     /**
      * Отчество
@@ -100,6 +105,7 @@ public class Person extends Staff implements Comparable<Person>{
     public void setJobTittle(JobTittle jobTittle) {
         this.jobTittle = jobTittle;
     }
+
     @XmlElement(name = "photo")
     public String getPhoto() {
         return photo;
@@ -145,5 +151,25 @@ public class Person extends Staff implements Comparable<Person>{
     @Override
     public int compareTo(Person o) {
         return Comparator.comparing(Person::getSecondName).thenComparing(Person::getFirstName).compare(this, o);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        if (!super.equals(o)) return false;
+        Person person = (Person) o;
+        return Objects.equals(lastName, person.lastName) && Objects.equals(secondName, person.secondName) && Objects.equals(firstName, person.firstName) && Objects.equals(jobTittle, person.jobTittle) && Objects.equals(photo, person.photo) && Objects.equals(birthDay, person.birthDay) && Objects.equals(phoneNumber, person.phoneNumber);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), lastName, secondName, firstName, jobTittle, photo, birthDay, phoneNumber);
     }
 }

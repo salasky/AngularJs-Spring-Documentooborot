@@ -141,6 +141,7 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
 
     /**
      * Статический метод для создания builder для {@link BaseDocument}
+     *
      * @return возвращает объект builder для {@link BaseDocument}
      */
     public static BaseDocument.BaseDocumentBuilder newBuilder() {
@@ -199,6 +200,7 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
 
         /**
          * Метод build
+         *
          * @return возвращает объект класса {@link BaseDocument}
          */
         public BaseDocument build() {

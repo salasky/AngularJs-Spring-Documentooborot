@@ -35,6 +35,7 @@ public class TaskDocumentShell {
      */
     @Autowired
     private DocumentStorageService documentStorageService;
+
     /**
      * Shell метод генерации документов и создания отчетов по ним
      *

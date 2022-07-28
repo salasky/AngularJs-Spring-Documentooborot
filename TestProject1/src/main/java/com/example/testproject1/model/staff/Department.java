@@ -4,6 +4,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.text.MessageFormat;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -12,8 +14,8 @@ import java.util.UUID;
  * @author smigranov
  */
 @XmlRootElement
-@XmlType(name = "department",propOrder = {"fullName","shortName","supervisor","contactNumber","organization"})
-public class Department extends Staff{
+@XmlType(name = "department", propOrder = {"fullName", "shortName", "supervisor", "contactNumber"})
+public class Department extends Staff {
     /**
      * Полное название департамента
      */
@@ -41,10 +43,6 @@ public class Department extends Staff{
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
-    }
-
-    public void setId(UUID id){
-        super.setId(id);
     }
 
     @XmlAttribute(name = "id")
@@ -82,5 +80,37 @@ public class Department extends Staff{
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Department)) return false;
+        if (!super.equals(o)) return false;
+        Department that = (Department) o;
+        return Objects.equals(fullName, that.fullName) && Objects.equals(shortName, that.shortName) && Objects.equals(supervisor, that.supervisor) && Objects.equals(contactNumber, that.contactNumber);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), fullName, shortName, supervisor, contactNumber);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        Object[] taskArgs = {id, fullName, shortName, supervisor, contactNumber};
+        MessageFormat form = new MessageFormat(
+                "Department id= {0} fullName= {1}, shortName= {2}, supervisor= {3}" +
+                        ", contactNumber= {4}");
+        return form.format(taskArgs);
     }
 }

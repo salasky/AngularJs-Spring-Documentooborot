@@ -25,16 +25,17 @@ public class JaxbReaderImpl implements JaxbReader {
      */
     @Autowired
     private JAXBContext jaxbContext;
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public  <T> T jaxbXMLToObject() {
-        String path=this.getClass().getClassLoader().getResource(fileName).getPath();
-        try (FileReader reader=new FileReader(path)) {
+    public <T> T jaxbXMLToObject() {
+        String path = this.getClass().getClassLoader().getResource(fileName).getPath();
+        try (FileReader reader = new FileReader(path)) {
             T result = null;
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            result= (T) unmarshaller.unmarshal(reader);
+            result = (T) unmarshaller.unmarshal(reader);
             return result;
         } catch (Exception e) {
             throw new RuntimeException(e);

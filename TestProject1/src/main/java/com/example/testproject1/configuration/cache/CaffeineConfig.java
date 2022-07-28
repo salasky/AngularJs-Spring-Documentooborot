@@ -1,7 +1,6 @@
 package com.example.testproject1.configuration.cache;
 
 
-
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
@@ -18,11 +17,12 @@ import java.util.concurrent.TimeUnit;
 public class CaffeineConfig {
     /**
      * Бин CaffeineCacheManager вместо стандартного CacheManager
+     *
      * @return бин {@link CaffeineCacheManager} с настройками параметров кэша
      */
     @Bean
     public CaffeineCacheManager cacheManager() {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager("person","department","organization");
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager("person", "department", "organization");
         cacheManager.setCaffeine(caffeineCacheBuilder());
         return cacheManager;
     }
@@ -31,9 +31,10 @@ public class CaffeineConfig {
      * initialCapacity-минимальный общий размер для внутренних хеш-таблиц
      * maximumSize-максимальное количество записей, которые может содержать кэш
      * expireAfterAccess-время автоматического удаления из кэша по истечении фиксированного времени после создания записи
+     *
      * @return объект билдер для {@link Caffeine#}
      */
-    Caffeine < Object, Object > caffeineCacheBuilder() {
+    Caffeine<Object, Object> caffeineCacheBuilder() {
         return Caffeine.newBuilder()
                 .initialCapacity(100)
                 .maximumSize(500)

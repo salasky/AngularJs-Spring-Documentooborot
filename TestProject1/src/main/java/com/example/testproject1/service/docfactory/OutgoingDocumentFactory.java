@@ -17,6 +17,7 @@ public class OutgoingDocumentFactory extends DocumentFactory<OutgoingDocument.Ou
     public OutgoingDocument.OutgoingBuilder getBuilder() {
         return OutgoingDocument.newBuilder();
     }
+
     /**
      * {@inheritDoc}
      */

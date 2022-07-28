@@ -4,6 +4,7 @@ import com.example.testproject1.model.documents.BaseDocument;
 
 /**
  * Интерфейс фабрик
+ *
  * @param <T> реализация фабрик
  */
 public interface Factory<T> {

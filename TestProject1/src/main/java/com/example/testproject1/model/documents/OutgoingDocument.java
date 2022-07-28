@@ -79,6 +79,7 @@ public class OutgoingDocument extends BaseDocument {
 
     /**
      * {@inheritDoc}
+     *
      * @param documentInspector принимает объект класса {@link DocumentInspector}
      * @return Возвращает объект класса String, содержащий не полную информацию о документе для отчета
      */
@@ -113,8 +114,10 @@ public class OutgoingDocument extends BaseDocument {
             OutgoingDocument.this.deliveryType = type;
             return this;
         }
+
         /**
          * Метод build
+         *
          * @return возвращает объект класса {@link OutgoingDocument}
          */
         public OutgoingDocument build() {

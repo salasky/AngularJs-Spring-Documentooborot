@@ -3,6 +3,7 @@ package com.example.testproject1.model.staff;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.text.MessageFormat;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -11,7 +12,7 @@ import java.util.UUID;
  * @author smigranov
  */
 @XmlRootElement
-@XmlType(name = "jobTittle",propOrder = {"uuid","jobTittleName"})
+@XmlType(name = "jobTittle", propOrder = {"uuid", "jobTittleName"})
 public class JobTittle {
     /**
      * Идентификатор должности
@@ -46,11 +47,33 @@ public class JobTittle {
         this.jobTittleName = jobTittleName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        Object[] jobTittleArgs = {uuid,jobTittleName};
+        Object[] jobTittleArgs = {uuid, jobTittleName};
         MessageFormat form = new MessageFormat(
                 "id {0}, jobTittleName= {1}");
         return form.format(jobTittleArgs);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof JobTittle)) return false;
+        JobTittle jobTittle = (JobTittle) o;
+        return Objects.equals(uuid, jobTittle.uuid) && Objects.equals(jobTittleName, jobTittle.jobTittleName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid, jobTittleName);
     }
 }

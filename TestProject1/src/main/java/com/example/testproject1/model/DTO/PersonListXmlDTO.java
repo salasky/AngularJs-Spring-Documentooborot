@@ -24,7 +24,7 @@ public class PersonListXmlDTO {
      */
     @XmlElementWrapper(name = "personList")
     @XmlElement(name = "person")
-    private List<Person> list=new ArrayList<>();
+    private List<Person> list = new ArrayList<>();
 
     public PersonListXmlDTO() {
     }
@@ -35,6 +35,7 @@ public class PersonListXmlDTO {
 
     /**
      * Метод получения списка Person
+     *
      * @return @return {@link List} объектов {@link Person}
      */
 

@@ -68,7 +68,6 @@ public class IncomingDocument extends BaseDocument {
 
     /**
      * {@inheritDoc}
-     *
      */
     @Override
     public String toString() {
@@ -80,7 +79,6 @@ public class IncomingDocument extends BaseDocument {
 
     /**
      * {@inheritDoc}
-     *
      */
     @Override
     public boolean equals(Object o) {
@@ -93,6 +91,7 @@ public class IncomingDocument extends BaseDocument {
 
     /**
      * {@inheritDoc}
+     *
      * @param documentInspector принимает объект класса {@link DocumentInspector}
      * @return Возвращает объект класса String, содержащий не полную информацию о документе для отчета
      */
@@ -103,7 +102,6 @@ public class IncomingDocument extends BaseDocument {
 
     /**
      * {@inheritDoc}
-     *
      */
     @Override
     public int hashCode() {
@@ -146,8 +144,10 @@ public class IncomingDocument extends BaseDocument {
             IncomingDocument.this.dateOfRegistration = date;
             return this;
         }
+
         /**
          * Метод build
+         *
          * @return возвращает объект класса {@link IncomingDocument}
          */
         public IncomingDocument build() {
