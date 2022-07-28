@@ -33,7 +33,6 @@ public class Organization extends Staff {
      */
     private String contactNumber;
 
-    @XmlAttribute(name = "id")
     public UUID getId() {
         return super.getId();
     }
