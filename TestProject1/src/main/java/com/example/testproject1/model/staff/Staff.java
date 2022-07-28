@@ -1,5 +1,6 @@
 package com.example.testproject1.model.staff;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
@@ -18,9 +19,9 @@ public class Staff {
     /**
      * идентификатор орг.структуры
      */
-    protected UUID id;
 
-    @XmlTransient
+    protected UUID id;
+    @XmlAttribute
     public UUID getId() {
         return id;
     }

@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.sql.Date;
 import java.text.MessageFormat;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -21,7 +21,6 @@ import java.util.UUID;
  * @author smigranov
  */
 @XmlRootElement
-
 @XmlType(name = "person",propOrder = {"secondName", "firstName", "lastName", "jobTittle", "birthDay", "phoneNumber", "photo", "department"})
 public class Person extends Staff implements Comparable<Person>{
     /**
@@ -56,25 +55,11 @@ public class Person extends Staff implements Comparable<Person>{
      * Департамент работника
      */
     private Department department;
-    @XmlElement(name = "department")
-    public Department getDepartment() {
-        return department;
-    }
 
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public Person() {
-    }
-
-    public void setId(UUID id){
-        super.setId(id);
-    }
-    @XmlAttribute(name = "id")
     public UUID getId(){
         return super.getId();
     }
+
     @XmlElement(name = "lastName")
     public String getLastName() {
         return lastName;
@@ -82,6 +67,7 @@ public class Person extends Staff implements Comparable<Person>{
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     @XmlElement(name = "secondName")
     public String getSecondName() {
         return secondName;
@@ -89,6 +75,7 @@ public class Person extends Staff implements Comparable<Person>{
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
+
     @XmlElement(name = "firstName")
     public String getFirstName() {
         return firstName;
@@ -132,6 +119,14 @@ public class Person extends Staff implements Comparable<Person>{
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @XmlElement(name = "department")
+    public Department getDepartment() {
+        return department;
+    }
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     /**

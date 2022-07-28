@@ -1,5 +1,7 @@
 package com.example.testproject1.model.staff;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -33,7 +35,6 @@ public class Organization extends Staff {
      */
     private String contactNumber;
 
-    @XmlAttribute(name = "id")
     public UUID getId() {
         return super.getId();
     }
@@ -46,7 +47,6 @@ public class Organization extends Staff {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-
     @XmlElement(name = "shortName")
     public String getShortName() {
         return shortName;
@@ -55,7 +55,6 @@ public class Organization extends Staff {
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
-
     @XmlElement(name = "supervisor")
     public String getSupervisor() {
         return supervisor;
@@ -64,7 +63,6 @@ public class Organization extends Staff {
     public void setSupervisor(String supervisor) {
         this.supervisor = supervisor;
     }
-
     @XmlElement(name = "contactNumber")
     public String getContactNumber() {
         return contactNumber;
