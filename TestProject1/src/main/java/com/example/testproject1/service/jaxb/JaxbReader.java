@@ -13,5 +13,5 @@ public interface JaxbReader {
      * @return Возвращает объект класса, который передали
      * @param <T> класс для анмаршализации
      */
-     <T> T jaxbXMLToObject();
+     <T> T jaxbXMLToObject(String fileName);
 }

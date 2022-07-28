@@ -120,9 +120,6 @@ public class IncomingDocument extends BaseDocument {
      * @author smigranov
      */
     public class IncomingDocumentBuilder extends BaseDocumentBuilder {
-        private IncomingDocumentBuilder() {
-            // private constructor
-        }
 
         public IncomingDocumentBuilder setIncomingSender(Person sender) {
             IncomingDocument.this.sender = sender;

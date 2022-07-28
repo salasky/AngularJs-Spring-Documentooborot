@@ -45,7 +45,7 @@ public class Person extends Staff implements Comparable<Person> {
      * Дата рождения
      */
     @JsonFormat
-            (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+            (shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private Date birthDay;
     /**
      * Номер телефона

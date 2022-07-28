@@ -16,11 +16,6 @@ import java.io.FileReader;
 @Service
 public class JaxbReaderImpl implements JaxbReader {
     /**
-     * Имя xml файла
-     */
-    @Value("${jaxb.fileName}")
-    private String fileName;
-    /**
      * Бин jaxb context-а
      */
     @Autowired
@@ -30,7 +25,7 @@ public class JaxbReaderImpl implements JaxbReader {
      * {@inheritDoc}
      */
     @Override
-    public <T> T jaxbXMLToObject() {
+    public <T> T jaxbXMLToObject(String fileName) {
         String path = this.getClass().getClassLoader().getResource(fileName).getPath();
         try (FileReader reader = new FileReader(path)) {
             T result = null;

@@ -36,7 +36,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
      * Объект для библиотеки Fasterxml Jackson
      * с настройками даты
      */
-    ObjectMapper objectMapper = new ObjectMapper().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+    private final ObjectMapper objectMapper = new ObjectMapper().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .enable(SerializationFeature.INDENT_OUTPUT);
 
     /**

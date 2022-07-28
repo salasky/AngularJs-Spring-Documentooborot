@@ -35,7 +35,7 @@ public class DocumentServiceImpl implements DocumentService {
                 .filter(s -> s.getRegNumber() == baseDocument.getRegNumber())
                 .findFirst();
         if (optionalBaseDocument.isPresent()) {
-            throw new DocumentExistsException(baseDocument.getRegNumber(), MessageFormat.format("Document number {0}} exist", baseDocument.getRegNumber()));
+            throw new DocumentExistsException(baseDocument.getRegNumber(), MessageFormat.format("Document number {0} exist", baseDocument.getRegNumber()));
         }
         documentStorageService.addAll(baseDocument);
     }
