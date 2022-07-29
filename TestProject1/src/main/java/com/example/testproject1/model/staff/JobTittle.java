@@ -1,5 +1,8 @@
 package com.example.testproject1.model.staff;
 
+import javax.persistence.Column;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.text.MessageFormat;
@@ -12,25 +15,27 @@ import java.util.UUID;
  * @author smigranov
  */
 @XmlRootElement
-@XmlType(name = "jobTittle", propOrder = {"uuid", "jobTittleName"})
+@XmlType(name = "jobTittle", propOrder = {"name"})
 public class JobTittle {
     /**
      * Идентификатор должности
      */
+    @Column(name ="id")
     private UUID uuid;
     /**
      * Наименование должности
      */
-    private String jobTittleName;
+    @Column(name ="name")
+    private String name;
 
-    public JobTittle(UUID uuid, String jobTittleName) {
+    public JobTittle(UUID uuid, String name) {
         this.uuid = uuid;
-        this.jobTittleName = jobTittleName;
+        this.name = name;
     }
 
     public JobTittle() {
     }
-
+    @XmlAttribute(name = "id")
     public UUID getUuid() {
         return uuid;
     }
@@ -38,13 +43,13 @@ public class JobTittle {
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
-
-    public String getJobTittleName() {
-        return jobTittleName;
+    @XmlElement(name = "jobTittleName")
+    public String getName() {
+        return name;
     }
 
-    public void setJobTittleName(String jobTittleName) {
-        this.jobTittleName = jobTittleName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -52,7 +57,7 @@ public class JobTittle {
      */
     @Override
     public String toString() {
-        Object[] jobTittleArgs = {uuid, jobTittleName};
+        Object[] jobTittleArgs = {uuid, name};
         MessageFormat form = new MessageFormat(
                 "id {0}, jobTittleName= {1}");
         return form.format(jobTittleArgs);
@@ -66,7 +71,7 @@ public class JobTittle {
         if (this == o) return true;
         if (!(o instanceof JobTittle)) return false;
         JobTittle jobTittle = (JobTittle) o;
-        return Objects.equals(uuid, jobTittle.uuid) && Objects.equals(jobTittleName, jobTittle.jobTittleName);
+        return Objects.equals(uuid, jobTittle.uuid) && Objects.equals(name, jobTittle.name);
     }
 
     /**
@@ -74,6 +79,6 @@ public class JobTittle {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, jobTittleName);
+        return Objects.hash(uuid, name);
     }
 }

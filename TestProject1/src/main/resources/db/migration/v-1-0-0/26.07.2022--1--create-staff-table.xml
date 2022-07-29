@@ -13,16 +13,16 @@
             <column name="id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_ORGANIZATION"/>
             </column>
-            <column name="fullName" type="VARCHAR(255)">
+            <column name="full_name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="shortName" type="VARCHAR(64)">
+            <column name="short_name" type="VARCHAR(64)">
                 <constraints nullable="false"/>
             </column>
             <column name="supervisor" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="contactNumber" type="VARCHAR(255)">
+            <column name="contact_number" type="VARCHAR(255)">
                 <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
@@ -36,16 +36,16 @@
             <column name="id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_DEPARTMENT"/>
             </column>
-            <column name="fullname" type="VARCHAR(255)">
+            <column name="full_name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="shortName" type="VARCHAR(64)">
+            <column name="short_name" type="VARCHAR(64)">
                 <constraints nullable="false"/>
             </column>
             <column name="supervisor" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="contactNumber" type="VARCHAR(255)">
+            <column name="contact_number" type="VARCHAR(255)">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="organization_id" type="VARCHAR(64)">
@@ -82,29 +82,29 @@
             <column name="id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_PERSON"/>
             </column>
-            <column name="firstName" type="VARCHAR(255)">
+            <column name="first_name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="secondName" type="VARCHAR(255)">
+            <column name="second_name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="lastName" type="VARCHAR(255)">
+            <column name="last_name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="photo" type="VARCHAR(255)">
                 <constraints nullable="true"/>
             </column>
-            <column name="jobTittle_id" type="VARCHAR(64)">
+            <column name="job_tittle_id" type="VARCHAR(64)">
                 <constraints nullable="false"/>
             </column>
             <column name="department_id" type="VARCHAR(64)">
                 <constraints nullable="false"/>
             </column>
-            <column name="phoneNumber" type="VARCHAR(255)">
+            <column name="phone_number" type="VARCHAR(255)">
                 <constraints nullable="false" unique="true"/>
             </column>
 
-            <column name="birthDay" type="date">
+            <column name="birth_day" type="date">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -120,7 +120,7 @@
     </changeSet>
 
     <changeSet author="smigranov" id="7">
-        <addForeignKeyConstraint baseColumnNames="jobTittle_id" baseTableName="person" constraintName="FK_PERSON_JOBTITTLE"
+        <addForeignKeyConstraint baseColumnNames="job_tittle_id" baseTableName="person" constraintName="FK_PERSON_JOBTITTLE"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="jobTittle" validate="true"/>
     </changeSet>

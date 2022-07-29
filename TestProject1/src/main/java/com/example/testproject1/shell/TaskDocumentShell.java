@@ -65,20 +65,20 @@ public class TaskDocumentShell {
     public void createorg() {
         Organization organization=new Organization();
         organization.setId(UUID.randomUUID());
-        organization.setFullName("dfg");
-        organization.setShortName("dsf");
-        organization.setSupervisor("fs");
-        organization.setContactNumber("345353");
+        organization.setFullName("organizationName");
+        organization.setShortName("organizationShortName");
+        organization.setSupervisor("organizationSupervisor");
+        organization.setContactNumber("organizationContactNumber");
         organizationRepository.create(organization);
-        System.out.println(organization.toString() +" создан");
+        System.out.println(organization +" создан");
     }
     @ShellMethod()
     public void getallorg() {
         organizationRepository.getAll().stream().forEach(System.out::println);
     }
     @ShellMethod()
-    public void getabyidorg(String u) {
-        Optional<Organization> organization=organizationRepository.getById(u);
+    public void getbyidorg(String id) {
+        Optional<Organization> organization=organizationRepository.getById(id);
         if(organization.isPresent()){
             System.out.println(organization.get());
         }
@@ -89,26 +89,39 @@ public class TaskDocumentShell {
         organizationRepository.deleteAll();
     }
     @ShellMethod()
-    public void deletebyidorg(String i) {
-        System.out.println(organizationRepository.deleteById(i));
+    public void deletebyidorg(String id) {
+        System.out.println(organizationRepository.deleteById(id));
     }
-
-
     @ShellMethod()
     public void createdep() {
         Department department=new Department();
         department.setId(UUID.randomUUID());
-        department.setFullName("FFFF");
-        department.setShortName("F");
-        department.setSupervisor("ds");
-        department.setContactNumber("343");
+        department.setFullName("departmentName");
+        department.setShortName("departmentShortName");
+        department.setSupervisor("departmentSupervisor");
+        department.setContactNumber("departmentContactNumber");
         department.setOrganization(organizationRepository.getAll().get(0));
         departmentRepository.create(department);
+        System.out.println(department +" создан");
     }
-
     @ShellMethod()
     public void getalldep() {
         departmentRepository.getAll().stream().forEach(System.out::println);
+    }
+
+    @ShellMethod()
+    public void getbyiddep(String id) {
+        System.out.println( departmentRepository.getById(id).get());
+    }
+
+    @ShellMethod()
+    public void deletealldep() {
+        departmentRepository.deleteAll();
+    }
+
+    @ShellMethod()
+    public Integer deletebyiddep(String id) {
+        return departmentRepository.deleteById(id);
     }
 
 }

@@ -40,15 +40,14 @@ public class OrganizationRepository {
      */
     private final String queryDeleteById="DELETE FROM organization WHERE id=?";
 
-    private final JdbcTemplate jdbcTemplate;
     @Autowired
-    public OrganizationRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    private JdbcTemplate jdbcTemplate;
+
 
     public List<Organization> getAll(){
         return jdbcTemplate.query(queryGetAll, new OrganizationMapper());
     }
+
     public Optional<Organization> getById(String uuid) {
         try {
             return Optional.of(jdbcTemplate.queryForObject(queryGetById, new OrganizationMapper(),uuid));

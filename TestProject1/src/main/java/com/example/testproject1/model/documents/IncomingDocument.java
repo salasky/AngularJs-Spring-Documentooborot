@@ -3,6 +3,7 @@ package com.example.testproject1.model.documents;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
+import javax.persistence.Column;
 import java.sql.Timestamp;
 import java.text.MessageFormat;
 import java.util.Date;
@@ -17,18 +18,22 @@ public class IncomingDocument extends BaseDocument {
     /**
      * отправитель
      */
+    @Column(name ="sender")
     private Person sender;
     /**
      * адресат
      */
+    @Column(name ="destination")
     private Person destination;
     /**
      * исходящий номер
      */
+    @Column(name ="destination")
     private Long number;
     /**
      * исходящая дата регистрации
      */
+    @Column(name ="date_of_registration")
     private Timestamp dateOfRegistration;
 
     public IncomingDocument() {

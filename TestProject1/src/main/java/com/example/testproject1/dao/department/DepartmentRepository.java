@@ -1,11 +1,8 @@
 package com.example.testproject1.dao.department;
 
 import com.example.testproject1.dao.department.mapper.DepartmentMapper;
-import com.example.testproject1.dao.organization.mapper.OrganizationMapper;
 import com.example.testproject1.model.staff.Department;
-import com.example.testproject1.model.staff.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,15 +14,21 @@ public class DepartmentRepository {
     /**
      * Запрос на получение всех объектов из таблицы department
      */
-    private final String queryGetAll="SELECT department.id, department.fullName, department.shortName" +
-            ", department.supervisor, department.contactNumber" +
-            ", organization.id, organization.fullName, organization.shortName" +
-            ", organization.supervisor, organization.department" +
-            " FROM department INNER JOIN organization ON department.organization_id=organization.id";
+    private final String queryGetAll="SELECT department.id AS department_id, department.full_name AS department_full_name," +
+            " department.short_name AS department_short_name, department.supervisor AS department_supervisor," +
+            " department.contact_number AS department_contact_number, organization.id AS organization_id ," +
+            " organization.full_name AS organization_full_name, organization.short_name AS organization_short_name,\n" +
+            "organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number\n" +
+            "FROM department INNER JOIN organization ON department.organization_id=organization.id";
     /**
      * Запрос на получение объекта по id из таблицы organization
      */
-    private final String queryGetById="SELECT * FROM department WHERE id=?";
+    private final String queryGetById="SELECT department.id AS department_id, department.full_name AS department_full_name," +
+            " department.short_name AS department_short_name, department.supervisor AS department_supervisor," +
+            " department.contact_number AS department_contact_number, organization.id AS organization_id ," +
+            " organization.full_name AS organization_full_name, organization.short_name AS organization_short_name,\n" +
+            "organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number\n" +
+            "FROM department INNER JOIN organization ON department.organization_id=organization.id WHERE department.id=?";
     /**
      * Запрос на создание записи в таблице organization
      */
@@ -40,12 +43,9 @@ public class DepartmentRepository {
     private final String queryDeleteById="DELETE FROM department WHERE id=?";
     @Autowired
     private DepartmentMapper departmentMapper;
-
-    private final JdbcTemplate jdbcTemplate;
     @Autowired
-    public DepartmentRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    private JdbcTemplate jdbcTemplate;
+
 
     public List<Department> getAll(){
         return jdbcTemplate.query(queryGetAll,departmentMapper);
@@ -58,5 +58,17 @@ public class DepartmentRepository {
                    ,department.getContactNumber(),department.getOrganization().getId().toString());
    }
 
+   public Optional<Department> getById(String id){
+      return jdbcTemplate.query(queryGetById, new DepartmentMapper(),id).stream().findFirst();
+   }
+
+    public void deleteAll(){
+        jdbcTemplate.update(queryDeleteAll);
+    }
+
+    public Integer deleteById(String id) {
+        int update = jdbcTemplate.update(queryDeleteById, id);
+        return update;
+    }
 
 }

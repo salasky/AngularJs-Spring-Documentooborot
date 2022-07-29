@@ -4,6 +4,7 @@ import com.example.testproject1.model.enums.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
+import javax.persistence.Column;
 import java.text.MessageFormat;
 import java.util.Objects;
 
@@ -16,10 +17,12 @@ public class OutgoingDocument extends BaseDocument {
     /**
      * адресат
      */
+    @Column(name ="sender")
     private Person sender;
     /**
      * способ доставки
      */
+    @Column(name ="delivery_type")
     private DocumentDeliveryType deliveryType;
 
     public OutgoingDocument() {

@@ -1,5 +1,6 @@
 package com.example.testproject1.model.staff;
 
+import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -19,6 +20,7 @@ public class Staff {
     /**
      * идентификатор орг.структуры
      */
+    @Column(name ="id")
     protected UUID id;
 
     @XmlAttribute

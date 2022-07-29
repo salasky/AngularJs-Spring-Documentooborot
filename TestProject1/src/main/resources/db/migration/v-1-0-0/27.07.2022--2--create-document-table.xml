@@ -19,10 +19,10 @@
             <column name="text" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="regNumber" type="BIGINT">
+            <column name="reg_number" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="creatingDate" type="TIMESTAMP">
+            <column name="creating_date" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
             <column name="author_id" type="VARCHAR(64)">
@@ -42,22 +42,22 @@
 
     <changeSet author="smigranov" id="12">
         <createTable tableName="taskDocument">
-            <column name="baseDocument_id" type="VARCHAR(64)" autoIncrement="false">
+            <column name="base_document_id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_TASKDOCUMENT"/>
             </column>
-            <column name="outDate" type="TIMESTAMP">
+            <column name="out_date" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
-            <column name="execPeriod" type="VARCHAR(255)">
+            <column name="exec_period" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="responsible_id" type="VARCHAR(64)">
                 <constraints nullable="false"/>
             </column>
-            <column name="signOfControl" type="BOOLEAN">
+            <column name="sign_of_control" type="BOOLEAN">
                 <constraints nullable="false"/>
             </column>
-            <column name="controlPerson_id" type="VARCHAR(64)">
+            <column name="control_person_id" type="VARCHAR(64)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -67,7 +67,7 @@
     </changeSet>
 
     <changeSet author="smigranov" id="13">
-        <addForeignKeyConstraint baseColumnNames="baseDocument_id" baseTableName="taskDocument" constraintName="FK_TASK_BASEDOCUMENT"
+        <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="taskDocument" constraintName="FK_TASK_BASEDOCUMENT"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="baseDocument" validate="true"/>
     </changeSet>
@@ -79,14 +79,14 @@
     </changeSet>
 
     <changeSet author="smigranov" id="15">
-        <addForeignKeyConstraint baseColumnNames="controlPerson_id" baseTableName="taskDocument" constraintName="FK_TASKDOCUMENT_PERSONCONTROL"
+        <addForeignKeyConstraint baseColumnNames="control_person_id" baseTableName="taskDocument" constraintName="FK_TASKDOCUMENT_PERSONCONTROL"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="16">
         <createTable tableName="incomingDocument">
-            <column name="baseDocument_id" type="VARCHAR(64)" autoIncrement="false">
+            <column name="base_document_id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_INCOMINGDOCUMENT"/>
             </column>
             <column name="sender_id" type="VARCHAR(64)">
@@ -98,7 +98,7 @@
             <column name="number" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="dateOfRegistration" type="TIMESTAMP">
+            <column name="date_of_registration" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -108,7 +108,7 @@
     </changeSet>
 
     <changeSet author="smigranov" id="17">
-        <addForeignKeyConstraint baseColumnNames="baseDocument_id" baseTableName="incomingDocument" constraintName="FK_INCOMINGDOCUMENT_BASEDOCUMENT"
+        <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="incomingDocument" constraintName="FK_INCOMINGDOCUMENT_BASEDOCUMENT"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="baseDocument" validate="true"/>
     </changeSet>
@@ -127,13 +127,13 @@
 
     <changeSet author="smigranov" id="20">
         <createTable tableName="outgoingDocument">
-            <column name="baseDocument_id" type="VARCHAR(64)" autoIncrement="false">
+            <column name="base_document_id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_OUTGOINGDOCUMENT"/>
             </column>
             <column name="sender_id" type="VARCHAR(64)">
                 <constraints nullable="false"/>
             </column>
-            <column name="deliveryType" type="VARCHAR(255)">
+            <column name="delivery_type" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -143,7 +143,7 @@
     </changeSet>
 
     <changeSet author="smigranov" id="21">
-        <addForeignKeyConstraint baseColumnNames="baseDocument_id" baseTableName="outgoingDocument" constraintName="FK_OUTGOINGDOCUMENT_BASEDOCUMENT"
+        <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="outgoingDocument" constraintName="FK_OUTGOINGDOCUMENT_BASEDOCUMENT"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="baseDocument" validate="true"/>
     </changeSet>

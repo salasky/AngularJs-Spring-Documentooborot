@@ -4,6 +4,7 @@ package com.example.testproject1.model.documents;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
+import javax.persistence.Column;
 import java.sql.Timestamp;
 import java.text.MessageFormat;
 import java.util.Date;
@@ -18,22 +19,27 @@ public class TaskDocument extends BaseDocument {
     /**
      * дата выдачи поручения
      */
+    @Column(name ="out_date")
     private Timestamp outDate;
     /**
      * срок исполнения поручения
      */
+    @Column(name ="exec_period")
     private String execPeriod;
     /**
      * ответственный исполнитель
      */
+    @Column(name ="responsible")
     private Person responsible;
     /**
      * признак контрольности
      */
+    @Column(name ="sign_of_control")
     private Boolean signOfControl;
     /**
      * контролер поручения
      */
+    @Column(name ="control_person")
     private Person controlPerson;
 
     public TaskDocument() {

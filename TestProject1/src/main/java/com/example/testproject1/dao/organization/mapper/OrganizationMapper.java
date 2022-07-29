@@ -13,10 +13,10 @@ public class OrganizationMapper implements RowMapper<Organization> {
     public Organization mapRow(ResultSet rs, int rowNum) throws SQLException {
         Organization organization=new Organization();
         organization.setId(UUID.fromString(rs.getString("id")));
-        organization.setFullName(rs.getString("fullName"));
-        organization.setShortName(rs.getString("shortName"));
+        organization.setFullName(rs.getString("full_name"));
+        organization.setShortName(rs.getString("short_name"));
         organization.setSupervisor(rs.getString("supervisor"));
-        organization.setContactNumber(rs.getString("contactNumber"));
+        organization.setContactNumber(rs.getString("contact_number"));
         return organization;
     }
 }

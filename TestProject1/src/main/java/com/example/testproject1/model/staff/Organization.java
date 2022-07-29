@@ -1,5 +1,6 @@
 package com.example.testproject1.model.staff;
 
+import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -21,18 +22,22 @@ public class Organization extends Staff {
     /**
      * Полное название организации
      */
+    @Column(name ="full_name")
     private String fullName;
     /**
      * Короткое название организации
      */
+    @Column(name ="short_name")
     private String shortName;
     /**
      * Руководитель организации
      */
+    @Column(name ="supervisor")
     private String supervisor;
     /**
      * Контактный телефон организации
      */
+    @Column(name ="contact_number")
     private String contactNumber;
 
     @XmlElement(name = "fullName")

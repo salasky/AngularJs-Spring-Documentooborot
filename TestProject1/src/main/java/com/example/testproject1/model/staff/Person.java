@@ -3,6 +3,7 @@ package com.example.testproject1.model.staff;
 import com.example.testproject1.service.jaxb.DateSQLTimeAdapter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,34 +27,42 @@ public class Person extends Staff implements Comparable<Person>{
     /**
      * Отчество
      */
+    @Column(name ="last_name")
     private String lastName;
     /**
      * Фамилия
      */
+    @Column(name ="second_name")
     private String secondName;
     /**
      * Имя
      */
+    @Column(name ="first_name")
     private String firstName;
     /**
      * Должность
      */
+    @Column(name ="job_tittle")
     private JobTittle jobTittle;
     /**
      * Ссылка на фото
      */
+    @Column(name ="photo")
     private String photo;
     /**
      * Дата рождения
      */
+    @Column(name ="birth_day")
     private Date birthDay;
     /**
      * Номер телефона
      */
+    @Column(name ="phone_number")
     private String phoneNumber;
     /**
      * Департамент работника
      */
+    @Column(name ="department")
     private Department department;
 
     @XmlElement(name = "lastName")

@@ -20,23 +20,27 @@ public class Department extends Staff {
     /**
      * Полное название департамента
      */
-    @Column(name ="fullname")
+    @Column(name ="full_name")
     private String fullName;
     /**
      * Короткое название департамента
      */
+    @Column(name ="short_name")
     private String shortName;
     /**
      * Руководитель департамента
      */
+    @Column(name ="supervisor")
     private String supervisor;
     /**
      * Контактный телефон департамента
      */
+    @Column(name ="contact_number")
     private String contactNumber;
     /**
      * Организация подразделения
      */
+    @Column(name ="organization")
     private Organization organization;
 
     @XmlElement(name = "fullName")

@@ -6,6 +6,7 @@ import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 import com.example.testproject1.service.visitorPatternRelase.DocumentVisitor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Column;
 import java.sql.Timestamp;
 import java.text.MessageFormat;
 import java.util.Comparator;
@@ -21,27 +22,33 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
     /**
      * идентификатор документа
      */
+    @Column(name ="id")
     protected UUID id;
     /**
      * название документа
      */
+    @Column(name ="name")
     protected String name;
     /**
      * Tекст документа
      */
+    @Column(name ="text")
     protected String text;
     /**
      * Регистрационный номер документа
      */
+    @Column(name ="reg_number")
     protected Long regNumber;
     /**
      * дата регистрации документа
      */
+    @Column(name ="creating_date")
     protected Timestamp creatingDate;
     /**
      * автор документа
      */
     @JsonIgnore
+    @Column(name ="author")
     protected Person author;
 
     public UUID getId() {

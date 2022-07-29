@@ -5,8 +5,7 @@
         <secondName>Ivanov</secondName>
         <firstName>Ivan</firstName>
         <lastName>Ivanovich</lastName>
-        <jobTittle>
-            <uuid>6a3178ec-7c64-43cc-ae14-661fbaab02e4</uuid>
+        <jobTittle id="6a3178ec-7c64-43cc-ae14-661fbaab02e4">
             <jobTittleName>Java middle</jobTittleName>
         </jobTittle>
         <birthDay>1973-03-14</birthDay>
@@ -29,8 +28,7 @@
         <secondName>Nikin</secondName>
         <firstName>Sergey</firstName>
         <lastName>Nikolayevich</lastName>
-        <jobTittle>
-            <uuid>c10e0744-feb7-4be2-8e8b-62403dbb7d34</uuid>
+        <jobTittle id="c10e0744-feb7-4be2-8e8b-62403dbb7d34">
             <jobTittleName>Java junior</jobTittleName>
         </jobTittle>
         <birthDay>1957-06-17</birthDay>
@@ -53,8 +51,7 @@
         <secondName>Migranov</secondName>
         <firstName>Salavat</firstName>
         <lastName>Vagizovich</lastName>
-        <jobTittle>
-            <uuid>90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e</uuid>
+        <jobTittle id="90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e">
             <jobTittleName>Java junior</jobTittleName>
         </jobTittle>
         <birthDay>2007-01-14</birthDay>
@@ -77,8 +74,7 @@
         <secondName>Gubaidullin</secondName>
         <firstName>Idel</firstName>
         <lastName>Kinigaleevich</lastName>
-        <jobTittle>
-            <uuid>08a5ef70-73c6-4124-b3bc-547c5e50e4ef</uuid>
+        <jobTittle id="08a5ef70-73c6-4124-b3bc-547c5e50e4ef">
             <jobTittleName>JS junior</jobTittleName>
         </jobTittle>
         <birthDay>2009-06-03</birthDay>
@@ -101,8 +97,7 @@
         <secondName>Petrov</secondName>
         <firstName>Petr</firstName>
         <lastName>Petrovich</lastName>
-        <jobTittle>
-            <uuid>4c7e2780-6b60-492d-9ccf-95940d4a300d</uuid>
+        <jobTittle id="4c7e2780-6b60-492d-9ccf-95940d4a300d">
             <jobTittleName>QA</jobTittleName>
         </jobTittle>
         <birthDay>2000-09-01</birthDay>
