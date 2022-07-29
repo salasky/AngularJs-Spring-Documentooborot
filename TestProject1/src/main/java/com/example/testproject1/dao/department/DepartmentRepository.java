@@ -47,16 +47,18 @@ public class DepartmentRepository {
      */
     private final String queryUpdate="UPDATE department SET full_name=?, short_name=?," +
             " supervisor=?, contact_number=?, organization_id=? WHERE id=?";
-    @Autowired
-    private DepartmentMapper departmentMapper;
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
 
     public List<Department> getAll(){
-        return jdbcTemplate.query(queryGetAll,departmentMapper);
+        return jdbcTemplate.query(queryGetAll,new DepartmentMapper());
     }
 
+    public Optional<Department> getById(String id){
+        return jdbcTemplate.query(queryGetById, new DepartmentMapper(),id).stream().findFirst();
+    }
 
    public void create(Department department){
            jdbcTemplate.update(queryCreate,department.getId().toString()
@@ -69,10 +71,6 @@ public class DepartmentRepository {
                 department.getSupervisor(),department.getContactNumber(),department.getOrganization().getId().toString(),
                 department.getId().toString());
     }
-
-   public Optional<Department> getById(String id){
-      return jdbcTemplate.query(queryGetById, new DepartmentMapper(),id).stream().findFirst();
-   }
 
     public void deleteAll(){
         jdbcTemplate.update(queryDeleteAll);

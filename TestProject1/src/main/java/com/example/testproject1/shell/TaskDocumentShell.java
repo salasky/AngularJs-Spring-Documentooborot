@@ -5,13 +5,16 @@ package com.example.testproject1.shell;
 import com.example.testproject1.dao.department.DepartmentRepository;
 import com.example.testproject1.dao.jobTittle.JobTittleRepository;
 import com.example.testproject1.dao.organization.OrganizationRepository;
+import com.example.testproject1.dao.person.PersonRepository;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
+import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.documentService.DocumentStorageService;
 import com.example.testproject1.service.documentService.GenerateDocumentService;
 import com.example.testproject1.service.documentService.GenerateReportService;
 import liquibase.pro.packaged.O;
+import liquibase.pro.packaged.P;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+import java.sql.Date;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -51,6 +55,9 @@ public class TaskDocumentShell {
     private DepartmentRepository departmentRepository;
     @Autowired
     private JobTittleRepository jobTittleRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
     /**
      * Shell метод генерации документов и создания отчетов по ним
      *
@@ -199,6 +206,38 @@ public class TaskDocumentShell {
     @ShellMethod()
     public void deletebyidjob(String id) {
         System.out.println(jobTittleRepository.deleteById(id));
+    }
+
+    @ShellMethod()
+    public void createpers() {
+        Person person=new Person();
+        person.setId(UUID.randomUUID());
+        person.setFirstName("personsetFirstName");
+        person.setSecondName("personsetSecondName");
+        person.setLastName("personsetLastName");
+        person.setPhoto("personsetPhoto");
+        JobTittle jobTittle=jobTittleRepository.getAll().stream().findFirst().get();
+        person.setJobTittle(jobTittle);
+        Department department=departmentRepository.getAll().stream().findFirst().get();
+        person.setDepartment(department);
+        person.setPhoneNumber("personsetPhoneNumber");
+        person.setBirthDay(new Date(System.currentTimeMillis()));
+        personRepository.create(person);
+        System.out.println(person +" создан");
+    }
+
+    @ShellMethod()
+    public void getallper() {
+       personRepository.getAll().stream().forEach(System.out::println);
+    }
+
+    @ShellMethod()
+    public void getbyidper(String id) {
+        Optional<Person> person=personRepository.getById(id);
+        if(person.isPresent()){
+            System.out.println(person.get());
+        }
+        else System.out.println("не найдено");
     }
 
 }
