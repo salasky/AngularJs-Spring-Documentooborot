@@ -239,5 +239,24 @@ public class TaskDocumentShell {
         }
         else System.out.println("не найдено");
     }
-
+    @ShellMethod()
+    public void updatepers() {
+        Optional<Person> persons=personRepository.getAll().stream().findFirst();
+        if(persons.isPresent()){
+            Person person=persons.get();
+            person.setFirstName("FirstUpdateName");
+            personRepository.update(person);
+            System.out.println(person +" обнавлен");
+        }
+        else
+            System.out.println("Нет person с id="+persons.get().getId().toString());
+    }
+    @ShellMethod()
+    public void deleteallpers() {
+        personRepository.deleteAll();
+    }
+    @ShellMethod()
+    public void deletebyidpers(String id) {
+        System.out.println(personRepository.deleteById(id));
+    }
 }

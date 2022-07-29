@@ -57,6 +57,20 @@ public class PersonRepository {
                     "    ON person.job_tittle_id=job_tittle.id "+
                     "INNER JOIN organization " +
                     "   ON organization.id=department.organization_id  WHERE person.id=?";
+
+    /**
+     * Запрос на обновление записи в таблице person
+     */
+    private final String queryUpdate="UPDATE person SET first_name=?, second_name=?, last_name=?," +
+            " photo=?, job_tittle_id=?, department_id=?, phone_number=?, birth_day=? WHERE id=?";
+    /**
+     * Запрос на удаление всех записей в таблице person
+     */
+    private final String queryDeleteAll="DELETE FROM person";
+    /**
+     * Запрос на удаление записи по id в таблице person
+     */
+    private final String queryDeleteById="DELETE FROM person WHERE id=?";
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -71,5 +85,18 @@ public class PersonRepository {
 
     public Optional<Person> getById(String id){
         return jdbcTemplate.query(queryGetById, new PersonMapper(),id).stream().findFirst();
+    }
+    public Integer update(Person person){
+        return jdbcTemplate.update(queryUpdate,person.getFirstName(),person.getSecondName(),
+                person.getLastName(),person.getPhoto(),person.getJobTittle().getUuid().toString(),
+                person.getDepartment().getId().toString(), person.getPhoneNumber(),person.getBirthDay(),person.getId().toString());
+    }
+    public void deleteAll(){
+        jdbcTemplate.update(queryDeleteAll);
+    }
+
+    public Integer deleteById(String id) {
+        int update = jdbcTemplate.update(queryDeleteById, id);
+        return update;
     }
 }
