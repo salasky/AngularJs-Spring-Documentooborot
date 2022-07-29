@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import java.io.FileReader;
+import java.net.URL;
 import java.text.MessageFormat;
 
 /**
@@ -32,19 +33,18 @@ public class JaxbReaderImpl implements JaxbReader {
      */
     @Override
     public <T> T jaxbXMLToObject(String fileName) {
-        String path = null;
-        try {
-            path = this.getClass().getClassLoader().getResource(fileName).getPath();
-        } catch (NullPointerException e) {
-            LOGGER.error(MessageFormat.format("Файл {0} не найден",fileName));
+        if(fileName!=null) {
+            String path = this.getClass().getClassLoader().getResource(fileName).getPath();
+            try (FileReader reader = new FileReader(path)) {
+                T result = null;
+                Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+                result = (T) unmarshaller.unmarshal(reader);
+                return result;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
-        try (FileReader reader = new FileReader(path)) {
-            T result = null;
-            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            result = (T) unmarshaller.unmarshal(reader);
-            return result;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        LOGGER.error(MessageFormat.format("Файл {0} не найден",fileName));
+        return null;
     }
 }
