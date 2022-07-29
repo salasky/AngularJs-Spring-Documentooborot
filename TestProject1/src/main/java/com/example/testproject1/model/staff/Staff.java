@@ -19,8 +19,8 @@ public class Staff {
     /**
      * идентификатор орг.структуры
      */
-
     protected UUID id;
+
     @XmlAttribute
     public UUID getId() {
         return id;

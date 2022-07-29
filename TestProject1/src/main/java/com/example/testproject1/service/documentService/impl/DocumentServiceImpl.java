@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Класс реализующий интерфейс {@link DocumentService}
+ * Класс реализующий интерфейс {@link DocumentService}. Сохраняет переданные документы,
+ * перед сохранением проверяет уникаль6ность рег.номера
  *
  * @author smigranov
  */
@@ -35,7 +36,7 @@ public class DocumentServiceImpl implements DocumentService {
                 .filter(s -> s.getRegNumber() == baseDocument.getRegNumber())
                 .findFirst();
         if (optionalBaseDocument.isPresent()) {
-            throw new DocumentExistsException(baseDocument.getRegNumber(), MessageFormat.format("Document number {0}} exist", baseDocument.getRegNumber()));
+            throw new DocumentExistsException(baseDocument.getRegNumber(), MessageFormat.format("Document number {0} exist", baseDocument.getRegNumber()));
         }
         documentStorageService.addAll(baseDocument);
     }

@@ -35,7 +35,7 @@ public class DepartmentStorageServiceImpl implements DepartmentStorageService {
     @Override
     public List<Department> getDepartmentList() {
         LOGGER.info("Begin find Department ");
-        DepartmentListXmlDTO departmentListXmlDTO = jaxbReader.jaxbXMLToObject();
+        DepartmentListXmlDTO departmentListXmlDTO = jaxbReader.jaxbXMLToObject("department.xml");
         List<Department> departmentList = departmentListXmlDTO.getDepartmentList();
         LOGGER.info("Find Department result");
         return departmentList;

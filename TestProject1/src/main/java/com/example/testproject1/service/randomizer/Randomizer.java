@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Класс для рандомной выдачи данных
@@ -66,10 +67,10 @@ public class Randomizer {
     /**
      * Метод возврата рандомного регистрационного номера
      *
-     * @return возвращает рандомный рег.номер типа {@link Long} в промежутке от 0 до 10000 с использованием {@link Math#random()}
+     * @return возвращает рандомный рег.номер типа {@link Long} в промежутке от 0 до 10000
      */
     public Long getRandDocumentRegNumber() {
-        return Long.valueOf((int) (Math.random() * 10000));
+        return ThreadLocalRandom.current().nextLong(10000);
     }
 
     /**
@@ -162,7 +163,7 @@ public class Randomizer {
      * @return рандомный объект класса {@link Long} в промежутке от 0 до 10000 с использованием {@link Math#random()}
      */
     public Long getIncomingDocumentNumber() {
-        return Long.valueOf((int) (Math.random() * 10000));
+        return ThreadLocalRandom.current().nextLong(10000);
     }
 
     /**

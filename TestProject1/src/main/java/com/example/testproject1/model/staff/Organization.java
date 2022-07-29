@@ -35,10 +35,6 @@ public class Organization extends Staff {
      */
     private String contactNumber;
 
-    public UUID getId() {
-        return super.getId();
-    }
-
     @XmlElement(name = "fullName")
     public String getFullName() {
         return fullName;
@@ -47,6 +43,7 @@ public class Organization extends Staff {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
     @XmlElement(name = "shortName")
     public String getShortName() {
         return shortName;
@@ -55,6 +52,7 @@ public class Organization extends Staff {
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
+
     @XmlElement(name = "supervisor")
     public String getSupervisor() {
         return supervisor;
@@ -63,6 +61,7 @@ public class Organization extends Staff {
     public void setSupervisor(String supervisor) {
         this.supervisor = supervisor;
     }
+
     @XmlElement(name = "contactNumber")
     public String getContactNumber() {
         return contactNumber;

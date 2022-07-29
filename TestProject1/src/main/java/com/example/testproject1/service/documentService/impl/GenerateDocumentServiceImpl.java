@@ -9,12 +9,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.testproject1.model.documents.TaskDocument;
+import com.example.testproject1.model.documents.OutgoingDocument;
+import com.example.testproject1.model.documents.IncomingDocument;
 
 import java.util.List;
 import java.util.Random;
 
 /**
  * Класс реализующий интерфейс {@link GenerateDocumentService}
+ * Рандомно создает документ трех классов: {@link TaskDocument},{@link OutgoingDocument},{@link IncomingDocument}
  *
  * @author smigranov
  */

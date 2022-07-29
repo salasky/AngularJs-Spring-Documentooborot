@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Класс фабрики для {@link OutgoingDocument}
+ * Для установки полей характерных только Исходящим документам.
  *
  * @author smigranov
  */

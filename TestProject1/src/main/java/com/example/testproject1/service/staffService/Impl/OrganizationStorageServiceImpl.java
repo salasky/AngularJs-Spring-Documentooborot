@@ -35,7 +35,7 @@ public class OrganizationStorageServiceImpl implements OrganizationStorageServic
     @Override
     public List<Organization> getOrganizationList() {
         LOGGER.info("Begin find Organization ");
-        OrganizationListXmlDTO organizationListXmlDTO = jaxbReader.jaxbXMLToObject();
+        OrganizationListXmlDTO organizationListXmlDTO = jaxbReader.jaxbXMLToObject("organization.xml");
         List<Organization> organizationList = organizationListXmlDTO.getOrganizationList();
         LOGGER.info("Find Organization result");
         return organizationList;

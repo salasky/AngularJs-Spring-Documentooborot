@@ -56,14 +56,11 @@ public class Person extends Staff implements Comparable<Person>{
      */
     private Department department;
 
-    public UUID getId(){
-        return super.getId();
-    }
-
     @XmlElement(name = "lastName")
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -72,6 +69,7 @@ public class Person extends Staff implements Comparable<Person>{
     public String getSecondName() {
         return secondName;
     }
+
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
@@ -84,6 +82,7 @@ public class Person extends Staff implements Comparable<Person>{
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     @XmlElement(name = "jobTittle")
     public JobTittle getJobTittle() {
         return jobTittle;

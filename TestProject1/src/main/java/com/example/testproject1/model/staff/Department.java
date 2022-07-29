@@ -39,10 +39,6 @@ public class Department extends Staff {
      */
     private Organization organization;
 
-    public UUID getId(){
-        return super.getId();
-    }
-
     @XmlElement(name = "fullName")
     public String getFullName() {
         return fullName;

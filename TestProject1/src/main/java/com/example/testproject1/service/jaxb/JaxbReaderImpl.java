@@ -1,5 +1,8 @@
 package com.example.testproject1.service.jaxb;
 
+import com.example.testproject1.service.staffService.Impl.DepartmentStorageServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -7,19 +10,17 @@ import org.springframework.stereotype.Service;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import java.io.FileReader;
+import java.text.MessageFormat;
 
 /**
  * Класс реализующий интерфейс {@link JaxbReader}
+ * Для unmarshalling-а xml файлов любого типа
  *
  * @author smigranov
  */
 @Service
 public class JaxbReaderImpl implements JaxbReader {
-    /**
-     * Имя xml файла
-     */
-    @Value("${jaxb.fileName}")
-    private String fileName;
+    private static final Logger LOGGER = LoggerFactory.getLogger(JaxbReaderImpl.class);
     /**
      * Бин jaxb context-а
      */
@@ -30,8 +31,13 @@ public class JaxbReaderImpl implements JaxbReader {
      * {@inheritDoc}
      */
     @Override
-    public <T> T jaxbXMLToObject() {
-        String path = this.getClass().getClassLoader().getResource(fileName).getPath();
+    public <T> T jaxbXMLToObject(String fileName) {
+        String path = null;
+        try {
+            path = this.getClass().getClassLoader().getResource(fileName).getPath();
+        } catch (NullPointerException e) {
+            LOGGER.error(MessageFormat.format("Файл {0} не найден",fileName));
+        }
         try (FileReader reader = new FileReader(path)) {
             T result = null;
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();

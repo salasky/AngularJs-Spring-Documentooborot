@@ -4,6 +4,7 @@ import com.example.testproject1.model.staff.Person;
 
 /**
  * Интерфейс анмаршализации объктов класса {@link Person}
+ *Для unmarshalling-а xml файлов любого типа
  *
  * @author smigranov
  */
@@ -13,5 +14,5 @@ public interface JaxbReader {
      * @return Возвращает объект класса, который передали
      * @param <T> класс для анмаршализации
      */
-     <T> T jaxbXMLToObject();
+     <T> T jaxbXMLToObject(String fileName);
 }
