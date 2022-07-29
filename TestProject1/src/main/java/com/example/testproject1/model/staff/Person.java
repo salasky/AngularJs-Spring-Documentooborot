@@ -52,10 +52,6 @@ public class Person extends Staff implements Comparable<Person> {
      */
     private String phoneNumber;
 
-    public UUID getId() {
-        return super.getId();
-    }
-
     @XmlElement(name = "lastName")
     public String getLastName() {
         return lastName;

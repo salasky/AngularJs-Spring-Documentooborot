@@ -4,7 +4,8 @@ import com.example.testproject1.model.documents.IncomingDocument;
 import org.springframework.stereotype.Service;
 
 /**
- * Класс фабрики для {@link IncomingDocument}
+ * Класс фабрики для {@link IncomingDocument}.
+ * Для установки полей характерных только Вхоящим документам.
  *
  * @author smigranov
  */

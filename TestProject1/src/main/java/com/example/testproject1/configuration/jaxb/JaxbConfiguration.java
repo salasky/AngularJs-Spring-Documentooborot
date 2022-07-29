@@ -13,7 +13,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
 /**
- * Класс для инициализации JAXBContext
+ * Класс для конфишурации JAXBContext.
+ * Создания инициализированного бина JAXBContext.
  *
  * @author smigranov
  */
@@ -22,8 +23,8 @@ public class JaxbConfiguration {
     @Bean(name = "BeanJaxbContext")
     public JAXBContext getContext() {
         try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(PersonListXmlDTO.class, DepartmentListXmlDTO.class
-                    , OrganizationListXmlDTO.class, Person.class, Department.class, Organization.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(PersonListXmlDTO.class, DepartmentListXmlDTO.class,
+                    OrganizationListXmlDTO.class, Person.class, Department.class, Organization.class);
             return jaxbContext;
         } catch (JAXBException e) {
             throw new RuntimeException(e);

@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Класс конфигурации CaffeineConfig для кэширования
+ * Класс конфигурации CaffeineConfig для кэширования данных для получения
+ * объектов клаасса Person, Department, Organization
  *
  * @author smigranov
  */
@@ -34,7 +35,7 @@ public class CaffeineConfig {
      *
      * @return объект билдер для {@link Caffeine#}
      */
-    Caffeine<Object, Object> caffeineCacheBuilder() {
+    private Caffeine<Object, Object> caffeineCacheBuilder() {
         return Caffeine.newBuilder()
                 .initialCapacity(100)
                 .maximumSize(500)

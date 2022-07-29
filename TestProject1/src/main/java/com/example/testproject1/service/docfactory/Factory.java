@@ -3,9 +3,11 @@ package com.example.testproject1.service.docfactory;
 import com.example.testproject1.model.documents.BaseDocument;
 
 /**
- * Интерфейс фабрик
+ * Интерфейс фабрик для объектов классы которых унаследованы от {@link BaseDocument}
  *
  * @param <T> реализация фабрик
+ *
+ * @author smigranov
  */
 public interface Factory<T> {
     /**

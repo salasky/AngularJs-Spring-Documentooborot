@@ -22,6 +22,7 @@ import java.util.Map;
 
 /**
  * Класс реализующий интерфейс {@link GenerateReportService}
+ * Создает отчеты по сгенерированным документам и сохраняет их в json формате по авторам.
  *
  * @author smigranov
  */

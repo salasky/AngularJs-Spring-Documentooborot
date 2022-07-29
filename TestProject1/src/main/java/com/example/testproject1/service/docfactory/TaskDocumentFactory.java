@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Класс фабрики для {@link TaskDocument}
+ * Для установки полей характерных только Поручениям документам.
  *
  * @author smigranov
  */

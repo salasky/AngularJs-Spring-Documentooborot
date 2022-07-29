@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Класс реализующий интерфейс {@link DocumentService}
+ * Класс реализующий интерфейс {@link DocumentService}. Сохраняет переданные документы,
+ * перед сохранением проверяет уникаль6ность рег.номера
  *
  * @author smigranov
  */

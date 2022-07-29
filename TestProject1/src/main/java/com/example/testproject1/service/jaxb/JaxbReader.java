@@ -4,6 +4,7 @@ import com.example.testproject1.model.staff.Person;
 
 /**
  * Интерфейс анмаршализации объктов класса {@link Person}
+ *Для unmarshalling-а xml файлов любого типа
  *
  * @author smigranov
  */
