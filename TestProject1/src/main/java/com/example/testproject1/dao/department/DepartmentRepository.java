@@ -2,6 +2,7 @@ package com.example.testproject1.dao.department;
 
 import com.example.testproject1.dao.department.mapper.DepartmentMapper;
 import com.example.testproject1.model.staff.Department;
+import com.example.testproject1.model.staff.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,7 @@ public class DepartmentRepository {
             "organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number\n" +
             "FROM department INNER JOIN organization ON department.organization_id=organization.id";
     /**
-     * Запрос на получение объекта по id из таблицы organization
+     * Запрос на получение объекта по id из таблицы department
      */
     private final String queryGetById="SELECT department.id AS department_id, department.full_name AS department_full_name," +
             " department.short_name AS department_short_name, department.supervisor AS department_supervisor," +
@@ -30,17 +31,22 @@ public class DepartmentRepository {
             "organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number\n" +
             "FROM department INNER JOIN organization ON department.organization_id=organization.id WHERE department.id=?";
     /**
-     * Запрос на создание записи в таблице organization
+     * Запрос на создание записи в таблице department
      */
     private final String queryCreate="INSERT INTO department VALUES (?,?,?,?,?,?)";
     /**
-     * Запрос на удаление всех записей в таблице organization
+     * Запрос на удаление всех записей в таблице department
      */
     private final String queryDeleteAll="DELETE FROM department";
     /**
-     * Запрос на удаление записи по id в таблице organization
+     * Запрос на удаление записи по id в таблице department
      */
     private final String queryDeleteById="DELETE FROM department WHERE id=?";
+    /**
+     * Запрос на обновление записи по id в таблице department
+     */
+    private final String queryUpdate="UPDATE department SET full_name=?, short_name=?," +
+            " supervisor=?, contact_number=?, organization_id=? WHERE id=?";
     @Autowired
     private DepartmentMapper departmentMapper;
     @Autowired
@@ -57,6 +63,12 @@ public class DepartmentRepository {
                    ,department.getFullName(),department.getShortName(),department.getSupervisor()
                    ,department.getContactNumber(),department.getOrganization().getId().toString());
    }
+
+    public Integer update(Department department){
+        return jdbcTemplate.update(queryUpdate,department.getFullName(),department.getShortName(),
+                department.getSupervisor(),department.getContactNumber(),department.getOrganization().getId().toString(),
+                department.getId().toString());
+    }
 
    public Optional<Department> getById(String id){
       return jdbcTemplate.query(queryGetById, new DepartmentMapper(),id).stream().findFirst();

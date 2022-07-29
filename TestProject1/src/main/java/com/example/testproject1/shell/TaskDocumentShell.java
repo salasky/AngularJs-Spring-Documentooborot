@@ -3,8 +3,10 @@ package com.example.testproject1.shell;
 
 
 import com.example.testproject1.dao.department.DepartmentRepository;
+import com.example.testproject1.dao.jobTittle.JobTittleRepository;
 import com.example.testproject1.dao.organization.OrganizationRepository;
 import com.example.testproject1.model.staff.Department;
+import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.documentService.DocumentStorageService;
 import com.example.testproject1.service.documentService.GenerateDocumentService;
@@ -47,6 +49,8 @@ public class TaskDocumentShell {
     private OrganizationRepository organizationRepository;
     @Autowired
     private DepartmentRepository departmentRepository;
+    @Autowired
+    private JobTittleRepository jobTittleRepository;
     /**
      * Shell метод генерации документов и создания отчетов по ним
      *
@@ -71,6 +75,21 @@ public class TaskDocumentShell {
         organization.setContactNumber("organizationContactNumber");
         organizationRepository.create(organization);
         System.out.println(organization +" создан");
+    }
+    @ShellMethod()
+    public void updateorg() {
+        Optional<Organization> organizations=organizationRepository.getAll().stream().findFirst();
+        if(organizations.isPresent()){
+            Organization organization=organizations.get();
+            organization.setFullName("organizationNameUpdate");
+            organization.setShortName("organizationShortNameU");
+            organization.setSupervisor("organizationSupervisorU");
+            organization.setContactNumber("organizationContactNumberU");
+            organizationRepository.update(organization);
+            System.out.println(organization +" обнавлен");
+        }
+        else
+        System.out.println("Нет организации с id="+organizations.get().getId());
     }
     @ShellMethod()
     public void getallorg() {
@@ -104,6 +123,23 @@ public class TaskDocumentShell {
         departmentRepository.create(department);
         System.out.println(department +" создан");
     }
+
+    @ShellMethod()
+    public void updatedep() {
+        Optional<Department> departments=departmentRepository.getAll().stream().findFirst();
+        if(departments.isPresent()){
+            Department department=departments.get();
+            department.setFullName("departmentNameUpdate2");
+            department.setShortName("departmentShortNameU");
+            department.setSupervisor("departmentSupervisorU");
+            department.setContactNumber("departmentContactNumberU");
+            department.setOrganization(organizationRepository.getAll().stream().findFirst().get());
+            departmentRepository.update(department);
+            System.out.println(department +" обнавлен");
+        }
+        else
+            System.out.println("Нет department с id="+departments.get().getId());
+    }
     @ShellMethod()
     public void getalldep() {
         departmentRepository.getAll().stream().forEach(System.out::println);
@@ -122,6 +158,47 @@ public class TaskDocumentShell {
     @ShellMethod()
     public Integer deletebyiddep(String id) {
         return departmentRepository.deleteById(id);
+    }
+
+    @ShellMethod()
+    public void createjob() {
+        JobTittle jobTittle=new JobTittle();
+        jobTittle.setUuid(UUID.randomUUID());
+        jobTittle.setName("JobName");
+        jobTittleRepository.create(jobTittle);
+        System.out.println(jobTittle +" создан");
+    }
+    @ShellMethod()
+    public void updatejob() {
+        Optional<JobTittle> jobTittles=jobTittleRepository.getAll().stream().findFirst();
+        if(jobTittles.isPresent()){
+            JobTittle jobTittle=jobTittles.get();
+            jobTittle.setName("JobNameU");
+            jobTittleRepository.update(jobTittle);
+            System.out.println(jobTittle +" обнавлен");
+        }
+        else
+            System.out.println("Нет department с id="+jobTittles.get().getUuid());
+    }
+    @ShellMethod()
+    public void getalljob() {
+        jobTittleRepository.getAll().stream().forEach(System.out::println);
+    }
+    @ShellMethod()
+    public void getbyidjob(String id) {
+        Optional<JobTittle> jobTittle=jobTittleRepository.getById(id);
+        if(jobTittle.isPresent()){
+            System.out.println(jobTittle.get());
+        }
+        else System.out.println("не найдено");
+    }
+    @ShellMethod()
+    public void deletealljob() {
+        jobTittleRepository.deleteAll();
+    }
+    @ShellMethod()
+    public void deletebyidjob(String id) {
+        System.out.println(jobTittleRepository.deleteById(id));
     }
 
 }

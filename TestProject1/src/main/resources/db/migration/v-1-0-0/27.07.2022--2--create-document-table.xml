@@ -9,7 +9,7 @@
       http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
 
     <changeSet author="smigranov" id="10">
-        <createTable tableName="baseDocument">
+        <createTable tableName="base_document">
             <column name="id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_BASEDOCUMENT"/>
             </column>
@@ -30,18 +30,18 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="baseDocument"></dropTable>
+            <dropTable tableName="base_document"></dropTable>
         </rollback>
     </changeSet>
 
     <changeSet author="smigranov" id="11">
-        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="baseDocument" constraintName="FK_BASEDOCUMENT_PERSONAUTHOR"
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="base_document" constraintName="FK_BASEDOCUMENT_PERSONAUTHOR"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="12">
-        <createTable tableName="taskDocument">
+        <createTable tableName="task_document">
             <column name="base_document_id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_TASKDOCUMENT"/>
             </column>
@@ -62,30 +62,30 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="taskDocument"></dropTable>
+            <dropTable tableName="task_document"></dropTable>
         </rollback>
     </changeSet>
 
     <changeSet author="smigranov" id="13">
-        <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="taskDocument" constraintName="FK_TASK_BASEDOCUMENT"
+        <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="task_document" constraintName="FK_TASK_BASEDOCUMENT"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-                                 referencedColumnNames="id" referencedTableName="baseDocument" validate="true"/>
+                                 referencedColumnNames="id" referencedTableName="base_document" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="14">
-        <addForeignKeyConstraint baseColumnNames="responsible_id" baseTableName="taskDocument" constraintName="FK_TASK_PERSONRESPONSIBLE"
+        <addForeignKeyConstraint baseColumnNames="responsible_id" baseTableName="task_document" constraintName="FK_TASK_PERSONRESPONSIBLE"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="15">
-        <addForeignKeyConstraint baseColumnNames="control_person_id" baseTableName="taskDocument" constraintName="FK_TASKDOCUMENT_PERSONCONTROL"
+        <addForeignKeyConstraint baseColumnNames="control_person_id" baseTableName="task_document" constraintName="FK_TASKDOCUMENT_PERSONCONTROL"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="16">
-        <createTable tableName="incomingDocument">
+        <createTable tableName="incoming_document">
             <column name="base_document_id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_INCOMINGDOCUMENT"/>
             </column>
@@ -103,30 +103,30 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="incomingDocument"></dropTable>
+            <dropTable tableName="incoming_document"></dropTable>
         </rollback>
     </changeSet>
 
     <changeSet author="smigranov" id="17">
-        <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="incomingDocument" constraintName="FK_INCOMINGDOCUMENT_BASEDOCUMENT"
+        <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="incoming_document" constraintName="FK_INCOMINGDOCUMENT_BASEDOCUMENT"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-                                 referencedColumnNames="id" referencedTableName="baseDocument" validate="true"/>
+                                 referencedColumnNames="id" referencedTableName="base_document" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="18">
-        <addForeignKeyConstraint baseColumnNames="sender_id" baseTableName="incomingDocument" constraintName="FK_INCOMINGDOCUMENT_PERSONSENDER"
+        <addForeignKeyConstraint baseColumnNames="sender_id" baseTableName="incoming_document" constraintName="FK_INCOMINGDOCUMENT_PERSONSENDER"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="19">
-        <addForeignKeyConstraint baseColumnNames="destination_id" baseTableName="incomingDocument" constraintName="FK_INCOMINGDOCUMENT_PERSONDESTINATION"
+        <addForeignKeyConstraint baseColumnNames="destination_id" baseTableName="incoming_document" constraintName="FK_INCOMINGDOCUMENT_PERSONDESTINATION"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="20">
-        <createTable tableName="outgoingDocument">
+        <createTable tableName="outgoing_document">
             <column name="base_document_id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_OUTGOINGDOCUMENT"/>
             </column>
@@ -138,18 +138,18 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="outgoingDocument"></dropTable>
+            <dropTable tableName="outgoing_document"></dropTable>
         </rollback>
     </changeSet>
 
     <changeSet author="smigranov" id="21">
-        <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="outgoingDocument" constraintName="FK_OUTGOINGDOCUMENT_BASEDOCUMENT"
+        <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="outgoing_document" constraintName="FK_OUTGOINGDOCUMENT_BASEDOCUMENT"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-                                 referencedColumnNames="id" referencedTableName="baseDocument" validate="true"/>
+                                 referencedColumnNames="id" referencedTableName="base_document" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="22">
-        <addForeignKeyConstraint baseColumnNames="sender_id" baseTableName="outgoingDocument" constraintName="FK_OUTGOINGDOCUMENT_PERSONSENDER"
+        <addForeignKeyConstraint baseColumnNames="sender_id" baseTableName="outgoing_document" constraintName="FK_OUTGOINGDOCUMENT_PERSONSENDER"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>

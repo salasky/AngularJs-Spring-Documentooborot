@@ -64,7 +64,7 @@
     </changeSet>
 
     <changeSet author="smigranov" id="4">
-        <createTable tableName="jobTittle">
+        <createTable tableName="job_tittle">
             <column name="id" type="VARCHAR(64)" autoIncrement="false">
                 <constraints primaryKey="true" primaryKeyName="PK_JOBTITTLE"/>
             </column>
@@ -73,7 +73,7 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="jobTittle"></dropTable>
+            <dropTable tableName="job_tittle"></dropTable>
         </rollback>
     </changeSet>
 
@@ -122,7 +122,7 @@
     <changeSet author="smigranov" id="7">
         <addForeignKeyConstraint baseColumnNames="job_tittle_id" baseTableName="person" constraintName="FK_PERSON_JOBTITTLE"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-                                 referencedColumnNames="id" referencedTableName="jobTittle" validate="true"/>
+                                 referencedColumnNames="id" referencedTableName="job_tittle" validate="true"/>
     </changeSet>
 
 </databaseChangeLog>

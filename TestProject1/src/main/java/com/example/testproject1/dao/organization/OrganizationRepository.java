@@ -40,10 +40,23 @@ public class OrganizationRepository {
      */
     private final String queryDeleteById="DELETE FROM organization WHERE id=?";
 
+    /**
+     * Запрос на обновление записи по id в таблице organization
+     */
+    private final String queryUpdate="UPDATE organization SET full_name=?, short_name=?, supervisor=?, contact_number=? WHERE id=?";
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    public Integer create(Organization organization){
+        return jdbcTemplate.update(queryCreate,organization.getId().toString()
+                ,organization.getFullName(),organization.getShortName(),organization.getSupervisor(),organization.getContactNumber());
+    }
 
+    public Integer update(Organization organization){
+        return jdbcTemplate.update(queryUpdate,organization.getFullName(),organization.getShortName(),
+                organization.getSupervisor(),organization.getContactNumber(),organization.getId().toString());
+    }
     public List<Organization> getAll(){
         return jdbcTemplate.query(queryGetAll, new OrganizationMapper());
     }
@@ -54,11 +67,6 @@ public class OrganizationRepository {
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
-    }
-
-    public void create(Organization organization){
-        jdbcTemplate.update(queryCreate,organization.getId().toString()
-        ,organization.getFullName(),organization.getShortName(),organization.getSupervisor(),organization.getContactNumber());
     }
 
     public void deleteAll(){
