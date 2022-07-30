@@ -71,6 +71,7 @@ public class PersonRepository {
      * Запрос на удаление записи по id в таблице person
      */
     private final String queryDeleteById="DELETE FROM person WHERE id=?";
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

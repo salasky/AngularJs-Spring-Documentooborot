@@ -1,5 +1,6 @@
-package com.example.testproject1.dao.person.mapper;
+package com.example.testproject1.dao.baseDocument.mapper;
 
+import com.example.testproject1.model.documents.BaseDocument;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
@@ -10,10 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class PersonMapper implements RowMapper<Person> {
-
+public class BaseDocumentMapper implements RowMapper<BaseDocument> {
     @Override
-    public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public BaseDocument mapRow(ResultSet rs, int rowNum) throws SQLException {
+        BaseDocument baseDocument=new BaseDocument();
+        baseDocument.setId(UUID.fromString(rs.getString("base_document_id")));
+        baseDocument.setName(rs.getString("base_document_name"));
+        baseDocument.setText(rs.getString("base_document_text"));
+        baseDocument.setRegNumber(rs.getLong("base_document_number"));
+        baseDocument.setCreatingDate(rs.getTimestamp("base_document_date"));
+
         Person person=new Person();
         person.setId(UUID.fromString(rs.getString("person_id")));
         person.setFirstName(rs.getString("person_first_name"));
@@ -44,6 +51,8 @@ public class PersonMapper implements RowMapper<Person> {
         department.setOrganization(organization);
         person.setDepartment(department);
         person.setJobTittle(jobTittle);
-        return person;
+        baseDocument.setAuthor(person);
+
+        return baseDocument;
     }
 }

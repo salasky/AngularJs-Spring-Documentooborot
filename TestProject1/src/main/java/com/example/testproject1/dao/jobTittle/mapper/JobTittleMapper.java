@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-@Component
 public class JobTittleMapper implements RowMapper<JobTittle> {
     @Override
     public JobTittle mapRow(ResultSet rs, int rowNum) throws SQLException {

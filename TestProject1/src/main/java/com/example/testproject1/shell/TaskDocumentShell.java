@@ -2,10 +2,12 @@ package com.example.testproject1.shell;
 
 
 
+import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.department.DepartmentRepository;
 import com.example.testproject1.dao.jobTittle.JobTittleRepository;
 import com.example.testproject1.dao.organization.OrganizationRepository;
 import com.example.testproject1.dao.person.PersonRepository;
+import com.example.testproject1.model.documents.BaseDocument;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
@@ -13,8 +15,6 @@ import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.documentService.DocumentStorageService;
 import com.example.testproject1.service.documentService.GenerateDocumentService;
 import com.example.testproject1.service.documentService.GenerateReportService;
-import liquibase.pro.packaged.O;
-import liquibase.pro.packaged.P;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,10 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Класс для работы с терминалом shell и запуска генерации документов и отчетов
@@ -58,6 +60,9 @@ public class TaskDocumentShell {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private BaseDocumentRepository baseDocumentRepository;
     /**
      * Shell метод генерации документов и создания отчетов по ним
      *
@@ -259,4 +264,57 @@ public class TaskDocumentShell {
     public void deletebyidpers(String id) {
         System.out.println(personRepository.deleteById(id));
     }
+
+    @ShellMethod()
+    public void createbdoc() {
+        BaseDocument baseDocument=new BaseDocument();
+        baseDocument.setId(UUID.randomUUID());
+        baseDocument.setName("BaseDocName");
+        baseDocument.setText("BaseDocText");
+        baseDocument.setRegNumber(ThreadLocalRandom.current().nextLong(1000));
+        long offset = Timestamp.valueOf("2015-01-01 00:00:00").getTime();
+        long end = Timestamp.valueOf("2022-08-01 00:00:00").getTime();
+        long diff = end - offset + 1;
+        Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
+        baseDocument.setCreatingDate(rand);
+        Person person=personRepository.getAll().stream().findFirst().get();
+        baseDocument.setAuthor(person);
+        baseDocumentRepository.create(baseDocument);
+        System.out.println(baseDocument +" создан");
+    }
+    @ShellMethod()
+    public void getallbdoc() {
+        baseDocumentRepository.getAll().stream().forEach(System.out::println);
+    }
+
+    @ShellMethod()
+    public void getbyidbdoc(String id) {
+        Optional<BaseDocument> baseDocument=baseDocumentRepository.getById(id);
+        if(baseDocument.isPresent()){
+            System.out.println(baseDocument.get());
+        }
+        else System.out.println("не найдено");
+    }
+    @ShellMethod()
+    public void updatebdoc() {
+        Optional<BaseDocument> baseDocuments=baseDocumentRepository.getAll().stream().findFirst();
+        if(baseDocuments.isPresent()){
+            BaseDocument baseDocument=baseDocuments.get();
+            baseDocument.setName("BaseNameU");
+            baseDocumentRepository.update(baseDocument);
+            System.out.println(baseDocument +" обнавлен");
+        }
+        else
+            System.out.println("Нет department с id="+baseDocuments.get().getId());
+    }
+
+    @ShellMethod()
+    public void deleteallbdoc() {
+        baseDocumentRepository.deleteAll();
+    }
+    @ShellMethod()
+    public void deletebyidbdoc(String id) {
+        System.out.println(baseDocumentRepository.deleteById(id));
+    }
+
 }
