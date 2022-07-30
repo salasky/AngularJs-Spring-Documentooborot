@@ -7,7 +7,9 @@ import com.example.testproject1.dao.department.DepartmentRepository;
 import com.example.testproject1.dao.jobTittle.JobTittleRepository;
 import com.example.testproject1.dao.organization.OrganizationRepository;
 import com.example.testproject1.dao.person.PersonRepository;
+import com.example.testproject1.dao.taskDocument.TaskDocumentRepository;
 import com.example.testproject1.model.documents.BaseDocument;
+import com.example.testproject1.model.documents.TaskDocument;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
@@ -34,8 +36,8 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author smigranov
  */
 @ShellComponent
-public class TaskDocumentShell {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentShell.class);
+public class DocumentShell {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DocumentShell.class);
     /**
      * Autowired бина класса {@link GenerateDocumentService}
      */
@@ -63,6 +65,9 @@ public class TaskDocumentShell {
 
     @Autowired
     private BaseDocumentRepository baseDocumentRepository;
+
+    @Autowired
+    TaskDocumentRepository taskDocumentRepository;
     /**
      * Shell метод генерации документов и создания отчетов по ним
      *
@@ -225,7 +230,7 @@ public class TaskDocumentShell {
         person.setJobTittle(jobTittle);
         Department department=departmentRepository.getAll().stream().findFirst().get();
         person.setDepartment(department);
-        person.setPhoneNumber("personsetPhoneNumber");
+        person.setPhoneNumber("personsetPhoneNumber22");
         person.setBirthDay(new Date(System.currentTimeMillis()));
         personRepository.create(person);
         System.out.println(person +" создан");
@@ -316,5 +321,27 @@ public class TaskDocumentShell {
     public void deletebyidbdoc(String id) {
         System.out.println(baseDocumentRepository.deleteById(id));
     }
+    @ShellMethod()
+    public void createtask() {
+        TaskDocument taskDocument=new TaskDocument();
+        taskDocument.setId(baseDocumentRepository.getAll().stream().findFirst().get().getId());
+        long offset = Timestamp.valueOf("2015-01-01 00:00:00").getTime();
+        long end = Timestamp.valueOf("2022-08-01 00:00:00").getTime();
+        long diff = end - offset + 1;
+        Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
+        taskDocument.setOutDate(rand);
+        taskDocument.setExecPeriod("3 дня");
+        Person personResponse=personRepository.getAll().stream().findFirst().get();
+        taskDocument.setResponsible(personResponse);
+        taskDocument.setControlPerson(personResponse);
+        taskDocument.setSignOfControl(true);
 
+        taskDocumentRepository.create(taskDocument);
+        System.out.println(taskDocument +" создан");
+    }
+
+    @ShellMethod()
+    public void getalltask() {
+        taskDocumentRepository.getAll().stream().forEach(System.out::println);
+    }
 }
