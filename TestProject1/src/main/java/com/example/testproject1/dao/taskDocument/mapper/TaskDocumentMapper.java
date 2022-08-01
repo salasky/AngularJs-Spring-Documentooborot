@@ -64,12 +64,12 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
         //Мапим Person(responsible) к taskDocument
         Person response=new Person();
         response.setId(UUID.fromString(rs.getString("person_response_id")));
-        response.setFirstName(rs.getString("person_response_id_first_name"));
-        response.setSecondName(rs.getString("person_response_id_second_name"));
-        response.setLastName(rs.getString("person_response_id_last_name"));
-        response.setPhoto(rs.getString("person_response_id_photo"));
-        response.setPhoneNumber(rs.getString("person_response_id_phone_number"));
-        response.setBirthDay((rs.getDate("person_response_id_birth_day")));
+        response.setFirstName(rs.getString("person_response_first_name"));
+        response.setSecondName(rs.getString("person_response_second_name"));
+        response.setLastName(rs.getString("person_response_last_name"));
+        response.setPhoto(rs.getString("person_response_photo"));
+        response.setPhoneNumber(rs.getString("person_response_phone_number"));
+        response.setBirthDay((rs.getDate("person_response_birth_day")));
         Department departmentResponse=new Department();
         departmentResponse.setId(UUID.fromString(rs.getString("department_response_id")));
         departmentResponse.setFullName(rs.getString("department_response_full_name"));

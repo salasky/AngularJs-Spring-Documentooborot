@@ -4,11 +4,13 @@ package com.example.testproject1.shell;
 
 import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.department.DepartmentRepository;
+import com.example.testproject1.dao.incomingDocumrnt.IncomingDocumentRepository;
 import com.example.testproject1.dao.jobTittle.JobTittleRepository;
 import com.example.testproject1.dao.organization.OrganizationRepository;
 import com.example.testproject1.dao.person.PersonRepository;
 import com.example.testproject1.dao.taskDocument.TaskDocumentRepository;
 import com.example.testproject1.model.documents.BaseDocument;
+import com.example.testproject1.model.documents.IncomingDocument;
 import com.example.testproject1.model.documents.TaskDocument;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
@@ -68,6 +70,9 @@ public class DocumentShell {
 
     @Autowired
     TaskDocumentRepository taskDocumentRepository;
+
+    @Autowired
+    IncomingDocumentRepository incomingDocumentRepository;
     /**
      * Shell метод генерации документов и создания отчетов по ним
      *
@@ -353,11 +358,76 @@ public class DocumentShell {
         else System.out.println("не найдено");
     }
     @ShellMethod()
+    public void updatetask() {
+        Optional<TaskDocument> taskDocuments=taskDocumentRepository.getAll().stream().findFirst();
+        if(taskDocuments.isPresent()){
+            TaskDocument taskDocument=taskDocuments.get();
+            taskDocument.setName("BASENameU");
+            taskDocument.setExecPeriod("12 дней");
+            taskDocumentRepository.update(taskDocument);
+            System.out.println(taskDocument +" обнавлен");
+        }
+        else
+            System.out.println("Нет department с id="+taskDocuments.get().getId());
+    }
+    @ShellMethod()
     public void deletealltask() {
         taskDocumentRepository.deleteAll();
     }
     @ShellMethod()
     public void deletebyidtask(String id) {
         System.out.println(taskDocumentRepository.deleteById(id));
+    }
+    @ShellMethod()
+    public void createincom() {
+        IncomingDocument incomingDocument=new IncomingDocument();
+        incomingDocument.setId(baseDocumentRepository.getAll().stream().findFirst().get().getId());
+        long offset = Timestamp.valueOf("2015-01-01 00:00:00").getTime();
+        long end = Timestamp.valueOf("2022-08-01 00:00:00").getTime();
+        long diff = end - offset + 1;
+        Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
+        incomingDocument.setDateOfRegistration(rand);
+        incomingDocument.setNumber(2343l);
+
+        Person personResponse=personRepository.getAll().stream().findFirst().get();
+        incomingDocument.setSender(personResponse);
+        incomingDocument.setDestination(personResponse);
+
+        incomingDocumentRepository.create(incomingDocument);
+        System.out.println(incomingDocument +" создан");
+    }
+
+    @ShellMethod()
+    public void getallincom() {
+        incomingDocumentRepository.getAll().stream().forEach(System.out::println);
+    }
+
+    @ShellMethod()
+    public void getbyidincom(String id) {
+        Optional<IncomingDocument> incomingDocument=incomingDocumentRepository.getById(id);
+        if(incomingDocument.isPresent()){
+            System.out.println(incomingDocument.get());
+        }
+        else System.out.println("не найдено");
+    }
+    @ShellMethod()
+    public void updateincome() {
+        Optional<IncomingDocument> incomingDocuments=incomingDocumentRepository.getAll().stream().findFirst();
+        if(incomingDocuments.isPresent()){
+            IncomingDocument incomingDocument=incomingDocuments.get();
+            incomingDocument.setNumber(1l);
+            incomingDocumentRepository.update(incomingDocument);
+            System.out.println(incomingDocument +" обнавлен");
+        }
+        else
+            System.out.println("Нет department с id="+incomingDocuments.get().getId());
+    }
+    @ShellMethod()
+    public void deleteallincom() {
+        incomingDocumentRepository.deleteAll();
+    }
+    @ShellMethod()
+    public void deletebyidincom(String id) {
+        System.out.println(incomingDocumentRepository.deleteById(id));
     }
 }

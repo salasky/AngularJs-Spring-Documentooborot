@@ -39,12 +39,12 @@ public class TaskDocumentRepository {
             "                    organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number," +
             "                    job_tittle.id AS job_tittle_id, job_tittle.name AS job_name," +
             "                    response.id AS person_response_id," +
-            "                    response.first_name AS person_response_id_first_name," +
-            "                    response.second_name AS person_response_id_second_name," +
-            "                    response.last_name AS person_response_id_last_name," +
-            "                    response.photo AS person_response_id_photo," +
-            "                    response.phone_number AS person_response_id_phone_number," +
-            "                    response.birth_day AS person_response_id_birth_day," +
+            "                    response.first_name AS person_response_first_name," +
+            "                    response.second_name AS person_response_second_name," +
+            "                    response.last_name AS person_response_last_name," +
+            "                    response.photo AS person_response_photo," +
+            "                    response.phone_number AS person_response_phone_number," +
+            "                    response.birth_day AS person_response_birth_day," +
             "                    departmentResponse.id AS department_response_id," +
             "                    departmentResponse.full_name AS department_response_full_name," +
             "                    departmentResponse.short_name AS department_response_short_name," +
@@ -192,7 +192,7 @@ public class TaskDocumentRepository {
      * Запрос на обновление записи в таблице task_document
      */
     private final String queryUpdate="UPDATE task_document SET out_date=?, exec_period=?, responsible_id=?," +
-            " sign_of_control=?, control_person_id=? WHERE base_document_id=?";
+            " sign_of_control=?, control_person_id=? WHERE task_document.base_document_id=?";
 
     /**
      * Запрос на удаление всех записей в таблице task_document
@@ -219,7 +219,7 @@ public class TaskDocumentRepository {
     public Integer update(TaskDocument taskDocument){
         return jdbcTemplate.update(queryUpdate,taskDocument.getOutDate(),taskDocument.getExecPeriod(),
                 taskDocument.getResponsible().getId().toString(), taskDocument.getSignOfControl(),
-                taskDocument.getControlPerson().getId().toString());
+                taskDocument.getControlPerson().getId().toString(),taskDocument.getId().toString());
     }
 
     public void deleteAll(){
