@@ -15,11 +15,6 @@ import java.util.UUID;
 public class TaskDocumentMapper implements RowMapper<TaskDocument> {
     @Override
     public TaskDocument mapRow(ResultSet rs, int rowNum) throws SQLException {
-        TaskDocument taskDocument=new TaskDocument();
-        taskDocument.setOutDate(rs.getTimestamp("task_document_out_date"));
-        taskDocument.setExecPeriod(rs.getString("task_document_exec_period"));
-        taskDocument.setSignOfControl(rs.getBoolean("task_document_sign_of_control"));
-
         //Мапим baseDocument к taskDocument
         BaseDocument baseDocument=new BaseDocument();
         baseDocument.setId(UUID.fromString(rs.getString("base_document_id")));
@@ -55,7 +50,16 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
         person.setJobTittle(jobTittle);
         baseDocument.setAuthor(person);
 
+        TaskDocument taskDocument=new TaskDocument();
+        taskDocument.setOutDate(rs.getTimestamp("task_document_out_date"));
+        taskDocument.setExecPeriod(rs.getString("task_document_exec_period"));
+        taskDocument.setSignOfControl(rs.getBoolean("task_document_sign_of_control"));
         taskDocument.setId(baseDocument.getId());
+        taskDocument.setName(baseDocument.getName());
+        taskDocument.setText(baseDocument.getText());
+        taskDocument.setAuthor(baseDocument.getAuthor());
+        taskDocument.setRegNumber(baseDocument.getRegNumber());
+        taskDocument.setCreatingDate(baseDocument.getCreatingDate());
 
         //Мапим Person(responsible) к taskDocument
         Person response=new Person();

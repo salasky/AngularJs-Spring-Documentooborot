@@ -344,4 +344,20 @@ public class DocumentShell {
     public void getalltask() {
         taskDocumentRepository.getAll().stream().forEach(System.out::println);
     }
+    @ShellMethod()
+    public void getbyidtask(String id) {
+        Optional<TaskDocument> taskDocument=taskDocumentRepository.getById(id);
+        if(taskDocument.isPresent()){
+            System.out.println(taskDocument.get());
+        }
+        else System.out.println("не найдено");
+    }
+    @ShellMethod()
+    public void deletealltask() {
+        taskDocumentRepository.deleteAll();
+    }
+    @ShellMethod()
+    public void deletebyidtask(String id) {
+        System.out.println(taskDocumentRepository.deleteById(id));
+    }
 }
