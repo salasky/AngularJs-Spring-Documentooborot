@@ -1,10 +1,9 @@
 package com.example.testproject1.dao.outgoingDocument.mapper;
 
 import com.example.testproject1.dao.baseDocument.mapper.BaseDocumentMapper;
-import com.example.testproject1.model.documents.BaseDocument;
-import com.example.testproject1.model.documents.IncomingDocument;
-import com.example.testproject1.model.documents.OutgoingDocument;
-import com.example.testproject1.model.enums.DocumentDeliveryType;
+import com.example.testproject1.model.document.BaseDocument;
+import com.example.testproject1.model.document.OutgoingDocument;
+import com.example.testproject1.model.documentEnum.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;

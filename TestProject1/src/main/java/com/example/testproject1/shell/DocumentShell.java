@@ -2,19 +2,19 @@ package com.example.testproject1.shell;
 
 
 
-import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
-import com.example.testproject1.dao.department.DepartmentRepository;
-import com.example.testproject1.dao.incomingDocumrnt.IncomingDocumentRepository;
-import com.example.testproject1.dao.jobTittle.JobTittleRepository;
-import com.example.testproject1.dao.organization.OrganizationRepository;
-import com.example.testproject1.dao.outgoingDocument.OutgoingDocumentRepository;
-import com.example.testproject1.dao.person.PersonRepository;
-import com.example.testproject1.dao.taskDocument.TaskDocumentRepository;
-import com.example.testproject1.model.documents.BaseDocument;
-import com.example.testproject1.model.documents.IncomingDocument;
-import com.example.testproject1.model.documents.OutgoingDocument;
-import com.example.testproject1.model.documents.TaskDocument;
-import com.example.testproject1.model.enums.DocumentDeliveryType;
+import com.example.testproject1.dao.baseDocument.BaseDocumentRepositoryImpl;
+import com.example.testproject1.dao.department.DepartmentRepositoryImpl;
+import com.example.testproject1.dao.incomingDocumrnt.IncomingDocumentRepositoryImpl;
+import com.example.testproject1.dao.jobTittle.JobTittleRepositoryImpl;
+import com.example.testproject1.dao.organization.OrganizationRepositoryImpl;
+import com.example.testproject1.dao.outgoingDocument.OutgoingDocumentRepositoryImpl;
+import com.example.testproject1.dao.person.PersonRepositoryImpl;
+import com.example.testproject1.dao.taskDocument.TaskDocumentRepositoryImpl;
+import com.example.testproject1.model.document.BaseDocument;
+import com.example.testproject1.model.document.IncomingDocument;
+import com.example.testproject1.model.document.OutgoingDocument;
+import com.example.testproject1.model.document.TaskDocument;
+import com.example.testproject1.model.documentEnum.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
@@ -59,32 +59,32 @@ public class DocumentShell {
     @Autowired
     private DocumentStorageService documentStorageService;
     @Autowired
-    private OrganizationRepository organizationRepository;
+    private OrganizationRepositoryImpl organizationRepositoryImpl;
     @Autowired
-    private DepartmentRepository departmentRepository;
+    private DepartmentRepositoryImpl departmentRepositoryImpl;
     @Autowired
-    private JobTittleRepository jobTittleRepository;
+    private JobTittleRepositoryImpl jobTittleRepositoryImpl;
 
     @Autowired
-    private PersonRepository personRepository;
+    private PersonRepositoryImpl personRepositoryImpl;
 
     @Autowired
-    private BaseDocumentRepository baseDocumentRepository;
+    private BaseDocumentRepositoryImpl baseDocumentRepositoryImpl;
 
     @Autowired
-    TaskDocumentRepository taskDocumentRepository;
+    TaskDocumentRepositoryImpl taskDocumentRepositoryImpl;
 
     @Autowired
-    IncomingDocumentRepository incomingDocumentRepository;
+    IncomingDocumentRepositoryImpl incomingDocumentRepositoryImpl;
 
     @Autowired
-    OutgoingDocumentRepository outgoingDocumentRepository;
+    OutgoingDocumentRepositoryImpl outgoingDocumentRepositoryImpl;
     /**
      * Shell метод генерации документов и создания отчетов по ним
      *
      * @param a Генерируем заданное количество документов
      */
-    @ShellMethod("Cmd: generate --a  (Int DocumentCount (default = 100)")
+    @ShellMethod("Cmd: generate --a  (Int DocumentCount each type (default = 100)")
     public void generate(@ShellOption(defaultValue = "100") int a) {
         Integer countDocument = Integer.valueOf(a);
         LOGGER.info("Попытка сгенерировать документы");
@@ -101,19 +101,19 @@ public class DocumentShell {
         organization.setShortName("organizationShortName");
         organization.setSupervisor("organizationSupervisor");
         organization.setContactNumber("organizationContactNumber");
-        organizationRepository.create(organization);
+        organizationRepositoryImpl.create(organization);
         System.out.println(organization +" создан");
     }
     @ShellMethod()
     public void updateorg() {
-        Optional<Organization> organizations=organizationRepository.getAll().stream().findFirst();
+        Optional<Organization> organizations= organizationRepositoryImpl.getAll().stream().findFirst();
         if(organizations.isPresent()){
             Organization organization=organizations.get();
             organization.setFullName("organizationNameUpdate");
             organization.setShortName("organizationShortNameU");
             organization.setSupervisor("organizationSupervisorU");
             organization.setContactNumber("organizationContactNumberU");
-            organizationRepository.update(organization);
+            organizationRepositoryImpl.update(organization);
             System.out.println(organization +" обнавлен");
         }
         else
@@ -121,11 +121,11 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void getallorg() {
-        organizationRepository.getAll().stream().forEach(System.out::println);
+        organizationRepositoryImpl.getAll().stream().forEach(System.out::println);
     }
     @ShellMethod()
     public void getbyidorg(String id) {
-        Optional<Organization> organization=organizationRepository.getById(id);
+        Optional<Organization> organization= organizationRepositoryImpl.getById(id);
         if(organization.isPresent()){
             System.out.println(organization.get());
         }
@@ -133,11 +133,11 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void deleteallorg() {
-        organizationRepository.deleteAll();
+        organizationRepositoryImpl.deleteAll();
     }
     @ShellMethod()
     public void deletebyidorg(String id) {
-        System.out.println(organizationRepository.deleteById(id));
+        System.out.println(organizationRepositoryImpl.deleteById(id));
     }
     @ShellMethod()
     public void createdep() {
@@ -147,22 +147,22 @@ public class DocumentShell {
         department.setShortName("departmentShortName");
         department.setSupervisor("departmentSupervisor");
         department.setContactNumber("departmentContactNumber");
-        department.setOrganization(organizationRepository.getAll().get(0));
-        departmentRepository.create(department);
+        department.setOrganization(organizationRepositoryImpl.getAll().get(0));
+        departmentRepositoryImpl.create(department);
         System.out.println(department +" создан");
     }
 
     @ShellMethod()
     public void updatedep() {
-        Optional<Department> departments=departmentRepository.getAll().stream().findFirst();
+        Optional<Department> departments= departmentRepositoryImpl.getAll().stream().findFirst();
         if(departments.isPresent()){
             Department department=departments.get();
             department.setFullName("departmentNameUpdate2");
             department.setShortName("departmentShortNameU");
             department.setSupervisor("departmentSupervisorU");
             department.setContactNumber("departmentContactNumberU");
-            department.setOrganization(organizationRepository.getAll().stream().findFirst().get());
-            departmentRepository.update(department);
+            department.setOrganization(organizationRepositoryImpl.getAll().stream().findFirst().get());
+            departmentRepositoryImpl.update(department);
             System.out.println(department +" обнавлен");
         }
         else
@@ -170,22 +170,22 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void getalldep() {
-        departmentRepository.getAll().stream().forEach(System.out::println);
+        departmentRepositoryImpl.getAll().stream().forEach(System.out::println);
     }
 
     @ShellMethod()
     public void getbyiddep(String id) {
-        System.out.println( departmentRepository.getById(id).get());
+        System.out.println( departmentRepositoryImpl.getById(id).get());
     }
 
     @ShellMethod()
     public void deletealldep() {
-        departmentRepository.deleteAll();
+        departmentRepositoryImpl.deleteAll();
     }
 
     @ShellMethod()
     public Integer deletebyiddep(String id) {
-        return departmentRepository.deleteById(id);
+        return departmentRepositoryImpl.deleteById(id);
     }
 
     @ShellMethod()
@@ -193,16 +193,16 @@ public class DocumentShell {
         JobTittle jobTittle=new JobTittle();
         jobTittle.setUuid(UUID.randomUUID());
         jobTittle.setName("JobName");
-        jobTittleRepository.create(jobTittle);
+        jobTittleRepositoryImpl.create(jobTittle);
         System.out.println(jobTittle +" создан");
     }
     @ShellMethod()
     public void updatejob() {
-        Optional<JobTittle> jobTittles=jobTittleRepository.getAll().stream().findFirst();
+        Optional<JobTittle> jobTittles= jobTittleRepositoryImpl.getAll().stream().findFirst();
         if(jobTittles.isPresent()){
             JobTittle jobTittle=jobTittles.get();
             jobTittle.setName("JobNameU");
-            jobTittleRepository.update(jobTittle);
+            jobTittleRepositoryImpl.update(jobTittle);
             System.out.println(jobTittle +" обнавлен");
         }
         else
@@ -210,11 +210,11 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void getalljob() {
-        jobTittleRepository.getAll().stream().forEach(System.out::println);
+        jobTittleRepositoryImpl.getAll().stream().forEach(System.out::println);
     }
     @ShellMethod()
     public void getbyidjob(String id) {
-        Optional<JobTittle> jobTittle=jobTittleRepository.getById(id);
+        Optional<JobTittle> jobTittle= jobTittleRepositoryImpl.getById(id);
         if(jobTittle.isPresent()){
             System.out.println(jobTittle.get());
         }
@@ -222,11 +222,11 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void deletealljob() {
-        jobTittleRepository.deleteAll();
+        jobTittleRepositoryImpl.deleteAll();
     }
     @ShellMethod()
     public void deletebyidjob(String id) {
-        System.out.println(jobTittleRepository.deleteById(id));
+        System.out.println(jobTittleRepositoryImpl.deleteById(id));
     }
 
     @ShellMethod()
@@ -237,24 +237,24 @@ public class DocumentShell {
         person.setSecondName("personsetSecondName");
         person.setLastName("personsetLastName");
         person.setPhoto("personsetPhoto");
-        JobTittle jobTittle=jobTittleRepository.getAll().stream().findFirst().get();
+        JobTittle jobTittle= jobTittleRepositoryImpl.getAll().stream().findFirst().get();
         person.setJobTittle(jobTittle);
-        Department department=departmentRepository.getAll().stream().findFirst().get();
+        Department department= departmentRepositoryImpl.getAll().stream().findFirst().get();
         person.setDepartment(department);
         person.setPhoneNumber("personsetPhoneNumber22");
         person.setBirthDay(new Date(System.currentTimeMillis()));
-        personRepository.create(person);
+        personRepositoryImpl.create(person);
         System.out.println(person +" создан");
     }
 
     @ShellMethod()
     public void getallper() {
-       personRepository.getAll().stream().forEach(System.out::println);
+       personRepositoryImpl.getAll().stream().forEach(System.out::println);
     }
 
     @ShellMethod()
     public void getbyidper(String id) {
-        Optional<Person> person=personRepository.getById(id);
+        Optional<Person> person= personRepositoryImpl.getById(id);
         if(person.isPresent()){
             System.out.println(person.get());
         }
@@ -262,11 +262,11 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void updatepers() {
-        Optional<Person> persons=personRepository.getAll().stream().findFirst();
+        Optional<Person> persons= personRepositoryImpl.getAll().stream().findFirst();
         if(persons.isPresent()){
             Person person=persons.get();
             person.setFirstName("FirstUpdateName");
-            personRepository.update(person);
+            personRepositoryImpl.update(person);
             System.out.println(person +" обнавлен");
         }
         else
@@ -274,11 +274,11 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void deleteallpers() {
-        personRepository.deleteAll();
+        personRepositoryImpl.deleteAll();
     }
     @ShellMethod()
     public void deletebyidpers(String id) {
-        System.out.println(personRepository.deleteById(id));
+        System.out.println(personRepositoryImpl.deleteById(id));
     }
 
     @ShellMethod()
@@ -293,19 +293,19 @@ public class DocumentShell {
         long diff = end - offset + 1;
         Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
         baseDocument.setCreatingDate(rand);
-        Person person=personRepository.getAll().stream().findFirst().get();
+        Person person= personRepositoryImpl.getAll().stream().findFirst().get();
         baseDocument.setAuthor(person);
-        baseDocumentRepository.create(baseDocument);
+        baseDocumentRepositoryImpl.create(baseDocument);
         System.out.println(baseDocument +" создан");
     }
     @ShellMethod()
     public void getallbdoc() {
-        baseDocumentRepository.getAll().stream().forEach(System.out::println);
+        baseDocumentRepositoryImpl.getAll().stream().forEach(System.out::println);
     }
 
     @ShellMethod()
     public void getbyidbdoc(String id) {
-        Optional<BaseDocument> baseDocument=baseDocumentRepository.getById(id);
+        Optional<BaseDocument> baseDocument= baseDocumentRepositoryImpl.getById(id);
         if(baseDocument.isPresent()){
             System.out.println(baseDocument.get());
         }
@@ -313,11 +313,11 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void updatebdoc() {
-        Optional<BaseDocument> baseDocuments=baseDocumentRepository.getAll().stream().findFirst();
+        Optional<BaseDocument> baseDocuments= baseDocumentRepositoryImpl.getAll().stream().findFirst();
         if(baseDocuments.isPresent()){
             BaseDocument baseDocument=baseDocuments.get();
             baseDocument.setName("BaseNameU");
-            baseDocumentRepository.update(baseDocument);
+            baseDocumentRepositoryImpl.update(baseDocument);
             System.out.println(baseDocument +" обнавлен");
         }
         else
@@ -326,38 +326,38 @@ public class DocumentShell {
 
     @ShellMethod()
     public void deleteallbdoc() {
-        baseDocumentRepository.deleteAll();
+        baseDocumentRepositoryImpl.deleteAll();
     }
     @ShellMethod()
     public void deletebyidbdoc(String id) {
-        System.out.println(baseDocumentRepository.deleteById(id));
+        System.out.println(baseDocumentRepositoryImpl.deleteById(id));
     }
     @ShellMethod()
     public void createtask() {
         TaskDocument taskDocument=new TaskDocument();
-        taskDocument.setId(baseDocumentRepository.getAll().stream().findFirst().get().getId());
+        taskDocument.setId(baseDocumentRepositoryImpl.getAll().stream().findFirst().get().getId());
         long offset = Timestamp.valueOf("2015-01-01 00:00:00").getTime();
         long end = Timestamp.valueOf("2022-08-01 00:00:00").getTime();
         long diff = end - offset + 1;
         Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
         taskDocument.setOutDate(rand);
         taskDocument.setExecPeriod("3 дня");
-        Person personResponse=personRepository.getAll().stream().findFirst().get();
+        Person personResponse= personRepositoryImpl.getAll().stream().findFirst().get();
         taskDocument.setResponsible(personResponse);
         taskDocument.setControlPerson(personResponse);
         taskDocument.setSignOfControl(true);
 
-        taskDocumentRepository.create(taskDocument);
+        taskDocumentRepositoryImpl.create(taskDocument);
         System.out.println(taskDocument +" создан");
     }
 
     @ShellMethod()
     public void getalltask() {
-        taskDocumentRepository.getAll().stream().forEach(System.out::println);
+        taskDocumentRepositoryImpl.getAll().stream().forEach(System.out::println);
     }
     @ShellMethod()
     public void getbyidtask(String id) {
-        Optional<TaskDocument> taskDocument=taskDocumentRepository.getById(id);
+        Optional<TaskDocument> taskDocument= taskDocumentRepositoryImpl.getById(id);
         if(taskDocument.isPresent()){
             System.out.println(taskDocument.get());
         }
@@ -365,12 +365,12 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void updatetask() {
-        Optional<TaskDocument> taskDocuments=taskDocumentRepository.getAll().stream().findFirst();
+        Optional<TaskDocument> taskDocuments= taskDocumentRepositoryImpl.getAll().stream().findFirst();
         if(taskDocuments.isPresent()){
             TaskDocument taskDocument=taskDocuments.get();
             taskDocument.setName("BASENameU");
             taskDocument.setExecPeriod("12 дней");
-            taskDocumentRepository.update(taskDocument);
+            taskDocumentRepositoryImpl.update(taskDocument);
             System.out.println(taskDocument +" обнавлен");
         }
         else
@@ -378,16 +378,16 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void deletealltask() {
-        taskDocumentRepository.deleteAll();
+        taskDocumentRepositoryImpl.deleteAll();
     }
     @ShellMethod()
     public void deletebyidtask(String id) {
-        System.out.println(taskDocumentRepository.deleteById(id));
+        System.out.println(taskDocumentRepositoryImpl.deleteById(id));
     }
     @ShellMethod()
     public void createincom() {
         IncomingDocument incomingDocument=new IncomingDocument();
-        incomingDocument.setId(baseDocumentRepository.getAll().stream().findFirst().get().getId());
+        incomingDocument.setId(baseDocumentRepositoryImpl.getAll().stream().findFirst().get().getId());
         long offset = Timestamp.valueOf("2015-01-01 00:00:00").getTime();
         long end = Timestamp.valueOf("2022-08-01 00:00:00").getTime();
         long diff = end - offset + 1;
@@ -395,22 +395,22 @@ public class DocumentShell {
         incomingDocument.setDateOfRegistration(rand);
         incomingDocument.setNumber(2343l);
 
-        Person personResponse=personRepository.getAll().stream().findFirst().get();
+        Person personResponse= personRepositoryImpl.getAll().stream().findFirst().get();
         incomingDocument.setSender(personResponse);
         incomingDocument.setDestination(personResponse);
 
-        incomingDocumentRepository.create(incomingDocument);
+        incomingDocumentRepositoryImpl.create(incomingDocument);
         System.out.println(incomingDocument +" создан");
     }
 
     @ShellMethod()
     public void getallincom() {
-        incomingDocumentRepository.getAll().stream().forEach(System.out::println);
+        incomingDocumentRepositoryImpl.getAll().stream().forEach(System.out::println);
     }
 
     @ShellMethod()
     public void getbyidincom(String id) {
-        Optional<IncomingDocument> incomingDocument=incomingDocumentRepository.getById(id);
+        Optional<IncomingDocument> incomingDocument= incomingDocumentRepositoryImpl.getById(id);
         if(incomingDocument.isPresent()){
             System.out.println(incomingDocument.get());
         }
@@ -418,11 +418,11 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void updateincome() {
-        Optional<IncomingDocument> incomingDocuments=incomingDocumentRepository.getAll().stream().findFirst();
+        Optional<IncomingDocument> incomingDocuments= incomingDocumentRepositoryImpl.getAll().stream().findFirst();
         if(incomingDocuments.isPresent()){
             IncomingDocument incomingDocument=incomingDocuments.get();
             incomingDocument.setNumber(1l);
-            incomingDocumentRepository.update(incomingDocument);
+            incomingDocumentRepositoryImpl.update(incomingDocument);
             System.out.println(incomingDocument +" обнавлен");
         }
         else
@@ -430,33 +430,33 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void deleteallincom() {
-        incomingDocumentRepository.deleteAll();
+        incomingDocumentRepositoryImpl.deleteAll();
     }
     @ShellMethod()
     public void deletebyidincom(String id) {
-        System.out.println(incomingDocumentRepository.deleteById(id));
+        System.out.println(incomingDocumentRepositoryImpl.deleteById(id));
     }
 
     @ShellMethod()
     public void createout() {
         OutgoingDocument outgoingDocument=new OutgoingDocument();
-        outgoingDocument.setId(baseDocumentRepository.getAll().stream().findFirst().get().getId());
+        outgoingDocument.setId(baseDocumentRepositoryImpl.getAll().stream().findFirst().get().getId());
 
-        Person personResponse=personRepository.getAll().stream().findFirst().get();
+        Person personResponse= personRepositoryImpl.getAll().stream().findFirst().get();
         outgoingDocument.setSender(personResponse);
 
         outgoingDocument.setDeliveryType(DocumentDeliveryType.EMAIL);
 
-        outgoingDocumentRepository.create(outgoingDocument);
+        outgoingDocumentRepositoryImpl.create(outgoingDocument);
         System.out.println(outgoingDocument +" создан");
     }
     @ShellMethod()
     public void getallout() {
-        outgoingDocumentRepository.getAll().stream().forEach(System.out::println);
+        outgoingDocumentRepositoryImpl.getAll().stream().forEach(System.out::println);
     }
     @ShellMethod()
     public void getbyidout(String id) {
-        Optional<OutgoingDocument> outgoingDocument=outgoingDocumentRepository.getById(id);
+        Optional<OutgoingDocument> outgoingDocument= outgoingDocumentRepositoryImpl.getById(id);
         if(outgoingDocument.isPresent()){
             System.out.println(outgoingDocument.get());
         }
@@ -465,11 +465,11 @@ public class DocumentShell {
 
     @ShellMethod()
     public void updateout() {
-        Optional<OutgoingDocument> outgoingDocuments=outgoingDocumentRepository.getAll().stream().findFirst();
+        Optional<OutgoingDocument> outgoingDocuments= outgoingDocumentRepositoryImpl.getAll().stream().findFirst();
         if(outgoingDocuments.isPresent()){
             OutgoingDocument outgoingDocument=outgoingDocuments.get();
             outgoingDocument.setDeliveryType(DocumentDeliveryType.MESSENGER);
-            outgoingDocumentRepository.update(outgoingDocument);
+            outgoingDocumentRepositoryImpl.update(outgoingDocument);
             System.out.println(outgoingDocument +" обнавлен");
         }
         else
@@ -477,10 +477,10 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void deleteallout() {
-        outgoingDocumentRepository.deleteAll();
+        outgoingDocumentRepositoryImpl.deleteAll();
     }
     @ShellMethod()
     public void deletebyidout(String id) {
-        System.out.println(outgoingDocumentRepository.deleteById(id));
+        System.out.println(outgoingDocumentRepositoryImpl.deleteById(id));
     }
 }

@@ -1,11 +1,9 @@
 package com.example.testproject1.service.documentService.impl;
 
-import com.example.testproject1.exception.DocumentExistsException;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.service.documentService.DocumentStorageService;
 import org.springframework.stereotype.Service;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

@@ -1,0 +1,494 @@
+{
+  "person" : {
+    "id" : "5141b394-d5bd-4d4b-9a0e-ed456a571966",
+    "lastName" : "Kinigaleevich",
+    "secondName" : "Gubaidullin",
+    "firstName" : "Idel",
+    "jobTittle" : {
+      "uuid" : "08a5ef70-73c6-4124-b3bc-547c5e50e4ef",
+      "jobTittleName" : "JS junior"
+    },
+    "photo" : "http//:guba.png",
+    "birthDay" : "03.06.2009",
+    "phoneNumber" : "8423546346"
+  },
+  "documentList" : [ {
+    "id" : "88c57612-fcf5-4f18-8f08-4d76292ba61d",
+    "name" : "Положение",
+    "text" : "Количественный рост",
+    "regNumber" : 488,
+    "creatingDate" : "02-01-2022 05:56",
+    "sender" : {
+      "id" : "9245da16-15fa-4eed-a1b7-37aa78216e23",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "6a3178ec-7c64-43cc-ae14-661fbaab02e4",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "14.03.1973",
+      "phoneNumber" : "687546346"
+    },
+    "deliveryType" : "RUSSIAN_POST"
+  }, {
+    "id" : "3322f5f0-19f5-402f-945b-eca951bad4bd",
+    "name" : "Должностная инструкция",
+    "text" : "Системы обучения кадров",
+    "regNumber" : 7269,
+    "creatingDate" : "08-01-2022 09:45",
+    "sender" : {
+      "id" : "5141b394-d5bd-4d4b-9a0e-ed456a571966",
+      "lastName" : "Kinigaleevich",
+      "secondName" : "Gubaidullin",
+      "firstName" : "Idel",
+      "jobTittle" : {
+        "uuid" : "08a5ef70-73c6-4124-b3bc-547c5e50e4ef",
+        "jobTittleName" : "JS junior"
+      },
+      "photo" : "http//:guba.png",
+      "birthDay" : "03.06.2009",
+      "phoneNumber" : "8423546346"
+    },
+    "destination" : {
+      "id" : "2871feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Nikolayevna",
+      "secondName" : "Petrova",
+      "firstName" : "Anna",
+      "jobTittle" : {
+        "uuid" : "5c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hrdrf.png",
+      "birthDay" : "11.09.1995",
+      "phoneNumber" : "842433546346"
+    },
+    "number" : 9283,
+    "dateOfRegistration" : "2022-01-01T10:23:14.690+00:00"
+  }, {
+    "id" : "cb613169-ee18-42a4-98c3-47afc0f7b7ef",
+    "name" : "Положение",
+    "text" : "Количественный рост",
+    "regNumber" : 2142,
+    "creatingDate" : "13-01-2022 04:03",
+    "sender" : {
+      "id" : "9245da16-15fa-4eed-a1b7-37aa78216e23",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "6a3178ec-7c64-43cc-ae14-661fbaab02e4",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "14.03.1973",
+      "phoneNumber" : "687546346"
+    },
+    "destination" : {
+      "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:salmig.png",
+      "birthDay" : "14.01.2007",
+      "phoneNumber" : "84827546346"
+    },
+    "number" : 2342,
+    "dateOfRegistration" : "2022-02-14T17:55:01.314+00:00"
+  }, {
+    "id" : "feba20f7-ba6b-4c0e-b66f-f119af7e5d02",
+    "name" : "Приказ",
+    "text" : "Количественный рост",
+    "regNumber" : 9478,
+    "creatingDate" : "13-02-2022 05:54",
+    "sender" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01.09.2000",
+      "phoneNumber" : "84243546346"
+    },
+    "destination" : {
+      "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:salmig.png",
+      "birthDay" : "14.01.2007",
+      "phoneNumber" : "84827546346"
+    },
+    "number" : 1157,
+    "dateOfRegistration" : "2022-01-05T18:28:02.642+00:00"
+  }, {
+    "id" : "1343e063-742a-4687-82e9-aab06ece7345",
+    "name" : "Устав",
+    "text" : "Значимость этих проблем",
+    "regNumber" : 9566,
+    "creatingDate" : "19-03-2022 12:00",
+    "outDate" : "2022-08-01T10:44:03.847+00:00",
+    "execPeriod" : "4 дня",
+    "responsible" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01.09.2000",
+      "phoneNumber" : "84243546346"
+    },
+    "signOfControl" : true,
+    "controlPerson" : {
+      "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:salmig.png",
+      "birthDay" : "14.01.2007",
+      "phoneNumber" : "84827546346"
+    }
+  }, {
+    "id" : "ccebf9ff-720e-4d7c-808f-2f610b0ed8a1",
+    "name" : "Штатное расписание",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 2145,
+    "creatingDate" : "02-04-2022 09:14",
+    "sender" : {
+      "id" : "61930184-4ef8-4fab-b3a8-1f4ca15e7f37",
+      "lastName" : "Nikolayevich",
+      "secondName" : "Nikin",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "c10e0744-feb7-4be2-8e8b-62403dbb7d34",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:sddf.png",
+      "birthDay" : "17.06.1957",
+      "phoneNumber" : "6827546346"
+    },
+    "destination" : {
+      "id" : "9245da16-15fa-4eed-a1b7-37aa78216e23",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "6a3178ec-7c64-43cc-ae14-661fbaab02e4",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "14.03.1973",
+      "phoneNumber" : "687546346"
+    },
+    "number" : 5824,
+    "dateOfRegistration" : "2022-12-18T05:41:34.316+00:00"
+  }, {
+    "id" : "242aee37-0d86-410c-86da-037ccc0938a0",
+    "name" : "Приказ",
+    "text" : "Значимость этих проблем",
+    "regNumber" : 7301,
+    "creatingDate" : "11-04-2022 04:08",
+    "sender" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01.09.2000",
+      "phoneNumber" : "84243546346"
+    },
+    "deliveryType" : "ROCKET_CHAT"
+  }, {
+    "id" : "a1591269-9e00-4510-81a2-cad2de086956",
+    "name" : "Приказ",
+    "text" : "Повышение уровня гражданского сознания",
+    "regNumber" : 7366,
+    "creatingDate" : "26-05-2022 03:23",
+    "sender" : {
+      "id" : "5141b394-d5bd-4d4b-9a0e-ed456a571966",
+      "lastName" : "Kinigaleevich",
+      "secondName" : "Gubaidullin",
+      "firstName" : "Idel",
+      "jobTittle" : {
+        "uuid" : "08a5ef70-73c6-4124-b3bc-547c5e50e4ef",
+        "jobTittleName" : "JS junior"
+      },
+      "photo" : "http//:guba.png",
+      "birthDay" : "03.06.2009",
+      "phoneNumber" : "8423546346"
+    },
+    "deliveryType" : "TELEGRAM"
+  }, {
+    "id" : "0e0be61a-0c3d-49a7-989a-533da9ddfa0e",
+    "name" : "Устав",
+    "text" : "Значимость этих проблем",
+    "regNumber" : 1383,
+    "creatingDate" : "14-06-2022 10:46",
+    "outDate" : "2022-08-01T10:44:03.744+00:00",
+    "execPeriod" : "14 дня",
+    "responsible" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01.09.2000",
+      "phoneNumber" : "84243546346"
+    },
+    "signOfControl" : false,
+    "controlPerson" : {
+      "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:salmig.png",
+      "birthDay" : "14.01.2007",
+      "phoneNumber" : "84827546346"
+    }
+  }, {
+    "id" : "cf172fcc-1464-4331-a2e6-243d01e16dcb",
+    "name" : "Приказ",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 6169,
+    "creatingDate" : "19-07-2022 04:45",
+    "outDate" : "2022-08-01T10:44:03.855+00:00",
+    "execPeriod" : "1 дня",
+    "responsible" : {
+      "id" : "61930184-4ef8-4fab-b3a8-1f4ca15e7f37",
+      "lastName" : "Nikolayevich",
+      "secondName" : "Nikin",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "c10e0744-feb7-4be2-8e8b-62403dbb7d34",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:sddf.png",
+      "birthDay" : "17.06.1957",
+      "phoneNumber" : "6827546346"
+    },
+    "signOfControl" : false,
+    "controlPerson" : {
+      "id" : "2871feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Nikolayevna",
+      "secondName" : "Petrova",
+      "firstName" : "Anna",
+      "jobTittle" : {
+        "uuid" : "5c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hrdrf.png",
+      "birthDay" : "11.09.1995",
+      "phoneNumber" : "842433546346"
+    }
+  }, {
+    "id" : "bf131e5c-afdf-4002-8e58-189923ee7b8e",
+    "name" : "Должностная инструкция",
+    "text" : "Значимость этих проблем",
+    "regNumber" : 7946,
+    "creatingDate" : "26-07-2022 08:23",
+    "sender" : {
+      "id" : "61930184-4ef8-4fab-b3a8-1f4ca15e7f37",
+      "lastName" : "Nikolayevich",
+      "secondName" : "Nikin",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "c10e0744-feb7-4be2-8e8b-62403dbb7d34",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:sddf.png",
+      "birthDay" : "17.06.1957",
+      "phoneNumber" : "6827546346"
+    },
+    "destination" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01.09.2000",
+      "phoneNumber" : "84243546346"
+    },
+    "number" : 9382,
+    "dateOfRegistration" : "2022-08-12T04:57:54.460+00:00"
+  }, {
+    "id" : "669b6eb2-8614-46b2-87ef-dee20bfddda9",
+    "name" : "Приказ",
+    "text" : "Значимость этих проблем",
+    "regNumber" : 7245,
+    "creatingDate" : "05-08-2022 08:35",
+    "outDate" : "2022-08-01T10:44:03.859+00:00",
+    "execPeriod" : "4 дня",
+    "responsible" : {
+      "id" : "3471feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Petrovich",
+      "secondName" : "Petrov",
+      "firstName" : "Petr",
+      "jobTittle" : {
+        "uuid" : "4c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hdf.png",
+      "birthDay" : "01.09.2000",
+      "phoneNumber" : "84243546346"
+    },
+    "signOfControl" : true,
+    "controlPerson" : {
+      "id" : "2871feff-1bca-4f62-a148-91f03a26e7f5",
+      "lastName" : "Nikolayevna",
+      "secondName" : "Petrova",
+      "firstName" : "Anna",
+      "jobTittle" : {
+        "uuid" : "5c7e2780-6b60-492d-9ccf-95940d4a300d",
+        "jobTittleName" : "QA"
+      },
+      "photo" : "http//:hrdrf.png",
+      "birthDay" : "11.09.1995",
+      "phoneNumber" : "842433546346"
+    }
+  }, {
+    "id" : "453d41b3-9e63-4325-80b7-495e351395da",
+    "name" : "Положение",
+    "text" : "Системы обучения кадров",
+    "regNumber" : 5992,
+    "creatingDate" : "12-09-2022 02:18",
+    "sender" : {
+      "id" : "61930184-4ef8-4fab-b3a8-1f4ca15e7f37",
+      "lastName" : "Nikolayevich",
+      "secondName" : "Nikin",
+      "firstName" : "Sergey",
+      "jobTittle" : {
+        "uuid" : "c10e0744-feb7-4be2-8e8b-62403dbb7d34",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:sddf.png",
+      "birthDay" : "17.06.1957",
+      "phoneNumber" : "6827546346"
+    },
+    "destination" : {
+      "id" : "9245da16-15fa-4eed-a1b7-37aa78216e23",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "6a3178ec-7c64-43cc-ae14-661fbaab02e4",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "14.03.1973",
+      "phoneNumber" : "687546346"
+    },
+    "number" : 7185,
+    "dateOfRegistration" : "2022-07-06T07:41:34.515+00:00"
+  }, {
+    "id" : "3e3f4670-9830-4355-a210-6b66096b1b72",
+    "name" : "Должностная инструкция",
+    "text" : "Соображения высшего порядка",
+    "regNumber" : 9386,
+    "creatingDate" : "03-10-2022 09:59",
+    "sender" : {
+      "id" : "5141b394-d5bd-4d4b-9a0e-ed456a571966",
+      "lastName" : "Kinigaleevich",
+      "secondName" : "Gubaidullin",
+      "firstName" : "Idel",
+      "jobTittle" : {
+        "uuid" : "08a5ef70-73c6-4124-b3bc-547c5e50e4ef",
+        "jobTittleName" : "JS junior"
+      },
+      "photo" : "http//:guba.png",
+      "birthDay" : "03.06.2009",
+      "phoneNumber" : "8423546346"
+    },
+    "deliveryType" : "MESSENGER"
+  }, {
+    "id" : "25c546c0-78ee-47bf-8353-b28117877240",
+    "name" : "Приказ",
+    "text" : "Значимость этих проблем",
+    "regNumber" : 6661,
+    "creatingDate" : "04-10-2022 05:24",
+    "sender" : {
+      "id" : "9245da16-15fa-4eed-a1b7-37aa78216e23",
+      "lastName" : "Ivanovich",
+      "secondName" : "Ivanov",
+      "firstName" : "Ivan",
+      "jobTittle" : {
+        "uuid" : "6a3178ec-7c64-43cc-ae14-661fbaab02e4",
+        "jobTittleName" : "Java middle"
+      },
+      "photo" : "http//:dssf.png",
+      "birthDay" : "14.03.1973",
+      "phoneNumber" : "687546346"
+    },
+    "deliveryType" : "TELEGRAM"
+  }, {
+    "id" : "a84c941e-f203-4003-956d-6ff9ea566ded",
+    "name" : "Штатное расписание",
+    "text" : "Повышение уровня гражданского сознания",
+    "regNumber" : 541,
+    "creatingDate" : "17-12-2022 10:54",
+    "sender" : {
+      "id" : "5141b394-d5bd-4d4b-9a0e-ed456a571966",
+      "lastName" : "Kinigaleevich",
+      "secondName" : "Gubaidullin",
+      "firstName" : "Idel",
+      "jobTittle" : {
+        "uuid" : "08a5ef70-73c6-4124-b3bc-547c5e50e4ef",
+        "jobTittleName" : "JS junior"
+      },
+      "photo" : "http//:guba.png",
+      "birthDay" : "03.06.2009",
+      "phoneNumber" : "8423546346"
+    },
+    "destination" : {
+      "id" : "3fb25459-dbea-49f0-85d5-d9f7ad4f675f",
+      "lastName" : "Vagizovich",
+      "secondName" : "Migranov",
+      "firstName" : "Salavat",
+      "jobTittle" : {
+        "uuid" : "90ed0c3b-a2e9-444a-bd0b-76d2733a8f6e",
+        "jobTittleName" : "Java junior"
+      },
+      "photo" : "http//:salmig.png",
+      "birthDay" : "14.01.2007",
+      "phoneNumber" : "84827546346"
+    },
+    "number" : 6175,
+    "dateOfRegistration" : "2022-01-16T00:46:27.866+00:00"
+  } ]
+}

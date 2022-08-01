@@ -2,7 +2,9 @@ package com.example.testproject1.service.documentService.impl;
 
 import com.example.testproject1.exception.DocumentExistsException;
 import com.example.testproject1.model.document.BaseDocument;
-import com.example.testproject1.service.docfactory.Factory;
+import com.example.testproject1.service.docfactory.IncomingDocumentFactory;
+import com.example.testproject1.service.docfactory.OutgoingDocumentFactory;
+import com.example.testproject1.service.docfactory.TaskDocumentFactory;
 import com.example.testproject1.service.documentService.DocumentService;
 import com.example.testproject1.service.documentService.GenerateDocumentService;
 import org.slf4j.Logger;
@@ -12,9 +14,6 @@ import org.springframework.stereotype.Service;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.IncomingDocument;
-
-import java.util.List;
-import java.util.Random;
 
 /**
  * Класс реализующий интерфейс {@link GenerateDocumentService}
@@ -35,8 +34,11 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
      * Инжектим все бины классов реализующих интерфейс Factory
      */
     @Autowired
-    private List<Factory<BaseDocument>> documentFactoryList;
-
+    private TaskDocumentFactory taskDocumentFactory;
+    @Autowired
+    private IncomingDocumentFactory incomingDocumentFactory;
+    @Autowired
+    private OutgoingDocumentFactory outgoingDocumentFactory;
     /**
      * {@inheritDoc}
      */
@@ -44,15 +46,18 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
     public void generateDocument(Integer count) {
         LOGGER.info("\n         ---------------------Сгенерированные документы---------------------");
         for (int i = 0; i < count; i++) {
-            BaseDocument baseDocument = documentFactoryList.get(new Random().nextInt(documentFactoryList.size())).create();
-            if (baseDocument != null) {
+            BaseDocument taskDocument = taskDocumentFactory.create();
+            BaseDocument incomingDocument=incomingDocumentFactory.create();
+            BaseDocument outgoingDocument=outgoingDocumentFactory.create();
                 try {
-                    documentService.add(baseDocument);
-                    LOGGER.info(String.valueOf(baseDocument));
+                    documentService.add(taskDocument);
+                    ////
+                    ////save-service
+                    LOGGER.info(String.valueOf(taskDocument));
                 } catch (DocumentExistsException e) {
                     LOGGER.error(e.getMessage());
                 }
-            }
+
         }
     }
 }

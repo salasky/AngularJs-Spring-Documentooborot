@@ -1,8 +1,8 @@
 package com.example.testproject1.dao.taskDocument.mapper;
 
 import com.example.testproject1.dao.baseDocument.mapper.BaseDocumentMapper;
-import com.example.testproject1.model.documents.BaseDocument;
-import com.example.testproject1.model.documents.TaskDocument;
+import com.example.testproject1.model.document.BaseDocument;
+import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
