@@ -1,6 +1,5 @@
-package com.example.testproject1.model.DTO;
+package com.example.testproject1.model.dto;
 
-import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Person;
 
 import javax.xml.bind.annotation.XmlAccessType;

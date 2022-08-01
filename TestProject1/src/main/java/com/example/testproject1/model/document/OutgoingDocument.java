@@ -1,8 +1,7 @@
-package com.example.testproject1.model.documents;
+package com.example.testproject1.model.document;
 
-import com.example.testproject1.model.enums.DocumentDeliveryType;
+import com.example.testproject1.model.documentEnum.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
 import java.text.MessageFormat;
 import java.util.Objects;
@@ -77,17 +76,6 @@ public class OutgoingDocument extends BaseDocument {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getSender(), getDeliveryType());
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param documentInspector принимает объект класса {@link DocumentInspector}
-     * @return Возвращает объект класса String, содержащий не полную информацию о документе для отчета
-     */
-    @Override
-    public String accept(DocumentInspector documentInspector) {
-        return documentInspector.visit(this);
     }
 
     /**

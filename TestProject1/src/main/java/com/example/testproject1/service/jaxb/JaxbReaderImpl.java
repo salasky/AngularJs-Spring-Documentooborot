@@ -1,16 +1,13 @@
 package com.example.testproject1.service.jaxb;
 
-import com.example.testproject1.service.staffService.Impl.DepartmentStorageServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import java.io.FileReader;
-import java.net.URL;
 import java.text.MessageFormat;
 
 /**

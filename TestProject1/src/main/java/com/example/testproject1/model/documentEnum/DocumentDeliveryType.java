@@ -1,4 +1,4 @@
-package com.example.testproject1.model.enums;
+package com.example.testproject1.model.documentEnum;
 
 /**
  * Enum для типа доставки

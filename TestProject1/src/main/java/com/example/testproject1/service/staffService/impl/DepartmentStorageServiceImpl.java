@@ -1,7 +1,7 @@
-package com.example.testproject1.service.staffService.Impl;
+package com.example.testproject1.service.staffService.impl;
 
 import com.example.testproject1.configuration.cache.CaffeineConfig;
-import com.example.testproject1.model.DTO.DepartmentListXmlDTO;
+import com.example.testproject1.model.dto.DepartmentListXmlDTO;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.jaxb.JaxbReader;
 import com.example.testproject1.service.staffService.DepartmentStorageService;

@@ -1,6 +1,6 @@
-package com.example.testproject1.model.DTO;
+package com.example.testproject1.model.dto;
 
-import com.example.testproject1.model.documents.BaseDocument;
+import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Person;
 
 import java.util.List;

@@ -1,11 +1,14 @@
 package com.example.testproject1.service.documentService.impl;
 
-import com.example.testproject1.model.documents.BaseDocument;
+import com.example.testproject1.exception.DocumentExistsException;
+import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.service.documentService.DocumentStorageService;
 import org.springframework.stereotype.Service;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Класс сохранения объектов BaseDocument созданных с помощью Builder-ов
@@ -33,5 +36,21 @@ public class DocumentStorageServiceImpl implements DocumentStorageService {
     @Override
     public void addAll(BaseDocument baseDocumentList) {
         documentList.add(baseDocumentList);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean existByRegNumber(BaseDocument baseDocument) {
+        Optional<BaseDocument> optionalBaseDocument = documentList
+                .stream()
+                .filter(s -> s.getRegNumber() == baseDocument.getRegNumber())
+                .findFirst();
+        if (optionalBaseDocument.isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

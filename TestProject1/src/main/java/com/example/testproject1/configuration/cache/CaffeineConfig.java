@@ -17,6 +17,18 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class CaffeineConfig {
     /**
+     * Минимальный общий размер для внутренних хеш-таблиц
+     */
+    private static final Integer INITAL_CAPACITY=100;
+    /**
+     * Максимальное количество записей, которые может содержать кэш
+     */
+    private static final Integer MAX_SIZE=500;
+    /**
+     * Время автоматического удаления из кэша по истечении фиксированного времени после создания записи
+     */
+    private static final Integer EXPIRE_TIME=60;
+    /**
      * Бин CaffeineCacheManager вместо стандартного CacheManager
      *
      * @return бин {@link CaffeineCacheManager} с настройками параметров кэша
@@ -29,17 +41,14 @@ public class CaffeineConfig {
     }
 
     /**
-     * initialCapacity-минимальный общий размер для внутренних хеш-таблиц
-     * maximumSize-максимальное количество записей, которые может содержать кэш
-     * expireAfterAccess-время автоматического удаления из кэша по истечении фиксированного времени после создания записи
-     *
+     * Метод для настройки кэша
      * @return объект билдер для {@link Caffeine#}
      */
     private Caffeine<Object, Object> caffeineCacheBuilder() {
         return Caffeine.newBuilder()
-                .initialCapacity(100)
-                .maximumSize(500)
-                .expireAfterAccess(60, TimeUnit.MINUTES)
+                .initialCapacity(INITAL_CAPACITY)
+                .maximumSize(MAX_SIZE)
+                .expireAfterAccess(EXPIRE_TIME, TimeUnit.MINUTES)
                 .weakKeys()
                 .recordStats();
     }

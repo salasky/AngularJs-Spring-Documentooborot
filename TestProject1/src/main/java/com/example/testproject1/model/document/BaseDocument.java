@@ -1,9 +1,7 @@
-package com.example.testproject1.model.documents;
+package com.example.testproject1.model.document;
 
 
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
-import com.example.testproject1.service.visitorPatternRelase.DocumentVisitor;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,7 +16,7 @@ import java.util.UUID;
  *
  * @author smigranov
  */
-public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
+public class BaseDocument implements Comparable<BaseDocument> {
     /**
      * идентификатор документа
      */
@@ -149,17 +147,6 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
      */
     public static BaseDocument.BaseDocumentBuilder newBuilder() {
         return new BaseDocument().new BaseDocumentBuilder();
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param documentInspector принимает объект класса {@link DocumentInspector}
-     * @return Возвращает объект класса String, содержащий не полную информацию о документе для отчета
-     */
-    @Override
-    public String accept(DocumentInspector documentInspector) {
-        return documentInspector.visit(this);
     }
 
     /**

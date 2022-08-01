@@ -23,14 +23,6 @@ public class JobTittle {
      */
     private String jobTittleName;
 
-    public JobTittle(UUID uuid, String jobTittleName) {
-        this.uuid = uuid;
-        this.jobTittleName = jobTittleName;
-    }
-
-    public JobTittle() {
-    }
-
     public UUID getUuid() {
         return uuid;
     }

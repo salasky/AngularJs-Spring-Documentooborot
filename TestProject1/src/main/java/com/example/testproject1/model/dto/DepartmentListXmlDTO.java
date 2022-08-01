@@ -1,4 +1,4 @@
-package com.example.testproject1.model.DTO;
+package com.example.testproject1.model.dto;
 
 import com.example.testproject1.model.staff.Department;
 

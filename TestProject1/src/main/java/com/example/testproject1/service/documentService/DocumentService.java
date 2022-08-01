@@ -1,7 +1,7 @@
 package com.example.testproject1.service.documentService;
 
 import com.example.testproject1.exception.DocumentExistsException;
-import com.example.testproject1.model.documents.BaseDocument;
+import com.example.testproject1.model.document.BaseDocument;
 
 /**
  * Интерфейс добавления документов
