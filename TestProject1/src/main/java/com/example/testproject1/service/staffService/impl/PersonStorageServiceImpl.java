@@ -1,6 +1,6 @@
-package com.example.testproject1.service.staffService.Impl;
+package com.example.testproject1.service.staffService.impl;
 
-import com.example.testproject1.model.DTO.PersonListXmlDTO;
+import com.example.testproject1.model.dto.PersonListXmlDTO;
 import com.example.testproject1.service.jaxb.JaxbReader;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.staffService.PersonStorageService;

@@ -1,6 +1,7 @@
 package com.example.testproject1.service.documentService;
 
-import com.example.testproject1.model.documents.BaseDocument;
+import com.example.testproject1.exception.DocumentExistsException;
+import com.example.testproject1.model.document.BaseDocument;
 
 import java.util.List;
 
@@ -21,4 +22,12 @@ public interface DocumentStorageService {
      * @param baseDocumentList объект класса {@link BaseDocument}
      */
     void addAll(BaseDocument baseDocumentList);
+
+    /**
+     * Метод проверки существования документа с указанным рег.номером
+     * @param baseDocument объект добовляемого класса {@link BaseDocument}
+     * @return возращает true если есть документ с данным рег.номером, иначе false
+     * @throws DocumentExistsException
+     */
+    boolean existByRegNumber(BaseDocument baseDocument);
 }

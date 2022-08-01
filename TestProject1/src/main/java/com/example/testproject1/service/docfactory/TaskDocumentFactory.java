@@ -1,6 +1,6 @@
 package com.example.testproject1.service.docfactory;
 
-import com.example.testproject1.model.documents.TaskDocument;
+import com.example.testproject1.model.document.TaskDocument;
 import org.springframework.stereotype.Service;
 
 /**

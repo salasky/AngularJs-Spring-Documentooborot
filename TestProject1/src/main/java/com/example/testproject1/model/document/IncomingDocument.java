@@ -1,7 +1,6 @@
-package com.example.testproject1.model.documents;
+package com.example.testproject1.model.document;
 
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
 import javax.persistence.Column;
 import java.sql.Timestamp;
@@ -92,17 +91,6 @@ public class IncomingDocument extends BaseDocument {
         if (!super.equals(o)) return false;
         IncomingDocument that = (IncomingDocument) o;
         return Objects.equals(sender, that.sender) && Objects.equals(destination, that.destination) && Objects.equals(number, that.number) && Objects.equals(dateOfRegistration, that.dateOfRegistration);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param documentInspector принимает объект класса {@link DocumentInspector}
-     * @return Возвращает объект класса String, содержащий не полную информацию о документе для отчета
-     */
-    @Override
-    public String accept(DocumentInspector documentInspector) {
-        return documentInspector.visit(this);
     }
 
     /**

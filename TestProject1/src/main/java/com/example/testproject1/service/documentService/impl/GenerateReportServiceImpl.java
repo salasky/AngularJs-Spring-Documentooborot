@@ -1,7 +1,7 @@
 package com.example.testproject1.service.documentService.impl;
 
-import com.example.testproject1.model.documents.BaseDocument;
-import com.example.testproject1.model.DTO.ReportForJsonDTO;
+import com.example.testproject1.model.document.BaseDocument;
+import com.example.testproject1.model.dto.ReportForJsonDTO;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.documentService.GenerateReportService;
 import com.example.testproject1.service.documentService.DocumentStorageService;
@@ -31,7 +31,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     /**
      * Путь к папке с json файлами
      */
-    private static String SHORTPATH = "./src/main/resources/";
+    private static String SHORTPATH = ClassLoader.getSystemClassLoader().getResource("").getPath();
     private static final Logger LOGGER = LoggerFactory.getLogger(GenerateReportServiceImpl.class);
     /**
      * Объект для библиотеки Fasterxml Jackson
@@ -66,7 +66,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
                 totalMap.put(baseDocument.getAuthor(), oldList);
             }
         }
-
+        LOGGER.info("Путь к файлам:"+SHORTPATH);
         for (Map.Entry<Person, List<BaseDocument>> entry : totalMap.entrySet()) {
             writeReportInFile(entry);
         }

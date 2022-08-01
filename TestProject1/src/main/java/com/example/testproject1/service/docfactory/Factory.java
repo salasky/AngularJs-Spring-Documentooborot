@@ -1,6 +1,6 @@
 package com.example.testproject1.service.docfactory;
 
-import com.example.testproject1.model.documents.BaseDocument;
+import com.example.testproject1.model.document.BaseDocument;
 
 /**
  * Интерфейс фабрик для объектов классы которых унаследованы от {@link BaseDocument}

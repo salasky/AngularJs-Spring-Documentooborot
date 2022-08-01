@@ -1,8 +1,7 @@
-package com.example.testproject1.model.documents;
+package com.example.testproject1.model.document;
 
 
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.visitorPatternRelase.DocumentInspector;
 
 import javax.persistence.Column;
 import java.sql.Timestamp;
@@ -118,17 +117,6 @@ public class TaskDocument extends BaseDocument {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), outDate, execPeriod, responsible, signOfControl, controlPerson);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param documentInspector принимает объект класса {@link DocumentInspector}
-     * @return Возвращает объект класса String, содержащий не полную информацию о документе для отчета
-     */
-    @Override
-    public String accept(DocumentInspector documentInspector) {
-        return documentInspector.visit(this);
     }
 
     /**
