@@ -18,7 +18,7 @@ import java.util.UUID;
  *
  * @author smigranov
  */
-public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
+public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor  {
     /**
      * идентификатор документа
      */
@@ -47,7 +47,6 @@ public class BaseDocument implements Comparable<BaseDocument>, DocumentVisitor {
     /**
      * автор документа
      */
-    @JsonIgnore
     @Column(name ="author")
     protected Person author;
 

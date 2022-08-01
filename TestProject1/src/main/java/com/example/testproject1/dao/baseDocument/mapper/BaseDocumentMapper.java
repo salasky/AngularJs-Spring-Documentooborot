@@ -6,11 +6,13 @@ import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
+@Component
 public class BaseDocumentMapper implements RowMapper<BaseDocument> {
     @Override
     public BaseDocument mapRow(ResultSet rs, int rowNum) throws SQLException {

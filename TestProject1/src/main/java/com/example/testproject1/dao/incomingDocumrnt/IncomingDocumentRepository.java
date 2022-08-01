@@ -15,6 +15,8 @@ import java.util.Optional;
 public class IncomingDocumentRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private IncomingDocumentMapper incomingDocumentMapper;
     /**
      * Запрос на создание записи в таблице incoming_document
      */
@@ -211,11 +213,12 @@ public class IncomingDocumentRepository {
     }
 
     public List<IncomingDocument> getAll(){
-        return jdbcTemplate.query(queryGetAll,new IncomingDocumentMapper());
+        return jdbcTemplate.query(queryGetAll,incomingDocumentMapper);
     }
 
     public Optional<IncomingDocument> getById(String id){
-        return jdbcTemplate.query(queryGetById, new IncomingDocumentMapper(),id).stream().findFirst();
+        return jdbcTemplate.query(queryGetById, incomingDocumentMapper,id)
+                .stream().findFirst();
     }
 
     public Integer update(IncomingDocument incomingDocument){

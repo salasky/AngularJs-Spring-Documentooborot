@@ -7,11 +7,14 @@ import com.example.testproject1.dao.department.DepartmentRepository;
 import com.example.testproject1.dao.incomingDocumrnt.IncomingDocumentRepository;
 import com.example.testproject1.dao.jobTittle.JobTittleRepository;
 import com.example.testproject1.dao.organization.OrganizationRepository;
+import com.example.testproject1.dao.outgoingDocument.OutgoingDocumentRepository;
 import com.example.testproject1.dao.person.PersonRepository;
 import com.example.testproject1.dao.taskDocument.TaskDocumentRepository;
 import com.example.testproject1.model.documents.BaseDocument;
 import com.example.testproject1.model.documents.IncomingDocument;
+import com.example.testproject1.model.documents.OutgoingDocument;
 import com.example.testproject1.model.documents.TaskDocument;
+import com.example.testproject1.model.enums.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
@@ -73,6 +76,9 @@ public class DocumentShell {
 
     @Autowired
     IncomingDocumentRepository incomingDocumentRepository;
+
+    @Autowired
+    OutgoingDocumentRepository outgoingDocumentRepository;
     /**
      * Shell метод генерации документов и создания отчетов по ним
      *
@@ -429,5 +435,52 @@ public class DocumentShell {
     @ShellMethod()
     public void deletebyidincom(String id) {
         System.out.println(incomingDocumentRepository.deleteById(id));
+    }
+
+    @ShellMethod()
+    public void createout() {
+        OutgoingDocument outgoingDocument=new OutgoingDocument();
+        outgoingDocument.setId(baseDocumentRepository.getAll().stream().findFirst().get().getId());
+
+        Person personResponse=personRepository.getAll().stream().findFirst().get();
+        outgoingDocument.setSender(personResponse);
+
+        outgoingDocument.setDeliveryType(DocumentDeliveryType.EMAIL);
+
+        outgoingDocumentRepository.create(outgoingDocument);
+        System.out.println(outgoingDocument +" создан");
+    }
+    @ShellMethod()
+    public void getallout() {
+        outgoingDocumentRepository.getAll().stream().forEach(System.out::println);
+    }
+    @ShellMethod()
+    public void getbyidout(String id) {
+        Optional<OutgoingDocument> outgoingDocument=outgoingDocumentRepository.getById(id);
+        if(outgoingDocument.isPresent()){
+            System.out.println(outgoingDocument.get());
+        }
+        else System.out.println("не найдено");
+    }
+
+    @ShellMethod()
+    public void updateout() {
+        Optional<OutgoingDocument> outgoingDocuments=outgoingDocumentRepository.getAll().stream().findFirst();
+        if(outgoingDocuments.isPresent()){
+            OutgoingDocument outgoingDocument=outgoingDocuments.get();
+            outgoingDocument.setDeliveryType(DocumentDeliveryType.MESSENGER);
+            outgoingDocumentRepository.update(outgoingDocument);
+            System.out.println(outgoingDocument +" обнавлен");
+        }
+        else
+            System.out.println("Нет department с id="+outgoingDocuments.get().getId());
+    }
+    @ShellMethod()
+    public void deleteallout() {
+        outgoingDocumentRepository.deleteAll();
+    }
+    @ShellMethod()
+    public void deletebyidout(String id) {
+        System.out.println(outgoingDocumentRepository.deleteById(id));
     }
 }

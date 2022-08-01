@@ -1,8 +1,6 @@
 package com.example.testproject1.dao.taskDocument;
 
-import com.example.testproject1.dao.baseDocument.mapper.BaseDocumentMapper;
 import com.example.testproject1.dao.taskDocument.mapper.TaskDocumentMapper;
-import com.example.testproject1.model.documents.BaseDocument;
 import com.example.testproject1.model.documents.TaskDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,6 +13,8 @@ import java.util.Optional;
 public class TaskDocumentRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private TaskDocumentMapper taskDocumentMapper;
     /**
      * Запрос на создание записи в таблице task_document
      */
@@ -210,11 +210,12 @@ public class TaskDocumentRepository {
                 taskDocument.getSignOfControl(),taskDocument.getControlPerson().getId().toString());
     }
     public List<TaskDocument> getAll(){
-        return jdbcTemplate.query(queryGetAll,new TaskDocumentMapper());
+        return jdbcTemplate.query(queryGetAll,taskDocumentMapper);
     }
 
     public Optional<TaskDocument> getById(String id){
-        return jdbcTemplate.query(queryGetById, new TaskDocumentMapper(),id).stream().findFirst();
+        return jdbcTemplate.query(queryGetById, taskDocumentMapper,id)
+                .stream().findFirst();
     }
     public Integer update(TaskDocument taskDocument){
         return jdbcTemplate.update(queryUpdate,taskDocument.getOutDate(),taskDocument.getExecPeriod(),
