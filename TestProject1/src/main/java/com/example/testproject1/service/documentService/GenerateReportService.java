@@ -6,7 +6,6 @@ package com.example.testproject1.service.documentService;
 public interface GenerateReportService {
     /**
      * Метод генерации отчетов по документам
-     *
      */
     public void generateReport();
 }

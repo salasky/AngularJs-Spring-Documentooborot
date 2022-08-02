@@ -19,15 +19,16 @@ public class CaffeineConfig {
     /**
      * Минимальный общий размер для внутренних хеш-таблиц
      */
-    private static final Integer INITAL_CAPACITY=100;
+    private static final Integer INITAL_CAPACITY = 100;
     /**
      * Максимальное количество записей, которые может содержать кэш
      */
-    private static final Integer MAX_SIZE=500;
+    private static final Integer MAX_SIZE = 500;
     /**
      * Время автоматического удаления из кэша по истечении фиксированного времени после создания записи
      */
-    private static final Integer EXPIRE_TIME=60;
+    private static final Integer EXPIRE_TIME = 60;
+
     /**
      * Бин CaffeineCacheManager вместо стандартного CacheManager
      *
@@ -42,6 +43,7 @@ public class CaffeineConfig {
 
     /**
      * Метод для настройки кэша
+     *
      * @return объект билдер для {@link Caffeine#}
      */
     private Caffeine<Object, Object> caffeineCacheBuilder() {

@@ -30,7 +30,7 @@ public class JaxbReaderImpl implements JaxbReader {
      */
     @Override
     public <T> T jaxbXMLToObject(String fileName) {
-        if(fileName!=null) {
+        if (fileName != null) {
             String path = this.getClass().getClassLoader().getResource(fileName).getPath();
             try (FileReader reader = new FileReader(path)) {
                 T result = null;
@@ -41,7 +41,7 @@ public class JaxbReaderImpl implements JaxbReader {
                 throw new RuntimeException(e);
             }
         }
-        LOGGER.error(MessageFormat.format("Файл {0} не найден",fileName));
+        LOGGER.error(MessageFormat.format("Файл {0} не найден", fileName));
         return null;
     }
 }

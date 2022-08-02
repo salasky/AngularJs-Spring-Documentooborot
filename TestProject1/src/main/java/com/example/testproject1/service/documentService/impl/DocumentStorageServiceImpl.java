@@ -1,11 +1,9 @@
 package com.example.testproject1.service.documentService.impl;
 
-import com.example.testproject1.exception.DocumentExistsException;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.service.documentService.DocumentStorageService;
 import org.springframework.stereotype.Service;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,12 +40,8 @@ public class DocumentStorageServiceImpl implements DocumentStorageService {
      * {@inheritDoc}
      */
     @Override
-    public boolean existByRegNumber(BaseDocument baseDocument) {
-        Optional<BaseDocument> optionalBaseDocument = documentList
-                .stream()
-                .filter(s -> s.getRegNumber() == baseDocument.getRegNumber())
-                .findFirst();
-        if (optionalBaseDocument.isPresent()) {
+    public boolean existByRegNumber(Long regNumber) {
+        if (documentList.stream().filter(s -> s.getRegNumber() == regNumber).findFirst().isPresent()) {
             return true;
         } else {
             return false;

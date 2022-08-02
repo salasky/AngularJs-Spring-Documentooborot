@@ -13,21 +13,23 @@ import java.util.List;
 public interface DocumentStorageService {
     /**
      * Метод получения сохраненных документов
+     *
      * @return объект {@link List} содержащий объекты класса {@link BaseDocument}
      */
     List<BaseDocument> getAll();
 
     /**
      * Метод добавления документов в базу
+     *
      * @param baseDocumentList объект класса {@link BaseDocument}
      */
     void addAll(BaseDocument baseDocumentList);
 
     /**
      * Метод проверки существования документа с указанным рег.номером
-     * @param baseDocument объект добовляемого класса {@link BaseDocument}
+     *
+     * @param regNumber регистрационный номер базового документа
      * @return возращает true если есть документ с данным рег.номером, иначе false
-     * @throws DocumentExistsException
      */
-    boolean existByRegNumber(BaseDocument baseDocument);
+    boolean existByRegNumber(Long regNumber);
 }
