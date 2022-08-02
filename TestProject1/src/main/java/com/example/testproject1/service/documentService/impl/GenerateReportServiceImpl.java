@@ -36,9 +36,13 @@ public class GenerateReportServiceImpl implements GenerateReportService {
      * Объект для библиотеки Fasterxml Jackson
      * с настройками даты
      */
-    private final ObjectMapper objectMapper = new ObjectMapper().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-            .enable(SerializationFeature.INDENT_OUTPUT);
-
+    @Autowired
+    private  ObjectMapper objectMapper;
+    /**
+     * Autowired бина класса {@link DocumentStorageService}
+     */
+    @Autowired
+    private DocumentStorageService documentStorageService;
 
     /**
      * {@inheritDoc}
@@ -63,7 +67,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
         LOGGER.info("Путь к файлам:" + SHORTPATH);
         for (Map.Entry<Person, List<BaseDocument>> entry : totalMap.entrySet()) {
             writeReportInFile(entry);
-        }*/
+        }
     }
 
     public void writeReportInFile(Map.Entry<Person, List<BaseDocument>> entry) {
