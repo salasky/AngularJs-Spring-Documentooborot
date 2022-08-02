@@ -37,9 +37,8 @@ public class GenerateReportServiceImpl implements GenerateReportService {
      * Объект для библиотеки Fasterxml Jackson
      * с настройками даты
      */
-    private final ObjectMapper objectMapper = new ObjectMapper().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-            .enable(SerializationFeature.INDENT_OUTPUT);
-
+    @Autowired
+    private  ObjectMapper objectMapper;
     /**
      * Autowired бина класса {@link DocumentStorageService}
      */
@@ -79,7 +78,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
                 .build();
         StringBuilder secondName = new StringBuilder(entry.getKey().getSecondName());
         //Полный путь к файлу
-        StringBuilder filepathFull = new StringBuilder(SHORTPATH + secondName + ".json");
+        StringBuilder filepathFull = new StringBuilder(SHORTPATH).append(secondName).append(".json");
         LOGGER.info("Создаем файл " + secondName + ".json");
         try {
             objectMapper.writeValue(new File(filepathFull.toString()), reportForJsonDTO);

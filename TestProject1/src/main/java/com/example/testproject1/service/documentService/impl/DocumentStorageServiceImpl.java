@@ -41,10 +41,6 @@ public class DocumentStorageServiceImpl implements DocumentStorageService {
      */
     @Override
     public boolean existByRegNumber(Long regNumber) {
-        if (documentList.stream().filter(s -> s.getRegNumber() == regNumber).findFirst().isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+        return documentList.stream().filter(s -> s.getRegNumber() == regNumber).findFirst().isPresent();
     }
 }
