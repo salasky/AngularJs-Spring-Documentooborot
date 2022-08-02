@@ -30,7 +30,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     /**
      * Путь к папке с json файлами
      */
-    private static String SHORTPATH = ClassLoader.getSystemClassLoader().getResource("").getPath();
+    private static final String SHORTPATH = ClassLoader.getSystemClassLoader().getResource("").getPath();
     private static final Logger LOGGER = LoggerFactory.getLogger(GenerateReportServiceImpl.class);
     /**
      * Объект для библиотеки Fasterxml Jackson
@@ -60,7 +60,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
                 totalMap.put(baseDocument.getAuthor(), oldList);
             }
         }
-        LOGGER.info("Путь к файлам:"+SHORTPATH);
+        LOGGER.info("Путь к файлам:" + SHORTPATH);
         for (Map.Entry<Person, List<BaseDocument>> entry : totalMap.entrySet()) {
             writeReportInFile(entry);
         }*/
@@ -71,12 +71,12 @@ public class GenerateReportServiceImpl implements GenerateReportService {
                 .setPerson(entry.getKey())
                 .setDocumentList(entry.getValue())
                 .build();
-        String secondName = entry.getKey().getSecondName();
+        StringBuilder secondName = new StringBuilder(entry.getKey().getSecondName());
         //Полный путь к файлу
-        String filepathFull = SHORTPATH + secondName + ".json";
+        StringBuilder filepathFull = new StringBuilder(SHORTPATH + secondName + ".json");
         LOGGER.info("Создаем файл " + secondName + ".json");
         try {
-            objectMapper.writeValue(new File(filepathFull), reportForJsonDTO);
+            objectMapper.writeValue(new File(filepathFull.toString()), reportForJsonDTO);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

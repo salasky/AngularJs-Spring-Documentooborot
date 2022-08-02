@@ -6,7 +6,6 @@ import com.example.testproject1.model.document.BaseDocument;
  * Интерфейс фабрик для объектов классы которых унаследованы от {@link BaseDocument}
  *
  * @param <T> реализация фабрик
- *
  * @author smigranov
  */
 public interface Factory<T> {
