@@ -1,6 +1,9 @@
 package com.example.testproject1.dao.person;
 
+import com.example.testproject1.dao.department.DepartmentRepository;
+import com.example.testproject1.dao.jobTittle.JobTittleRepository;
 import com.example.testproject1.dao.person.mapper.PersonMapper;
+import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -75,11 +78,24 @@ public class PersonRepositoryImpl implements PersonRepository{
     @Autowired
     private PersonMapper personMapper;
 
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
+    @Autowired
+    private JobTittleRepository jobTittleRepository;
+
     @Override
     public Integer create(Person person){
-        return jdbcTemplate.update(queryCreate,person.getId().toString(),person.getFirstName(),person.getSecondName(),
-                person.getLastName(),person.getPhoto(),person.getJobTittle().getUuid().toString(),
-                person.getDepartment().getId().toString(), person.getPhoneNumber(),person.getBirthDay());
+        if(existById(person.getId().toString())){
+            return -10;
+        }
+        else {
+            jobTittleRepository.create(person.getJobTittle());
+            departmentRepository.create(person.getDepartment());
+            return jdbcTemplate.update(queryCreate,person.getId().toString(),person.getFirstName(),person.getSecondName(),
+                    person.getLastName(),person.getPhoto(),person.getJobTittle().getUuid().toString(),
+                    person.getDepartment().getId().toString(), person.getPhoneNumber(),person.getBirthDay());
+        }
     }
     @Override
     public List<Person> getAll(){
@@ -105,5 +121,15 @@ public class PersonRepositoryImpl implements PersonRepository{
     public Integer deleteById(String id) {
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
+    }
+    @Override
+    public boolean existById(String uuid) {
+        Optional<Person> person= jdbcTemplate.query(queryGetById,personMapper,uuid).stream().findFirst();
+        if (person.isPresent()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

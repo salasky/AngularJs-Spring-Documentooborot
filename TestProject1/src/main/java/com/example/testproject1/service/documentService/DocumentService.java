@@ -2,16 +2,18 @@ package com.example.testproject1.service.documentService;
 
 import com.example.testproject1.exception.DocumentExistsException;
 import com.example.testproject1.model.document.BaseDocument;
+import com.example.testproject1.model.document.IncomingDocument;
+import com.example.testproject1.model.document.OutgoingDocument;
+import com.example.testproject1.model.document.TaskDocument;
 
 /**
  * Интерфейс добавления документов
  */
 public interface DocumentService {
-    /**
-     * Метод добавления документов в базу
-     *
-     * @param baseDocument передаем объект класса BaseDocument
-     * @throws DocumentExistsException если такой объект с данным рег.номером в базе уже существет
-     */
-    void add(BaseDocument baseDocument) throws DocumentExistsException;
+
+    void saveTaskInDB(TaskDocument taskDocument) throws DocumentExistsException;
+
+    void saveIncomingInDB(IncomingDocument incomingDocument) throws DocumentExistsException;
+
+    void saveOutgoingInDB(OutgoingDocument outgoingDocument) throws DocumentExistsException;
 }

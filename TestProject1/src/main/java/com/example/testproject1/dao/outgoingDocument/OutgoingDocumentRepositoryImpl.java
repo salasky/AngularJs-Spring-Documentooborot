@@ -1,6 +1,9 @@
 package com.example.testproject1.dao.outgoingDocument;
 
+import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.outgoingDocument.mapper.OutgoingDocumentMapper;
+import com.example.testproject1.dao.person.PersonRepository;
+import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,6 +18,10 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private OutgoingDocumentMapper outgoingDocumentMapper;
+    @Autowired
+    private BaseDocumentRepository baseDocumentRepository;
+    @Autowired
+    private PersonRepository personRepository;
     /**
      * Запрос на создание записи в таблице outgoing_document
      */
@@ -147,9 +154,23 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
 
     @Override
     public Integer create(OutgoingDocument outgoingDocument){
-        return jdbcTemplate.update(queryCreate,outgoingDocument.getId().toString(),
-                outgoingDocument.getSender().getId().toString(),
-                outgoingDocument.getDeliveryType().toString());
+        if(existById(outgoingDocument.getId().toString())){
+            return -10;
+        }
+        else {
+            BaseDocument baseDocument=new BaseDocument();
+            baseDocument.setId(outgoingDocument.getId());
+            baseDocument.setName(outgoingDocument.getName());
+            baseDocument.setText(outgoingDocument.getText());
+            baseDocument.setRegNumber(outgoingDocument.getRegNumber());
+            baseDocument.setCreatingDate(outgoingDocument.getCreatingDate());
+            baseDocument.setAuthor(outgoingDocument.getAuthor());
+            baseDocumentRepository.create(baseDocument);
+            personRepository.create(outgoingDocument.getSender());
+            return jdbcTemplate.update(queryCreate,outgoingDocument.getId().toString(),
+                    outgoingDocument.getSender().getId().toString(),
+                    outgoingDocument.getDeliveryType().toString());
+        }
     }
     @Override
     public List<OutgoingDocument> getAll(){
@@ -174,5 +195,15 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
     public Integer deleteById(String id) {
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
+    }
+    @Override
+    public boolean existById(String uuid) {
+        Optional<OutgoingDocument> outgoingDocument= jdbcTemplate.query(queryGetById,outgoingDocumentMapper,uuid).stream().findFirst();
+        if (outgoingDocument.isPresent()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

@@ -1,7 +1,11 @@
 package com.example.testproject1.dao.incomingDocumrnt;
 
+import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.incomingDocumrnt.mapper.IncomingDocumentMapper;
+import com.example.testproject1.dao.person.PersonRepository;
+import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
+import com.example.testproject1.model.document.TaskDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,6 +19,12 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private IncomingDocumentMapper incomingDocumentMapper;
+
+    @Autowired
+    private BaseDocumentRepository baseDocumentRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
     /**
      * Запрос на создание записи в таблице incoming_document
      */
@@ -203,11 +213,25 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
     private final String queryDeleteById="DELETE FROM incoming_document WHERE base_document_id=?";
 
     @Override
-    public Integer create(IncomingDocument incomingDocument){
-        return jdbcTemplate.update(queryCreate,incomingDocument.getId().toString(),
-                incomingDocument.getSender().getId().toString(),
-                incomingDocument.getDestination().getId().toString(),
-                incomingDocument.getNumber(),incomingDocument.getDateOfRegistration());
+    public Integer create(IncomingDocument incomingDocument) {
+        if (existById(incomingDocument.getId().toString())) {
+            return -10;//ИСКЛЮЧЕНИЕ В ADVICE CONTROLLER-СДЕЛАТЬ
+        } else {
+            BaseDocument baseDocument = new BaseDocument();
+            baseDocument.setId(incomingDocument.getId());
+            baseDocument.setName(incomingDocument.getName());
+            baseDocument.setText(incomingDocument.getText());
+            baseDocument.setRegNumber(incomingDocument.getRegNumber());
+            baseDocument.setCreatingDate(incomingDocument.getCreatingDate());
+            baseDocument.setAuthor(incomingDocument.getAuthor());
+            baseDocumentRepository.create(baseDocument);
+            personRepository.create(incomingDocument.getSender());
+            personRepository.create(incomingDocument.getDestination());
+            return jdbcTemplate.update(queryCreate, incomingDocument.getId().toString(),
+                    incomingDocument.getSender().getId().toString(),
+                    incomingDocument.getDestination().getId().toString(),
+                    incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
+        }
     }
 
     @Override
@@ -234,4 +258,15 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
     public Integer deleteById(String id) {
         return jdbcTemplate.update(queryDeleteById, id);
     }
+    @Override
+    public boolean existById(String uuid) {
+        Optional<IncomingDocument> incomingDocument= jdbcTemplate.query(queryGetById,incomingDocumentMapper,uuid).stream().findFirst();
+        if (incomingDocument.isPresent()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
+

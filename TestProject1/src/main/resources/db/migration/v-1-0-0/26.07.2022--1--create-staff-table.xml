@@ -23,7 +23,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="contact_number" type="VARCHAR(255)">
-                <constraints nullable="false" unique="true"/>
+                <constraints nullable="false"/>
             </column>
         </createTable>
         <rollback>
@@ -46,7 +46,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="contact_number" type="VARCHAR(255)">
-                <constraints nullable="false" unique="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="organization_id" type="VARCHAR(64)">
                 <constraints nullable="false"/>
@@ -59,7 +59,7 @@
 
     <changeSet author="smigranov" id="3">
         <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="department" constraintName="FK_DEPARTMENT_ORGANIZATION"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
                                  referencedColumnNames="id" referencedTableName="organization" validate="true"/>
     </changeSet>
 
@@ -101,7 +101,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="phone_number" type="VARCHAR(255)">
-                <constraints nullable="false" unique="true"/>
+                <constraints nullable="false"/>
             </column>
 
             <column name="birth_day" type="date">
@@ -115,13 +115,13 @@
 
     <changeSet author="smigranov" id="6">
         <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="person" constraintName="FK_PERSON_DEPARTMENT"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
                                  referencedColumnNames="id" referencedTableName="department" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="7">
         <addForeignKeyConstraint baseColumnNames="job_tittle_id" baseTableName="person" constraintName="FK_PERSON_JOBTITTLE"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
                                  referencedColumnNames="id" referencedTableName="job_tittle" validate="true"/>
     </changeSet>
 

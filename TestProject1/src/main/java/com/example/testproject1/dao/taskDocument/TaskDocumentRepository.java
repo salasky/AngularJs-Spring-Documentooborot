@@ -17,4 +17,6 @@ public interface TaskDocumentRepository {
     Integer deleteAll();
 
     Integer deleteById(String id);
+
+    boolean existById(String uuid);
 }

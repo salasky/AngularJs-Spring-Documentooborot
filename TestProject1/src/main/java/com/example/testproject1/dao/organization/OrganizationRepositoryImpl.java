@@ -20,11 +20,17 @@ public class OrganizationRepositoryImpl implements OrganizationRepository{
     /**
      * Запрос на получение всех объектов из таблицы organization
      */
-    private final String queryGetAll="SELECT * FROM organization";
+    private final String queryGetAll="SELECT organization.id AS organization_id ," +
+            "organization.full_name AS organization_full_name, organization.short_name AS organization_short_name," +
+            "organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number " +
+            "FROM organization";
     /**
      * Запрос на получение объекта по id из таблицы organization
      */
-    private final String queryGetById="SELECT * FROM organization WHERE id=?";
+    private final String queryGetById="SELECT organization.id AS organization_id ," +
+            "organization.full_name AS organization_full_name, organization.short_name AS organization_short_name," +
+            "organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number " +
+            "FROM organization WHERE organization.id=?";
     /**
      * Запрос на создание записи в таблице organization
      */
@@ -50,8 +56,13 @@ public class OrganizationRepositoryImpl implements OrganizationRepository{
 
     @Override
     public Integer create(Organization organization){
-        return jdbcTemplate.update(queryCreate,organization.getId().toString()
-                ,organization.getFullName(),organization.getShortName(),organization.getSupervisor(),organization.getContactNumber());
+        if(existById(organization.getId().toString())){
+            return -10;
+        }
+        else {
+            return jdbcTemplate.update(queryCreate,organization.getId().toString()
+                    ,organization.getFullName(),organization.getShortName(),organization.getSupervisor(),organization.getContactNumber());
+        }
     }
     @Override
     public Integer update(Organization organization){
@@ -78,5 +89,15 @@ public class OrganizationRepositoryImpl implements OrganizationRepository{
     public Integer deleteById(String id) {
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
+    }
+    @Override
+    public boolean existById(String uuid) {
+        Optional<Organization> organization= jdbcTemplate.query(queryGetById,organizationMapper,uuid).stream().findFirst();
+        if (organization.isPresent()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

@@ -17,4 +17,6 @@ public interface IncomingDocumentRepository {
     Integer deleteAll();
 
     Integer deleteById(String id);
+
+    boolean existById(String uuid);
 }

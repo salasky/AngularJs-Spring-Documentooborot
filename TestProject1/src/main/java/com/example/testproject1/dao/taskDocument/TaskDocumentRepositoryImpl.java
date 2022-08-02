@@ -1,7 +1,11 @@
 package com.example.testproject1.dao.taskDocument;
 
+import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
+import com.example.testproject1.dao.person.PersonRepository;
 import com.example.testproject1.dao.taskDocument.mapper.TaskDocumentMapper;
+import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.TaskDocument;
+import com.example.testproject1.model.staff.JobTittle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,6 +19,11 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private TaskDocumentMapper taskDocumentMapper;
+    @Autowired
+    private BaseDocumentRepository baseDocumentRepository;
+    @Autowired
+    private PersonRepository personRepository;
+
     /**
      * Запрос на создание записи в таблице task_document
      */
@@ -205,9 +214,24 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
 
     @Override
     public Integer create(TaskDocument taskDocument){
-        return jdbcTemplate.update(queryCreate,taskDocument.getId().toString(),taskDocument.getOutDate()
-                ,taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
-                taskDocument.getSignOfControl(),taskDocument.getControlPerson().getId().toString());
+        if(existById(taskDocument.getId().toString())){
+            return -10;
+        }
+        else {
+            BaseDocument baseDocument=new BaseDocument();
+            baseDocument.setId(taskDocument.getId());
+            baseDocument.setName(taskDocument.getName());
+            baseDocument.setText(taskDocument.getText());
+            baseDocument.setRegNumber(taskDocument.getRegNumber());
+            baseDocument.setCreatingDate(taskDocument.getCreatingDate());
+            baseDocument.setAuthor(taskDocument.getAuthor());
+            baseDocumentRepository.create(baseDocument);
+            personRepository.create(taskDocument.getControlPerson());
+            personRepository.create(taskDocument.getResponsible());
+            return jdbcTemplate.update(queryCreate,taskDocument.getId().toString(),taskDocument.getOutDate()
+                    ,taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
+                    taskDocument.getSignOfControl(),taskDocument.getControlPerson().getId().toString());
+        }
     }
     @Override
     public List<TaskDocument> getAll(){
@@ -233,5 +257,15 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
     public Integer deleteById(String id) {
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
+    }
+    @Override
+    public boolean existById(String uuid) {
+        Optional<TaskDocument> taskDocument= jdbcTemplate.query(queryGetById,taskDocumentMapper,uuid).stream().findFirst();
+        if (taskDocument.isPresent()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

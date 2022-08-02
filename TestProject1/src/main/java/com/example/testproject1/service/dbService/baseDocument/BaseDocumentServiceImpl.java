@@ -76,4 +76,10 @@ public class BaseDocumentServiceImpl implements BaseDocumentService{
             LOGGER.error("Не удачная попытка удаления записи из таблицы base_document");
             return "Не удачная попытка удаления записи из таблицы base_document";
     }
+
+    @Override
+    public boolean existByRegNumber(Long regNumber) {
+       LOGGER.info("Поиск baseDocument по регистрационному номеру");
+       return baseDocumentRepository.existByRegNumber(regNumber);
+    }
 }

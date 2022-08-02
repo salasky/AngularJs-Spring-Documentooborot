@@ -19,7 +19,6 @@ import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.documentService.DocumentStorageService;
 import com.example.testproject1.service.documentService.GenerateDocumentService;
 import com.example.testproject1.service.documentService.GenerateReportService;
 import org.slf4j.Logger;
@@ -53,11 +52,7 @@ public class DocumentShell {
      */
     @Autowired
     private GenerateReportService generateReportService;
-    /**
-     * Autowired бина класса {@link DocumentStorageService}
-     */
-    @Autowired
-    private DocumentStorageService documentStorageService;
+
     @Autowired
     private OrganizationRepositoryImpl organizationRepositoryImpl;
     @Autowired
@@ -91,7 +86,6 @@ public class DocumentShell {
         generateDocumentService.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
         generateReportService.generateReport();
-        documentStorageService.getAll().clear();
     }
     @ShellMethod()
     public void createorg() {
@@ -482,5 +476,11 @@ public class DocumentShell {
     @ShellMethod()
     public void deletebyidout(String id) {
         System.out.println(outgoingDocumentRepositoryImpl.deleteById(id));
+    }
+    @ShellMethod()
+    public void exist() {
+        BaseDocument baseDocument=new BaseDocument();
+        baseDocument.setRegNumber(289l);
+        baseDocumentRepositoryImpl.existByRegNumber(baseDocument.getRegNumber());
     }
 }

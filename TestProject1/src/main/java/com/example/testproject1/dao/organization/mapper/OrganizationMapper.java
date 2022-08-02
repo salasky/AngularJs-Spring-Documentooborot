@@ -12,11 +12,11 @@ public class OrganizationMapper implements RowMapper<Organization> {
     @Override
     public Organization mapRow(ResultSet rs, int rowNum) throws SQLException {
         Organization organization=new Organization();
-        organization.setId(UUID.fromString(rs.getString("id")));
-        organization.setFullName(rs.getString("full_name"));
-        organization.setShortName(rs.getString("short_name"));
-        organization.setSupervisor(rs.getString("supervisor"));
-        organization.setContactNumber(rs.getString("contact_number"));
+        organization.setId(UUID.fromString(rs.getString("organization_id")));
+        organization.setFullName(rs.getString("organization_full_name"));
+        organization.setShortName(rs.getString("organization_short_name"));
+        organization.setSupervisor(rs.getString("organization_supervisor"));
+        organization.setContactNumber(rs.getString("organization_contact_number"));
         return organization;
     }
 }

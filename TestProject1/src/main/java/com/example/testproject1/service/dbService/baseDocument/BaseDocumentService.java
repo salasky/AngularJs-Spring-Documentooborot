@@ -12,4 +12,5 @@ public interface BaseDocumentService {
     Optional<BaseDocument> update(BaseDocument baseDocument);
     String deleteAll();
     String deleteById(String id);
+    boolean existByRegNumber(Long regNumber);
 }

@@ -2,6 +2,7 @@ package com.example.testproject1.dao.jobTittle;
 
 import com.example.testproject1.dao.jobTittle.mapper.JobTittleMapper;
 import com.example.testproject1.model.staff.JobTittle;
+import com.example.testproject1.model.staff.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,11 +18,15 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
     /**
      * Запрос на получение всех объектов из таблицы jobTittle
      */
-    private final String queryGetAll="SELECT * FROM job_tittle";
+    private final String queryGetAll="SELECT job_tittle.id AS job_tittle_id," +
+            " job_tittle.name AS job_name" +
+            " FROM job_tittle";
     /**
      * Запрос на получение объекта по id из таблицы jobTittle
      */
-    private final String queryGetById="SELECT * FROM job_tittle WHERE id=?";
+    private final String queryGetById="SELECT job_tittle.id AS job_tittle_id," +
+            " job_tittle.name AS job_name" +
+            " FROM job_tittle WHERE id=?";
     /**
      * Запрос на создание записи в таблице jobTittle
      */
@@ -57,8 +62,13 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
     }
     @Override
     public Integer create(JobTittle jobTittle){
-        return jdbcTemplate.update(queryCreate,jobTittle.getUuid().toString()
-                ,jobTittle.getName());
+        if(existById(jobTittle.getUuid().toString())){
+            return -10;
+        }
+        else {
+            return jdbcTemplate.update(queryCreate,jobTittle.getUuid().toString()
+                    ,jobTittle.getName());
+        }
     }
     @Override
     public Integer update(JobTittle jobTittle){
@@ -72,5 +82,15 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
     public Integer deleteById(String id) {
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
+    }
+    @Override
+    public boolean existById(String uuid) {
+        Optional<JobTittle> jobTittle= jdbcTemplate.query(queryGetById,jobTittleMapper,uuid).stream().findFirst();
+        if (jobTittle.isPresent()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

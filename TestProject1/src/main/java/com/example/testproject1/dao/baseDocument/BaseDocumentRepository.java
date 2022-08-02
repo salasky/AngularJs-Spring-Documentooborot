@@ -17,4 +17,8 @@ public interface BaseDocumentRepository {
     Integer deleteAll();
 
     Integer deleteById(String id);
+
+    boolean existByRegNumber(Long regNumber);
+
+    boolean existById(String uuid);
 }

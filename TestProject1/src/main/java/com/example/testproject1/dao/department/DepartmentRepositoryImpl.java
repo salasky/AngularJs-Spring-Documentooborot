@@ -1,7 +1,9 @@
 package com.example.testproject1.dao.department;
 
 import com.example.testproject1.dao.department.mapper.DepartmentMapper;
+import com.example.testproject1.dao.organization.OrganizationRepository;
 import com.example.testproject1.model.staff.Department;
+import com.example.testproject1.model.staff.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -51,6 +53,8 @@ public class DepartmentRepositoryImpl implements DepartmentRepository{
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private DepartmentMapper departmentMapper;
+    @Autowired
+    private OrganizationRepository organizationRepository;
 
     @Override
     public List<Department> getAll(){
@@ -64,9 +68,16 @@ public class DepartmentRepositoryImpl implements DepartmentRepository{
 
     @Override
     public Integer create(Department department){
-           return jdbcTemplate.update(queryCreate,department.getId().toString()
-                   ,department.getFullName(),department.getShortName(),department.getSupervisor()
-                   ,department.getContactNumber(),department.getOrganization().getId().toString());
+        if(existById(department.getId().toString())){
+            return -10;
+        }
+        else {
+            organizationRepository.create(department.getOrganization());
+            return jdbcTemplate.update(queryCreate,department.getId().toString()
+                    ,department.getFullName(),department.getShortName(),department.getSupervisor()
+                    ,department.getContactNumber(),department.getOrganization().getId().toString());
+        }
+
     }
     @Override
     public Integer update(Department department){
@@ -82,5 +93,16 @@ public class DepartmentRepositoryImpl implements DepartmentRepository{
     public Integer deleteById(String id) {
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
+    }
+
+    @Override
+    public boolean existById(String uuid) {
+        Optional<Department> department= jdbcTemplate.query(queryGetById,departmentMapper,uuid).stream().findFirst();
+        if (department.isPresent()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

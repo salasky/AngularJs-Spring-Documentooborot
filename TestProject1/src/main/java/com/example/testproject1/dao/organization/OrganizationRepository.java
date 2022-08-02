@@ -4,6 +4,7 @@ import com.example.testproject1.model.staff.Organization;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface OrganizationRepository {
     Integer create(Organization organization);
@@ -17,4 +18,5 @@ public interface OrganizationRepository {
     Integer deleteAll();
 
     Integer deleteById(String id);
+    boolean existById(String uuid);
 }

@@ -4,7 +4,6 @@ import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.dto.ReportForJsonDTO;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.documentService.GenerateReportService;
-import com.example.testproject1.service.documentService.DocumentStorageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;
@@ -40,18 +39,13 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     private final ObjectMapper objectMapper = new ObjectMapper().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .enable(SerializationFeature.INDENT_OUTPUT);
 
-    /**
-     * Autowired бина класса {@link DocumentStorageService}
-     */
-    @Autowired
-    private DocumentStorageService documentStorageService;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void generateReport() {
-        Map<Person, List<BaseDocument>> totalMap = new HashMap<>();
+        /*Map<Person, List<BaseDocument>> totalMap = new HashMap<>();
         for (BaseDocument baseDocument : documentStorageService.getAll()) {
             //Если не существует запись для данного автора
             if (!totalMap.containsKey(baseDocument.getAuthor())) {
@@ -69,7 +63,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
         LOGGER.info("Путь к файлам:"+SHORTPATH);
         for (Map.Entry<Person, List<BaseDocument>> entry : totalMap.entrySet()) {
             writeReportInFile(entry);
-        }
+        }*/
     }
 
     public void writeReportInFile(Map.Entry<Person, List<BaseDocument>> entry) {
