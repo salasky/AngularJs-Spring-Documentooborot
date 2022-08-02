@@ -37,19 +37,14 @@ public class GenerateReportServiceImpl implements GenerateReportService {
      * с настройками даты
      */
     @Autowired
-    private  ObjectMapper objectMapper;
-    /**
-     * Autowired бина класса {@link DocumentStorageService}
-     */
-    @Autowired
-    private DocumentStorageService documentStorageService;
+    private ObjectMapper objectMapper;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void generateReport() {
-        /*Map<Person, List<BaseDocument>> totalMap = new HashMap<>();
+       /* Map<Person, List<BaseDocument>> totalMap = new HashMap<>();
         for (BaseDocument baseDocument : documentStorageService.getAll()) {
             //Если не существует запись для данного автора
             if (!totalMap.containsKey(baseDocument.getAuthor())) {
@@ -83,6 +78,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
             objectMapper.writeValue(new File(filepathFull.toString()), reportForJsonDTO);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+      
+    }*/
     }
 }
