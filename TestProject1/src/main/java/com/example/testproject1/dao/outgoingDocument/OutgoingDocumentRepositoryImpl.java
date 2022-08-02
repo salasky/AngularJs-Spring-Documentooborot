@@ -3,8 +3,16 @@ package com.example.testproject1.dao.outgoingDocument;
 import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.outgoingDocument.mapper.OutgoingDocumentMapper;
 import com.example.testproject1.dao.person.PersonRepository;
+import com.example.testproject1.dao.taskDocument.TaskDocumentRepositoryImpl;
+import com.example.testproject1.exception.BaseDocumentExistInDb;
+import com.example.testproject1.exception.DocumentExistInDb;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
+import com.example.testproject1.model.document.TaskDocument;
+import com.example.testproject1.service.dbService.baseDocument.BaseDocumentService;
+import com.example.testproject1.service.dbService.person.PersonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,14 +22,15 @@ import java.util.Optional;
 
 @Repository
 public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepository {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OutgoingDocumentRepositoryImpl.class);
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private OutgoingDocumentMapper outgoingDocumentMapper;
     @Autowired
-    private BaseDocumentRepository baseDocumentRepository;
+    private BaseDocumentService baseDocumentService;
     @Autowired
-    private PersonRepository personRepository;
+    private PersonService personService;
     /**
      * Запрос на создание записи в таблице outgoing_document
      */
@@ -154,10 +163,8 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
 
     @Override
     public Integer create(OutgoingDocument outgoingDocument){
-        if(existById(outgoingDocument.getId().toString())){
-            return -10;
-        }
-        else {
+        try {
+            isExistElseThrow(outgoingDocument);
             BaseDocument baseDocument=new BaseDocument();
             baseDocument.setId(outgoingDocument.getId());
             baseDocument.setName(outgoingDocument.getName());
@@ -165,11 +172,19 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
             baseDocument.setRegNumber(outgoingDocument.getRegNumber());
             baseDocument.setCreatingDate(outgoingDocument.getCreatingDate());
             baseDocument.setAuthor(outgoingDocument.getAuthor());
-            baseDocumentRepository.create(baseDocument);
-            personRepository.create(outgoingDocument.getSender());
+            baseDocumentService.create(baseDocument);
+            personService.create(outgoingDocument.getSender());
             return jdbcTemplate.update(queryCreate,outgoingDocument.getId().toString(),
                     outgoingDocument.getSender().getId().toString(),
                     outgoingDocument.getDeliveryType().toString());
+        } catch (DocumentExistInDb e) {
+            LOGGER.info(e.toString());
+            return 0;
+        }
+    }
+    public void isExistElseThrow(OutgoingDocument outgoingDocument) throws DocumentExistInDb {
+        if(existById(outgoingDocument.getId().toString())){
+            throw new DocumentExistInDb(outgoingDocument.getId().toString());
         }
     }
     @Override

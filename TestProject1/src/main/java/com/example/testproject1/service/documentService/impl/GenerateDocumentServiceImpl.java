@@ -53,7 +53,6 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
                     documentService.saveTaskInDB((TaskDocument) taskDocument);
                     documentService.saveIncomingInDB((IncomingDocument) incomingDocument);
                     documentService.saveOutgoingInDB((OutgoingDocument) outgoingDocument);
-                    LOGGER.info(String.valueOf(taskDocument));
                 } catch (DocumentExistsException e) {
                     LOGGER.error(e.getMessage());
                 }

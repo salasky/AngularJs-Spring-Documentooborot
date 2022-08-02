@@ -2,8 +2,16 @@ package com.example.testproject1.dao.department;
 
 import com.example.testproject1.dao.department.mapper.DepartmentMapper;
 import com.example.testproject1.dao.organization.OrganizationRepository;
+import com.example.testproject1.dao.person.PersonRepositoryImpl;
+import com.example.testproject1.exception.DepartmentExistInDb;
+import com.example.testproject1.exception.DocumentExistInDb;
+import com.example.testproject1.exception.PersonExistInDb;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Organization;
+import com.example.testproject1.model.staff.Person;
+import com.example.testproject1.service.dbService.organization.OrganizationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -13,6 +21,14 @@ import java.util.Optional;
 
 @Repository
 public class DepartmentRepositoryImpl implements DepartmentRepository{
+    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentRepositoryImpl.class);
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private DepartmentMapper departmentMapper;
+    @Autowired
+    private OrganizationService organizationService;
     /**
      * Запрос на получение всех объектов из таблицы department
      */
@@ -49,13 +65,6 @@ public class DepartmentRepositoryImpl implements DepartmentRepository{
     private final String queryUpdate="UPDATE department SET full_name=?, short_name=?," +
             " supervisor=?, contact_number=?, organization_id=? WHERE id=?";
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-    @Autowired
-    private DepartmentMapper departmentMapper;
-    @Autowired
-    private OrganizationRepository organizationRepository;
-
     @Override
     public List<Department> getAll(){
         return jdbcTemplate.query(queryGetAll,departmentMapper);
@@ -68,16 +77,21 @@ public class DepartmentRepositoryImpl implements DepartmentRepository{
 
     @Override
     public Integer create(Department department){
-        if(existById(department.getId().toString())){
-            return -10;
-        }
-        else {
-            organizationRepository.create(department.getOrganization());
+        try {
+            isExistElseThrow(department);
+            organizationService.create(department.getOrganization());
             return jdbcTemplate.update(queryCreate,department.getId().toString()
                     ,department.getFullName(),department.getShortName(),department.getSupervisor()
                     ,department.getContactNumber(),department.getOrganization().getId().toString());
+        } catch (DepartmentExistInDb e) {
+            LOGGER.info(e.toString());
+            return 0;
         }
-
+    }
+    public void isExistElseThrow(Department department) throws DepartmentExistInDb {
+        if(existById(department.getId().toString())){
+            throw new DepartmentExistInDb(department.getId().toString());
+        }
     }
     @Override
     public Integer update(Department department){

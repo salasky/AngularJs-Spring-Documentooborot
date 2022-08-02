@@ -1,8 +1,14 @@
 package com.example.testproject1.dao.jobTittle;
 
 import com.example.testproject1.dao.jobTittle.mapper.JobTittleMapper;
+import com.example.testproject1.dao.person.PersonRepositoryImpl;
+import com.example.testproject1.exception.DocumentExistInDb;
+import com.example.testproject1.exception.JobTittleExistIndDb;
+import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,6 +19,7 @@ import java.util.Optional;
 
 @Repository
 public class JobTittleRepositoryImpl implements JobTittleRepository {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JobTittleRepositoryImpl.class);
     @Autowired
     private JobTittleMapper jobTittleMapper;
     /**
@@ -62,12 +69,20 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
     }
     @Override
     public Integer create(JobTittle jobTittle){
-        if(existById(jobTittle.getUuid().toString())){
-            return -10;
-        }
-        else {
+        try {
+            isExistElseThrow(jobTittle);
             return jdbcTemplate.update(queryCreate,jobTittle.getUuid().toString()
                     ,jobTittle.getName());
+
+        } catch (JobTittleExistIndDb e) {
+            LOGGER.info(e.toString());
+            return 0;
+        }
+
+    }
+    public void isExistElseThrow(JobTittle jobTittle) throws JobTittleExistIndDb {
+        if(existById(jobTittle.getUuid().toString())){
+            throw new JobTittleExistIndDb(jobTittle.getUuid().toString());
         }
     }
     @Override

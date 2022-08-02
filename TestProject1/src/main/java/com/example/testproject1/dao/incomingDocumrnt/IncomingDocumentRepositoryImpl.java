@@ -2,10 +2,17 @@ package com.example.testproject1.dao.incomingDocumrnt;
 
 import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.incomingDocumrnt.mapper.IncomingDocumentMapper;
+import com.example.testproject1.dao.outgoingDocument.OutgoingDocumentRepositoryImpl;
 import com.example.testproject1.dao.person.PersonRepository;
+import com.example.testproject1.exception.DocumentExistInDb;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
+import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
+import com.example.testproject1.service.dbService.baseDocument.BaseDocumentService;
+import com.example.testproject1.service.dbService.person.PersonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,16 +22,17 @@ import java.util.Optional;
 
 @Repository
 public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepository {
+    private static final Logger LOGGER = LoggerFactory.getLogger(IncomingDocumentRepositoryImpl.class);
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private IncomingDocumentMapper incomingDocumentMapper;
 
     @Autowired
-    private BaseDocumentRepository baseDocumentRepository;
+    private BaseDocumentService baseDocumentService;
 
     @Autowired
-    private PersonRepository personRepository;
+    private PersonService personService;
     /**
      * Запрос на создание записи в таблице incoming_document
      */
@@ -214,9 +222,8 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
 
     @Override
     public Integer create(IncomingDocument incomingDocument) {
-        if (existById(incomingDocument.getId().toString())) {
-            return -10;//ИСКЛЮЧЕНИЕ В ADVICE CONTROLLER-СДЕЛАТЬ
-        } else {
+        try {
+            isExistElseThrow(incomingDocument);
             BaseDocument baseDocument = new BaseDocument();
             baseDocument.setId(incomingDocument.getId());
             baseDocument.setName(incomingDocument.getName());
@@ -224,16 +231,24 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
             baseDocument.setRegNumber(incomingDocument.getRegNumber());
             baseDocument.setCreatingDate(incomingDocument.getCreatingDate());
             baseDocument.setAuthor(incomingDocument.getAuthor());
-            baseDocumentRepository.create(baseDocument);
-            personRepository.create(incomingDocument.getSender());
-            personRepository.create(incomingDocument.getDestination());
+            baseDocumentService.create(baseDocument);
+            personService.create(incomingDocument.getSender());
+            personService.create(incomingDocument.getDestination());
             return jdbcTemplate.update(queryCreate, incomingDocument.getId().toString(),
                     incomingDocument.getSender().getId().toString(),
                     incomingDocument.getDestination().getId().toString(),
                     incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
+        } catch (DocumentExistInDb e) {
+            LOGGER.info(e.toString());
+            return 0;
         }
     }
 
+    public void isExistElseThrow(IncomingDocument incomingDocument) throws DocumentExistInDb {
+        if(existById(incomingDocument.getId().toString())){
+            throw new DocumentExistInDb(incomingDocument.getId().toString());
+        }
+    }
     @Override
     public List<IncomingDocument> getAll(){
         return jdbcTemplate.query(queryGetAll,incomingDocumentMapper);

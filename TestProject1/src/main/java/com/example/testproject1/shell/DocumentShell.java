@@ -10,6 +10,7 @@ import com.example.testproject1.dao.organization.OrganizationRepositoryImpl;
 import com.example.testproject1.dao.outgoingDocument.OutgoingDocumentRepositoryImpl;
 import com.example.testproject1.dao.person.PersonRepositoryImpl;
 import com.example.testproject1.dao.taskDocument.TaskDocumentRepositoryImpl;
+import com.example.testproject1.exception.BaseDocumentExistInDb;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
@@ -19,6 +20,7 @@ import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
+import com.example.testproject1.service.dbService.taskDocument.TaskDocumentService;
 import com.example.testproject1.service.documentService.GenerateDocumentService;
 import com.example.testproject1.service.documentService.GenerateReportService;
 import org.slf4j.Logger;
@@ -74,6 +76,8 @@ public class DocumentShell {
 
     @Autowired
     OutgoingDocumentRepositoryImpl outgoingDocumentRepositoryImpl;
+    @Autowired
+    TaskDocumentService taskDocumentService;
     /**
      * Shell метод генерации документов и создания отчетов по ним
      *
@@ -278,7 +282,7 @@ public class DocumentShell {
     @ShellMethod()
     public void createbdoc() {
         BaseDocument baseDocument=new BaseDocument();
-        baseDocument.setId(UUID.randomUUID());
+        baseDocument.setId(UUID.fromString("00505b60-9031-4068-b5f6-d7e5fa1b7d1c"));
         baseDocument.setName("BaseDocName");
         baseDocument.setText("BaseDocText");
         baseDocument.setRegNumber(ThreadLocalRandom.current().nextLong(1000));
@@ -290,8 +294,9 @@ public class DocumentShell {
         Person person= personRepositoryImpl.getAll().stream().findFirst().get();
         baseDocument.setAuthor(person);
         baseDocumentRepositoryImpl.create(baseDocument);
-        System.out.println(baseDocument +" создан");
+        System.out.println(baseDocumentRepositoryImpl.getById("00505b60-9031-4068-b5f6-d7e5fa1b7d1c") +" создан");
     }
+
     @ShellMethod()
     public void getallbdoc() {
         baseDocumentRepositoryImpl.getAll().stream().forEach(System.out::println);
@@ -328,21 +333,11 @@ public class DocumentShell {
     }
     @ShellMethod()
     public void createtask() {
-        TaskDocument taskDocument=new TaskDocument();
-        taskDocument.setId(baseDocumentRepositoryImpl.getAll().stream().findFirst().get().getId());
-        long offset = Timestamp.valueOf("2015-01-01 00:00:00").getTime();
-        long end = Timestamp.valueOf("2022-08-01 00:00:00").getTime();
-        long diff = end - offset + 1;
-        Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
-        taskDocument.setOutDate(rand);
-        taskDocument.setExecPeriod("3 дня");
-        Person personResponse= personRepositoryImpl.getAll().stream().findFirst().get();
-        taskDocument.setResponsible(personResponse);
-        taskDocument.setControlPerson(personResponse);
-        taskDocument.setSignOfControl(true);
+        TaskDocument taskDocument=taskDocumentRepositoryImpl.getAll().stream().findFirst().get();
 
-        taskDocumentRepositoryImpl.create(taskDocument);
-        System.out.println(taskDocument +" создан");
+
+        taskDocumentService.create(taskDocument);
+
     }
 
     @ShellMethod()
@@ -394,7 +389,6 @@ public class DocumentShell {
         incomingDocument.setDestination(personResponse);
 
         incomingDocumentRepositoryImpl.create(incomingDocument);
-        System.out.println(incomingDocument +" создан");
     }
 
     @ShellMethod()
@@ -442,7 +436,7 @@ public class DocumentShell {
         outgoingDocument.setDeliveryType(DocumentDeliveryType.EMAIL);
 
         outgoingDocumentRepositoryImpl.create(outgoingDocument);
-        System.out.println(outgoingDocument +" создан");
+
     }
     @ShellMethod()
     public void getallout() {

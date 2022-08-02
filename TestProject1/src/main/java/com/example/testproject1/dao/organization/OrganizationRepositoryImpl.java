@@ -1,7 +1,13 @@
 package com.example.testproject1.dao.organization;
 
 import com.example.testproject1.dao.organization.mapper.OrganizationMapper;
+import com.example.testproject1.dao.person.PersonRepositoryImpl;
+import com.example.testproject1.exception.JobTittleExistIndDb;
+import com.example.testproject1.exception.OrganizationExistInDb;
+import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,6 +23,7 @@ import java.util.Optional;
  */
 @Repository
 public class OrganizationRepositoryImpl implements OrganizationRepository{
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationRepositoryImpl.class);
     /**
      * Запрос на получение всех объектов из таблицы organization
      */
@@ -56,12 +63,19 @@ public class OrganizationRepositoryImpl implements OrganizationRepository{
 
     @Override
     public Integer create(Organization organization){
-        if(existById(organization.getId().toString())){
-            return -10;
-        }
-        else {
+        try {
+            isExistElseThrow(organization);
             return jdbcTemplate.update(queryCreate,organization.getId().toString()
                     ,organization.getFullName(),organization.getShortName(),organization.getSupervisor(),organization.getContactNumber());
+        } catch (OrganizationExistInDb e) {
+            LOGGER.info(e.toString());
+            return 0;
+        }
+
+    }
+    public void isExistElseThrow(Organization organization) throws OrganizationExistInDb {
+        if(existById(organization.getId().toString())){
+            throw new OrganizationExistInDb(organization.getId().toString());
         }
     }
     @Override

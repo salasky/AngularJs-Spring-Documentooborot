@@ -27,7 +27,7 @@ public class TaskDocumentServiceImpl implements TaskDocumentService{
             LOGGER.info("TaskDocument успешно сохранен");
             return Optional.ofNullable(taskDocument);
         }
-        LOGGER.error("Неудачная попытка сохранения TaskDocument");
+        LOGGER.error(MessageFormat.format("Неудачная попытка сохранения TaskDocument c id {0}",taskDocument.getId().toString()));
         return null;
     }
 

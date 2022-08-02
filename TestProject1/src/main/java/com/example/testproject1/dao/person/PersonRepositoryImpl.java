@@ -1,10 +1,19 @@
 package com.example.testproject1.dao.person;
 
+import com.example.testproject1.dao.baseDocument.BaseDocumentRepositoryImpl;
 import com.example.testproject1.dao.department.DepartmentRepository;
 import com.example.testproject1.dao.jobTittle.JobTittleRepository;
 import com.example.testproject1.dao.person.mapper.PersonMapper;
+import com.example.testproject1.exception.BaseDocumentExistInDb;
+import com.example.testproject1.exception.PersonExistInDb;
+import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
+import com.example.testproject1.service.dbService.department.DepartmentService;
+import com.example.testproject1.service.dbService.jobTittleService.JobTittleService;
+import liquibase.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,6 +23,18 @@ import java.util.Optional;
 
 @Repository
 public class PersonRepositoryImpl implements PersonRepository{
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersonRepositoryImpl.class);
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private PersonMapper personMapper;
+
+    @Autowired
+    private DepartmentService departmentService;
+
+    @Autowired
+    private JobTittleService jobTittleService;
     /**
      * Запрос на создание записи в таблице person
      */
@@ -73,28 +94,23 @@ public class PersonRepositoryImpl implements PersonRepository{
      */
     private final String queryDeleteById="DELETE FROM person WHERE id=?";
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-    @Autowired
-    private PersonMapper personMapper;
-
-    @Autowired
-    private DepartmentRepository departmentRepository;
-
-    @Autowired
-    private JobTittleRepository jobTittleRepository;
-
     @Override
     public Integer create(Person person){
-        if(existById(person.getId().toString())){
-            return -10;
-        }
-        else {
-            jobTittleRepository.create(person.getJobTittle());
-            departmentRepository.create(person.getDepartment());
+        try {
+            isExistElseThrow(person);
+            jobTittleService.create(person.getJobTittle());
+            departmentService.create(person.getDepartment());
             return jdbcTemplate.update(queryCreate,person.getId().toString(),person.getFirstName(),person.getSecondName(),
                     person.getLastName(),person.getPhoto(),person.getJobTittle().getUuid().toString(),
                     person.getDepartment().getId().toString(), person.getPhoneNumber(),person.getBirthDay());
+        } catch (PersonExistInDb e) {
+            LOGGER.info(e.toString());
+            return 0;
+        }
+    }
+    public void isExistElseThrow(Person person) throws PersonExistInDb {
+        if(existById(person.getId().toString())){
+            throw new PersonExistInDb(person.getId().toString());
         }
     }
     @Override

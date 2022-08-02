@@ -2,8 +2,11 @@ package com.example.testproject1.dao.baseDocument;
 
 import com.example.testproject1.dao.baseDocument.mapper.BaseDocumentMapper;
 import com.example.testproject1.dao.person.PersonRepository;
+import com.example.testproject1.exception.BaseDocumentExistInDb;
 import com.example.testproject1.model.document.BaseDocument;
-import com.example.testproject1.model.staff.Organization;
+import com.example.testproject1.service.dbService.person.PersonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -13,13 +16,13 @@ import java.util.Optional;
 
 @Repository
 public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseDocumentRepositoryImpl.class);
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private BaseDocumentMapper baseDocumentMapper;
     @Autowired
-    private PersonRepository personRepository;
+    private PersonService personService;
 
     /**
      * Запрос на создание записи в таблице base_document
@@ -118,13 +121,19 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
 
     @Override
     public Integer create(BaseDocument baseDocument){
-        if(existById(baseDocument.getId().toString())){
-            return -10;
-        }
-        else {
-            personRepository.create(baseDocument.getAuthor());
+        try {
+            isExistElseThrow(baseDocument);
+            personService.create(baseDocument.getAuthor());
             return jdbcTemplate.update(queryCreate,baseDocument.getId().toString(),baseDocument.getName(),baseDocument.getText(),
                     baseDocument.getRegNumber(),baseDocument.getCreatingDate(),baseDocument.getAuthor().getId().toString());
+        } catch (BaseDocumentExistInDb e) {
+            LOGGER.info(e.toString());
+            return 0;
+        }
+    }
+    public void isExistElseThrow(BaseDocument baseDocument) throws BaseDocumentExistInDb {
+        if(existById(baseDocument.getId().toString())){
+            throw new BaseDocumentExistInDb(baseDocument.getId().toString());
         }
     }
     @Override
