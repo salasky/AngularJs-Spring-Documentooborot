@@ -1,9 +1,9 @@
 package com.example.testproject1.shell;
 
 
+import com.example.testproject1.service.documentservice.DocumentStorageService;
 import com.example.testproject1.service.documentservice.GenerateDocumentService;
 import com.example.testproject1.service.documentservice.GenerateReportService;
-import com.example.testproject1.service.documentservice.DocumentStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

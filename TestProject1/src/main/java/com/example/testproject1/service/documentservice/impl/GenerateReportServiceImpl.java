@@ -3,8 +3,8 @@ package com.example.testproject1.service.documentservice.impl;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.dto.ReportForJsonDTO;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.documentservice.GenerateReportService;
 import com.example.testproject1.service.documentservice.DocumentStorageService;
+import com.example.testproject1.service.documentservice.GenerateReportService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,13 +52,10 @@ public class GenerateReportServiceImpl implements GenerateReportService {
         for (BaseDocument baseDocument : documentStorageService.getAll()) {
             List<BaseDocument> baseDocumentList = new ArrayList<>();
             //Если не существует запись для данного автора
-            if (!totalMap.containsKey(baseDocument.getAuthor())) {
-                baseDocumentList.add(baseDocument);
-            } else {
-                //Ecли существуют документы данного автора
+            if (totalMap.containsKey(baseDocument.getAuthor())) {
                 baseDocumentList = totalMap.get(baseDocument.getAuthor());
-                baseDocumentList.add(baseDocument);
             }
+            baseDocumentList.add(baseDocument);
             totalMap.put(baseDocument.getAuthor(), baseDocumentList);
         }
         LOGGER.info(new StringBuilder("Путь к файлам:").append(SHORT_PATH).toString());

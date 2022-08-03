@@ -3,7 +3,6 @@ package com.example.testproject1.model.staff;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
 import java.text.MessageFormat;
 import java.util.Objects;
 import java.util.UUID;

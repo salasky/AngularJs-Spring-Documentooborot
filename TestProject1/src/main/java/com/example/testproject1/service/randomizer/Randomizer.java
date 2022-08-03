@@ -50,7 +50,7 @@ public class Randomizer {
     @PostConstruct
     private void postConstruct() {
         personList = personStorageService.getPersonList();
-        random=new Random();
+        random = new Random();
     }
 
     /**
@@ -105,7 +105,7 @@ public class Randomizer {
      * @return возвращает рандомного автора из XML файла
      */
     public Person getRandDocumentAuthor() {
-        return personList.get(random.nextInt( personList.size()));
+        return personList.get(random.nextInt(personList.size()));
     }
 
     /**
@@ -133,7 +133,7 @@ public class Randomizer {
      * @return возвращает рандомного автора из xml файла
      */
     public Person getRandTaskResponsible() {
-        return personList.get(random.nextInt( personList.size()));
+        return personList.get(random.nextInt(personList.size()));
     }
 
     /**
@@ -151,7 +151,7 @@ public class Randomizer {
      * @return возвращает рандомного контролирующего из XML
      */
     public Person getRandTaskControlPerson() {
-        return personList.get(random.nextInt( personList.size()));
+        return personList.get(random.nextInt(personList.size()));
     }
 
     /**
@@ -160,7 +160,7 @@ public class Randomizer {
      * @return рандомный объект класса {@link Person} из persons.xml
      */
     public Person getRandIncomingDocumentSender() {
-        return personList.get(random.nextInt( personList.size()));
+        return personList.get(random.nextInt(personList.size()));
     }
 
     /**
@@ -169,7 +169,7 @@ public class Randomizer {
      * @return возвращает рандомного получателя из XML
      */
     public Person getIncomingDocumentDestination() {
-        return personList.get(random.nextInt( personList.size()));
+        return personList.get(random.nextInt(personList.size()));
     }
 
     /**
@@ -197,7 +197,7 @@ public class Randomizer {
      * @return рандомный объект класса {@link Person} из person.xml
      */
     public Person getRandOutgoingDocumentSender() {
-        return personList.get(random.nextInt( personList.size()));
+        return personList.get(random.nextInt(personList.size()));
     }
 
     /**
