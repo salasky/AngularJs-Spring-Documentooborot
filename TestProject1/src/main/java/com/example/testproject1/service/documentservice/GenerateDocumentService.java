@@ -1,4 +1,4 @@
-package com.example.testproject1.service.documentService;
+package com.example.testproject1.service.documentservice;
 
 /**
  * Интерфейс генерации документов
@@ -9,7 +9,7 @@ public interface GenerateDocumentService {
     /**
      * Метод генерации документов трех типов
      *
-     * @param count Количество генерируемых документов
+     * @param count Количество генерируемых документов каждого типа
      */
     void generateDocument(Integer count);
 }

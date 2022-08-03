@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.text.MessageFormat;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Класс подразделение. Наследуется от {@link Staff}

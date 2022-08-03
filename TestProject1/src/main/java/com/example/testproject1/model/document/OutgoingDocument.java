@@ -1,6 +1,6 @@
 package com.example.testproject1.model.document;
 
-import com.example.testproject1.model.documentEnum.DocumentDeliveryType;
+import com.example.testproject1.model.documentenum.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Person;
 
 import javax.persistence.Column;

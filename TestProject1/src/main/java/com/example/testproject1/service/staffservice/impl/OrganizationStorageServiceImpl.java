@@ -1,10 +1,10 @@
-package com.example.testproject1.service.staffService.impl;
+package com.example.testproject1.service.staffservice.impl;
 
 import com.example.testproject1.configuration.cache.CaffeineConfig;
 import com.example.testproject1.model.dto.OrganizationListXmlDTO;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.jaxb.JaxbReader;
-import com.example.testproject1.service.staffService.OrganizationStorageService;
+import com.example.testproject1.service.staffservice.OrganizationStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,10 @@ import java.util.List;
 public class OrganizationStorageServiceImpl implements OrganizationStorageService {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationStorageServiceImpl.class);
     /**
+     * Имя файла для jaxb анмаршалинга
+     */
+    private final String FILE_NAME = "organization.xml";
+    /**
      * Бин для чтения информации из xml файла
      */
     @Autowired
@@ -35,7 +39,7 @@ public class OrganizationStorageServiceImpl implements OrganizationStorageServic
     @Override
     public List<Organization> getOrganizationList() {
         LOGGER.info("Begin find Organization ");
-        OrganizationListXmlDTO organizationListXmlDTO = jaxbReader.jaxbXMLToObject("organization.xml");
+        OrganizationListXmlDTO organizationListXmlDTO = jaxbReader.jaxbXMLToObject(FILE_NAME);
         List<Organization> organizationList = organizationListXmlDTO.getOrganizationList();
         LOGGER.info("Find Organization result");
         return organizationList;

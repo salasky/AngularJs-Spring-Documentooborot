@@ -21,6 +21,8 @@
 		<com.fasterxml.jackson.core.version>2.13.0</com.fasterxml.jackson.core.version>
 		<org.glassfish.jaxb.version>2.3.1</org.glassfish.jaxb.version>
 		<org.apache.derby.version>10.13.1.1</org.apache.derby.version>
+		<jakarta.persistence.version>2.2.3</jakarta.persistence.version>
+		<org.liquibase.version>4.10.0</org.liquibase.version>
 	</properties>
 	<dependencies>
 
@@ -41,13 +43,7 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
-			<version>4.10.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.3.6</version>
+			<version>${org.liquibase.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
 		<dependency>
@@ -67,11 +63,13 @@
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
+			<version>${javax.xml.bind.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
+			<version>${com.fasterxml.jackson.core.version}</version>
 		</dependency>
 
 		<dependency>
@@ -99,7 +97,7 @@
 		<dependency>
 			<groupId>jakarta.persistence</groupId>
 			<artifactId>jakarta.persistence-api</artifactId>
-			<version>2.2.3</version>
+			<version>${jakarta.persistence.version}</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
@@ -119,7 +117,7 @@
 			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>4.0.0</version>
+				<version>${org.liquibase.version}</version>
 				<configuration>
 					<driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
 					<url>jdbc:derby:C:\Derby\db-derby-10.13.1.1-bin\mydb</url>

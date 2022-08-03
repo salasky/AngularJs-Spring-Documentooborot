@@ -20,6 +20,10 @@ import javax.xml.bind.JAXBException;
  */
 @Configuration
 public class JaxbConfiguration {
+    /**
+     * Метод получения бина JAXBContext
+     * @return озвращает сконфигурированный JAXBContext
+     */
     @Bean
     public JAXBContext getContext() {
         try {

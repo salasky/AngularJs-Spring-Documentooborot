@@ -22,14 +22,14 @@ public abstract class DocumentFactory<T extends BaseDocument.BaseDocumentBuilder
 
     /**
      *  Метод который заполняет особенности конкретной реализации
-     * @param builder объект builder унаследованный от {@link com.example.testproject1.model.document.BaseDocument.BaseDocumentBuilder}
+     * @param builder объект builder унаследованный от {@link BaseDocument.BaseDocumentBuilder}
      * @return объект builder того класса, который передан в параметрах
      */
     public abstract T setFields(T builder);
     /**
      * Собирает готовый документ с полями базового класса
      * @param builder
-     * @return
+     * @return Возвращает документ наследник класса {@link BaseDocument}
      */
     public BaseDocument createDocument(T builder) {
         return builder

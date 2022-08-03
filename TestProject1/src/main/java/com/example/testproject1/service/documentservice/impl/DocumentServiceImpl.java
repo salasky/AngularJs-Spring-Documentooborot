@@ -1,4 +1,4 @@
-package com.example.testproject1.service.documentService.impl;
+package com.example.testproject1.service.documentservice.impl;
 
 import com.example.testproject1.exception.DocumentExistsException;
 import com.example.testproject1.model.document.IncomingDocument;
@@ -8,7 +8,7 @@ import com.example.testproject1.service.dbService.baseDocument.BaseDocumentServi
 import com.example.testproject1.service.dbService.incomingDocument.IncomingDocumentService;
 import com.example.testproject1.service.dbService.outgoingDocument.OutgoingDocumentService;
 import com.example.testproject1.service.dbService.taskDocument.TaskDocumentService;
-import com.example.testproject1.service.documentService.DocumentService;
+import com.example.testproject1.service.documentservice.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +23,23 @@ import java.text.MessageFormat;
 @Service
 public class DocumentServiceImpl implements DocumentService {
     /**
-     * Объект класса для хранения документов
+     * Бин сервиса для работы с базовыми документами
      */
     @Autowired
     private BaseDocumentService baseDocumentService;
+    /**
+     * Бин сервиса для работы с поручениями
+     */
     @Autowired
     private TaskDocumentService taskDocumentService;
+    /**
+     * Бин сервиса для работы с входящими документами
+     */
     @Autowired
     private IncomingDocumentService incomingDocumentService;
+    /**
+     * Бин сервиса для работы с исходящими документами
+     */
     @Autowired
     private OutgoingDocumentService outgoingDocumentService;
 
@@ -39,38 +48,35 @@ public class DocumentServiceImpl implements DocumentService {
      */
     @Override
     public void saveTaskInDB(TaskDocument taskDocument) throws DocumentExistsException {
-        if(baseDocumentService.existByRegNumber(taskDocument.getRegNumber())){
-            throw new DocumentExistsException(taskDocument.getRegNumber(),
-                    MessageFormat.format("Document number {0} exist", taskDocument.getRegNumber()));
-        }
-        else {
-           taskDocumentService.create(taskDocument);
-        }
+        isNotExitByRegNumberOrElseThrow(taskDocument.getRegNumber());
+        taskDocumentService.create(taskDocument);
     }
     /**
      * {@inheritDoc}
      */
     @Override
     public void saveIncomingInDB(IncomingDocument incomingDocument) throws DocumentExistsException {
-        if(baseDocumentService.existByRegNumber(incomingDocument.getRegNumber())){
-            throw new DocumentExistsException(incomingDocument.getRegNumber(),
-                    MessageFormat.format("Document number {0} exist", incomingDocument.getRegNumber()));
-        }
-        else {
-            incomingDocumentService.create(incomingDocument);
-        }
+        isNotExitByRegNumberOrElseThrow(incomingDocument.getRegNumber());
+        incomingDocumentService.create(incomingDocument);
     }
     /**
      * {@inheritDoc}
      */
     @Override
     public void saveOutgoingInDB(OutgoingDocument outgoingDocument) throws DocumentExistsException {
-        if(baseDocumentService.existByRegNumber(outgoingDocument.getRegNumber())){
-            throw new DocumentExistsException(outgoingDocument.getRegNumber(),
-                    MessageFormat.format("Document number {0} exist", outgoingDocument.getRegNumber()));
-        }
-        else {
-            outgoingDocumentService.create(outgoingDocument);
+        isNotExitByRegNumberOrElseThrow(outgoingDocument.getRegNumber());
+        outgoingDocumentService.create(outgoingDocument);
+    }
+
+    /**
+     * Метод проверки существования документа с принимаемым регистрационным номером
+     * @param regNumber регистрационный номер документа
+     * @throws DocumentExistsException выбрасывает исключение, если существет документ с переданным регистрационным номером
+     */
+    private void isNotExitByRegNumberOrElseThrow(Long regNumber) throws DocumentExistsException {
+        if(baseDocumentService.existByRegNumber(regNumber)){
+            throw new DocumentExistsException(regNumber,
+                    MessageFormat.format("Document number {0} exist", regNumber));
         }
     }
 }
