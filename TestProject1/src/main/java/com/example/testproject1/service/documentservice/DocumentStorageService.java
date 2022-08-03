@@ -1,6 +1,5 @@
-package com.example.testproject1.service.documentService;
+package com.example.testproject1.service.documentservice;
 
-import com.example.testproject1.exception.DocumentExistsException;
 import com.example.testproject1.model.document.BaseDocument;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public interface DocumentStorageService {
      *
      * @param baseDocumentList объект класса {@link BaseDocument}
      */
-    void addAll(BaseDocument baseDocumentList);
+    void addDocument(BaseDocument baseDocumentList);
 
     /**
      * Метод проверки существования документа с указанным рег.номером

@@ -1,4 +1,4 @@
-package com.example.testproject1.service.staffService;
+package com.example.testproject1.service.staffservice;
 
 import com.example.testproject1.model.staff.Organization;
 

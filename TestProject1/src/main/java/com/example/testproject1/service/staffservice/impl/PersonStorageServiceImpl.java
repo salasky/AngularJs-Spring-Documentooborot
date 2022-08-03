@@ -1,9 +1,9 @@
-package com.example.testproject1.service.staffService.impl;
+package com.example.testproject1.service.staffservice.impl;
 
 import com.example.testproject1.model.dto.PersonListXmlDTO;
 import com.example.testproject1.service.jaxb.JaxbReader;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.staffService.PersonStorageService;
+import com.example.testproject1.service.staffservice.PersonStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class PersonStorageServiceImpl implements PersonStorageService {
     /**
      * Имя файла для jaxb анмаршалинга
      */
-    private final String FILENAME = "persons.xml";
+    private final String FILE_NAME = "persons.xml";
     /**
      * Бин для чтения информации из xml файла
      */
@@ -39,7 +39,7 @@ public class PersonStorageServiceImpl implements PersonStorageService {
     @Override
     public List<Person> getPersonList() {
         LOGGER.info("Begin find Person in xml file");
-        PersonListXmlDTO personListXmlDTO = jaxbReader.jaxbXMLToObject(FILENAME);
+        PersonListXmlDTO personListXmlDTO = jaxbReader.jaxbXMLToObject(FILE_NAME);
         List<Person> personList = personListXmlDTO.getPersonList();
         LOGGER.info("Find result");
         return personList;

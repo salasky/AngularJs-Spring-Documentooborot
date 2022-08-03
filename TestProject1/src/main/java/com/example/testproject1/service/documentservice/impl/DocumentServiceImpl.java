@@ -1,15 +1,13 @@
-package com.example.testproject1.service.documentService.impl;
+package com.example.testproject1.service.documentservice.impl;
 
 import com.example.testproject1.exception.DocumentExistsException;
 import com.example.testproject1.model.document.BaseDocument;
-import com.example.testproject1.service.documentService.DocumentService;
-import com.example.testproject1.service.documentService.DocumentStorageService;
+import com.example.testproject1.service.documentservice.DocumentService;
+import com.example.testproject1.service.documentservice.DocumentStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Класс реализующий интерфейс {@link DocumentService}. Сохраняет переданные документы,
@@ -34,7 +32,7 @@ public class DocumentServiceImpl implements DocumentService {
             throw new DocumentExistsException(baseDocument.getRegNumber(),
                     MessageFormat.format("Document number {0} exist", baseDocument.getRegNumber()));
         } else {
-            documentStorageService.addAll(baseDocument);
+            documentStorageService.addDocument(baseDocument);
         }
     }
 }

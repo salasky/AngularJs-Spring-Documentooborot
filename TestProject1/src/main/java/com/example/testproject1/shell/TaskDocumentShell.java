@@ -1,9 +1,9 @@
 package com.example.testproject1.shell;
 
 
-import com.example.testproject1.service.documentService.GenerateDocumentService;
-import com.example.testproject1.service.documentService.GenerateReportService;
-import com.example.testproject1.service.documentService.DocumentStorageService;
+import com.example.testproject1.service.documentservice.GenerateDocumentService;
+import com.example.testproject1.service.documentservice.GenerateReportService;
+import com.example.testproject1.service.documentservice.DocumentStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class TaskDocumentShell {
      * @param a Генерируем заданное количество документов
      */
     @ShellMethod("Cmd: generate --a  (Int DocumentCount (default = 100)")
-    public void generate(@ShellOption(defaultValue = "100") int a) {
+    public void generate(@ShellOption(defaultValue = "1000") int a) {
         Integer countDocument = Integer.valueOf(a);
         LOGGER.info("Попытка сгенерировать документы");
         generateDocumentService.generateDocument(countDocument);

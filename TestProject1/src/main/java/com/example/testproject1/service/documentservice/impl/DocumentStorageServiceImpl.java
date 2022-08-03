@@ -1,12 +1,11 @@
-package com.example.testproject1.service.documentService.impl;
+package com.example.testproject1.service.documentservice.impl;
 
 import com.example.testproject1.model.document.BaseDocument;
-import com.example.testproject1.service.documentService.DocumentStorageService;
+import com.example.testproject1.service.documentservice.DocumentStorageService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Класс сохранения объектов BaseDocument созданных с помощью Builder-ов
@@ -32,7 +31,7 @@ public class DocumentStorageServiceImpl implements DocumentStorageService {
      * {@inheritDoc}
      */
     @Override
-    public void addAll(BaseDocument baseDocumentList) {
+    public void addDocument(BaseDocument baseDocumentList) {
         documentList.add(baseDocumentList);
     }
 

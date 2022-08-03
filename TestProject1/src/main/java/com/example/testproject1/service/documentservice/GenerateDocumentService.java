@@ -1,4 +1,4 @@
-package com.example.testproject1.service.documentService;
+package com.example.testproject1.service.documentservice;
 
 /**
  * Интерфейс генерации документов

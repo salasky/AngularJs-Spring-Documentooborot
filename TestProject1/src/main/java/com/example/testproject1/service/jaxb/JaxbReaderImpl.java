@@ -33,9 +33,8 @@ public class JaxbReaderImpl implements JaxbReader {
         if (fileName != null) {
             String path = this.getClass().getClassLoader().getResource(fileName).getPath();
             try (FileReader reader = new FileReader(path)) {
-                T result = null;
                 Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-                result = (T) unmarshaller.unmarshal(reader);
+                T result = result = (T) unmarshaller.unmarshal(reader);
                 return result;
             } catch (Exception e) {
                 throw new RuntimeException(e);

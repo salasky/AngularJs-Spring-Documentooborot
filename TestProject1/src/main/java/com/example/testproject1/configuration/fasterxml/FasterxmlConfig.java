@@ -16,7 +16,7 @@ public class FasterxmlConfig {
     /**
      * Метод получения сконфигурированного {@link ObjectMapper}
      *
-     * @return возвращает {@link ObjectMapper}
+     * @return возвращает объект класса {@link ObjectMapper}
      */
     @Bean
     public ObjectMapper getObjectMapper() {

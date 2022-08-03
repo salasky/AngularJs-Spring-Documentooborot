@@ -1,12 +1,11 @@
-package com.example.testproject1.service.documentService.impl;
+package com.example.testproject1.service.documentservice.impl;
 
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.dto.ReportForJsonDTO;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.documentService.GenerateReportService;
-import com.example.testproject1.service.documentService.DocumentStorageService;
+import com.example.testproject1.service.documentservice.GenerateReportService;
+import com.example.testproject1.service.documentservice.DocumentStorageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +14,9 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Класс реализующий интерфейс {@link GenerateReportService}
@@ -32,7 +29,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     /**
      * Путь к папке с json файлами
      */
-    private static final String SHORTPATH = ClassLoader.getSystemClassLoader().getResource("").getPath();
+    private static final String SHORT_PATH = ClassLoader.getSystemClassLoader().getResource("").getPath();
     private static final Logger LOGGER = LoggerFactory.getLogger(GenerateReportServiceImpl.class);
     /**
      * Объект для библиотеки Fasterxml Jackson
@@ -53,30 +50,21 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     public void generateReport() {
         Map<Person, List<BaseDocument>> totalMap = new HashMap<>();
         for (BaseDocument baseDocument : documentStorageService.getAll()) {
+            List<BaseDocument> baseDocumentList = new ArrayList<>();
             //Если не существует запись для данного автора
             if (!totalMap.containsKey(baseDocument.getAuthor())) {
-                totalMap.put(baseDocument.getAuthor(), getNewListAndSetDoc(baseDocument));
+                baseDocumentList.add(baseDocument);
             } else {
                 //Ecли существуют документы данного автора
-                List<BaseDocument> oldList = getOldListAndSetDoc(totalMap.get(baseDocument.getAuthor()), baseDocument);
-                totalMap.put(baseDocument.getAuthor(), oldList);
+                baseDocumentList = totalMap.get(baseDocument.getAuthor());
+                baseDocumentList.add(baseDocument);
             }
+            totalMap.put(baseDocument.getAuthor(), baseDocumentList);
         }
-        LOGGER.info(new StringBuilder("Путь к файлам:").append(SHORTPATH).toString());
+        LOGGER.info(new StringBuilder("Путь к файлам:").append(SHORT_PATH).toString());
         for (Map.Entry<Person, List<BaseDocument>> entry : totalMap.entrySet()) {
             writeReportInFile(entry);
         }
-    }
-
-    private List<BaseDocument> getOldListAndSetDoc(List<BaseDocument> baseDocumentList, BaseDocument baseDocument) {
-        baseDocumentList.add(baseDocument);
-        return baseDocumentList;
-    }
-
-    private List<BaseDocument> getNewListAndSetDoc(BaseDocument baseDocument) {
-        List<BaseDocument> baseDocumentList = new ArrayList<>();
-        baseDocumentList.add(baseDocument);
-        return baseDocumentList;
     }
 
     private void writeReportInFile(Map.Entry<Person, List<BaseDocument>> entry) {
@@ -86,7 +74,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
                 .build();
         StringBuilder secondName = new StringBuilder(entry.getKey().getSecondName());
         //Полный путь к файлу
-        StringBuilder filepathFull = new StringBuilder(SHORTPATH).append(secondName).append(".json");
+        StringBuilder filepathFull = new StringBuilder(SHORT_PATH).append(secondName).append(".json");
         LOGGER.info(new StringBuilder("Создаем файл ").append(secondName).append(".json").toString());
         try {
             objectMapper.writeValue(new File(filepathFull.toString()), reportForJsonDTO);

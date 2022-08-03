@@ -1,8 +1,8 @@
 package com.example.testproject1.service.randomizer;
 
-import com.example.testproject1.model.documentEnum.DocumentDeliveryType;
+import com.example.testproject1.model.documentenum.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.staffService.PersonStorageService;
+import com.example.testproject1.service.staffservice.PersonStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Класс для рандомной выдачи данных
@@ -36,12 +35,22 @@ public class Randomizer {
      */
     @Value("${doc.documentText}")
     private List<String> newDocTextList;
-
+    /**
+     * List person для авторов, отправителей и получателей
+     */
     private List<Person> personList;
+    /**
+     * Random для получения рандомных значений
+     */
+    private Random random;
 
+    /**
+     * Инициализируем PersonList
+     */
     @PostConstruct
     private void postConstruct() {
         personList = personStorageService.getPersonList();
+        random=new Random();
     }
 
     /**
@@ -77,7 +86,6 @@ public class Randomizer {
      * @return возвращает рандомный рег.номер типа {@link Long} в промежутке от 0 до 10000
      */
     public Long getRandDocumentRegNumber() {
-        Random random = new Random();
         return random.nextLong();
     }
 
@@ -87,8 +95,7 @@ public class Randomizer {
      * @return возвращает рандомную дату в 2022 году
      */
     public Date getRandDocumentData() {
-        Random rnd = new Random();
-        Long ms = 1641027402000L + (Math.abs(rnd.nextLong()) % (1L * 365 * 24 * 60 * 60 * 1000));
+        Long ms = 1641027402000L + (Math.abs(random.nextLong()) % (1L * 365 * 24 * 60 * 60 * 1000));
         return new Date(ms);
     }
 
@@ -98,7 +105,7 @@ public class Randomizer {
      * @return возвращает рандомного автора из XML файла
      */
     public Person getRandDocumentAuthor() {
-        return personList.get((int) (Math.random() * personList.size()));
+        return personList.get(random.nextInt( personList.size()));
     }
 
     /**
@@ -117,7 +124,7 @@ public class Randomizer {
      * @return объект класса {@link String} содержащий количество дней от 1 до 14 в формате: X дня
      */
     public String getRandTaskExecPeriod() {
-        return ((int) (Math.random() * 14 + 1) + " дня");
+        return (random.nextInt(14) + " дня");
     }
 
     /**
@@ -126,7 +133,7 @@ public class Randomizer {
      * @return возвращает рандомного автора из xml файла
      */
     public Person getRandTaskResponsible() {
-        return personList.get((int) (Math.random() * personList.size()));
+        return personList.get(random.nextInt( personList.size()));
     }
 
     /**
@@ -144,7 +151,7 @@ public class Randomizer {
      * @return возвращает рандомного контролирующего из XML
      */
     public Person getRandTaskControlPerson() {
-        return personList.get((int) (Math.random() * personList.size()));
+        return personList.get(random.nextInt( personList.size()));
     }
 
     /**
@@ -153,7 +160,7 @@ public class Randomizer {
      * @return рандомный объект класса {@link Person} из persons.xml
      */
     public Person getRandIncomingDocumentSender() {
-        return personList.get((int) (Math.random() * personList.size()));
+        return personList.get(random.nextInt( personList.size()));
     }
 
     /**
@@ -162,7 +169,7 @@ public class Randomizer {
      * @return возвращает рандомного получателя из XML
      */
     public Person getIncomingDocumentDestination() {
-        return personList.get((int) (Math.random() * personList.size()));
+        return personList.get(random.nextInt( personList.size()));
     }
 
     /**
@@ -171,7 +178,6 @@ public class Randomizer {
      * @return рандомный объект класса {@link Long} в промежутке от 0 до 10000 с использованием {@link Math#random()}
      */
     public Long getIncomingDocumentNumber() {
-        Random random = new Random();
         return random.nextLong();
     }
 
@@ -181,8 +187,7 @@ public class Randomizer {
      * @return объект класса {@link Date} в 2022 году
      */
     public Date getRandIncomingDocumentDate() {
-        var rnd = new Random();
-        var ms = 1641027402000L + (Math.abs(rnd.nextLong()) % (1L * 365 * 24 * 60 * 60 * 1000));
+        var ms = 1641027402000L + (Math.abs(random.nextLong()) % (1L * 365 * 24 * 60 * 60 * 1000));
         return new Date(ms);
     }
 
@@ -192,7 +197,7 @@ public class Randomizer {
      * @return рандомный объект класса {@link Person} из person.xml
      */
     public Person getRandOutgoingDocumentSender() {
-        return personList.get((int) (Math.random() * personList.size()));
+        return personList.get(random.nextInt( personList.size()));
     }
 
     /**
