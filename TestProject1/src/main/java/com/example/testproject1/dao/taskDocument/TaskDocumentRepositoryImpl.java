@@ -221,7 +221,7 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
     @Override
     public Integer create(TaskDocument taskDocument) {
         try {
-            isExistElseThrow(taskDocument);
+            isNotExistElseThrow(taskDocument);
             BaseDocument baseDocument = new BaseDocument();
             baseDocument.setId(taskDocument.getId());
             baseDocument.setName(taskDocument.getName());
@@ -240,7 +240,7 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
             return 0;
         }
     }
-    public void isExistElseThrow(TaskDocument taskDocument) throws DocumentExistInDb {
+    public void isNotExistElseThrow(TaskDocument taskDocument) throws DocumentExistInDb {
         if(existById(taskDocument.getId().toString())){
             throw new DocumentExistInDb(taskDocument.getId().toString());
         }
@@ -274,11 +274,6 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
     @Override
     public boolean existById(String uuid) {
         Optional<TaskDocument> taskDocument= jdbcTemplate.query(queryGetById,taskDocumentMapper,uuid).stream().findFirst();
-        if (taskDocument.isPresent()){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return taskDocument.isPresent();
     }
 }

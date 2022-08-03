@@ -122,7 +122,7 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
     @Override
     public Integer create(BaseDocument baseDocument){
         try {
-            isExistElseThrow(baseDocument);
+            isNotExistElseThrow(baseDocument);
             personService.create(baseDocument.getAuthor());
             return jdbcTemplate.update(queryCreate,baseDocument.getId().toString(),baseDocument.getName(),baseDocument.getText(),
                     baseDocument.getRegNumber(),baseDocument.getCreatingDate(),baseDocument.getAuthor().getId().toString());
@@ -131,7 +131,7 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
             return 0;
         }
     }
-    public void isExistElseThrow(BaseDocument baseDocument) throws BaseDocumentExistInDb {
+    public void isNotExistElseThrow(BaseDocument baseDocument) throws BaseDocumentExistInDb {
         if(existById(baseDocument.getId().toString())){
             throw new BaseDocumentExistInDb(baseDocument.getId().toString());
         }
@@ -173,11 +173,6 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
     @Override
     public boolean existById(String uuid) {
         Optional<BaseDocument> baseDocumentOptional= jdbcTemplate.query(queryGetById,baseDocumentMapper,uuid).stream().findFirst();
-        if (baseDocumentOptional.isPresent()){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return baseDocumentOptional.isPresent();
     }
 }

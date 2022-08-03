@@ -78,7 +78,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository{
     @Override
     public Integer create(Department department){
         try {
-            isExistElseThrow(department);
+            isNotExistElseThrow(department);
             organizationService.create(department.getOrganization());
             return jdbcTemplate.update(queryCreate,department.getId().toString()
                     ,department.getFullName(),department.getShortName(),department.getSupervisor()
@@ -88,7 +88,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository{
             return 0;
         }
     }
-    public void isExistElseThrow(Department department) throws DepartmentExistInDb {
+    public void isNotExistElseThrow(Department department) throws DepartmentExistInDb {
         if(existById(department.getId().toString())){
             throw new DepartmentExistInDb(department.getId().toString());
         }
@@ -112,11 +112,6 @@ public class DepartmentRepositoryImpl implements DepartmentRepository{
     @Override
     public boolean existById(String uuid) {
         Optional<Department> department= jdbcTemplate.query(queryGetById,departmentMapper,uuid).stream().findFirst();
-        if (department.isPresent()){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return department.isPresent();
     }
 }

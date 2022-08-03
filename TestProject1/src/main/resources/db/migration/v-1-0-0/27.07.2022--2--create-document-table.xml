@@ -36,7 +36,7 @@
 
     <changeSet author="smigranov" id="11">
         <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="base_document" constraintName="FK_BASEDOCUMENT_PERSONAUTHOR"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
@@ -68,19 +68,19 @@
 
     <changeSet author="smigranov" id="13">
         <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="task_document" constraintName="FK_TASK_BASEDOCUMENT"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="base_document" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="14">
         <addForeignKeyConstraint baseColumnNames="responsible_id" baseTableName="task_document" constraintName="FK_TASK_PERSONRESPONSIBLE"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="15">
         <addForeignKeyConstraint baseColumnNames="control_person_id" baseTableName="task_document" constraintName="FK_TASKDOCUMENT_PERSONCONTROL"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
@@ -109,19 +109,19 @@
 
     <changeSet author="smigranov" id="17">
         <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="incoming_document" constraintName="FK_INCOMINGDOCUMENT_BASEDOCUMENT"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="base_document" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="18">
         <addForeignKeyConstraint baseColumnNames="sender_id" baseTableName="incoming_document" constraintName="FK_INCOMINGDOCUMENT_PERSONSENDER"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="19">
         <addForeignKeyConstraint baseColumnNames="destination_id" baseTableName="incoming_document" constraintName="FK_INCOMINGDOCUMENT_PERSONDESTINATION"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 
@@ -144,13 +144,13 @@
 
     <changeSet author="smigranov" id="21">
         <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="outgoing_document" constraintName="FK_OUTGOINGDOCUMENT_BASEDOCUMENT"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="base_document" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="22">
         <addForeignKeyConstraint baseColumnNames="sender_id" baseTableName="outgoing_document" constraintName="FK_OUTGOINGDOCUMENT_PERSONSENDER"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="person" validate="true"/>
     </changeSet>
 

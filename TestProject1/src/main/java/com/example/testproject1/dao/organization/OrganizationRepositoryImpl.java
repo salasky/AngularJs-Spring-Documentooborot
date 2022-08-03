@@ -64,7 +64,7 @@ public class OrganizationRepositoryImpl implements OrganizationRepository{
     @Override
     public Integer create(Organization organization){
         try {
-            isExistElseThrow(organization);
+            isNotExistElseThrow(organization);
             return jdbcTemplate.update(queryCreate,organization.getId().toString()
                     ,organization.getFullName(),organization.getShortName(),organization.getSupervisor(),organization.getContactNumber());
         } catch (OrganizationExistInDb e) {
@@ -73,7 +73,7 @@ public class OrganizationRepositoryImpl implements OrganizationRepository{
         }
 
     }
-    public void isExistElseThrow(Organization organization) throws OrganizationExistInDb {
+    public void isNotExistElseThrow(Organization organization) throws OrganizationExistInDb {
         if(existById(organization.getId().toString())){
             throw new OrganizationExistInDb(organization.getId().toString());
         }
@@ -107,11 +107,6 @@ public class OrganizationRepositoryImpl implements OrganizationRepository{
     @Override
     public boolean existById(String uuid) {
         Optional<Organization> organization= jdbcTemplate.query(queryGetById,organizationMapper,uuid).stream().findFirst();
-        if (organization.isPresent()){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return organization.isPresent();
     }
 }

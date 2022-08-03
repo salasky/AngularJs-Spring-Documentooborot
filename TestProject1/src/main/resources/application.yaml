@@ -3,11 +3,9 @@ spring:
     allow-circular-references: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/test
-    username: postgres
-    password: qwerty
-    driverClassName: org.postgresql.Driver
-
+    url: jdbc:derby:C:\Derby\db-derby-10.13.1.1-bin\mydb
+    driverClassName: org.apache.derby.jdbc.EmbeddedDriver
+    username: app
   liquibase:
     enabled: true
     drop-first: false

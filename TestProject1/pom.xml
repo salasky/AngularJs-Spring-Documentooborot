@@ -20,6 +20,7 @@
 		<javax.xml.bind.version>2.3.1</javax.xml.bind.version>
 		<com.fasterxml.jackson.core.version>2.13.0</com.fasterxml.jackson.core.version>
 		<org.glassfish.jaxb.version>2.3.1</org.glassfish.jaxb.version>
+		<org.apache.derby.version>10.13.1.1</org.apache.derby.version>
 	</properties>
 	<dependencies>
 
@@ -32,7 +33,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.github.ben-manes.caffeine</groupId>
 			<artifactId>caffeine</artifactId>
@@ -49,6 +49,19 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.3.6</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>${org.apache.derby.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.derby/derbyclient -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbyclient</artifactId>
+			<version>${org.apache.derby.version}</version>
+		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
 		<dependency>
@@ -64,11 +77,13 @@
 		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
 			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>${jakarta.xml.bind.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
+			<version>${org.glassfish.jaxb.version}</version>
 		</dependency>
 
 		<dependency>
@@ -106,10 +121,8 @@
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>4.0.0</version>
 				<configuration>
-					<driver>org.postgresql.Driver</driver>
-					<url>jdbc:postgresql://localhost:5432/test</url>
-					<username>postgres</username>
-					<password>qwerty</password>
+					<driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+					<url>jdbc:derby:C:\Derby\db-derby-10.13.1.1-bin\mydb</url>
 					<changeLogFile>
 						./src/main/resources/db/migration/master.xml
 					</changeLogFile>

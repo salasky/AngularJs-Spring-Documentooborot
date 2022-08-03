@@ -223,7 +223,7 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
     @Override
     public Integer create(IncomingDocument incomingDocument) {
         try {
-            isExistElseThrow(incomingDocument);
+            isNotExistElseThrow(incomingDocument);
             BaseDocument baseDocument = new BaseDocument();
             baseDocument.setId(incomingDocument.getId());
             baseDocument.setName(incomingDocument.getName());
@@ -244,7 +244,7 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
         }
     }
 
-    public void isExistElseThrow(IncomingDocument incomingDocument) throws DocumentExistInDb {
+    public void isNotExistElseThrow(IncomingDocument incomingDocument) throws DocumentExistInDb {
         if(existById(incomingDocument.getId().toString())){
             throw new DocumentExistInDb(incomingDocument.getId().toString());
         }
@@ -276,12 +276,7 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
     @Override
     public boolean existById(String uuid) {
         Optional<IncomingDocument> incomingDocument= jdbcTemplate.query(queryGetById,incomingDocumentMapper,uuid).stream().findFirst();
-        if (incomingDocument.isPresent()){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return incomingDocument.isPresent();
     }
 }
 

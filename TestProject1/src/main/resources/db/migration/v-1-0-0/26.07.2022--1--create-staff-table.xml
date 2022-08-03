@@ -59,7 +59,7 @@
 
     <changeSet author="smigranov" id="3">
         <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="department" constraintName="FK_DEPARTMENT_ORGANIZATION"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="organization" validate="true"/>
     </changeSet>
 
@@ -115,13 +115,13 @@
 
     <changeSet author="smigranov" id="6">
         <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="person" constraintName="FK_PERSON_DEPARTMENT"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="department" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="7">
         <addForeignKeyConstraint baseColumnNames="job_tittle_id" baseTableName="person" constraintName="FK_PERSON_JOBTITTLE"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="CASCADE"
+                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="job_tittle" validate="true"/>
     </changeSet>
 

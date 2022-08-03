@@ -70,7 +70,7 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
     @Override
     public Integer create(JobTittle jobTittle){
         try {
-            isExistElseThrow(jobTittle);
+            isNotExistElseThrow(jobTittle);
             return jdbcTemplate.update(queryCreate,jobTittle.getUuid().toString()
                     ,jobTittle.getName());
 
@@ -80,7 +80,7 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
         }
 
     }
-    public void isExistElseThrow(JobTittle jobTittle) throws JobTittleExistIndDb {
+    public void isNotExistElseThrow(JobTittle jobTittle) throws JobTittleExistIndDb {
         if(existById(jobTittle.getUuid().toString())){
             throw new JobTittleExistIndDb(jobTittle.getUuid().toString());
         }
@@ -101,11 +101,6 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
     @Override
     public boolean existById(String uuid) {
         Optional<JobTittle> jobTittle= jdbcTemplate.query(queryGetById,jobTittleMapper,uuid).stream().findFirst();
-        if (jobTittle.isPresent()){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return jobTittle.isPresent();
     }
 }

@@ -97,7 +97,7 @@ public class PersonRepositoryImpl implements PersonRepository{
     @Override
     public Integer create(Person person){
         try {
-            isExistElseThrow(person);
+            isNotExistElseThrow(person);
             jobTittleService.create(person.getJobTittle());
             departmentService.create(person.getDepartment());
             return jdbcTemplate.update(queryCreate,person.getId().toString(),person.getFirstName(),person.getSecondName(),
@@ -108,7 +108,7 @@ public class PersonRepositoryImpl implements PersonRepository{
             return 0;
         }
     }
-    public void isExistElseThrow(Person person) throws PersonExistInDb {
+    public void isNotExistElseThrow(Person person) throws PersonExistInDb {
         if(existById(person.getId().toString())){
             throw new PersonExistInDb(person.getId().toString());
         }
@@ -141,11 +141,6 @@ public class PersonRepositoryImpl implements PersonRepository{
     @Override
     public boolean existById(String uuid) {
         Optional<Person> person= jdbcTemplate.query(queryGetById,personMapper,uuid).stream().findFirst();
-        if (person.isPresent()){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return person.isPresent();
     }
 }

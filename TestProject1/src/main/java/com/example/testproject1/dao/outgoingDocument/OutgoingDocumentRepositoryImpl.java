@@ -164,7 +164,7 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
     @Override
     public Integer create(OutgoingDocument outgoingDocument){
         try {
-            isExistElseThrow(outgoingDocument);
+            isNotExistElseThrow(outgoingDocument);
             BaseDocument baseDocument=new BaseDocument();
             baseDocument.setId(outgoingDocument.getId());
             baseDocument.setName(outgoingDocument.getName());
@@ -182,7 +182,7 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
             return 0;
         }
     }
-    public void isExistElseThrow(OutgoingDocument outgoingDocument) throws DocumentExistInDb {
+    public void isNotExistElseThrow(OutgoingDocument outgoingDocument) throws DocumentExistInDb {
         if(existById(outgoingDocument.getId().toString())){
             throw new DocumentExistInDb(outgoingDocument.getId().toString());
         }
@@ -214,11 +214,6 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
     @Override
     public boolean existById(String uuid) {
         Optional<OutgoingDocument> outgoingDocument= jdbcTemplate.query(queryGetById,outgoingDocumentMapper,uuid).stream().findFirst();
-        if (outgoingDocument.isPresent()){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return outgoingDocument.isPresent();
     }
 }
