@@ -22,6 +22,10 @@ import java.util.List;
 public class PersonStorageServiceImpl implements PersonStorageService {
     private static final Logger LOGGER = LoggerFactory.getLogger(PersonStorageServiceImpl.class);
     /**
+     * Имя файла для jaxb анмаршалинга
+     */
+    private final String FILENAME = "persons.xml";
+    /**
      * Бин для чтения информации из xml файла
      */
     @Autowired
@@ -35,7 +39,7 @@ public class PersonStorageServiceImpl implements PersonStorageService {
     @Override
     public List<Person> getPersonList() {
         LOGGER.info("Begin find Person in xml file");
-        PersonListXmlDTO personListXmlDTO = jaxbReader.jaxbXMLToObject("persons.xml");
+        PersonListXmlDTO personListXmlDTO = jaxbReader.jaxbXMLToObject(FILENAME);
         List<Person> personList = personListXmlDTO.getPersonList();
         LOGGER.info("Find result");
         return personList;

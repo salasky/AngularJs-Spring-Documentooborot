@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Класс реализующий интерфейс {@link GenerateReportService}
@@ -38,7 +39,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
      * с настройками даты
      */
     @Autowired
-    private  ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
     /**
      * Autowired бина класса {@link DocumentStorageService}
      */
@@ -54,24 +55,31 @@ public class GenerateReportServiceImpl implements GenerateReportService {
         for (BaseDocument baseDocument : documentStorageService.getAll()) {
             //Если не существует запись для данного автора
             if (!totalMap.containsKey(baseDocument.getAuthor())) {
-                List<BaseDocument> list = new ArrayList<>();
-                list.add(baseDocument);
-                totalMap.put(baseDocument.getAuthor(), list);
+                totalMap.put(baseDocument.getAuthor(), getNewListAndSetDoc(baseDocument));
             } else {
                 //Ecли существуют документы данного автора
-                List<BaseDocument> oldList = totalMap.get(baseDocument.getAuthor());
-                oldList.add(baseDocument);
-                Collections.sort(oldList);
+                List<BaseDocument> oldList = getOldListAndSetDoc(totalMap.get(baseDocument.getAuthor()), baseDocument);
                 totalMap.put(baseDocument.getAuthor(), oldList);
             }
         }
-        LOGGER.info("Путь к файлам:" + SHORTPATH);
+        LOGGER.info(new StringBuilder("Путь к файлам:").append(SHORTPATH).toString());
         for (Map.Entry<Person, List<BaseDocument>> entry : totalMap.entrySet()) {
             writeReportInFile(entry);
         }
     }
 
-    public void writeReportInFile(Map.Entry<Person, List<BaseDocument>> entry) {
+    private List<BaseDocument> getOldListAndSetDoc(List<BaseDocument> baseDocumentList, BaseDocument baseDocument) {
+        baseDocumentList.add(baseDocument);
+        return baseDocumentList;
+    }
+
+    private List<BaseDocument> getNewListAndSetDoc(BaseDocument baseDocument) {
+        List<BaseDocument> baseDocumentList = new ArrayList<>();
+        baseDocumentList.add(baseDocument);
+        return baseDocumentList;
+    }
+
+    private void writeReportInFile(Map.Entry<Person, List<BaseDocument>> entry) {
         ReportForJsonDTO reportForJsonDTO = ReportForJsonDTO.newBuilder()
                 .setPerson(entry.getKey())
                 .setDocumentList(entry.getValue())
@@ -79,7 +87,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
         StringBuilder secondName = new StringBuilder(entry.getKey().getSecondName());
         //Полный путь к файлу
         StringBuilder filepathFull = new StringBuilder(SHORTPATH).append(secondName).append(".json");
-        LOGGER.info("Создаем файл " + secondName + ".json");
+        LOGGER.info(new StringBuilder("Создаем файл ").append(secondName).append(".json").toString());
         try {
             objectMapper.writeValue(new File(filepathFull.toString()), reportForJsonDTO);
         } catch (IOException e) {

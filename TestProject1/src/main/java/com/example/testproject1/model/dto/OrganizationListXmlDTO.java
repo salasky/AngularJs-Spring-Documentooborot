@@ -20,19 +20,14 @@ public class OrganizationListXmlDTO {
      */
     @XmlElement(name = "organization")
     @XmlElementWrapper(name = "organizationList")
-    private List<Organization> list = new ArrayList<>();
+    private List<Organization> organizationList = new ArrayList<>();
 
     /**
      * Метод получения списка организаций
      *
      * @return {@link List} объектов {@link Organization}
      */
-    public List<Organization> getOrganizationList() {
-        return list;
+    public final List<Organization> getOrganizationList() {
+        return organizationList;
     }
-
-    public void setList(List<Organization> list) {
-        this.list = list;
-    }
-
 }

@@ -23,14 +23,7 @@ public class PersonListXmlDTO {
      */
     @XmlElementWrapper(name = "personList")
     @XmlElement(name = "person")
-    private List<Person> list = new ArrayList<>();
-
-    public PersonListXmlDTO() {
-    }
-
-    public void setList(List<Person> list) {
-        this.list = list;
-    }
+    private final List<Person> personList = new ArrayList<>();
 
     /**
      * Метод получения списка Person
@@ -39,7 +32,7 @@ public class PersonListXmlDTO {
      */
 
     public List<Person> getPersonList() {
-        return list;
+        return personList;
     }
 
 }

@@ -20,9 +20,6 @@ public class ReportForJsonDTO {
      */
     private List<BaseDocument> documentList;
 
-    public ReportForJsonDTO() {
-    }
-
     public Person getPerson() {
         return person;
     }
@@ -49,10 +46,6 @@ public class ReportForJsonDTO {
      * @author smigranov
      */
     public class ReportBuilder {
-        private ReportBuilder() {
-            // private constructor
-        }
-
         public ReportBuilder setPerson(Person person) {
             ReportForJsonDTO.this.person = person;
             return this;

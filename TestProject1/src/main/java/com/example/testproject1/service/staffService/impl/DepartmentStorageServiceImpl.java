@@ -22,6 +22,10 @@ import java.util.List;
 public class DepartmentStorageServiceImpl implements DepartmentStorageService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentStorageServiceImpl.class);
     /**
+     * Имя файла для jaxb анмаршалинга
+     */
+    private final String FILENAME = "department.xml";
+    /**
      * Бин для чтения информации из xml файла
      */
     @Autowired
@@ -35,7 +39,7 @@ public class DepartmentStorageServiceImpl implements DepartmentStorageService {
     @Override
     public List<Department> getDepartmentList() {
         LOGGER.info("Begin find Department ");
-        DepartmentListXmlDTO departmentListXmlDTO = jaxbReader.jaxbXMLToObject("department.xml");
+        DepartmentListXmlDTO departmentListXmlDTO = jaxbReader.jaxbXMLToObject(FILENAME);
         List<Department> departmentList = departmentListXmlDTO.getDepartmentList();
         LOGGER.info("Find Department result");
         return departmentList;

@@ -22,6 +22,10 @@ import java.util.List;
 public class OrganizationStorageServiceImpl implements OrganizationStorageService {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationStorageServiceImpl.class);
     /**
+     * Имя файла для jaxb анмаршалинга
+     */
+    private final String FILENAME = "organization.xml";
+    /**
      * Бин для чтения информации из xml файла
      */
     @Autowired
@@ -35,7 +39,7 @@ public class OrganizationStorageServiceImpl implements OrganizationStorageServic
     @Override
     public List<Organization> getOrganizationList() {
         LOGGER.info("Begin find Organization ");
-        OrganizationListXmlDTO organizationListXmlDTO = jaxbReader.jaxbXMLToObject("organization.xml");
+        OrganizationListXmlDTO organizationListXmlDTO = jaxbReader.jaxbXMLToObject(FILENAME);
         List<Organization> organizationList = organizationListXmlDTO.getOrganizationList();
         LOGGER.info("Find Organization result");
         return organizationList;
