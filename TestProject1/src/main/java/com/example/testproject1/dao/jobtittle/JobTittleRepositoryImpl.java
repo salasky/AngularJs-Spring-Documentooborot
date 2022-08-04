@@ -1,10 +1,8 @@
 package com.example.testproject1.dao.jobtittle;
 
-import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.jobtittle.mapper.JobTittleMapper;
 import com.example.testproject1.exception.DepartmentExistInDb;
 import com.example.testproject1.exception.JobTittleExistIndDb;
-import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.JobTittle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +13,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_CREATE_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_DELETE_ALL_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_DELETE_BY_ID_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_GET_ALL_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_GET_BY_ID_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_UPDATE_ID_QUERY;
+
 /**
  * Класс реализующий интерфейс {@link JobTittleRepository}. Для выполнения операций с базой данных.
  *
@@ -33,41 +39,13 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
      */
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    /**
-     * Запрос на получение всех объектов из таблицы jobTittle
-     */
-    private final String queryGetAll = "SELECT job_tittle.id AS job_tittle_id," +
-            " job_tittle.name AS job_name" +
-            " FROM job_tittle";
-    /**
-     * Запрос на получение объекта по id из таблицы jobTittle
-     */
-    private final String queryGetById = "SELECT job_tittle.id AS job_tittle_id," +
-            " job_tittle.name AS job_name" +
-            " FROM job_tittle WHERE id=?";
-    /**
-     * Запрос на создание записи в таблице jobTittle
-     */
-    private final String queryCreate = "INSERT INTO job_tittle VALUES (?,?)";
-    /**
-     * Запрос на удаление всех записей в таблице jobTittle
-     */
-    private final String queryDeleteAll = "DELETE FROM job_tittle";
-    /**
-     * Запрос на удаление записи по id в таблице jobTittle
-     */
-    private final String queryDeleteById = "DELETE FROM job_tittle WHERE id=?";
-    /**
-     * Запрос на обновление записи по id в таблице jobTittle
-     */
-    private final String queryUpdate = "UPDATE job_tittle SET name=? WHERE id=?";
 
     /**
      * {@inheritDoc}
      */
     @Override
     public List<JobTittle> getAll() {
-        return jdbcTemplate.query(queryGetAll, jobTittleMapper);
+        return jdbcTemplate.query(JOB_TITTLE_GET_ALL_QUERY, jobTittleMapper);
     }
     /**
      * {@inheritDoc}
@@ -75,7 +53,7 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
     @Override
     public Optional<JobTittle> getById(String uuid) {
         try {
-            return Optional.of(jdbcTemplate.queryForObject(queryGetById, jobTittleMapper, uuid));
+            return Optional.of(jdbcTemplate.queryForObject(JOB_TITTLE_GET_BY_ID_QUERY, jobTittleMapper, uuid));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
@@ -87,14 +65,13 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
     public Integer create(JobTittle jobTittle) {
         try {
             isNotExistElseThrow(jobTittle);
-            return jdbcTemplate.update(queryCreate, jobTittle.getUuid().toString()
+            return jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getUuid().toString()
                     , jobTittle.getName());
 
         } catch (JobTittleExistIndDb e) {
             LOGGER.info(e.toString());
             return 0;
         }
-
     }
     /**
      * Метод поиска jobTittle по id. Из-за того, что в XML staff сущностей(Person,Department и т.д.) ограниченное количество, каждый раз ловить
@@ -112,21 +89,21 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
      */
     @Override
     public Integer update(JobTittle jobTittle) {
-        return jdbcTemplate.update(queryUpdate, jobTittle.getName(), jobTittle.getUuid().toString());
+        return jdbcTemplate.update(JOB_TITTLE_UPDATE_ID_QUERY, jobTittle.getName(), jobTittle.getUuid().toString());
     }
     /**
      * {@inheritDoc}
      */
     @Override
     public Integer deleteAll() {
-        return jdbcTemplate.update(queryDeleteAll);
+        return jdbcTemplate.update(JOB_TITTLE_DELETE_ALL_QUERY);
     }
     /**
      * {@inheritDoc}
      */
     @Override
     public Integer deleteById(String id) {
-        int update = jdbcTemplate.update(queryDeleteById, id);
+        int update = jdbcTemplate.update(JOB_TITTLE_DELETE_BY_ID_QUERY, id);
         return update;
     }
     /**
@@ -134,7 +111,7 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
      */
     @Override
     public boolean existById(String uuid) {
-        Optional<JobTittle> jobTittle = jdbcTemplate.query(queryGetById, jobTittleMapper, uuid).stream().findFirst();
+        Optional<JobTittle> jobTittle = jdbcTemplate.query(JOB_TITTLE_GET_BY_ID_QUERY, jobTittleMapper, uuid).stream().findFirst();
         return jobTittle.isPresent();
     }
 }

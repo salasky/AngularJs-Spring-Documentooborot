@@ -1,0 +1,123 @@
+package com.example.testproject1.dao.outgoingdocument;
+
+import com.example.testproject1.dao.outgoingdocument.mapper.OutgoingDocumentMapper;
+import com.example.testproject1.model.document.BaseDocument;
+import com.example.testproject1.model.document.OutgoingDocument;
+import com.example.testproject1.model.staff.Person;
+import com.example.testproject1.service.dbservice.baseDocument.BaseDocumentService;
+import com.example.testproject1.service.dbservice.person.PersonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_CREATE_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_DELETE_ALL_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_DELETE_BY_ID_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_GET_ALL_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_GET_BY_ID_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_UPDATE_QUERY;
+
+/**
+ * Класс реализующий интерфейс {@link OutgoingDocumentRepository}. Для выполнения операций с базой данных.
+ *
+ * @author smigranov
+ */
+@Repository
+public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepository {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OutgoingDocumentRepositoryImpl.class);
+    /**
+     * Бин JdbcTemplate
+     */
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    /**
+     * Маппер для извлечения {@link OutgoingDocument}
+     */
+    @Autowired
+    private OutgoingDocumentMapper outgoingDocumentMapper;
+    /**
+     * Сервис для работы с {@link BaseDocument}
+     */
+    @Autowired
+    private BaseDocumentService baseDocumentService;
+    /**
+     * Сервис для работы с {@link Person}
+     */
+    @Autowired
+    private PersonService personService;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Integer create(OutgoingDocument outgoingDocument) {
+        try {
+            BaseDocument baseDocument = new BaseDocument();
+            baseDocument.setId(outgoingDocument.getId());
+            baseDocument.setName(outgoingDocument.getName());
+            baseDocument.setText(outgoingDocument.getText());
+            baseDocument.setRegNumber(outgoingDocument.getRegNumber());
+            baseDocument.setCreatingDate(outgoingDocument.getCreatingDate());
+            baseDocument.setAuthor(outgoingDocument.getAuthor());
+            baseDocumentService.create(baseDocument);
+            personService.create(outgoingDocument.getSender());
+            return jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
+                    outgoingDocument.getSender().getId().toString(),
+                    outgoingDocument.getDeliveryType().toString());
+        } catch (DataIntegrityViolationException ex) {
+            LOGGER.error(ex.toString());
+            return 0;
+        }
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<OutgoingDocument> getAll() {
+        return jdbcTemplate.query(OUTGOING_DOCUMENT_GET_ALL_QUERY, outgoingDocumentMapper);
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<OutgoingDocument> getById(String id) {
+        return jdbcTemplate.query(OUTGOING_DOCUMENT_GET_BY_ID_QUERY, outgoingDocumentMapper, id)
+                .stream().findFirst();
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Integer update(OutgoingDocument outgoingDocument) {
+        return jdbcTemplate.update(OUTGOING_DOCUMENT_UPDATE_QUERY, outgoingDocument.getSender().getId().toString(),
+                outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString());
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Integer deleteAll() {
+        return jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_ALL_QUERY);
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Integer deleteById(String id) {
+        int update = jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_BY_ID_QUERY, id);
+        return update;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean existById(String uuid) {
+        Optional<OutgoingDocument> outgoingDocument = jdbcTemplate.query(OUTGOING_DOCUMENT_GET_BY_ID_QUERY, outgoingDocumentMapper, uuid).stream().findFirst();
+        return outgoingDocument.isPresent();
+    }
+}

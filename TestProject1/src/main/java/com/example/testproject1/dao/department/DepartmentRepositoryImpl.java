@@ -4,7 +4,7 @@ import com.example.testproject1.dao.department.mapper.DepartmentMapper;
 import com.example.testproject1.exception.DepartmentExistInDb;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Organization;
-import com.example.testproject1.service.dbService.organization.OrganizationService;
+import com.example.testproject1.service.dbservice.organization.OrganizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_CREATE_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_DELETE_ALL_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_DELETE_BY_ID_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_GET_ALL_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_GET_BY_ID_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_UPDATE_QUERY;
 
 /**
  * Класс репозиторий для {@link Department}. Реализует интерфейс {@link DepartmentRepository}
@@ -37,55 +44,20 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
      */
     @Autowired
     private OrganizationService organizationService;
-    /**
-     * Запрос на получение всех объектов из таблицы department
-     */
-    private final String queryGetAll = "SELECT department.id AS department_id, department.full_name AS department_full_name," +
-            " department.short_name AS department_short_name, department.supervisor AS department_supervisor," +
-            " department.contact_number AS department_contact_number, organization.id AS organization_id ," +
-            " organization.full_name AS organization_full_name, organization.short_name AS organization_short_name,\n" +
-            "organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number\n" +
-            "FROM department INNER JOIN organization ON department.organization_id=organization.id";
-    /**
-     * Запрос на получение объекта по id из таблицы department
-     */
-    private final String queryGetById = "SELECT department.id AS department_id, department.full_name AS department_full_name," +
-            " department.short_name AS department_short_name, department.supervisor AS department_supervisor," +
-            " department.contact_number AS department_contact_number, organization.id AS organization_id ," +
-            " organization.full_name AS organization_full_name, organization.short_name AS organization_short_name,\n" +
-            "organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number\n" +
-            "FROM department INNER JOIN organization ON department.organization_id=organization.id WHERE department.id=?";
-    /**
-     * Запрос на создание записи в таблице department
-     */
-    private final String queryCreate = "INSERT INTO department VALUES (?,?,?,?,?,?)";
-    /**
-     * Запрос на удаление всех записей в таблице department
-     */
-    private final String queryDeleteAll = "DELETE FROM department";
-    /**
-     * Запрос на удаление записи по id в таблице department
-     */
-    private final String queryDeleteById = "DELETE FROM department WHERE id=?";
-    /**
-     * Запрос на обновление записи по id в таблице department
-     */
-    private final String queryUpdate = "UPDATE department SET full_name=?, short_name=?," +
-            " supervisor=?, contact_number=?, organization_id=? WHERE id=?";
 
     /**
      * {@inheritDoc}
      */
     @Override
     public List<Department> getAll() {
-        return jdbcTemplate.query(queryGetAll, departmentMapper);
+        return jdbcTemplate.query(DEPARTMENT_GET_ALL_QUERY, departmentMapper);
     }
     /**
      * {@inheritDoc}
      */
     @Override
     public Optional<Department> getById(String id) {
-        return jdbcTemplate.query(queryGetById, departmentMapper, id).stream().findFirst();
+        return jdbcTemplate.query(DEPARTMENT_GET_BY_ID_QUERY, departmentMapper, id).stream().findFirst();
     }
     /**
      * {@inheritDoc}
@@ -95,7 +67,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
         try {
             isNotExistElseThrow(department);
             organizationService.create(department.getOrganization());
-            return jdbcTemplate.update(queryCreate, department.getId().toString()
+            return jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
                     , department.getFullName(), department.getShortName(), department.getSupervisor()
                     , department.getContactNumber(), department.getOrganization().getId().toString());
         } catch (DepartmentExistInDb e) {
@@ -121,7 +93,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
      */
     @Override
     public Integer update(Department department) {
-        return jdbcTemplate.update(queryUpdate, department.getFullName(), department.getShortName(),
+        return jdbcTemplate.update(DEPARTMENT_UPDATE_QUERY, department.getFullName(), department.getShortName(),
                 department.getSupervisor(), department.getContactNumber(), department.getOrganization().getId().toString(),
                 department.getId().toString());
     }
@@ -130,14 +102,14 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
      */
     @Override
     public Integer deleteAll() {
-        return jdbcTemplate.update(queryDeleteAll);
+        return jdbcTemplate.update(DEPARTMENT_DELETE_ALL_QUERY);
     }
     /**
      * {@inheritDoc}
      */
     @Override
     public Integer deleteById(String id) {
-        int update = jdbcTemplate.update(queryDeleteById, id);
+        int update = jdbcTemplate.update(DEPARTMENT_DELETE_BY_ID_QUERY, id);
         return update;
     }
     /**
@@ -145,7 +117,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
      */
     @Override
     public boolean existById(String uuid) {
-        Optional<Department> department = jdbcTemplate.query(queryGetById, departmentMapper, uuid).stream().findFirst();
+        Optional<Department> department = jdbcTemplate.query(DEPARTMENT_GET_BY_ID_QUERY, departmentMapper, uuid).stream().findFirst();
         return department.isPresent();
     }
 }

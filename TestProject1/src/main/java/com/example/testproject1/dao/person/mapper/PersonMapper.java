@@ -1,9 +1,7 @@
 package com.example.testproject1.dao.person.mapper;
 
-import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.department.mapper.DepartmentMapper;
 import com.example.testproject1.dao.jobtittle.mapper.JobTittleMapper;
-import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Person;

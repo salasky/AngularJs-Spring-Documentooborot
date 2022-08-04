@@ -1,10 +1,8 @@
 package com.example.testproject1.dao.organization;
 
-import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.organization.mapper.OrganizationMapper;
 import com.example.testproject1.exception.DepartmentExistInDb;
 import com.example.testproject1.exception.OrganizationExistInDb;
-import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Organization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +13,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_CREATE_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_DELETE_ALL_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_DELETE_BY_ID_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_GET_ALL_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_GET_BY_ID_QUERY;
+import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_UPDATE_QUERY;
 
 /**
  * Класс реализующий интерфейс {@link OrganizationRepository}. Для выполнения операций с базой данных.
@@ -34,37 +39,7 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
      */
     @Autowired
     private OrganizationMapper organizationMapper;
-    /**
-     * Запрос на получение всех объектов из таблицы organization
-     */
-    private final String queryGetAll = "SELECT organization.id AS organization_id ," +
-            "organization.full_name AS organization_full_name, organization.short_name AS organization_short_name," +
-            "organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number " +
-            "FROM organization";
-    /**
-     * Запрос на получение объекта по id из таблицы organization
-     */
-    private final String queryGetById = "SELECT organization.id AS organization_id ," +
-            "organization.full_name AS organization_full_name, organization.short_name AS organization_short_name," +
-            "organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number " +
-            "FROM organization WHERE organization.id=?";
-    /**
-     * Запрос на создание записи в таблице organization
-     */
-    private final String queryCreate = "INSERT INTO organization VALUES (?,?,?,?,?)";
-    /**
-     * Запрос на удаление всех записей в таблице organization
-     */
-    private final String queryDeleteAll = "DELETE FROM organization";
-    /**
-     * Запрос на удаление записи по id в таблице organization
-     */
-    private final String queryDeleteById = "DELETE FROM organization WHERE id=?";
 
-    /**
-     * Запрос на обновление записи по id в таблице organization
-     */
-    private final String queryUpdate = "UPDATE organization SET full_name=?, short_name=?, supervisor=?, contact_number=? WHERE id=?";
     /**
      * {@inheritDoc}
      */
@@ -72,7 +47,7 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
     public Integer create(Organization organization) {
         try {
             isNotExistElseThrow(organization);
-            return jdbcTemplate.update(queryCreate, organization.getId().toString()
+            return jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString()
                     , organization.getFullName(), organization.getShortName(), organization.getSupervisor(), organization.getContactNumber());
         } catch (OrganizationExistInDb e) {
             LOGGER.info(e.toString());
@@ -95,7 +70,7 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
      */
     @Override
     public Integer update(Organization organization) {
-        return jdbcTemplate.update(queryUpdate, organization.getFullName(), organization.getShortName(),
+        return jdbcTemplate.update(ORGANIZATION_UPDATE_QUERY, organization.getFullName(), organization.getShortName(),
                 organization.getSupervisor(), organization.getContactNumber(), organization.getId().toString());
     }
     /**
@@ -103,7 +78,7 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
      */
     @Override
     public List<Organization> getAll() {
-        return jdbcTemplate.query(queryGetAll, organizationMapper);
+        return jdbcTemplate.query(ORGANIZATION_GET_ALL_QUERY, organizationMapper);
     }
     /**
      * {@inheritDoc}
@@ -111,7 +86,7 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
     @Override
     public Optional<Organization> getById(String uuid) {
         try {
-            return Optional.of(jdbcTemplate.queryForObject(queryGetById, organizationMapper, uuid));
+            return Optional.of(jdbcTemplate.queryForObject(ORGANIZATION_GET_BY_ID_QUERY, organizationMapper, uuid));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
@@ -121,14 +96,14 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
      */
     @Override
     public Integer deleteAll() {
-        return jdbcTemplate.update(queryDeleteAll);
+        return jdbcTemplate.update(ORGANIZATION_DELETE_ALL_QUERY);
     }
     /**
      * {@inheritDoc}
      */
     @Override
     public Integer deleteById(String id) {
-        int update = jdbcTemplate.update(queryDeleteById, id);
+        int update = jdbcTemplate.update(ORGANIZATION_DELETE_BY_ID_QUERY, id);
         return update;
     }
     /**
@@ -136,7 +111,7 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
      */
     @Override
     public boolean existById(String uuid) {
-        Optional<Organization> organization = jdbcTemplate.query(queryGetById, organizationMapper, uuid).stream().findFirst();
+        Optional<Organization> organization = jdbcTemplate.query(ORGANIZATION_GET_BY_ID_QUERY, organizationMapper, uuid).stream().findFirst();
         return organization.isPresent();
     }
 }
