@@ -6,6 +6,7 @@ target/
 
 mvnw
 mvnw.cmd
+derby.log
 /src/main/resources/*.json
 /src/main/java/META-INF/
 /src/main/java/javadoc/

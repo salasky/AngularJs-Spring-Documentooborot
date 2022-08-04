@@ -15,14 +15,16 @@ import java.util.UUID;
  */
 @Component
 public class JobTittleMapper implements RowMapper<JobTittle> {
+    private final String JOB_TITTLE_ID="job_tittle_id";
+    private final String JOB_NAME="job_name";
     /**
      * {@inheritDoc}
      */
     @Override
     public JobTittle mapRow(ResultSet rs, int rowNum) throws SQLException {
         JobTittle jobTittle = new JobTittle();
-        jobTittle.setUuid(UUID.fromString(rs.getString("job_tittle_id")));
-        jobTittle.setName(rs.getString("job_name"));
+        jobTittle.setUuid(UUID.fromString(rs.getString(JOB_TITTLE_ID)));
+        jobTittle.setName(rs.getString(JOB_NAME));
         return jobTittle;
     }
 }

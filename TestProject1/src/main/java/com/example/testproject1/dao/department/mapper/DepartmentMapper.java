@@ -25,16 +25,36 @@ public class DepartmentMapper implements RowMapper<Department> {
     @Autowired
     private OrganizationMapper organizationMapper;
     /**
-     * {@inheritDoc}
+     * Название столбца для мапинаг
+     */
+    private final String DEPARTMENT_ID="department_id";
+    /**
+     * Название столбца для мапинага в поле id
+     */
+    private final String DEPARTMENT_FULL_NAME="department_full_name";
+    /**
+     * Название столбца для мапинага в поле short_name
+     */
+    private final String DEPARTMENT_SHORT_NAME="department_short_name";
+    /**
+     * Название столбца для мапинага в поле supervisor
+     */
+    private final String DEPARTMENT_SUPERVISOR="department_supervisor";
+    /**
+     * Название столбца для мапинага в поле contact_number
+     */
+    private final String DEPARTMENT_CONTACT_NUMBER="department_contact_number";
+    /**
+     * Название столбца для мапинага в поле id
      */
     @Override
     public Department mapRow(ResultSet rs, int rowNum) throws SQLException {
         Department department = new Department();
-        department.setId(UUID.fromString(rs.getString("department_id")));
-        department.setFullName(rs.getString("department_full_name"));
-        department.setShortName(rs.getString("department_short_name"));
-        department.setSupervisor(rs.getString("department_supervisor"));
-        department.setContactNumber(rs.getString("department_contact_number"));
+        department.setId(UUID.fromString(rs.getString(DEPARTMENT_ID)));
+        department.setFullName(rs.getString(DEPARTMENT_FULL_NAME));
+        department.setShortName(rs.getString(DEPARTMENT_SHORT_NAME));
+        department.setSupervisor(rs.getString(DEPARTMENT_SUPERVISOR));
+        department.setContactNumber(rs.getString(DEPARTMENT_CONTACT_NUMBER));
         Organization organization = organizationMapper.mapRow(rs, rowNum);
         department.setOrganization(organization);
         return department;

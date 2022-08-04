@@ -26,6 +26,46 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
      */
     @Autowired
     private BaseDocumentMapper baseDocumentMapper;
+    private final String INCOMING_DOCUMENT_NUMBER="incoming_document_number";
+    private final String INCOMING_DOCUMENT_DATE_OF_REGISTRATION="incoming_document_date_of_registration";
+    private final String PERSON_SENDER_ID="person_sender_id";
+    private final String PERSON_SENDER_FIRST_NAME="person_sender_first_name";
+    private final String PERSON_SENDER_SECOND_NAME="person_sender_second_name";
+    private final String PERSON_SENDER_LAST_NAME="person_sender_last_name";
+    private final String PERSON_SENDER_PHOTO="person_sender_photo";
+    private final String PERSON_SENDER_PHONE_NUMBER="person_sender_phone_number";
+    private final String PERSON_SENDER_BIRTH_DAY="person_sender_birth_day";
+    private final String DEPARTMENT_SENDER_ID="department_sender_id";
+    private final String DEPARTMENT_SENDER_FULL_NAME="department_sender_full_name";
+    private final String DEPARTMENT_SENDER_SHORT_NAME="department_sender_short_name";
+    private final String DEPARTMENT_SENDER_SUPERVISOR="department_sender_supervisor";
+    private final String DEPARTMENT_SENDER_CONTACT_NUMBER="department_sender_contact_number";
+    private final String ORGANIZATION_SENDER_ID="organization_sender_id";
+    private final String ORGANIZATION_SENDER_FULL_NAME="organization_sender_full_name";
+    private final String ORGANIZATION_SENDER_SHORT_NAME="organization_sender_short_name";
+    private final String ORGANIZATION_SENDER_SUPERVISOR="organization_sender_supervisor";
+    private final String ORGANIZATION_SENDER_CONTACT_NUMBER="organization_sender_contact_number";
+    private final String JOB_TITTLE_SENDER_ID="job_tittle_sender_id";
+    private final String JOB_SENDER_NAME="job_sender_name";
+    private final String PERSON_DESTINATION_ID="person_destination_id";
+    private final String PERSON_DESTINATION_FIRST_NAME="person_destination_first_name";
+    private final String PERSON_DESTINATION_SECOND_NAME="person_destination_second_name";
+    private final String PERSON_DESTINATION_LAST_NAME="person_destination_last_name";
+    private final String PERSON_DESTINATION_PHOTO="person_destination_photo";
+    private final String PERSON_DESTINATION_PHONE_NUMBER="person_destination_phone_number";
+    private final String PERSON_DESTINATION_BIRTH_DAY="person_destination_birth_day";
+    private final String DEPARTMENT_DESTINATION_ID="department_destination_id";
+    private final String DEPARTMENT_DESTINATION_FULL_NAME="department_destination_full_name";
+    private final String DEPARTMENT_DESTINATION_SHORT_NAME="department_destination_short_name";
+    private final String DEPARTMENT_DESTINATION_SUPERVISOR="department_destination_supervisor";
+    private final String DEPARTMENT_DESTINATION_CONTACT_NUMBER="department_destination_contact_number";
+    private final String ORGANIZATION_DESTINATION_ID="organization_destination_id";
+    private final String ORGANIZATION_DESTINATION_FULL_NAME="organization_destination_full_name";
+    private final String ORGANIZATION_DESTINATION_SHORT_NAME="organization_destination_short_name";
+    private final String ORGANIZATION_DESTINATION_SUPERVISOR="organization_destination_supervisor";
+    private final String ORGANIZATION_DESTINATION_CONTACT_NUMBER="organization_destination_contact_number";
+    private final String JOB_TITTLE_DESTINATION_ID="job_tittle_destination_id";
+    private final String JOB_DESTINATION_NAME="job_destination_name";
     /**
      * {@inheritDoc}
      */
@@ -35,8 +75,8 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
         BaseDocument baseDocument = baseDocumentMapper.mapRow(rs, rowNum);
 
         IncomingDocument incomingDocument = new IncomingDocument();
-        incomingDocument.setNumber(rs.getLong("incoming_document_number"));
-        incomingDocument.setDateOfRegistration(rs.getTimestamp("incoming_document_date_of_registration"));
+        incomingDocument.setNumber(rs.getLong(INCOMING_DOCUMENT_NUMBER));
+        incomingDocument.setDateOfRegistration(rs.getTimestamp(INCOMING_DOCUMENT_DATE_OF_REGISTRATION));
         incomingDocument.setId(baseDocument.getId());
         incomingDocument.setName(baseDocument.getName());
         incomingDocument.setText(baseDocument.getText());
@@ -46,28 +86,31 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
 
         //Мапим Person(sender) к incomingDocument
         Person sender = new Person();
-        sender.setId(UUID.fromString(rs.getString("person_sender_id")));
-        sender.setFirstName(rs.getString("person_sender_first_name"));
-        sender.setSecondName(rs.getString("person_sender_second_name"));
-        sender.setLastName(rs.getString("person_sender_last_name"));
-        sender.setPhoto(rs.getString("person_sender_photo"));
-        sender.setPhoneNumber(rs.getString("person_sender_phone_number"));
-        sender.setBirthDay((rs.getDate("person_sender_birth_day")));
+        sender.setId(UUID.fromString(rs.getString(PERSON_SENDER_ID)));
+        sender.setFirstName(rs.getString(PERSON_SENDER_FIRST_NAME));
+        sender.setSecondName(rs.getString(PERSON_SENDER_SECOND_NAME));
+        sender.setLastName(rs.getString(PERSON_SENDER_LAST_NAME));
+        sender.setPhoto(rs.getString(PERSON_SENDER_PHOTO));
+        sender.setPhoneNumber(rs.getString(PERSON_SENDER_PHONE_NUMBER));
+        sender.setBirthDay((rs.getDate(PERSON_SENDER_BIRTH_DAY)));
+
         Department departmentsender = new Department();
-        departmentsender.setId(UUID.fromString(rs.getString("department_sender_id")));
-        departmentsender.setFullName(rs.getString("department_sender_full_name"));
-        departmentsender.setShortName(rs.getString("department_sender_short_name"));
-        departmentsender.setSupervisor(rs.getString("department_sender_supervisor"));
-        departmentsender.setContactNumber(rs.getString("department_sender_contact_number"));
+        departmentsender.setId(UUID.fromString(rs.getString(DEPARTMENT_SENDER_ID)));
+        departmentsender.setFullName(rs.getString(DEPARTMENT_SENDER_FULL_NAME));
+        departmentsender.setShortName(rs.getString(DEPARTMENT_SENDER_SHORT_NAME));
+        departmentsender.setSupervisor(rs.getString(DEPARTMENT_SENDER_SUPERVISOR));
+        departmentsender.setContactNumber(rs.getString(DEPARTMENT_SENDER_CONTACT_NUMBER));
+
         Organization organizationsender = new Organization();
-        organizationsender.setId(UUID.fromString(rs.getString("organization_sender_id")));
-        organizationsender.setFullName(rs.getString("organization_sender_full_name"));
-        organizationsender.setShortName(rs.getString("organization_sender_short_name"));
-        organizationsender.setSupervisor(rs.getString("organization_sender_supervisor"));
-        organizationsender.setContactNumber(rs.getString("organization_sender_contact_number"));
+        organizationsender.setId(UUID.fromString(rs.getString(ORGANIZATION_SENDER_ID)));
+        organizationsender.setFullName(rs.getString(ORGANIZATION_SENDER_FULL_NAME));
+        organizationsender.setShortName(rs.getString(ORGANIZATION_SENDER_SHORT_NAME));
+        organizationsender.setSupervisor(rs.getString(ORGANIZATION_SENDER_SUPERVISOR));
+        organizationsender.setContactNumber(rs.getString(ORGANIZATION_SENDER_CONTACT_NUMBER));
+
         JobTittle jobTittlesender = new JobTittle();
-        jobTittlesender.setUuid(UUID.fromString(rs.getString("job_tittle_sender_id")));
-        jobTittlesender.setName(rs.getString("job_sender_name"));
+        jobTittlesender.setUuid(UUID.fromString(rs.getString(JOB_TITTLE_SENDER_ID)));
+        jobTittlesender.setName(rs.getString(JOB_SENDER_NAME));
         departmentsender.setOrganization(organizationsender);
         sender.setDepartment(departmentsender);
         sender.setJobTittle(jobTittlesender);
@@ -75,29 +118,31 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
 
         //Мапим Person(destination) к incomingDocument
         Person destination = new Person();
-        destination.setId(UUID.fromString(rs.getString("person_destination_id")));
-        destination.setFirstName(rs.getString("person_destination_first_name"));
-        destination.setSecondName(rs.getString("person_destination_second_name"));
-        destination.setLastName(rs.getString("person_destination_last_name"));
-        destination.setPhoto(rs.getString("person_destination_photo"));
-        destination.setPhoneNumber(rs.getString("person_destination_phone_number"));
-        destination.setBirthDay((rs.getDate("person_destination_birth_day")));
+        destination.setId(UUID.fromString(rs.getString(PERSON_DESTINATION_ID)));
+        destination.setFirstName(rs.getString(PERSON_DESTINATION_FIRST_NAME));
+        destination.setSecondName(rs.getString(PERSON_DESTINATION_SECOND_NAME));
+        destination.setLastName(rs.getString(PERSON_DESTINATION_LAST_NAME));
+        destination.setPhoto(rs.getString(PERSON_DESTINATION_PHOTO));
+        destination.setPhoneNumber(rs.getString(PERSON_DESTINATION_PHONE_NUMBER));
+        destination.setBirthDay((rs.getDate(PERSON_DESTINATION_BIRTH_DAY)));
 
         Department departmentDestination = new Department();
-        departmentDestination.setId(UUID.fromString(rs.getString("department_destination_id")));
-        departmentDestination.setFullName(rs.getString("department_destination_full_name"));
-        departmentDestination.setShortName(rs.getString("department_destination_short_name"));
-        departmentDestination.setSupervisor(rs.getString("department_destination_supervisor"));
-        departmentDestination.setContactNumber(rs.getString("department_destination_contact_number"));
+        departmentDestination.setId(UUID.fromString(rs.getString(DEPARTMENT_DESTINATION_ID)));
+        departmentDestination.setFullName(rs.getString(DEPARTMENT_DESTINATION_FULL_NAME));
+        departmentDestination.setShortName(rs.getString(DEPARTMENT_DESTINATION_SHORT_NAME));
+        departmentDestination.setSupervisor(rs.getString(DEPARTMENT_DESTINATION_SUPERVISOR));
+        departmentDestination.setContactNumber(rs.getString(DEPARTMENT_DESTINATION_CONTACT_NUMBER));
+
         Organization organizationDestination = new Organization();
-        organizationDestination.setId(UUID.fromString(rs.getString("organization_destination_id")));
-        organizationDestination.setFullName(rs.getString("organization_destination_full_name"));
-        organizationDestination.setShortName(rs.getString("organization_destination_short_name"));
-        organizationDestination.setSupervisor(rs.getString("organization_destination_supervisor"));
-        organizationDestination.setContactNumber(rs.getString("organization_destination_contact_number"));
+        organizationDestination.setId(UUID.fromString(rs.getString(ORGANIZATION_DESTINATION_ID)));
+        organizationDestination.setFullName(rs.getString(ORGANIZATION_DESTINATION_FULL_NAME));
+        organizationDestination.setShortName(rs.getString(ORGANIZATION_DESTINATION_SHORT_NAME));
+        organizationDestination.setSupervisor(rs.getString(ORGANIZATION_DESTINATION_SUPERVISOR));
+        organizationDestination.setContactNumber(rs.getString(ORGANIZATION_DESTINATION_CONTACT_NUMBER));
+
         JobTittle jobTittleDestination = new JobTittle();
-        jobTittleDestination.setUuid(UUID.fromString(rs.getString("job_tittle_destination_id")));
-        jobTittleDestination.setName(rs.getString("job_destination_name"));
+        jobTittleDestination.setUuid(UUID.fromString(rs.getString(JOB_TITTLE_DESTINATION_ID)));
+        jobTittleDestination.setName(rs.getString(JOB_DESTINATION_NAME));
         departmentDestination.setOrganization(organizationDestination);
         destination.setDepartment(departmentDestination);
         destination.setJobTittle(jobTittleDestination);

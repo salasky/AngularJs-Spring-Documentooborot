@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Thu Aug 04 15:34:38 MSK 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-0182-68d9-c303-0000078bec98 
-on database directory C:\Derby\db-derby-10.13.1.1-bin\mydb with class loader java.net.URLClassLoader@44924587 
+Thu Aug 04 16:24:42 MSK 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-0182-6907-9b05-00000c06f928 
+on database directory C:\Derby\db-derby-10.13.1.1-bin\mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@3cd1a2f1 
 Loaded from file:/C:/Users/smigranov/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=18.0.1.1+2-6
@@ -12,5 +12,18 @@ os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-Thu Aug 04 15:34:43 MSK 2022:
-Shutting down instance a816c00e-0182-68d9-c303-0000078bec98 on database directory C:\Derby\db-derby-10.13.1.1-bin\mydb with class loader java.net.URLClassLoader@44924587 
+Thu Aug 04 16:24:44 MSK 2022:
+Shutting down instance a816c00e-0182-6907-9b05-00000c06f928 on database directory C:\Derby\db-derby-10.13.1.1-bin\mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@3cd1a2f1 
+----------------------------------------------------------------
+Thu Aug 04 16:24:51 MSK 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance d5e900f8-0182-6907-9b05-00000c06f928 
+on database directory C:\Derby\db-derby-10.13.1.1-bin\mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@3cd1a2f1 
+Loaded from file:/C:/Users/smigranov/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=18.0.1.1+2-6
+user.dir=C:\Users\smigranov\Desktop\TestProject\TestProject\testrepo\TestProject1
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
