@@ -14,12 +14,21 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
-
+/**
+ * Маппер для класса {@link IncomingDocument}
+ *
+ * @author smigranov
+ */
 @Component
 public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
+    /**
+     * Бин маппер {@link BaseDocument}
+     */
     @Autowired
     private BaseDocumentMapper baseDocumentMapper;
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public IncomingDocument mapRow(ResultSet rs, int rowNum) throws SQLException {
         //Мапим baseDocument к incomingDocument

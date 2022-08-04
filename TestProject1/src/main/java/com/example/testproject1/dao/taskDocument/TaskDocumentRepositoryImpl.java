@@ -1,8 +1,10 @@
 package com.example.testproject1.dao.taskDocument;
 
+import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.taskDocument.mapper.TaskDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.TaskDocument;
+import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbService.baseDocument.BaseDocumentService;
 import com.example.testproject1.service.dbService.person.PersonService;
 import org.slf4j.Logger;
@@ -14,16 +16,32 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Класс реализующий интерфейс {@link TaskDocumentRepository}. Для выполнения операций с базой данных.
+ *
+ * @author smigranov
+ */
 @Repository
 public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentRepositoryImpl.class);
+    /**
+     * Бин JdbcTemplate
+     */
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    /**
+     * Маппер для извлечения {@link TaskDocument}
+     */
     @Autowired
     private TaskDocumentMapper taskDocumentMapper;
+    /**
+     * Сервис для работы с {@link BaseDocument}
+     */
     @Autowired
     private BaseDocumentService baseDocumentService;
+    /**
+     * Сервис для работы с {@link Person}
+     */
     @Autowired
     private PersonService personService;
 
@@ -214,7 +232,9 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
      * Запрос на удаление записи по id в таблице task_document
      */
     private final String queryDeleteById = "DELETE FROM task_document WHERE base_document_id=?";
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer create(TaskDocument taskDocument) {
         try {
@@ -236,36 +256,48 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
             return 0;
         }
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<TaskDocument> getAll() {
         return jdbcTemplate.query(queryGetAll, taskDocumentMapper);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<TaskDocument> getById(String id) {
         return jdbcTemplate.query(queryGetById, taskDocumentMapper, id)
                 .stream().findFirst();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer update(TaskDocument taskDocument) {
         return jdbcTemplate.update(queryUpdate, taskDocument.getOutDate(), taskDocument.getExecPeriod(),
                 taskDocument.getResponsible().getId().toString(), taskDocument.getSignOfControl(),
                 taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString());
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer deleteAll() {
         return jdbcTemplate.update(queryDeleteAll);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer deleteById(String id) {
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean existById(String uuid) {
         Optional<TaskDocument> taskDocument = jdbcTemplate.query(queryGetById, taskDocumentMapper, uuid).stream().findFirst();

@@ -7,9 +7,16 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
-
+/**
+ * Маппер для класса {@link Organization}
+ *
+ * @author smigranov
+ */
 @Component
 public class OrganizationMapper implements RowMapper<Organization> {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Organization mapRow(ResultSet rs, int rowNum) throws SQLException {
         Organization organization = new Organization();

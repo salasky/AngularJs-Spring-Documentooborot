@@ -45,7 +45,7 @@ public interface BaseDocumentRepository {
     /**
      * Метод удаления всех записей с таблицы baseDocument
      *
-     * @return возвращает количество удаленнх строк
+     * @return возвращает количество удаленных строк
      */
     Integer deleteAll();
 

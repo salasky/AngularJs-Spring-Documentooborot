@@ -15,17 +15,25 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
-
+/**
+ * Маппер для класса {@link OutgoingDocument}
+ *
+ * @author smigranov
+ */
 @Component
 public class OutgoingDocumentMapper implements RowMapper<OutgoingDocument> {
+    /**
+     * Бин маппера {@link BaseDocument}
+     */
     @Autowired
     private BaseDocumentMapper baseDocumentMapper;
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public OutgoingDocument mapRow(ResultSet rs, int rowNum) throws SQLException {
         //Мапим baseDocument к incomingDocument
         BaseDocument baseDocument = baseDocumentMapper.mapRow(rs, rowNum);
-
         OutgoingDocument outgoingDocument = new OutgoingDocument();
         outgoingDocument.setDeliveryType(DocumentDeliveryType.valueOf(rs.getString("outgoing_delivery_type")));
         outgoingDocument.setId(baseDocument.getId());

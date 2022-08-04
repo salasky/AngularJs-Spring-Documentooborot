@@ -14,17 +14,25 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
-
+/**
+ * Маппер для класса {@link TaskDocument}
+ *
+ * @author smigranov
+ */
 @Component
 public class TaskDocumentMapper implements RowMapper<TaskDocument> {
+    /**
+     * Бин маппер {@link BaseDocument}
+     */
     @Autowired
     private BaseDocumentMapper baseDocumentMapper;
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public TaskDocument mapRow(ResultSet rs, int rowNum) throws SQLException {
         //Мапим baseDocument к taskDocument
         BaseDocument baseDocument = baseDocumentMapper.mapRow(rs, rowNum);
-
         TaskDocument taskDocument = new TaskDocument();
         taskDocument.setOutDate(rs.getTimestamp("task_document_out_date"));
         taskDocument.setExecPeriod(rs.getString("task_document_exec_period"));
@@ -93,7 +101,6 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
         controlPerson.setDepartment(departmentControl);
         controlPerson.setJobTittle(jobTittleControl);
         taskDocument.setControlPerson(controlPerson);
-
         return taskDocument;
     }
 }

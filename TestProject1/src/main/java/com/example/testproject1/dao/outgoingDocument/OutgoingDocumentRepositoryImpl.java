@@ -1,9 +1,11 @@
 package com.example.testproject1.dao.outgoingDocument;
 
+import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.outgoingDocument.mapper.OutgoingDocumentMapper;
 import com.example.testproject1.exception.DocumentExistInDb;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
+import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbService.baseDocument.BaseDocumentService;
 import com.example.testproject1.service.dbService.person.PersonService;
 import org.slf4j.Logger;
@@ -15,16 +17,32 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Класс реализующий интерфейс {@link OutgoingDocumentRepository}. Для выполнения операций с базой данных.
+ *
+ * @author smigranov
+ */
 @Repository
 public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(OutgoingDocumentRepositoryImpl.class);
+    /**
+     * Бин JdbcTemplate
+     */
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    /**
+     * Маппер для извлечения {@link OutgoingDocument}
+     */
     @Autowired
     private OutgoingDocumentMapper outgoingDocumentMapper;
+    /**
+     * Сервис для работы с {@link BaseDocument}
+     */
     @Autowired
     private BaseDocumentService baseDocumentService;
+    /**
+     * Сервис для работы с {@link Person}
+     */
     @Autowired
     private PersonService personService;
     /**
@@ -156,7 +174,9 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
      * Запрос на удаление записи по id в таблице outgoing_document
      */
     private final String queryDeleteById = "DELETE FROM outgoing_document WHERE base_document_id=?";
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer create(OutgoingDocument outgoingDocument) {
         try {
@@ -177,41 +197,47 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
             return 0;
         }
     }
-
-    public void isNotExistElseThrow(OutgoingDocument outgoingDocument) throws DocumentExistInDb {
-        if (existById(outgoingDocument.getId().toString())) {
-            throw new DocumentExistInDb(outgoingDocument.getId().toString());
-        }
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<OutgoingDocument> getAll() {
         return jdbcTemplate.query(queryGetAll, outgoingDocumentMapper);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<OutgoingDocument> getById(String id) {
         return jdbcTemplate.query(queryGetById, outgoingDocumentMapper, id)
                 .stream().findFirst();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer update(OutgoingDocument outgoingDocument) {
         return jdbcTemplate.update(queryUpdate, outgoingDocument.getSender().getId().toString(),
                 outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString());
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer deleteAll() {
         return jdbcTemplate.update(queryDeleteAll);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer deleteById(String id) {
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean existById(String uuid) {
         Optional<OutgoingDocument> outgoingDocument = jdbcTemplate.query(queryGetById, outgoingDocumentMapper, uuid).stream().findFirst();

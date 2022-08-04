@@ -4,6 +4,7 @@ import com.example.testproject1.dao.incomingDocumrnt.mapper.IncomingDocumentMapp
 import com.example.testproject1.exception.DocumentExistInDb;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
+import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbService.baseDocument.BaseDocumentService;
 import com.example.testproject1.service.dbService.person.PersonService;
 import org.slf4j.Logger;
@@ -15,18 +16,32 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Класс реализующий интерфейс {@link IncomingDocumentRepository}. Для выполнения операций с базой данных.
+ *
+ * @author smigranov
+ */
 @Repository
 public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(IncomingDocumentRepositoryImpl.class);
+    /**
+     * Бин JdbcTemplate
+     */
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    /**
+     * Маппер для извлечения {@link IncomingDocument}
+     */
     @Autowired
     private IncomingDocumentMapper incomingDocumentMapper;
-
+    /**
+     * Сервис для работы с {@link BaseDocument}
+     */
     @Autowired
     private BaseDocumentService baseDocumentService;
-
+    /**
+     * Сервис для работы с {@link Person}
+     */
     @Autowired
     private PersonService personService;
     /**
@@ -216,6 +231,9 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
      */
     private final String queryDeleteById = "DELETE FROM incoming_document WHERE base_document_id=?";
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer create(IncomingDocument incomingDocument) {
         try {
@@ -238,41 +256,47 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
             return 0;
         }
     }
-
-    public void isNotExistElseThrow(IncomingDocument incomingDocument) throws DocumentExistInDb {
-        if (existById(incomingDocument.getId().toString())) {
-            throw new DocumentExistInDb(incomingDocument.getId().toString());
-        }
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<IncomingDocument> getAll() {
         return jdbcTemplate.query(queryGetAll, incomingDocumentMapper);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<IncomingDocument> getById(String id) {
         return jdbcTemplate.query(queryGetById, incomingDocumentMapper, id)
                 .stream().findFirst();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer update(IncomingDocument incomingDocument) {
         return jdbcTemplate.update(queryUpdate, incomingDocument.getSender().getId().toString(),
                 incomingDocument.getDestination().getId().toString(), incomingDocument.getNumber(),
                 incomingDocument.getDateOfRegistration(), incomingDocument.getId().toString());
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer deleteAll() {
         return jdbcTemplate.update(queryDeleteAll);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer deleteById(String id) {
         return jdbcTemplate.update(queryDeleteById, id);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean existById(String uuid) {
         Optional<IncomingDocument> incomingDocument = jdbcTemplate.query(queryGetById, incomingDocumentMapper, uuid).stream().findFirst();

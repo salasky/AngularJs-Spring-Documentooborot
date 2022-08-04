@@ -1,7 +1,10 @@
 package com.example.testproject1.dao.organization;
 
+import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.organization.mapper.OrganizationMapper;
+import com.example.testproject1.exception.DepartmentExistInDb;
 import com.example.testproject1.exception.OrganizationExistInDb;
+import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Organization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,13 +17,23 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Класс репозиторий для организаций
+ * Класс реализующий интерфейс {@link OrganizationRepository}. Для выполнения операций с базой данных.
  *
  * @author smigranov
  */
 @Repository
 public class OrganizationRepositoryImpl implements OrganizationRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationRepositoryImpl.class);
+    /**
+     * Бин JdbcTemplate
+     */
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    /**
+     * Маппер для извлечения {@link Organization}
+     */
+    @Autowired
+    private OrganizationMapper organizationMapper;
     /**
      * Запрос на получение всех объектов из таблицы organization
      */
@@ -52,12 +65,9 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
      * Запрос на обновление записи по id в таблице organization
      */
     private final String queryUpdate = "UPDATE organization SET full_name=?, short_name=?, supervisor=?, contact_number=? WHERE id=?";
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-    @Autowired
-    private OrganizationMapper organizationMapper;
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer create(Organization organization) {
         try {
@@ -69,24 +79,35 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
             return 0;
         }
     }
-
+    /**
+     * Метод поиска Organization по id. Из-за того, что в XML staff сущностей(Person,Department и т.д.) ограниченное количество, каждый раз ловить
+     * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
+     * @param organization
+     * @throws DepartmentExistInDb если найден Organization с переданным id
+     */
     public void isNotExistElseThrow(Organization organization) throws OrganizationExistInDb {
         if (existById(organization.getId().toString())) {
             throw new OrganizationExistInDb(organization.getId().toString());
         }
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer update(Organization organization) {
         return jdbcTemplate.update(queryUpdate, organization.getFullName(), organization.getShortName(),
                 organization.getSupervisor(), organization.getContactNumber(), organization.getId().toString());
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Organization> getAll() {
         return jdbcTemplate.query(queryGetAll, organizationMapper);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Organization> getById(String uuid) {
         try {
@@ -95,18 +116,24 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
             return Optional.empty();
         }
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer deleteAll() {
         return jdbcTemplate.update(queryDeleteAll);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer deleteById(String id) {
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean existById(String uuid) {
         Optional<Organization> organization = jdbcTemplate.query(queryGetById, organizationMapper, uuid).stream().findFirst();
