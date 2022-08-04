@@ -11,12 +11,20 @@ import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.service.dbService.baseDocument.BaseDocumentService;
 import com.example.testproject1.service.dbService.person.PersonService;
+import liquibase.pro.packaged.L;
+import org.apache.derby.client.am.SqlException;
+import org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.ConstraintViolationException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -223,7 +231,6 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
     @Override
     public Integer create(IncomingDocument incomingDocument) {
         try {
-            isNotExistElseThrow(incomingDocument);
             BaseDocument baseDocument = new BaseDocument();
             baseDocument.setId(incomingDocument.getId());
             baseDocument.setName(incomingDocument.getName());
@@ -238,8 +245,8 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
                     incomingDocument.getSender().getId().toString(),
                     incomingDocument.getDestination().getId().toString(),
                     incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
-        } catch (DocumentExistInDb e) {
-            LOGGER.info(e.toString());
+        } catch (DataIntegrityViolationException ex) {
+            LOGGER.error(ex.toString());
             return 0;
         }
     }

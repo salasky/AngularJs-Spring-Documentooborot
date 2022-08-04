@@ -17,17 +17,17 @@ public interface DocumentService {
      * @param taskDocument объект класса {@link TaskDocument}
      * @throws DocumentExistsException если в базе существует запись с таким регистрационным номером
      */
-    void saveTaskInDB(TaskDocument taskDocument) throws DocumentExistsException;
+    void saveTaskInDB(TaskDocument taskDocument);
     /**
      * Метод сохранения входящих документов в базу данных
      * @param incomingDocument объект класса {@link IncomingDocument}
      * @throws DocumentExistsException если в базе существует запись с таким регистрационным номером
      */
-    void saveIncomingInDB(IncomingDocument incomingDocument) throws DocumentExistsException;
+    void saveIncomingInDB(IncomingDocument incomingDocument);
     /**
      * Метод сохранения исходящих документов в базу данных
      * @param outgoingDocument объект класса {@link OutgoingDocument}
      * @throws DocumentExistsException если в базе существует запись с таким регистрационным номером
      */
-    void saveOutgoingInDB(OutgoingDocument outgoingDocument) throws DocumentExistsException;
+    void saveOutgoingInDB(OutgoingDocument outgoingDocument);
 }

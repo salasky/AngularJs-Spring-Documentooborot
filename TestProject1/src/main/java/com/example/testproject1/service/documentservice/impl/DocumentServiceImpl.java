@@ -47,36 +47,21 @@ public class DocumentServiceImpl implements DocumentService {
      * {@inheritDoc}
      */
     @Override
-    public void saveTaskInDB(TaskDocument taskDocument) throws DocumentExistsException {
-        isNotExitByRegNumberOrElseThrow(taskDocument.getRegNumber());
+    public void saveTaskInDB(TaskDocument taskDocument) {
         taskDocumentService.create(taskDocument);
     }
     /**
      * {@inheritDoc}
      */
     @Override
-    public void saveIncomingInDB(IncomingDocument incomingDocument) throws DocumentExistsException {
-        isNotExitByRegNumberOrElseThrow(incomingDocument.getRegNumber());
+    public void saveIncomingInDB(IncomingDocument incomingDocument) {
         incomingDocumentService.create(incomingDocument);
     }
     /**
      * {@inheritDoc}
      */
     @Override
-    public void saveOutgoingInDB(OutgoingDocument outgoingDocument) throws DocumentExistsException {
-        isNotExitByRegNumberOrElseThrow(outgoingDocument.getRegNumber());
+    public void saveOutgoingInDB(OutgoingDocument outgoingDocument) {
         outgoingDocumentService.create(outgoingDocument);
-    }
-
-    /**
-     * Метод проверки существования документа с принимаемым регистрационным номером
-     * @param regNumber регистрационный номер документа
-     * @throws DocumentExistsException выбрасывает исключение, если существет документ с переданным регистрационным номером
-     */
-    private void isNotExitByRegNumberOrElseThrow(Long regNumber) throws DocumentExistsException {
-        if(baseDocumentService.existByRegNumber(regNumber)){
-            throw new DocumentExistsException(regNumber,
-                    MessageFormat.format("Document number {0} exist", regNumber));
-        }
     }
 }

@@ -1,12 +1,8 @@
-package com.example.testproject1.dao.jobTittle;
+package com.example.testproject1.dao.jobtittle;
 
-import com.example.testproject1.dao.jobTittle.mapper.JobTittleMapper;
-import com.example.testproject1.dao.person.PersonRepositoryImpl;
-import com.example.testproject1.exception.DocumentExistInDb;
+import com.example.testproject1.dao.jobtittle.mapper.JobTittleMapper;
 import com.example.testproject1.exception.JobTittleExistIndDb;
-import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.JobTittle;
-import com.example.testproject1.model.staff.Organization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

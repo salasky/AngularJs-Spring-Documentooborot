@@ -1,6 +1,6 @@
 package com.example.testproject1.service.dbService.jobTittleService;
 
-import com.example.testproject1.dao.jobTittle.JobTittleRepository;
+import com.example.testproject1.dao.jobtittle.JobTittleRepository;
 import com.example.testproject1.model.staff.JobTittle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

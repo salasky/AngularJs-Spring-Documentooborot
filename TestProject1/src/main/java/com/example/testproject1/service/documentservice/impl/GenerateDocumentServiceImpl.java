@@ -54,13 +54,9 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
             BaseDocument taskDocument = taskDocumentFactory.create();
             BaseDocument incomingDocument=incomingDocumentFactory.create();
             BaseDocument outgoingDocument=outgoingDocumentFactory.create();
-                try {
-                    documentService.saveTaskInDB((TaskDocument) taskDocument);
-                    documentService.saveIncomingInDB((IncomingDocument) incomingDocument);
-                    documentService.saveOutgoingInDB((OutgoingDocument) outgoingDocument);
-                } catch (DocumentExistsException e) {
-                    LOGGER.error(e.getMessage());
-                }
+            documentService.saveTaskInDB((TaskDocument) taskDocument);
+            documentService.saveIncomingInDB((IncomingDocument) incomingDocument);
+            documentService.saveOutgoingInDB((OutgoingDocument) outgoingDocument);
         }
     }
 }

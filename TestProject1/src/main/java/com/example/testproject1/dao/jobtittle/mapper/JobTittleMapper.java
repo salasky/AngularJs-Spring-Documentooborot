@@ -1,4 +1,4 @@
-package com.example.testproject1.dao.jobTittle.mapper;
+package com.example.testproject1.dao.jobtittle.mapper;
 
 import com.example.testproject1.model.staff.JobTittle;
 import org.springframework.jdbc.core.RowMapper;

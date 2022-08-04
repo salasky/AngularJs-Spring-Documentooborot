@@ -11,12 +11,19 @@ import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.service.dbService.baseDocument.BaseDocumentService;
 import com.example.testproject1.service.dbService.person.PersonService;
+import org.apache.derby.client.am.SqlException;
+import org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.ConstraintViolationException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -164,7 +171,6 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
     @Override
     public Integer create(OutgoingDocument outgoingDocument){
         try {
-            isNotExistElseThrow(outgoingDocument);
             BaseDocument baseDocument=new BaseDocument();
             baseDocument.setId(outgoingDocument.getId());
             baseDocument.setName(outgoingDocument.getName());
@@ -177,8 +183,8 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
             return jdbcTemplate.update(queryCreate,outgoingDocument.getId().toString(),
                     outgoingDocument.getSender().getId().toString(),
                     outgoingDocument.getDeliveryType().toString());
-        } catch (DocumentExistInDb e) {
-            LOGGER.info(e.toString());
+        } catch (DataIntegrityViolationException ex) {
+            LOGGER.error(ex.toString());
             return 0;
         }
     }

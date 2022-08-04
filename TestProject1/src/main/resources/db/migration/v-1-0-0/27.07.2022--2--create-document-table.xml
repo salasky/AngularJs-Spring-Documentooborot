@@ -20,7 +20,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="reg_number" type="BIGINT">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="creating_date" type="TIMESTAMP">
                 <constraints nullable="false"/>

@@ -14,9 +14,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
+/**
+ * Маппер для класса {@link BaseDocument}
+ *
+ * @author smigranov
+ */
 @Component
 public class BaseDocumentMapper implements RowMapper<BaseDocument> {
-
+    /**
+     * Бин маппер {@link Person}
+     */
     @Autowired
     private PersonMapper personMapper;
     @Override

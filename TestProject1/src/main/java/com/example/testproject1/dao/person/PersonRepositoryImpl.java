@@ -1,17 +1,10 @@
 package com.example.testproject1.dao.person;
 
-import com.example.testproject1.dao.baseDocument.BaseDocumentRepositoryImpl;
-import com.example.testproject1.dao.department.DepartmentRepository;
-import com.example.testproject1.dao.jobTittle.JobTittleRepository;
 import com.example.testproject1.dao.person.mapper.PersonMapper;
-import com.example.testproject1.exception.BaseDocumentExistInDb;
 import com.example.testproject1.exception.PersonExistInDb;
-import com.example.testproject1.model.document.BaseDocument;
-import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbService.department.DepartmentService;
 import com.example.testproject1.service.dbService.jobTittleService.JobTittleService;
-import liquibase.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,9 @@
 package com.example.testproject1.dao.person.mapper;
 
 import com.example.testproject1.dao.department.mapper.DepartmentMapper;
-import com.example.testproject1.dao.jobTittle.mapper.JobTittleMapper;
+import com.example.testproject1.dao.jobtittle.mapper.JobTittleMapper;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
-import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;

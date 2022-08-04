@@ -71,7 +71,6 @@ public class OrganizationRepositoryImpl implements OrganizationRepository{
             LOGGER.info(e.toString());
             return 0;
         }
-
     }
     public void isNotExistElseThrow(Organization organization) throws OrganizationExistInDb {
         if(existById(organization.getId().toString())){

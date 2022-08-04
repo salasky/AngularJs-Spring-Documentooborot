@@ -5,7 +5,7 @@ package com.example.testproject1.shell;
 import com.example.testproject1.dao.baseDocument.BaseDocumentRepositoryImpl;
 import com.example.testproject1.dao.department.DepartmentRepositoryImpl;
 import com.example.testproject1.dao.incomingDocumrnt.IncomingDocumentRepositoryImpl;
-import com.example.testproject1.dao.jobTittle.JobTittleRepositoryImpl;
+import com.example.testproject1.dao.jobtittle.JobTittleRepositoryImpl;
 import com.example.testproject1.dao.organization.OrganizationRepositoryImpl;
 import com.example.testproject1.dao.outgoingDocument.OutgoingDocumentRepositoryImpl;
 import com.example.testproject1.dao.person.PersonRepositoryImpl;
@@ -83,7 +83,7 @@ public class DocumentShell {
      * @param a Генерируем заданное количество документов
      */
     @ShellMethod("Cmd: generate --a  (Int DocumentCount each type (default = 100)")
-    public void generate(@ShellOption(defaultValue = "100") int a) {
+    public void generate(@ShellOption(defaultValue = "1000") int a) {
         Integer countDocument = Integer.valueOf(a);
         LOGGER.info("Попытка сгенерировать документы");
         generateDocumentService.generateDocument(countDocument);
@@ -428,7 +428,7 @@ public class DocumentShell {
     public void createout() {
         OutgoingDocument outgoingDocument=new OutgoingDocument();
         outgoingDocument.setId(baseDocumentRepositoryImpl.getAll().stream().findFirst().get().getId());
-
+        outgoingDocument.setRegNumber(3349268837256532463l);
         Person personResponse= personRepositoryImpl.getAll().stream().findFirst().get();
         outgoingDocument.setSender(personResponse);
 

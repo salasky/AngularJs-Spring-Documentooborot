@@ -1,4 +1,4 @@
-package com.example.testproject1.dao.jobTittle;
+package com.example.testproject1.dao.jobtittle;
 
 import com.example.testproject1.model.staff.JobTittle;
 

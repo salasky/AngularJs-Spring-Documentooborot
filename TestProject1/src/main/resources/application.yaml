@@ -10,7 +10,7 @@ spring:
     enabled: true
     drop-first: false
     change-log: classpath:db/migration/master.xml
-    default-schema: public
+    default-schema: app
 
 doc:
   documentName: Устав, Должностная инструкция , Положение, Штатное расписание,Приказ

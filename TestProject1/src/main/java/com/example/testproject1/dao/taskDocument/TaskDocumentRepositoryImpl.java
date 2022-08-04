@@ -1,20 +1,20 @@
 package com.example.testproject1.dao.taskDocument;
 
-import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
-import com.example.testproject1.dao.person.PersonRepository;
 import com.example.testproject1.dao.taskDocument.mapper.TaskDocumentMapper;
 import com.example.testproject1.exception.DocumentExistInDb;
 import com.example.testproject1.model.document.BaseDocument;
-import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.service.dbService.baseDocument.BaseDocumentService;
 import com.example.testproject1.service.dbService.person.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,14 +33,14 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
     /**
      * Запрос на создание записи в таблице task_document
      */
-    private final String queryCreate="INSERT INTO task_document VALUES (?,?,?,?,?,?)";
+    private final String queryCreate = "INSERT INTO task_document VALUES (?,?,?,?,?,?)";
     /**
      * Запрос на получение всех объектов из таблицы task_document
      */
-    private final String queryGetAll="SELECT   task_document.base_document_id AS task_document_id," +
+    private final String queryGetAll = "SELECT   task_document.base_document_id AS task_document_id," +
             "                    task_document.out_date AS task_document_out_date," +
             "                    task_document.exec_period AS task_document_exec_period," +
-            "                    task_document.sign_of_control AS task_document_sign_of_control,"+
+            "                    task_document.sign_of_control AS task_document_sign_of_control," +
             "                    base_document.id AS base_document_id, base_document.name AS base_document_name," +
             "                    base_document.text AS base_document_text, base_document.reg_number AS base_document_number," +
             "                    base_document.creating_date AS base_document_date," +
@@ -121,7 +121,7 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
     /**
      * Запрос на получение объекта по id из таблицы task_document
      */
-    private final String queryGetById="SELECT   task_document.base_document_id AS task_document_id,   " +
+    private final String queryGetById = "SELECT   task_document.base_document_id AS task_document_id,   " +
             "                                 task_document.out_date AS task_document_out_date,   " +
             "                                 task_document.exec_period AS task_document_exec_period,   " +
             "                                 task_document.sign_of_control AS task_document_sign_of_control,  " +
@@ -206,22 +206,21 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
     /**
      * Запрос на обновление записи в таблице task_document
      */
-    private final String queryUpdate="UPDATE task_document SET out_date=?, exec_period=?, responsible_id=?," +
+    private final String queryUpdate = "UPDATE task_document SET out_date=?, exec_period=?, responsible_id=?," +
             " sign_of_control=?, control_person_id=? WHERE task_document.base_document_id=?";
 
     /**
      * Запрос на удаление всех записей в таблице task_document
      */
-    private final String queryDeleteAll="DELETE FROM task_document";
+    private final String queryDeleteAll = "DELETE FROM task_document";
     /**
      * Запрос на удаление записи по id в таблице task_document
      */
-    private final String queryDeleteById="DELETE FROM task_document WHERE base_document_id=?";
+    private final String queryDeleteById = "DELETE FROM task_document WHERE base_document_id=?";
 
     @Override
     public Integer create(TaskDocument taskDocument) {
         try {
-            isNotExistElseThrow(taskDocument);
             BaseDocument baseDocument = new BaseDocument();
             baseDocument.setId(taskDocument.getId());
             baseDocument.setName(taskDocument.getName());
@@ -235,45 +234,44 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
             return jdbcTemplate.update(queryCreate, taskDocument.getId().toString(), taskDocument.getOutDate()
                     , taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
                     taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
-        } catch (DocumentExistInDb e) {
-            LOGGER.info(e.toString());
+        } catch (DataIntegrityViolationException ex) {
+            LOGGER.error(ex.toString());
             return 0;
         }
     }
-    public void isNotExistElseThrow(TaskDocument taskDocument) throws DocumentExistInDb {
-        if(existById(taskDocument.getId().toString())){
-            throw new DocumentExistInDb(taskDocument.getId().toString());
-        }
+
+    @Override
+    public List<TaskDocument> getAll() {
+        return jdbcTemplate.query(queryGetAll, taskDocumentMapper);
     }
 
     @Override
-    public List<TaskDocument> getAll(){
-        return jdbcTemplate.query(queryGetAll,taskDocumentMapper);
-    }
-
-    @Override
-    public Optional<TaskDocument> getById(String id){
-        return jdbcTemplate.query(queryGetById, taskDocumentMapper,id)
+    public Optional<TaskDocument> getById(String id) {
+        return jdbcTemplate.query(queryGetById, taskDocumentMapper, id)
                 .stream().findFirst();
     }
+
     @Override
-    public Integer update(TaskDocument taskDocument){
-        return jdbcTemplate.update(queryUpdate,taskDocument.getOutDate(),taskDocument.getExecPeriod(),
+    public Integer update(TaskDocument taskDocument) {
+        return jdbcTemplate.update(queryUpdate, taskDocument.getOutDate(), taskDocument.getExecPeriod(),
                 taskDocument.getResponsible().getId().toString(), taskDocument.getSignOfControl(),
-                taskDocument.getControlPerson().getId().toString(),taskDocument.getId().toString());
+                taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString());
     }
+
     @Override
-    public Integer deleteAll(){
+    public Integer deleteAll() {
         return jdbcTemplate.update(queryDeleteAll);
     }
+
     @Override
     public Integer deleteById(String id) {
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
     }
+
     @Override
     public boolean existById(String uuid) {
-        Optional<TaskDocument> taskDocument= jdbcTemplate.query(queryGetById,taskDocumentMapper,uuid).stream().findFirst();
+        Optional<TaskDocument> taskDocument = jdbcTemplate.query(queryGetById, taskDocumentMapper, uuid).stream().findFirst();
         return taskDocument.isPresent();
     }
 }

@@ -1,9 +1,7 @@
 package com.example.testproject1.service.dbService.outgoingDocument;
 
-import com.example.testproject1.dao.jobTittle.JobTittleRepository;
 import com.example.testproject1.dao.outgoingDocument.OutgoingDocumentRepository;
 import com.example.testproject1.model.document.OutgoingDocument;
-import com.example.testproject1.service.dbService.jobTittleService.JobTittleServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
