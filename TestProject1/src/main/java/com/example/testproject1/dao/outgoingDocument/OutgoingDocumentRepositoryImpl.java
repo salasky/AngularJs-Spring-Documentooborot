@@ -1,29 +1,18 @@
 package com.example.testproject1.dao.outgoingDocument;
 
-import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.outgoingDocument.mapper.OutgoingDocumentMapper;
-import com.example.testproject1.dao.person.PersonRepository;
-import com.example.testproject1.dao.taskDocument.TaskDocumentRepositoryImpl;
-import com.example.testproject1.exception.BaseDocumentExistInDb;
 import com.example.testproject1.exception.DocumentExistInDb;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
-import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.service.dbService.baseDocument.BaseDocumentService;
 import com.example.testproject1.service.dbService.person.PersonService;
-import org.apache.derby.client.am.SqlException;
-import org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.validation.ConstraintViolationException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,11 +30,11 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
     /**
      * Запрос на создание записи в таблице outgoing_document
      */
-    private final String queryCreate="INSERT INTO outgoing_document VALUES (?,?,?)";
+    private final String queryCreate = "INSERT INTO outgoing_document VALUES (?,?,?)";
     /**
      * Запрос на получение всех объектов из таблицы outgoing_document
      */
-    private final String queryGetAll="SELECT   base_document.id AS base_document_id,  " +
+    private final String queryGetAll = "SELECT   base_document.id AS base_document_id,  " +
             "                    base_document.name AS base_document_name,  " +
             "                    base_document.text AS base_document_text,  " +
             "                    base_document.reg_number AS base_document_number,   " +
@@ -101,7 +90,7 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
     /**
      * Запрос на получение объекта по id из таблицы outgoing_document
      */
-    private final String queryGetById="SELECT   base_document.id AS base_document_id,  " +
+    private final String queryGetById = "SELECT   base_document.id AS base_document_id,  " +
             "                    base_document.name AS base_document_name,  " +
             "                    base_document.text AS base_document_text,  " +
             "                    base_document.reg_number AS base_document_number,   " +
@@ -157,21 +146,21 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
     /**
      * Запрос на обновление записи в таблице outgoing_document
      */
-    private final String queryUpdate="UPDATE outgoing_document SET sender_id=?, delivery_type=?" +
+    private final String queryUpdate = "UPDATE outgoing_document SET sender_id=?, delivery_type=?" +
             " WHERE outgoing_document.base_document_id=?";
     /**
      * Запрос на удаление всех записей в таблице outgoing_document
      */
-    private final String queryDeleteAll="DELETE FROM outgoing_document";
+    private final String queryDeleteAll = "DELETE FROM outgoing_document";
     /**
      * Запрос на удаление записи по id в таблице outgoing_document
      */
-    private final String queryDeleteById="DELETE FROM outgoing_document WHERE base_document_id=?";
+    private final String queryDeleteById = "DELETE FROM outgoing_document WHERE base_document_id=?";
 
     @Override
-    public Integer create(OutgoingDocument outgoingDocument){
+    public Integer create(OutgoingDocument outgoingDocument) {
         try {
-            BaseDocument baseDocument=new BaseDocument();
+            BaseDocument baseDocument = new BaseDocument();
             baseDocument.setId(outgoingDocument.getId());
             baseDocument.setName(outgoingDocument.getName());
             baseDocument.setText(outgoingDocument.getText());
@@ -180,7 +169,7 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
             baseDocument.setAuthor(outgoingDocument.getAuthor());
             baseDocumentService.create(baseDocument);
             personService.create(outgoingDocument.getSender());
-            return jdbcTemplate.update(queryCreate,outgoingDocument.getId().toString(),
+            return jdbcTemplate.update(queryCreate, outgoingDocument.getId().toString(),
                     outgoingDocument.getSender().getId().toString(),
                     outgoingDocument.getDeliveryType().toString());
         } catch (DataIntegrityViolationException ex) {
@@ -188,38 +177,44 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
             return 0;
         }
     }
+
     public void isNotExistElseThrow(OutgoingDocument outgoingDocument) throws DocumentExistInDb {
-        if(existById(outgoingDocument.getId().toString())){
+        if (existById(outgoingDocument.getId().toString())) {
             throw new DocumentExistInDb(outgoingDocument.getId().toString());
         }
     }
+
     @Override
-    public List<OutgoingDocument> getAll(){
-        return jdbcTemplate.query(queryGetAll,outgoingDocumentMapper);
+    public List<OutgoingDocument> getAll() {
+        return jdbcTemplate.query(queryGetAll, outgoingDocumentMapper);
     }
 
     @Override
-    public Optional<OutgoingDocument> getById(String id){
-        return jdbcTemplate.query(queryGetById, outgoingDocumentMapper,id)
+    public Optional<OutgoingDocument> getById(String id) {
+        return jdbcTemplate.query(queryGetById, outgoingDocumentMapper, id)
                 .stream().findFirst();
     }
+
     @Override
-    public Integer update(OutgoingDocument outgoingDocument){
-        return jdbcTemplate.update(queryUpdate,outgoingDocument.getSender().getId().toString(),
-                outgoingDocument.getDeliveryType().toString(),outgoingDocument.getId().toString());
+    public Integer update(OutgoingDocument outgoingDocument) {
+        return jdbcTemplate.update(queryUpdate, outgoingDocument.getSender().getId().toString(),
+                outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString());
     }
+
     @Override
-    public Integer deleteAll(){
+    public Integer deleteAll() {
         return jdbcTemplate.update(queryDeleteAll);
     }
+
     @Override
     public Integer deleteById(String id) {
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
     }
+
     @Override
     public boolean existById(String uuid) {
-        Optional<OutgoingDocument> outgoingDocument= jdbcTemplate.query(queryGetById,outgoingDocumentMapper,uuid).stream().findFirst();
+        Optional<OutgoingDocument> outgoingDocument = jdbcTemplate.query(queryGetById, outgoingDocumentMapper, uuid).stream().findFirst();
         return outgoingDocument.isPresent();
     }
 }

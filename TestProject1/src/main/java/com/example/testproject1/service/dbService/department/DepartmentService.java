@@ -7,9 +7,14 @@ import java.util.Optional;
 
 public interface DepartmentService {
     Optional<Department> create(Department department);
+
     List<Department> getall();
+
     Optional<Department> getById(String id);
+
     Optional<Department> update(Department department);
+
     String deleteAll();
+
     String deleteById(String id);
 }

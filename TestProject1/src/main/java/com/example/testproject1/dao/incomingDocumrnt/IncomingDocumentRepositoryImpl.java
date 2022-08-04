@@ -1,30 +1,18 @@
 package com.example.testproject1.dao.incomingDocumrnt;
 
-import com.example.testproject1.dao.baseDocument.BaseDocumentRepository;
 import com.example.testproject1.dao.incomingDocumrnt.mapper.IncomingDocumentMapper;
-import com.example.testproject1.dao.outgoingDocument.OutgoingDocumentRepositoryImpl;
-import com.example.testproject1.dao.person.PersonRepository;
 import com.example.testproject1.exception.DocumentExistInDb;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
-import com.example.testproject1.model.document.OutgoingDocument;
-import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.service.dbService.baseDocument.BaseDocumentService;
 import com.example.testproject1.service.dbService.person.PersonService;
-import liquibase.pro.packaged.L;
-import org.apache.derby.client.am.SqlException;
-import org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.validation.ConstraintViolationException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,12 +32,12 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
     /**
      * Запрос на создание записи в таблице incoming_document
      */
-    private final String queryCreate="INSERT INTO incoming_document VALUES (?,?,?,?,?)";
+    private final String queryCreate = "INSERT INTO incoming_document VALUES (?,?,?,?,?)";
 
     /**
      * Запрос на получение всех объектов из таблицы incoming_document
      */
-    private final String queryGetAll="SELECT   base_document.id AS base_document_id,  " +
+    private final String queryGetAll = "SELECT   base_document.id AS base_document_id,  " +
             "                    base_document.name AS base_document_name,   " +
             "                    base_document.text AS base_document_text, " +
             "                    base_document.reg_number AS base_document_number,  " +
@@ -133,7 +121,7 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
     /**
      * Запрос на получение объекта по id из таблицы incoming_document
      */
-    private final String queryGetById="SELECT   base_document.id AS base_document_id,  " +
+    private final String queryGetById = "SELECT   base_document.id AS base_document_id,  " +
             "                    base_document.name AS base_document_name,   " +
             "                    base_document.text AS base_document_text, " +
             "                    base_document.reg_number AS base_document_number,  " +
@@ -217,16 +205,16 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
     /**
      * Запрос на обновление записи в таблице incoming_document
      */
-    private final String queryUpdate="UPDATE incoming_document SET sender_id=?, destination_id=?, number=?," +
+    private final String queryUpdate = "UPDATE incoming_document SET sender_id=?, destination_id=?, number=?," +
             " date_of_registration=? WHERE incoming_document.base_document_id=?";
     /**
      * Запрос на удаление всех записей в таблице incoming_document
      */
-    private final String queryDeleteAll="DELETE FROM incoming_document";
+    private final String queryDeleteAll = "DELETE FROM incoming_document";
     /**
      * Запрос на удаление записи по id в таблице incoming_document
      */
-    private final String queryDeleteById="DELETE FROM incoming_document WHERE base_document_id=?";
+    private final String queryDeleteById = "DELETE FROM incoming_document WHERE base_document_id=?";
 
     @Override
     public Integer create(IncomingDocument incomingDocument) {
@@ -252,37 +240,42 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
     }
 
     public void isNotExistElseThrow(IncomingDocument incomingDocument) throws DocumentExistInDb {
-        if(existById(incomingDocument.getId().toString())){
+        if (existById(incomingDocument.getId().toString())) {
             throw new DocumentExistInDb(incomingDocument.getId().toString());
         }
     }
+
     @Override
-    public List<IncomingDocument> getAll(){
-        return jdbcTemplate.query(queryGetAll,incomingDocumentMapper);
+    public List<IncomingDocument> getAll() {
+        return jdbcTemplate.query(queryGetAll, incomingDocumentMapper);
     }
 
     @Override
-    public Optional<IncomingDocument> getById(String id){
-        return jdbcTemplate.query(queryGetById, incomingDocumentMapper,id)
+    public Optional<IncomingDocument> getById(String id) {
+        return jdbcTemplate.query(queryGetById, incomingDocumentMapper, id)
                 .stream().findFirst();
     }
+
     @Override
-    public Integer update(IncomingDocument incomingDocument){
-        return jdbcTemplate.update(queryUpdate,incomingDocument.getSender().getId().toString(),
-                incomingDocument.getDestination().getId().toString(),incomingDocument.getNumber(),
-                incomingDocument.getDateOfRegistration(),incomingDocument.getId().toString());
+    public Integer update(IncomingDocument incomingDocument) {
+        return jdbcTemplate.update(queryUpdate, incomingDocument.getSender().getId().toString(),
+                incomingDocument.getDestination().getId().toString(), incomingDocument.getNumber(),
+                incomingDocument.getDateOfRegistration(), incomingDocument.getId().toString());
     }
+
     @Override
-    public Integer deleteAll(){
+    public Integer deleteAll() {
         return jdbcTemplate.update(queryDeleteAll);
     }
+
     @Override
     public Integer deleteById(String id) {
         return jdbcTemplate.update(queryDeleteById, id);
     }
+
     @Override
     public boolean existById(String uuid) {
-        Optional<IncomingDocument> incomingDocument= jdbcTemplate.query(queryGetById,incomingDocumentMapper,uuid).stream().findFirst();
+        Optional<IncomingDocument> incomingDocument = jdbcTemplate.query(queryGetById, incomingDocumentMapper, uuid).stream().findFirst();
         return incomingDocument.isPresent();
     }
 }

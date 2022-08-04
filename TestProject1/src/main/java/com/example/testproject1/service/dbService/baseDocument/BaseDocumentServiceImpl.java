@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BaseDocumentServiceImpl implements BaseDocumentService{
+public class BaseDocumentServiceImpl implements BaseDocumentService {
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseDocumentServiceImpl.class);
     @Autowired
     private BaseDocumentRepository baseDocumentRepository;
@@ -20,8 +20,8 @@ public class BaseDocumentServiceImpl implements BaseDocumentService{
     @Override
     public Optional<BaseDocument> create(BaseDocument baseDocument) {
         LOGGER.info("Попытка создания BaseDocument");
-        int updateCount=baseDocumentRepository.create(baseDocument);
-        if(updateCount==1){
+        int updateCount = baseDocumentRepository.create(baseDocument);
+        if (updateCount == 1) {
             LOGGER.info("BaseDocument успешно сохранен");
             return Optional.ofNullable(baseDocument);
         }
@@ -43,9 +43,9 @@ public class BaseDocumentServiceImpl implements BaseDocumentService{
 
     @Override
     public Optional<BaseDocument> update(BaseDocument baseDocument) {
-        LOGGER.info(MessageFormat.format("Попытка изменить данные у BaseDocument с id {0}",baseDocument.getId().toString()));
-        int updateCount=baseDocumentRepository.update(baseDocument);
-        if(updateCount==1){
+        LOGGER.info(MessageFormat.format("Попытка изменить данные у BaseDocument с id {0}", baseDocument.getId().toString()));
+        int updateCount = baseDocumentRepository.update(baseDocument);
+        if (updateCount == 1) {
             LOGGER.info("BaseDocument успешно обновлен");
             return Optional.ofNullable(baseDocument);
         }
@@ -56,30 +56,30 @@ public class BaseDocumentServiceImpl implements BaseDocumentService{
     @Override
     public String deleteAll() {
         LOGGER.info("Попытка удалить все записи в таблице base_document");
-        int count=baseDocumentRepository.deleteAll();
-        if (count>0){
+        int count = baseDocumentRepository.deleteAll();
+        if (count > 0) {
             LOGGER.info("Записи из таблицы base_document успешно удалены");
             return "Записи из таблицы base_document успешно удалены";
         }
-            LOGGER.error("Не удачная попытка удаления записей из таблицы base_document");
-            return "Не удачная попытка удаления записей из таблицы base_document";
+        LOGGER.error("Не удачная попытка удаления записей из таблицы base_document");
+        return "Не удачная попытка удаления записей из таблицы base_document";
     }
 
     @Override
     public String deleteById(String id) {
         LOGGER.info("Попытка удалить запись из таблицы base_document");
-        int count=baseDocumentRepository.deleteById(id);
-        if (count>0){
+        int count = baseDocumentRepository.deleteById(id);
+        if (count > 0) {
             LOGGER.info("Запись из таблицы base_document успешно удалена");
             return "Запись из таблицы base_document успешно удалена";
         }
-            LOGGER.error("Не удачная попытка удаления записи из таблицы base_document");
-            return "Не удачная попытка удаления записи из таблицы base_document";
+        LOGGER.error("Не удачная попытка удаления записи из таблицы base_document");
+        return "Не удачная попытка удаления записи из таблицы base_document";
     }
 
     @Override
     public boolean existByRegNumber(Long regNumber) {
-       LOGGER.info("Поиск baseDocument по регистрационному номеру");
-       return baseDocumentRepository.existByRegNumber(regNumber);
+        LOGGER.info("Поиск baseDocument по регистрационному номеру");
+        return baseDocumentRepository.existByRegNumber(regNumber);
     }
 }

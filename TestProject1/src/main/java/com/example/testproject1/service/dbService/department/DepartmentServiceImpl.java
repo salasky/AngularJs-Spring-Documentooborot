@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DepartmentServiceImpl implements DepartmentService{
+public class DepartmentServiceImpl implements DepartmentService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceImpl.class);
 
@@ -22,8 +22,8 @@ public class DepartmentServiceImpl implements DepartmentService{
     @Override
     public Optional<Department> create(Department department) {
         LOGGER.info("Попытка создания Department");
-        int updateCount=departmentRepository.create(department);
-        if(updateCount==1){
+        int updateCount = departmentRepository.create(department);
+        if (updateCount == 1) {
             LOGGER.info("Department успешно сохранен");
             return Optional.ofNullable(department);
         }
@@ -45,9 +45,9 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public Optional<Department> update(Department department) {
-        LOGGER.info(MessageFormat.format("Попытка изменить данные у Department с id {0}",department.getId().toString()));
-        int updateCount=departmentRepository.update(department);
-        if(updateCount==1){
+        LOGGER.info(MessageFormat.format("Попытка изменить данные у Department с id {0}", department.getId().toString()));
+        int updateCount = departmentRepository.update(department);
+        if (updateCount == 1) {
             LOGGER.info("Department успешно обновлен");
             return Optional.ofNullable(department);
         }
@@ -58,8 +58,8 @@ public class DepartmentServiceImpl implements DepartmentService{
     @Override
     public String deleteAll() {
         LOGGER.info("Попытка удалить все записи в таблице department");
-        int count=departmentRepository.deleteAll();
-        if (count>0){
+        int count = departmentRepository.deleteAll();
+        if (count > 0) {
             LOGGER.info("Записи из таблицы department успешно удалены");
             return "Записи из таблицы department успешно удалены";
         }
@@ -70,8 +70,8 @@ public class DepartmentServiceImpl implements DepartmentService{
     @Override
     public String deleteById(String id) {
         LOGGER.info("Попытка удалить запись из таблицы department");
-        int count=departmentRepository.deleteById(id);
-        if (count>0){
+        int count = departmentRepository.deleteById(id);
+        if (count > 0) {
             LOGGER.info("Запись из таблицы department успешно удалена");
             return "Запись из таблицы department успешно удалена";
         }

@@ -1,20 +1,16 @@
 package com.example.testproject1.model.staff;
 
 import com.example.testproject1.service.jaxb.DateSQLTimeAdapter;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Column;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.sql.Date;
 import java.text.MessageFormat;
 import java.util.Comparator;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Класс Person наследуется от {@link Staff}
@@ -22,47 +18,47 @@ import java.util.UUID;
  * @author smigranov
  */
 @XmlRootElement
-@XmlType(name = "person",propOrder = {"secondName", "firstName", "lastName", "jobTittle", "birthDay", "phoneNumber", "photo", "department"})
-public class Person extends Staff implements Comparable<Person>{
+@XmlType(name = "person", propOrder = {"secondName", "firstName", "lastName", "jobTittle", "birthDay", "phoneNumber", "photo", "department"})
+public class Person extends Staff implements Comparable<Person> {
     /**
      * Отчество
      */
-    @Column(name ="last_name")
+    @Column(name = "last_name")
     private String lastName;
     /**
      * Фамилия
      */
-    @Column(name ="second_name")
+    @Column(name = "second_name")
     private String secondName;
     /**
      * Имя
      */
-    @Column(name ="first_name")
+    @Column(name = "first_name")
     private String firstName;
     /**
      * Должность
      */
-    @Column(name ="job_tittle")
+    @Column(name = "job_tittle")
     private JobTittle jobTittle;
     /**
      * Ссылка на фото
      */
-    @Column(name ="photo")
+    @Column(name = "photo")
     private String photo;
     /**
      * Дата рождения
      */
-    @Column(name ="birth_day")
+    @Column(name = "birth_day")
     private Date birthDay;
     /**
      * Номер телефона
      */
-    @Column(name ="phone_number")
+    @Column(name = "phone_number")
     private String phoneNumber;
     /**
      * Департамент работника
      */
-    @Column(name ="department")
+    @Column(name = "department")
     private Department department;
 
     @XmlElement(name = "lastName")
@@ -133,6 +129,7 @@ public class Person extends Staff implements Comparable<Person>{
     public Department getDepartment() {
         return department;
     }
+
     public void setDepartment(Department department) {
         this.department = department;
     }
@@ -142,7 +139,7 @@ public class Person extends Staff implements Comparable<Person>{
      */
     @Override
     public String toString() {
-        Object[] personArgs = {id,lastName, secondName,firstName,jobTittle,photo,birthDay,phoneNumber};
+        Object[] personArgs = {id, lastName, secondName, firstName, jobTittle, photo, birthDay, phoneNumber};
         MessageFormat form = new MessageFormat(
                 "id {0}, lastName= {1}, secondName= {2}, firstName= {3}, jobTittle= {4}, photo= {5}, birthDay= {6}, phoneNumber={7}");
         return form.format(personArgs);

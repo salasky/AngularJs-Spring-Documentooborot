@@ -4,9 +4,10 @@ import java.text.MessageFormat;
 
 public class OrganizationExistInDb extends Exception {
     private String messages;
+
     public OrganizationExistInDb(String message) {
         super(message);
-        this.messages=message;
+        this.messages = message;
     }
 
     /**
@@ -14,6 +15,6 @@ public class OrganizationExistInDb extends Exception {
      */
     @Override
     public String toString() {
-        return MessageFormat.format("Organization c id {0} уже существует",messages);
+        return MessageFormat.format("Organization c id {0} уже существует", messages);
     }
 }

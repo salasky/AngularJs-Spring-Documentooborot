@@ -15,16 +15,18 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+
 @Component
 public class OutgoingDocumentMapper implements RowMapper<OutgoingDocument> {
     @Autowired
     private BaseDocumentMapper baseDocumentMapper;
+
     @Override
     public OutgoingDocument mapRow(ResultSet rs, int rowNum) throws SQLException {
         //Мапим baseDocument к incomingDocument
-        BaseDocument baseDocument=baseDocumentMapper.mapRow(rs,rowNum);
+        BaseDocument baseDocument = baseDocumentMapper.mapRow(rs, rowNum);
 
-        OutgoingDocument outgoingDocument=new OutgoingDocument();
+        OutgoingDocument outgoingDocument = new OutgoingDocument();
         outgoingDocument.setDeliveryType(DocumentDeliveryType.valueOf(rs.getString("outgoing_delivery_type")));
         outgoingDocument.setId(baseDocument.getId());
         outgoingDocument.setName(baseDocument.getName());
@@ -34,7 +36,7 @@ public class OutgoingDocumentMapper implements RowMapper<OutgoingDocument> {
         outgoingDocument.setCreatingDate(baseDocument.getCreatingDate());
 
         //Мапим Person(sender) к outgoingDocument
-        Person sender=new Person();
+        Person sender = new Person();
         sender.setId(UUID.fromString(rs.getString("person_sender_id")));
         sender.setFirstName(rs.getString("person_sender_first_name"));
         sender.setSecondName(rs.getString("person_sender_second_name"));
@@ -42,7 +44,7 @@ public class OutgoingDocumentMapper implements RowMapper<OutgoingDocument> {
         sender.setPhoto(rs.getString("person_sender_photo"));
         sender.setPhoneNumber(rs.getString("person_sender_phone_number"));
         sender.setBirthDay((rs.getDate("person_sender_birth_day")));
-        Department departmentsender=new Department();
+        Department departmentsender = new Department();
         departmentsender.setId(UUID.fromString(rs.getString("department_sender_id")));
         departmentsender.setFullName(rs.getString("department_sender_full_name"));
         departmentsender.setShortName(rs.getString("department_sender_short_name"));
@@ -54,7 +56,7 @@ public class OutgoingDocumentMapper implements RowMapper<OutgoingDocument> {
         organizationsender.setShortName(rs.getString("organization_sender_short_name"));
         organizationsender.setSupervisor(rs.getString("organization_sender_supervisor"));
         organizationsender.setContactNumber(rs.getString("organization_sender_contact_number"));
-        JobTittle jobTittlesender=new JobTittle();
+        JobTittle jobTittlesender = new JobTittle();
         jobTittlesender.setUuid(UUID.fromString(rs.getString("job_tittle_sender_id")));
         jobTittlesender.setName(rs.getString("job_sender_name"));
         departmentsender.setOrganization(organizationsender);

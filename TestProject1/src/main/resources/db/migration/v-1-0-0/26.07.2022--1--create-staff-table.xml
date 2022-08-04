@@ -2,11 +2,8 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
-      http://www.liquibase.org/xml/ns/pro
-      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
     <changeSet author="smigranov" id="1">
         <createTable tableName="organization">
@@ -58,7 +55,8 @@
     </changeSet>
 
     <changeSet author="smigranov" id="3">
-        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="department" constraintName="FK_DEPARTMENT_ORGANIZATION"
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="department"
+                                 constraintName="FK_DEPARTMENT_ORGANIZATION"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="organization" validate="true"/>
     </changeSet>
@@ -114,13 +112,15 @@
     </changeSet>
 
     <changeSet author="smigranov" id="6">
-        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="person" constraintName="FK_PERSON_DEPARTMENT"
+        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="person"
+                                 constraintName="FK_PERSON_DEPARTMENT"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="department" validate="true"/>
     </changeSet>
 
     <changeSet author="smigranov" id="7">
-        <addForeignKeyConstraint baseColumnNames="job_tittle_id" baseTableName="person" constraintName="FK_PERSON_JOBTITTLE"
+        <addForeignKeyConstraint baseColumnNames="job_tittle_id" baseTableName="person"
+                                 constraintName="FK_PERSON_JOBTITTLE"
                                  deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="job_tittle" validate="true"/>
     </changeSet>

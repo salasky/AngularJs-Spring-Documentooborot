@@ -15,36 +15,36 @@ import java.util.UUID;
  *
  * @author smigranov
  */
-public class BaseDocument implements Comparable<BaseDocument>  {
+public class BaseDocument implements Comparable<BaseDocument> {
     /**
      * идентификатор документа
      */
-    @Column(name ="id")
+    @Column(name = "id")
     protected UUID id;
     /**
      * название документа
      */
-    @Column(name ="name")
+    @Column(name = "name")
     protected String name;
     /**
      * Tекст документа
      */
-    @Column(name ="text")
+    @Column(name = "text")
     protected String text;
     /**
      * Регистрационный номер документа
      */
-    @Column(name ="reg_number")
+    @Column(name = "reg_number")
     protected Long regNumber;
     /**
      * дата регистрации документа
      */
-    @Column(name ="creating_date")
+    @Column(name = "creating_date")
     protected Timestamp creatingDate;
     /**
      * автор документа
      */
-    @Column(name ="author")
+    @Column(name = "author")
     protected Person author;
 
     public UUID getId() {

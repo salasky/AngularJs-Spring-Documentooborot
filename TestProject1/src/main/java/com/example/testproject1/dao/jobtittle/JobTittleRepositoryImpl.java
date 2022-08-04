@@ -21,54 +21,55 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
     /**
      * Запрос на получение всех объектов из таблицы jobTittle
      */
-    private final String queryGetAll="SELECT job_tittle.id AS job_tittle_id," +
+    private final String queryGetAll = "SELECT job_tittle.id AS job_tittle_id," +
             " job_tittle.name AS job_name" +
             " FROM job_tittle";
     /**
      * Запрос на получение объекта по id из таблицы jobTittle
      */
-    private final String queryGetById="SELECT job_tittle.id AS job_tittle_id," +
+    private final String queryGetById = "SELECT job_tittle.id AS job_tittle_id," +
             " job_tittle.name AS job_name" +
             " FROM job_tittle WHERE id=?";
     /**
      * Запрос на создание записи в таблице jobTittle
      */
-    private final String queryCreate="INSERT INTO job_tittle VALUES (?,?)";
+    private final String queryCreate = "INSERT INTO job_tittle VALUES (?,?)";
     /**
      * Запрос на удаление всех записей в таблице jobTittle
      */
-    private final String queryDeleteAll="DELETE FROM job_tittle";
+    private final String queryDeleteAll = "DELETE FROM job_tittle";
     /**
      * Запрос на удаление записи по id в таблице jobTittle
      */
-    private final String queryDeleteById="DELETE FROM job_tittle WHERE id=?";
+    private final String queryDeleteById = "DELETE FROM job_tittle WHERE id=?";
     /**
      * Запрос на обновление записи по id в таблице jobTittle
      */
-    private final String queryUpdate="UPDATE job_tittle SET name=? WHERE id=?";
+    private final String queryUpdate = "UPDATE job_tittle SET name=? WHERE id=?";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<JobTittle> getAll(){
+    public List<JobTittle> getAll() {
         return jdbcTemplate.query(queryGetAll, jobTittleMapper);
     }
 
     @Override
     public Optional<JobTittle> getById(String uuid) {
         try {
-            return Optional.of(jdbcTemplate.queryForObject(queryGetById,jobTittleMapper,uuid));
+            return Optional.of(jdbcTemplate.queryForObject(queryGetById, jobTittleMapper, uuid));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
     }
+
     @Override
-    public Integer create(JobTittle jobTittle){
+    public Integer create(JobTittle jobTittle) {
         try {
             isNotExistElseThrow(jobTittle);
-            return jdbcTemplate.update(queryCreate,jobTittle.getUuid().toString()
-                    ,jobTittle.getName());
+            return jdbcTemplate.update(queryCreate, jobTittle.getUuid().toString()
+                    , jobTittle.getName());
 
         } catch (JobTittleExistIndDb e) {
             LOGGER.info(e.toString());
@@ -76,27 +77,32 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
         }
 
     }
+
     public void isNotExistElseThrow(JobTittle jobTittle) throws JobTittleExistIndDb {
-        if(existById(jobTittle.getUuid().toString())){
+        if (existById(jobTittle.getUuid().toString())) {
             throw new JobTittleExistIndDb(jobTittle.getUuid().toString());
         }
     }
+
     @Override
-    public Integer update(JobTittle jobTittle){
-        return jdbcTemplate.update(queryUpdate,jobTittle.getName(),jobTittle.getUuid().toString());
+    public Integer update(JobTittle jobTittle) {
+        return jdbcTemplate.update(queryUpdate, jobTittle.getName(), jobTittle.getUuid().toString());
     }
+
     @Override
-    public Integer deleteAll(){
-       return jdbcTemplate.update(queryDeleteAll);
+    public Integer deleteAll() {
+        return jdbcTemplate.update(queryDeleteAll);
     }
+
     @Override
     public Integer deleteById(String id) {
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
     }
+
     @Override
     public boolean existById(String uuid) {
-        Optional<JobTittle> jobTittle= jdbcTemplate.query(queryGetById,jobTittleMapper,uuid).stream().findFirst();
+        Optional<JobTittle> jobTittle = jdbcTemplate.query(queryGetById, jobTittleMapper, uuid).stream().findFirst();
         return jobTittle.isPresent();
     }
 }

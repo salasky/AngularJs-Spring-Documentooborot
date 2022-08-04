@@ -19,7 +19,7 @@ public class Staff {
     /**
      * идентификатор орг.структуры
      */
-    @Column(name ="id")
+    @Column(name = "id")
     protected UUID id;
 
     @XmlAttribute

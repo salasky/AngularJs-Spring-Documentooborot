@@ -16,15 +16,16 @@ public class DepartmentMapper implements RowMapper<Department> {
 
     @Autowired
     private OrganizationMapper organizationMapper;
+
     @Override
     public Department mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Department department=new Department();
+        Department department = new Department();
         department.setId(UUID.fromString(rs.getString("department_id")));
         department.setFullName(rs.getString("department_full_name"));
         department.setShortName(rs.getString("department_short_name"));
         department.setSupervisor(rs.getString("department_supervisor"));
         department.setContactNumber(rs.getString("department_contact_number"));
-        Organization organization = organizationMapper.mapRow(rs,rowNum);
+        Organization organization = organizationMapper.mapRow(rs, rowNum);
         department.setOrganization(organization);
 
         return department;

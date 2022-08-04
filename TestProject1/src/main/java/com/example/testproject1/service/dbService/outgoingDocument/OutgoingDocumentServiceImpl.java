@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OutgoingDocumentServiceImpl implements OutgoingDocumentService{
+public class OutgoingDocumentServiceImpl implements OutgoingDocumentService {
     private static final Logger LOGGER = LoggerFactory.getLogger(OutgoingDocumentServiceImpl.class);
 
     @Autowired
@@ -21,8 +21,8 @@ public class OutgoingDocumentServiceImpl implements OutgoingDocumentService{
     @Override
     public Optional<OutgoingDocument> create(OutgoingDocument outgoingDocument) {
         LOGGER.info("Попытка создания OutgoingDocument");
-        int updateCount=outgoingDocumentRepository.create(outgoingDocument);
-        if(updateCount==1){
+        int updateCount = outgoingDocumentRepository.create(outgoingDocument);
+        if (updateCount == 1) {
             LOGGER.info("OutgoingDocument успешно сохранен");
             return Optional.ofNullable(outgoingDocument);
         }
@@ -44,9 +44,9 @@ public class OutgoingDocumentServiceImpl implements OutgoingDocumentService{
 
     @Override
     public Optional<OutgoingDocument> update(OutgoingDocument outgoingDocument) {
-        LOGGER.info(MessageFormat.format("Попытка изменить данные у OutgoingDocument с id {0}",outgoingDocument.getId().toString()));
-        int updateCount=outgoingDocumentRepository.update(outgoingDocument);
-        if(updateCount==1){
+        LOGGER.info(MessageFormat.format("Попытка изменить данные у OutgoingDocument с id {0}", outgoingDocument.getId().toString()));
+        int updateCount = outgoingDocumentRepository.update(outgoingDocument);
+        if (updateCount == 1) {
             LOGGER.info("OutgoingDocument успешно обновлен");
             return Optional.ofNullable(outgoingDocument);
         }
@@ -57,8 +57,8 @@ public class OutgoingDocumentServiceImpl implements OutgoingDocumentService{
     @Override
     public String deleteAll() {
         LOGGER.info("Попытка удалить все записи в таблице outgoing_document");
-        int count=outgoingDocumentRepository.deleteAll();
-        if (count>0){
+        int count = outgoingDocumentRepository.deleteAll();
+        if (count > 0) {
             LOGGER.info("Записи из таблицы outgoing_document успешно удалены");
             return "Записи из таблицы outgoing_document успешно удалены";
         }
@@ -69,8 +69,8 @@ public class OutgoingDocumentServiceImpl implements OutgoingDocumentService{
     @Override
     public String deleteById(String id) {
         LOGGER.info("Попытка удалить запись из таблицы outgoing_document");
-        int count=outgoingDocumentRepository.deleteById(id);
-        if (count>0){
+        int count = outgoingDocumentRepository.deleteById(id);
+        if (count > 0) {
             LOGGER.info("Запись из таблицы outgoing_document успешно удалена");
             return "Запись из таблицы outgoing_document успешно удалена";
         }

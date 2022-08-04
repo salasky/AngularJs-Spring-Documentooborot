@@ -12,6 +12,7 @@ public class DateSQLTimeAdapter extends XmlAdapter<String, Date> {
 
     /**
      * Marshal sql.Date в String
+     *
      * @param date объект sql.Date, представляющий дату в формате "yyyy-[m]m-[d]d".
      * @return объект String, представляющий дату в формате "yyyy-[m]m-[d]d"
      */
@@ -22,6 +23,7 @@ public class DateSQLTimeAdapter extends XmlAdapter<String, Date> {
 
     /**
      * Unmarshal String в sql.Date
+     *
      * @param data объект String, представляющий дату в формате "yyyy-[m]m-[d]d".
      * @return {@link  Date} Возвращает объект java.sql.Date, представляющий заданную дату
      */

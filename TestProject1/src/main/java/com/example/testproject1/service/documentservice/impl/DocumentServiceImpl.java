@@ -1,6 +1,5 @@
 package com.example.testproject1.service.documentservice.impl;
 
-import com.example.testproject1.exception.DocumentExistsException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
@@ -11,8 +10,6 @@ import com.example.testproject1.service.dbService.taskDocument.TaskDocumentServi
 import com.example.testproject1.service.documentservice.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.MessageFormat;
 
 /**
  * Класс реализующий интерфейс {@link DocumentService}. Сохраняет переданные документы,
@@ -50,6 +47,7 @@ public class DocumentServiceImpl implements DocumentService {
     public void saveTaskInDB(TaskDocument taskDocument) {
         taskDocumentService.create(taskDocument);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -57,6 +55,7 @@ public class DocumentServiceImpl implements DocumentService {
     public void saveIncomingInDB(IncomingDocument incomingDocument) {
         incomingDocumentService.create(incomingDocument);
     }
+
     /**
      * {@inheritDoc}
      */

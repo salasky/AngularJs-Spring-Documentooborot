@@ -1,10 +1,9 @@
 package com.example.testproject1.dao.baseDocument;
 
 import com.example.testproject1.dao.baseDocument.mapper.BaseDocumentMapper;
-import com.example.testproject1.exception.BaseDocumentExistInDb;
 import com.example.testproject1.model.document.BaseDocument;
-import com.example.testproject1.service.dbService.person.PersonService;
 import com.example.testproject1.model.staff.Person;
+import com.example.testproject1.service.dbService.person.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +20,7 @@ import java.util.Optional;
  * @author smigranov
  */
 @Repository
-public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
+public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseDocumentRepositoryImpl.class);
     /**
      * Бин JdbcTemplate
@@ -43,11 +41,11 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
     /**
      * Запрос на создание записи в таблице base_document
      */
-    private final String queryCreate="INSERT INTO base_document VALUES (?,?,?,?,?,?)";
+    private final String queryCreate = "INSERT INTO base_document VALUES (?,?,?,?,?,?)";
     /**
      * Запрос на получение всех объектов из таблицы base_document
      */
-    private final String queryGetAll=
+    private final String queryGetAll =
             "SELECT  base_document.id AS base_document_id, base_document.name AS base_document_name, " +
                     "base_document.text AS base_document_text, base_document.reg_number AS base_document_number," +
                     "base_document.creating_date AS base_document_date," +
@@ -66,14 +64,14 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
                     "INNER JOIN department " +
                     "    ON person.department_id=department_id " +
                     "INNER JOIN job_tittle " +
-                    "    ON person.job_tittle_id=job_tittle.id "+
+                    "    ON person.job_tittle_id=job_tittle.id " +
                     "INNER JOIN organization " +
                     "   ON organization.id=department.organization_id";
 
     /**
      * Запрос на получение объекта по id из таблицы base_document
      */
-    private final String queryGetById=
+    private final String queryGetById =
             "SELECT  base_document.id AS base_document_id, base_document.name AS base_document_name, " +
                     "base_document.text AS base_document_text, base_document.reg_number AS base_document_number," +
                     "base_document.creating_date AS base_document_date," +
@@ -92,27 +90,27 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
                     "INNER JOIN department " +
                     "    ON person.department_id=department_id " +
                     "INNER JOIN job_tittle " +
-                    "    ON person.job_tittle_id=job_tittle.id "+
+                    "    ON person.job_tittle_id=job_tittle.id " +
                     "INNER JOIN organization " +
                     "   ON organization.id=department.organization_id WHERE base_document.id=?";
     /**
      * Запрос на обновление записи в таблице base_document
      */
-    private final String queryUpdate="UPDATE base_document SET name=?, text=?, reg_number=?," +
+    private final String queryUpdate = "UPDATE base_document SET name=?, text=?, reg_number=?," +
             " creating_date=?, author_id=? WHERE id=?";
 
     /**
      * Запрос на удаление всех записей в таблице base_document
      */
-    private final String queryDeleteAll="DELETE FROM base_document";
+    private final String queryDeleteAll = "DELETE FROM base_document";
     /**
      * Запрос на удаление записи по id в таблице base_document
      */
-    private final String queryDeleteById="DELETE FROM base_document WHERE id=?";
+    private final String queryDeleteById = "DELETE FROM base_document WHERE id=?";
     /**
      * Запрос на обновление записи в таблице base_document
      */
-    private final String queryExistByRegNumber=
+    private final String queryExistByRegNumber =
             "SELECT  base_document.id AS base_document_id, base_document.name AS base_document_name, " +
                     "base_document.text AS base_document_text, base_document.reg_number AS base_document_number," +
                     "base_document.creating_date AS base_document_date," +
@@ -131,7 +129,7 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
                     "INNER JOIN department " +
                     "    ON person.department_id=department_id " +
                     "INNER JOIN job_tittle " +
-                    "    ON person.job_tittle_id=job_tittle.id "+
+                    "    ON person.job_tittle_id=job_tittle.id " +
                     "INNER JOIN organization " +
                     "   ON organization.id=department.organization_id WHERE base_document.reg_number=?";
 
@@ -139,11 +137,11 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
      * {@inheritDoc}
      */
     @Override
-    public Integer create(BaseDocument baseDocument){
+    public Integer create(BaseDocument baseDocument) {
         try {
             personService.create(baseDocument.getAuthor());
-            return jdbcTemplate.update(queryCreate,baseDocument.getId().toString(),baseDocument.getName(),baseDocument.getText(),
-                    baseDocument.getRegNumber(),baseDocument.getCreatingDate(),baseDocument.getAuthor().getId().toString());
+            return jdbcTemplate.update(queryCreate, baseDocument.getId().toString(), baseDocument.getName(), baseDocument.getText(),
+                    baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString());
         } catch (DataIntegrityViolationException ex) {
             LOGGER.error(ex.toString());
             return 0;
@@ -154,32 +152,36 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
      * {@inheritDoc}
      */
     @Override
-    public List<BaseDocument> getAll(){
-        return jdbcTemplate.query(queryGetAll,baseDocumentMapper);
+    public List<BaseDocument> getAll() {
+        return jdbcTemplate.query(queryGetAll, baseDocumentMapper);
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public Optional<BaseDocument> getById(String id){
-        return jdbcTemplate.query(queryGetById,baseDocumentMapper,id).stream().findFirst();
+    public Optional<BaseDocument> getById(String id) {
+        return jdbcTemplate.query(queryGetById, baseDocumentMapper, id).stream().findFirst();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public Integer update(BaseDocument baseDocument){
-        return jdbcTemplate.update(queryUpdate,baseDocument.getName(),baseDocument.getText(),
-                baseDocument.getRegNumber(),baseDocument.getCreatingDate(),baseDocument.getAuthor().getId().toString(),
+    public Integer update(BaseDocument baseDocument) {
+        return jdbcTemplate.update(queryUpdate, baseDocument.getName(), baseDocument.getText(),
+                baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString(),
                 baseDocument.getId().toString());
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public Integer deleteAll(){
+    public Integer deleteAll() {
         return jdbcTemplate.update(queryDeleteAll);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -188,25 +190,26 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository{
         int update = jdbcTemplate.update(queryDeleteById, id);
         return update;
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean existByRegNumber(Long regNumber){
-        Optional<BaseDocument> baseDocumentOptional= jdbcTemplate.query(queryExistByRegNumber,baseDocumentMapper,regNumber).stream().findFirst();
-        if (baseDocumentOptional.isPresent()){
+    public boolean existByRegNumber(Long regNumber) {
+        Optional<BaseDocument> baseDocumentOptional = jdbcTemplate.query(queryExistByRegNumber, baseDocumentMapper, regNumber).stream().findFirst();
+        if (baseDocumentOptional.isPresent()) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean existById(String uuid) {
-        Optional<BaseDocument> baseDocumentOptional= jdbcTemplate.query(queryGetById,baseDocumentMapper,uuid).stream().findFirst();
+        Optional<BaseDocument> baseDocumentOptional = jdbcTemplate.query(queryGetById, baseDocumentMapper, uuid).stream().findFirst();
         return baseDocumentOptional.isPresent();
     }
 }

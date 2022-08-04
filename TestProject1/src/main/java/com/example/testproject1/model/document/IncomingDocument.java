@@ -16,22 +16,22 @@ public class IncomingDocument extends BaseDocument {
     /**
      * отправитель
      */
-    @Column(name ="sender")
+    @Column(name = "sender")
     private Person sender;
     /**
      * адресат
      */
-    @Column(name ="destination")
+    @Column(name = "destination")
     private Person destination;
     /**
      * исходящий номер
      */
-    @Column(name ="destination")
+    @Column(name = "destination")
     private Long number;
     /**
      * исходящая дата регистрации
      */
-    @Column(name ="date_of_registration")
+    @Column(name = "date_of_registration")
     private Timestamp dateOfRegistration;
 
     public IncomingDocument() {

@@ -7,7 +7,7 @@ public class DocumentExistInDb extends Exception {
 
     public DocumentExistInDb(String message) {
         super(message);
-        this.messages=message;
+        this.messages = message;
     }
 
     /**
@@ -15,6 +15,6 @@ public class DocumentExistInDb extends Exception {
      */
     @Override
     public String toString() {
-        return MessageFormat.format("Document c id {0} уже существует",messages);
+        return MessageFormat.format("Document c id {0} уже существует", messages);
     }
 }

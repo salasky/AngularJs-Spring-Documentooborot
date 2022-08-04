@@ -1,12 +1,9 @@
 package com.example.testproject1.service.documentservice.impl;
 
-import com.example.testproject1.exception.DocumentExistsException;
 import com.example.testproject1.model.document.BaseDocument;
-
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
-import com.example.testproject1.service.docfactory.Factory;
 import com.example.testproject1.service.docfactory.IncomingDocumentFactory;
 import com.example.testproject1.service.docfactory.OutgoingDocumentFactory;
 import com.example.testproject1.service.docfactory.TaskDocumentFactory;
@@ -16,9 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.testproject1.model.document.TaskDocument;
-import com.example.testproject1.model.document.OutgoingDocument;
-import com.example.testproject1.model.document.IncomingDocument;
 
 /**
  * Класс реализующий интерфейс {@link GenerateDocumentService}
@@ -44,6 +38,7 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
     private IncomingDocumentFactory incomingDocumentFactory;
     @Autowired
     private OutgoingDocumentFactory outgoingDocumentFactory;
+
     /**
      * {@inheritDoc}
      */
@@ -52,8 +47,8 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
         LOGGER.info("\n         ---------------------Сгенерированные документы---------------------");
         for (int i = 0; i < count; i++) {
             BaseDocument taskDocument = taskDocumentFactory.create();
-            BaseDocument incomingDocument=incomingDocumentFactory.create();
-            BaseDocument outgoingDocument=outgoingDocumentFactory.create();
+            BaseDocument incomingDocument = incomingDocumentFactory.create();
+            BaseDocument outgoingDocument = outgoingDocumentFactory.create();
             documentService.saveTaskInDB((TaskDocument) taskDocument);
             documentService.saveIncomingInDB((IncomingDocument) incomingDocument);
             documentService.saveOutgoingInDB((OutgoingDocument) outgoingDocument);

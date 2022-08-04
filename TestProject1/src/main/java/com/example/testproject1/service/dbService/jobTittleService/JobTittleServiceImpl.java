@@ -12,16 +12,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class JobTittleServiceImpl implements JobTittleService{
+public class JobTittleServiceImpl implements JobTittleService {
     private static final Logger LOGGER = LoggerFactory.getLogger(JobTittleServiceImpl.class);
 
     @Autowired
     private JobTittleRepository jobTittleRepository;
+
     @Override
     public Optional<JobTittle> create(JobTittle jobTittle) {
         LOGGER.info("Попытка создания JobTittle");
-        int updateCount=jobTittleRepository.create(jobTittle);
-        if(updateCount==1){
+        int updateCount = jobTittleRepository.create(jobTittle);
+        if (updateCount == 1) {
             LOGGER.info("JobTittle успешно сохранен");
             return Optional.ofNullable(jobTittle);
         }
@@ -43,9 +44,9 @@ public class JobTittleServiceImpl implements JobTittleService{
 
     @Override
     public Optional<JobTittle> update(JobTittle jobTittle) {
-        LOGGER.info(MessageFormat.format("Попытка изменить данные у JobTittle с id {0}",jobTittle.getUuid().toString()));
-        int updateCount=jobTittleRepository.update(jobTittle);
-        if(updateCount==1){
+        LOGGER.info(MessageFormat.format("Попытка изменить данные у JobTittle с id {0}", jobTittle.getUuid().toString()));
+        int updateCount = jobTittleRepository.update(jobTittle);
+        if (updateCount == 1) {
             LOGGER.info("JobTittle успешно обновлен");
             return Optional.ofNullable(jobTittle);
         }
@@ -56,8 +57,8 @@ public class JobTittleServiceImpl implements JobTittleService{
     @Override
     public String deleteAll() {
         LOGGER.info("Попытка удалить все записи в таблице job_tittle");
-        int count=jobTittleRepository.deleteAll();
-        if (count>0){
+        int count = jobTittleRepository.deleteAll();
+        if (count > 0) {
             LOGGER.info("Записи из таблицы job_tittle успешно удалены");
             return "Записи из таблицы job_tittle успешно удалены";
         }
@@ -68,8 +69,8 @@ public class JobTittleServiceImpl implements JobTittleService{
     @Override
     public String deleteById(String id) {
         LOGGER.info("Попытка удалить запись из таблицы job_tittle");
-        int count=jobTittleRepository.deleteById(id);
-        if (count>0){
+        int count = jobTittleRepository.deleteById(id);
+        if (count > 0) {
             LOGGER.info("Запись из таблицы job_tittle успешно удалена");
             return "Запись из таблицы job_tittle успешно удалена";
         }

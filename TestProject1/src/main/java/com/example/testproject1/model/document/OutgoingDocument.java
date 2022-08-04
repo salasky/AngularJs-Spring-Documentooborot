@@ -16,12 +16,12 @@ public class OutgoingDocument extends BaseDocument {
     /**
      * адресат
      */
-    @Column(name ="sender")
+    @Column(name = "sender")
     private Person sender;
     /**
      * способ доставки
      */
-    @Column(name ="delivery_type")
+    @Column(name = "delivery_type")
     private DocumentDeliveryType deliveryType;
 
     public OutgoingDocument() {
@@ -72,7 +72,6 @@ public class OutgoingDocument extends BaseDocument {
 
     /**
      * {@inheritDoc}
-     *
      */
     @Override
     public int hashCode() {

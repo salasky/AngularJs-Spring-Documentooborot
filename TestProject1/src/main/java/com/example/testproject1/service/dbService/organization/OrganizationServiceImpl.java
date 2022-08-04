@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrganizationServiceImpl implements OrganizationService{
+public class OrganizationServiceImpl implements OrganizationService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationServiceImpl.class);
 
@@ -22,8 +22,8 @@ public class OrganizationServiceImpl implements OrganizationService{
     @Override
     public Optional<Organization> create(Organization organization) {
         LOGGER.info("Попытка создания Organization");
-        int updateCount=organizationRepository.create(organization);
-        if(updateCount==1){
+        int updateCount = organizationRepository.create(organization);
+        if (updateCount == 1) {
             LOGGER.info("Organization успешно сохранен");
             return Optional.ofNullable(organization);
         }
@@ -45,9 +45,9 @@ public class OrganizationServiceImpl implements OrganizationService{
 
     @Override
     public Optional<Organization> update(Organization organization) {
-        LOGGER.info(MessageFormat.format("Попытка изменить данные у Organization с id {0}",organization.getId().toString()));
-        int updateCount=organizationRepository.update(organization);
-        if(updateCount==1){
+        LOGGER.info(MessageFormat.format("Попытка изменить данные у Organization с id {0}", organization.getId().toString()));
+        int updateCount = organizationRepository.update(organization);
+        if (updateCount == 1) {
             LOGGER.info("Organization успешно обновлен");
             return Optional.ofNullable(organization);
         }
@@ -58,8 +58,8 @@ public class OrganizationServiceImpl implements OrganizationService{
     @Override
     public String deleteAll() {
         LOGGER.info("Попытка удалить все записи в таблице organization");
-        int count=organizationRepository.deleteAll();
-        if (count>0){
+        int count = organizationRepository.deleteAll();
+        if (count > 0) {
             LOGGER.info("Записи из таблицы organization успешно удалены");
             return "Записи из таблицы organization успешно удалены";
         }
@@ -70,8 +70,8 @@ public class OrganizationServiceImpl implements OrganizationService{
     @Override
     public String deleteById(String id) {
         LOGGER.info("Попытка удалить запись из таблицы organization");
-        int count=organizationRepository.deleteById(id);
-        if (count>0){
+        int count = organizationRepository.deleteById(id);
+        if (count > 0) {
             LOGGER.info("Запись из таблицы organization успешно удалена");
             return "Запись из таблицы organization успешно удалена";
         }

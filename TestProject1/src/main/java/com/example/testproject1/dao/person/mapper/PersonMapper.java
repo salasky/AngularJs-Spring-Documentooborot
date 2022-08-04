@@ -20,9 +20,10 @@ public class PersonMapper implements RowMapper<Person> {
     private DepartmentMapper departmentMapper;
     @Autowired
     private JobTittleMapper jobTittleMapper;
+
     @Override
     public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Person person=new Person();
+        Person person = new Person();
         person.setId(UUID.fromString(rs.getString("person_id")));
         person.setFirstName(rs.getString("person_first_name"));
         person.setSecondName(rs.getString("person_second_name"));
@@ -31,9 +32,9 @@ public class PersonMapper implements RowMapper<Person> {
         person.setPhoneNumber(rs.getString("person_phone_number"));
         person.setBirthDay((rs.getDate("person_birth_day")));
 
-        Department department=departmentMapper.mapRow(rs,rowNum);
+        Department department = departmentMapper.mapRow(rs, rowNum);
 
-        JobTittle jobTittle=jobTittleMapper.mapRow(rs,rowNum);
+        JobTittle jobTittle = jobTittleMapper.mapRow(rs, rowNum);
 
         person.setDepartment(department);
         person.setJobTittle(jobTittle);

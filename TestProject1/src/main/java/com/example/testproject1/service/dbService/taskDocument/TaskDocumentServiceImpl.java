@@ -1,9 +1,7 @@
 package com.example.testproject1.service.dbService.taskDocument;
 
-import com.example.testproject1.dao.department.DepartmentRepository;
 import com.example.testproject1.dao.taskDocument.TaskDocumentRepository;
 import com.example.testproject1.model.document.TaskDocument;
-import com.example.testproject1.service.dbService.department.DepartmentServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +10,9 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
+
 @Service
-public class TaskDocumentServiceImpl implements TaskDocumentService{
+public class TaskDocumentServiceImpl implements TaskDocumentService {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentServiceImpl.class);
 
     @Autowired
@@ -22,12 +21,12 @@ public class TaskDocumentServiceImpl implements TaskDocumentService{
     @Override
     public Optional<TaskDocument> create(TaskDocument taskDocument) {
         LOGGER.info("Попытка создания TaskDocument");
-        int updateCount=taskDocumentRepository.create(taskDocument);
-        if(updateCount==1){
+        int updateCount = taskDocumentRepository.create(taskDocument);
+        if (updateCount == 1) {
             LOGGER.info("TaskDocument успешно сохранен");
             return Optional.ofNullable(taskDocument);
         }
-        LOGGER.error(MessageFormat.format("Неудачная попытка сохранения TaskDocument c id {0}",taskDocument.getId().toString()));
+        LOGGER.error(MessageFormat.format("Неудачная попытка сохранения TaskDocument c id {0}", taskDocument.getId().toString()));
         return null;
     }
 
@@ -45,9 +44,9 @@ public class TaskDocumentServiceImpl implements TaskDocumentService{
 
     @Override
     public Optional<TaskDocument> update(TaskDocument taskDocument) {
-        LOGGER.info(MessageFormat.format("Попытка изменить данные у TaskDocument с id {0}",taskDocument.getId().toString()));
-        int updateCount=taskDocumentRepository.update(taskDocument);
-        if(updateCount==1){
+        LOGGER.info(MessageFormat.format("Попытка изменить данные у TaskDocument с id {0}", taskDocument.getId().toString()));
+        int updateCount = taskDocumentRepository.update(taskDocument);
+        if (updateCount == 1) {
             LOGGER.info("TaskDocument успешно обновлен");
             return Optional.ofNullable(taskDocument);
         }
@@ -58,8 +57,8 @@ public class TaskDocumentServiceImpl implements TaskDocumentService{
     @Override
     public String deleteAll() {
         LOGGER.info("Попытка удалить все записи в таблице task_document");
-        int count=taskDocumentRepository.deleteAll();
-        if (count>0){
+        int count = taskDocumentRepository.deleteAll();
+        if (count > 0) {
             LOGGER.info("Записи из таблицы task_document успешно удалены");
             return "Записи из таблицы task_document успешно удалены";
         }
@@ -70,8 +69,8 @@ public class TaskDocumentServiceImpl implements TaskDocumentService{
     @Override
     public String deleteById(String id) {
         LOGGER.info("Попытка удалить запись из таблицы task_document");
-        int count=taskDocumentRepository.deleteById(id);
-        if (count>0){
+        int count = taskDocumentRepository.deleteById(id);
+        if (count > 0) {
             LOGGER.info("Запись из таблицы task_document успешно удалена");
             return "Запись из таблицы task_document успешно удалена";
         }

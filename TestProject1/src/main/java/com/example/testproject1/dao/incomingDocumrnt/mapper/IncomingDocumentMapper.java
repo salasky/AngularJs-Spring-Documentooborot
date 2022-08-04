@@ -19,12 +19,13 @@ import java.util.UUID;
 public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
     @Autowired
     private BaseDocumentMapper baseDocumentMapper;
+
     @Override
     public IncomingDocument mapRow(ResultSet rs, int rowNum) throws SQLException {
         //Мапим baseDocument к incomingDocument
-        BaseDocument baseDocument=baseDocumentMapper.mapRow(rs,rowNum);
+        BaseDocument baseDocument = baseDocumentMapper.mapRow(rs, rowNum);
 
-        IncomingDocument incomingDocument=new IncomingDocument();
+        IncomingDocument incomingDocument = new IncomingDocument();
         incomingDocument.setNumber(rs.getLong("incoming_document_number"));
         incomingDocument.setDateOfRegistration(rs.getTimestamp("incoming_document_date_of_registration"));
         incomingDocument.setId(baseDocument.getId());
@@ -35,7 +36,7 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
         incomingDocument.setCreatingDate(baseDocument.getCreatingDate());
 
         //Мапим Person(sender) к incomingDocument
-        Person sender=new Person();
+        Person sender = new Person();
         sender.setId(UUID.fromString(rs.getString("person_sender_id")));
         sender.setFirstName(rs.getString("person_sender_first_name"));
         sender.setSecondName(rs.getString("person_sender_second_name"));
@@ -43,7 +44,7 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
         sender.setPhoto(rs.getString("person_sender_photo"));
         sender.setPhoneNumber(rs.getString("person_sender_phone_number"));
         sender.setBirthDay((rs.getDate("person_sender_birth_day")));
-        Department departmentsender=new Department();
+        Department departmentsender = new Department();
         departmentsender.setId(UUID.fromString(rs.getString("department_sender_id")));
         departmentsender.setFullName(rs.getString("department_sender_full_name"));
         departmentsender.setShortName(rs.getString("department_sender_short_name"));
@@ -55,7 +56,7 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
         organizationsender.setShortName(rs.getString("organization_sender_short_name"));
         organizationsender.setSupervisor(rs.getString("organization_sender_supervisor"));
         organizationsender.setContactNumber(rs.getString("organization_sender_contact_number"));
-        JobTittle jobTittlesender=new JobTittle();
+        JobTittle jobTittlesender = new JobTittle();
         jobTittlesender.setUuid(UUID.fromString(rs.getString("job_tittle_sender_id")));
         jobTittlesender.setName(rs.getString("job_sender_name"));
         departmentsender.setOrganization(organizationsender);
@@ -64,7 +65,7 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
         incomingDocument.setSender(sender);
 
         //Мапим Person(destination) к incomingDocument
-        Person destination=new Person();
+        Person destination = new Person();
         destination.setId(UUID.fromString(rs.getString("person_destination_id")));
         destination.setFirstName(rs.getString("person_destination_first_name"));
         destination.setSecondName(rs.getString("person_destination_second_name"));
@@ -73,7 +74,7 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
         destination.setPhoneNumber(rs.getString("person_destination_phone_number"));
         destination.setBirthDay((rs.getDate("person_destination_birth_day")));
 
-        Department departmentDestination=new Department();
+        Department departmentDestination = new Department();
         departmentDestination.setId(UUID.fromString(rs.getString("department_destination_id")));
         departmentDestination.setFullName(rs.getString("department_destination_full_name"));
         departmentDestination.setShortName(rs.getString("department_destination_short_name"));
@@ -85,7 +86,7 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
         organizationDestination.setShortName(rs.getString("organization_destination_short_name"));
         organizationDestination.setSupervisor(rs.getString("organization_destination_supervisor"));
         organizationDestination.setContactNumber(rs.getString("organization_destination_contact_number"));
-        JobTittle jobTittleDestination=new JobTittle();
+        JobTittle jobTittleDestination = new JobTittle();
         jobTittleDestination.setUuid(UUID.fromString(rs.getString("job_tittle_destination_id")));
         jobTittleDestination.setName(rs.getString("job_destination_name"));
         departmentDestination.setOrganization(organizationDestination);

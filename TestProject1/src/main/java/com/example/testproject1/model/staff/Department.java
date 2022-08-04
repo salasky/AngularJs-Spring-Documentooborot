@@ -1,7 +1,6 @@
 package com.example.testproject1.model.staff;
 
 import javax.persistence.Column;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -19,27 +18,27 @@ public class Department extends Staff {
     /**
      * Полное название департамента
      */
-    @Column(name ="full_name")
+    @Column(name = "full_name")
     private String fullName;
     /**
      * Короткое название департамента
      */
-    @Column(name ="short_name")
+    @Column(name = "short_name")
     private String shortName;
     /**
      * Руководитель департамента
      */
-    @Column(name ="supervisor")
+    @Column(name = "supervisor")
     private String supervisor;
     /**
      * Контактный телефон департамента
      */
-    @Column(name ="contact_number")
+    @Column(name = "contact_number")
     private String contactNumber;
     /**
      * Организация подразделения
      */
-    @Column(name ="organization")
+    @Column(name = "organization")
     private Organization organization;
 
     @XmlElement(name = "fullName")
@@ -50,6 +49,7 @@ public class Department extends Staff {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
     @XmlElement(name = "shortName")
     public String getShortName() {
         return shortName;
@@ -58,6 +58,7 @@ public class Department extends Staff {
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
+
     @XmlElement(name = "supervisor")
     public String getSupervisor() {
         return supervisor;
@@ -66,6 +67,7 @@ public class Department extends Staff {
     public void setSupervisor(String supervisor) {
         this.supervisor = supervisor;
     }
+
     @XmlElement(name = "contactNumber")
     public String getContactNumber() {
         return contactNumber;
@@ -79,6 +81,7 @@ public class Department extends Staff {
     public void setOrganization(Organization organization) {
         this.organization = organization;
     }
+
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
@@ -108,7 +111,7 @@ public class Department extends Staff {
      */
     @Override
     public String toString() {
-        Object[] taskArgs = {id, fullName, shortName, supervisor, contactNumber,organization};
+        Object[] taskArgs = {id, fullName, shortName, supervisor, contactNumber, organization};
         MessageFormat form = new MessageFormat(
                 "Department id= {0} fullName= {1}, shortName= {2}, supervisor= {3}" +
                         ", contactNumber= {4},organization = {5}");

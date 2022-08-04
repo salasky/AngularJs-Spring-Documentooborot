@@ -17,27 +17,27 @@ public class TaskDocument extends BaseDocument {
     /**
      * дата выдачи поручения
      */
-    @Column(name ="out_date")
+    @Column(name = "out_date")
     private Timestamp outDate;
     /**
      * срок исполнения поручения
      */
-    @Column(name ="exec_period")
+    @Column(name = "exec_period")
     private String execPeriod;
     /**
      * ответственный исполнитель
      */
-    @Column(name ="responsible")
+    @Column(name = "responsible")
     private Person responsible;
     /**
      * признак контрольности
      */
-    @Column(name ="sign_of_control")
+    @Column(name = "sign_of_control")
     private Boolean signOfControl;
     /**
      * контролер поручения
      */
-    @Column(name ="control_person")
+    @Column(name = "control_person")
     private Person controlPerson;
 
     public TaskDocument() {
@@ -85,7 +85,6 @@ public class TaskDocument extends BaseDocument {
 
     /**
      * {@inheritDoc}
-     *
      */
     @Override
     public String toString() {
@@ -111,7 +110,6 @@ public class TaskDocument extends BaseDocument {
 
     /**
      * {@inheritDoc}
-     *
      */
     @Override
     public int hashCode() {

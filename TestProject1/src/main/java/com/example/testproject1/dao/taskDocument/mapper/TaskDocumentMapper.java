@@ -19,12 +19,13 @@ import java.util.UUID;
 public class TaskDocumentMapper implements RowMapper<TaskDocument> {
     @Autowired
     private BaseDocumentMapper baseDocumentMapper;
+
     @Override
     public TaskDocument mapRow(ResultSet rs, int rowNum) throws SQLException {
         //Мапим baseDocument к taskDocument
-        BaseDocument baseDocument=baseDocumentMapper.mapRow(rs,rowNum);
+        BaseDocument baseDocument = baseDocumentMapper.mapRow(rs, rowNum);
 
-        TaskDocument taskDocument=new TaskDocument();
+        TaskDocument taskDocument = new TaskDocument();
         taskDocument.setOutDate(rs.getTimestamp("task_document_out_date"));
         taskDocument.setExecPeriod(rs.getString("task_document_exec_period"));
         taskDocument.setSignOfControl(rs.getBoolean("task_document_sign_of_control"));
@@ -36,7 +37,7 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
         taskDocument.setCreatingDate(baseDocument.getCreatingDate());
 
         //Мапим Person(responsible) к taskDocument
-        Person response=new Person();
+        Person response = new Person();
         response.setId(UUID.fromString(rs.getString("person_response_id")));
         response.setFirstName(rs.getString("person_response_first_name"));
         response.setSecondName(rs.getString("person_response_second_name"));
@@ -44,7 +45,7 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
         response.setPhoto(rs.getString("person_response_photo"));
         response.setPhoneNumber(rs.getString("person_response_phone_number"));
         response.setBirthDay((rs.getDate("person_response_birth_day")));
-        Department departmentResponse=new Department();
+        Department departmentResponse = new Department();
         departmentResponse.setId(UUID.fromString(rs.getString("department_response_id")));
         departmentResponse.setFullName(rs.getString("department_response_full_name"));
         departmentResponse.setShortName(rs.getString("department_response_short_name"));
@@ -56,7 +57,7 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
         organizationResponse.setShortName(rs.getString("organization_response_short_name"));
         organizationResponse.setSupervisor(rs.getString("organization_response_supervisor"));
         organizationResponse.setContactNumber(rs.getString("organization_response_contact_number"));
-        JobTittle jobTittleResponse=new JobTittle();
+        JobTittle jobTittleResponse = new JobTittle();
         jobTittleResponse.setUuid(UUID.fromString(rs.getString("job_tittle_response_id")));
         jobTittleResponse.setName(rs.getString("job_response_name"));
         departmentResponse.setOrganization(organizationResponse);
@@ -65,7 +66,7 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
         taskDocument.setResponsible(response);
 
         //Мапим Person(control_person) к taskDocument
-        Person controlPerson=new Person();
+        Person controlPerson = new Person();
         controlPerson.setId(UUID.fromString(rs.getString("person_control_id")));
         controlPerson.setFirstName(rs.getString("person_control_id_first_name"));
         controlPerson.setSecondName(rs.getString("person_control_id_second_name"));
@@ -73,7 +74,7 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
         controlPerson.setPhoto(rs.getString("person_control_id_photo"));
         controlPerson.setPhoneNumber(rs.getString("person_control_id_phone_number"));
         controlPerson.setBirthDay((rs.getDate("person_control_id_birth_day")));
-        Department departmentControl=new Department();
+        Department departmentControl = new Department();
         departmentControl.setId(UUID.fromString(rs.getString("department_control_id")));
         departmentControl.setFullName(rs.getString("department_control_full_name"));
         departmentControl.setShortName(rs.getString("department_control_short_name"));
@@ -85,7 +86,7 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
         organizationControl.setShortName(rs.getString("organization_control_short_name"));
         organizationControl.setSupervisor(rs.getString("organization_control_supervisor"));
         organizationControl.setContactNumber(rs.getString("organization_control_contact_number"));
-        JobTittle jobTittleControl=new JobTittle();
+        JobTittle jobTittleControl = new JobTittle();
         jobTittleControl.setUuid(UUID.fromString(rs.getString("job_tittle_control_id")));
         jobTittleControl.setName(rs.getString("job_control_name"));
         departmentControl.setOrganization(organizationControl);

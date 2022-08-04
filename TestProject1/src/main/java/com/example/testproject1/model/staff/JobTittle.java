@@ -20,12 +20,12 @@ public class JobTittle {
     /**
      * Идентификатор должности
      */
-    @Column(name ="id")
+    @Column(name = "id")
     private UUID uuid;
     /**
      * Наименование должности
      */
-    @Column(name ="name")
+    @Column(name = "name")
     private String name;
 
     public JobTittle(UUID uuid, String name) {
@@ -35,6 +35,7 @@ public class JobTittle {
 
     public JobTittle() {
     }
+
     @XmlAttribute(name = "id")
     public UUID getUuid() {
         return uuid;
@@ -43,6 +44,7 @@ public class JobTittle {
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
+
     @XmlElement(name = "jobTittleName")
     public String getName() {
         return name;

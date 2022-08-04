@@ -22,6 +22,7 @@ import javax.xml.bind.JAXBException;
 public class JaxbConfiguration {
     /**
      * Метод получения бина JAXBContext
+     *
      * @return озвращает сконфигурированный JAXBContext
      */
     @Bean

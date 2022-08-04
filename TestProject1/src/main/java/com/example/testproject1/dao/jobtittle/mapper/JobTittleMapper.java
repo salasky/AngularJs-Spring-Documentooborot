@@ -7,11 +7,12 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+
 @Component
 public class JobTittleMapper implements RowMapper<JobTittle> {
     @Override
     public JobTittle mapRow(ResultSet rs, int rowNum) throws SQLException {
-        JobTittle jobTittle=new JobTittle();
+        JobTittle jobTittle = new JobTittle();
         jobTittle.setUuid(UUID.fromString(rs.getString("job_tittle_id")));
         jobTittle.setName(rs.getString("job_name"));
         return jobTittle;
