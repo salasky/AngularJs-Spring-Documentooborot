@@ -1,6 +1,7 @@
 package com.example.testproject1.dao.taskdocument;
 
 import com.example.testproject1.dao.taskdocument.mapper.TaskDocumentMapper;
+import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
@@ -110,16 +111,23 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
      * {@inheritDoc}
      */
     @Override
-    public Integer deleteAll() {
-        return jdbcTemplate.update(TASK_DOCUMENT_DELETE_ALL_QUERY);
+    public boolean deleteAll() throws DeletePoorlyException {
+        int deleteCount= jdbcTemplate.update(TASK_DOCUMENT_DELETE_ALL_QUERY);
+        if(deleteCount>0){
+            return true;
+        }
+        throw new DeletePoorlyException();
     }
     /**
      * {@inheritDoc}
      */
     @Override
-    public Integer deleteById(String id) {
-        int update = jdbcTemplate.update(TASK_DOCUMENT_DELETE_BY_ID_QUERY, id);
-        return update;
+    public boolean deleteById(String id) throws DeletePoorlyException {
+        int deleteCount = jdbcTemplate.update(TASK_DOCUMENT_DELETE_BY_ID_QUERY, id);
+        if(deleteCount==1) {
+            return true;
+        }
+        throw new DeletePoorlyException();
     }
     /**
      * {@inheritDoc}

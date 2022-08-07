@@ -14,7 +14,7 @@ public interface OrganizationService {
 
     Optional<Organization> update(Organization organization);
 
-    String deleteAll();
+    void deleteAll();
 
-    String deleteById(String id);
+    void deleteById(String id);
 }

@@ -1,6 +1,7 @@
 package com.example.testproject1.service.dbservice.jobtittleservice;
 
 import com.example.testproject1.dao.jobtittle.JobTittleRepository;
+import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.staff.JobTittle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,28 +18,35 @@ public class JobTittleServiceImpl implements JobTittleService {
 
     @Autowired
     private JobTittleRepository jobTittleRepository;
+    private final String CREATE_SUCCESS="JobTittle успешно сохранен";
+    private final String CREATE_FAIL="Неудачная попытка сохранения JobTittle";
+    private final String GET_ALL_ATTEMPT="Попытка выдачи всех JobTittle";
+    private final String GET_BY_ID_ATTEMPT="Попытка получить JobTittle по id";
+    private final String UPDATE_SUCCESS="JobTittle успешно обновлен";
+    private final String UPDATE_FAIL="Неудачная попытка обновления JobTittle";
+    private final String DELETE_SUCCESS="Записи из таблицы JobTittle успешно удалены";
+    private final String DELETE_BY_ID_SUCCESS="Запись из таблицы JobTittle успешно удалена";
 
     @Override
     public Optional<JobTittle> create(JobTittle jobTittle) {
-        LOGGER.info("Попытка создания JobTittle");
         Optional<JobTittle> jobTittleOptional = jobTittleRepository.create(jobTittle);
         if (jobTittleOptional.isPresent()) {
-            LOGGER.info("JobTittle успешно сохранен");
+            LOGGER.info(CREATE_SUCCESS);
             return Optional.ofNullable(jobTittle);
         }
-        LOGGER.error("Неудачная попытка сохранения JobTittle");
+        LOGGER.error(CREATE_FAIL);
         return Optional.empty();
     }
 
     @Override
     public List<JobTittle> getall() {
-        LOGGER.info("Попытка выдачи всех JobTittle");
+        LOGGER.info(GET_ALL_ATTEMPT);
         return jobTittleRepository.getAll();
     }
 
     @Override
     public Optional<JobTittle> getById(String id) {
-        LOGGER.info("Попытка получить JobTittle по id");
+        LOGGER.info(GET_BY_ID_ATTEMPT);
         return jobTittleRepository.getById(id);
     }
 
@@ -47,34 +55,32 @@ public class JobTittleServiceImpl implements JobTittleService {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у JobTittle с id {0}", jobTittle.getUuid().toString()));
         int updateCount = jobTittleRepository.update(jobTittle);
         if (updateCount == 1) {
-            LOGGER.info("JobTittle успешно обновлен");
+            LOGGER.info(UPDATE_SUCCESS);
             return Optional.ofNullable(jobTittle);
         }
-        LOGGER.error("Неудачная попытка обновления JobTittle");
-        return null;
+        LOGGER.error(UPDATE_FAIL);
+        return Optional.empty();
     }
 
     @Override
-    public String deleteAll() {
-        LOGGER.info("Попытка удалить все записи в таблице job_tittle");
-        int count = jobTittleRepository.deleteAll();
-        if (count > 0) {
-            LOGGER.info("Записи из таблицы job_tittle успешно удалены");
-            return "Записи из таблицы job_tittle успешно удалены";
+    public void deleteAll() {
+        try {
+            if (jobTittleRepository.deleteAll()) {
+                LOGGER.info(DELETE_SUCCESS);
+            }
+        } catch (DeletePoorlyException e) {
+            LOGGER.error(e.toString());
         }
-        LOGGER.error("Не удачная попытка удаления записей из таблицы job_tittle");
-        return "Не удачная попытка удаления записей из таблицы job_tittle";
     }
 
     @Override
-    public String deleteById(String id) {
-        LOGGER.info("Попытка удалить запись из таблицы job_tittle");
-        int count = jobTittleRepository.deleteById(id);
-        if (count > 0) {
-            LOGGER.info("Запись из таблицы job_tittle успешно удалена");
-            return "Запись из таблицы job_tittle успешно удалена";
+    public void deleteById(String id) {
+        try {
+            if (jobTittleRepository.deleteById(id)) {
+                LOGGER.info(DELETE_BY_ID_SUCCESS);
+            }
+        } catch (DeletePoorlyException e) {
+            LOGGER.error(e.toString());
         }
-        LOGGER.error("Не удачная попытка удаления записи из таблицы job_tittle");
-        return "Не удачная попытка удаления записи из таблицы job_tittle";
     }
 }

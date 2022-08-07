@@ -2,6 +2,7 @@ package com.example.testproject1.dao.basedocument;
 
 import com.example.testproject1.dao.basedocument.mapper.BaseDocumentMapper;
 import com.example.testproject1.dao.queryholder.QueryHolder;
+import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.person.PersonService;
@@ -98,17 +99,24 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      * {@inheritDoc}
      */
     @Override
-    public Integer deleteAll() {
-        return jdbcTemplate.update(BASE_DOCUMENT_DELETE_ALL_QUERY);
+    public boolean deleteAll() throws DeletePoorlyException {
+        int deleteCount= jdbcTemplate.update(BASE_DOCUMENT_DELETE_ALL_QUERY);
+        if(deleteCount>0){
+            return true;
+        }
+        throw new DeletePoorlyException();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Integer deleteById(String id) {
-        int update = jdbcTemplate.update(BASE_DOCUMENT_DELETE_BY_ID_QUERY, id);
-        return update;
+    public boolean deleteById(String id) throws DeletePoorlyException {
+        int deleteCount = jdbcTemplate.update(BASE_DOCUMENT_DELETE_BY_ID_QUERY, id);
+        if(deleteCount==1) {
+            return true;
+        }
+        throw new DeletePoorlyException();
     }
 
     /**

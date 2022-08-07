@@ -1,6 +1,7 @@
 package com.example.testproject1.service.dbservice.incomingdocument;
 
 import com.example.testproject1.dao.incomingdocument.IncomingDocumentRepository;
+import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.IncomingDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,27 +20,35 @@ public class IncomingDocumentServiceImpl implements IncomingDocumentService {
     @Autowired
     private IncomingDocumentRepository incomingDocumentRepository;
 
+    private final String CREATE_SUCCESS="IncomingDocument успешно сохранен";
+    private final String CREATE_FAIL="Неудачная попытка сохранения IncomingDocument";
+    private final String GET_ALL_ATTEMPT="Попытка выдачи всех IncomingDocument";
+    private final String GET_BY_ID_ATTEMPT="Попытка получить IncomingDocument по id";
+    private final String UPDATE_SUCCESS="IncomingDocument успешно обновлен";
+    private final String UPDATE_FAIL="Неудачная попытка обновления IncomingDocument";
+    private final String DELETE_SUCCESS="Записи из таблицы incoming_document успешно удалены";
+    private final String DELETE_BY_ID_SUCCESS="Запись из таблицы incoming_document успешно удалена";
+
     @Override
     public Optional<IncomingDocument> create(IncomingDocument incomingDocument) {
-        LOGGER.info("Попытка создания IncomingDocument");
         Optional<IncomingDocument> incomingDocumentOptional = incomingDocumentRepository.create(incomingDocument);
         if (incomingDocumentOptional.isPresent()) {
-            LOGGER.info("IncomingDocument успешно сохранен");
+            LOGGER.info(CREATE_SUCCESS);
             return Optional.ofNullable(incomingDocument);
         }
-        LOGGER.error("Неудачная попытка сохранения IncomingDocument");
+        LOGGER.error(CREATE_FAIL);
         return Optional.empty();
     }
 
     @Override
     public List<IncomingDocument> getall() {
-        LOGGER.info("Попытка выдачи всех IncomingDocument");
+        LOGGER.info(GET_ALL_ATTEMPT);
         return incomingDocumentRepository.getAll();
     }
 
     @Override
     public Optional<IncomingDocument> getById(String id) {
-        LOGGER.info("Попытка получить IncomingDocument по id");
+        LOGGER.info(GET_BY_ID_ATTEMPT);
         return incomingDocumentRepository.getById(id);
     }
 
@@ -48,34 +57,32 @@ public class IncomingDocumentServiceImpl implements IncomingDocumentService {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у IncomingDocument с id {0}", incomingDocument.getId().toString()));
         int updateCount = incomingDocumentRepository.update(incomingDocument);
         if (updateCount == 1) {
-            LOGGER.info("IncomingDocument успешно обновлен");
+            LOGGER.info(UPDATE_SUCCESS);
             return Optional.ofNullable(incomingDocument);
         }
-        LOGGER.error("Неудачная попытка обновления IncomingDocument");
-        return null;
+        LOGGER.error(UPDATE_FAIL);
+        return Optional.empty();
     }
 
     @Override
-    public String deleteAll() {
-        LOGGER.info("Попытка удалить все записи в таблице incoming_document");
-        int count = incomingDocumentRepository.deleteAll();
-        if (count > 0) {
-            LOGGER.info("Записи из таблицы incoming_document успешно удалены");
-            return "Записи из таблицы incoming_document успешно удалены";
+    public void deleteAll() {
+        try {
+            if (incomingDocumentRepository.deleteAll()) {
+                LOGGER.info(DELETE_SUCCESS);
+            }
+        } catch (DeletePoorlyException e) {
+            LOGGER.error(e.toString());
         }
-        LOGGER.error("Не удачная попытка удаления записей из таблицы incoming_document");
-        return "Не удачная попытка удаления записей из таблицы incoming_document";
     }
 
     @Override
-    public String deleteById(String id) {
-        LOGGER.info("Попытка удалить запись из таблицы incoming_document");
-        int count = incomingDocumentRepository.deleteById(id);
-        if (count > 0) {
-            LOGGER.info("Запись из таблицы incoming_document успешно удалена");
-            return "Запись из таблицы incoming_document успешно удалена";
+    public void deleteById(String id) {
+        try {
+            if (incomingDocumentRepository.deleteById(id)) {
+                LOGGER.info(DELETE_BY_ID_SUCCESS);
+            }
+        } catch (DeletePoorlyException e) {
+            LOGGER.error(e.toString());
         }
-        LOGGER.error("Не удачная попытка удаления записи из таблицы incoming_document");
-        return "Не удачная попытка удаления записи из таблицы incoming_document";
     }
 }

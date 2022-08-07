@@ -14,7 +14,7 @@ public interface JobTittleService {
 
     Optional<JobTittle> update(JobTittle jobTittle);
 
-    String deleteAll();
+    void deleteAll();
 
-    String deleteById(String id);
+    void deleteById(String id);
 }

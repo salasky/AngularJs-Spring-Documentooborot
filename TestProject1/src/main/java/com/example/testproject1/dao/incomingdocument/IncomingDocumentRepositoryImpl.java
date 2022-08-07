@@ -1,6 +1,7 @@
 package com.example.testproject1.dao.incomingdocument;
 
 import com.example.testproject1.dao.incomingdocument.mapper.IncomingDocumentMapper;
+import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
@@ -57,7 +58,7 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
      */
     @Override
     public Optional<IncomingDocument> create(IncomingDocument incomingDocument) {
-        if (incomingDocument!=null) {
+        if (incomingDocument != null) {
             try {
                 BaseDocument baseDocument = new BaseDocument();
                 baseDocument.setId(incomingDocument.getId());
@@ -80,9 +81,9 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
             } catch (DataIntegrityViolationException ex) {
                 throw new RuntimeException(ex);
             }
-        }
-        else throw new IllegalArgumentException("IncomingDocument не может быть null");
+        } else throw new IllegalArgumentException("IncomingDocument не может быть null");
     }
+
     /**
      * {@inheritDoc}
      */
@@ -90,6 +91,7 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
     public List<IncomingDocument> getAll() {
         return jdbcTemplate.query(INCOMING_DOCUMENT_GET_ALL_QUERY, incomingDocumentMapper);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -98,6 +100,7 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
         return jdbcTemplate.query(INCOMING_DOCUMENT_GET_BY_ID_QUERY, incomingDocumentMapper, id)
                 .stream().findFirst();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -107,20 +110,31 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
                 incomingDocument.getDestination().getId().toString(), incomingDocument.getNumber(),
                 incomingDocument.getDateOfRegistration(), incomingDocument.getId().toString());
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public Integer deleteAll() {
-        return jdbcTemplate.update(INCOMING_DOCUMENT_DELETE_ALL_QUERY);
+    public boolean deleteAll() throws DeletePoorlyException {
+        int deleteCount = jdbcTemplate.update(INCOMING_DOCUMENT_DELETE_ALL_QUERY);
+        if (deleteCount > 0) {
+            return true;
+        }
+        throw new DeletePoorlyException();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public Integer deleteById(String id) {
-        return jdbcTemplate.update(INCOMING_DOCUMENT_DELETE_BY_ID_QUERY, id);
+    public boolean deleteById(String id) throws DeletePoorlyException {
+        int deleteCount = jdbcTemplate.update(INCOMING_DOCUMENT_DELETE_BY_ID_QUERY, id);
+        if (deleteCount == 1) {
+            return true;
+        }
+        throw new DeletePoorlyException();
     }
+
     /**
      * {@inheritDoc}
      */

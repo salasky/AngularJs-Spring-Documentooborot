@@ -14,8 +14,8 @@ public interface PersonService {
 
     Optional<Person> update(Person person);
 
-    String deleteAll();
+    void deleteAll();
 
-    String deleteById(String id);
+    void deleteById(String id);
 }
 

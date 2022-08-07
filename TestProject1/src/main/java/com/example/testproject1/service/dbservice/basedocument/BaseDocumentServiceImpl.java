@@ -1,6 +1,7 @@
 package com.example.testproject1.service.dbservice.basedocument;
 
 import com.example.testproject1.dao.basedocument.BaseDocumentRepository;
+import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.BaseDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,70 +17,73 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseDocumentServiceImpl.class);
     @Autowired
     private BaseDocumentRepository baseDocumentRepository;
-
+    private final String CREATE_SUCCESS="BaseDocument успешно сохранен";
+    private final String CREATE_FAIL="Не удалось сохранить BaseDocument";
+    private final String GET_ALL_ATTEMPT="Попытка выдачи всех BaseDocument";
+    private final String GET_BY_ID_ATTEMPT="Попытка получить BaseDocument по id";
+    private final String UPDATE_SUCCESS="BaseDocument успешно обновлен";
+    private final String UPDATE_FAIL="Неудачная попытка сохранения BaseDocument";
+    private final String DELETE_ALL_SUCCESS="Записи из таблицы base_document успешно удалены";
+    private final String DELETE_BY_ID_SUCCESS="Запись из таблицы base_document успешно удалена";
+    private final String FINE_BY_REG_NUMBER="Поиск baseDocument по регистрационному номеру";
     @Override
     public Optional<BaseDocument> create(BaseDocument baseDocument) {
-        LOGGER.info("Попытка создания BaseDocument");
         Optional<BaseDocument> baseDocumentOptional = baseDocumentRepository.create(baseDocument);
         if (baseDocumentOptional.isPresent()) {
-            LOGGER.info("BaseDocument успешно сохранен");
+            LOGGER.info(CREATE_SUCCESS);
             return Optional.ofNullable(baseDocumentOptional.get());
         }
-        LOGGER.error("Неудачная попытка сохранения BaseDocument");
-        return null;
+        LOGGER.error(CREATE_FAIL);
+        return Optional.empty();
     }
 
     @Override
     public List<BaseDocument> getall() {
-        LOGGER.info("Попытка выдачи всех BaseDocument");
+        LOGGER.info(GET_ALL_ATTEMPT);
         return baseDocumentRepository.getAll();
     }
 
     @Override
     public Optional<BaseDocument> getById(String id) {
-        LOGGER.info("Попытка получить BaseDocument по id");
+        LOGGER.info(GET_BY_ID_ATTEMPT);
         return baseDocumentRepository.getById(id);
     }
 
     @Override
     public Optional<BaseDocument> update(BaseDocument baseDocument) {
-        LOGGER.info(MessageFormat.format("Попытка изменить данные у BaseDocument с id {0}", baseDocument.getId().toString()));
         int updateCount = baseDocumentRepository.update(baseDocument);
         if (updateCount == 1) {
-            LOGGER.info("BaseDocument успешно обновлен");
+            LOGGER.info(UPDATE_SUCCESS);
             return Optional.ofNullable(baseDocument);
         }
-        LOGGER.error("Неудачная попытка сохранения BaseDocument");
+        LOGGER.error(UPDATE_FAIL);
         return Optional.empty();
     }
 
     @Override
-    public String deleteAll() {
-        LOGGER.info("Попытка удалить все записи в таблице base_document");
-        int count = baseDocumentRepository.deleteAll();
-        if (count > 0) {
-            LOGGER.info("Записи из таблицы base_document успешно удалены");
-            return "Записи из таблицы base_document успешно удалены";
+    public void deleteAll() {
+        try {
+            if (baseDocumentRepository.deleteAll()) {
+                LOGGER.info(DELETE_ALL_SUCCESS);
+            }
+        } catch (DeletePoorlyException e) {
+            LOGGER.error(e.toString());
         }
-        LOGGER.error("Не удачная попытка удаления записей из таблицы base_document");
-        return "Не удачная попытка удаления записей из таблицы base_document";
     }
-
     @Override
-    public String deleteById(String id) {
-        LOGGER.info("Попытка удалить запись из таблицы base_document");
-        int count = baseDocumentRepository.deleteById(id);
-        if (count > 0) {
-            LOGGER.info("Запись из таблицы base_document успешно удалена");
-            return "Запись из таблицы base_document успешно удалена";
+    public void deleteById(String id) {
+        try {
+            if (baseDocumentRepository.deleteById(id)) {
+                LOGGER.info(DELETE_BY_ID_SUCCESS);
+            }
+        } catch (DeletePoorlyException e) {
+            LOGGER.error(e.toString());
         }
-        LOGGER.error("Не удачная попытка удаления записи из таблицы base_document");
-        return "Не удачная попытка удаления записи из таблицы base_document";
     }
 
     @Override
     public boolean existByRegNumber(Long regNumber) {
-        LOGGER.info("Поиск baseDocument по регистрационному номеру");
+        LOGGER.info(FINE_BY_REG_NUMBER);
         return baseDocumentRepository.existByRegNumber(regNumber);
     }
 }

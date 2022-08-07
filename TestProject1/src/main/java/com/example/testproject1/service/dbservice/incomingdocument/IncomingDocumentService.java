@@ -14,7 +14,7 @@ public interface IncomingDocumentService {
 
     Optional<IncomingDocument> update(IncomingDocument incomingDocument);
 
-    String deleteAll();
+    void deleteAll();
 
-    String deleteById(String id);
+    void deleteById(String id);
 }

@@ -14,7 +14,7 @@ public interface TaskDocumentService {
 
     Optional<TaskDocument> update(TaskDocument taskDocument);
 
-    String deleteAll();
+    void deleteAll();
 
-    String deleteById(String id);
+    void deleteById(String id);
 }

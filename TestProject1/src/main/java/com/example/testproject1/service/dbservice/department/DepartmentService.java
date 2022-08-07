@@ -14,7 +14,7 @@ public interface DepartmentService {
 
     Optional<Department> update(Department department);
 
-    String deleteAll();
+    void deleteAll();
 
-    String deleteById(String id);
+    void deleteById(String id);
 }

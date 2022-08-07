@@ -1,6 +1,7 @@
 package com.example.testproject1.dao.organization;
 
 import com.example.testproject1.dao.organization.mapper.OrganizationMapper;
+import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.exception.DepartmentExistInDataBaseException;
 import com.example.testproject1.exception.OrganizationExistInDataBaseException;
 import com.example.testproject1.model.staff.Organization;
@@ -103,16 +104,23 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
      * {@inheritDoc}
      */
     @Override
-    public Integer deleteAll() {
-        return jdbcTemplate.update(ORGANIZATION_DELETE_ALL_QUERY);
+    public boolean deleteAll() throws DeletePoorlyException {
+        int deleteCount= jdbcTemplate.update(ORGANIZATION_DELETE_ALL_QUERY);
+        if(deleteCount>0) {
+            return true;
+        }
+        throw new DeletePoorlyException();
     }
     /**
      * {@inheritDoc}
      */
     @Override
-    public Integer deleteById(String id) {
-        int update = jdbcTemplate.update(ORGANIZATION_DELETE_BY_ID_QUERY, id);
-        return update;
+    public boolean deleteById(String id) throws DeletePoorlyException {
+        int deleteCount = jdbcTemplate.update(ORGANIZATION_DELETE_BY_ID_QUERY, id);
+        if(deleteCount==1) {
+            return true;
+        }
+        throw new DeletePoorlyException();
     }
     /**
      * {@inheritDoc}

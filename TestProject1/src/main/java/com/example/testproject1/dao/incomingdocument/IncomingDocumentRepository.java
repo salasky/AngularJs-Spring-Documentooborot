@@ -1,5 +1,6 @@
 package com.example.testproject1.dao.incomingdocument;
 
+import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.IncomingDocument;
 
 import java.util.List;
@@ -40,16 +41,16 @@ public interface IncomingDocumentRepository {
     /**
      * Метод удаления всех записей с таблицы baseDocument
      *
-     * @return возвращает количество удаленных строк
+     * @return возвращает true при успешном удалении и false при неудаче
      */
-    Integer deleteAll();
+    boolean deleteAll() throws DeletePoorlyException;
     /**
      * Метод удаления по id
      *
      * @param id UUID в строковом формате
-     * @return возвращает 1 при удачном удалениии и 0 при неудаче
+     * @return возвращает true при успешном удалении и false при неудаче
      */
-    Integer deleteById(String id);
+    boolean deleteById(String id) throws DeletePoorlyException;
     /**
      * Метод проверки существования {@link IncomingDocument} в базе по переданному uuid
      *

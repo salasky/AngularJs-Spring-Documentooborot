@@ -1,6 +1,7 @@
 package com.example.testproject1.dao.person;
 
 import com.example.testproject1.dao.person.mapper.PersonMapper;
+import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.exception.DepartmentExistInDataBaseException;
 import com.example.testproject1.exception.PersonExistInDataBaseException;
 import com.example.testproject1.model.staff.Person;
@@ -10,6 +11,7 @@ import com.example.testproject1.model.staff.Department;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -115,16 +117,23 @@ public class PersonRepositoryImpl implements PersonRepository {
      * {@inheritDoc}
      */
     @Override
-    public Integer deleteAll() {
-        return jdbcTemplate.update(PERSON_DELETE_ALL_QUERY);
+    public boolean deleteAll() throws DeletePoorlyException {
+        int deleteCount= jdbcTemplate.update(PERSON_DELETE_ALL_QUERY);
+        if(deleteCount>0){
+            return true;
+        }
+        throw new DeletePoorlyException();
     }
     /**
      * {@inheritDoc}
      */
     @Override
-    public Integer deleteById(String id) {
-        int update = jdbcTemplate.update(PERSON_DELETE_BY_ID_QUERY, id);
-        return update;
+    public boolean deleteById(String id) throws DeletePoorlyException {
+        int deleteCount = jdbcTemplate.update(PERSON_DELETE_BY_ID_QUERY, id);
+        if(deleteCount==1) {
+            return true;
+        }
+        throw new DeletePoorlyException();
     }
     /**
      * {@inheritDoc}

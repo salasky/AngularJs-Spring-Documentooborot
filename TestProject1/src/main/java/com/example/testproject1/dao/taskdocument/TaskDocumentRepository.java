@@ -1,5 +1,6 @@
 package com.example.testproject1.dao.taskdocument;
 
+import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.TaskDocument;
 
 import java.util.List;
@@ -40,16 +41,16 @@ public interface TaskDocumentRepository {
     /**
      * Метод удаления всех записей с таблицы taskDocument
      *
-     * @return возвращает количество удаленных строк
+     * @return возвращает true при успешном удалении и false при неудаче
      */
-    Integer deleteAll();
+    boolean deleteAll() throws DeletePoorlyException;
     /**
      * Метод удаления по id
      *
      * @param id UUID в строковом формате
-     * @return возвращает 1 при удачном удалениии и 0 при неудаче
+     * @return возвращает true при успешном удалении и false при неудаче
      */
-    Integer deleteById(String id);
+    boolean deleteById(String id) throws DeletePoorlyException;
     /**
      * Метод проверки существования {@link TaskDocument} в базе по переданному uuid
      *

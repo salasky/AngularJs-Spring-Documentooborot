@@ -1,6 +1,7 @@
 package com.example.testproject1.service.dbservice.organization;
 
 import com.example.testproject1.dao.organization.OrganizationRepository;
+import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.staff.Organization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,27 +20,35 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Autowired
     private OrganizationRepository organizationRepository;
 
+    private final String CREATE_SUCCESS="Organization успешно сохранен";
+    private final String CREATE_FAIL="Неудачная попытка сохранения Organization";
+    private final String GET_ALL_ATTEMPT="Попытка выдачи всех Organization";
+    private final String GET_BY_ID_ATTEMPT="Попытка получить Organization по id";
+    private final String UPDATE_SUCCESS="Organization успешно обновлен";
+    private final String UPDATE_FAIL="Неудачная попытка обновления Organization";
+    private final String DELETE_SUCCESS="Записи из таблицы Organization успешно удалены";
+    private final String DELETE_BY_ID_SUCCESS="Запись из таблицы Organization успешно удалена";
+
     @Override
     public Optional<Organization> create(Organization organization) {
-        LOGGER.info("Попытка создания Organization");
         Optional<Organization> optionalOrganization = organizationRepository.create(organization);
         if (optionalOrganization.isPresent()) {
-            LOGGER.info("Organization успешно сохранен");
+            LOGGER.info(CREATE_SUCCESS);
             return Optional.ofNullable(organization);
         }
-        LOGGER.error("Неудачная попытка сохранения Organization");
+        LOGGER.error(CREATE_FAIL);
         return Optional.empty();
     }
 
     @Override
     public List<Organization> getall() {
-        LOGGER.info("Попытка выдачи всех Organization");
+        LOGGER.info(GET_ALL_ATTEMPT);
         return organizationRepository.getAll();
     }
 
     @Override
     public Optional<Organization> getById(String id) {
-        LOGGER.info("Попытка получить Organization по id");
+        LOGGER.info(GET_BY_ID_ATTEMPT);
         return organizationRepository.getById(id);
     }
 
@@ -48,34 +57,32 @@ public class OrganizationServiceImpl implements OrganizationService {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у Organization с id {0}", organization.getId().toString()));
         int updateCount = organizationRepository.update(organization);
         if (updateCount == 1) {
-            LOGGER.info("Organization успешно обновлен");
+            LOGGER.info(UPDATE_SUCCESS);
             return Optional.ofNullable(organization);
         }
-        LOGGER.error("Неудачная попытка обновления Organization");
-        return null;
+        LOGGER.error(UPDATE_FAIL);
+        return Optional.empty();
     }
 
     @Override
-    public String deleteAll() {
-        LOGGER.info("Попытка удалить все записи в таблице organization");
-        int count = organizationRepository.deleteAll();
-        if (count > 0) {
-            LOGGER.info("Записи из таблицы organization успешно удалены");
-            return "Записи из таблицы organization успешно удалены";
+    public void deleteAll() {
+        try {
+            if (organizationRepository.deleteAll()) {
+                LOGGER.info(DELETE_SUCCESS);
+            }
+        } catch (DeletePoorlyException e) {
+            LOGGER.error(e.toString());
         }
-        LOGGER.error("Не удачная попытка удаления записей из таблицы organization");
-        return "Не удачная попытка удаления записей из таблицы organization";
     }
 
     @Override
-    public String deleteById(String id) {
-        LOGGER.info("Попытка удалить запись из таблицы organization");
-        int count = organizationRepository.deleteById(id);
-        if (count > 0) {
-            LOGGER.info("Запись из таблицы organization успешно удалена");
-            return "Запись из таблицы organization успешно удалена";
+    public void deleteById(String id) {
+        try {
+            if (organizationRepository.deleteById(id)) {
+                LOGGER.info(DELETE_BY_ID_SUCCESS);
+            }
+        } catch (DeletePoorlyException e) {
+            LOGGER.error(e.toString());
         }
-        LOGGER.error("Не удачная попытка удаления записи из таблицы organization");
-        return "Не удачная попытка удаления записи из таблицы organization";
     }
 }

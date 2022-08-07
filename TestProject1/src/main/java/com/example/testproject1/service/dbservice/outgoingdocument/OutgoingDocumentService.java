@@ -14,7 +14,7 @@ public interface OutgoingDocumentService {
 
     Optional<OutgoingDocument> update(OutgoingDocument outgoingDocument);
 
-    String deleteAll();
+    void deleteAll();
 
-    String deleteById(String id);
+    void deleteById(String id);
 }
