@@ -1,23 +1,26 @@
 package com.example.testproject1.service.dbservice.outgoingdocument;
 
-import com.example.testproject1.dao.outgoingdocument.OutgoingDocumentRepository;
+import com.example.testproject1.dao.CrudRepositories;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.OutgoingDocument;
+import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class OutgoingDocumentServiceImpl implements OutgoingDocumentService {
+@Service("OutgoingDocumentService")
+public class OutgoingDocumentServiceImpl implements CrudService<OutgoingDocument> {
     private static final Logger LOGGER = LoggerFactory.getLogger(OutgoingDocumentServiceImpl.class);
 
     @Autowired
-    private OutgoingDocumentRepository outgoingDocumentRepository;
+    @Qualifier("OutgoingDocumentRepository")
+    private CrudRepositories outgoingDocumentRepository;
 
     private final String CREATE_SUCCESS="OutgoingDocument успешно сохранен";
     private final String CREATE_FAIL="Неудачная попытка сохранения OutgoingDocument";

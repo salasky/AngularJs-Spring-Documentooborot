@@ -3,12 +3,11 @@ package com.example.testproject1.service.documentservice.impl;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
+import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.dbservice.basedocument.BaseDocumentService;
-import com.example.testproject1.service.dbservice.incomingdocument.IncomingDocumentService;
-import com.example.testproject1.service.dbservice.outgoingdocument.OutgoingDocumentService;
-import com.example.testproject1.service.dbservice.taskdocument.TaskDocumentService;
 import com.example.testproject1.service.documentservice.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,17 +27,20 @@ public class DocumentServiceImpl implements DocumentService {
      * Бин сервиса для работы с поручениями
      */
     @Autowired
-    private TaskDocumentService taskDocumentService;
+    @Qualifier("TaskDocumentService")
+    private CrudService taskDocumentService;
     /**
      * Бин сервиса для работы с входящими документами
      */
     @Autowired
-    private IncomingDocumentService incomingDocumentService;
+    @Qualifier("IncomingDocumentService")
+    private CrudService incomingDocumentService;
     /**
      * Бин сервиса для работы с исходящими документами
      */
     @Autowired
-    private OutgoingDocumentService outgoingDocumentService;
+    @Qualifier("OutgoingDocumentService")
+    private CrudService outgoingDocumentService;
 
     /**
      * {@inheritDoc}

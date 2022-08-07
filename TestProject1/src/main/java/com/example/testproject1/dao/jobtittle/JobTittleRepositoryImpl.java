@@ -1,6 +1,7 @@
 package com.example.testproject1.dao.jobtittle;
 
-import com.example.testproject1.dao.jobtittle.mapper.JobTittleMapper;
+import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.mapper.staff.JobTittleMapper;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.exception.DepartmentExistInDataBaseException;
 import com.example.testproject1.exception.JobTittleExistInDataBaseException;
@@ -23,12 +24,12 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_GE
 import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_UPDATE_ID_QUERY;
 
 /**
- * Класс реализующий интерфейс {@link JobTittleRepository}. Для выполнения операций с базой данных.
+ * Класс реализующий интерфейс {@link CrudRepositories}. Для выполнения операций с базой данных.
  *
  * @author smigranov
  */
-@Repository
-public class JobTittleRepositoryImpl implements JobTittleRepository {
+@Repository("JobTittleRepository")
+public class JobTittleRepositoryImpl implements CrudRepositories<JobTittle> {
     private static final Logger LOGGER = LoggerFactory.getLogger(JobTittleRepositoryImpl.class);
     /**
      * Маппер для извлечения {@link JobTittle}

@@ -1,14 +1,16 @@
 package com.example.testproject1.dao.department;
 
-import com.example.testproject1.dao.department.mapper.DepartmentMapper;
+import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.mapper.staff.DepartmentMapper;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.exception.DepartmentExistInDataBaseException;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Organization;
-import com.example.testproject1.service.dbservice.organization.OrganizationService;
+import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -23,12 +25,12 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_GE
 import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_UPDATE_QUERY;
 
 /**
- * Класс репозиторий для {@link Department}. Реализует интерфейс {@link DepartmentRepository}
+ * Класс репозиторий для {@link Department}. Реализует интерфейс {@link CrudRepositories}
  *
  * @author smigranov
  */
-@Repository
-public class DepartmentRepositoryImpl implements DepartmentRepository {
+@Repository("DepartmentRepository")
+public class DepartmentRepositoryImpl implements CrudRepositories<Department> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentRepositoryImpl.class);
     /**
      * Бин JdbcTemplate
@@ -44,7 +46,8 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
      * Сервис для работы с {@link Organization}
      */
     @Autowired
-    private OrganizationService organizationService;
+    @Qualifier("OrganizationService")
+    private CrudService organizationService;
 
     /**
      * {@inheritDoc}

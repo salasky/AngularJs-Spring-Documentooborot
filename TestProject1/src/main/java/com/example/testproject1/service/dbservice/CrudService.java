@@ -12,7 +12,7 @@ public interface CrudService <T> {
 
     Optional<T> getById(String id);
 
-    Optional<T> update(Department department);
+    Optional<T> update(T object);
 
     void deleteAll();
 

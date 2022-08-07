@@ -1,15 +1,17 @@
 package com.example.testproject1.dao.incomingdocument;
 
-import com.example.testproject1.dao.incomingdocument.mapper.IncomingDocumentMapper;
+import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.mapper.document.IncomingDocumentMapper;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
+import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.dbservice.basedocument.BaseDocumentService;
-import com.example.testproject1.service.dbservice.person.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -25,12 +27,12 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.INCOMING_DOCU
 import static com.example.testproject1.dao.queryholder.QueryHolder.INCOMING_DOCUMENT_UPDATE_QUERY;
 
 /**
- * Класс реализующий интерфейс {@link IncomingDocumentRepository}. Для выполнения операций с базой данных.
+ * Класс реализующий интерфейс {@link CrudRepositories}. Для выполнения операций с базой данных.
  *
  * @author smigranov
  */
-@Repository
-public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepository {
+@Repository("IncomingDocumentRepository")
+public class IncomingDocumentRepositoryImpl implements CrudRepositories<IncomingDocument> {
     private static final Logger LOGGER = LoggerFactory.getLogger(IncomingDocumentRepositoryImpl.class);
     /**
      * Бин JdbcTemplate
@@ -51,7 +53,8 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
      * Сервис для работы с {@link Person}
      */
     @Autowired
-    private PersonService personService;
+    @Qualifier("PersonService")
+    private CrudService personService;
 
     /**
      * {@inheritDoc}

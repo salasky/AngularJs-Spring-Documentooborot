@@ -1,6 +1,6 @@
-package com.example.testproject1.dao.basedocument.mapper;
+package com.example.testproject1.mapper.document;
 
-import com.example.testproject1.dao.person.mapper.PersonMapper;
+import com.example.testproject1.mapper.staff.PersonMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Person;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,14 +1,14 @@
 package com.example.testproject1.dao.basedocument;
 
-import com.example.testproject1.dao.basedocument.mapper.BaseDocumentMapper;
-import com.example.testproject1.dao.queryholder.QueryHolder;
+import com.example.testproject1.mapper.document.BaseDocumentMapper;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.dbservice.person.PersonService;
+import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -46,7 +46,8 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      * Сервис для работы с {@link Person}
      */
     @Autowired
-    private PersonService personService;
+    @Qualifier("PersonService")
+    private CrudService personService;
 
     /**
      * {@inheritDoc}

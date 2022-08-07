@@ -6,14 +6,13 @@ import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.dto.ReportForJsonDTO;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.dbservice.incomingdocument.IncomingDocumentService;
-import com.example.testproject1.service.dbservice.outgoingdocument.OutgoingDocumentService;
-import com.example.testproject1.service.dbservice.taskdocument.TaskDocumentService;
+import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.documentservice.GenerateReportService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -44,11 +43,14 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
-    private TaskDocumentService taskDocumentService;
+    @Qualifier("TaskDocumentService")
+    private CrudService taskDocumentService;
     @Autowired
-    private IncomingDocumentService incomingDocumentService;
+    @Qualifier("IncomingDocumentService")
+    private CrudService incomingDocumentService;
     @Autowired
-    private OutgoingDocumentService outgoingDocumentService;
+    @Qualifier("OutgoingDocumentService")
+    private CrudService outgoingDocumentService;
 
     /**
      * {@inheritDoc}

@@ -1,6 +1,5 @@
-package com.example.testproject1.dao.outgoingdocument.mapper;
+package com.example.testproject1.mapper.document;
 
-import com.example.testproject1.dao.basedocument.mapper.BaseDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.documentenum.DocumentDeliveryType;
@@ -8,7 +7,6 @@ import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
-import liquibase.pro.packaged.S;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;

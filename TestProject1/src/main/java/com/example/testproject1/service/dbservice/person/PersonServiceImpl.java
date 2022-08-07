@@ -1,24 +1,26 @@
 package com.example.testproject1.service.dbservice.person;
 
-import com.example.testproject1.dao.person.PersonRepository;
+import com.example.testproject1.dao.CrudRepositories;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.staff.Person;
-import liquibase.pro.packaged.D;
+import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class PersonServiceImpl implements PersonService {
+@Service("PersonService")
+public class PersonServiceImpl implements CrudService<Person> {
     private static final Logger LOGGER = LoggerFactory.getLogger(PersonServiceImpl.class);
 
     @Autowired
-    private PersonRepository personRepository;
+    @Qualifier("PersonRepository")
+    private CrudRepositories personRepository;
 
     private final String CREATE_SUCCESS="Person успешно сохранен";
     private final String CREATE_FAIL="Неудачная попытка сохранения Person";

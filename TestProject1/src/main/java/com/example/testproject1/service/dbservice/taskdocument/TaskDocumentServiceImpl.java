@@ -1,23 +1,26 @@
 package com.example.testproject1.service.dbservice.taskdocument;
 
-import com.example.testproject1.dao.taskdocument.TaskDocumentRepository;
+import com.example.testproject1.dao.CrudRepositories;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.TaskDocument;
+import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class TaskDocumentServiceImpl implements TaskDocumentService {
+@Service("TaskDocumentService")
+public class TaskDocumentServiceImpl implements CrudService<TaskDocument> {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentServiceImpl.class);
 
     @Autowired
-    private TaskDocumentRepository taskDocumentRepository;
+    @Qualifier("TaskDocumentRepository")
+    private CrudRepositories taskDocumentRepository;
 
     private final String CREATE_SUCCESS="TaskDocument успешно сохранен";
     private final String GET_ALL_ATTEMPT="Попытка выдачи всех TaskDocument";

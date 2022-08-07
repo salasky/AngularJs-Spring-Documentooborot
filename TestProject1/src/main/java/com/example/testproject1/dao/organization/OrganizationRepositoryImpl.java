@@ -1,6 +1,7 @@
 package com.example.testproject1.dao.organization;
 
-import com.example.testproject1.dao.organization.mapper.OrganizationMapper;
+import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.mapper.staff.OrganizationMapper;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.exception.DepartmentExistInDataBaseException;
 import com.example.testproject1.exception.OrganizationExistInDataBaseException;
@@ -23,12 +24,12 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_
 import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_UPDATE_QUERY;
 
 /**
- * Класс реализующий интерфейс {@link OrganizationRepository}. Для выполнения операций с базой данных.
+ * Класс реализующий интерфейс {@link CrudRepositories}. Для выполнения операций с базой данных.
  *
  * @author smigranov
  */
-@Repository
-public class OrganizationRepositoryImpl implements OrganizationRepository {
+@Repository("OrganizationRepository")
+public class OrganizationRepositoryImpl implements CrudRepositories<Organization> {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationRepositoryImpl.class);
     /**
      * Бин JdbcTemplate

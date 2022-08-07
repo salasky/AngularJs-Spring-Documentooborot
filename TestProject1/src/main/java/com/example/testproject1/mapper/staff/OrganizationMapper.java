@@ -1,4 +1,4 @@
-package com.example.testproject1.dao.organization.mapper;
+package com.example.testproject1.mapper.staff;
 
 import com.example.testproject1.model.staff.Organization;
 import org.springframework.jdbc.core.RowMapper;

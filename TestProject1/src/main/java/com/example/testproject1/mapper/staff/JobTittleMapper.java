@@ -1,4 +1,4 @@
-package com.example.testproject1.dao.jobtittle.mapper;
+package com.example.testproject1.mapper.staff;
 
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.JobTittle;

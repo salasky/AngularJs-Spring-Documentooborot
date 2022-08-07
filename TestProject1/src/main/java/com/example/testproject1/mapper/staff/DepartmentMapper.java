@@ -1,10 +1,7 @@
-package com.example.testproject1.dao.department.mapper;
+package com.example.testproject1.mapper.staff;
 
-import com.example.testproject1.dao.organization.mapper.OrganizationMapper;
-import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Organization;
-import com.example.testproject1.model.staff.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;

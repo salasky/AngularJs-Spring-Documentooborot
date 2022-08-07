@@ -1,15 +1,17 @@
 package com.example.testproject1.dao.taskdocument;
 
-import com.example.testproject1.dao.taskdocument.mapper.TaskDocumentMapper;
+import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.mapper.document.TaskDocumentMapper;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
+import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.dbservice.basedocument.BaseDocumentService;
-import com.example.testproject1.service.dbservice.person.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -25,12 +27,12 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT
 import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_UPDATE_QUERY;
 
 /**
- * Класс реализующий интерфейс {@link TaskDocumentRepository}. Для выполнения операций с базой данных.
+ * Класс реализующий интерфейс {@link CrudRepositories}. Для выполнения операций с базой данных.
  *
  * @author smigranov
  */
-@Repository
-public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
+@Repository("TaskDocumentRepository")
+public class TaskDocumentRepositoryImpl implements CrudRepositories<TaskDocument> {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentRepositoryImpl.class);
     /**
      * Бин JdbcTemplate
@@ -51,7 +53,8 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
      * Сервис для работы с {@link Person}
      */
     @Autowired
-    private PersonService personService;
+    @Qualifier("PersonService")
+    private CrudService personService;
 
     /**
      * {@inheritDoc}
