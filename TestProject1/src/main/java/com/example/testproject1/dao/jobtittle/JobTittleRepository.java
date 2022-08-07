@@ -15,9 +15,9 @@ public interface JobTittleRepository {
      * Метод сохранения объекта класса {@link JobTittle} в базу данных
      *
      * @param jobTittle объекта класса {@link JobTittle}
-     * @return возвращает количество созданных строк 1 удачное сохранение, 0 ошибка сохранения
+     * @return Optional<JobTittle>
      */
-    Integer create(JobTittle jobTittle);
+    Optional<JobTittle> create(JobTittle jobTittle);
     /**
      * Метод получения всех {@link JobTittle} из базы данных
      *

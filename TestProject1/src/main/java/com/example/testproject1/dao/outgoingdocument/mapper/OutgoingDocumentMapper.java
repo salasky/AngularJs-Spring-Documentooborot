@@ -28,25 +28,85 @@ public class OutgoingDocumentMapper implements RowMapper<OutgoingDocument> {
      */
     @Autowired
     private BaseDocumentMapper baseDocumentMapper;
+    /**
+     * Название столбца для мапинга в поле outgoing_delivery_type
+     */
     private final String OUTGOING_DELIVERY_TYPE="outgoing_delivery_type";
+    /**
+     * Название столбца для мапинга в поле person_sender_id
+     */
     private final String PERSON_SENDER_ID="person_sender_id";
+    /**
+     * Название столбца для мапинга в поле person_sender_first_name
+     */
     private final String PERSON_SENDER_FIRST_NAME="person_sender_first_name";
+    /**
+     * Название столбца для мапинга в поле person_sender_second_name
+     */
     private final String PERSON_SENDER_SECOND_NAME="person_sender_second_name";
+    /**
+     * Название столбца для мапинга в поле person_sender_last_name
+     */
     private final String PERSON_SENDER_LAST_NAME="person_sender_last_name";
+    /**
+     * Название столбца для мапинга в поле person_sender_photo
+     */
     private final String PERSON_SENDER_PHOTO="person_sender_photo";
+    /**
+     * Название столбца для мапинга в поле person_sender_phone_number
+     */
     private final String PERSON_SENDER_PHONE_NUMBER="person_sender_phone_number";
+    /**
+     * Название столбца для мапинга в поле person_sender_birth_day
+     */
     private final String PERSON_SENDER_BIRTH_DAY="person_sender_birth_day";
+    /**
+     * Название столбца для мапинга в поле department_sender_id
+     */
     private final String DEPARTMENT_SENDER_ID="department_sender_id";
+    /**
+     * Название столбца для мапинга в поле department_sender_full_name
+     */
     private final String DEPARTMENT_SENDER_FULL_NAME="department_sender_full_name";
+    /**
+     * Название столбца для мапинга в поле department_sender_short_name
+     */
     private final String DEPARTMENT_SENDER_SHORT_NAME="department_sender_short_name";
+    /**
+     * Название столбца для мапинга в поле department_sender_supervisor
+     */
     private final String DEPARTMENT_SENDER_SUPERVISOR="department_sender_supervisor";
+    /**
+     * Название столбца для мапинга в поле department_sender_contact_number
+     */
     private final String DEPARTMENT_SENDER_CONTACT_NUMBER="department_sender_contact_number";
+    /**
+     * Название столбца для мапинга в поле organization_sender_id
+     */
     private final String ORGANIZATION_SENDER_ID="organization_sender_id";
+    /**
+     * Название столбца для мапинга в поле organization_sender_full_name
+     */
     private final String ORGANIZATION_SENDER_FULL_NAME="organization_sender_full_name";
+    /**
+     * Название столбца для мапинга в поле document_organization_sender_short_namenumber
+     */
     private final String ORGANIZATION_SENDER_SHORT_NAME="organization_sender_short_name";
+    /**
+     * Название столбца для мапинга в поле organization_sender_supervisor
+     */
     private final String ORGANIZATION_SENDER_SUPERVISOR="organization_sender_supervisor";
+    /**
+     * Название столбца для мапинга в поле organization_sender_contact_number
+     */
     private final String ORGANIZATION_SENDER_CONTACT_NUMBER="organization_sender_contact_number";
+    /**
+     * Название столбца для мапинга в поле job_tittle_sender_id
+     */
     private final String JOB_TITTLE_SENDER_ID="job_tittle_sender_id";
+    /**
+     * Название столбца для мапинга в поле job_sender_name
+     */
     private final String JOB_SENDER_NAME="job_sender_name";
     /**
      * {@inheritDoc}

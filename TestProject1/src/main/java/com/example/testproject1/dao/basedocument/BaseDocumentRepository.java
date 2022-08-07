@@ -15,9 +15,9 @@ public interface BaseDocumentRepository {
      * Метод сохранения объекта класса {@link BaseDocument} в базу данных
      *
      * @param baseDocument объекта класса {@link BaseDocument}
-     * @return возвращает количество созданных строк 1 удачное сохранение, 0 ошибка сохранения
+     * @return возвращает сохраненный объект,или null
      */
-    Integer create(BaseDocument baseDocument);
+    Optional<BaseDocument> create(BaseDocument baseDocument);
 
     /**
      * Метод получения всех {@link BaseDocument} из базы данных

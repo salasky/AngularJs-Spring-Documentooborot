@@ -2,10 +2,10 @@ package com.example.testproject1.exception;
 
 import java.text.MessageFormat;
 
-public class PersonExistInDb extends Exception {
+public class PersonExistInDataBaseException extends Exception {
     private String messages;
 
-    public PersonExistInDb(String message) {
+    public PersonExistInDataBaseException(String message) {
         super(message);
         this.messages = message;
     }

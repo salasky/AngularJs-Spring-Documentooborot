@@ -2,10 +2,10 @@ package com.example.testproject1.exception;
 
 import java.text.MessageFormat;
 
-public class JobTittleExistIndDb extends Exception {
+public class DocumentExistInDataBaseException extends Exception {
     private String messages;
 
-    public JobTittleExistIndDb(String message) {
+    public DocumentExistInDataBaseException(String message) {
         super(message);
         this.messages = message;
     }
@@ -15,6 +15,6 @@ public class JobTittleExistIndDb extends Exception {
      */
     @Override
     public String toString() {
-        return MessageFormat.format("JobTittle c id {0} уже существует", messages);
+        return MessageFormat.format("Document c id {0} уже существует", messages);
     }
 }

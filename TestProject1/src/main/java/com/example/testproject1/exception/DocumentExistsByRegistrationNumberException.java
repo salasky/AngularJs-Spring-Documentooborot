@@ -7,18 +7,18 @@ import java.text.MessageFormat;
  *
  * @author smigranov
  */
-public class DocumentExistsException extends Exception {
+public class DocumentExistsByRegistrationNumberException extends Exception {
     /**
      * Рег.номер или идентификатор созданного документа,который уже существует у другого документа
      */
     private Long detail;
 
-    public DocumentExistsException(Long detail, String message) {
+    public DocumentExistsByRegistrationNumberException(Long detail, String message) {
         super(message);
         this.detail = detail;
     }
 
-    public DocumentExistsException() {
+    public DocumentExistsByRegistrationNumberException() {
 
     }
 

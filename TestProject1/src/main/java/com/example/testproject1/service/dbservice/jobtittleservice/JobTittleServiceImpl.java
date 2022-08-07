@@ -1,4 +1,4 @@
-package com.example.testproject1.service.dbservice.jobTittleService;
+package com.example.testproject1.service.dbservice.jobtittleservice;
 
 import com.example.testproject1.dao.jobtittle.JobTittleRepository;
 import com.example.testproject1.model.staff.JobTittle;
@@ -21,13 +21,13 @@ public class JobTittleServiceImpl implements JobTittleService {
     @Override
     public Optional<JobTittle> create(JobTittle jobTittle) {
         LOGGER.info("Попытка создания JobTittle");
-        int updateCount = jobTittleRepository.create(jobTittle);
-        if (updateCount == 1) {
+        Optional<JobTittle> jobTittleOptional = jobTittleRepository.create(jobTittle);
+        if (jobTittleOptional.isPresent()) {
             LOGGER.info("JobTittle успешно сохранен");
             return Optional.ofNullable(jobTittle);
         }
         LOGGER.error("Неудачная попытка сохранения JobTittle");
-        return null;
+        return Optional.empty();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.testproject1.service.dbservice.jobTittleService;
+package com.example.testproject1.service.dbservice.jobtittleservice;
 
 import com.example.testproject1.model.staff.JobTittle;
 

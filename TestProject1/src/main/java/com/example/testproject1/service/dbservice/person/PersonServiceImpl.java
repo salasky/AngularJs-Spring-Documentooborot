@@ -21,13 +21,13 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Optional<Person> create(Person person) {
         LOGGER.info("Попытка создания Person");
-        int updateCount = personRepository.create(person);
-        if (updateCount == 1) {
+        Optional<Person> optionalPerson = personRepository.create(person);
+        if (optionalPerson.isPresent()) {
             LOGGER.info("Person успешно сохранен");
             return Optional.ofNullable(person);
         }
         LOGGER.error("Неудачная попытка сохранения Person");
-        return null;
+        return Optional.empty();
     }
 
     @Override

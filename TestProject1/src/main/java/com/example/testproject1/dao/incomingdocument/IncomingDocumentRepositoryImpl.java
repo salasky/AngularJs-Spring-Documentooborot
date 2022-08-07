@@ -1,10 +1,10 @@
-package com.example.testproject1.dao.incomingdocumrnt;
+package com.example.testproject1.dao.incomingdocument;
 
-import com.example.testproject1.dao.incomingdocumrnt.mapper.IncomingDocumentMapper;
+import com.example.testproject1.dao.incomingdocument.mapper.IncomingDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.dbservice.baseDocument.BaseDocumentService;
+import com.example.testproject1.service.dbservice.basedocument.BaseDocumentService;
 import com.example.testproject1.service.dbservice.person.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,26 +56,32 @@ public class IncomingDocumentRepositoryImpl implements IncomingDocumentRepositor
      * {@inheritDoc}
      */
     @Override
-    public Integer create(IncomingDocument incomingDocument) {
-        try {
-            BaseDocument baseDocument = new BaseDocument();
-            baseDocument.setId(incomingDocument.getId());
-            baseDocument.setName(incomingDocument.getName());
-            baseDocument.setText(incomingDocument.getText());
-            baseDocument.setRegNumber(incomingDocument.getRegNumber());
-            baseDocument.setCreatingDate(incomingDocument.getCreatingDate());
-            baseDocument.setAuthor(incomingDocument.getAuthor());
-            baseDocumentService.create(baseDocument);
-            personService.create(incomingDocument.getSender());
-            personService.create(incomingDocument.getDestination());
-            return jdbcTemplate.update(INCOMING_DOCUMENT_CREATE_QUERY, incomingDocument.getId().toString(),
-                    incomingDocument.getSender().getId().toString(),
-                    incomingDocument.getDestination().getId().toString(),
-                    incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
-        } catch (DataIntegrityViolationException ex) {
-            LOGGER.error(ex.toString());
-            return 0;
+    public Optional<IncomingDocument> create(IncomingDocument incomingDocument) {
+        if (incomingDocument!=null) {
+            try {
+                BaseDocument baseDocument = new BaseDocument();
+                baseDocument.setId(incomingDocument.getId());
+                baseDocument.setName(incomingDocument.getName());
+                baseDocument.setText(incomingDocument.getText());
+                baseDocument.setRegNumber(incomingDocument.getRegNumber());
+                baseDocument.setCreatingDate(incomingDocument.getCreatingDate());
+                baseDocument.setAuthor(incomingDocument.getAuthor());
+                baseDocumentService.create(baseDocument);
+                personService.create(incomingDocument.getSender());
+                personService.create(incomingDocument.getDestination());
+                int countCreate = jdbcTemplate.update(INCOMING_DOCUMENT_CREATE_QUERY, incomingDocument.getId().toString(),
+                        incomingDocument.getSender().getId().toString(),
+                        incomingDocument.getDestination().getId().toString(),
+                        incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
+                if (countCreate == 1) {
+                    return Optional.ofNullable(incomingDocument);
+                }
+                return Optional.empty();
+            } catch (DataIntegrityViolationException ex) {
+                throw new RuntimeException(ex);
+            }
         }
+        else throw new IllegalArgumentException("IncomingDocument не может быть null");
     }
     /**
      * {@inheritDoc}

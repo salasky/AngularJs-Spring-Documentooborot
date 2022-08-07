@@ -4,7 +4,7 @@ import com.example.testproject1.dao.outgoingdocument.mapper.OutgoingDocumentMapp
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.dbservice.baseDocument.BaseDocumentService;
+import com.example.testproject1.service.dbservice.basedocument.BaseDocumentService;
 import com.example.testproject1.service.dbservice.person.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +55,8 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
      * {@inheritDoc}
      */
     @Override
-    public Integer create(OutgoingDocument outgoingDocument) {
+    public Optional<OutgoingDocument> create(OutgoingDocument outgoingDocument) {
+        if(outgoingDocument!=null){
         try {
             BaseDocument baseDocument = new BaseDocument();
             baseDocument.setId(outgoingDocument.getId());
@@ -66,13 +67,18 @@ public class OutgoingDocumentRepositoryImpl implements OutgoingDocumentRepositor
             baseDocument.setAuthor(outgoingDocument.getAuthor());
             baseDocumentService.create(baseDocument);
             personService.create(outgoingDocument.getSender());
-            return jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
+            int createCount=jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
                     outgoingDocument.getSender().getId().toString(),
                     outgoingDocument.getDeliveryType().toString());
+            if(createCount==1){
+                return Optional.ofNullable(outgoingDocument);
+            }
+            return Optional.empty();
         } catch (DataIntegrityViolationException ex) {
-            LOGGER.error(ex.toString());
-            return 0;
+            throw new RuntimeException(ex);
+            }
         }
+        else throw new IllegalArgumentException("OutgoingDocument не может быть null");
     }
     /**
      * {@inheritDoc}

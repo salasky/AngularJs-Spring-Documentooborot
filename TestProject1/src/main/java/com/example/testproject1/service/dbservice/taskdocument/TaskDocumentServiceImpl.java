@@ -1,4 +1,4 @@
-package com.example.testproject1.service.dbservice.taskDocument;
+package com.example.testproject1.service.dbservice.taskdocument;
 
 import com.example.testproject1.dao.taskdocument.TaskDocumentRepository;
 import com.example.testproject1.model.document.TaskDocument;
@@ -21,13 +21,13 @@ public class TaskDocumentServiceImpl implements TaskDocumentService {
     @Override
     public Optional<TaskDocument> create(TaskDocument taskDocument) {
         LOGGER.info("Попытка создания TaskDocument");
-        int updateCount = taskDocumentRepository.create(taskDocument);
-        if (updateCount == 1) {
+        Optional<TaskDocument> optionalTaskDocument = taskDocumentRepository.create(taskDocument);
+        if (optionalTaskDocument.isPresent()) {
             LOGGER.info("TaskDocument успешно сохранен");
             return Optional.ofNullable(taskDocument);
         }
         LOGGER.error(MessageFormat.format("Неудачная попытка сохранения TaskDocument c id {0}", taskDocument.getId().toString()));
-        return null;
+        return Optional.empty();
     }
 
     @Override

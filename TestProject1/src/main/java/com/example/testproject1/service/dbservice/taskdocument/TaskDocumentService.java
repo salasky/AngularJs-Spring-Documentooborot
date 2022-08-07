@@ -1,4 +1,4 @@
-package com.example.testproject1.service.dbservice.taskDocument;
+package com.example.testproject1.service.dbservice.taskdocument;
 
 import com.example.testproject1.model.document.TaskDocument;
 

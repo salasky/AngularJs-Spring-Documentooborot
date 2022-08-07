@@ -15,9 +15,9 @@ public interface OrganizationRepository {
      * Метод сохранения объекта класса {@link Organization} в базу данных
      *
      * @param organization объекта класса {@link Organization}
-     * @return возвращает количество созданных строк 1 удачное сохранение, 0 ошибка сохранения
+     * @return возвращает  Optional<Organization>
      */
-    Integer create(Organization organization);
+    Optional<Organization> create(Organization organization);
     /**
      * Метод получения всех {@link Organization} из базы данных
      *

@@ -22,13 +22,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public Optional<Department> create(Department department) {
         LOGGER.info("Попытка создания Department");
-        int updateCount = departmentRepository.create(department);
-        if (updateCount == 1) {
+        Optional<Department> optionalDepartment= departmentRepository.create(department);
+        if (optionalDepartment.isPresent()) {
             LOGGER.info("Department успешно сохранен");
             return Optional.ofNullable(department);
         }
         LOGGER.error("Неудачная попытка сохранения Department");
-        return null;
+        return Optional.empty();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.testproject1.service.dbservice.outgoingDocument;
+package com.example.testproject1.service.dbservice.outgoingdocument;
 
 import com.example.testproject1.model.document.OutgoingDocument;
 

@@ -4,7 +4,7 @@ import com.example.testproject1.dao.taskdocument.mapper.TaskDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.dbservice.baseDocument.BaseDocumentService;
+import com.example.testproject1.service.dbservice.basedocument.BaseDocumentService;
 import com.example.testproject1.service.dbservice.person.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,25 +56,31 @@ public class TaskDocumentRepositoryImpl implements TaskDocumentRepository {
      * {@inheritDoc}
      */
     @Override
-    public Integer create(TaskDocument taskDocument) {
-        try {
-            BaseDocument baseDocument = new BaseDocument();
-            baseDocument.setId(taskDocument.getId());
-            baseDocument.setName(taskDocument.getName());
-            baseDocument.setText(taskDocument.getText());
-            baseDocument.setRegNumber(taskDocument.getRegNumber());
-            baseDocument.setCreatingDate(taskDocument.getCreatingDate());
-            baseDocument.setAuthor(taskDocument.getAuthor());
-            baseDocumentService.create(baseDocument);
-            personService.create(taskDocument.getControlPerson());
-            personService.create(taskDocument.getResponsible());
-            return jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate()
-                    , taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
-                    taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
-        } catch (DataIntegrityViolationException ex) {
-            LOGGER.error(ex.toString());
-            return 0;
+    public Optional<TaskDocument> create(TaskDocument taskDocument) {
+        if(taskDocument!=null) {
+            try {
+                BaseDocument baseDocument = new BaseDocument();
+                baseDocument.setId(taskDocument.getId());
+                baseDocument.setName(taskDocument.getName());
+                baseDocument.setText(taskDocument.getText());
+                baseDocument.setRegNumber(taskDocument.getRegNumber());
+                baseDocument.setCreatingDate(taskDocument.getCreatingDate());
+                baseDocument.setAuthor(taskDocument.getAuthor());
+                baseDocumentService.create(baseDocument);
+                personService.create(taskDocument.getControlPerson());
+                personService.create(taskDocument.getResponsible());
+                int countCreate=jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate()
+                        , taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
+                        taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
+                if(countCreate==1){
+                    return Optional.ofNullable(taskDocument);
+                }
+                return Optional.empty();
+            } catch (DataIntegrityViolationException ex) {
+                throw new RuntimeException(ex);
+            }
         }
+        else throw new IllegalArgumentException("TaskDocument не может быть null");
     }
     /**
      * {@inheritDoc}

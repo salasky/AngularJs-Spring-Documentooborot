@@ -1,4 +1,4 @@
-package com.example.testproject1.service.dbservice.outgoingDocument;
+package com.example.testproject1.service.dbservice.outgoingdocument;
 
 import com.example.testproject1.dao.outgoingdocument.OutgoingDocumentRepository;
 import com.example.testproject1.model.document.OutgoingDocument;
@@ -21,13 +21,13 @@ public class OutgoingDocumentServiceImpl implements OutgoingDocumentService {
     @Override
     public Optional<OutgoingDocument> create(OutgoingDocument outgoingDocument) {
         LOGGER.info("Попытка создания OutgoingDocument");
-        int updateCount = outgoingDocumentRepository.create(outgoingDocument);
-        if (updateCount == 1) {
+        Optional<OutgoingDocument> optionalOutgoingDocument = outgoingDocumentRepository.create(outgoingDocument);
+        if (optionalOutgoingDocument.isPresent()) {
             LOGGER.info("OutgoingDocument успешно сохранен");
             return Optional.ofNullable(outgoingDocument);
         }
         LOGGER.error("Неудачная попытка сохранения OutgoingDocument");
-        return null;
+        return Optional.empty();
     }
 
     @Override

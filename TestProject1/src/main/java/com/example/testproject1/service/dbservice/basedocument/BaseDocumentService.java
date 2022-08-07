@@ -1,4 +1,4 @@
-package com.example.testproject1.service.dbservice.baseDocument;
+package com.example.testproject1.service.dbservice.basedocument;
 
 import com.example.testproject1.model.document.BaseDocument;
 

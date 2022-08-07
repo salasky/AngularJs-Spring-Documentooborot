@@ -44,8 +44,9 @@ public class DepartmentMapper implements RowMapper<Department> {
      * Название столбца для мапинага в поле contact_number
      */
     private final String DEPARTMENT_CONTACT_NUMBER="department_contact_number";
+
     /**
-     * Название столбца для мапинага в поле id
+     * {@inheritDoc}
      */
     @Override
     public Department mapRow(ResultSet rs, int rowNum) throws SQLException {

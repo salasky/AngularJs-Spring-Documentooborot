@@ -1,4 +1,4 @@
-package com.example.testproject1.service.dbservice.baseDocument;
+package com.example.testproject1.service.dbservice.basedocument;
 
 import com.example.testproject1.dao.basedocument.BaseDocumentRepository;
 import com.example.testproject1.model.document.BaseDocument;
@@ -20,10 +20,10 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
     @Override
     public Optional<BaseDocument> create(BaseDocument baseDocument) {
         LOGGER.info("Попытка создания BaseDocument");
-        int updateCount = baseDocumentRepository.create(baseDocument);
-        if (updateCount == 1) {
+        Optional<BaseDocument> baseDocumentOptional = baseDocumentRepository.create(baseDocument);
+        if (baseDocumentOptional.isPresent()) {
             LOGGER.info("BaseDocument успешно сохранен");
-            return Optional.ofNullable(baseDocument);
+            return Optional.ofNullable(baseDocumentOptional.get());
         }
         LOGGER.error("Неудачная попытка сохранения BaseDocument");
         return null;
@@ -50,7 +50,7 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
             return Optional.ofNullable(baseDocument);
         }
         LOGGER.error("Неудачная попытка сохранения BaseDocument");
-        return null;
+        return Optional.empty();
     }
 
     @Override

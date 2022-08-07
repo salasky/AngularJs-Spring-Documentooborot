@@ -14,9 +14,9 @@ public interface TaskDocumentRepository {
      * Метод сохранения объекта класса {@link TaskDocument} в базу данных
      *
      * @param taskDocument объекта класса {@link TaskDocument}
-     * @return возвращает количество созданных строк 1 удачное сохранение, 0 ошибка сохранения
+     * @return возвращает Optional<TaskDocument>
      */
-    Integer create(TaskDocument taskDocument);
+    Optional<TaskDocument> create(TaskDocument taskDocument);
     /**
      * Метод получения всех {@link TaskDocument} из базы данных
      *

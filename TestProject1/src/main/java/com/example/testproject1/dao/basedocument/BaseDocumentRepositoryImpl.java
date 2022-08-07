@@ -51,15 +51,21 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      * {@inheritDoc}
      */
     @Override
-    public Integer create(BaseDocument baseDocument) {
-        try {
-            personService.create(baseDocument.getAuthor());
-            return jdbcTemplate.update(BASE_DOCUMENT_CREATE_QUERY, baseDocument.getId().toString(), baseDocument.getName(), baseDocument.getText(),
-                    baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString());
-        } catch (DataIntegrityViolationException ex) {
-            LOGGER.error(ex.toString());
-            return 0;
+    public Optional<BaseDocument> create(BaseDocument baseDocument) {
+        if(baseDocument!=null) {
+            try {
+                personService.create(baseDocument.getAuthor());
+                int countCreate = jdbcTemplate.update(BASE_DOCUMENT_CREATE_QUERY, baseDocument.getId().toString(), baseDocument.getName(), baseDocument.getText(),
+                        baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString());
+                if (countCreate == 1) {
+                    return Optional.of(baseDocument);
+                }
+                return Optional.empty();
+            } catch (DataIntegrityViolationException ex) {
+                throw new RuntimeException(ex);
+            }
         }
+        else throw new IllegalArgumentException("BaseDocument не может быть null");
     }
 
     /**
@@ -111,11 +117,8 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
     @Override
     public boolean existByRegNumber(Long regNumber) {
         Optional<BaseDocument> baseDocumentOptional = jdbcTemplate.query(BASE_DOCUMENT_EXIST_BY_REG_NUMBER_QUERY, baseDocumentMapper, regNumber).stream().findFirst();
-        if (baseDocumentOptional.isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+        return baseDocumentOptional.isPresent();
+
     }
 
     /**

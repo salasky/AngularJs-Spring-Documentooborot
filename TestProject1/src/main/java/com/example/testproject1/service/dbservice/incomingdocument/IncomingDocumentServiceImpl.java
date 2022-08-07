@@ -1,6 +1,6 @@
-package com.example.testproject1.service.dbservice.incomingDocument;
+package com.example.testproject1.service.dbservice.incomingdocument;
 
-import com.example.testproject1.dao.incomingdocumrnt.IncomingDocumentRepository;
+import com.example.testproject1.dao.incomingdocument.IncomingDocumentRepository;
 import com.example.testproject1.model.document.IncomingDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,13 +22,13 @@ public class IncomingDocumentServiceImpl implements IncomingDocumentService {
     @Override
     public Optional<IncomingDocument> create(IncomingDocument incomingDocument) {
         LOGGER.info("Попытка создания IncomingDocument");
-        int updateCount = incomingDocumentRepository.create(incomingDocument);
-        if (updateCount == 1) {
+        Optional<IncomingDocument> incomingDocumentOptional = incomingDocumentRepository.create(incomingDocument);
+        if (incomingDocumentOptional.isPresent()) {
             LOGGER.info("IncomingDocument успешно сохранен");
             return Optional.ofNullable(incomingDocument);
         }
         LOGGER.error("Неудачная попытка сохранения IncomingDocument");
-        return null;
+        return Optional.empty();
     }
 
     @Override

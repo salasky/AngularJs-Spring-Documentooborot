@@ -1,8 +1,8 @@
 package com.example.testproject1.dao.jobtittle;
 
 import com.example.testproject1.dao.jobtittle.mapper.JobTittleMapper;
-import com.example.testproject1.exception.DepartmentExistInDb;
-import com.example.testproject1.exception.JobTittleExistIndDb;
+import com.example.testproject1.exception.DepartmentExistInDataBaseException;
+import com.example.testproject1.exception.JobTittleExistInDataBaseException;
 import com.example.testproject1.model.staff.JobTittle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,26 +62,31 @@ public class JobTittleRepositoryImpl implements JobTittleRepository {
      * {@inheritDoc}
      */
     @Override
-    public Integer create(JobTittle jobTittle) {
-        try {
-            isNotExistElseThrow(jobTittle);
-            return jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getUuid().toString()
-                    , jobTittle.getName());
-
-        } catch (JobTittleExistIndDb e) {
-            LOGGER.info(e.toString());
-            return 0;
+    public  Optional<JobTittle> create(JobTittle jobTittle) {
+        if(jobTittle!=null) {
+            try {
+                isNotExistElseThrow(jobTittle);
+                int countCreate = jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getUuid().toString(), jobTittle.getName());
+                if (countCreate == 1) {
+                    return Optional.ofNullable(jobTittle);
+                }
+                return Optional.empty();
+            } catch (JobTittleExistInDataBaseException e) {
+                LOGGER.error(e.toString());
+                return Optional.empty();
+            }
         }
+        else throw new IllegalArgumentException("JobTittle не может быть null");
     }
     /**
      * Метод поиска jobTittle по id. Из-за того, что в XML staff сущностей(Person,Department и т.д.) ограниченное количество, каждый раз ловить
      * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
      * @param jobTittle
-     * @throws DepartmentExistInDb если найден JobTittle с переданным id
+     * @throws DepartmentExistInDataBaseException если найден JobTittle с переданным id
      */
-    public void isNotExistElseThrow(JobTittle jobTittle) throws JobTittleExistIndDb {
+    private void isNotExistElseThrow(JobTittle jobTittle) throws JobTittleExistInDataBaseException {
         if (existById(jobTittle.getUuid().toString())) {
-            throw new JobTittleExistIndDb(jobTittle.getUuid().toString());
+            throw new JobTittleExistInDataBaseException(jobTittle.getUuid().toString());
         }
     }
     /**

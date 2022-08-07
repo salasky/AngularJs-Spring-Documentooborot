@@ -1,7 +1,7 @@
 package com.example.testproject1.dao.department;
 
 import com.example.testproject1.dao.department.mapper.DepartmentMapper;
-import com.example.testproject1.exception.DepartmentExistInDb;
+import com.example.testproject1.exception.DepartmentExistInDataBaseException;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.dbservice.organization.OrganizationService;
@@ -63,28 +63,35 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
      * {@inheritDoc}
      */
     @Override
-    public Integer create(Department department) {
-        try {
-            isNotExistElseThrow(department);
-            organizationService.create(department.getOrganization());
-            return jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
-                    , department.getFullName(), department.getShortName(), department.getSupervisor()
-                    , department.getContactNumber(), department.getOrganization().getId().toString());
-        } catch (DepartmentExistInDb e) {
-            LOGGER.info(e.toString());
-            return 0;
+    public Optional<Department> create(Department department) {
+        if (department!=null) {
+            try {
+                isNotExistElseThrow(department);
+                organizationService.create(department.getOrganization());
+                int countCreate = jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
+                        , department.getFullName(), department.getShortName(), department.getSupervisor()
+                        , department.getContactNumber(), department.getOrganization().getId().toString());
+                if (countCreate == 1) {
+                    return Optional.ofNullable(department);
+                }
+                return Optional.empty();
+            } catch (DepartmentExistInDataBaseException e) {
+                LOGGER.error(e.toString());
+                return Optional.empty();
+            }
         }
+        else throw new IllegalArgumentException("Department не может быть null");
     }
 
     /**
      * Метод поиска Department по id. Из-за того, что в XML staff сущностей(Person,Department и т.д.) ограниченное количество, каждый раз ловить
      * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
      * @param department
-     * @throws DepartmentExistInDb если найден Department с переданным id
+     * @throws DepartmentExistInDataBaseException если найден Department с переданным id
      */
-    private void isNotExistElseThrow(Department department) throws DepartmentExistInDb {
+    private void isNotExistElseThrow(Department department) throws DepartmentExistInDataBaseException {
         if (existById(department.getId().toString())) {
-            throw new DepartmentExistInDb(department.getId().toString());
+            throw new DepartmentExistInDataBaseException(department.getId().toString());
         }
     }
 

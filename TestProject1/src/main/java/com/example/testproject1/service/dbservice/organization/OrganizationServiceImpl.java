@@ -22,13 +22,13 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public Optional<Organization> create(Organization organization) {
         LOGGER.info("Попытка создания Organization");
-        int updateCount = organizationRepository.create(organization);
-        if (updateCount == 1) {
+        Optional<Organization> optionalOrganization = organizationRepository.create(organization);
+        if (optionalOrganization.isPresent()) {
             LOGGER.info("Organization успешно сохранен");
             return Optional.ofNullable(organization);
         }
         LOGGER.error("Неудачная попытка сохранения Organization");
-        return null;
+        return Optional.empty();
     }
 
     @Override

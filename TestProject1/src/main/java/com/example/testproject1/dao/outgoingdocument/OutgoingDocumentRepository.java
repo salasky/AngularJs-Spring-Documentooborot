@@ -14,9 +14,9 @@ public interface OutgoingDocumentRepository {
      * Метод сохранения объекта класса {@link OutgoingDocument} в базу данных
      *
      * @param outgoingDocument объекта класса {@link OutgoingDocument}
-     * @return возвращает количество созданных строк 1 удачное сохранение, 0 ошибка сохранения
+     * @return возвращаетOptional<OutgoingDocument>
      */
-    Integer create(OutgoingDocument outgoingDocument);
+    Optional<OutgoingDocument> create(OutgoingDocument outgoingDocument);
     /**
      * Метод получения всех {@link OutgoingDocument} из базы данных
      *

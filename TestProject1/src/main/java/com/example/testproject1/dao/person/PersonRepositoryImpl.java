@@ -1,11 +1,11 @@
 package com.example.testproject1.dao.person;
 
 import com.example.testproject1.dao.person.mapper.PersonMapper;
-import com.example.testproject1.exception.DepartmentExistInDb;
-import com.example.testproject1.exception.PersonExistInDb;
+import com.example.testproject1.exception.DepartmentExistInDataBaseException;
+import com.example.testproject1.exception.PersonExistInDataBaseException;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.department.DepartmentService;
-import com.example.testproject1.service.dbservice.jobTittleService.JobTittleService;
+import com.example.testproject1.service.dbservice.jobtittleservice.JobTittleService;
 import com.example.testproject1.model.staff.Department;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,28 +56,35 @@ public class PersonRepositoryImpl implements PersonRepository {
      * {@inheritDoc}
      */
     @Override
-    public Integer create(Person person) {
-        try {
-            isNotExistElseThrow(person);
-            jobTittleService.create(person.getJobTittle());
-            departmentService.create(person.getDepartment());
-            return jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
-                    person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
-                    person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
-        } catch (PersonExistInDb e) {
-            LOGGER.info(e.toString());
-            return 0;
+    public Optional<Person> create(Person person) {
+        if(person!=null) {
+            try {
+                isNotExistElseThrow(person);
+                jobTittleService.create(person.getJobTittle());
+                departmentService.create(person.getDepartment());
+                int countCreate=jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
+                        person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
+                        person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
+                if(countCreate==1){
+                    return Optional.ofNullable(person);
+                }
+                return Optional.empty();
+            } catch (PersonExistInDataBaseException e) {
+                LOGGER.info(e.toString());
+                return Optional.empty();
+            }
         }
+        else throw new IllegalArgumentException("Person не может быть null");
     }
     /**
      * Метод поиска Person по id. Из-за того, что в XML staff сущностей(Person,Department и т.д.) ограниченное количество, каждый раз ловить
      * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
      * @param person
-     * @throws DepartmentExistInDb если найден Person с переданным id
+     * @throws DepartmentExistInDataBaseException если найден Person с переданным id
      */
-    public void isNotExistElseThrow(Person person) throws PersonExistInDb {
+    private void isNotExistElseThrow(Person person) throws PersonExistInDataBaseException {
         if (existById(person.getId().toString())) {
-            throw new PersonExistInDb(person.getId().toString());
+            throw new PersonExistInDataBaseException(person.getId().toString());
         }
     }
     /**

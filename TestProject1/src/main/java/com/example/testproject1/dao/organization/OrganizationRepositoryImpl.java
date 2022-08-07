@@ -1,8 +1,8 @@
 package com.example.testproject1.dao.organization;
 
 import com.example.testproject1.dao.organization.mapper.OrganizationMapper;
-import com.example.testproject1.exception.DepartmentExistInDb;
-import com.example.testproject1.exception.OrganizationExistInDb;
+import com.example.testproject1.exception.DepartmentExistInDataBaseException;
+import com.example.testproject1.exception.OrganizationExistInDataBaseException;
 import com.example.testproject1.model.staff.Organization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,25 +44,33 @@ public class OrganizationRepositoryImpl implements OrganizationRepository {
      * {@inheritDoc}
      */
     @Override
-    public Integer create(Organization organization) {
-        try {
-            isNotExistElseThrow(organization);
-            return jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString()
-                    , organization.getFullName(), organization.getShortName(), organization.getSupervisor(), organization.getContactNumber());
-        } catch (OrganizationExistInDb e) {
-            LOGGER.info(e.toString());
-            return 0;
+    public Optional<Organization> create(Organization organization) {
+        if(organization!=null) {
+            try {
+                isNotExistElseThrow(organization);
+                int countCreate=jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString()
+                        , organization.getFullName(), organization.getShortName(), organization.getSupervisor(), organization.getContactNumber());
+
+                if(countCreate==1){
+                    return Optional.ofNullable(organization);
+                }
+                return Optional.empty();
+            } catch (OrganizationExistInDataBaseException e) {
+                LOGGER.info(e.toString());
+                return Optional.empty();
+            }
         }
+        else throw new IllegalArgumentException("Organization не может быть null");
     }
     /**
      * Метод поиска Organization по id. Из-за того, что в XML staff сущностей(Person,Department и т.д.) ограниченное количество, каждый раз ловить
      * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
      * @param organization
-     * @throws DepartmentExistInDb если найден Organization с переданным id
+     * @throws DepartmentExistInDataBaseException если найден Organization с переданным id
      */
-    public void isNotExistElseThrow(Organization organization) throws OrganizationExistInDb {
+    private void isNotExistElseThrow(Organization organization) throws OrganizationExistInDataBaseException {
         if (existById(organization.getId().toString())) {
-            throw new OrganizationExistInDb(organization.getId().toString());
+            throw new OrganizationExistInDataBaseException(organization.getId().toString());
         }
     }
     /**

@@ -28,9 +28,9 @@ public interface DepartmentRepository {
      * Метод сохранения объекта класса {@link Department} в базу данных
      *
      * @param department объекта класса {@link Department}
-     * @return возвращает количество созданных строк 1 удачное сохранение, 0 ошибка сохранения
+     * @return возвращает Optional<Department>
      */
-    Integer create(Department department);
+    Optional<Department> create(Department department);
     /**
      * Метод обновления информации {@link Department}
      *

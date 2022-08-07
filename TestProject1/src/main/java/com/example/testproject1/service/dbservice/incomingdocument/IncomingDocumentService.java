@@ -1,4 +1,4 @@
-package com.example.testproject1.service.dbservice.incomingDocument;
+package com.example.testproject1.service.dbservice.incomingdocument;
 
 import com.example.testproject1.model.document.IncomingDocument;
 

@@ -1,4 +1,4 @@
-package com.example.testproject1.dao.incomingdocumrnt;
+package com.example.testproject1.dao.incomingdocument;
 
 import com.example.testproject1.model.document.IncomingDocument;
 
@@ -14,9 +14,9 @@ public interface IncomingDocumentRepository {
      * Метод сохранения объекта класса {@link IncomingDocument} в базу данных
      *
      * @param incomingDocument объекта класса {@link IncomingDocument}
-     * @return возвращает количество созданных строк 1 удачное сохранение, 0 ошибка сохранения
+     * @return возвращает IncomingDocument или null при неудаче
      */
-    Integer create(IncomingDocument incomingDocument);
+    Optional<IncomingDocument> create(IncomingDocument incomingDocument);
     /**
      * Метод получения всех {@link IncomingDocument} из базы данных
      *

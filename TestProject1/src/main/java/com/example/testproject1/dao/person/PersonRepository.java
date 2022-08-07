@@ -15,9 +15,9 @@ public interface PersonRepository {
      * Метод сохранения объекта класса {@link Person} в базу данных
      *
      * @param person объекта класса {@link Person}
-     * @return возвращает количество созданных строк 1 удачное сохранение, 0 ошибка сохранения
+     * @return возвращает Optional<Person>
      */
-    Integer create(Person person);
+    Optional<Person> create(Person person);
     /**
      * Метод получения всех {@link Person} из базы данных
      *
