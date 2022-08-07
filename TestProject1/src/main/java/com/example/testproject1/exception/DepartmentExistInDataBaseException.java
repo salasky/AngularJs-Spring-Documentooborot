@@ -1,8 +1,16 @@
 package com.example.testproject1.exception;
 
 import java.text.MessageFormat;
-
+/**
+ * Класс исключений выдаваемое при попытке сохранения {@link com.example.testproject1.model.staff.Department}
+ * с уже существующим в базе id
+ *
+ * @author smigranov
+ */
 public class DepartmentExistInDataBaseException extends Exception {
+    /**
+     * id существующей записи
+     */
     private String messages;
 
     public DepartmentExistInDataBaseException(String message) {

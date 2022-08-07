@@ -13,25 +13,57 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Класс реализующий интерфейс {@link CrudService}. Для выполнения CRUD операций объектов класса {@link  IncomingDocument} к базе данных .
+ *
+ * @author smigranov
+ */
 @Service("IncomingDocumentService")
 public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IncomingDocumentServiceImpl.class);
-
+    /**
+     * Бин {@link CrudRepositories}
+     */
     @Autowired
     @Qualifier("IncomingDocumentRepository")
     private CrudRepositories incomingDocumentRepository;
-
+    /**
+     * Лог при успешном сохранении
+     */
     private final String CREATE_SUCCESS="IncomingDocument успешно сохранен";
+    /**
+     * Лог при неудачном сохранении
+     */
     private final String CREATE_FAIL="Неудачная попытка сохранения IncomingDocument";
+    /**
+     * Лог при выдаче всех IncomingDocument
+     */
     private final String GET_ALL_ATTEMPT="Попытка выдачи всех IncomingDocument";
+    /**
+     * Лог при выдаче IncomingDocument по id
+     */
     private final String GET_BY_ID_ATTEMPT="Попытка получить IncomingDocument по id";
+    /**
+     * Лог при успешном обновлении
+     */
     private final String UPDATE_SUCCESS="IncomingDocument успешно обновлен";
+    /**
+     * Лог при неудачном обновлении
+     */
     private final String UPDATE_FAIL="Неудачная попытка обновления IncomingDocument";
+    /**
+     * Лог при успешном удалении всех записей
+     */
     private final String DELETE_SUCCESS="Записи из таблицы incoming_document успешно удалены";
+    /**
+     * Лог при успешном удалении записи по id
+     */
     private final String DELETE_BY_ID_SUCCESS="Запись из таблицы incoming_document успешно удалена";
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<IncomingDocument> create(IncomingDocument incomingDocument) {
         Optional<IncomingDocument> incomingDocumentOptional = incomingDocumentRepository.create(incomingDocument);
@@ -42,19 +74,25 @@ public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument
         LOGGER.error(CREATE_FAIL);
         return Optional.empty();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<IncomingDocument> getall() {
         LOGGER.info(GET_ALL_ATTEMPT);
         return incomingDocumentRepository.getAll();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<IncomingDocument> getById(String id) {
         LOGGER.info(GET_BY_ID_ATTEMPT);
         return incomingDocumentRepository.getById(id);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<IncomingDocument> update(IncomingDocument incomingDocument) {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у IncomingDocument с id {0}", incomingDocument.getId().toString()));
@@ -66,7 +104,9 @@ public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument
         LOGGER.error(UPDATE_FAIL);
         return Optional.empty();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteAll() {
         try {
@@ -77,7 +117,9 @@ public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument
             LOGGER.error(e.toString());
         }
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteById(String id) {
         try {
