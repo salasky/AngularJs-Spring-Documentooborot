@@ -2,7 +2,6 @@ package com.example.testproject1.service.dbservice.organization;
 
 import com.example.testproject1.dao.CrudRepositories;
 import com.example.testproject1.exception.DeletePoorlyException;
-import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
+
 /**
  * Класс реализующий интерфейс {@link CrudService}. Для выполнения CRUD операций объектов класса {@link  Organization} к базе данных .
  *
@@ -32,35 +32,36 @@ public class OrganizationServiceImpl implements CrudService<Organization> {
     /**
      * Лог при успешном сохранении
      */
-    private final String CREATE_SUCCESS="Organization успешно сохранен";
+    private final String CREATE_SUCCESS = "Organization успешно сохранен";
     /**
      * Лог при неудачном сохранении
      */
-    private final String CREATE_FAIL="Неудачная попытка сохранения Organization";
+    private final String CREATE_FAIL = "Неудачная попытка сохранения Organization";
     /**
      * Лог при выдаче всех Organization
      */
-    private final String GET_ALL_ATTEMPT="Попытка выдачи всех Organization";
+    private final String GET_ALL_ATTEMPT = "Попытка выдачи всех Organization";
     /**
      * Лог при выдаче Organization по id
      */
-    private final String GET_BY_ID_ATTEMPT="Попытка получить Organization по id";
+    private final String GET_BY_ID_ATTEMPT = "Попытка получить Organization по id";
     /**
      * Лог при успешном обновлении
      */
-    private final String UPDATE_SUCCESS="Organization успешно обновлен";
+    private final String UPDATE_SUCCESS = "Organization успешно обновлен";
     /**
      * Лог при неудачном обновлении
      */
-    private final String UPDATE_FAIL="Неудачная попытка обновления Organization";
+    private final String UPDATE_FAIL = "Неудачная попытка обновления Organization";
     /**
      * Лог при успешном удалении всех записей
      */
-    private final String DELETE_SUCCESS="Записи из таблицы Organization успешно удалены";
+    private final String DELETE_SUCCESS = "Записи из таблицы Organization успешно удалены";
     /**
      * Лог при успешном удалении записи по id
      */
-    private final String DELETE_BY_ID_SUCCESS="Запись из таблицы Organization успешно удалена";
+    private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы Organization успешно удалена";
+
     /**
      * {@inheritDoc}
      */
@@ -74,6 +75,7 @@ public class OrganizationServiceImpl implements CrudService<Organization> {
         LOGGER.error(CREATE_FAIL);
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -82,6 +84,7 @@ public class OrganizationServiceImpl implements CrudService<Organization> {
         LOGGER.info(GET_ALL_ATTEMPT);
         return organizationRepository.getAll();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -90,6 +93,7 @@ public class OrganizationServiceImpl implements CrudService<Organization> {
         LOGGER.info(GET_BY_ID_ATTEMPT);
         return organizationRepository.getById(id);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -104,6 +108,7 @@ public class OrganizationServiceImpl implements CrudService<Organization> {
         LOGGER.error(UPDATE_FAIL);
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -117,6 +122,7 @@ public class OrganizationServiceImpl implements CrudService<Organization> {
             LOGGER.error(e.toString());
         }
     }
+
     /**
      * {@inheritDoc}
      */

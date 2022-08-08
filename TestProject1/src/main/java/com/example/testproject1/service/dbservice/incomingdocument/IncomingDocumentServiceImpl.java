@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
+
 /**
  * Класс реализующий интерфейс {@link CrudService}. Для выполнения CRUD операций объектов класса {@link  IncomingDocument} к базе данных .
  *
@@ -31,35 +32,35 @@ public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument
     /**
      * Лог при успешном сохранении
      */
-    private final String CREATE_SUCCESS="IncomingDocument успешно сохранен";
+    private final String CREATE_SUCCESS = "IncomingDocument успешно сохранен";
     /**
      * Лог при неудачном сохранении
      */
-    private final String CREATE_FAIL="Неудачная попытка сохранения IncomingDocument";
+    private final String CREATE_FAIL = "Неудачная попытка сохранения IncomingDocument";
     /**
      * Лог при выдаче всех IncomingDocument
      */
-    private final String GET_ALL_ATTEMPT="Попытка выдачи всех IncomingDocument";
+    private final String GET_ALL_ATTEMPT = "Попытка выдачи всех IncomingDocument";
     /**
      * Лог при выдаче IncomingDocument по id
      */
-    private final String GET_BY_ID_ATTEMPT="Попытка получить IncomingDocument по id";
+    private final String GET_BY_ID_ATTEMPT = "Попытка получить IncomingDocument по id";
     /**
      * Лог при успешном обновлении
      */
-    private final String UPDATE_SUCCESS="IncomingDocument успешно обновлен";
+    private final String UPDATE_SUCCESS = "IncomingDocument успешно обновлен";
     /**
      * Лог при неудачном обновлении
      */
-    private final String UPDATE_FAIL="Неудачная попытка обновления IncomingDocument";
+    private final String UPDATE_FAIL = "Неудачная попытка обновления IncomingDocument";
     /**
      * Лог при успешном удалении всех записей
      */
-    private final String DELETE_SUCCESS="Записи из таблицы incoming_document успешно удалены";
+    private final String DELETE_SUCCESS = "Записи из таблицы incoming_document успешно удалены";
     /**
      * Лог при успешном удалении записи по id
      */
-    private final String DELETE_BY_ID_SUCCESS="Запись из таблицы incoming_document успешно удалена";
+    private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы incoming_document успешно удалена";
 
     /**
      * {@inheritDoc}
@@ -74,6 +75,7 @@ public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument
         LOGGER.error(CREATE_FAIL);
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -82,6 +84,7 @@ public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument
         LOGGER.info(GET_ALL_ATTEMPT);
         return incomingDocumentRepository.getAll();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -90,6 +93,7 @@ public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument
         LOGGER.info(GET_BY_ID_ATTEMPT);
         return incomingDocumentRepository.getById(id);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -104,6 +108,7 @@ public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument
         LOGGER.error(UPDATE_FAIL);
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -117,6 +122,7 @@ public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument
             LOGGER.error(e.toString());
         }
     }
+
     /**
      * {@inheritDoc}
      */

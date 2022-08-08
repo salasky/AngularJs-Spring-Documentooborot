@@ -1,8 +1,8 @@
 package com.example.testproject1.dao.incomingdocument;
 
 import com.example.testproject1.dao.CrudRepositories;
-import com.example.testproject1.mapper.document.IncomingDocumentMapper;
 import com.example.testproject1.exception.DeletePoorlyException;
+import com.example.testproject1.mapper.document.IncomingDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
@@ -143,8 +143,8 @@ public class IncomingDocumentRepositoryImpl implements CrudRepositories<Incoming
      */
     @Override
     public boolean existById(String uuid) {
-        Optional<IncomingDocument> incomingDocument = jdbcTemplate.query(INCOMING_DOCUMENT_GET_BY_ID_QUERY, incomingDocumentMapper, uuid).stream().findFirst();
-        return incomingDocument.isPresent();
+        return jdbcTemplate.query(INCOMING_DOCUMENT_GET_BY_ID_QUERY, incomingDocumentMapper, uuid)
+                .stream().findFirst().isPresent();
     }
 }
 

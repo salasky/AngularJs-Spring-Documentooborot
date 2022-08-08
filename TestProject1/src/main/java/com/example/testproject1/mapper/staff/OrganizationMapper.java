@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+
 /**
  * Маппер для класса {@link Organization}
  *
@@ -17,23 +18,24 @@ public class OrganizationMapper implements RowMapper<Organization> {
     /**
      * Название столбца для мапинга в поле organization_id
      */
-    private final String ORGANIZATION_ID="organization_id";
+    private final String ORGANIZATION_ID = "organization_id";
     /**
      * Название столбца для мапинга в поле organization_full_name
      */
-    private final String ORGANIZATION_FULL_NAME="organization_full_name";
+    private final String ORGANIZATION_FULL_NAME = "organization_full_name";
     /**
      * Название столбца для мапинга в поле organization_short_name
      */
-    private final String ORGANIZATION_SHORT_NAME="organization_short_name";
+    private final String ORGANIZATION_SHORT_NAME = "organization_short_name";
     /**
      * Название столбца для мапинга в поле organization_supervisor
      */
-    private final String ORGANIZATION_SUPERVISOR="organization_supervisor";
+    private final String ORGANIZATION_SUPERVISOR = "organization_supervisor";
     /**
      * Название столбца для мапинга в поле organization_contact_number
      */
-    private final String ORGANIZATION_CONTACT_NUMBER="organization_contact_number";
+    private final String ORGANIZATION_CONTACT_NUMBER = "organization_contact_number";
+
     /**
      * {@inheritDoc}
      */

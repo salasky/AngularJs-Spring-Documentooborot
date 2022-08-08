@@ -1,4 +1,5 @@
 package com.example.testproject1.exception;
+
 /**
  * Класс исключений выдаваемое при неудачном удалении записи.
  *
@@ -14,6 +15,6 @@ public class DeletePoorlyException extends Exception {
      */
     @Override
     public String toString() {
-        return  "Ошибка удаления";
+        return "Ошибка удаления";
     }
 }

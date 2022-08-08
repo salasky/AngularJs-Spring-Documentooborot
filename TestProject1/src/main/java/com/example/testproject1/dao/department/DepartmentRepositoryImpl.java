@@ -1,9 +1,9 @@
 package com.example.testproject1.dao.department;
 
 import com.example.testproject1.dao.CrudRepositories;
-import com.example.testproject1.mapper.staff.DepartmentMapper;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.exception.DepartmentExistInDataBaseException;
+import com.example.testproject1.mapper.staff.DepartmentMapper;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -56,6 +56,7 @@ public class DepartmentRepositoryImpl implements CrudRepositories<Department> {
     public List<Department> getAll() {
         return jdbcTemplate.query(DEPARTMENT_GET_ALL_QUERY, departmentMapper);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -63,12 +64,13 @@ public class DepartmentRepositoryImpl implements CrudRepositories<Department> {
     public Optional<Department> getById(String id) {
         return jdbcTemplate.query(DEPARTMENT_GET_BY_ID_QUERY, departmentMapper, id).stream().findFirst();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public Optional<Department> create(Department department) {
-        if (department!=null) {
+        if (department != null) {
             try {
                 isNotExistElseThrow(department);
                 organizationService.create(department.getOrganization());
@@ -83,13 +85,13 @@ public class DepartmentRepositoryImpl implements CrudRepositories<Department> {
                 LOGGER.error(e.toString());
                 return Optional.empty();
             }
-        }
-        else throw new IllegalArgumentException("Department не может быть null");
+        } else throw new IllegalArgumentException("Department не может быть null");
     }
 
     /**
      * Метод поиска Department по id. Из-за того, что в XML staff сущностей(Person,Department и т.д.) ограниченное количество, каждый раз ловить
      * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
+     *
      * @param department
      * @throws DepartmentExistInDataBaseException если найден Department с переданным id
      */
@@ -108,34 +110,37 @@ public class DepartmentRepositoryImpl implements CrudRepositories<Department> {
                 department.getSupervisor(), department.getContactNumber(), department.getOrganization().getId().toString(),
                 department.getId().toString());
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean deleteAll() throws DeletePoorlyException {
-        int deleteCount=jdbcTemplate.update(DEPARTMENT_DELETE_ALL_QUERY);
-        if(deleteCount>0){
+        int deleteCount = jdbcTemplate.update(DEPARTMENT_DELETE_ALL_QUERY);
+        if (deleteCount > 0) {
             return true;
         }
         throw new DeletePoorlyException();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean deleteById(String id) throws DeletePoorlyException {
         int deleteCount = jdbcTemplate.update(DEPARTMENT_DELETE_BY_ID_QUERY, id);
-        if(deleteCount==1){
+        if (deleteCount == 1) {
             return true;
         }
         throw new DeletePoorlyException();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean existById(String uuid) {
-        Optional<Department> department = jdbcTemplate.query(DEPARTMENT_GET_BY_ID_QUERY, departmentMapper, uuid).stream().findFirst();
-        return department.isPresent();
+        return jdbcTemplate.query(DEPARTMENT_GET_BY_ID_QUERY, departmentMapper, uuid)
+                .stream().findFirst().isPresent();
     }
 }

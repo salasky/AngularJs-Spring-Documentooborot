@@ -1,10 +1,10 @@
 package com.example.testproject1.dao.jobtittle;
 
 import com.example.testproject1.dao.CrudRepositories;
-import com.example.testproject1.mapper.staff.JobTittleMapper;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.exception.DepartmentExistInDataBaseException;
 import com.example.testproject1.exception.JobTittleExistInDataBaseException;
+import com.example.testproject1.mapper.staff.JobTittleMapper;
 import com.example.testproject1.model.staff.JobTittle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +49,7 @@ public class JobTittleRepositoryImpl implements CrudRepositories<JobTittle> {
     public List<JobTittle> getAll() {
         return jdbcTemplate.query(JOB_TITTLE_GET_ALL_QUERY, jobTittleMapper);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -60,12 +61,13 @@ public class JobTittleRepositoryImpl implements CrudRepositories<JobTittle> {
             return Optional.empty();
         }
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public  Optional<JobTittle> create(JobTittle jobTittle) {
-        if(jobTittle!=null) {
+    public Optional<JobTittle> create(JobTittle jobTittle) {
+        if (jobTittle != null) {
             try {
                 isNotExistElseThrow(jobTittle);
                 int countCreate = jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getUuid().toString(), jobTittle.getName());
@@ -77,12 +79,13 @@ public class JobTittleRepositoryImpl implements CrudRepositories<JobTittle> {
                 LOGGER.error(e.toString());
                 return Optional.empty();
             }
-        }
-        else throw new IllegalArgumentException("JobTittle не может быть null");
+        } else throw new IllegalArgumentException("JobTittle не может быть null");
     }
+
     /**
      * Метод поиска jobTittle по id. Из-за того, что в XML staff сущностей(Person,Department и т.д.) ограниченное количество, каждый раз ловить
      * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
+     *
      * @param jobTittle
      * @throws DepartmentExistInDataBaseException если найден JobTittle с переданным id
      */
@@ -91,6 +94,7 @@ public class JobTittleRepositoryImpl implements CrudRepositories<JobTittle> {
             throw new JobTittleExistInDataBaseException(jobTittle.getUuid().toString());
         }
     }
+
     /**
      * {@inheritDoc}
      */
@@ -98,34 +102,37 @@ public class JobTittleRepositoryImpl implements CrudRepositories<JobTittle> {
     public Integer update(JobTittle jobTittle) {
         return jdbcTemplate.update(JOB_TITTLE_UPDATE_ID_QUERY, jobTittle.getName(), jobTittle.getUuid().toString());
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean deleteAll() throws DeletePoorlyException {
-        int deleteCount= jdbcTemplate.update(JOB_TITTLE_DELETE_ALL_QUERY);
-        if(deleteCount>0) {
+        int deleteCount = jdbcTemplate.update(JOB_TITTLE_DELETE_ALL_QUERY);
+        if (deleteCount > 0) {
             return true;
         }
         throw new DeletePoorlyException();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean deleteById(String id) throws DeletePoorlyException {
         int deleteCount = jdbcTemplate.update(JOB_TITTLE_DELETE_BY_ID_QUERY, id);
-        if(deleteCount==1) {
+        if (deleteCount == 1) {
             return true;
         }
         throw new DeletePoorlyException();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean existById(String uuid) {
-        Optional<JobTittle> jobTittle = jdbcTemplate.query(JOB_TITTLE_GET_BY_ID_QUERY, jobTittleMapper, uuid).stream().findFirst();
-        return jobTittle.isPresent();
+        return jdbcTemplate.query(JOB_TITTLE_GET_BY_ID_QUERY, jobTittleMapper, uuid)
+                .stream().findFirst().isPresent();
     }
 }

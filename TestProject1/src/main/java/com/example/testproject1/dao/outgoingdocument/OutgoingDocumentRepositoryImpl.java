@@ -1,8 +1,8 @@
 package com.example.testproject1.dao.outgoingdocument;
 
 import com.example.testproject1.dao.CrudRepositories;
-import com.example.testproject1.mapper.document.OutgoingDocumentMapper;
 import com.example.testproject1.exception.DeletePoorlyException;
+import com.example.testproject1.mapper.document.OutgoingDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.staff.Person;
@@ -55,35 +55,36 @@ public class OutgoingDocumentRepositoryImpl implements CrudRepositories<Outgoing
     @Autowired
     @Qualifier("PersonService")
     private CrudService personService;
+
     /**
      * {@inheritDoc}
      */
     @Override
     public Optional<OutgoingDocument> create(OutgoingDocument outgoingDocument) {
-        if(outgoingDocument!=null){
-        try {
-            BaseDocument baseDocument = new BaseDocument();
-            baseDocument.setId(outgoingDocument.getId());
-            baseDocument.setName(outgoingDocument.getName());
-            baseDocument.setText(outgoingDocument.getText());
-            baseDocument.setRegNumber(outgoingDocument.getRegNumber());
-            baseDocument.setCreatingDate(outgoingDocument.getCreatingDate());
-            baseDocument.setAuthor(outgoingDocument.getAuthor());
-            baseDocumentService.create(baseDocument);
-            personService.create(outgoingDocument.getSender());
-            int createCount=jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
-                    outgoingDocument.getSender().getId().toString(),
-                    outgoingDocument.getDeliveryType().toString());
-            if(createCount==1){
-                return Optional.ofNullable(outgoingDocument);
+        if (outgoingDocument != null) {
+            try {
+                BaseDocument baseDocument = new BaseDocument();
+                baseDocument.setId(outgoingDocument.getId());
+                baseDocument.setName(outgoingDocument.getName());
+                baseDocument.setText(outgoingDocument.getText());
+                baseDocument.setRegNumber(outgoingDocument.getRegNumber());
+                baseDocument.setCreatingDate(outgoingDocument.getCreatingDate());
+                baseDocument.setAuthor(outgoingDocument.getAuthor());
+                baseDocumentService.create(baseDocument);
+                personService.create(outgoingDocument.getSender());
+                int createCount = jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
+                        outgoingDocument.getSender().getId().toString(),
+                        outgoingDocument.getDeliveryType().toString());
+                if (createCount == 1) {
+                    return Optional.ofNullable(outgoingDocument);
+                }
+                return Optional.empty();
+            } catch (DataIntegrityViolationException ex) {
+                throw new RuntimeException(ex);
             }
-            return Optional.empty();
-        } catch (DataIntegrityViolationException ex) {
-            throw new RuntimeException(ex);
-            }
-        }
-        else throw new IllegalArgumentException("OutgoingDocument не может быть null");
+        } else throw new IllegalArgumentException("OutgoingDocument не может быть null");
     }
+
     /**
      * {@inheritDoc}
      */
@@ -91,6 +92,7 @@ public class OutgoingDocumentRepositoryImpl implements CrudRepositories<Outgoing
     public List<OutgoingDocument> getAll() {
         return jdbcTemplate.query(OUTGOING_DOCUMENT_GET_ALL_QUERY, outgoingDocumentMapper);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -99,6 +101,7 @@ public class OutgoingDocumentRepositoryImpl implements CrudRepositories<Outgoing
         return jdbcTemplate.query(OUTGOING_DOCUMENT_GET_BY_ID_QUERY, outgoingDocumentMapper, id)
                 .stream().findFirst();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -107,34 +110,37 @@ public class OutgoingDocumentRepositoryImpl implements CrudRepositories<Outgoing
         return jdbcTemplate.update(OUTGOING_DOCUMENT_UPDATE_QUERY, outgoingDocument.getSender().getId().toString(),
                 outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString());
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean deleteAll() throws DeletePoorlyException {
-        int deleteCount= jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_ALL_QUERY);
-        if(deleteCount>0){
+        int deleteCount = jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_ALL_QUERY);
+        if (deleteCount > 0) {
             return true;
         }
         throw new DeletePoorlyException();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean deleteById(String id) throws DeletePoorlyException {
         int deleteCount = jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_BY_ID_QUERY, id);
-        if(deleteCount==1) {
+        if (deleteCount == 1) {
             return true;
         }
         throw new DeletePoorlyException();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean existById(String uuid) {
-        Optional<OutgoingDocument> outgoingDocument = jdbcTemplate.query(OUTGOING_DOCUMENT_GET_BY_ID_QUERY, outgoingDocumentMapper, uuid).stream().findFirst();
-        return outgoingDocument.isPresent();
+        return jdbcTemplate.query(OUTGOING_DOCUMENT_GET_BY_ID_QUERY, outgoingDocumentMapper, uuid)
+                .stream().findFirst().isPresent();
     }
 }

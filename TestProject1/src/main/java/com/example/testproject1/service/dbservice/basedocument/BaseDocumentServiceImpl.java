@@ -27,39 +27,39 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
     /**
      * Лог при успешном сохранении
      */
-    private final String CREATE_SUCCESS="BaseDocument успешно сохранен";
+    private final String CREATE_SUCCESS = "BaseDocument успешно сохранен";
     /**
      * Лог при неудачном сохранении
      */
-    private final String CREATE_FAIL="Не удалось сохранить BaseDocument";
+    private final String CREATE_FAIL = "Не удалось сохранить BaseDocument";
     /**
      * Лог при выдаче всех BaseDocument
      */
-    private final String GET_ALL_ATTEMPT="Попытка выдачи всех BaseDocument";
+    private final String GET_ALL_ATTEMPT = "Попытка выдачи всех BaseDocument";
     /**
      * Лог при выдаче BaseDocument по id
      */
-    private final String GET_BY_ID_ATTEMPT="Попытка получить BaseDocument по id";
+    private final String GET_BY_ID_ATTEMPT = "Попытка получить BaseDocument по id";
     /**
      * Лог при успешном обновлении
      */
-    private final String UPDATE_SUCCESS="BaseDocument успешно обновлен";
+    private final String UPDATE_SUCCESS = "BaseDocument успешно обновлен";
     /**
      * Лог при неудачном обновлении
      */
-    private final String UPDATE_FAIL="Неудачная попытка сохранения BaseDocument";
+    private final String UPDATE_FAIL = "Неудачная попытка сохранения BaseDocument";
     /**
      * Лог при успешном удалении всех записей
      */
-    private final String DELETE_ALL_SUCCESS="Записи из таблицы base_document успешно удалены";
+    private final String DELETE_ALL_SUCCESS = "Записи из таблицы base_document успешно удалены";
     /**
      * Лог при успешном удалении записи по id
      */
-    private final String DELETE_BY_ID_SUCCESS="Запись из таблицы base_document успешно удалена";
+    private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы base_document успешно удалена";
     /**
      * Лог при поиске baseDocument по регистрационному номеру
      */
-    private final String FINE_BY_REG_NUMBER="Поиск baseDocument по регистрационному номеру";
+    private final String FINE_BY_REG_NUMBER = "Поиск baseDocument по регистрационному номеру";
 
     /**
      * {@inheritDoc}
@@ -74,6 +74,7 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
         LOGGER.error(CREATE_FAIL);
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -82,6 +83,7 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
         LOGGER.info(GET_ALL_ATTEMPT);
         return baseDocumentRepository.getAll();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -90,6 +92,7 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
         LOGGER.info(GET_BY_ID_ATTEMPT);
         return baseDocumentRepository.getById(id);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -103,6 +106,7 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
         LOGGER.error(UPDATE_FAIL);
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -116,6 +120,7 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
             LOGGER.error(e.toString());
         }
     }
+
     /**
      * {@inheritDoc}
      */
@@ -129,6 +134,7 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
             LOGGER.error(e.toString());
         }
     }
+
     /**
      * {@inheritDoc}
      */

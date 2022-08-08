@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+
 /**
  * Маппер для класса {@link Person}
  *
@@ -30,31 +31,32 @@ public class PersonMapper implements RowMapper<Person> {
     /**
      * Название столбца для мапинга в поле person_id
      */
-    private final String PERSON_ID="person_id";
+    private final String PERSON_ID = "person_id";
     /**
      * Название столбца для мапинга в поле person_first_name
      */
-    private final String PERSON_FIRST_NAME="person_first_name";
+    private final String PERSON_FIRST_NAME = "person_first_name";
     /**
      * Название столбца для мапинга в поле person_second_name
      */
-    private final String PERSON_SECOND_NAME="person_second_name";
+    private final String PERSON_SECOND_NAME = "person_second_name";
     /**
      * Название столбца для мапинга в поле person_last_name
      */
-    private final String PERSON_LAST_NAME="person_last_name";
+    private final String PERSON_LAST_NAME = "person_last_name";
     /**
      * Название столбца для мапинга в поле person_photo
      */
-    private final String PERSON_PHOTO="person_photo";
+    private final String PERSON_PHOTO = "person_photo";
     /**
      * Название столбца для мапинга в поле person_phone_number
      */
-    private final String PERSON_PHONE_NUMBER="person_phone_number";
+    private final String PERSON_PHONE_NUMBER = "person_phone_number";
     /**
      * Название столбца для мапинга в поле person_birth_day
      */
-    private final String PERSON_BIRTH_DAY="person_birth_day";
+    private final String PERSON_BIRTH_DAY = "person_birth_day";
+
     /**
      * {@inheritDoc}
      */

@@ -1,7 +1,6 @@
 package com.example.testproject1.dao;
 
 import com.example.testproject1.exception.DeletePoorlyException;
-import com.example.testproject1.model.staff.Department;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,13 +10,14 @@ import java.util.Optional;
  *
  * @author smigranov
  */
-public interface CrudRepositories <T>{
+public interface CrudRepositories<T> {
     /**
      * Метод получения всех объектов указанного из базы данных
      *
      * @return возвращает List<> объектов указанного типа
      */
     List<T> getAll();
+
     /**
      * Метод получения объекта указанного типа из базы по id
      *
@@ -25,6 +25,7 @@ public interface CrudRepositories <T>{
      * @return возвращает null или объект
      */
     Optional<T> getById(String id);
+
     /**
      * Метод сохранения объекта указанного класса в базу данных
      *
@@ -32,6 +33,7 @@ public interface CrudRepositories <T>{
      * @return возвращает Optional<Объект указанного класса>
      */
     Optional<T> create(T obj);
+
     /**
      * Метод обновления информации указанного объекта
      *
@@ -42,10 +44,12 @@ public interface CrudRepositories <T>{
 
     /**
      * Метод удаления всех записей с таблицы
+     *
      * @return булевое значение: true при удачном удалении и false при неудаче
      * @throws DeletePoorlyException при неудачном удалении
      */
     boolean deleteAll() throws DeletePoorlyException;
+
     /**
      * Метод удаления по id
      *
@@ -54,6 +58,7 @@ public interface CrudRepositories <T>{
      * @throws DeletePoorlyException при неудачном удалении
      */
     boolean deleteById(String id) throws DeletePoorlyException;
+
     /**
      * Метод проверки существования объекта в базе по переданному uuid
      *

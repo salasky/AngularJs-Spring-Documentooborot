@@ -1,8 +1,8 @@
 package com.example.testproject1.dao.taskdocument;
 
 import com.example.testproject1.dao.CrudRepositories;
-import com.example.testproject1.mapper.document.TaskDocumentMapper;
 import com.example.testproject1.exception.DeletePoorlyException;
+import com.example.testproject1.mapper.document.TaskDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
@@ -61,7 +61,7 @@ public class TaskDocumentRepositoryImpl implements CrudRepositories<TaskDocument
      */
     @Override
     public Optional<TaskDocument> create(TaskDocument taskDocument) {
-        if(taskDocument!=null) {
+        if (taskDocument != null) {
             try {
                 BaseDocument baseDocument = new BaseDocument();
                 baseDocument.setId(taskDocument.getId());
@@ -73,19 +73,19 @@ public class TaskDocumentRepositoryImpl implements CrudRepositories<TaskDocument
                 baseDocumentService.create(baseDocument);
                 personService.create(taskDocument.getControlPerson());
                 personService.create(taskDocument.getResponsible());
-                int countCreate=jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate()
+                int countCreate = jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate()
                         , taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
                         taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
-                if(countCreate==1){
+                if (countCreate == 1) {
                     return Optional.ofNullable(taskDocument);
                 }
                 return Optional.empty();
             } catch (DataIntegrityViolationException ex) {
                 throw new RuntimeException(ex);
             }
-        }
-        else throw new IllegalArgumentException("TaskDocument не может быть null");
+        } else throw new IllegalArgumentException("TaskDocument не может быть null");
     }
+
     /**
      * {@inheritDoc}
      */
@@ -93,6 +93,7 @@ public class TaskDocumentRepositoryImpl implements CrudRepositories<TaskDocument
     public List<TaskDocument> getAll() {
         return jdbcTemplate.query(TASK_DOCUMENT_GET_ALL_QUERY, taskDocumentMapper);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -101,6 +102,7 @@ public class TaskDocumentRepositoryImpl implements CrudRepositories<TaskDocument
         return jdbcTemplate.query(TASK_DOCUMENT_GET_BY_ID_QUERY, taskDocumentMapper, id)
                 .stream().findFirst();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -110,34 +112,37 @@ public class TaskDocumentRepositoryImpl implements CrudRepositories<TaskDocument
                 taskDocument.getResponsible().getId().toString(), taskDocument.getSignOfControl(),
                 taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString());
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean deleteAll() throws DeletePoorlyException {
-        int deleteCount= jdbcTemplate.update(TASK_DOCUMENT_DELETE_ALL_QUERY);
-        if(deleteCount>0){
+        int deleteCount = jdbcTemplate.update(TASK_DOCUMENT_DELETE_ALL_QUERY);
+        if (deleteCount > 0) {
             return true;
         }
         throw new DeletePoorlyException();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean deleteById(String id) throws DeletePoorlyException {
         int deleteCount = jdbcTemplate.update(TASK_DOCUMENT_DELETE_BY_ID_QUERY, id);
-        if(deleteCount==1) {
+        if (deleteCount == 1) {
             return true;
         }
         throw new DeletePoorlyException();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean existById(String uuid) {
-        Optional<TaskDocument> taskDocument = jdbcTemplate.query(TASK_DOCUMENT_GET_BY_ID_QUERY, taskDocumentMapper, uuid).stream().findFirst();
-        return taskDocument.isPresent();
+        return jdbcTemplate.query(TASK_DOCUMENT_GET_BY_ID_QUERY, taskDocumentMapper, uuid)
+                .stream().findFirst().isPresent();
     }
 }

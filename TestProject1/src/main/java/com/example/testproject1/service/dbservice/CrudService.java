@@ -1,8 +1,5 @@
 package com.example.testproject1.service.dbservice;
 
-import com.example.testproject1.exception.DeletePoorlyException;
-import com.example.testproject1.model.staff.Department;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +8,7 @@ import java.util.Optional;
  *
  * @author smigranov
  */
-public interface CrudService <T> {
+public interface CrudService<T> {
     /**
      * Метод сохранения объекта указанного класса в базу данных
      *
@@ -19,12 +16,14 @@ public interface CrudService <T> {
      * @return возвращает Optional<Объект указанного класса>
      */
     Optional<T> create(T object);
+
     /**
      * Метод получения всех объектов указанного из базы данных
      *
      * @return возвращает List<> объектов указанного типа
      */
     List<T> getall();
+
     /**
      * Метод получения объекта указанного типа из базы по id
      *
@@ -32,6 +31,7 @@ public interface CrudService <T> {
      * @return возвращает null или объект
      */
     Optional<T> getById(String id);
+
     /**
      * Метод обновления информации указанного объекта
      *
@@ -39,10 +39,12 @@ public interface CrudService <T> {
      * @return возвращает null или объект
      */
     Optional<T> update(T object);
+
     /**
      * Метод удаления всех записей с таблицы
      */
     void deleteAll();
+
     /**
      * Метод удаления по id
      *

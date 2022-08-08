@@ -2,7 +2,6 @@ package com.example.testproject1.service.dbservice.taskdocument;
 
 import com.example.testproject1.dao.CrudRepositories;
 import com.example.testproject1.exception.DeletePoorlyException;
-import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
+
 /**
  * Класс реализующий интерфейс {@link CrudService}. Для выполнения CRUD операций объектов класса {@link TaskDocument} к базе данных .
  *
@@ -31,31 +31,32 @@ public class TaskDocumentServiceImpl implements CrudService<TaskDocument> {
     /**
      * Лог при успешном сохранении
      */
-    private final String CREATE_SUCCESS="TaskDocument успешно сохранен";
+    private final String CREATE_SUCCESS = "TaskDocument успешно сохранен";
     /**
      * Лог при выдаче всех TaskDocument
      */
-    private final String GET_ALL_ATTEMPT="Попытка выдачи всех TaskDocument";
+    private final String GET_ALL_ATTEMPT = "Попытка выдачи всех TaskDocument";
     /**
      * Лог при выдаче TaskDocument по id
      */
-    private final String GET_BY_ID_ATTEMPT="Попытка получить TaskDocument по id";
+    private final String GET_BY_ID_ATTEMPT = "Попытка получить TaskDocument по id";
     /**
      * Лог при успешном обновлении
      */
-    private final String UPDATE_SUCCESS="TaskDocument успешно обновлен";
+    private final String UPDATE_SUCCESS = "TaskDocument успешно обновлен";
     /**
      * Лог при неудачном обновлении
      */
-    private final String UPDATE_FAIL="Неудачная попытка обновления TaskDocument";
+    private final String UPDATE_FAIL = "Неудачная попытка обновления TaskDocument";
     /**
      * Лог при успешном удалении всех записей
      */
-    private final String DELETE_SUCCESS="Записи из таблицы TaskDocument успешно удалены";
+    private final String DELETE_SUCCESS = "Записи из таблицы TaskDocument успешно удалены";
     /**
      * Лог при успешном удалении записи по id
      */
-    private final String DELETE_BY_ID_SUCCESS="Запись из таблицы TaskDocument успешно удалена";
+    private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы TaskDocument успешно удалена";
+
     /**
      * {@inheritDoc}
      */
@@ -69,6 +70,7 @@ public class TaskDocumentServiceImpl implements CrudService<TaskDocument> {
         LOGGER.error(MessageFormat.format("Неудачная попытка сохранения TaskDocument c id {0}", taskDocument.getId().toString()));
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -77,6 +79,7 @@ public class TaskDocumentServiceImpl implements CrudService<TaskDocument> {
         LOGGER.info(GET_ALL_ATTEMPT);
         return taskDocumentRepository.getAll();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -85,6 +88,7 @@ public class TaskDocumentServiceImpl implements CrudService<TaskDocument> {
         LOGGER.info(GET_BY_ID_ATTEMPT);
         return taskDocumentRepository.getById(id);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -99,6 +103,7 @@ public class TaskDocumentServiceImpl implements CrudService<TaskDocument> {
         LOGGER.error(UPDATE_FAIL);
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -112,6 +117,7 @@ public class TaskDocumentServiceImpl implements CrudService<TaskDocument> {
             LOGGER.error(e.toString());
         }
     }
+
     /**
      * {@inheritDoc}
      */

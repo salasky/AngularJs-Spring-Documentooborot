@@ -1,7 +1,7 @@
 package com.example.testproject1.dao.basedocument;
 
-import com.example.testproject1.mapper.document.BaseDocumentMapper;
 import com.example.testproject1.exception.DeletePoorlyException;
+import com.example.testproject1.mapper.document.BaseDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -54,7 +54,7 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      */
     @Override
     public Optional<BaseDocument> create(BaseDocument baseDocument) {
-        if(baseDocument!=null) {
+        if (baseDocument != null) {
             try {
                 personService.create(baseDocument.getAuthor());
                 int countCreate = jdbcTemplate.update(BASE_DOCUMENT_CREATE_QUERY, baseDocument.getId().toString(), baseDocument.getName(), baseDocument.getText(),
@@ -66,8 +66,7 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
             } catch (DataIntegrityViolationException ex) {
                 throw new RuntimeException(ex);
             }
-        }
-        else throw new IllegalArgumentException("BaseDocument не может быть null");
+        } else throw new IllegalArgumentException("BaseDocument не может быть null");
     }
 
     /**
@@ -101,8 +100,8 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      */
     @Override
     public boolean deleteAll() throws DeletePoorlyException {
-        int deleteCount= jdbcTemplate.update(BASE_DOCUMENT_DELETE_ALL_QUERY);
-        if(deleteCount>0){
+        int deleteCount = jdbcTemplate.update(BASE_DOCUMENT_DELETE_ALL_QUERY);
+        if (deleteCount > 0) {
             return true;
         }
         throw new DeletePoorlyException();
@@ -114,7 +113,7 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
     @Override
     public boolean deleteById(String id) throws DeletePoorlyException {
         int deleteCount = jdbcTemplate.update(BASE_DOCUMENT_DELETE_BY_ID_QUERY, id);
-        if(deleteCount==1) {
+        if (deleteCount == 1) {
             return true;
         }
         throw new DeletePoorlyException();
@@ -125,9 +124,8 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      */
     @Override
     public boolean existByRegNumber(Long regNumber) {
-        Optional<BaseDocument> baseDocumentOptional = jdbcTemplate.query(BASE_DOCUMENT_EXIST_BY_REG_NUMBER_QUERY, baseDocumentMapper, regNumber).stream().findFirst();
-        return baseDocumentOptional.isPresent();
-
+        return jdbcTemplate.query(BASE_DOCUMENT_EXIST_BY_REG_NUMBER_QUERY, baseDocumentMapper, regNumber)
+                .stream().findFirst().isPresent();
     }
 
     /**
@@ -135,7 +133,7 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      */
     @Override
     public boolean existById(String uuid) {
-        Optional<BaseDocument> baseDocumentOptional = jdbcTemplate.query(BASE_DOCUMENT_GET_BY_ID_QUERY, baseDocumentMapper, uuid).stream().findFirst();
-        return baseDocumentOptional.isPresent();
+        return jdbcTemplate.query(BASE_DOCUMENT_GET_BY_ID_QUERY, baseDocumentMapper, uuid)
+                .stream().findFirst().isPresent();
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+
 /**
  * Маппер для класса {@link TaskDocument}
  *
@@ -28,167 +29,167 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
     /**
      * Название столбца для мапинга в поле task_document_out_date
      */
-    private final String TASK_DOCUMENT_OUT_DATE="task_document_out_date";
+    private final String TASK_DOCUMENT_OUT_DATE = "task_document_out_date";
     /**
      * Название столбца для мапинга в поле task_document_exec_period
      */
-    private final String TASK_DOCUMENT_EXEC_PERIOD="task_document_exec_period";
+    private final String TASK_DOCUMENT_EXEC_PERIOD = "task_document_exec_period";
     /**
      * Название столбца для мапинга в поле task_document_sign_of_control
      */
-    private final String TASK_DOCUMENT_SIGN_OF_CONTROL="task_document_sign_of_control";
+    private final String TASK_DOCUMENT_SIGN_OF_CONTROL = "task_document_sign_of_control";
     /**
      * Название столбца для мапинга в поле person_response_id
      */
-    private final String PERSON_RESPONSE_ID="person_response_id";
+    private final String PERSON_RESPONSE_ID = "person_response_id";
     /**
      * Название столбца для мапинга в поле person_response_first_name
      */
-    private final String PERSON_RESPONSE_FIRST_NAME="person_response_first_name";
+    private final String PERSON_RESPONSE_FIRST_NAME = "person_response_first_name";
     /**
      * Название столбца для мапинга в поле person_response_second_name
      */
-    private final String PERSON_RESPONSE_SECOND_NAME="person_response_second_name";
+    private final String PERSON_RESPONSE_SECOND_NAME = "person_response_second_name";
     /**
      * Название столбца для мапинга в поле person_response_last_name
      */
-    private final String PERSON_RESPONSE_LAST_NAME="person_response_last_name";
+    private final String PERSON_RESPONSE_LAST_NAME = "person_response_last_name";
     /**
      * Название столбца для мапинга в поле person_response_photo
      */
-    private final String PERSON_RESPONSE_PHOTO="person_response_photo";
+    private final String PERSON_RESPONSE_PHOTO = "person_response_photo";
     /**
      * Название столбца для мапинга в поле person_response_phone_number
      */
-    private final String PERSON_RESPONSE_PHONE_NUMBER="person_response_phone_number";
+    private final String PERSON_RESPONSE_PHONE_NUMBER = "person_response_phone_number";
     /**
      * Название столбца для мапинга в поле person_response_birth_day
      */
-    private final String PERSON_RESPONSE_BIRTH_DAY="person_response_birth_day";
+    private final String PERSON_RESPONSE_BIRTH_DAY = "person_response_birth_day";
     /**
      * Название столбца для мапинга в поле department_response_id
      */
-    private final String DEPARTMENT_RESPONSE_ID="department_response_id";
+    private final String DEPARTMENT_RESPONSE_ID = "department_response_id";
     /**
      * Название столбца для мапинга в поле department_response_full_name
      */
-    private final String DEPARTMENT_RESPONSE_FULL_NAME="department_response_full_name";
+    private final String DEPARTMENT_RESPONSE_FULL_NAME = "department_response_full_name";
     /**
      * Название столбца для мапинга в поле department_response_short_name
      */
-    private final String DEPARTMENT_RESPONSE_SHORT_NAME="department_response_short_name";
+    private final String DEPARTMENT_RESPONSE_SHORT_NAME = "department_response_short_name";
     /**
      * Название столбца для мапинга в поле department_response_supervisor
      */
-    private final String DEPARTMENT_RESPONSE_SUPERVISOR="department_response_supervisor";
+    private final String DEPARTMENT_RESPONSE_SUPERVISOR = "department_response_supervisor";
     /**
      * Название столбца для мапинга в поле department_response_contact_number
      */
-    private final String DEPARTMENT_RESPONSE_CONTACT_NUMBER="department_response_contact_number";
+    private final String DEPARTMENT_RESPONSE_CONTACT_NUMBER = "department_response_contact_number";
     /**
      * Название столбца для мапинга в поле organization_response_id
      */
-    private final String ORGANIZATION_RESPONSE_ID="organization_response_id";
+    private final String ORGANIZATION_RESPONSE_ID = "organization_response_id";
     /**
      * Название столбца для мапинга в поле organization_response_full_name
      */
-    private final String ORGANIZATION_RESPONSE_FULL_NAME="organization_response_full_name";
+    private final String ORGANIZATION_RESPONSE_FULL_NAME = "organization_response_full_name";
     /**
      * Название столбца для мапинга в поле organization_response_short_name
      */
-    private final String ORGANIZATION_RESPONSE_SHORT_NAME="organization_response_short_name";
+    private final String ORGANIZATION_RESPONSE_SHORT_NAME = "organization_response_short_name";
     /**
      * Название столбца для мапинга в поле organization_response_supervisor
      */
-    private final String ORGANIZATION_RESPONSE_SUPERVISOR="organization_response_supervisor";
+    private final String ORGANIZATION_RESPONSE_SUPERVISOR = "organization_response_supervisor";
     /**
      * Название столбца для мапинга в поле organization_response_contact_number
      */
-    private final String ORGANIZATION_RESPONSE_CONTACT_NUMBER="organization_response_contact_number";
+    private final String ORGANIZATION_RESPONSE_CONTACT_NUMBER = "organization_response_contact_number";
     /**
      * Название столбца для мапинга в поле job_tittle_response_id
      */
-    private final String JOB_TITTLE_RESPONSE_ID="job_tittle_response_id";
+    private final String JOB_TITTLE_RESPONSE_ID = "job_tittle_response_id";
     /**
      * Название столбца для мапинга в поле job_response_name
      */
-    private final String JOB_RESPONSE_NAME="job_response_name";
+    private final String JOB_RESPONSE_NAME = "job_response_name";
     /**
      * Название столбца для мапинга в поле person_control_id
      */
-    private final String PERSON_CONTROL_ID="person_control_id";
+    private final String PERSON_CONTROL_ID = "person_control_id";
     /**
      * Название столбца для мапинга в поле person_control_first_name
      */
-    private final String PERSON_CONTROL_FIRST_NAME="person_control_first_name";
+    private final String PERSON_CONTROL_FIRST_NAME = "person_control_first_name";
     /**
      * Название столбца для мапинга в поле person_control_second_name
      */
-    private final String PERSON_CONTROL_SECOND_NAME="person_control_second_name";
+    private final String PERSON_CONTROL_SECOND_NAME = "person_control_second_name";
     /**
      * Название столбца для мапинга в поле person_control_last_name
      */
-    private final String PERSON_CONTROL_LAST_NAME="person_control_last_name";
+    private final String PERSON_CONTROL_LAST_NAME = "person_control_last_name";
     /**
      * Название столбца для мапинга в поле person_control_photo
      */
-    private final String PERSON_CONTROL_PHOTO="person_control_photo";
+    private final String PERSON_CONTROL_PHOTO = "person_control_photo";
     /**
      * Название столбца для мапинга в поле person_control_phone_number
      */
-    private final String PERSON_CONTROL_PHONE_NUMBER="person_control_phone_number";
+    private final String PERSON_CONTROL_PHONE_NUMBER = "person_control_phone_number";
     /**
      * Название столбца для мапинга в поле person_control_birth_day
      */
-    private final String PERSON_CONTROL_BIRTH_DAY="person_control_birth_day";
+    private final String PERSON_CONTROL_BIRTH_DAY = "person_control_birth_day";
     /**
      * Название столбца для мапинга в поле department_control_id
      */
-    private final String DEPARTMENT_CONTROL_ID="department_control_id";
+    private final String DEPARTMENT_CONTROL_ID = "department_control_id";
     /**
      * Название столбца для мапинга в поле department_control_full_name
      */
-    private final String DEPARTMENT_CONTROL_FULL_NAME="department_control_full_name";
+    private final String DEPARTMENT_CONTROL_FULL_NAME = "department_control_full_name";
     /**
      * Название столбца для мапинга в поле department_control_short_name
      */
-    private final String DEPARTMENT_CONTROL_SHORT_NAME="department_control_short_name";
+    private final String DEPARTMENT_CONTROL_SHORT_NAME = "department_control_short_name";
     /**
      * Название столбца для мапинга в поле department_control_supervisor
      */
-    private final String DEPARTMENT_CONTROL_SUPERVISOR="department_control_supervisor";
+    private final String DEPARTMENT_CONTROL_SUPERVISOR = "department_control_supervisor";
     /**
      * Название столбца для мапинга в поле department_control_contact_number
      */
-    private final String DEPARTMENT_CONTROL_CONTACT_NUMBER="department_control_contact_number";
+    private final String DEPARTMENT_CONTROL_CONTACT_NUMBER = "department_control_contact_number";
     /**
      * Название столбца для мапинга в поле organization_control_id
      */
-    private final String ORGANIZATION_CONTROL_ID="organization_control_id";
+    private final String ORGANIZATION_CONTROL_ID = "organization_control_id";
     /**
      * Название столбца для мапинга в поле organization_control_full_name
      */
-    private final String ORGANIZATION_CONTROL_FULL_NAME="organization_control_full_name";
+    private final String ORGANIZATION_CONTROL_FULL_NAME = "organization_control_full_name";
     /**
      * Название столбца для мапинга в поле organization_control_short_name
      */
-    private final String ORGANIZATION_CONTROL_SHORT_NAME="organization_control_short_name";
+    private final String ORGANIZATION_CONTROL_SHORT_NAME = "organization_control_short_name";
     /**
      * Название столбца для мапинга в поле organization_control_supervisor
      */
-    private final String ORGANIZATION_CONTROL_SUPERVISOR="organization_control_supervisor";
+    private final String ORGANIZATION_CONTROL_SUPERVISOR = "organization_control_supervisor";
     /**
      * Название столбца для мапинга в поле organization_control_contact_number
      */
-    private final String ORGANIZATION_CONTROL_CONTACT_NUMBER="organization_control_contact_number";
+    private final String ORGANIZATION_CONTROL_CONTACT_NUMBER = "organization_control_contact_number";
     /**
      * Название столбца для мапинга в поле job_tittle_control_id
      */
-    private final String JOB_TITTLE_CONTROL_ID="job_tittle_control_id";
+    private final String JOB_TITTLE_CONTROL_ID = "job_tittle_control_id";
     /**
      * Название столбца для мапинга в поле job_control_name
      */
-    private final String JOB_CONTROL_NAME="job_control_name";
+    private final String JOB_CONTROL_NAME = "job_control_name";
 
     /**
      * {@inheritDoc}

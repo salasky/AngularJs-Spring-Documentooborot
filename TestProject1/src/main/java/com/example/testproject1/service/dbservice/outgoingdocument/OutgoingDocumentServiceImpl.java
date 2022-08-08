@@ -2,7 +2,6 @@ package com.example.testproject1.service.dbservice.outgoingdocument;
 
 import com.example.testproject1.dao.CrudRepositories;
 import com.example.testproject1.exception.DeletePoorlyException;
-import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
+
 /**
  * Класс реализующий интерфейс {@link CrudService}. Для выполнения CRUD операций объектов класса {@link OutgoingDocument} к базе данных .
  *
@@ -31,35 +31,36 @@ public class OutgoingDocumentServiceImpl implements CrudService<OutgoingDocument
     /**
      * Лог при успешном сохранении
      */
-    private final String CREATE_SUCCESS="OutgoingDocument успешно сохранен";
+    private final String CREATE_SUCCESS = "OutgoingDocument успешно сохранен";
     /**
      * Лог при неудачном сохранении
      */
-    private final String CREATE_FAIL="Неудачная попытка сохранения OutgoingDocument";
+    private final String CREATE_FAIL = "Неудачная попытка сохранения OutgoingDocument";
     /**
      * Лог при выдаче всех OutgoingDocument
      */
-    private final String GET_ALL_ATTEMPT="Попытка выдачи всех OutgoingDocument";
+    private final String GET_ALL_ATTEMPT = "Попытка выдачи всех OutgoingDocument";
     /**
      * Лог при выдаче OutgoingDocument по id
      */
-    private final String GET_BY_ID_ATTEMPT="Попытка получить OutgoingDocument по id";
+    private final String GET_BY_ID_ATTEMPT = "Попытка получить OutgoingDocument по id";
     /**
      * Лог при успешном обновлении
      */
-    private final String UPDATE_SUCCESS="OutgoingDocument успешно обновлен";
+    private final String UPDATE_SUCCESS = "OutgoingDocument успешно обновлен";
     /**
      * Лог при неудачном обновлении
      */
-    private final String UPDATE_FAIL="Неудачная попытка обновления OutgoingDocument";
+    private final String UPDATE_FAIL = "Неудачная попытка обновления OutgoingDocument";
     /**
      * Лог при успешном удалении всех записей
      */
-    private final String DELETE_SUCCESS="Записи из таблицы OutgoingDocument успешно удалены";
+    private final String DELETE_SUCCESS = "Записи из таблицы OutgoingDocument успешно удалены";
     /**
      * Лог при успешном удалении записи по id
      */
-    private final String DELETE_BY_ID_SUCCESS="Запись из таблицы OutgoingDocument успешно удалена";
+    private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы OutgoingDocument успешно удалена";
+
     /**
      * {@inheritDoc}
      */
@@ -73,6 +74,7 @@ public class OutgoingDocumentServiceImpl implements CrudService<OutgoingDocument
         LOGGER.error(CREATE_FAIL);
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -81,6 +83,7 @@ public class OutgoingDocumentServiceImpl implements CrudService<OutgoingDocument
         LOGGER.info(GET_ALL_ATTEMPT);
         return outgoingDocumentRepository.getAll();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -89,6 +92,7 @@ public class OutgoingDocumentServiceImpl implements CrudService<OutgoingDocument
         LOGGER.info(GET_BY_ID_ATTEMPT);
         return outgoingDocumentRepository.getById(id);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -103,6 +107,7 @@ public class OutgoingDocumentServiceImpl implements CrudService<OutgoingDocument
         LOGGER.error(UPDATE_FAIL);
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -116,6 +121,7 @@ public class OutgoingDocumentServiceImpl implements CrudService<OutgoingDocument
             LOGGER.error(e.toString());
         }
     }
+
     /**
      * {@inheritDoc}
      */

@@ -18,12 +18,14 @@ public interface BaseDocumentService {
      * @return возвращает сохраненный объект,или null
      */
     Optional<BaseDocument> create(BaseDocument baseDocument);
+
     /**
      * Метод получения всех {@link BaseDocument} из базы данных
      *
      * @return возвращает List<BaseDocument>
      */
     List<BaseDocument> getall();
+
     /**
      * Метод получения {@link BaseDocument} из базы по id
      *
@@ -31,6 +33,7 @@ public interface BaseDocumentService {
      * @return возвращает null или объект {@link BaseDocument}
      */
     Optional<BaseDocument> getById(String id);
+
     /**
      * Метод обновления информации {@link BaseDocument}
      *
@@ -38,17 +41,19 @@ public interface BaseDocumentService {
      * @return возвращает возвращает null или объект {@link BaseDocument}
      */
     Optional<BaseDocument> update(BaseDocument baseDocument);
+
     /**
      * Метод удаления всех записей с таблицы baseDocument
-     *
      */
     void deleteAll();
+
     /**
      * Метод удаления по id
      *
      * @param id UUID в строковом формате
      */
     void deleteById(String id);
+
     /**
      * Метод проверки существования {@link BaseDocument} в базе с переданным рег.номером
      *

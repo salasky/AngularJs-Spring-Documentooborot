@@ -2,7 +2,6 @@ package com.example.testproject1.service.dbservice.person;
 
 import com.example.testproject1.dao.CrudRepositories;
 import com.example.testproject1.exception.DeletePoorlyException;
-import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
+
 /**
  * Класс реализующий интерфейс {@link CrudService}. Для выполнения CRUD операций объектов класса {@link Person} к базе данных .
  *
@@ -31,35 +31,36 @@ public class PersonServiceImpl implements CrudService<Person> {
     /**
      * Лог при успешном сохранении
      */
-    private final String CREATE_SUCCESS="Person успешно сохранен";
+    private final String CREATE_SUCCESS = "Person успешно сохранен";
     /**
      * Лог при неудачном сохранении
      */
-    private final String CREATE_FAIL="Неудачная попытка сохранения Person";
+    private final String CREATE_FAIL = "Неудачная попытка сохранения Person";
     /**
      * Лог при выдаче всех Person
      */
-    private final String GET_ALL_ATTEMPT="Попытка выдачи всех Person";
+    private final String GET_ALL_ATTEMPT = "Попытка выдачи всех Person";
     /**
      * Лог при выдаче Person по id
      */
-    private final String GET_BY_ID_ATTEMPT="Попытка получить Person по id";
+    private final String GET_BY_ID_ATTEMPT = "Попытка получить Person по id";
     /**
      * Лог при успешном обновлении
      */
-    private final String UPDATE_SUCCESS="Person успешно обновлен";
+    private final String UPDATE_SUCCESS = "Person успешно обновлен";
     /**
      * Лог при неудачном обновлении
      */
-    private final String UPDATE_FAIL="Неудачная попытка обновления Person";
+    private final String UPDATE_FAIL = "Неудачная попытка обновления Person";
     /**
      * Лог при успешном удалении всех записей
      */
-    private final String DELETE_SUCCESS="Записи из таблицы Person успешно удалены";
+    private final String DELETE_SUCCESS = "Записи из таблицы Person успешно удалены";
     /**
      * Лог при успешном удалении записи по id
      */
-    private final String DELETE_BY_ID_SUCCESS="Запись из таблицы Person успешно удалена";
+    private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы Person успешно удалена";
+
     /**
      * {@inheritDoc}
      */
@@ -73,6 +74,7 @@ public class PersonServiceImpl implements CrudService<Person> {
         LOGGER.error(CREATE_FAIL);
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -81,6 +83,7 @@ public class PersonServiceImpl implements CrudService<Person> {
         LOGGER.info(GET_ALL_ATTEMPT);
         return personRepository.getAll();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -89,6 +92,7 @@ public class PersonServiceImpl implements CrudService<Person> {
         LOGGER.info(GET_BY_ID_ATTEMPT);
         return personRepository.getById(id);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -103,6 +107,7 @@ public class PersonServiceImpl implements CrudService<Person> {
         LOGGER.error(UPDATE_FAIL);
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -116,6 +121,7 @@ public class PersonServiceImpl implements CrudService<Person> {
             LOGGER.error(e.toString());
         }
     }
+
     /**
      * {@inheritDoc}
      */

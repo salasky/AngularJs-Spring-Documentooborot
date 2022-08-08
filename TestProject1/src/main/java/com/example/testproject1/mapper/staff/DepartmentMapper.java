@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+
 /**
  * Маппер для класса {@link Department}
  *
@@ -24,23 +25,23 @@ public class DepartmentMapper implements RowMapper<Department> {
     /**
      * Название столбца для мапинаг
      */
-    private final String DEPARTMENT_ID="department_id";
+    private final String DEPARTMENT_ID = "department_id";
     /**
      * Название столбца для мапинага в поле id
      */
-    private final String DEPARTMENT_FULL_NAME="department_full_name";
+    private final String DEPARTMENT_FULL_NAME = "department_full_name";
     /**
      * Название столбца для мапинага в поле short_name
      */
-    private final String DEPARTMENT_SHORT_NAME="department_short_name";
+    private final String DEPARTMENT_SHORT_NAME = "department_short_name";
     /**
      * Название столбца для мапинага в поле supervisor
      */
-    private final String DEPARTMENT_SUPERVISOR="department_supervisor";
+    private final String DEPARTMENT_SUPERVISOR = "department_supervisor";
     /**
      * Название столбца для мапинага в поле contact_number
      */
-    private final String DEPARTMENT_CONTACT_NUMBER="department_contact_number";
+    private final String DEPARTMENT_CONTACT_NUMBER = "department_contact_number";
 
     /**
      * {@inheritDoc}
