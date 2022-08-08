@@ -8,7 +8,6 @@ import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
-import com.example.testproject1.service.dbservice.basedocument.BaseDocumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.testproject1.dao.queryholder.QueryHolder.BASE_DOCUMENT_UPDATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_CREATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_DELETE_ALL_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_DELETE_BY_ID_QUERY;
@@ -109,9 +107,9 @@ public class OutgoingDocumentRepositoryImpl implements CrudRepositories<Outgoing
      */
     @Override
     public int update(OutgoingDocument outgoingDocument) {
-        int baseDocumentCount=baseDocumentRepository.update(outgoingDocument);
+        int baseDocumentCount = baseDocumentRepository.update(outgoingDocument);
         return jdbcTemplate.update(OUTGOING_DOCUMENT_UPDATE_QUERY, outgoingDocument.getSender().getId().toString(),
-                outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString())+baseDocumentCount;
+                outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString()) + baseDocumentCount;
     }
 
     /**

@@ -32,7 +32,6 @@ class OrganizationRepositoriesTest {
         organization.setSupervisor("VVP");
         organization.setContactNumber("678908i765");
         organizationRepositories.create(organization);
-        Assertions.assertNotNull(organizationRepositories.getById(uuid.toString()));
         Organization organizationDB = (Organization) organizationRepositories.getById(uuid.toString()).get();
         Assertions.assertEquals("Neft", organizationDB.getFullName());
         Assertions.assertEquals("NFT", organizationDB.getShortName());
@@ -83,7 +82,6 @@ class OrganizationRepositoriesTest {
         organizationRepositories.create(organization);
         organization.setFullName("NeftServices");
         organizationRepositories.update(organization);
-        Assertions.assertNotNull(organizationRepositories.getById(uuid.toString()));
         Organization organizationDB = (Organization) organizationRepositories.getById(uuid.toString()).get();
         Assertions.assertEquals("NeftServices", organizationDB.getFullName());
     }

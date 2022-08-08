@@ -36,7 +36,6 @@ public class OutgoingDocumentTest {
         OutgoingDocument outgoingDocument = (OutgoingDocument) outgoingDocumentFactory.create();
         UUID uuid = outgoingDocument.getId();
         outgoingDocumentRepositories.create(outgoingDocument);
-        Assertions.assertNotNull(outgoingDocumentRepositories.getById(uuid.toString()));
         OutgoingDocument outgoingDocumentDB = (OutgoingDocument) outgoingDocumentRepositories.getById(uuid.toString()).get();
         //get запрос в outgoingdocument не загружает полные данные об авторах
         Person author = (Person) personRepositories.getById(outgoingDocumentDB.getAuthor().getId().toString()).get();
@@ -74,7 +73,6 @@ public class OutgoingDocumentTest {
         outgoingDocumentRepositories.create(outgoingDocument);
         outgoingDocument.setName("TestText");
         outgoingDocumentRepositories.update(outgoingDocument);
-        Assertions.assertNotNull(outgoingDocumentRepositories.getById(uuid.toString()));
         OutgoingDocument outgoingDocumentDB = (OutgoingDocument) outgoingDocumentRepositories.getById(uuid.toString()).get();
         Assertions.assertEquals("TestText", outgoingDocumentDB.getName());
     }

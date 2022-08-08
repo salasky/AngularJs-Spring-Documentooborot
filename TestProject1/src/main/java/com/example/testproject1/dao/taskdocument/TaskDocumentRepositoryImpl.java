@@ -8,7 +8,6 @@ import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
-import com.example.testproject1.service.dbservice.basedocument.BaseDocumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.testproject1.dao.queryholder.QueryHolder.BASE_DOCUMENT_UPDATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_CREATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_DELETE_ALL_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_DELETE_BY_ID_QUERY;
@@ -110,10 +108,10 @@ public class TaskDocumentRepositoryImpl implements CrudRepositories<TaskDocument
      */
     @Override
     public int update(TaskDocument taskDocument) {
-        int baseDocumentCount=baseDocumentRepository.update(taskDocument);
+        int baseDocumentCount = baseDocumentRepository.update(taskDocument);
         return jdbcTemplate.update(TASK_DOCUMENT_UPDATE_QUERY, taskDocument.getOutDate(), taskDocument.getExecPeriod(),
                 taskDocument.getResponsible().getId().toString(), taskDocument.getSignOfControl(),
-                taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString())+baseDocumentCount;
+                taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString()) + baseDocumentCount;
     }
 
     /**

@@ -22,18 +22,12 @@ public class QueryHolder {
             .append("person.last_name AS person_last_name ")
             .append("FROM base_document ")
             .append("INNER JOIN person ")
-            .append("ON base_document.author_id=person.id ")
-            .append("INNER JOIN department ")
-            .append("ON person.department_id=department_id ")
-            .append("INNER JOIN job_tittle ")
-            .append("ON person.job_tittle_id=job_tittle.id ")
-            .append("INNER JOIN organization ")
-            .append("ON organization.id=department.organization_id").toString();
+            .append("ON base_document.author_id=person.id ").toString();
     /**
      * Запрос на получение объекта по id из таблицы base_document
      */
     public static final String BASE_DOCUMENT_GET_BY_ID_QUERY = new StringBuilder(BASE_DOCUMENT_GET_ALL_QUERY)
-            .append(" WHERE base_document.reg_number=?").toString();
+            .append(" WHERE base_document.id=?").toString();
     /**
      * Запрос на обновление записи в таблице base_document
      */
