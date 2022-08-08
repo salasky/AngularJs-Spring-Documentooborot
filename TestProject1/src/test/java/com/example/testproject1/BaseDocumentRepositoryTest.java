@@ -1,6 +1,6 @@
 package com.example.testproject1;
 
-import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.BaseDocumentRepository;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Person;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
@@ -19,61 +18,63 @@ import java.util.UUID;
 @SpringBootTest
 @TestPropertySource(
         locations = "classpath:application.yaml")
-public class BaseDocumentRepositoriesTest {
+public class BaseDocumentRepositoryTest {
 
     @Autowired
     private BaseDocumentRepository baseDocumentRepository;
 
     @Autowired
-    @Qualifier("PersonRepository")
-    private CrudRepositories personRepositories;
+    private CrudRepository<Person> personCrudRepository;
 
     @Autowired
     private TaskDocumentFactory taskDocumentFactory;
 
-    @DisplayName("BaseDocumentRepositories create and getById test successful")
+    @DisplayName("BaseDocumentRepository create and getById test successful")
     @Test
-    void baseDocumentRepositoriesCreateTest() {
+    void baseDocumentRepositoryCreateTest() {
         BaseDocument baseDocument = taskDocumentFactory.create();
-        baseDocumentRepository.create(baseDocument);
         UUID uuid = baseDocument.getId();
+        baseDocumentRepository.create(baseDocument);
         BaseDocument baseDocumentDB = baseDocumentRepository.getById(uuid.toString()).get();
-        //get запрос в basedocument не загружает полные данные об авторах
-        Person author = (Person) personRepositories.getById(baseDocumentDB.getAuthor().getId().toString()).get();
+        Assertions.assertTrue(personCrudRepository.getById(baseDocumentDB.getAuthor().getId().toString()).isPresent());
+        Person author = personCrudRepository.getById(baseDocumentDB.getAuthor().getId().toString()).get();
         baseDocumentDB.setAuthor(author);
         Assertions.assertEquals(baseDocument.getId(), baseDocumentDB.getId());
         Assertions.assertEquals(baseDocument.getAuthor(), baseDocumentDB.getAuthor());
         Assertions.assertEquals(baseDocument.getName(), baseDocumentDB.getName());
     }
 
-    @DisplayName("BaseDocumentRepositories deleteAll test successful")
+    @DisplayName("BaseDocumentRepository deleteAll test successful")
     @Test
-    void baseDocumentRepositoriesDeleteAllTest() {
+    void baseDocumentRepositoryDeleteAllTest() {
         BaseDocument baseDocument = taskDocumentFactory.create();
         baseDocumentRepository.create(baseDocument);
         UUID uuid = baseDocument.getId();
         baseDocumentRepository.deleteAll();
+        Assertions.assertTrue( baseDocumentRepository.getAll().isEmpty());
         Assertions.assertEquals(0, baseDocumentRepository.getAll().size());
     }
 
-    @DisplayName("BaseDocumentRepositories deleteById test successful")
+    @DisplayName("BaseDocumentRepository deleteById test successful")
     @Test
-    void baseDocumentRepositoriesDeleteByIdTest() {
+    void baseDocumentRepositoryDeleteByIdTest() {
         BaseDocument baseDocument = taskDocumentFactory.create();
         baseDocumentRepository.create(baseDocument);
         UUID uuid = baseDocument.getId();
         baseDocumentRepository.deleteById(uuid.toString());
+        Assertions.assertTrue(baseDocumentRepository.getById(uuid.toString()).isEmpty());
         Assertions.assertEquals(Optional.empty(), baseDocumentRepository.getById(uuid.toString()));
     }
 
-    @DisplayName("BaseDocumentRepositories update test successful")
+    @DisplayName("BaseDocumentRepository update test successful")
     @Test
-    void baseDocumentRepositoriesUpdateTest() {
+    void baseDocumentRepositoryUpdateTest() {
         BaseDocument baseDocument = taskDocumentFactory.create();
         baseDocumentRepository.create(baseDocument);
         UUID uuid = baseDocument.getId();
         baseDocument.setName("TestText");
         baseDocumentRepository.update(baseDocument);
+        Assertions.assertTrue(baseDocumentRepository.getById(uuid.toString()).isPresent());
         BaseDocument baseDocumentDB = baseDocumentRepository.getById(uuid.toString()).get();
         Assertions.assertEquals("TestText", baseDocumentDB.getName());
     }

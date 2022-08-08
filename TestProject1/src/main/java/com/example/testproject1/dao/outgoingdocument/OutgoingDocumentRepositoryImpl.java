@@ -1,6 +1,6 @@
 package com.example.testproject1.dao.outgoingdocument;
 
-import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.BaseDocumentRepository;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.mapper.document.OutgoingDocumentMapper;
@@ -11,13 +11,13 @@ import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_CREATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_DELETE_ALL_QUERY;
@@ -27,12 +27,12 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCU
 import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_UPDATE_QUERY;
 
 /**
- * Класс реализующий интерфейс {@link CrudRepositories}. Для выполнения операций с базой данных.
+ * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
  *
  * @author smigranov
  */
 @Repository("OutgoingDocumentRepository")
-public class OutgoingDocumentRepositoryImpl implements CrudRepositories<OutgoingDocument> {
+public class OutgoingDocumentRepositoryImpl implements CrudRepository<OutgoingDocument> {
     private static final Logger LOGGER = LoggerFactory.getLogger(OutgoingDocumentRepositoryImpl.class);
     /**
      * Бин JdbcTemplate
@@ -53,8 +53,7 @@ public class OutgoingDocumentRepositoryImpl implements CrudRepositories<Outgoing
      * Сервис для работы с {@link Person}
      */
     @Autowired
-    @Qualifier("PersonService")
-    private CrudService personService;
+    private CrudService<Person> personService;
 
     /**
      * {@inheritDoc}
@@ -140,8 +139,8 @@ public class OutgoingDocumentRepositoryImpl implements CrudRepositories<Outgoing
      * {@inheritDoc}
      */
     @Override
-    public boolean existById(String uuid) {
-        return jdbcTemplate.query(OUTGOING_DOCUMENT_GET_BY_ID_QUERY, outgoingDocumentMapper, uuid)
+    public boolean existById(UUID uuid) {
+        return jdbcTemplate.query(OUTGOING_DOCUMENT_GET_BY_ID_QUERY, outgoingDocumentMapper, uuid.toString())
                 .stream().findFirst().isPresent();
     }
 }

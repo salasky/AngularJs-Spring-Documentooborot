@@ -79,7 +79,7 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
      * {@inheritDoc}
      */
     @Override
-    public List<BaseDocument> getall() {
+    public List<BaseDocument> getAll() {
         LOGGER.info(GET_ALL_ATTEMPT);
         return baseDocumentRepository.getAll();
     }

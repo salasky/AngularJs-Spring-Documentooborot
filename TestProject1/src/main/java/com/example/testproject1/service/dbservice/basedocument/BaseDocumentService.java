@@ -24,7 +24,7 @@ public interface BaseDocumentService {
      *
      * @return возвращает List<BaseDocument>
      */
-    List<BaseDocument> getall();
+    List<BaseDocument> getAll();
 
     /**
      * Метод получения {@link BaseDocument} из базы по id

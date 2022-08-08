@@ -1,13 +1,12 @@
 package com.example.testproject1.service.dbservice.department;
 
-import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -24,11 +23,10 @@ public class DepartmentServiceImpl implements CrudService<Department> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceImpl.class);
     /**
-     * Бин {@link CrudRepositories}
+     * Бин {@link CrudRepository}
      */
     @Autowired
-    @Qualifier("DepartmentRepository")
-    private CrudRepositories departmentRepository;
+    private CrudRepository<Department> departmentRepository;
     /**
      * Лог при успешном сохранении
      */

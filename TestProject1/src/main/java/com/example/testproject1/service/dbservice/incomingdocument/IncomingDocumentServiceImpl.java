@@ -1,13 +1,12 @@
 package com.example.testproject1.service.dbservice.incomingdocument;
 
-import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -24,11 +23,10 @@ public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IncomingDocumentServiceImpl.class);
     /**
-     * Бин {@link CrudRepositories}
+     * Бин {@link CrudRepository}
      */
     @Autowired
-    @Qualifier("IncomingDocumentRepository")
-    private CrudRepositories incomingDocumentRepository;
+    private CrudRepository<IncomingDocument> incomingDocumentRepository;
     /**
      * Лог при успешном сохранении
      */

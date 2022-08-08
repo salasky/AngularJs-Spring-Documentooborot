@@ -5,6 +5,7 @@ import com.example.testproject1.model.document.BaseDocument;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Интерфейс репозитория для {@link BaseDocument}
@@ -72,5 +73,5 @@ public interface BaseDocumentRepository {
      * @param uuid документа
      * @return возвращает true при существовании записи и false при отсутствии
      */
-    boolean existById(String uuid);
+    boolean existById(UUID uuid);
 }

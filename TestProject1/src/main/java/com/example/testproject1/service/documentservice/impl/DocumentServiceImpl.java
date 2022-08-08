@@ -27,20 +27,17 @@ public class DocumentServiceImpl implements DocumentService {
      * Бин сервиса для работы с поручениями
      */
     @Autowired
-    @Qualifier("TaskDocumentService")
-    private CrudService taskDocumentService;
+    private CrudService<TaskDocument> taskDocumentService;
     /**
      * Бин сервиса для работы с входящими документами
      */
     @Autowired
-    @Qualifier("IncomingDocumentService")
-    private CrudService incomingDocumentService;
+    private CrudService<IncomingDocument> incomingDocumentService;
     /**
      * Бин сервиса для работы с исходящими документами
      */
     @Autowired
-    @Qualifier("OutgoingDocumentService")
-    private CrudService outgoingDocumentService;
+    private CrudService<OutgoingDocument> outgoingDocumentService;
 
     /**
      * {@inheritDoc}

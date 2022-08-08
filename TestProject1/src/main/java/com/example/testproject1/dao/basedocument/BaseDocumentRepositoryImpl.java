@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.example.testproject1.dao.queryholder.QueryHolder.BASE_DOCUMENT_CREATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.BASE_DOCUMENT_DELETE_ALL_QUERY;
@@ -46,8 +47,7 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      * Сервис для работы с {@link Person}
      */
     @Autowired
-    @Qualifier("PersonService")
-    private CrudService personService;
+    private CrudService<Person> personService;
 
     /**
      * {@inheritDoc}
@@ -132,8 +132,8 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      * {@inheritDoc}
      */
     @Override
-    public boolean existById(String uuid) {
-        return jdbcTemplate.query(BASE_DOCUMENT_GET_BY_ID_QUERY, baseDocumentMapper, uuid)
+    public boolean existById(UUID uuid) {
+        return jdbcTemplate.query(BASE_DOCUMENT_GET_BY_ID_QUERY, baseDocumentMapper, uuid.toString())
                 .stream().findFirst().isPresent();
     }
 }

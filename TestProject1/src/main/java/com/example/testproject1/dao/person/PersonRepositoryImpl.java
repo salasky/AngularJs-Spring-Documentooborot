@@ -1,22 +1,23 @@
 package com.example.testproject1.dao.person;
 
-import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.exception.DepartmentExistInDataBaseException;
 import com.example.testproject1.exception.PersonExistInDataBaseException;
 import com.example.testproject1.mapper.staff.PersonMapper;
 import com.example.testproject1.model.staff.Department;
+import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.example.testproject1.dao.queryholder.QueryHolder.PERSON_CREATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.PERSON_DELETE_ALL_QUERY;
@@ -26,12 +27,12 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.PERSON_GET_BY
 import static com.example.testproject1.dao.queryholder.QueryHolder.PERSON_UPDATE_QUERY;
 
 /**
- * Класс реализующий интерфейс {@link CrudRepositories}. Для выполнения операций с базой данных.
+ * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
  *
  * @author smigranov
  */
 @Repository("PersonRepository")
-public class PersonRepositoryImpl implements CrudRepositories<Person> {
+public class PersonRepositoryImpl implements CrudRepository<Person> {
     private static final Logger LOGGER = LoggerFactory.getLogger(PersonRepositoryImpl.class);
     /**
      * Бин JdbcTemplate
@@ -47,14 +48,12 @@ public class PersonRepositoryImpl implements CrudRepositories<Person> {
      * Сервис для работы с {@link Department}
      */
     @Autowired
-    @Qualifier("DepartmentService")
-    private CrudService departmentService;
+    private CrudService<Department> departmentService;
     /**
      * Сервис для работы с {@link Department}
      */
     @Autowired
-    @Qualifier("JobTittleService")
-    private CrudService jobTittleService;
+    private CrudService<JobTittle> jobTittleService;
 
     /**
      * {@inheritDoc}
@@ -88,7 +87,7 @@ public class PersonRepositoryImpl implements CrudRepositories<Person> {
      * @throws DepartmentExistInDataBaseException если найден Person с переданным id
      */
     private void isNotExistElseThrow(Person person) throws PersonExistInDataBaseException {
-        if (existById(person.getId().toString())) {
+        if (existById(person.getId())) {
             throw new PersonExistInDataBaseException(person.getId().toString());
         }
     }
@@ -148,8 +147,8 @@ public class PersonRepositoryImpl implements CrudRepositories<Person> {
      * {@inheritDoc}
      */
     @Override
-    public boolean existById(String uuid) {
-        return jdbcTemplate.query(PERSON_GET_BY_ID_QUERY, personMapper, uuid)
+    public boolean existById(UUID uuid) {
+        return jdbcTemplate.query(PERSON_GET_BY_ID_QUERY, personMapper, uuid.toString())
                 .stream().findFirst().isPresent();
     }
 }

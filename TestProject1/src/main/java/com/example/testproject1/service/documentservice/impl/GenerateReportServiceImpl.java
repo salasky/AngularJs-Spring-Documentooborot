@@ -43,14 +43,13 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
-    @Qualifier("TaskDocumentService")
-    private CrudService taskDocumentService;
+    private CrudService<TaskDocument> taskDocumentService;
+
     @Autowired
-    @Qualifier("IncomingDocumentService")
-    private CrudService incomingDocumentService;
+    private CrudService<IncomingDocument> incomingDocumentService;
+
     @Autowired
-    @Qualifier("OutgoingDocumentService")
-    private CrudService outgoingDocumentService;
+    private CrudService<OutgoingDocument> outgoingDocumentService;
 
     /**
      * {@inheritDoc}

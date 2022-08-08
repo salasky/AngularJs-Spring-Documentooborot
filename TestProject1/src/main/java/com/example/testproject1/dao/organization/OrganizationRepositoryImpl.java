@@ -1,6 +1,6 @@
 package com.example.testproject1.dao.organization;
 
-import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.exception.DepartmentExistInDataBaseException;
 import com.example.testproject1.exception.OrganizationExistInDataBaseException;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_CREATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_DELETE_ALL_QUERY;
@@ -24,12 +25,12 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_
 import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_UPDATE_QUERY;
 
 /**
- * Класс реализующий интерфейс {@link CrudRepositories}. Для выполнения операций с базой данных.
+ * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
  *
  * @author smigranov
  */
 @Repository("OrganizationRepository")
-public class OrganizationRepositoryImpl implements CrudRepositories<Organization> {
+public class OrganizationRepositoryImpl implements CrudRepository<Organization> {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationRepositoryImpl.class);
     /**
      * Бин JdbcTemplate
@@ -72,7 +73,7 @@ public class OrganizationRepositoryImpl implements CrudRepositories<Organization
      * @throws DepartmentExistInDataBaseException если найден Organization с переданным id
      */
     private void isNotExistElseThrow(Organization organization) throws OrganizationExistInDataBaseException {
-        if (existById(organization.getId().toString())) {
+        if (existById(organization.getId())) {
             throw new OrganizationExistInDataBaseException(organization.getId().toString());
         }
     }
@@ -134,8 +135,8 @@ public class OrganizationRepositoryImpl implements CrudRepositories<Organization
      * {@inheritDoc}
      */
     @Override
-    public boolean existById(String uuid) {
-        return jdbcTemplate.query(ORGANIZATION_GET_BY_ID_QUERY, organizationMapper, uuid)
+    public boolean existById(UUID uuid) {
+        return jdbcTemplate.query(ORGANIZATION_GET_BY_ID_QUERY, organizationMapper, uuid.toString())
                 .stream().findFirst().isPresent();
     }
 }

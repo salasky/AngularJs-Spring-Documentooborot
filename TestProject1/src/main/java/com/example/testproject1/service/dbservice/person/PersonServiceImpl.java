@@ -1,13 +1,12 @@
 package com.example.testproject1.service.dbservice.person;
 
-import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -23,11 +22,10 @@ import java.util.Optional;
 public class PersonServiceImpl implements CrudService<Person> {
     private static final Logger LOGGER = LoggerFactory.getLogger(PersonServiceImpl.class);
     /**
-     * Бин {@link CrudRepositories}
+     * Бин {@link CrudRepository}
      */
     @Autowired
-    @Qualifier("PersonRepository")
-    private CrudRepositories personRepository;
+    private CrudRepository<Person> personRepository;
     /**
      * Лог при успешном сохранении
      */

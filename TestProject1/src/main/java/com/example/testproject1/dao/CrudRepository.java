@@ -4,13 +4,14 @@ import com.example.testproject1.exception.DeletePoorlyException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Интерфейс для репозиториев с CRUD операциями
  *
  * @author smigranov
  */
-public interface CrudRepositories<T> {
+public interface CrudRepository<T> {
     /**
      * Метод получения всех объектов указанного из базы данных
      *
@@ -65,5 +66,5 @@ public interface CrudRepositories<T> {
      * @param uuid department
      * @return возвращает true при существовании записи и false при отсутствии
      */
-    boolean existById(String uuid);
+    boolean existById(UUID uuid);
 }

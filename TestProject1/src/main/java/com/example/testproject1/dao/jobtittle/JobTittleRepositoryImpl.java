@@ -1,6 +1,6 @@
 package com.example.testproject1.dao.jobtittle;
 
-import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.exception.DepartmentExistInDataBaseException;
 import com.example.testproject1.exception.JobTittleExistInDataBaseException;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_CREATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_DELETE_ALL_QUERY;
@@ -24,12 +25,12 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_GE
 import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_UPDATE_ID_QUERY;
 
 /**
- * Класс реализующий интерфейс {@link CrudRepositories}. Для выполнения операций с базой данных.
+ * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
  *
  * @author smigranov
  */
 @Repository("JobTittleRepository")
-public class JobTittleRepositoryImpl implements CrudRepositories<JobTittle> {
+public class JobTittleRepositoryImpl implements CrudRepository<JobTittle> {
     private static final Logger LOGGER = LoggerFactory.getLogger(JobTittleRepositoryImpl.class);
     /**
      * Маппер для извлечения {@link JobTittle}
@@ -90,7 +91,7 @@ public class JobTittleRepositoryImpl implements CrudRepositories<JobTittle> {
      * @throws DepartmentExistInDataBaseException если найден JobTittle с переданным id
      */
     private void isNotExistElseThrow(JobTittle jobTittle) throws JobTittleExistInDataBaseException {
-        if (existById(jobTittle.getUuid().toString())) {
+        if (existById(jobTittle.getUuid())) {
             throw new JobTittleExistInDataBaseException(jobTittle.getUuid().toString());
         }
     }
@@ -131,8 +132,8 @@ public class JobTittleRepositoryImpl implements CrudRepositories<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public boolean existById(String uuid) {
-        return jdbcTemplate.query(JOB_TITTLE_GET_BY_ID_QUERY, jobTittleMapper, uuid)
+    public boolean existById(UUID uuid) {
+        return jdbcTemplate.query(JOB_TITTLE_GET_BY_ID_QUERY, jobTittleMapper, uuid.toString())
                 .stream().findFirst().isPresent();
     }
 }

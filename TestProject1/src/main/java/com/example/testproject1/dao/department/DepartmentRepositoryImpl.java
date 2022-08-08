@@ -1,6 +1,6 @@
 package com.example.testproject1.dao.department;
 
-import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.exception.DepartmentExistInDataBaseException;
 import com.example.testproject1.mapper.staff.DepartmentMapper;
@@ -10,12 +10,12 @@ import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_CREATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_DELETE_ALL_QUERY;
@@ -25,12 +25,12 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_GE
 import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_UPDATE_QUERY;
 
 /**
- * Класс репозиторий для {@link Department}. Реализует интерфейс {@link CrudRepositories}
+ * Класс репозиторий для {@link Department}. Реализует интерфейс {@link CrudRepository}
  *
  * @author smigranov
  */
 @Repository("DepartmentRepository")
-public class DepartmentRepositoryImpl implements CrudRepositories<Department> {
+public class DepartmentRepositoryImpl implements CrudRepository<Department> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentRepositoryImpl.class);
     /**
      * Бин JdbcTemplate
@@ -46,8 +46,7 @@ public class DepartmentRepositoryImpl implements CrudRepositories<Department> {
      * Сервис для работы с {@link Organization}
      */
     @Autowired
-    @Qualifier("OrganizationService")
-    private CrudService organizationService;
+    private CrudService<Organization> organizationService;
 
     /**
      * {@inheritDoc}
@@ -96,7 +95,7 @@ public class DepartmentRepositoryImpl implements CrudRepositories<Department> {
      * @throws DepartmentExistInDataBaseException если найден Department с переданным id
      */
     private void isNotExistElseThrow(Department department) throws DepartmentExistInDataBaseException {
-        if (existById(department.getId().toString())) {
+        if (existById(department.getId())) {
             throw new DepartmentExistInDataBaseException(department.getId().toString());
         }
     }
@@ -139,8 +138,8 @@ public class DepartmentRepositoryImpl implements CrudRepositories<Department> {
      * {@inheritDoc}
      */
     @Override
-    public boolean existById(String uuid) {
-        return jdbcTemplate.query(DEPARTMENT_GET_BY_ID_QUERY, departmentMapper, uuid)
+    public boolean existById(UUID uuid) {
+        return jdbcTemplate.query(DEPARTMENT_GET_BY_ID_QUERY, departmentMapper, uuid.toString())
                 .stream().findFirst().isPresent();
     }
 }
