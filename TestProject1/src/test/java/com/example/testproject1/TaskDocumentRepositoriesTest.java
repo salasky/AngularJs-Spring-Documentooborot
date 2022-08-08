@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @SpringBootTest
@@ -56,7 +57,6 @@ public class TaskDocumentRepositoriesTest {
         UUID uuid=taskDocument.getId();
         taskDocumentRepositories.create(taskDocument);
         taskDocumentRepositories.deleteAll();
-        Assertions.assertNotNull(taskDocumentRepositories.getAll());
         Assertions.assertEquals(0,taskDocumentRepositories.getAll().size());
     }
 
@@ -66,9 +66,8 @@ public class TaskDocumentRepositoriesTest {
         TaskDocument taskDocument= (TaskDocument) taskDocumentFactory.create();
         UUID uuid=taskDocument.getId();
         taskDocumentRepositories.create(taskDocument);
-        taskDocumentRepositories.deleteAll();
-        Assertions.assertNotNull(taskDocumentRepositories.getById(uuid.toString()));
-        Assertions.assertTrue(taskDocumentRepositories.getById(uuid.toString()).isEmpty());
+        taskDocumentRepositories.deleteById(uuid.toString());
+        Assertions.assertEquals(Optional.empty(),taskDocumentRepositories.getById(uuid.toString()));
     }
 
     @DisplayName("TaskDocumentRepositories update test successful")

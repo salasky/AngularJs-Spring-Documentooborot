@@ -24,8 +24,8 @@ class OrganizationRepositoriesTest {
     @DisplayName("OrganizationRepositories create and getById test successful")
     @Test
     void organizationRepositoriesCreateTest() {
-        Organization organization=new Organization();
-        UUID uuid=UUID.randomUUID();
+        Organization organization = new Organization();
+        UUID uuid = UUID.randomUUID();
         organization.setId(uuid);
         organization.setFullName("Neft");
         organization.setShortName("NFT");
@@ -33,18 +33,18 @@ class OrganizationRepositoriesTest {
         organization.setContactNumber("678908i765");
         organizationRepositories.create(organization);
         Assertions.assertNotNull(organizationRepositories.getById(uuid.toString()));
-        Organization organizationDB= (Organization) organizationRepositories.getById(uuid.toString()).get();
-        Assertions.assertEquals("Neft",organizationDB.getFullName());
-        Assertions.assertEquals("NFT",organizationDB.getShortName());
-        Assertions.assertEquals("VVP",organizationDB.getSupervisor());
-        Assertions.assertEquals("678908i765",organizationDB.getContactNumber());
+        Organization organizationDB = (Organization) organizationRepositories.getById(uuid.toString()).get();
+        Assertions.assertEquals("Neft", organizationDB.getFullName());
+        Assertions.assertEquals("NFT", organizationDB.getShortName());
+        Assertions.assertEquals("VVP", organizationDB.getSupervisor());
+        Assertions.assertEquals("678908i765", organizationDB.getContactNumber());
     }
 
     @DisplayName("OrganizationRepositories deleteAll test successful")
     @Test
     void organizationRepositoriesDeleteAllTest() {
-        Organization organization=new Organization();
-        UUID uuid=UUID.randomUUID();
+        Organization organization = new Organization();
+        UUID uuid = UUID.randomUUID();
         organization.setId(uuid);
         organization.setFullName("OilAndGas");
         organization.setShortName("OGS");
@@ -52,14 +52,14 @@ class OrganizationRepositoriesTest {
         organization.setContactNumber("67328i765");
         organizationRepositories.create(organization);
         organizationRepositories.deleteAll();
-        Assertions.assertEquals(0,organizationRepositories.getAll().size());
+        Assertions.assertEquals(0, organizationRepositories.getAll().size());
     }
 
     @DisplayName("OrganizationRepositories deleteById test successful")
     @Test
     void organizationRepositoriesDeleteByIdTest() {
-        Organization organization=new Organization();
-        UUID uuid=UUID.randomUUID();
+        Organization organization = new Organization();
+        UUID uuid = UUID.randomUUID();
         organization.setId(uuid);
         organization.setFullName("OilAndGas");
         organization.setShortName("OGS");
@@ -73,8 +73,8 @@ class OrganizationRepositoriesTest {
     @DisplayName("OrganizationRepositories update test successful")
     @Test
     void organizationRepositoriesUpdateTest() {
-        Organization organization=new Organization();
-        UUID uuid=UUID.randomUUID();
+        Organization organization = new Organization();
+        UUID uuid = UUID.randomUUID();
         organization.setId(uuid);
         organization.setFullName("OilAndGas");
         organization.setShortName("OGS");
@@ -84,7 +84,7 @@ class OrganizationRepositoriesTest {
         organization.setFullName("NeftServices");
         organizationRepositories.update(organization);
         Assertions.assertNotNull(organizationRepositories.getById(uuid.toString()));
-        Organization organizationDB= (Organization) organizationRepositories.getById(uuid.toString()).get();
-        Assertions.assertEquals("NeftServices",organizationDB.getFullName());
+        Organization organizationDB = (Organization) organizationRepositories.getById(uuid.toString()).get();
+        Assertions.assertEquals("NeftServices", organizationDB.getFullName());
     }
 }
