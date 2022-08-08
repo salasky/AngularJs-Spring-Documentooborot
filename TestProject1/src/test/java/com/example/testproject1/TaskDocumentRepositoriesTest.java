@@ -38,7 +38,7 @@ public class TaskDocumentRepositoriesTest {
         taskDocumentRepositories.create(taskDocument);
         Assertions.assertNotNull(taskDocumentRepositories.getById(uuid.toString()));
         TaskDocument taskDocumentDB= (TaskDocument) taskDocumentRepositories.getById(uuid.toString()).get();
-        //get запрос в taskDocumentRepositories не загружает не полные данные об авторах
+        //get запрос в taskDocumentRepositories не загружает полные данные об авторах
         Person author= (Person) personRepositories.getById(taskDocumentDB.getAuthor().getId().toString()).get();
         Person responsible= (Person) personRepositories.getById(taskDocumentDB.getResponsible().getId().toString()).get();
         Person controlPerson= (Person) personRepositories.getById(taskDocumentDB.getControlPerson().getId().toString()).get();
@@ -47,4 +47,5 @@ public class TaskDocumentRepositoriesTest {
         taskDocumentDB.setControlPerson(controlPerson);
         Assertions.assertEquals(taskDocument,taskDocumentDB);
     }
+
 }
