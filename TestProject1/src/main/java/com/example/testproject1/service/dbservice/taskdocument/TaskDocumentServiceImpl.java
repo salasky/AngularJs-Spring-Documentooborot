@@ -96,7 +96,7 @@ public class TaskDocumentServiceImpl implements CrudService<TaskDocument> {
     public Optional<TaskDocument> update(TaskDocument taskDocument) {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у TaskDocument с id {0}", taskDocument.getId().toString()));
         int updateCount = taskDocumentRepository.update(taskDocument);
-        if (updateCount == 1) {
+        if (updateCount >0) {
             LOGGER.info(UPDATE_SUCCESS);
             return Optional.ofNullable(taskDocument);
         }

@@ -81,7 +81,7 @@ public class OrganizationRepositoryImpl implements CrudRepositories<Organization
      * {@inheritDoc}
      */
     @Override
-    public Integer update(Organization organization) {
+    public int update(Organization organization) {
         return jdbcTemplate.update(ORGANIZATION_UPDATE_QUERY, organization.getFullName(), organization.getShortName(),
                 organization.getSupervisor(), organization.getContactNumber(), organization.getId().toString());
     }

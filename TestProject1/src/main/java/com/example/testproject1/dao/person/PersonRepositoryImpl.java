@@ -114,7 +114,7 @@ public class PersonRepositoryImpl implements CrudRepositories<Person> {
      * {@inheritDoc}
      */
     @Override
-    public Integer update(Person person) {
+    public int update(Person person) {
         return jdbcTemplate.update(PERSON_UPDATE_QUERY, person.getFirstName(), person.getSecondName(),
                 person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
                 person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay(), person.getId().toString());

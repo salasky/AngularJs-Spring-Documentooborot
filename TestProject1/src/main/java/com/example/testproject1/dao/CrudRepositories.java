@@ -40,7 +40,7 @@ public interface CrudRepositories<T> {
      * @param obj объект класса
      * @return возвращает количество измененных строк. 0 при неудаче.
      */
-    Integer update(T obj);
+    int update(T obj);
 
     /**
      * Метод удаления всех записей с таблицы

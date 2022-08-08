@@ -2,6 +2,7 @@ package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepositories;
 import com.example.testproject1.model.document.TaskDocument;
+import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.docfactory.TaskDocumentFactory;
 import org.junit.jupiter.api.Assertions;
@@ -48,4 +49,38 @@ public class TaskDocumentRepositoriesTest {
         Assertions.assertEquals(taskDocument,taskDocumentDB);
     }
 
+    @DisplayName("TaskDocumentRepositories deleteAll test successful")
+    @Test
+    void taskDocumentRepositoriesDeleteAllTest() {
+        TaskDocument taskDocument= (TaskDocument) taskDocumentFactory.create();
+        UUID uuid=taskDocument.getId();
+        taskDocumentRepositories.create(taskDocument);
+        taskDocumentRepositories.deleteAll();
+        Assertions.assertNotNull(taskDocumentRepositories.getAll());
+        Assertions.assertEquals(0,taskDocumentRepositories.getAll().size());
+    }
+
+    @DisplayName("TaskDocumentRepositories deleteById test successful")
+    @Test
+    void taskDocumentRepositoriesDeleteByIdTest() {
+        TaskDocument taskDocument= (TaskDocument) taskDocumentFactory.create();
+        UUID uuid=taskDocument.getId();
+        taskDocumentRepositories.create(taskDocument);
+        taskDocumentRepositories.deleteAll();
+        Assertions.assertNotNull(taskDocumentRepositories.getById(uuid.toString()));
+        Assertions.assertTrue(taskDocumentRepositories.getById(uuid.toString()).isEmpty());
+    }
+
+    @DisplayName("TaskDocumentRepositories update test successful")
+    @Test
+    void taskDocumentRepositoriesUpdateTest() {
+        TaskDocument taskDocument=(TaskDocument) taskDocumentFactory.create();
+        UUID uuid=taskDocument.getId();
+        taskDocumentRepositories.create(taskDocument);
+        taskDocument.setName("TestText");
+        taskDocumentRepositories.update(taskDocument);
+        Assertions.assertNotNull(taskDocumentRepositories.getById(uuid.toString()));
+        TaskDocument taskDocumentDB= (TaskDocument) taskDocumentRepositories.getById(uuid.toString()).get();
+        Assertions.assertEquals("TestText",taskDocumentDB.getName());
+    }
 }

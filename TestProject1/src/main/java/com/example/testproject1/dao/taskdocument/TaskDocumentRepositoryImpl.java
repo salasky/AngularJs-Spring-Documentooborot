@@ -1,6 +1,7 @@
 package com.example.testproject1.dao.taskdocument;
 
 import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.dao.basedocument.BaseDocumentRepository;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.mapper.document.TaskDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.testproject1.dao.queryholder.QueryHolder.BASE_DOCUMENT_UPDATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_CREATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_DELETE_ALL_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_DELETE_BY_ID_QUERY;
@@ -48,7 +50,7 @@ public class TaskDocumentRepositoryImpl implements CrudRepositories<TaskDocument
      * Сервис для работы с {@link BaseDocument}
      */
     @Autowired
-    private BaseDocumentService baseDocumentService;
+    private BaseDocumentRepository baseDocumentRepository;
     /**
      * Сервис для работы с {@link Person}
      */
@@ -70,7 +72,7 @@ public class TaskDocumentRepositoryImpl implements CrudRepositories<TaskDocument
                 baseDocument.setRegNumber(taskDocument.getRegNumber());
                 baseDocument.setCreatingDate(taskDocument.getCreatingDate());
                 baseDocument.setAuthor(taskDocument.getAuthor());
-                baseDocumentService.create(baseDocument);
+                baseDocumentRepository.create(baseDocument);
                 personService.create(taskDocument.getControlPerson());
                 personService.create(taskDocument.getResponsible());
                 int countCreate = jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate()
@@ -107,10 +109,11 @@ public class TaskDocumentRepositoryImpl implements CrudRepositories<TaskDocument
      * {@inheritDoc}
      */
     @Override
-    public Integer update(TaskDocument taskDocument) {
+    public int update(TaskDocument taskDocument) {
+        int baseDocumentCount=baseDocumentRepository.update(taskDocument);
         return jdbcTemplate.update(TASK_DOCUMENT_UPDATE_QUERY, taskDocument.getOutDate(), taskDocument.getExecPeriod(),
                 taskDocument.getResponsible().getId().toString(), taskDocument.getSignOfControl(),
-                taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString());
+                taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString())+baseDocumentCount;
     }
 
     /**

@@ -99,7 +99,7 @@ public class JobTittleRepositoryImpl implements CrudRepositories<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public Integer update(JobTittle jobTittle) {
+    public int update(JobTittle jobTittle) {
         return jdbcTemplate.update(JOB_TITTLE_UPDATE_ID_QUERY, jobTittle.getName(), jobTittle.getUuid().toString());
     }
 

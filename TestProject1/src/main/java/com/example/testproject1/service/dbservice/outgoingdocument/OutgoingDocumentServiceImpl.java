@@ -100,7 +100,7 @@ public class OutgoingDocumentServiceImpl implements CrudService<OutgoingDocument
     public Optional<OutgoingDocument> update(OutgoingDocument outgoingDocument) {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у OutgoingDocument с id {0}", outgoingDocument.getId().toString()));
         int updateCount = outgoingDocumentRepository.update(outgoingDocument);
-        if (updateCount == 1) {
+        if (updateCount >0) {
             LOGGER.info(UPDATE_SUCCESS);
             return Optional.ofNullable(outgoingDocument);
         }

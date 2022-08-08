@@ -1,6 +1,7 @@
 package com.example.testproject1.dao.incomingdocument;
 
 import com.example.testproject1.dao.CrudRepositories;
+import com.example.testproject1.dao.basedocument.BaseDocumentRepository;
 import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.mapper.document.IncomingDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.testproject1.dao.queryholder.QueryHolder.BASE_DOCUMENT_UPDATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.INCOMING_DOCUMENT_CREATE_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.INCOMING_DOCUMENT_DELETE_ALL_QUERY;
 import static com.example.testproject1.dao.queryholder.QueryHolder.INCOMING_DOCUMENT_DELETE_BY_ID_QUERY;
@@ -48,7 +50,7 @@ public class IncomingDocumentRepositoryImpl implements CrudRepositories<Incoming
      * Сервис для работы с {@link BaseDocument}
      */
     @Autowired
-    private BaseDocumentService baseDocumentService;
+    private BaseDocumentRepository baseDocumentRepository;
     /**
      * Сервис для работы с {@link Person}
      */
@@ -70,7 +72,7 @@ public class IncomingDocumentRepositoryImpl implements CrudRepositories<Incoming
                 baseDocument.setRegNumber(incomingDocument.getRegNumber());
                 baseDocument.setCreatingDate(incomingDocument.getCreatingDate());
                 baseDocument.setAuthor(incomingDocument.getAuthor());
-                baseDocumentService.create(baseDocument);
+                baseDocumentRepository.create(baseDocument);
                 personService.create(incomingDocument.getSender());
                 personService.create(incomingDocument.getDestination());
                 int countCreate = jdbcTemplate.update(INCOMING_DOCUMENT_CREATE_QUERY, incomingDocument.getId().toString(),
@@ -108,10 +110,11 @@ public class IncomingDocumentRepositoryImpl implements CrudRepositories<Incoming
      * {@inheritDoc}
      */
     @Override
-    public Integer update(IncomingDocument incomingDocument) {
+    public int update(IncomingDocument incomingDocument) {
+        int baseDocumentCount=baseDocumentRepository.update(incomingDocument);
         return jdbcTemplate.update(INCOMING_DOCUMENT_UPDATE_QUERY, incomingDocument.getSender().getId().toString(),
                 incomingDocument.getDestination().getId().toString(), incomingDocument.getNumber(),
-                incomingDocument.getDateOfRegistration(), incomingDocument.getId().toString());
+                incomingDocument.getDateOfRegistration(), incomingDocument.getId().toString())+baseDocumentCount;
     }
 
     /**

@@ -105,7 +105,7 @@ public class DepartmentRepositoryImpl implements CrudRepositories<Department> {
      * {@inheritDoc}
      */
     @Override
-    public Integer update(Department department) {
+    public int update(Department department) {
         return jdbcTemplate.update(DEPARTMENT_UPDATE_QUERY, department.getFullName(), department.getShortName(),
                 department.getSupervisor(), department.getContactNumber(), department.getOrganization().getId().toString(),
                 department.getId().toString());

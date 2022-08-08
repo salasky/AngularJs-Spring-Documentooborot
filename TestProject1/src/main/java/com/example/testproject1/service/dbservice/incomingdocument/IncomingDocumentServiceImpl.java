@@ -101,7 +101,7 @@ public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument
     public Optional<IncomingDocument> update(IncomingDocument incomingDocument) {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у IncomingDocument с id {0}", incomingDocument.getId().toString()));
         int updateCount = incomingDocumentRepository.update(incomingDocument);
-        if (updateCount == 1) {
+        if (updateCount >0) {
             LOGGER.info(UPDATE_SUCCESS);
             return Optional.ofNullable(incomingDocument);
         }
