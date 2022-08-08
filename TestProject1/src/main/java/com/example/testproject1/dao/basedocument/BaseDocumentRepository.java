@@ -41,7 +41,7 @@ public interface BaseDocumentRepository {
      * @param baseDocument объект класса {@link BaseDocument}
      * @return возвращает количество измененных строк. 0 при неудаче.
      */
-    Integer update(BaseDocument baseDocument);
+    int update(BaseDocument baseDocument);
 
     /**
      * Метод удаления всех записей с таблицы baseDocument

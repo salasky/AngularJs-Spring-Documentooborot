@@ -1,16 +1,23 @@
 spring:
-  main:
-    allow-circular-references: true
+  shell:
+    interactive:
+      enabled: false
   datasource:
-    url: jdbc:derby:C:\Derby\db-derby-10.13.1.1-bin\mydb
-    driverClassName: org.apache.derby.jdbc.EmbeddedDriver
-    username: app
+    url: jdbc:h2:mem:test
+    driverClassName: org.h2.Driver
+    username: sa
+    password: sa
   liquibase:
     enabled: true
     drop-first: false
     change-log: classpath:db/migration/master.xml
-    default-schema: app
-
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        web-allow-others: false
 doc:
   documentName: Устав, Должностная инструкция , Положение, Штатное расписание,Приказ
   documentText: Повышение уровня гражданского сознания, Системы обучения кадров, Количественный рост, Значимость этих проблем ,Соображения высшего порядка

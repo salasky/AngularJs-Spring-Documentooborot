@@ -23,6 +23,7 @@
         <org.apache.derby.version>10.13.1.1</org.apache.derby.version>
         <jakarta.persistence.version>2.2.3</jakarta.persistence.version>
         <org.liquibase.version>4.10.0</org.liquibase.version>
+        <org.junit.jupiter.version>5.8.1</org.junit.jupiter.version>
     </properties>
     <dependencies>
         <dependency>
@@ -56,7 +57,6 @@
             <artifactId>derbyclient</artifactId>
             <version>${org.apache.derby.version}</version>
         </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
         <dependency>
@@ -94,9 +94,20 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${org.junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
             <version>${jakarta.persistence.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <dependencyManagement>

@@ -18,11 +18,7 @@ import java.util.UUID;
  */
 @Component
 public class BaseDocumentMapper implements RowMapper<BaseDocument> {
-    /**
-     * Бин маппер {@link Person}
-     */
-    @Autowired
-    private PersonMapper personMapper;
+
     /**
      * Название столбца для мапинга в поле id
      */
@@ -43,6 +39,22 @@ public class BaseDocumentMapper implements RowMapper<BaseDocument> {
      * Название столбца для мапинга в поле document_date
      */
     private final String BASE_DOCUMENT_DATE = "base_document_date";
+    /**
+     * Название столбца для мапинга в поле person_id
+     */
+    private final String PERSON_ID = "person_id";
+    /**
+     * Название столбца для мапинга в поле person_first_name
+     */
+    private final String PERSON_FIRST_NAME = "person_first_name";
+    /**
+     * Название столбца для мапинга в поле person_second_name
+     */
+    private final String PERSON_SECOND_NAME = "person_second_name";
+    /**
+     * Название столбца для мапинга в поле person_last_name
+     */
+    private final String PERSON_LAST_NAME = "person_last_name";
 
     /**
      * {@inheritDoc}
@@ -55,7 +67,11 @@ public class BaseDocumentMapper implements RowMapper<BaseDocument> {
         baseDocument.setText(rs.getString(BASE_DOCUMENT_TEXT));
         baseDocument.setRegNumber(rs.getLong(BASE_DOCUMENT_NUMBER));
         baseDocument.setCreatingDate(rs.getTimestamp(BASE_DOCUMENT_DATE));
-        Person person = personMapper.mapRow(rs, rowNum);
+        Person person = new Person();
+        person.setId(UUID.fromString(rs.getString(PERSON_ID)));
+        person.setFirstName(rs.getString(PERSON_FIRST_NAME));
+        person.setSecondName(rs.getString(PERSON_SECOND_NAME));
+        person.setLastName(rs.getString(PERSON_LAST_NAME));
         baseDocument.setAuthor(person);
         return baseDocument;
     }

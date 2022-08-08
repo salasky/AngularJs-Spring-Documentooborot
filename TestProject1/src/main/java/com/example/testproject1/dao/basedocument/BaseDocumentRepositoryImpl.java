@@ -89,7 +89,7 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      * {@inheritDoc}
      */
     @Override
-    public Integer update(BaseDocument baseDocument) {
+    public int update(BaseDocument baseDocument) {
         return jdbcTemplate.update(BASE_DOCUMENT_UPDATE_QUERY, baseDocument.getName(), baseDocument.getText(),
                 baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString(),
                 baseDocument.getId().toString());

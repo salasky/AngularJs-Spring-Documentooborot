@@ -5,7 +5,7 @@ package com.example.testproject1.exception;
  *
  * @author smigranov
  */
-public class DeletePoorlyException extends Exception {
+public class DeletePoorlyException extends RuntimeException {
 
     public DeletePoorlyException() {
     }
