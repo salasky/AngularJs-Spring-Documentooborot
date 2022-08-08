@@ -84,7 +84,6 @@ class OrganizationRepositoriesTest {
         organization.setFullName("NeftServices");
         organizationRepositories.update(organization);
         Assertions.assertNotNull(organizationRepositories.getById(uuid.toString()));
-
         Organization organizationDB= (Organization) organizationRepositories.getById(uuid.toString()).get();
         Assertions.assertEquals("NeftServices",organizationDB.getFullName());
     }
