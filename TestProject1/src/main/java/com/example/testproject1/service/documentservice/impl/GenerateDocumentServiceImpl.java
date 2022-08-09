@@ -44,6 +44,7 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
      */
     @Override
     public void generateDocument(Integer count) {
+
         LOGGER.info("\n         ---------------------Сгенерированные документы---------------------");
         for (int i = 0; i < count; i++) {
             BaseDocument taskDocument = taskDocumentFactory.create();

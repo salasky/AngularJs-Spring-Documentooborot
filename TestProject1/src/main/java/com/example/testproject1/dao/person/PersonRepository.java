@@ -60,7 +60,6 @@ public class PersonRepository implements CrudRepository<Person> {
     @Override
     public Person create(Person person) {
         if (person != null) {
-            try {
                 isNotExistElseThrow(person);
                 jobTittleService.create(person.getJobTittle());
                 departmentService.create(person.getDepartment());
@@ -68,10 +67,6 @@ public class PersonRepository implements CrudRepository<Person> {
                         person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
                         person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
                 return person;
-            } catch (EntityExistInDataBaseException e) {
-                LOGGER.info(e.toString());
-                return null;
-            }
         } else throw new IllegalArgumentException("Person не может быть null");
     }
 

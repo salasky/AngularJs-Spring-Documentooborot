@@ -74,7 +74,7 @@ public class DepartmentRepository implements CrudRepository<Department> {
                 //This is a temporary solution due to duplicate values in the xml. It is more correct to catch DataIntegrityViolationException,
                 // but in this case, database rollbacks along the chain take a long time
                 isNotExistElseThrow(department);
-                organizationService.create(department.getOrganization());
+/*                organizationService.create(department.getOrganization());*/
                 jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
                         , department.getFullName(), department.getShortName(), department.getSupervisor()
                         , department.getContactNumber(), department.getOrganization().getId().toString());

@@ -3,12 +3,12 @@ package com.example.testproject1.exception;
 import java.text.MessageFormat;
 
 /**
- * Класс исключений выдаваемое при попытке сохранения {@link com.example.testproject1.model.document.BaseDocument}
+ * Класс исключений выдаваемое при попытке сохранения
  * с уже существующим в базе id
  *
  * @author smigranov
  */
-public class EntityExistInDataBaseException extends Exception {
+public class EntityExistInDataBaseException extends RuntimeException {
     /**
      * id существующего документа
      */

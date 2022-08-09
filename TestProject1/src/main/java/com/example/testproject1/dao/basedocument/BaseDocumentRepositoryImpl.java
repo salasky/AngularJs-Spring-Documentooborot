@@ -1,6 +1,5 @@
 package com.example.testproject1.dao.basedocument;
 
-import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.mapper.document.BaseDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Person;
@@ -47,7 +46,7 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      * Сервис для работы с {@link Person}
      */
     @Autowired
-    private CrudRepository<Person> personCrudRepository;
+    private CrudService<Person> personService;
 
     /**
      * {@inheritDoc}
@@ -55,11 +54,7 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
     @Override
     public BaseDocument create(BaseDocument baseDocument) {
         if (baseDocument != null) {
-            if(personCrudRepository.existById(baseDocument.getAuthor().getId())){
-                LOGGER.error(MessageFormat.format("Person с id {0} уже существует",baseDocument.getAuthor().getId().toString()));
-            } else {
-                personCrudRepository.create(baseDocument.getAuthor());
-            }
+            personService.create(baseDocument.getAuthor());
             jdbcTemplate.update(BASE_DOCUMENT_CREATE_QUERY, baseDocument.getId().toString(), baseDocument.getName(), baseDocument.getText(),
                     baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString());
             return baseDocument;
