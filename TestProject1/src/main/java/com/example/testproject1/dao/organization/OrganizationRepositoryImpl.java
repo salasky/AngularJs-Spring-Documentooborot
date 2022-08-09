@@ -1,9 +1,7 @@
 package com.example.testproject1.dao.organization;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
-import com.example.testproject1.exception.DepartmentExistInDataBaseException;
-import com.example.testproject1.exception.OrganizationExistInDataBaseException;
+import com.example.testproject1.exception.EntityExistInDataBaseException;
 import com.example.testproject1.mapper.staff.OrganizationMapper;
 import com.example.testproject1.model.staff.Organization;
 import org.slf4j.Logger;
@@ -13,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -47,20 +46,18 @@ public class OrganizationRepositoryImpl implements CrudRepository<Organization> 
      * {@inheritDoc}
      */
     @Override
-    public Optional<Organization> create(Organization organization) {
+    public Organization create(Organization organization) {
         if (organization != null) {
             try {
+                //This is a temporary solution due to duplicate values in the xml. It is more correct to catch DataIntegrityViolationException,
+                // but in this case, database rollbacks along the chain take a long time
                 isNotExistElseThrow(organization);
-                int countCreate = jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString()
+                jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString()
                         , organization.getFullName(), organization.getShortName(), organization.getSupervisor(), organization.getContactNumber());
-
-                if (countCreate == 1) {
-                    return Optional.ofNullable(organization);
-                }
-                return Optional.empty();
-            } catch (OrganizationExistInDataBaseException e) {
+                return organization;
+            } catch (EntityExistInDataBaseException e) {
                 LOGGER.info(e.toString());
-                return Optional.empty();
+                return null;
             }
         } else throw new IllegalArgumentException("Organization не может быть null");
     }
@@ -70,11 +67,12 @@ public class OrganizationRepositoryImpl implements CrudRepository<Organization> 
      * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
      *
      * @param organization
-     * @throws DepartmentExistInDataBaseException если найден Organization с переданным id
+     * @throws EntityExistInDataBaseException если найден Organization с переданным id
      */
-    private void isNotExistElseThrow(Organization organization) throws OrganizationExistInDataBaseException {
+    private void isNotExistElseThrow(Organization organization) throws EntityExistInDataBaseException {
         if (existById(organization.getId())) {
-            throw new OrganizationExistInDataBaseException(organization.getId().toString());
+            throw new EntityExistInDataBaseException(
+                    MessageFormat.format("Организация с id {0} уже существует",organization.getId().toString()));
         }
     }
 
@@ -111,24 +109,21 @@ public class OrganizationRepositoryImpl implements CrudRepository<Organization> 
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteAll() throws DeletePoorlyException {
-        int deleteCount = jdbcTemplate.update(ORGANIZATION_DELETE_ALL_QUERY);
-        if (deleteCount > 0) {
-            return true;
-        }
-        throw new DeletePoorlyException();
+    public void deleteAll(){
+        jdbcTemplate.update(ORGANIZATION_DELETE_ALL_QUERY);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeletePoorlyException {
+    public boolean deleteById(String id) {
         int deleteCount = jdbcTemplate.update(ORGANIZATION_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new DeletePoorlyException();
+        throw new RuntimeException(
+                MessageFormat.format("Ошибка удаления Organization с id {0}",id));
     }
 
     /**

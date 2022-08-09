@@ -1,7 +1,6 @@
 package com.example.testproject1.service.dbservice.basedocument;
 
 import com.example.testproject1.dao.basedocument.BaseDocumentRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.BaseDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,13 +48,17 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
      */
     private final String UPDATE_FAIL = "Неудачная попытка сохранения BaseDocument";
     /**
-     * Лог при успешном удалении всех записей
+     * Лог при попытке удаления всех записей
      */
-    private final String DELETE_ALL_SUCCESS = "Записи из таблицы base_document успешно удалены";
+    private final String DELETE_ALL_SUCCESS = "Попытка удаления записей из таблицы base_document ";
     /**
      * Лог при успешном удалении записи по id
      */
     private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы base_document успешно удалена";
+    /**
+     * Лог при неудачном удалении записи по id
+     */
+    private final String DELETE_BY_ID_FAIL = "Запись из таблицы base_document не удалена";
     /**
      * Лог при поиске baseDocument по регистрационному номеру
      */
@@ -65,14 +68,14 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
      * {@inheritDoc}
      */
     @Override
-    public Optional<BaseDocument> create(BaseDocument baseDocument) {
-        Optional<BaseDocument> baseDocumentOptional = baseDocumentRepository.create(baseDocument);
-        if (baseDocumentOptional.isPresent()) {
+    public BaseDocument create(BaseDocument baseDocument) {
+        BaseDocument baseDocumentDB= baseDocumentRepository.create(baseDocument);
+        if(baseDocumentDB!=null){
             LOGGER.info(CREATE_SUCCESS);
-            return Optional.ofNullable(baseDocumentOptional.get());
+            return baseDocumentDB;
         }
         LOGGER.error(CREATE_FAIL);
-        return Optional.empty();
+        return null;
     }
 
     /**
@@ -112,13 +115,8 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
      */
     @Override
     public void deleteAll() {
-        try {
-            if (baseDocumentRepository.deleteAll()) {
-                LOGGER.info(DELETE_ALL_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
-        }
+        LOGGER.info(DELETE_ALL_SUCCESS);
+        baseDocumentRepository.deleteAll();
     }
 
     /**
@@ -126,12 +124,10 @@ public class BaseDocumentServiceImpl implements BaseDocumentService {
      */
     @Override
     public void deleteById(String id) {
-        try {
-            if (baseDocumentRepository.deleteById(id)) {
-                LOGGER.info(DELETE_BY_ID_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
+        if (baseDocumentRepository.deleteById(id)) {
+            LOGGER.info(DELETE_BY_ID_SUCCESS);
+        }else {
+            LOGGER.error(DELETE_BY_ID_FAIL);
         }
     }
 

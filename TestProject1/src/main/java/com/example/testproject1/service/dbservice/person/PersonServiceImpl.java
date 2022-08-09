@@ -1,7 +1,6 @@
 package com.example.testproject1.service.dbservice.person;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -51,26 +50,30 @@ public class PersonServiceImpl implements CrudService<Person> {
      */
     private final String UPDATE_FAIL = "Неудачная попытка обновления Person";
     /**
-     * Лог при успешном удалении всех записей
+     * Лог при попытке удаления всех записей
      */
-    private final String DELETE_SUCCESS = "Записи из таблицы Person успешно удалены";
+    private final String DELETE_SUCCESS = "Попытка удаления записей из таблицы Person";
     /**
      * Лог при успешном удалении записи по id
      */
     private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы Person успешно удалена";
+    /**
+     * Лог при неудачном удалении удалении записи по id
+     */
+    private final String DELETE_BY_ID_FAIL = "Запись из таблицы Person не удалена";
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Optional<Person> create(Person person) {
-        Optional<Person> optionalPerson = personRepository.create(person);
-        if (optionalPerson.isPresent()) {
+    public Person create(Person person) {
+        Person personDB = personRepository.create(person);
+        if (personDB!=null) {
             LOGGER.info(CREATE_SUCCESS);
-            return Optional.ofNullable(person);
+            return personDB;
         }
         LOGGER.error(CREATE_FAIL);
-        return Optional.empty();
+        return null;
     }
 
     /**
@@ -111,13 +114,8 @@ public class PersonServiceImpl implements CrudService<Person> {
      */
     @Override
     public void deleteAll() {
-        try {
-            if (personRepository.deleteAll()) {
-                LOGGER.info(DELETE_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
-        }
+        LOGGER.info(DELETE_SUCCESS);
+        personRepository.deleteAll();
     }
 
     /**
@@ -125,12 +123,10 @@ public class PersonServiceImpl implements CrudService<Person> {
      */
     @Override
     public void deleteById(String id) {
-        try {
-            if (personRepository.deleteById(id)) {
-                LOGGER.info(DELETE_BY_ID_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
+        if (personRepository.deleteById(id)) {
+            LOGGER.info(DELETE_BY_ID_SUCCESS);
+        }else {
+            LOGGER.error(DELETE_BY_ID_FAIL);
         }
     }
 }

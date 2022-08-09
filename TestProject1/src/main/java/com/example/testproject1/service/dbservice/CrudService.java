@@ -15,7 +15,7 @@ public interface CrudService<T> {
      * @param object объекта класса
      * @return возвращает Optional<Объект указанного класса>
      */
-    Optional<T> create(T object);
+     T create(T object);
 
     /**
      * Метод получения всех объектов указанного из базы данных

@@ -1,7 +1,6 @@
 package com.example.testproject1.service.dbservice.taskdocument;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -47,26 +46,30 @@ public class TaskDocumentServiceImpl implements CrudService<TaskDocument> {
      */
     private final String UPDATE_FAIL = "Неудачная попытка обновления TaskDocument";
     /**
-     * Лог при успешном удалении всех записей
+     * Лог при попытке удаления всех записей
      */
-    private final String DELETE_SUCCESS = "Записи из таблицы TaskDocument успешно удалены";
+    private final String DELETE_SUCCESS = "Попытка удаления записей из таблицы TaskDocument";
     /**
      * Лог при успешном удалении записи по id
      */
     private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы TaskDocument успешно удалена";
+    /**
+     * Лог при неудачном удалении удалении записи по id
+     */
+    private final String DELETE_BY_ID_FAIL = "Запись из таблицы TaskDocument не удалена";
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Optional<TaskDocument> create(TaskDocument taskDocument) {
-        Optional<TaskDocument> optionalTaskDocument = taskDocumentRepository.create(taskDocument);
-        if (optionalTaskDocument.isPresent()) {
+    public TaskDocument create(TaskDocument taskDocument) {
+        TaskDocument taskDocumentDB = taskDocumentRepository.create(taskDocument);
+        if (taskDocumentDB!=null) {
             LOGGER.info(CREATE_SUCCESS);
-            return Optional.ofNullable(taskDocument);
+            return taskDocumentDB;
         }
         LOGGER.error(MessageFormat.format("Неудачная попытка сохранения TaskDocument c id {0}", taskDocument.getId().toString()));
-        return Optional.empty();
+        return null;
     }
 
     /**
@@ -107,13 +110,8 @@ public class TaskDocumentServiceImpl implements CrudService<TaskDocument> {
      */
     @Override
     public void deleteAll() {
-        try {
-            if (taskDocumentRepository.deleteAll()) {
-                LOGGER.info(DELETE_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
-        }
+        LOGGER.info(DELETE_SUCCESS);
+        taskDocumentRepository.deleteAll();
     }
 
     /**
@@ -121,12 +119,10 @@ public class TaskDocumentServiceImpl implements CrudService<TaskDocument> {
      */
     @Override
     public void deleteById(String id) {
-        try {
-            if (taskDocumentRepository.deleteById(id)) {
-                LOGGER.info(DELETE_BY_ID_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
+        if (taskDocumentRepository.deleteById(id)) {
+            LOGGER.info(DELETE_BY_ID_SUCCESS);
+        }else {
+            LOGGER.error(DELETE_BY_ID_FAIL);
         }
     }
 }

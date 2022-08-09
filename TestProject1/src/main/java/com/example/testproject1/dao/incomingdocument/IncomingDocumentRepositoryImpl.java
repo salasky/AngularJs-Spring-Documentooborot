@@ -2,7 +2,6 @@ package com.example.testproject1.dao.incomingdocument;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.BaseDocumentRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.mapper.document.IncomingDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
@@ -11,10 +10,10 @@ import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -59,9 +58,8 @@ public class IncomingDocumentRepositoryImpl implements CrudRepository<IncomingDo
      * {@inheritDoc}
      */
     @Override
-    public Optional<IncomingDocument> create(IncomingDocument incomingDocument) {
+    public IncomingDocument create(IncomingDocument incomingDocument) {
         if (incomingDocument != null) {
-            try {
                 BaseDocument baseDocument = new BaseDocument();
                 baseDocument.setId(incomingDocument.getId());
                 baseDocument.setName(incomingDocument.getName());
@@ -72,17 +70,11 @@ public class IncomingDocumentRepositoryImpl implements CrudRepository<IncomingDo
                 baseDocumentRepository.create(baseDocument);
                 personService.create(incomingDocument.getSender());
                 personService.create(incomingDocument.getDestination());
-                int countCreate = jdbcTemplate.update(INCOMING_DOCUMENT_CREATE_QUERY, incomingDocument.getId().toString(),
+                jdbcTemplate.update(INCOMING_DOCUMENT_CREATE_QUERY, incomingDocument.getId().toString(),
                         incomingDocument.getSender().getId().toString(),
                         incomingDocument.getDestination().getId().toString(),
                         incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
-                if (countCreate == 1) {
-                    return Optional.ofNullable(incomingDocument);
-                }
-                return Optional.empty();
-            } catch (DataIntegrityViolationException ex) {
-                throw new RuntimeException(ex);
-            }
+                return incomingDocument;
         } else throw new IllegalArgumentException("IncomingDocument не может быть null");
     }
 
@@ -118,24 +110,21 @@ public class IncomingDocumentRepositoryImpl implements CrudRepository<IncomingDo
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteAll() throws DeletePoorlyException {
-        int deleteCount = jdbcTemplate.update(INCOMING_DOCUMENT_DELETE_ALL_QUERY);
-        if (deleteCount > 0) {
-            return true;
-        }
-        throw new DeletePoorlyException();
+    public void deleteAll() {
+        jdbcTemplate.update(INCOMING_DOCUMENT_DELETE_ALL_QUERY);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeletePoorlyException {
+    public boolean deleteById(String id) {
         int deleteCount = jdbcTemplate.update(INCOMING_DOCUMENT_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new DeletePoorlyException();
+        throw new RuntimeException(
+                MessageFormat.format("Ошибка удаления IncomingDocument с id {0}",id));
     }
 
     /**

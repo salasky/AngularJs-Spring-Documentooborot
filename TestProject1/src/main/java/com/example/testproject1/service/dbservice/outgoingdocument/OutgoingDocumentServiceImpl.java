@@ -1,7 +1,6 @@
 package com.example.testproject1.service.dbservice.outgoingdocument;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -51,26 +50,30 @@ public class OutgoingDocumentServiceImpl implements CrudService<OutgoingDocument
      */
     private final String UPDATE_FAIL = "Неудачная попытка обновления OutgoingDocument";
     /**
-     * Лог при успешном удалении всех записей
+     * Лог при попытке удаления всех записей
      */
-    private final String DELETE_SUCCESS = "Записи из таблицы OutgoingDocument успешно удалены";
+    private final String DELETE_SUCCESS = "Попытка удаления записей из таблицы OutgoingDocument";
     /**
      * Лог при успешном удалении записи по id
      */
     private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы OutgoingDocument успешно удалена";
+    /**
+     * Лог при неудачном удалении удалении записи по id
+     */
+    private final String DELETE_BY_ID_FAIL = "Запись из таблицы OutgoingDocument не удалена";
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Optional<OutgoingDocument> create(OutgoingDocument outgoingDocument) {
-        Optional<OutgoingDocument> optionalOutgoingDocument = outgoingDocumentRepository.create(outgoingDocument);
-        if (optionalOutgoingDocument.isPresent()) {
+    public OutgoingDocument create(OutgoingDocument outgoingDocument) {
+        OutgoingDocument outgoingDocumentDB = outgoingDocumentRepository.create(outgoingDocument);
+        if (outgoingDocumentDB != null) {
             LOGGER.info(CREATE_SUCCESS);
-            return Optional.ofNullable(outgoingDocument);
+            return outgoingDocumentDB;
         }
         LOGGER.error(CREATE_FAIL);
-        return Optional.empty();
+        return null;
     }
 
     /**
@@ -111,13 +114,8 @@ public class OutgoingDocumentServiceImpl implements CrudService<OutgoingDocument
      */
     @Override
     public void deleteAll() {
-        try {
-            if (outgoingDocumentRepository.deleteAll()) {
-                LOGGER.info(DELETE_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
-        }
+        LOGGER.info(DELETE_SUCCESS);
+        outgoingDocumentRepository.deleteAll();
     }
 
     /**
@@ -125,12 +123,10 @@ public class OutgoingDocumentServiceImpl implements CrudService<OutgoingDocument
      */
     @Override
     public void deleteById(String id) {
-        try {
-            if (outgoingDocumentRepository.deleteById(id)) {
-                LOGGER.info(DELETE_BY_ID_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
+        if (outgoingDocumentRepository.deleteById(id)) {
+            LOGGER.info(DELETE_BY_ID_SUCCESS);
+        } else {
+            LOGGER.error(DELETE_BY_ID_FAIL);
         }
     }
 }

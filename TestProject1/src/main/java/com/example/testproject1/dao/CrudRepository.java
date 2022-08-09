@@ -1,7 +1,5 @@
 package com.example.testproject1.dao;
 
-import com.example.testproject1.exception.DeletePoorlyException;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -31,9 +29,9 @@ public interface CrudRepository<T> {
      * Метод сохранения объекта указанного класса в базу данных
      *
      * @param obj объекта класса
-     * @return возвращает Optional<Объект указанного класса>
+     * @return возвращает Объект указанного класса
      */
-    Optional<T> create(T obj);
+    T create(T obj);
 
     /**
      * Метод обновления информации указанного объекта
@@ -46,19 +44,15 @@ public interface CrudRepository<T> {
     /**
      * Метод удаления всех записей с таблицы
      *
-     * @return булевое значение: true при удачном удалении и false при неудаче
-     * @throws DeletePoorlyException при неудачном удалении
      */
-    boolean deleteAll() throws DeletePoorlyException;
+    void deleteAll();
 
     /**
      * Метод удаления по id
      *
      * @param id UUID в строковом формате
-     * @return возвращает true при успешном удалении и false при неудаче
-     * @throws DeletePoorlyException при неудачном удалении
      */
-    boolean deleteById(String id) throws DeletePoorlyException;
+    boolean deleteById(String id);
 
     /**
      * Метод проверки существования объекта в базе по переданному uuid

@@ -1,7 +1,6 @@
 package com.example.testproject1.service.dbservice.jobtittleservice;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -51,26 +50,30 @@ public class JobTittleServiceImpl implements CrudService<JobTittle> {
      */
     private final String UPDATE_FAIL = "Неудачная попытка обновления JobTittle";
     /**
-     * Лог при успешном удалении всех записей
+     * Лог при попытке удаления всех записей
      */
-    private final String DELETE_SUCCESS = "Записи из таблицы JobTittle успешно удалены";
+    private final String DELETE_SUCCESS = "Попытка удаления записей из таблицы JobTittle";
     /**
      * Лог при успешном удалении записи по id
      */
     private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы JobTittle успешно удалена";
+    /**
+     * Лог при неудачном удалении удалении записи по id
+     */
+    private final String DELETE_BY_ID_FAIL = "Запись из таблицы JobTittle не удалена";
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Optional<JobTittle> create(JobTittle jobTittle) {
-        Optional<JobTittle> jobTittleOptional = jobTittleRepository.create(jobTittle);
-        if (jobTittleOptional.isPresent()) {
+    public JobTittle create(JobTittle jobTittle) {
+        JobTittle jobTittleDB = jobTittleRepository.create(jobTittle);
+        if (jobTittleDB!=null) {
             LOGGER.info(CREATE_SUCCESS);
-            return Optional.ofNullable(jobTittle);
+            return jobTittleDB;
         }
         LOGGER.error(CREATE_FAIL);
-        return Optional.empty();
+        return null;
     }
 
     /**
@@ -111,13 +114,8 @@ public class JobTittleServiceImpl implements CrudService<JobTittle> {
      */
     @Override
     public void deleteAll() {
-        try {
-            if (jobTittleRepository.deleteAll()) {
-                LOGGER.info(DELETE_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
-        }
+        LOGGER.info(DELETE_SUCCESS);
+        jobTittleRepository.deleteAll();
     }
 
     /**
@@ -125,12 +123,11 @@ public class JobTittleServiceImpl implements CrudService<JobTittle> {
      */
     @Override
     public void deleteById(String id) {
-        try {
-            if (jobTittleRepository.deleteById(id)) {
-                LOGGER.info(DELETE_BY_ID_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
+        if (jobTittleRepository.deleteById(id)) {
+            LOGGER.info(DELETE_BY_ID_SUCCESS);
+        }
+        else {
+            LOGGER.error(DELETE_BY_ID_FAIL);
         }
     }
 }

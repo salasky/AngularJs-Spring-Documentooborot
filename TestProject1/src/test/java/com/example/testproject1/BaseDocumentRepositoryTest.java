@@ -29,7 +29,7 @@ public class BaseDocumentRepositoryTest {
     @Autowired
     private TaskDocumentFactory taskDocumentFactory;
 
-    @DisplayName("BaseDocumentRepository create and getById test successful")
+    @DisplayName("BaseDocumentRepository create test successful")
     @Test
     void baseDocumentRepositoryCreateTest() {
         BaseDocument baseDocument = taskDocumentFactory.create();

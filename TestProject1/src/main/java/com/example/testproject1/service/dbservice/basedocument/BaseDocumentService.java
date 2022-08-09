@@ -17,7 +17,7 @@ public interface BaseDocumentService {
      * @param baseDocument объекта класса {@link BaseDocument}
      * @return возвращает сохраненный объект,или null
      */
-    Optional<BaseDocument> create(BaseDocument baseDocument);
+    BaseDocument create(BaseDocument baseDocument);
 
     /**
      * Метод получения всех {@link BaseDocument} из базы данных

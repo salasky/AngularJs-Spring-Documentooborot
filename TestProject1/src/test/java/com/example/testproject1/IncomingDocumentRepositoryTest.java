@@ -26,7 +26,7 @@ public class IncomingDocumentRepositoryTest {
     @Autowired
     private CrudRepository<Person> personRepository;
 
-    @DisplayName("IncomingDocumentRepository create and getById test successful")
+    @DisplayName("IncomingDocumentRepository create test successful")
     @Test
     void incomingDocumentRepositoryCreateTest() {
         IncomingDocument incomingDocument = (IncomingDocument) incomingDocumentFactory.create();

@@ -1,7 +1,6 @@
 package com.example.testproject1.service.dbservice.department;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -52,26 +51,30 @@ public class DepartmentServiceImpl implements CrudService<Department> {
      */
     private final String UPDATE_FAIL = "Неудачная попытка обновления Department";
     /**
-     * Лог при успешном удалении всех записей
+     * Лог при попытке удаления всех записей
      */
-    private final String DELETE_SUCCESS = "Записи из таблицы department успешно удалены";
+    private final String DELETE_SUCCESS = "Попытка удаления записей из таблицы department";
     /**
      * Лог при успешном удалении записи по id
      */
     private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы department успешно удалена";
+    /**
+     * Лог при неудачном удалении записи по id
+     */
+    private final String DELETE_BY_ID_FAIL = "Запись из таблицы department не удалена";
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Optional<Department> create(Department department) {
-        Optional<Department> optionalDepartment = departmentRepository.create(department);
-        if (optionalDepartment.isPresent()) {
+    public Department create(Department department) {
+        Department departmentDB = departmentRepository.create(department);
+        if (departmentDB != null) {
             LOGGER.info(CREATE_SUCCESS);
-            return Optional.ofNullable(department);
+            return departmentDB;
         }
         LOGGER.error(CREATE_FAIL);
-        return Optional.empty();
+        return null;
     }
 
     /**
@@ -112,13 +115,8 @@ public class DepartmentServiceImpl implements CrudService<Department> {
      */
     @Override
     public void deleteAll() {
-        try {
-            if (departmentRepository.deleteAll()) {
-                LOGGER.info(DELETE_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
-        }
+        LOGGER.info(DELETE_SUCCESS);
+        departmentRepository.deleteAll();
     }
 
     /**
@@ -126,12 +124,10 @@ public class DepartmentServiceImpl implements CrudService<Department> {
      */
     @Override
     public void deleteById(String id) {
-        try {
-            if (departmentRepository.deleteById(id)) {
-                LOGGER.info(DELETE_BY_ID_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
+        if (departmentRepository.deleteById(id)) {
+            LOGGER.info(DELETE_BY_ID_SUCCESS);
+        } else {
+            LOGGER.error(DELETE_BY_ID_FAIL);
         }
     }
 }

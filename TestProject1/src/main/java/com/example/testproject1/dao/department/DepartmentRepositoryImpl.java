@@ -1,8 +1,7 @@
 package com.example.testproject1.dao.department;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
-import com.example.testproject1.exception.DepartmentExistInDataBaseException;
+import com.example.testproject1.exception.EntityExistInDataBaseException;
 import com.example.testproject1.mapper.staff.DepartmentMapper;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Organization;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -68,21 +68,20 @@ public class DepartmentRepositoryImpl implements CrudRepository<Department> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<Department> create(Department department) {
+    public Department create(Department department) {
         if (department != null) {
             try {
+                //This is a temporary solution due to duplicate values in the xml. It is more correct to catch DataIntegrityViolationException,
+                // but in this case, database rollbacks along the chain take a long time
                 isNotExistElseThrow(department);
                 organizationService.create(department.getOrganization());
-                int countCreate = jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
+                jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
                         , department.getFullName(), department.getShortName(), department.getSupervisor()
                         , department.getContactNumber(), department.getOrganization().getId().toString());
-                if (countCreate == 1) {
-                    return Optional.ofNullable(department);
-                }
-                return Optional.empty();
-            } catch (DepartmentExistInDataBaseException e) {
+                return department;
+            } catch (EntityExistInDataBaseException e) {
                 LOGGER.error(e.toString());
-                return Optional.empty();
+                return null;
             }
         } else throw new IllegalArgumentException("Department не может быть null");
     }
@@ -92,11 +91,12 @@ public class DepartmentRepositoryImpl implements CrudRepository<Department> {
      * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
      *
      * @param department
-     * @throws DepartmentExistInDataBaseException если найден Department с переданным id
+     * @throws EntityExistInDataBaseException если найден Department с переданным id
      */
-    private void isNotExistElseThrow(Department department) throws DepartmentExistInDataBaseException {
+    private void isNotExistElseThrow(Department department) throws EntityExistInDataBaseException {
         if (existById(department.getId())) {
-            throw new DepartmentExistInDataBaseException(department.getId().toString());
+            throw new EntityExistInDataBaseException(
+                    MessageFormat.format("Департамент с id {0} уже существует",department.getId().toString()));
         }
     }
 
@@ -114,24 +114,21 @@ public class DepartmentRepositoryImpl implements CrudRepository<Department> {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteAll() throws DeletePoorlyException {
-        int deleteCount = jdbcTemplate.update(DEPARTMENT_DELETE_ALL_QUERY);
-        if (deleteCount > 0) {
-            return true;
-        }
-        throw new DeletePoorlyException();
+    public void deleteAll() {
+        jdbcTemplate.update(DEPARTMENT_DELETE_ALL_QUERY);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeletePoorlyException {
+    public boolean deleteById(String id) {
         int deleteCount = jdbcTemplate.update(DEPARTMENT_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new DeletePoorlyException();
+        throw new RuntimeException(
+                MessageFormat.format("Ошибка удаления Department с id {0}",id));
     }
 
     /**

@@ -1,9 +1,7 @@
 package com.example.testproject1.dao.person;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
-import com.example.testproject1.exception.DepartmentExistInDataBaseException;
-import com.example.testproject1.exception.PersonExistInDataBaseException;
+import com.example.testproject1.exception.EntityExistInDataBaseException;
 import com.example.testproject1.mapper.staff.PersonMapper;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
@@ -15,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -59,22 +58,19 @@ public class PersonRepositoryImpl implements CrudRepository<Person> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<Person> create(Person person) {
+    public Person create(Person person) {
         if (person != null) {
             try {
                 isNotExistElseThrow(person);
                 jobTittleService.create(person.getJobTittle());
                 departmentService.create(person.getDepartment());
-                int countCreate = jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
+                jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
                         person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
                         person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
-                if (countCreate == 1) {
-                    return Optional.ofNullable(person);
-                }
-                return Optional.empty();
-            } catch (PersonExistInDataBaseException e) {
+                return person;
+            } catch (EntityExistInDataBaseException e) {
                 LOGGER.info(e.toString());
-                return Optional.empty();
+                return null;
             }
         } else throw new IllegalArgumentException("Person не может быть null");
     }
@@ -84,11 +80,12 @@ public class PersonRepositoryImpl implements CrudRepository<Person> {
      * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
      *
      * @param person
-     * @throws DepartmentExistInDataBaseException если найден Person с переданным id
+     * @throws EntityExistInDataBaseException если найден Person с переданным id
      */
-    private void isNotExistElseThrow(Person person) throws PersonExistInDataBaseException {
+    private void isNotExistElseThrow(Person person) throws EntityExistInDataBaseException {
         if (existById(person.getId())) {
-            throw new PersonExistInDataBaseException(person.getId().toString());
+            throw new EntityExistInDataBaseException(
+                    MessageFormat.format("Person с id {0} уже существует",person.getId().toString()));
         }
     }
 
@@ -123,24 +120,21 @@ public class PersonRepositoryImpl implements CrudRepository<Person> {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteAll() throws DeletePoorlyException {
-        int deleteCount = jdbcTemplate.update(PERSON_DELETE_ALL_QUERY);
-        if (deleteCount > 0) {
-            return true;
-        }
-        throw new DeletePoorlyException();
+    public void deleteAll() {
+        jdbcTemplate.update(PERSON_DELETE_ALL_QUERY);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeletePoorlyException {
+    public boolean deleteById(String id) {
         int deleteCount = jdbcTemplate.update(PERSON_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new DeletePoorlyException();
+        throw new RuntimeException(
+                MessageFormat.format("Ошибка удаления Person с id {0}",id));
     }
 
     /**

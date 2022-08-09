@@ -18,11 +18,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DocumentServiceImpl implements DocumentService {
-    /**
-     * Бин сервиса для работы с базовыми документами
-     */
-    @Autowired
-    private BaseDocumentService baseDocumentService;
+
     /**
      * Бин сервиса для работы с поручениями
      */

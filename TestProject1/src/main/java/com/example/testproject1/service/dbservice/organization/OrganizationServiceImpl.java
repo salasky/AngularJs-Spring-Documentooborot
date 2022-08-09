@@ -1,7 +1,6 @@
 package com.example.testproject1.service.dbservice.organization;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -52,26 +51,30 @@ public class OrganizationServiceImpl implements CrudService<Organization> {
      */
     private final String UPDATE_FAIL = "Неудачная попытка обновления Organization";
     /**
-     * Лог при успешном удалении всех записей
+     * Лог при попытке удаления всех записей
      */
-    private final String DELETE_SUCCESS = "Записи из таблицы Organization успешно удалены";
+    private final String DELETE_SUCCESS = "Попытка удаления записей из таблицы Organization";
     /**
      * Лог при успешном удалении записи по id
      */
     private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы Organization успешно удалена";
+    /**
+     * Лог при неудачном удалении удалении записи по id
+     */
+    private final String DELETE_BY_ID_FAIL = "Запись из таблицы Organization не удалена";
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Optional<Organization> create(Organization organization) {
-        Optional<Organization> optionalOrganization = organizationRepository.create(organization);
-        if (optionalOrganization.isPresent()) {
+    public Organization create(Organization organization) {
+        Organization organizationDB = organizationRepository.create(organization);
+        if (organizationDB!=null) {
             LOGGER.info(CREATE_SUCCESS);
-            return Optional.ofNullable(organization);
+            return organizationDB;
         }
         LOGGER.error(CREATE_FAIL);
-        return Optional.empty();
+        return null;
     }
 
     /**
@@ -112,13 +115,8 @@ public class OrganizationServiceImpl implements CrudService<Organization> {
      */
     @Override
     public void deleteAll() {
-        try {
-            if (organizationRepository.deleteAll()) {
-                LOGGER.info(DELETE_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
-        }
+        LOGGER.info(DELETE_SUCCESS);
+        organizationRepository.deleteAll();
     }
 
     /**
@@ -126,12 +124,11 @@ public class OrganizationServiceImpl implements CrudService<Organization> {
      */
     @Override
     public void deleteById(String id) {
-        try {
-            if (organizationRepository.deleteById(id)) {
-                LOGGER.info(DELETE_BY_ID_SUCCESS);
-            }
-        } catch (DeletePoorlyException e) {
-            LOGGER.error(e.toString());
+        if (organizationRepository.deleteById(id)) {
+            LOGGER.info(DELETE_BY_ID_SUCCESS);
+        }
+        else {
+            LOGGER.error(DELETE_BY_ID_FAIL);
         }
     }
 }

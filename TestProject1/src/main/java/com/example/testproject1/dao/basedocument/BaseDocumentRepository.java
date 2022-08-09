@@ -1,6 +1,5 @@
 package com.example.testproject1.dao.basedocument;
 
-import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.model.document.BaseDocument;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public interface BaseDocumentRepository {
      * @param baseDocument объекта класса {@link BaseDocument}
      * @return возвращает сохраненный объект,или null
      */
-    Optional<BaseDocument> create(BaseDocument baseDocument);
+    BaseDocument create(BaseDocument baseDocument);
 
     /**
      * Метод получения всех {@link BaseDocument} из базы данных
@@ -46,10 +45,8 @@ public interface BaseDocumentRepository {
 
     /**
      * Метод удаления всех записей с таблицы baseDocument
-     *
-     * @return возвращает true при успешном удалении и false при неудаче
      */
-    boolean deleteAll() throws DeletePoorlyException;
+    void deleteAll();
 
     /**
      * Метод удаления по id
@@ -57,7 +54,7 @@ public interface BaseDocumentRepository {
      * @param id UUID в строковом формате
      * @return возвращает true при успешном удалении и false при неудаче
      */
-    boolean deleteById(String id) throws DeletePoorlyException;
+    boolean deleteById(String id);
 
     /**
      * Метод проверки существования {@link BaseDocument} в базе с переданным рег.номером

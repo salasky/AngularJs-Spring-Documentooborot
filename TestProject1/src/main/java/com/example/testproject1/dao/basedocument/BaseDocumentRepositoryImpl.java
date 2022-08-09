@@ -1,6 +1,5 @@
 package com.example.testproject1.dao.basedocument;
 
-import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.mapper.document.BaseDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Person;
@@ -8,11 +7,11 @@ import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -53,16 +52,13 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      * {@inheritDoc}
      */
     @Override
-    public Optional<BaseDocument> create(BaseDocument baseDocument) {
+    public BaseDocument create(BaseDocument baseDocument) {
         if (baseDocument != null) {
             try {
                 personService.create(baseDocument.getAuthor());
-                int countCreate = jdbcTemplate.update(BASE_DOCUMENT_CREATE_QUERY, baseDocument.getId().toString(), baseDocument.getName(), baseDocument.getText(),
-                        baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString());
-                if (countCreate == 1) {
-                    return Optional.of(baseDocument);
-                }
-                return Optional.empty();
+                jdbcTemplate.update(BASE_DOCUMENT_CREATE_QUERY, baseDocument.getId().toString(), baseDocument.getName(), baseDocument.getText(),
+                            baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString());
+                return baseDocument;
             } catch (DataIntegrityViolationException ex) {
                 throw new RuntimeException(ex);
             }
@@ -99,24 +95,21 @@ public class BaseDocumentRepositoryImpl implements BaseDocumentRepository {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteAll() throws DeletePoorlyException {
-        int deleteCount = jdbcTemplate.update(BASE_DOCUMENT_DELETE_ALL_QUERY);
-        if (deleteCount > 0) {
-            return true;
-        }
-        throw new DeletePoorlyException();
+    public void deleteAll() {
+        jdbcTemplate.update(BASE_DOCUMENT_DELETE_ALL_QUERY);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeletePoorlyException {
+    public boolean deleteById(String id){
         int deleteCount = jdbcTemplate.update(BASE_DOCUMENT_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new DeletePoorlyException();
+        throw new RuntimeException(
+                MessageFormat.format("Ошибка удаления BaseDocument с id {0}",id));
     }
 
     /**

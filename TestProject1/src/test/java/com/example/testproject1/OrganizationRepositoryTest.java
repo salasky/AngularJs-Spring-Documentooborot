@@ -19,7 +19,7 @@ class OrganizationRepositoryTest {
     @Autowired
     private CrudRepository<Organization> organizationCrudRepository;
 
-    @DisplayName("OrganizationRepository create and getById test successful")
+    @DisplayName("OrganizationRepository create test successful")
     @Test
     void organizationRepositoryCreateTest() {
         Organization organization = new Organization();

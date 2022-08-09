@@ -8,13 +8,13 @@ import java.text.MessageFormat;
  *
  * @author smigranov
  */
-public class BaseDocumentExistInDataBaseException extends Exception {
+public class EntityExistInDataBaseException extends Exception {
     /**
      * id существующего документа
      */
     private String messages;
 
-    public BaseDocumentExistInDataBaseException(String message) {
+    public EntityExistInDataBaseException(String message) {
         super(message);
         this.messages = message;
     }
@@ -24,6 +24,6 @@ public class BaseDocumentExistInDataBaseException extends Exception {
      */
     @Override
     public String toString() {
-        return MessageFormat.format("BaseDocument c id {0} уже существует", messages);
+        return MessageFormat.format("{0}", messages);
     }
 }

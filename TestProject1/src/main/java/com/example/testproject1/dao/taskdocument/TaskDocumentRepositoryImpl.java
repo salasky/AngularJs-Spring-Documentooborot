@@ -2,7 +2,6 @@ package com.example.testproject1.dao.taskdocument;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.BaseDocumentRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.mapper.document.TaskDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.TaskDocument;
@@ -11,10 +10,10 @@ import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -59,9 +58,8 @@ public class TaskDocumentRepositoryImpl implements CrudRepository<TaskDocument> 
      * {@inheritDoc}
      */
     @Override
-    public Optional<TaskDocument> create(TaskDocument taskDocument) {
+    public TaskDocument create(TaskDocument taskDocument) {
         if (taskDocument != null) {
-            try {
                 BaseDocument baseDocument = new BaseDocument();
                 baseDocument.setId(taskDocument.getId());
                 baseDocument.setName(taskDocument.getName());
@@ -72,16 +70,10 @@ public class TaskDocumentRepositoryImpl implements CrudRepository<TaskDocument> 
                 baseDocumentRepository.create(baseDocument);
                 personService.create(taskDocument.getControlPerson());
                 personService.create(taskDocument.getResponsible());
-                int countCreate = jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate()
+                jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate()
                         , taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
                         taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
-                if (countCreate == 1) {
-                    return Optional.ofNullable(taskDocument);
-                }
-                return Optional.empty();
-            } catch (DataIntegrityViolationException ex) {
-                throw new RuntimeException(ex);
-            }
+                return taskDocument;
         } else throw new IllegalArgumentException("TaskDocument не может быть null");
     }
 
@@ -117,24 +109,21 @@ public class TaskDocumentRepositoryImpl implements CrudRepository<TaskDocument> 
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteAll() throws DeletePoorlyException {
-        int deleteCount = jdbcTemplate.update(TASK_DOCUMENT_DELETE_ALL_QUERY);
-        if (deleteCount > 0) {
-            return true;
-        }
-        throw new DeletePoorlyException();
+    public void deleteAll() {
+        jdbcTemplate.update(TASK_DOCUMENT_DELETE_ALL_QUERY);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeletePoorlyException {
+    public boolean deleteById(String id) {
         int deleteCount = jdbcTemplate.update(TASK_DOCUMENT_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new DeletePoorlyException();
+        throw new RuntimeException(
+                MessageFormat.format("Ошибка удаления TaskDocument с id {0}",id));
     }
 
     /**

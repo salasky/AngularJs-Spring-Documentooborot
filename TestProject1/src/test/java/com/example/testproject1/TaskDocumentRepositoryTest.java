@@ -27,7 +27,7 @@ public class TaskDocumentRepositoryTest {
     @Autowired
     private CrudRepository<Person> personCrudRepository;
 
-    @DisplayName("TaskDocumentRepository create and getById test successful")
+    @DisplayName("TaskDocumentRepository create test successful")
     @Test
     void taskDocumentRepositoryCreateTest() {
         TaskDocument taskDocument = (TaskDocument) taskDocumentFactory.create();

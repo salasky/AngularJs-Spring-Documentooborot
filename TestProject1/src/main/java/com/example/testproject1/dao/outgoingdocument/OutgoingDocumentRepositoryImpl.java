@@ -2,7 +2,6 @@ package com.example.testproject1.dao.outgoingdocument;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.BaseDocumentRepository;
-import com.example.testproject1.exception.DeletePoorlyException;
 import com.example.testproject1.mapper.document.OutgoingDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
@@ -11,10 +10,10 @@ import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -59,9 +58,8 @@ public class OutgoingDocumentRepositoryImpl implements CrudRepository<OutgoingDo
      * {@inheritDoc}
      */
     @Override
-    public Optional<OutgoingDocument> create(OutgoingDocument outgoingDocument) {
+    public OutgoingDocument create(OutgoingDocument outgoingDocument) {
         if (outgoingDocument != null) {
-            try {
                 BaseDocument baseDocument = new BaseDocument();
                 baseDocument.setId(outgoingDocument.getId());
                 baseDocument.setName(outgoingDocument.getName());
@@ -71,16 +69,10 @@ public class OutgoingDocumentRepositoryImpl implements CrudRepository<OutgoingDo
                 baseDocument.setAuthor(outgoingDocument.getAuthor());
                 baseDocumentRepository.create(baseDocument);
                 personService.create(outgoingDocument.getSender());
-                int createCount = jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
+                jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
                         outgoingDocument.getSender().getId().toString(),
                         outgoingDocument.getDeliveryType().toString());
-                if (createCount == 1) {
-                    return Optional.ofNullable(outgoingDocument);
-                }
-                return Optional.empty();
-            } catch (DataIntegrityViolationException ex) {
-                throw new RuntimeException(ex);
-            }
+                return outgoingDocument;
         } else throw new IllegalArgumentException("OutgoingDocument не может быть null");
     }
 
@@ -115,24 +107,21 @@ public class OutgoingDocumentRepositoryImpl implements CrudRepository<OutgoingDo
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteAll() throws DeletePoorlyException {
-        int deleteCount = jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_ALL_QUERY);
-        if (deleteCount > 0) {
-            return true;
-        }
-        throw new DeletePoorlyException();
+    public void deleteAll(){
+        jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_ALL_QUERY);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeletePoorlyException {
+    public boolean deleteById(String id) {
         int deleteCount = jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new DeletePoorlyException();
+        throw new RuntimeException(
+                MessageFormat.format("Ошибка удаления OutgoingDocument с id {0}",id));
     }
 
     /**
