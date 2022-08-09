@@ -18,8 +18,8 @@ import java.util.Optional;
  * @author smigranov
  */
 @Service("TaskDocumentService")
-public class TaskDocumentServiceImpl implements CrudService<TaskDocument> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentServiceImpl.class);
+public class TaskDocumentService implements CrudService<TaskDocument> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentService.class);
     /**
      * Бин {@link CrudRepository}
      */

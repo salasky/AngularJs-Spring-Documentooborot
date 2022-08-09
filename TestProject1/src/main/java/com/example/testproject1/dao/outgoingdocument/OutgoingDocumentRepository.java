@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_CREATE_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_DELETE_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_DELETE_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_GET_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_GET_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCUMENT_UPDATE_QUERY;
+import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_CREATE_QUERY;
+import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_DELETE_ALL_QUERY;
+import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_DELETE_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_GET_ALL_QUERY;
+import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_GET_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_UPDATE_QUERY;
 
 /**
  * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
@@ -31,8 +31,8 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.OUTGOING_DOCU
  * @author smigranov
  */
 @Repository("OutgoingDocumentRepository")
-public class OutgoingDocumentRepositoryImpl implements CrudRepository<OutgoingDocument> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OutgoingDocumentRepositoryImpl.class);
+public class OutgoingDocumentRepository implements CrudRepository<OutgoingDocument> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OutgoingDocumentRepository.class);
     /**
      * Бин JdbcTemplate
      */

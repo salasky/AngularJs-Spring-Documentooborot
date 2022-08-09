@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_CREATE_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_DELETE_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_DELETE_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_GET_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_GET_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT_UPDATE_QUERY;
+import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumentQueryHolder.TASK_DOCUMENT_CREATE_QUERY;
+import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumentQueryHolder.TASK_DOCUMENT_DELETE_ALL_QUERY;
+import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumentQueryHolder.TASK_DOCUMENT_DELETE_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumentQueryHolder.TASK_DOCUMENT_GET_ALL_QUERY;
+import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumentQueryHolder.TASK_DOCUMENT_GET_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumentQueryHolder.TASK_DOCUMENT_UPDATE_QUERY;
 
 /**
  * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
@@ -31,8 +31,8 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.TASK_DOCUMENT
  * @author smigranov
  */
 @Repository("TaskDocumentRepository")
-public class TaskDocumentRepositoryImpl implements CrudRepository<TaskDocument> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentRepositoryImpl.class);
+public class TaskDocumentRepository implements CrudRepository<TaskDocument> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentRepository.class);
     /**
      * Бин JdbcTemplate
      */

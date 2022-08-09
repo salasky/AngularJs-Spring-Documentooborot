@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_CREATE_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_DELETE_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_DELETE_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_GET_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_GET_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_UPDATE_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_CREATE_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_DELETE_ALL_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_DELETE_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_GET_ALL_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_GET_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_UPDATE_QUERY;
 
 /**
  * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
@@ -29,8 +29,8 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.ORGANIZATION_
  * @author smigranov
  */
 @Repository("OrganizationRepository")
-public class OrganizationRepositoryImpl implements CrudRepository<Organization> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationRepositoryImpl.class);
+public class OrganizationRepository implements CrudRepository<Organization> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationRepository.class);
     /**
      * Бин JdbcTemplate
      */

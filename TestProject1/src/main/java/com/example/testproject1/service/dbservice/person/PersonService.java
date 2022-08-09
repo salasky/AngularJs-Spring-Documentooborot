@@ -18,8 +18,8 @@ import java.util.Optional;
  * @author smigranov
  */
 @Service("PersonService")
-public class PersonServiceImpl implements CrudService<Person> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PersonServiceImpl.class);
+public class PersonService implements CrudService<Person> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersonService.class);
     /**
      * Бин {@link CrudRepository}
      */

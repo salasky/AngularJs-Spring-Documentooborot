@@ -42,6 +42,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
      */
     @Autowired
     private ObjectMapper objectMapper;
+
     @Autowired
     private CrudService<TaskDocument> taskDocumentService;
 
@@ -55,7 +56,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
      * {@inheritDoc}
      */
     @Override
-    public void generateReport() {
+    public void saveReportByAuthor() {
         Map<Person, List<BaseDocument>> totalMap = new HashMap<>();
         List<TaskDocument> taskDocumentList = taskDocumentService.getall();
         List<IncomingDocument> incomingDocumentList = incomingDocumentService.getall();

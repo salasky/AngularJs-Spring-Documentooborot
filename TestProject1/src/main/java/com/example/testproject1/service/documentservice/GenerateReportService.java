@@ -7,5 +7,5 @@ public interface GenerateReportService {
     /**
      * Метод генерации отчетов по документам
      */
-    public void generateReport();
+    public void saveReportByAuthor();
 }

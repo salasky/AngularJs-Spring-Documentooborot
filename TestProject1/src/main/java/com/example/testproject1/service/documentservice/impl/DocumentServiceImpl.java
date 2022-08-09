@@ -1,8 +1,10 @@
 package com.example.testproject1.service.documentservice.impl;
 
+import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
+import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.dbservice.basedocument.BaseDocumentService;
 import com.example.testproject1.service.documentservice.DocumentService;
@@ -34,6 +36,9 @@ public class DocumentServiceImpl implements DocumentService {
      */
     @Autowired
     private CrudService<OutgoingDocument> outgoingDocumentService;
+
+    @Autowired
+    private CrudRepository<Person> personCrudRepository;
 
     /**
      * {@inheritDoc}

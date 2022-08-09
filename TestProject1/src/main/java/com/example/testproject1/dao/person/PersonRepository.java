@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.testproject1.dao.queryholder.QueryHolder.PERSON_CREATE_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.PERSON_DELETE_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.PERSON_DELETE_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.PERSON_GET_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.PERSON_GET_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.PERSON_UPDATE_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_CREATE_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_DELETE_ALL_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_DELETE_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_GET_ALL_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_GET_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_UPDATE_QUERY;
 
 /**
  * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
@@ -31,8 +31,8 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.PERSON_UPDATE
  * @author smigranov
  */
 @Repository("PersonRepository")
-public class PersonRepositoryImpl implements CrudRepository<Person> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PersonRepositoryImpl.class);
+public class PersonRepository implements CrudRepository<Person> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersonRepository.class);
     /**
      * Бин JdbcTemplate
      */

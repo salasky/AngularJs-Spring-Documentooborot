@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_CREATE_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_DELETE_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_DELETE_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_GET_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_GET_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_UPDATE_ID_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_CREATE_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_DELETE_ALL_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_DELETE_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_GET_ALL_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_GET_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_UPDATE_ID_QUERY;
 
 /**
  * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
@@ -29,8 +29,8 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.JOB_TITTLE_UP
  * @author smigranov
  */
 @Repository("JobTittleRepository")
-public class JobTittleRepositoryImpl implements CrudRepository<JobTittle> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(JobTittleRepositoryImpl.class);
+public class JobTittleRepository implements CrudRepository<JobTittle> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JobTittleRepository.class);
     /**
      * Маппер для извлечения {@link JobTittle}
      */

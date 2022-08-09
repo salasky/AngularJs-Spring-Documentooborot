@@ -18,8 +18,8 @@ import java.util.Optional;
  * @author smigranov
  */
 @Service("OutgoingDocumentService")
-public class OutgoingDocumentServiceImpl implements CrudService<OutgoingDocument> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OutgoingDocumentServiceImpl.class);
+public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OutgoingDocumentService.class);
     /**
      * Бин {@link CrudRepository}
      */

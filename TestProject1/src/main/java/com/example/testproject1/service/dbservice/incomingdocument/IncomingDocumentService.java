@@ -18,9 +18,9 @@ import java.util.Optional;
  * @author smigranov
  */
 @Service("IncomingDocumentService")
-public class IncomingDocumentServiceImpl implements CrudService<IncomingDocument> {
+public class IncomingDocumentService implements CrudService<IncomingDocument> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(IncomingDocumentServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(IncomingDocumentService.class);
     /**
      * Бин {@link CrudRepository}
      */

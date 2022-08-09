@@ -17,12 +17,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_CREATE_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_DELETE_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_DELETE_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_GET_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_GET_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_UPDATE_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_CREATE_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_DELETE_ALL_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_DELETE_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_GET_ALL_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_GET_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_UPDATE_QUERY;
 
 /**
  * Класс репозиторий для {@link Department}. Реализует интерфейс {@link CrudRepository}
@@ -30,8 +30,8 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.DEPARTMENT_UP
  * @author smigranov
  */
 @Repository("DepartmentRepository")
-public class DepartmentRepositoryImpl implements CrudRepository<Department> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentRepositoryImpl.class);
+public class DepartmentRepository implements CrudRepository<Department> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentRepository.class);
     /**
      * Бин JdbcTemplate
      */

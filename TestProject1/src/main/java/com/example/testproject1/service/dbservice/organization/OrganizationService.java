@@ -18,9 +18,9 @@ import java.util.Optional;
  * @author smigranov
  */
 @Service("OrganizationService")
-public class OrganizationServiceImpl implements CrudService<Organization> {
+public class OrganizationService implements CrudService<Organization> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationService.class);
     /**
      * Бин {@link CrudRepository}
      */

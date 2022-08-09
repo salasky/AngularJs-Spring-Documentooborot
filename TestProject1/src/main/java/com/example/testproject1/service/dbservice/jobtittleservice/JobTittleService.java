@@ -18,8 +18,8 @@ import java.util.Optional;
  * @author smigranov
  */
 @Service("JobTittleService")
-public class JobTittleServiceImpl implements CrudService<JobTittle> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(JobTittleServiceImpl.class);
+public class JobTittleService implements CrudService<JobTittle> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JobTittleService.class);
     /**
      * Бин {@link CrudRepository}
      */

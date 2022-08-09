@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.testproject1.dao.queryholder.QueryHolder.INCOMING_DOCUMENT_CREATE_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.INCOMING_DOCUMENT_DELETE_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.INCOMING_DOCUMENT_DELETE_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.INCOMING_DOCUMENT_GET_ALL_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.INCOMING_DOCUMENT_GET_BY_ID_QUERY;
-import static com.example.testproject1.dao.queryholder.QueryHolder.INCOMING_DOCUMENT_UPDATE_QUERY;
+import static com.example.testproject1.queryholder.incomingdocumentquery.IncomingDocumentQueryHolder.INCOMING_DOCUMENT_CREATE_QUERY;
+import static com.example.testproject1.queryholder.incomingdocumentquery.IncomingDocumentQueryHolder.INCOMING_DOCUMENT_DELETE_ALL_QUERY;
+import static com.example.testproject1.queryholder.incomingdocumentquery.IncomingDocumentQueryHolder.INCOMING_DOCUMENT_DELETE_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.incomingdocumentquery.IncomingDocumentQueryHolder.INCOMING_DOCUMENT_GET_ALL_QUERY;
+import static com.example.testproject1.queryholder.incomingdocumentquery.IncomingDocumentQueryHolder.INCOMING_DOCUMENT_GET_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.incomingdocumentquery.IncomingDocumentQueryHolder.INCOMING_DOCUMENT_UPDATE_QUERY;
 
 /**
  * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
@@ -31,8 +31,8 @@ import static com.example.testproject1.dao.queryholder.QueryHolder.INCOMING_DOCU
  * @author smigranov
  */
 @Repository("IncomingDocumentRepository")
-public class IncomingDocumentRepositoryImpl implements CrudRepository<IncomingDocument> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(IncomingDocumentRepositoryImpl.class);
+public class IncomingDocumentRepository implements CrudRepository<IncomingDocument> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(IncomingDocumentRepository.class);
     /**
      * Бин JdbcTemplate
      */

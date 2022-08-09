@@ -40,6 +40,6 @@ public class DocumentShell {
         LOGGER.info("Попытка сгенерировать документы");
         generateDocumentService.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
-        generateReportService.generateReport();
+        generateReportService.saveReportByAuthor();
     }
 }
