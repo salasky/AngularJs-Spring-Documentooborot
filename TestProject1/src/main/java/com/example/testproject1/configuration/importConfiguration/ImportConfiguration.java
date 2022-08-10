@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Класс для конфигурации импорта xml в базу данных
@@ -21,7 +19,7 @@ import java.util.TreeMap;
  * @author smigranov
  */
 @Configuration
-public class ImportCongiguration {
+public class ImportConfiguration {
     /**
      * Бин CrudService Person
      */
