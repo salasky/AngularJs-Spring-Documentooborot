@@ -1,12 +1,15 @@
 package com.example.testproject1.service.dbservice.jobtittleservice;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -18,6 +21,7 @@ import java.util.Optional;
  *
  * @author smigranov
  */
+@Order(value=2)
 @Service("JobTittleService")
 public class JobTittleService implements CrudService<JobTittle> {
     private static final Logger LOGGER = LoggerFactory.getLogger(JobTittleService.class);
@@ -67,14 +71,13 @@ public class JobTittleService implements CrudService<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public JobTittle create(JobTittle jobTittle) {
+    public JobTittle create(JobTittle jobTittle) throws DocflowRuntimeApplicationException {
         JobTittle jobTittleDB = jobTittleRepository.create(jobTittle);
         if (jobTittleDB!=null) {
             LOGGER.info(CREATE_SUCCESS);
             return jobTittleDB;
         }
-        LOGGER.error(CREATE_FAIL);
-        return null;
+        throw new DocflowRuntimeApplicationException(CREATE_FAIL);
     }
 
     /**
@@ -99,14 +102,14 @@ public class JobTittleService implements CrudService<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public JobTittle update(JobTittle jobTittle) throws UpdateException {
+    public JobTittle update(JobTittle jobTittle) throws DocflowRuntimeApplicationException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у JobTittle с id {0}", jobTittle.getUuid().toString()));
         int updateCount = jobTittleRepository.update(jobTittle);
         if (updateCount == 1) {
             LOGGER.info(UPDATE_SUCCESS);
             return jobTittle;
         }
-        throw new UpdateException(UPDATE_FAIL);
+        throw new DocflowRuntimeApplicationException(UPDATE_FAIL);
     }
 
     /**
@@ -122,12 +125,11 @@ public class JobTittleService implements CrudService<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) {
-        if (jobTittleRepository.deleteById(id)) {
-            LOGGER.info(DELETE_BY_ID_SUCCESS);
-        }
-        else {
-            LOGGER.error(DELETE_BY_ID_FAIL);
+    public void deleteById(String id) throws DocflowRuntimeApplicationException {
+        try {
+            jobTittleRepository.deleteById(id);
+        } catch (DeleteByIdException e) {
+            throw new DocflowRuntimeApplicationException(DELETE_BY_ID_FAIL);
         }
     }
 }

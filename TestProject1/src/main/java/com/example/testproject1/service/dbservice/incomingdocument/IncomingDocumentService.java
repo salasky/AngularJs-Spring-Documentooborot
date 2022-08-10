@@ -1,6 +1,8 @@
 package com.example.testproject1.service.dbservice.incomingdocument;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -68,14 +70,13 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      * {@inheritDoc}
      */
     @Override
-    public IncomingDocument create(IncomingDocument incomingDocument) {
+    public IncomingDocument create(IncomingDocument incomingDocument) throws DocflowRuntimeApplicationException {
     IncomingDocument incomingDocumentDB = incomingDocumentRepository.create(incomingDocument);
         if (incomingDocumentDB!=null) {
             LOGGER.info(CREATE_SUCCESS);
             return incomingDocumentDB;
         }
-        LOGGER.error(CREATE_FAIL);
-        return null;
+        throw new DocflowRuntimeApplicationException(CREATE_FAIL);
     }
 
     /**
@@ -100,14 +101,14 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      * {@inheritDoc}
      */
     @Override
-    public IncomingDocument update(IncomingDocument incomingDocument) throws UpdateException {
+    public IncomingDocument update(IncomingDocument incomingDocument) throws DocflowRuntimeApplicationException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у IncomingDocument с id {0}", incomingDocument.getId().toString()));
         int updateCount = incomingDocumentRepository.update(incomingDocument);
         if (updateCount > 0) {
             LOGGER.info(UPDATE_SUCCESS);
             return incomingDocument;
         }
-        throw new UpdateException(UPDATE_FAIL);
+        throw new DocflowRuntimeApplicationException(UPDATE_FAIL);
     }
 
     /**
@@ -123,12 +124,11 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) {
-        if (incomingDocumentRepository.deleteById(id)) {
-            LOGGER.info(DELETE_BY_ID_SUCCESS);
-        }
-        else {
-           LOGGER.error(DELETE_BY_ID_FAIL);
+    public void deleteById(String id) throws DocflowRuntimeApplicationException {
+        try {
+            incomingDocumentRepository.deleteById(id);
+        } catch (DeleteByIdException e) {
+            throw new DocflowRuntimeApplicationException(DELETE_BY_ID_FAIL);
         }
     }
 }

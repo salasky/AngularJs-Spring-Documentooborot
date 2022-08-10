@@ -1,5 +1,7 @@
 package com.example.testproject1.service.dbservice;
 
+import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.exception.UpdateException;
 
 import java.util.List;
@@ -17,7 +19,7 @@ public interface CrudService<T> {
      * @param object объекта класса
      * @return возвращает Optional<Объект указанного класса>
      */
-     T create(T object);
+     T create(T object) throws DocflowRuntimeApplicationException;
 
     /**
      * Метод получения всех объектов указанного из базы данных
@@ -40,7 +42,7 @@ public interface CrudService<T> {
      * @param object объект указанного класса
      * @return возвращает null или объект
      */
-    T update(T object) throws UpdateException;
+    T update(T object) throws DocflowRuntimeApplicationException;
 
     /**
      * Метод удаления всех записей с таблицы
@@ -52,5 +54,5 @@ public interface CrudService<T> {
      *
      * @param id UUID в строковом формате
      */
-    void deleteById(String id);
+    void deleteById(String id) throws DocflowRuntimeApplicationException;
 }

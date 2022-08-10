@@ -1,6 +1,7 @@
 package com.example.testproject1.service.documentservice.impl;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
@@ -16,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.MessageFormat;
 
 /**
  * Класс реализующий интерфейс {@link GenerateDocumentService}
@@ -58,9 +61,13 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
             BaseDocument taskDocument = taskDocumentFactory.create();
             BaseDocument incomingDocument = incomingDocumentFactory.create();
             BaseDocument outgoingDocument = outgoingDocumentFactory.create();
-            documentService.saveTaskInDB((TaskDocument) taskDocument);
-            documentService.saveIncomingInDB((IncomingDocument) incomingDocument);
-            documentService.saveOutgoingInDB((OutgoingDocument) outgoingDocument);
+            try {
+                documentService.saveTaskInDB((TaskDocument) taskDocument);
+                documentService.saveIncomingInDB((IncomingDocument) incomingDocument);
+                documentService.saveOutgoingInDB((OutgoingDocument) outgoingDocument);
+            } catch (DocflowRuntimeApplicationException e) {
+                LOGGER.error("Ошибка создания документа ");
+            }
         }
     }
 }

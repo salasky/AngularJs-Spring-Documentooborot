@@ -2,6 +2,7 @@ package com.example.testproject1.dao.outgoingdocument;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.BaseDocumentRepositoryImpl;
+import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.mapper.document.OutgoingDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
@@ -55,14 +56,14 @@ public class OutgoingDocumentRepository extends BaseDocumentRepositoryImpl imple
     @Override
     public OutgoingDocument create(OutgoingDocument outgoingDocument) {
         if (outgoingDocument != null) {
-
                 super.create(outgoingDocument);
-
                 jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
                         outgoingDocument.getSender().getId().toString(),
                         outgoingDocument.getDeliveryType().toString());
                 return outgoingDocument;
-        } else throw new IllegalArgumentException("OutgoingDocument не может быть null");
+        } else {
+            throw new IllegalArgumentException("OutgoingDocument не может быть null");
+        }
     }
 
     /**
@@ -104,13 +105,12 @@ public class OutgoingDocumentRepository extends BaseDocumentRepositoryImpl imple
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) {
+    public boolean deleteById(String id) throws DeleteByIdException {
         int deleteCount = jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new RuntimeException(
-                MessageFormat.format("Ошибка удаления OutgoingDocument с id {0}",id));
+        throw new DeleteByIdException("OutgoingDocument");
     }
 
     /**

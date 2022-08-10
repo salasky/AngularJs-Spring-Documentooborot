@@ -1,6 +1,7 @@
 package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.model.staff.Organization;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -65,7 +66,11 @@ class OrganizationRepositoryTest {
         organization.setSupervisor("MMN");
         organization.setContactNumber("67328i765");
         organizationCrudRepository.create(organization);
-        organizationCrudRepository.deleteById(uuid.toString());
+        try {
+            organizationCrudRepository.deleteById(uuid.toString());
+        } catch (DeleteByIdException e) {
+            throw new RuntimeException(e);
+        }
         Assertions.assertTrue(organizationCrudRepository.getById(uuid.toString()).isEmpty());
     }
 

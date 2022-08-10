@@ -1,12 +1,15 @@
 package com.example.testproject1.service.dbservice.organization;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -19,6 +22,7 @@ import java.util.Optional;
  * @author smigranov
  */
 @Service("OrganizationService")
+@Order(value=1)
 public class OrganizationService implements CrudService<Organization> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationService.class);
@@ -68,14 +72,13 @@ public class OrganizationService implements CrudService<Organization> {
      * {@inheritDoc}
      */
     @Override
-    public Organization create(Organization organization) {
+    public Organization create(Organization organization) throws DocflowRuntimeApplicationException {
         Organization organizationDB = organizationRepository.create(organization);
         if (organizationDB!=null) {
             LOGGER.info(CREATE_SUCCESS);
             return organizationDB;
         }
-        LOGGER.error(CREATE_FAIL);
-        return null;
+        throw new DocflowRuntimeApplicationException(CREATE_FAIL);
     }
 
     /**
@@ -100,14 +103,14 @@ public class OrganizationService implements CrudService<Organization> {
      * {@inheritDoc}
      */
     @Override
-    public Organization update(Organization organization) throws UpdateException {
+    public Organization update(Organization organization) throws DocflowRuntimeApplicationException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у Organization с id {0}", organization.getId().toString()));
         int updateCount = organizationRepository.update(organization);
         if (updateCount == 1) {
             LOGGER.info(UPDATE_SUCCESS);
             return organization;
         }
-        throw new UpdateException(UPDATE_FAIL);
+        throw new DocflowRuntimeApplicationException(UPDATE_FAIL);
     }
 
     /**
@@ -123,12 +126,11 @@ public class OrganizationService implements CrudService<Organization> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) {
-        if (organizationRepository.deleteById(id)) {
-            LOGGER.info(DELETE_BY_ID_SUCCESS);
-        }
-        else {
-            LOGGER.error(DELETE_BY_ID_FAIL);
+    public void deleteById(String id) throws DocflowRuntimeApplicationException {
+        try {
+            organizationRepository.deleteById(id);
+        } catch (DeleteByIdException e) {
+            throw new DocflowRuntimeApplicationException(DELETE_BY_ID_FAIL);
         }
     }
 }

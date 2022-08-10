@@ -3,17 +3,17 @@ package com.example.testproject1.exception;
 import java.text.MessageFormat;
 
 /**
- * Исключение выбрасываемое при неудачном Update
+ * Исключение выбрасываемое при удалении
  *
  * @author smigranov
  */
-public class UpdateException extends Exception{
+public class DeleteByIdException extends Exception{
     /**
      * сообщение о деталях исключения
      */
     private String messages;
 
-    public UpdateException(String message) {
+    public DeleteByIdException(String message) {
         super(message);
         this.messages = message;
     }
@@ -23,6 +23,6 @@ public class UpdateException extends Exception{
      */
     @Override
     public String toString() {
-        return MessageFormat.format("{0}", messages);
+        return MessageFormat.format("Ошибка удаления по id {0}", messages);
     }
 }

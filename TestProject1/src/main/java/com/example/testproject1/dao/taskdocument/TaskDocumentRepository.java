@@ -2,19 +2,15 @@ package com.example.testproject1.dao.taskdocument;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.BaseDocumentRepositoryImpl;
+import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.mapper.document.TaskDocumentMapper;
-import com.example.testproject1.model.document.BaseDocument;
-import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -33,7 +29,6 @@ import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumen
  */
 @Repository("TaskDocumentRepository")
 public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implements CrudRepository<TaskDocument> {
-
     /**
      * Бин JdbcTemplate
      */
@@ -57,13 +52,14 @@ public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implement
     @Override
     public TaskDocument create(TaskDocument taskDocument) {
         if (taskDocument != null) {
-                super.create(taskDocument);
-
-                jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate()
-                        , taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
-                        taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
-                return taskDocument;
-        } else throw new IllegalArgumentException("TaskDocument не может быть null");
+            super.create(taskDocument);
+            jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate(),
+                    taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
+                    taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
+            return taskDocument;
+        } else {
+            throw new IllegalArgumentException("TaskDocument не может быть null");
+        }
     }
 
     /**
@@ -106,13 +102,12 @@ public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implement
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) {
+    public boolean deleteById(String id) throws DeleteByIdException {
         int deleteCount = jdbcTemplate.update(TASK_DOCUMENT_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new RuntimeException(
-                MessageFormat.format("Ошибка удаления TaskDocument с id {0}",id));
+        throw new DeleteByIdException("TaskDocument");
     }
 
     /**

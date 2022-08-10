@@ -1,5 +1,7 @@
 package com.example.testproject1.dao;
 
+import com.example.testproject1.exception.DeleteByIdException;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -52,7 +54,7 @@ public interface CrudRepository<T> {
      *
      * @param id UUID в строковом формате
      */
-    boolean deleteById(String id);
+    boolean deleteById(String id) throws DeleteByIdException;
 
     /**
      * Метод проверки существования объекта в базе по переданному uuid

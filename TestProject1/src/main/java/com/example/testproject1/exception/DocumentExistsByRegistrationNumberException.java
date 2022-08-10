@@ -18,10 +18,6 @@ public class DocumentExistsByRegistrationNumberException extends Exception {
         this.detail = detail;
     }
 
-    public DocumentExistsByRegistrationNumberException() {
-
-    }
-
     /**
      * {@inheritDoc}
      */

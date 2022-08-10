@@ -1,6 +1,7 @@
 package com.example.testproject1.dao.organization;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.EntityExistInDataBaseException;
 import com.example.testproject1.mapper.staff.OrganizationMapper;
 import com.example.testproject1.model.staff.Organization;
@@ -48,31 +49,11 @@ public class OrganizationRepository implements CrudRepository<Organization> {
     @Override
     public Organization create(Organization organization) {
         if (organization != null) {
-            try {
-                //This is a temporary solution due to duplicate values in the xml. It is more correct to catch DataIntegrityViolationException,
-                // but in this case, database rollbacks along the chain take a long time
-                isNotExistElseThrow(organization);
                 jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString()
                         , organization.getFullName(), organization.getShortName(), organization.getSupervisor(), organization.getContactNumber());
                 return organization;
-            } catch (EntityExistInDataBaseException e) {
-                LOGGER.info(e.toString());
-                return null;
-            }
-        } else throw new IllegalArgumentException("Organization не может быть null");
-    }
-
-    /**
-     * Метод поиска Organization по id. Из-за того, что в XML staff сущностей(Person,Department и т.д.) ограниченное количество, каждый раз ловить
-     * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
-     *
-     * @param organization
-     * @throws EntityExistInDataBaseException если найден Organization с переданным id
-     */
-    private void isNotExistElseThrow(Organization organization) throws EntityExistInDataBaseException {
-        if (existById(organization.getId())) {
-            throw new EntityExistInDataBaseException(
-                    MessageFormat.format("Организация с id {0} уже существует",organization.getId().toString()));
+        } else {
+            throw new IllegalArgumentException("Organization не может быть null");
         }
     }
 
@@ -117,13 +98,12 @@ public class OrganizationRepository implements CrudRepository<Organization> {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) {
+    public boolean deleteById(String id) throws DeleteByIdException {
         int deleteCount = jdbcTemplate.update(ORGANIZATION_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new RuntimeException(
-                MessageFormat.format("Ошибка удаления Organization с id {0}",id));
+        throw new DeleteByIdException("Organization");
     }
 
     /**

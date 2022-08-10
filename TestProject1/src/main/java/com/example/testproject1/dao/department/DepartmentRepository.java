@@ -1,6 +1,7 @@
 package com.example.testproject1.dao.department;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.EntityExistInDataBaseException;
 import com.example.testproject1.mapper.staff.DepartmentMapper;
 import com.example.testproject1.model.staff.Department;
@@ -70,33 +71,12 @@ public class DepartmentRepository implements CrudRepository<Department> {
     @Override
     public Department create(Department department) {
         if (department != null) {
-            try {
-                //This is a temporary solution due to duplicate values in the xml. It is more correct to catch DataIntegrityViolationException,
-                // but in this case, database rollbacks along the chain take a long time
-                isNotExistElseThrow(department);
-/*                organizationService.create(department.getOrganization());*/
                 jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
                         , department.getFullName(), department.getShortName(), department.getSupervisor()
                         , department.getContactNumber(), department.getOrganization().getId().toString());
                 return department;
-            } catch (EntityExistInDataBaseException e) {
-                LOGGER.error(e.toString());
-                return null;
-            }
-        } else throw new IllegalArgumentException("Department не может быть null");
-    }
-
-    /**
-     * Метод поиска Department по id. Из-за того, что в XML staff сущностей(Person,Department и т.д.) ограниченное количество, каждый раз ловить
-     * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
-     *
-     * @param department
-     * @throws EntityExistInDataBaseException если найден Department с переданным id
-     */
-    private void isNotExistElseThrow(Department department) throws EntityExistInDataBaseException {
-        if (existById(department.getId())) {
-            throw new EntityExistInDataBaseException(
-                    MessageFormat.format("Департамент с id {0} уже существует",department.getId().toString()));
+        } else {
+            throw new IllegalArgumentException("Department не может быть null");
         }
     }
 
@@ -122,13 +102,12 @@ public class DepartmentRepository implements CrudRepository<Department> {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) {
+    public boolean deleteById(String id) throws DeleteByIdException {
         int deleteCount = jdbcTemplate.update(DEPARTMENT_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new RuntimeException(
-                MessageFormat.format("Ошибка удаления Department с id {0}",id));
+        throw new DeleteByIdException("Department");
     }
 
     /**

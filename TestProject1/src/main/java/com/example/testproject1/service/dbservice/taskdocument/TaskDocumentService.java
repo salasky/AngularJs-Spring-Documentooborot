@@ -1,6 +1,8 @@
 package com.example.testproject1.service.dbservice.taskdocument;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -30,6 +32,10 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
      * Лог при успешном сохранении
      */
     private final String CREATE_SUCCESS = "TaskDocument успешно сохранен";
+    /**
+     * Лог при неудачном сохранении
+     */
+    private final String CREATE_FAIL="Неудачная попытка сохранения TaskDocument";
     /**
      * Лог при выдаче всех TaskDocument
      */
@@ -63,14 +69,13 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
      * {@inheritDoc}
      */
     @Override
-    public TaskDocument create(TaskDocument taskDocument) {
+    public TaskDocument create(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
         TaskDocument taskDocumentDB = taskDocumentRepository.create(taskDocument);
         if (taskDocumentDB!=null) {
             LOGGER.info(CREATE_SUCCESS);
             return taskDocumentDB;
         }
-        LOGGER.error(MessageFormat.format("Неудачная попытка сохранения TaskDocument c id {0}", taskDocument.getId().toString()));
-        return null;
+        throw new DocflowRuntimeApplicationException(CREATE_FAIL);
     }
 
     /**
@@ -95,14 +100,14 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
      * {@inheritDoc}
      */
     @Override
-    public TaskDocument update(TaskDocument taskDocument) throws UpdateException {
+    public TaskDocument update(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у TaskDocument с id {0}", taskDocument.getId().toString()));
         int updateCount = taskDocumentRepository.update(taskDocument);
         if (updateCount > 0) {
             LOGGER.info(UPDATE_SUCCESS);
             return taskDocument;
         }
-        throw new UpdateException(UPDATE_FAIL);
+        throw new DocflowRuntimeApplicationException(UPDATE_FAIL);
     }
 
     /**
@@ -118,11 +123,11 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) {
-        if (taskDocumentRepository.deleteById(id)) {
-            LOGGER.info(DELETE_BY_ID_SUCCESS);
-        }else {
-            LOGGER.error(DELETE_BY_ID_FAIL);
+    public void deleteById(String id) throws DocflowRuntimeApplicationException {
+        try {
+            taskDocumentRepository.deleteById(id);
+        } catch (DeleteByIdException e) {
+            throw new DocflowRuntimeApplicationException(DELETE_BY_ID_FAIL);
         }
     }
 }

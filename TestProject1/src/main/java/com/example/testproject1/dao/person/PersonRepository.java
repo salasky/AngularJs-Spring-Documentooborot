@@ -1,6 +1,7 @@
 package com.example.testproject1.dao.person;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.EntityExistInDataBaseException;
 import com.example.testproject1.mapper.staff.PersonMapper;
 import com.example.testproject1.model.staff.Department;
@@ -60,26 +61,12 @@ public class PersonRepository implements CrudRepository<Person> {
     @Override
     public Person create(Person person) {
         if (person != null) {
-                isNotExistElseThrow(person);
-
                 jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
                         person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
                         person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
                 return person;
-        } else throw new IllegalArgumentException("Person не может быть null");
-    }
-
-    /**
-     * Метод поиска Person по id. Из-за того, что в XML staff сущностей(Person,Department и т.д.) ограниченное количество, каждый раз ловить
-     * {@link org.springframework.dao.DataIntegrityViolationException} и откатывать сохранение очень долго
-     *
-     * @param person
-     * @throws EntityExistInDataBaseException если найден Person с переданным id
-     */
-    private void isNotExistElseThrow(Person person) throws EntityExistInDataBaseException {
-        if (existById(person.getId())) {
-            throw new EntityExistInDataBaseException(
-                    MessageFormat.format("Person с id {0} уже существует",person.getId().toString()));
+        } else {
+            throw new IllegalArgumentException("Person не может быть null");
         }
     }
 
@@ -122,13 +109,12 @@ public class PersonRepository implements CrudRepository<Person> {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) {
+    public boolean deleteById(String id) throws DeleteByIdException {
         int deleteCount = jdbcTemplate.update(PERSON_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new RuntimeException(
-                MessageFormat.format("Ошибка удаления Person с id {0}",id));
+        throw new DeleteByIdException("Person");
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.example.testproject1.service.documentservice.impl;
 
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
@@ -37,7 +38,7 @@ public class DocumentServiceImpl implements DocumentService {
      * {@inheritDoc}
      */
     @Override
-    public void saveTaskInDB(TaskDocument taskDocument) {
+    public void saveTaskInDB(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
         taskDocumentService.create(taskDocument);
     }
 
@@ -45,7 +46,7 @@ public class DocumentServiceImpl implements DocumentService {
      * {@inheritDoc}
      */
     @Override
-    public void saveIncomingInDB(IncomingDocument incomingDocument) {
+    public void saveIncomingInDB(IncomingDocument incomingDocument) throws DocflowRuntimeApplicationException {
         incomingDocumentService.create(incomingDocument);
     }
 
@@ -53,7 +54,7 @@ public class DocumentServiceImpl implements DocumentService {
      * {@inheritDoc}
      */
     @Override
-    public void saveOutgoingInDB(OutgoingDocument outgoingDocument) {
+    public void saveOutgoingInDB(OutgoingDocument outgoingDocument) throws DocflowRuntimeApplicationException {
         outgoingDocumentService.create(outgoingDocument);
     }
 }

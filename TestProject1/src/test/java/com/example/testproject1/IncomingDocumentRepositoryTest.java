@@ -1,6 +1,7 @@
 package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.importxmltodatabase.Impl.XmlToDataBaseImporterImpl;
@@ -103,7 +104,11 @@ public class IncomingDocumentRepositoryTest {
         incomingDocument.setDestination(personRepository.getAll().stream().findFirst().get());
         UUID uuid = incomingDocument.getId();
         incomingDocumentCrudRepository.create(incomingDocument);
-        incomingDocumentCrudRepository.deleteById(uuid.toString());
+        try {
+            incomingDocumentCrudRepository.deleteById(uuid.toString());
+        } catch (DeleteByIdException e) {
+            throw new RuntimeException(e);
+        }
         Assertions.assertTrue(incomingDocumentCrudRepository.getById(uuid.toString()).isEmpty());
     }
 

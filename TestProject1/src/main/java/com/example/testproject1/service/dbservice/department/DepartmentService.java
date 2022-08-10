@@ -1,12 +1,15 @@
 package com.example.testproject1.service.dbservice.department;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -19,6 +22,7 @@ import java.util.Optional;
  * @author smigranov
  */
 @Service("DepartmentService")
+@Order(value=3)
 public class DepartmentService implements CrudService<Department> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentService.class);
@@ -56,11 +60,7 @@ public class DepartmentService implements CrudService<Department> {
      */
     private final String DELETE_SUCCESS = "Попытка удаления записей из таблицы department";
     /**
-     * Лог при успешном удалении записи по id
-     */
-    private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы department успешно удалена";
-    /**
-     * Лог при неудачном удалении записи по id
+     * Лог при неудачном удалении удалении записи по id
      */
     private final String DELETE_BY_ID_FAIL = "Запись из таблицы department не удалена";
 
@@ -68,14 +68,13 @@ public class DepartmentService implements CrudService<Department> {
      * {@inheritDoc}
      */
     @Override
-    public Department create(Department department) {
+    public Department create(Department department) throws DocflowRuntimeApplicationException {
         Department departmentDB = departmentRepository.create(department);
         if (departmentDB != null) {
             LOGGER.info(CREATE_SUCCESS);
             return departmentDB;
         }
-        LOGGER.error(CREATE_FAIL);
-        return null;
+        throw new DocflowRuntimeApplicationException(CREATE_FAIL);
     }
 
     /**
@@ -100,14 +99,14 @@ public class DepartmentService implements CrudService<Department> {
      * {@inheritDoc}
      */
     @Override
-    public Department update(Department department) throws UpdateException {
+    public Department update(Department department) throws DocflowRuntimeApplicationException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у Department с id {0}", department.getId().toString()));
         int updateCount = departmentRepository.update(department);
         if (updateCount == 1) {
             LOGGER.info(UPDATE_SUCCESS);
             return department;
         }
-        throw new UpdateException(UPDATE_FAIL);
+        throw new DocflowRuntimeApplicationException(UPDATE_FAIL);
     }
 
     /**
@@ -123,11 +122,11 @@ public class DepartmentService implements CrudService<Department> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) {
-        if (departmentRepository.deleteById(id)) {
-            LOGGER.info(DELETE_BY_ID_SUCCESS);
-        } else {
-            LOGGER.error(DELETE_BY_ID_FAIL);
+    public void deleteById(String id) throws DocflowRuntimeApplicationException {
+        try {
+            departmentRepository.deleteById(id);
+        } catch (DeleteByIdException e) {
+            throw new DocflowRuntimeApplicationException(DELETE_BY_ID_FAIL);
         }
     }
 }

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +18,10 @@ import java.util.List;
  *
  * @author smigranov
  */
+@Order(value=2)
 @Service
-public class JobStorageServiceImpl implements StorageService<JobTittle> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(StorageServiceImpl.class);
+public class JobStorageService implements StorageService<JobTittle> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentStorageService.class);
     /**
      * Имя файла для jaxb анмаршалинга
      */

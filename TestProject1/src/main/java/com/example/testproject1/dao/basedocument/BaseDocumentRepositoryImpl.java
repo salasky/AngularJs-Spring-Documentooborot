@@ -32,7 +32,9 @@ public abstract class BaseDocumentRepositoryImpl{
             jdbcTemplate.update(BASE_DOCUMENT_CREATE_QUERY, baseDocument.getId().toString(), baseDocument.getName(), baseDocument.getText(),
                     baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString());
             return baseDocument;
-        } else throw new IllegalArgumentException("BaseDocument не может быть null");
+        } else {
+            throw new IllegalArgumentException("BaseDocument не может быть null");
+        }
     }
     /**
      * {@inheritDoc}

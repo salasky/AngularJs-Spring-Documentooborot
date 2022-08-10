@@ -1,6 +1,7 @@
 package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.docfactory.TaskDocumentFactory;
@@ -71,7 +72,11 @@ public class TaskDocumentRepositoryTest {
         TaskDocument taskDocument = (TaskDocument) taskDocumentFactory.create();
         UUID uuid = taskDocument.getId();
         taskDocumentCrudRepository.create(taskDocument);
-        taskDocumentCrudRepository.deleteById(uuid.toString());
+        try {
+            taskDocumentCrudRepository.deleteById(uuid.toString());
+        } catch (DeleteByIdException e) {
+            throw new RuntimeException(e);
+        }
         Assertions.assertTrue(taskDocumentCrudRepository.getById(uuid.toString()).isEmpty());
     }
 

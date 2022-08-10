@@ -1,6 +1,7 @@
 package com.example.testproject1.dao.jobtittle;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.EntityExistInDataBaseException;
 import com.example.testproject1.mapper.staff.JobTittleMapper;
 import com.example.testproject1.model.staff.JobTittle;
@@ -68,17 +69,11 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
     @Override
     public JobTittle create(JobTittle jobTittle) {
         if (jobTittle != null) {
-            try {
-                //This is a temporary solution due to duplicate values in the xml. It is more correct to catch DataIntegrityViolationException,
-                // but in this case, database rollbacks along the chain take a long time
-                isNotExistElseThrow(jobTittle);
                 jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getUuid().toString(), jobTittle.getName());
                 return jobTittle;
-            } catch (EntityExistInDataBaseException e) {
-                LOGGER.error(e.toString());
-                return null;
-            }
-        } else throw new IllegalArgumentException("JobTittle не может быть null");
+        } else {
+            throw new IllegalArgumentException("JobTittle не может быть null");
+        }
     }
 
     /**
@@ -115,13 +110,12 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) {
+    public boolean deleteById(String id) throws DeleteByIdException {
         int deleteCount = jdbcTemplate.update(JOB_TITTLE_DELETE_BY_ID_QUERY, id);
         if (deleteCount == 1) {
             return true;
         }
-        throw new RuntimeException(
-                MessageFormat.format("Ошибка удаления JobTittle с id {0}",id));
+        throw new DeleteByIdException("JobTittle");
     }
 
     /**
