@@ -5,7 +5,7 @@ package com.example.testproject1.service.importxmltodatabase;
  *
  * @author smigranov
  */
-public interface ImportXml {
+public interface XmlToDataBaseImporter {
 
     /**
      * Метод сохранения данных в базу данных

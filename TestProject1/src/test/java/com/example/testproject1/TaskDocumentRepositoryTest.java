@@ -4,7 +4,7 @@ import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.docfactory.TaskDocumentFactory;
-import com.example.testproject1.service.importxmltodatabase.ImportXml;
+import com.example.testproject1.service.importxmltodatabase.XmlToDataBaseImporter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -30,8 +30,8 @@ public class TaskDocumentRepositoryTest {
     private CrudRepository<Person> personCrudRepository;
 
     @BeforeAll
-    public static void init( @Autowired ImportXml importXml){
-        importXml.saveStaffInDb();
+    public static void init( @Autowired XmlToDataBaseImporter xmlToDataBaseImporter){
+        xmlToDataBaseImporter.saveStaffInDb();
     }
 
     @DisplayName("TaskDocumentRepository create test successful")

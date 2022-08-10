@@ -11,7 +11,7 @@ import com.example.testproject1.service.docfactory.OutgoingDocumentFactory;
 import com.example.testproject1.service.docfactory.TaskDocumentFactory;
 import com.example.testproject1.service.documentservice.DocumentService;
 import com.example.testproject1.service.documentservice.GenerateDocumentService;
-import com.example.testproject1.service.importxmltodatabase.ImportXml;
+import com.example.testproject1.service.importxmltodatabase.XmlToDataBaseImporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
     @Autowired
     private OutgoingDocumentFactory outgoingDocumentFactory;
     @Autowired
-    private ImportXml importXml;
+    private XmlToDataBaseImporter xmlToDataBaseImporter;
     @Autowired
     private CrudRepository<Person> personCrudRepository;
     /**
@@ -51,7 +51,7 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
     @Override
     public void createAndSaveDocument(Integer count) {
         if(personCrudRepository.getAll().size()==0){
-            importXml.saveStaffInDb();
+            xmlToDataBaseImporter.saveStaffInDb();
         }
         LOGGER.info("\n         ---------------------Сохранение в базу данных---------------------");
         for (int i = 0; i < count; i++) {

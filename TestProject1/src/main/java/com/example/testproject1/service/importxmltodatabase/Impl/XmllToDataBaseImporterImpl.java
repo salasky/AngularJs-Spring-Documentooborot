@@ -5,11 +5,14 @@ import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
-import com.example.testproject1.service.importxmltodatabase.ImportXml;
+import com.example.testproject1.service.importxmltodatabase.XmlToDataBaseImporter;
 import com.example.testproject1.service.staffservice.StorageService;
 
+import liquibase.pro.packaged.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Класс сохранения данных из XML в базу данных
@@ -17,7 +20,7 @@ import org.springframework.stereotype.Service;
  * @author smigranov
  */
 @Service
-public class ImportXmlmpl implements ImportXml {
+public class XmllToDataBaseImporterImpl implements XmlToDataBaseImporter {
 
     /**
      * Бин CrudService Person
@@ -65,47 +68,17 @@ public class ImportXmlmpl implements ImportXml {
      */
     @Override
     public void saveStaffInDb(){
-        saveOrganization();
-        saveDepartment();
-        saveJob();
-        savePerson();
+        save(organizationStorageService,organizationCrudService);
+        save(jobStorageService,jobTittleCrudService);
+        save(departmentStorageService,departmentCrudService);
+        save(personStorageService,personCrudService);
     }
 
-    /**
-     * Метод сохранения организации
-     */
-    private void saveOrganization(){
 
-        for (Organization organization :organizationStorageService.getList()
-        ) {
-            organizationCrudService.create(organization);
-        }
-    }
-    /**
-     * Метод сохранения department
-     */
-    private void saveDepartment(){
-        for (Department department : departmentStorageService.getList()
-        ) {
-            departmentCrudService.create(department);
-        }
-    }
-    /**
-     * Метод сохранения Job
-     */
-    private void saveJob(){
-        for (JobTittle jobTittle :jobStorageService.getList()
-        ) {
-            jobTittleCrudService.create(jobTittle);
-        }
-    }    /**
-     * Метод сохранения Person
-     */
-
-    private void savePerson(){
-        for (Person person:personStorageService.getList()
-        ) {
-            personCrudService.create(person);
+    private void save(StorageService storageService,CrudService crudService){
+        for (Object obj: storageService.getList()
+             ) {
+            crudService.create(obj);
         }
     }
 }
