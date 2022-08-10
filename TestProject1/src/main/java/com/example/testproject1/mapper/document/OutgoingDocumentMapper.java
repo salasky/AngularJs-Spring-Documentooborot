@@ -60,7 +60,7 @@ public class OutgoingDocumentMapper implements RowMapper<OutgoingDocument> {
         sender.setSecondName(rs.getString(PERSON_SENDER_SECOND_NAME));
         sender.setLastName(rs.getString(PERSON_SENDER_LAST_NAME));
 
-        return  (OutgoingDocument) OutgoingDocument.newBuilder()
+        return (OutgoingDocument) OutgoingDocument.newBuilder()
                 .setDocDeliveryType(DocumentDeliveryType.valueOf(rs.getString(OUTGOING_DELIVERY_TYPE)))
                 .setDocSender(sender)
                 .setDocId(baseDocument.getId())

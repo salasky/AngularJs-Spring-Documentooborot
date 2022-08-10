@@ -3,7 +3,6 @@ package com.example.testproject1.service.dbservice.organization;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -22,7 +21,7 @@ import java.util.Optional;
  * @author smigranov
  */
 @Service("OrganizationService")
-@Order(value=1)
+@Order(value = 1)
 public class OrganizationService implements CrudService<Organization> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationService.class);
@@ -74,7 +73,7 @@ public class OrganizationService implements CrudService<Organization> {
     @Override
     public Organization create(Organization organization) throws DocflowRuntimeApplicationException {
         Organization organizationDB = organizationRepository.create(organization);
-        if (organizationDB!=null) {
+        if (organizationDB != null) {
             LOGGER.info(CREATE_SUCCESS);
             return organizationDB;
         }

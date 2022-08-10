@@ -1,11 +1,8 @@
 package com.example.testproject1.dao.basedocument;
 
 import com.example.testproject1.model.document.BaseDocument;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 
 import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumentQueryHolder.BASE_DOCUMENT_CREATE_QUERY;
 import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumentQueryHolder.BASE_DOCUMENT_UPDATE_QUERY;
@@ -16,7 +13,7 @@ import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumen
  * @author smigranov
  */
 
-public abstract class BaseDocumentRepositoryImpl{
+public abstract class BaseDocumentRepositoryImpl {
 
     /**
      * Бин JdbcTemplate
@@ -36,6 +33,7 @@ public abstract class BaseDocumentRepositoryImpl{
             throw new IllegalArgumentException("BaseDocument не может быть null");
         }
     }
+
     /**
      * {@inheritDoc}
      */

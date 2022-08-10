@@ -29,14 +29,14 @@ public class IncomingDocumentRepositoryTest {
 
 
     @BeforeAll
-    public static void init( @Autowired XmlToDataBaseImporterImpl importXmlmpl){
+    public static void init(@Autowired XmlToDataBaseImporterImpl importXmlmpl) {
         importXmlmpl.saveStaffInDb();
     }
 
     @DisplayName("IncomingDocumentRepository create test successful")
     @Test
     void incomingDocumentRepositoryCreateTest() {
-        IncomingDocument incomingDocument =new IncomingDocument();
+        IncomingDocument incomingDocument = new IncomingDocument();
         incomingDocument.setId(UUID.randomUUID());
         incomingDocument.setText("text");
         incomingDocument.setName("name");
@@ -55,9 +55,9 @@ public class IncomingDocumentRepositoryTest {
 
         Assertions.assertTrue(personRepository.getById(incomingDocumentDB.getAuthor().getId().toString()).isPresent());
         Person author = personRepository.getById(incomingDocumentDB.getAuthor().getId().toString()).get();
-        Assertions.assertTrue( personRepository.getById(incomingDocumentDB.getSender().getId().toString()).isPresent());
+        Assertions.assertTrue(personRepository.getById(incomingDocumentDB.getSender().getId().toString()).isPresent());
         Person sender = personRepository.getById(incomingDocument.getSender().getId().toString()).get();
-        Assertions.assertTrue( personRepository.getById(incomingDocumentDB.getDestination().getId().toString()).isPresent());
+        Assertions.assertTrue(personRepository.getById(incomingDocumentDB.getDestination().getId().toString()).isPresent());
         Person destination = personRepository.getById(incomingDocument.getDestination().getId().toString()).get();
         incomingDocumentDB.setAuthor(author);
         incomingDocumentDB.setSender(sender);
@@ -68,8 +68,8 @@ public class IncomingDocumentRepositoryTest {
     @DisplayName("IncomingDocumentRepository deleteAll test successful")
     @Test
     void incomingDocumentRepositoryDeleteAllTest() {
-        if(incomingDocumentCrudRepository.getAll().isEmpty()){
-            IncomingDocument incomingDocument =new IncomingDocument();
+        if (incomingDocumentCrudRepository.getAll().isEmpty()) {
+            IncomingDocument incomingDocument = new IncomingDocument();
             incomingDocument.setId(UUID.randomUUID());
             incomingDocument.setText("text");
             incomingDocument.setName("name");
@@ -91,7 +91,7 @@ public class IncomingDocumentRepositoryTest {
     @DisplayName("IncomingDocumentRepository deleteById test successful")
     @Test
     void incomingDocumentRepositoryDeleteByIdTest() {
-        IncomingDocument incomingDocument =new IncomingDocument();
+        IncomingDocument incomingDocument = new IncomingDocument();
         incomingDocument.setId(UUID.randomUUID());
         incomingDocument.setText("text");
         incomingDocument.setName("name");
@@ -115,7 +115,7 @@ public class IncomingDocumentRepositoryTest {
     @DisplayName("IncomingDocumentRepository update test successful")
     @Test
     void incomingDocumentRepositoryUpdateTest() {
-        IncomingDocument incomingDocument =new IncomingDocument();
+        IncomingDocument incomingDocument = new IncomingDocument();
         incomingDocument.setId(UUID.randomUUID());
         incomingDocument.setText("text");
         incomingDocument.setName("name");

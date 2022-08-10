@@ -17,23 +17,38 @@ import java.util.Map;
  */
 @Configuration
 public class XmlImportConfiguration {
-
+    /**
+     * Лист StorageService для получения Staff сущностей из xml
+     */
     @Autowired
     private List<StorageService> storageServiceList;
-
+    /**
+     * Лист CrudService для сохранения Staff сущностей из xml в базу данных
+     */
     @Autowired
     private List<CrudService> crudServiceList;
 
+    /**
+     * Бин возвращающий сконфигурированный Map<StorageService, CrudService>
+     * @return возвращает Map<StorageService, CrudService> c совпадающими значениями
+     * в keys и values
+     */
     @Bean
     public Map<StorageService, CrudService> getStorageServiceMap() {
-        return combineLists (storageServiceList, crudServiceList);
+        return combineLists(storageServiceList, crudServiceList);
     }
 
-    Map<StorageService,CrudService> combineLists(List<StorageService> keys, List<CrudService> values) {
+    /**
+     * Вспомогательный метод для конфигурации map
+     * @param keys StorageService
+     * @param values CrudService
+     * @return Map<StorageService, CrudService>
+     */
+    Map<StorageService, CrudService> combineLists(List<StorageService> keys, List<CrudService> values) {
         if (keys.size() > values.size())
-            throw new IllegalArgumentException ("Unable to merge lists. StorageServiceList size must not be larger.");
-        Map<StorageService,CrudService> map = new LinkedHashMap<>();
-        for (int i=0; i<keys.size(); i++) {
+            throw new IllegalArgumentException("Unable to merge lists. StorageServiceList size must not be larger.");
+        Map<StorageService, CrudService> map = new LinkedHashMap<>();
+        for (int i = 0; i < keys.size(); i++) {
             map.put(keys.get(i), values.get(i));
         }
         return map;

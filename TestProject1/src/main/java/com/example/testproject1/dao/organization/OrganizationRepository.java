@@ -2,7 +2,6 @@ package com.example.testproject1.dao.organization;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
-import com.example.testproject1.exception.EntityExistInDataBaseException;
 import com.example.testproject1.mapper.staff.OrganizationMapper;
 import com.example.testproject1.model.staff.Organization;
 import org.slf4j.Logger;
@@ -12,7 +11,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -49,9 +47,9 @@ public class OrganizationRepository implements CrudRepository<Organization> {
     @Override
     public Organization create(Organization organization) {
         if (organization != null) {
-                jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString()
-                        , organization.getFullName(), organization.getShortName(), organization.getSupervisor(), organization.getContactNumber());
-                return organization;
+            jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString()
+                    , organization.getFullName(), organization.getShortName(), organization.getSupervisor(), organization.getContactNumber());
+            return organization;
         } else {
             throw new IllegalArgumentException("Organization не может быть null");
         }
@@ -90,7 +88,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteAll(){
+    public void deleteAll() {
         jdbcTemplate.update(ORGANIZATION_DELETE_ALL_QUERY);
     }
 

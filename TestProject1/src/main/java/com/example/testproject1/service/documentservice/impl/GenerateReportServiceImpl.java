@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -90,6 +89,7 @@ public class GenerateReportServiceImpl implements GenerateReportService {
 
     /**
      * Метод создания json файлов
+     *
      * @param entry map из метода {@link GenerateReportService#saveReportByAuthor()}
      */
     private void writeReportInFile(Map.Entry<Person, List<BaseDocument>> entry) {

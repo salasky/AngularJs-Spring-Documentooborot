@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author smigranov
  */
-@Order(value=2)
+@Order(value = 2)
 @Service
 public class JobStorageService implements StorageService<JobTittle> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentStorageService.class);

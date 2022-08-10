@@ -7,7 +7,7 @@ import java.text.MessageFormat;
  *
  * @author smigranov
  */
-public class UpdateException extends Exception{
+public class UpdateException extends Exception {
     /**
      * сообщение о деталях исключения
      */

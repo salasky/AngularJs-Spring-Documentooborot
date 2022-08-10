@@ -2,7 +2,6 @@ package com.example.testproject1.dao.person;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
-import com.example.testproject1.exception.EntityExistInDataBaseException;
 import com.example.testproject1.mapper.staff.PersonMapper;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
@@ -14,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -61,10 +59,10 @@ public class PersonRepository implements CrudRepository<Person> {
     @Override
     public Person create(Person person) {
         if (person != null) {
-                jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
-                        person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
-                        person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
-                return person;
+            jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
+                    person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
+                    person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
+            return person;
         } else {
             throw new IllegalArgumentException("Person не может быть null");
         }

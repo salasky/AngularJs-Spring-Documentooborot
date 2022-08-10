@@ -3,7 +3,6 @@ package com.example.testproject1.service.dbservice.jobtittleservice;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ import java.util.Optional;
  *
  * @author smigranov
  */
-@Order(value=2)
+@Order(value = 2)
 @Service("JobTittleService")
 public class JobTittleService implements CrudService<JobTittle> {
     private static final Logger LOGGER = LoggerFactory.getLogger(JobTittleService.class);
@@ -73,7 +72,7 @@ public class JobTittleService implements CrudService<JobTittle> {
     @Override
     public JobTittle create(JobTittle jobTittle) throws DocflowRuntimeApplicationException {
         JobTittle jobTittleDB = jobTittleRepository.create(jobTittle);
-        if (jobTittleDB!=null) {
+        if (jobTittleDB != null) {
             LOGGER.info(CREATE_SUCCESS);
             return jobTittleDB;
         }

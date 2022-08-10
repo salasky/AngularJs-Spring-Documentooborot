@@ -3,7 +3,6 @@ package com.example.testproject1.service.dbservice.department;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -22,7 +21,7 @@ import java.util.Optional;
  * @author smigranov
  */
 @Service("DepartmentService")
-@Order(value=3)
+@Order(value = 3)
 public class DepartmentService implements CrudService<Department> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentService.class);

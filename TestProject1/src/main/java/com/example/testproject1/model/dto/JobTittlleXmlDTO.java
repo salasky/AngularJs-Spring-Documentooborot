@@ -1,6 +1,5 @@
 package com.example.testproject1.model.dto;
 
-import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 
 import javax.xml.bind.annotation.XmlElement;

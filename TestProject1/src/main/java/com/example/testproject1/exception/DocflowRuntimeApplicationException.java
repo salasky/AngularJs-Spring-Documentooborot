@@ -1,9 +1,7 @@
 package com.example.testproject1.exception;
 
-import java.text.MessageFormat;
-
 /**
- * Класс исключений для ExceptionHendler
+ * Класс исключений для ExceptionHandler
  *
  * @author smigranov
  */

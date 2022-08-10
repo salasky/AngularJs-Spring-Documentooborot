@@ -3,7 +3,6 @@ package com.example.testproject1.service.dbservice.taskdocument;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -35,7 +34,7 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
     /**
      * Лог при неудачном сохранении
      */
-    private final String CREATE_FAIL="Неудачная попытка сохранения TaskDocument";
+    private final String CREATE_FAIL = "Неудачная попытка сохранения TaskDocument";
     /**
      * Лог при выдаче всех TaskDocument
      */
@@ -71,7 +70,7 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
     @Override
     public TaskDocument create(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
         TaskDocument taskDocumentDB = taskDocumentRepository.create(taskDocument);
-        if (taskDocumentDB!=null) {
+        if (taskDocumentDB != null) {
             LOGGER.info(CREATE_SUCCESS);
             return taskDocumentDB;
         }

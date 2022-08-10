@@ -3,7 +3,6 @@ package com.example.testproject1.service.dbservice.incomingdocument;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -71,8 +70,8 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      */
     @Override
     public IncomingDocument create(IncomingDocument incomingDocument) throws DocflowRuntimeApplicationException {
-    IncomingDocument incomingDocumentDB = incomingDocumentRepository.create(incomingDocument);
-        if (incomingDocumentDB!=null) {
+        IncomingDocument incomingDocumentDB = incomingDocumentRepository.create(incomingDocument);
+        if (incomingDocumentDB != null) {
             LOGGER.info(CREATE_SUCCESS);
             return incomingDocumentDB;
         }

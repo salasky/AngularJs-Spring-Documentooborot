@@ -1,4 +1,5 @@
 package com.example.testproject1.queryholder.basedocumentquery;
+
 /**
  * Класс для хранения SQL запросов BaseDocument
  *

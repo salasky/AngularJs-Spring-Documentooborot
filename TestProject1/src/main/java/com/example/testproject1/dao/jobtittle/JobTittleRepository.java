@@ -69,8 +69,8 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
     @Override
     public JobTittle create(JobTittle jobTittle) {
         if (jobTittle != null) {
-                jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getUuid().toString(), jobTittle.getName());
-                return jobTittle;
+            jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getUuid().toString(), jobTittle.getName());
+            return jobTittle;
         } else {
             throw new IllegalArgumentException("JobTittle не может быть null");
         }
@@ -86,7 +86,7 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
     private void isNotExistElseThrow(JobTittle jobTittle) throws EntityExistInDataBaseException {
         if (existById(jobTittle.getUuid())) {
             throw new EntityExistInDataBaseException(
-                    MessageFormat.format("JobTittle с id {0} уже существует",jobTittle.getUuid().toString()));
+                    MessageFormat.format("JobTittle с id {0} уже существует", jobTittle.getUuid().toString()));
         }
     }
 

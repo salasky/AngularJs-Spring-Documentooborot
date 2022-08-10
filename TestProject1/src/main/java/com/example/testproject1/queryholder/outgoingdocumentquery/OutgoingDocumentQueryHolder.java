@@ -1,4 +1,5 @@
 package com.example.testproject1.queryholder.outgoingdocumentquery;
+
 /**
  * Класс для хранения SQL запросов OutgoingDocument
  *

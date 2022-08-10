@@ -4,17 +4,13 @@ import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.BaseDocumentRepositoryImpl;
 import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.mapper.document.OutgoingDocumentMapper;
-import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -56,11 +52,11 @@ public class OutgoingDocumentRepository extends BaseDocumentRepositoryImpl imple
     @Override
     public OutgoingDocument create(OutgoingDocument outgoingDocument) {
         if (outgoingDocument != null) {
-                super.create(outgoingDocument);
-                jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
-                        outgoingDocument.getSender().getId().toString(),
-                        outgoingDocument.getDeliveryType().toString());
-                return outgoingDocument;
+            super.create(outgoingDocument);
+            jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
+                    outgoingDocument.getSender().getId().toString(),
+                    outgoingDocument.getDeliveryType().toString());
+            return outgoingDocument;
         } else {
             throw new IllegalArgumentException("OutgoingDocument не может быть null");
         }
@@ -88,7 +84,7 @@ public class OutgoingDocumentRepository extends BaseDocumentRepositoryImpl imple
      */
     @Override
     public int update(OutgoingDocument outgoingDocument) {
-        int count=super.update(outgoingDocument);
+        int count = super.update(outgoingDocument);
         return jdbcTemplate.update(OUTGOING_DOCUMENT_UPDATE_QUERY, outgoingDocument.getSender().getId().toString(),
                 outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString()) + count;
     }
@@ -97,7 +93,7 @@ public class OutgoingDocumentRepository extends BaseDocumentRepositoryImpl imple
      * {@inheritDoc}
      */
     @Override
-    public void deleteAll(){
+    public void deleteAll() {
         jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_ALL_QUERY);
     }
 

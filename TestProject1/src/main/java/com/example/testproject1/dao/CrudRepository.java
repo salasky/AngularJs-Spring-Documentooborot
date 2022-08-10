@@ -45,7 +45,6 @@ public interface CrudRepository<T> {
 
     /**
      * Метод удаления всех записей с таблицы
-     *
      */
     void deleteAll();
 

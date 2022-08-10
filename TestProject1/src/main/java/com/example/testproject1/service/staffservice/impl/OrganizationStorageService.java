@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author smigranov
  */
-@Order(value=1)
+@Order(value = 1)
 @Service
 public class OrganizationStorageService implements StorageService<Organization> {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationStorageService.class);

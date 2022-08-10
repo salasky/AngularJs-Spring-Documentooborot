@@ -1,4 +1,5 @@
 package com.example.testproject1.queryholder.incomingdocumentquery;
+
 /**
  * Класс для хранения SQL запросов IncomingDocument сущностей
  *

@@ -7,9 +7,9 @@ import java.text.MessageFormat;
  *
  * @author smigranov
  */
-public class DeleteByIdException extends Exception{
+public class DeleteByIdException extends Exception {
     /**
-     * сообщение о деталях исключения
+     * Сообщение о деталях исключения
      */
     private String messages;
 

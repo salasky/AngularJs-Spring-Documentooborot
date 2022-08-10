@@ -31,7 +31,7 @@ public class TaskDocumentRepositoryTest {
     private CrudRepository<Person> personCrudRepository;
 
     @BeforeAll
-    public static void init( @Autowired XmlToDataBaseImporter xmlToDataBaseImporter){
+    public static void init(@Autowired XmlToDataBaseImporter xmlToDataBaseImporter) {
         xmlToDataBaseImporter.saveStaffInDb();
     }
 
@@ -45,9 +45,9 @@ public class TaskDocumentRepositoryTest {
         Assertions.assertTrue(taskDocumentCrudRepository.getById(uuid.toString()).isPresent());
         TaskDocument taskDocumentDB = taskDocumentCrudRepository.getById(uuid.toString()).get();
 
-        Person person=personCrudRepository.getById(taskDocumentDB.getAuthor().getId().toString()).get();
+        Person person = personCrudRepository.getById(taskDocumentDB.getAuthor().getId().toString()).get();
 
-        Assertions.assertEquals(person,taskDocument.getAuthor());
+        Assertions.assertEquals(person, taskDocument.getAuthor());
 
         taskDocumentDB.setAuthor(taskDocument.getAuthor());
         taskDocumentDB.setResponsible(taskDocument.getResponsible());

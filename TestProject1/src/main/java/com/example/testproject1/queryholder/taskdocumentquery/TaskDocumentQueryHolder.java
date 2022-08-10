@@ -1,4 +1,5 @@
 package com.example.testproject1.queryholder.taskdocumentquery;
+
 /**
  * Класс для хранения SQL запросов TaskDocument
  *

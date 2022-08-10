@@ -31,7 +31,7 @@ public class OutgoingDocumentRepositoryTest {
     private CrudRepository<Person> personCrudRepository;
 
     @BeforeAll
-    public static void init( @Autowired XmlToDataBaseImporterImpl importXmlmpl){
+    public static void init(@Autowired XmlToDataBaseImporterImpl importXmlmpl) {
         importXmlmpl.saveStaffInDb();
     }
 

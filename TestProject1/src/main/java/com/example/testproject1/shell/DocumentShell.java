@@ -53,10 +53,11 @@ public class DocumentShell {
         LOGGER.info("Попытка сформировать отчет по документам");
         generateReportService.saveReportByAuthor();
     }
+
     @ShellMethod
-    public void save(){
-        IncomingDocument incomingDocument =new IncomingDocument();
-        Random random=new Random();
+    public void save() {
+        IncomingDocument incomingDocument = new IncomingDocument();
+        Random random = new Random();
         incomingDocument.setId(UUID.randomUUID());
         incomingDocument.setText("text");
         incomingDocument.setName("name");

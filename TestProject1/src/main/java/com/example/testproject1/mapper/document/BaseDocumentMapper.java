@@ -65,7 +65,7 @@ public class BaseDocumentMapper implements RowMapper<BaseDocument> {
         person.setSecondName(rs.getString(PERSON_SECOND_NAME));
         person.setLastName(rs.getString(PERSON_LAST_NAME));
 
-        return   BaseDocument.newBuilder().setDocId(UUID.fromString(rs.getString(BASE_DOCUMENT_ID)))
+        return BaseDocument.newBuilder().setDocId(UUID.fromString(rs.getString(BASE_DOCUMENT_ID)))
                 .setDocName(rs.getString(BASE_DOCUMENT_NAME))
                 .setDocText(rs.getString(BASE_DOCUMENT_TEXT))
                 .setDocRegNumber(rs.getLong(BASE_DOCUMENT_NUMBER))

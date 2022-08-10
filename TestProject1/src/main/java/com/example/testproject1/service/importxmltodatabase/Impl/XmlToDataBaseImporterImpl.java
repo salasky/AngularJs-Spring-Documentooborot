@@ -21,17 +21,18 @@ public class XmlToDataBaseImporterImpl implements XmlToDataBaseImporter {
     private static final Logger LOGGER = LoggerFactory.getLogger(XmlToDataBaseImporterImpl.class);
     @Autowired
     private XmlImportConfiguration xmlImportConfiguration;
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public void saveStaffInDb(){
+    public void saveStaffInDb() {
         xmlImportConfiguration.getStorageServiceMap().forEach(this::save);
     }
 
-    private void save(StorageService storageService,CrudService crudService){
-        for (Object obj:storageService.getList()
-             ) {
+    private void save(StorageService storageService, CrudService crudService) {
+        for (Object obj : storageService.getList()
+        ) {
             try {
                 crudService.create(obj);
             } catch (DocflowRuntimeApplicationException e) {

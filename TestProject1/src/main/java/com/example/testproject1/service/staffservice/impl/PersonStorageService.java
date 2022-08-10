@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author smigranov
  */
-@Order(value=4)
+@Order(value = 4)
 @Service
 public class PersonStorageService implements StorageService<Person> {
     private static final Logger LOGGER = LoggerFactory.getLogger(PersonStorageService.class);

@@ -18,8 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.MessageFormat;
-
 /**
  * Класс реализующий интерфейс {@link GenerateDocumentService}
  * Рандомно создает документ трех классов: {@link TaskDocument},{@link OutgoingDocument},{@link IncomingDocument}
@@ -48,12 +46,13 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
     private XmlToDataBaseImporter xmlToDataBaseImporter;
     @Autowired
     private CrudRepository<Person> personCrudRepository;
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void createAndSaveDocument(Integer count) {
-        if(personCrudRepository.getAll().size()==0){
+        if (personCrudRepository.getAll().size() == 0) {
             xmlToDataBaseImporter.saveStaffInDb();
         }
         LOGGER.info("\n         ---------------------Сохранение в базу данных---------------------");

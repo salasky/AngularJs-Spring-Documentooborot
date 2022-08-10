@@ -4,18 +4,13 @@ import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.BaseDocumentRepositoryImpl;
 import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.mapper.document.IncomingDocumentMapper;
-import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
-import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -58,12 +53,12 @@ public class IncomingDocumentRepository extends BaseDocumentRepositoryImpl imple
     @Override
     public IncomingDocument create(IncomingDocument incomingDocument) {
         if (incomingDocument != null) {
-                super.create(incomingDocument);
-                jdbcTemplate.update(INCOMING_DOCUMENT_CREATE_QUERY, incomingDocument.getId().toString(),
-                        incomingDocument.getSender().getId().toString(),
-                        incomingDocument.getDestination().getId().toString(),
-                        incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
-                return incomingDocument;
+            super.create(incomingDocument);
+            jdbcTemplate.update(INCOMING_DOCUMENT_CREATE_QUERY, incomingDocument.getId().toString(),
+                    incomingDocument.getSender().getId().toString(),
+                    incomingDocument.getDestination().getId().toString(),
+                    incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
+            return incomingDocument;
         } else {
             throw new IllegalArgumentException("IncomingDocument не может быть null");
         }

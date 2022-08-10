@@ -2,7 +2,6 @@ package com.example.testproject1.dao.department;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
-import com.example.testproject1.exception.EntityExistInDataBaseException;
 import com.example.testproject1.mapper.staff.DepartmentMapper;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Organization;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -71,10 +69,10 @@ public class DepartmentRepository implements CrudRepository<Department> {
     @Override
     public Department create(Department department) {
         if (department != null) {
-                jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
-                        , department.getFullName(), department.getShortName(), department.getSupervisor()
-                        , department.getContactNumber(), department.getOrganization().getId().toString());
-                return department;
+            jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
+                    , department.getFullName(), department.getShortName(), department.getSupervisor()
+                    , department.getContactNumber(), department.getOrganization().getId().toString());
+            return department;
         } else {
             throw new IllegalArgumentException("Department не может быть null");
         }
