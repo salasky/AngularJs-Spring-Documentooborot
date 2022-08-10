@@ -3,7 +3,7 @@ package com.example.testproject1;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.importxmltodatabase.Impl.XmllToDataBaseImporterImpl;
+import com.example.testproject1.service.importxmltodatabase.Impl.XmlToDataBaseImporterImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +28,7 @@ public class IncomingDocumentRepositoryTest {
 
 
     @BeforeAll
-    public static void init( @Autowired XmllToDataBaseImporterImpl importXmlmpl){
+    public static void init( @Autowired XmlToDataBaseImporterImpl importXmlmpl){
         importXmlmpl.saveStaffInDb();
     }
 

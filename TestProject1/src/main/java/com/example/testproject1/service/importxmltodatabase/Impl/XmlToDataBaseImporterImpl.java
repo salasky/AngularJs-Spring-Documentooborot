@@ -8,11 +8,8 @@ import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.importxmltodatabase.XmlToDataBaseImporter;
 import com.example.testproject1.service.staffservice.StorageService;
 
-import liquibase.pro.packaged.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Класс сохранения данных из XML в базу данных
@@ -20,7 +17,7 @@ import java.util.List;
  * @author smigranov
  */
 @Service
-public class XmllToDataBaseImporterImpl implements XmlToDataBaseImporter {
+public class XmlToDataBaseImporterImpl implements XmlToDataBaseImporter {
 
     /**
      * Бин CrudService Person
