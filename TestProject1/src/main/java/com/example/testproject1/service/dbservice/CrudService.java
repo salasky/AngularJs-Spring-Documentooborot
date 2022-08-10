@@ -1,5 +1,7 @@
 package com.example.testproject1.service.dbservice;
 
+import com.example.testproject1.exception.UpdateException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +40,7 @@ public interface CrudService<T> {
      * @param object объект указанного класса
      * @return возвращает null или объект
      */
-    Optional<T> update(T object);
+    T update(T object) throws UpdateException;
 
     /**
      * Метод удаления всех записей с таблицы

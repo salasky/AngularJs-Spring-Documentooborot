@@ -42,13 +42,19 @@ public class GenerateReportServiceImpl implements GenerateReportService {
      */
     @Autowired
     private ObjectMapper objectMapper;
-
+    /**
+     * Бин CrudService
+     */
     @Autowired
     private CrudService<TaskDocument> taskDocumentService;
-
+    /**
+     * Бин CrudService
+     */
     @Autowired
     private CrudService<IncomingDocument> incomingDocumentService;
-
+    /**
+     * Бин CrudService
+     */
     @Autowired
     private CrudService<OutgoingDocument> outgoingDocumentService;
 
@@ -82,7 +88,11 @@ public class GenerateReportServiceImpl implements GenerateReportService {
         }
     }
 
-    public void writeReportInFile(Map.Entry<Person, List<BaseDocument>> entry) {
+    /**
+     * Метод создания json файлов
+     * @param entry map из метода {@link GenerateReportService#saveReportByAuthor()}
+     */
+    private void writeReportInFile(Map.Entry<Person, List<BaseDocument>> entry) {
         ReportForJsonDTO reportForJsonDTO = ReportForJsonDTO.newBuilder()
                 .setPerson(entry.getKey())
                 .setDocumentList(entry.getValue())

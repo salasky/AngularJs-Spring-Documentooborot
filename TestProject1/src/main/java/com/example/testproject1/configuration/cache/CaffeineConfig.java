@@ -36,7 +36,7 @@ public class CaffeineConfig {
      */
     @Bean
     public CaffeineCacheManager cacheManager() {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager("person", "department", "organization");
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager("person", "department", "organization","job");
         cacheManager.setCaffeine(caffeineCacheBuilder());
         return cacheManager;
     }

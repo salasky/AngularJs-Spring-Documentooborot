@@ -75,16 +75,6 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
     public TaskDocument mapRow(ResultSet rs, int rowNum) throws SQLException {
         //Мапим baseDocument к taskDocument
         BaseDocument baseDocument = baseDocumentMapper.mapRow(rs, rowNum);
-        TaskDocument taskDocument = new TaskDocument();
-        taskDocument.setOutDate(rs.getTimestamp(TASK_DOCUMENT_OUT_DATE));
-        taskDocument.setExecPeriod(rs.getString(TASK_DOCUMENT_EXEC_PERIOD));
-        taskDocument.setSignOfControl(rs.getBoolean(TASK_DOCUMENT_SIGN_OF_CONTROL));
-        taskDocument.setId(baseDocument.getId());
-        taskDocument.setName(baseDocument.getName());
-        taskDocument.setText(baseDocument.getText());
-        taskDocument.setAuthor(baseDocument.getAuthor());
-        taskDocument.setRegNumber(baseDocument.getRegNumber());
-        taskDocument.setCreatingDate(baseDocument.getCreatingDate());
 
         //Мапим Person(responsible) к taskDocument
         Person response = new Person();
@@ -92,7 +82,6 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
         response.setFirstName(rs.getString(PERSON_RESPONSE_FIRST_NAME));
         response.setSecondName(rs.getString(PERSON_RESPONSE_SECOND_NAME));
         response.setLastName(rs.getString(PERSON_RESPONSE_LAST_NAME));
-        taskDocument.setResponsible(response);
 
         //Мапим Person(control_person) к taskDocument
         Person controlPerson = new Person();
@@ -101,7 +90,17 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
         controlPerson.setSecondName(rs.getString(PERSON_CONTROL_SECOND_NAME));
         controlPerson.setLastName(rs.getString(PERSON_CONTROL_LAST_NAME));
 
-        taskDocument.setControlPerson(controlPerson);
-        return taskDocument;
+        return (TaskDocument) TaskDocument.newBuilder()
+                .setTaskDate(rs.getTimestamp(TASK_DOCUMENT_OUT_DATE))
+                .setTaskExecPeriod(rs.getString(TASK_DOCUMENT_EXEC_PERIOD))
+                .setTaskSignOfControl(rs.getBoolean(TASK_DOCUMENT_SIGN_OF_CONTROL))
+                .setTaskResponsPerson(response)
+                .setTaskControlPerson(controlPerson)
+                .setDocId(baseDocument.getId())
+                .setDocName(baseDocument.getName())
+                .setDocText(baseDocument.getText())
+                .setDocAuthor(baseDocument.getAuthor())
+                .setDocRegNumber(baseDocument.getRegNumber())
+                .setDocDate(baseDocument.getCreatingDate()).build();
     }
 }

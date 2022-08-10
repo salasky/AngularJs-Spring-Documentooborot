@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jobTittlleXmlDTO>
+    <jobList>
+        <job id="00210db1-6e32-4096-b662-85d8b4aeaebb">
+            <jobTittleName>JS Junior</jobTittleName>
+        </job>
+        <job id="0b75a556-9b7e-4f89-b2f8-d1a10e991a0a">
+            <jobTittleName>Java Junior</jobTittleName>
+        </job>
+        <job id="f24d321e-6b78-4cf8-bdab-892e0d34fd63">
+            <jobTittleName>Hr manager</jobTittleName>
+        </job>
+        <job id="26648939-04fd-4359-8c55-4a7e9b21a6e9">
+            <jobTittleName>Product Manager</jobTittleName>
+        </job>
+    </jobList>
+</jobTittlleXmlDTO>

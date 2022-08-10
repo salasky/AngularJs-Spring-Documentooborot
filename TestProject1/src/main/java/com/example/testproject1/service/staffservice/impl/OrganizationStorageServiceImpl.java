@@ -4,7 +4,7 @@ import com.example.testproject1.configuration.cache.CaffeineConfig;
 import com.example.testproject1.model.dto.OrganizationListXmlDTO;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.jaxb.JaxbReader;
-import com.example.testproject1.service.staffservice.OrganizationStorageService;
+import com.example.testproject1.service.staffservice.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,12 @@ import java.util.List;
  * @author smigranov
  */
 @Service
-public class OrganizationStorageServiceImpl implements OrganizationStorageService {
+public class OrganizationStorageServiceImpl implements StorageService<Organization> {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationStorageServiceImpl.class);
     /**
      * Имя файла для jaxb анмаршалинга
      */
-    private final String FILE_NAME = "organization.xml";
+    private final String FILE_NAME = "organizations.xml";
     /**
      * Бин для чтения информации из xml файла
      */
@@ -37,7 +37,7 @@ public class OrganizationStorageServiceImpl implements OrganizationStorageServic
      */
     @Cacheable(cacheNames = "organization")
     @Override
-    public List<Organization> getOrganizationList() {
+    public List<Organization> getList() {
         LOGGER.info("Begin find Organization ");
         OrganizationListXmlDTO organizationListXmlDTO = jaxbReader.jaxbXMLToObject(FILE_NAME);
         List<Organization> organizationList = organizationListXmlDTO.getOrganizationList();

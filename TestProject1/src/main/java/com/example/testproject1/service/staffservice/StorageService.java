@@ -9,11 +9,11 @@ import java.util.List;
  *
  * @author smigranov
  */
-public interface DepartmentStorageService {
+public interface StorageService<T> {
     /**
      * Метод получения сохраненных department
      *
-     * @return объект {@link List} содержащий объекты класса {@link Department}
+     * @return объект {@link List} содержащий объекты из xml
      */
-    List<Department> getDepartmentList();
+    List<T> getList();
 }

@@ -4,7 +4,7 @@ import com.example.testproject1.configuration.cache.CaffeineConfig;
 import com.example.testproject1.model.dto.DepartmentListXmlDTO;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.jaxb.JaxbReader;
-import com.example.testproject1.service.staffservice.DepartmentStorageService;
+import com.example.testproject1.service.staffservice.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +19,18 @@ import java.util.List;
  * @author smigranov
  */
 @Service
-public class DepartmentStorageServiceImpl implements DepartmentStorageService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentStorageServiceImpl.class);
+public class StorageServiceImpl implements StorageService<Department> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(StorageServiceImpl.class);
     /**
      * Имя файла для jaxb анмаршалинга
      */
-    private final String FILE_NAME = "department.xml";
+    private final String FILE_NAME = "departments.xml";
     /**
      * Бин для чтения информации из xml файла
      */
     @Autowired
     private JaxbReader jaxbReader;
+
 
     /**
      * {@inheritDoc}
@@ -37,7 +38,7 @@ public class DepartmentStorageServiceImpl implements DepartmentStorageService {
      */
     @Cacheable(cacheNames = "department")
     @Override
-    public List<Department> getDepartmentList() {
+    public List<Department> getList() {
         LOGGER.info("Begin find Department ");
         DepartmentListXmlDTO departmentListXmlDTO = jaxbReader.jaxbXMLToObject(FILE_NAME);
         List<Department> departmentList = departmentListXmlDTO.getDepartmentList();

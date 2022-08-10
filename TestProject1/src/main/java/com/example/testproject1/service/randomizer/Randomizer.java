@@ -2,7 +2,7 @@ package com.example.testproject1.service.randomizer;
 
 import com.example.testproject1.model.documentenum.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Person;
-import com.example.testproject1.service.staffservice.PersonStorageService;
+import com.example.testproject1.service.staffservice.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class Randomizer {
      * Бин для получения списка пользователей
      */
     @Autowired
-    private PersonStorageService personStorageService;
+    private StorageService<Person> personStorageService;
     /**
      * Лист названий документов из application.yaml
      */
@@ -51,7 +51,7 @@ public class Randomizer {
      */
     @PostConstruct
     private void postConstruct() {
-        personList = personStorageService.getPersonList();
+        personList = personStorageService.getList();
         random = new Random();
     }
 

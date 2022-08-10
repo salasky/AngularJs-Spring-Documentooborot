@@ -4,7 +4,9 @@ import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.docfactory.TaskDocumentFactory;
+import com.example.testproject1.service.importxmltodatabase.ImportXml;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,23 +29,28 @@ public class TaskDocumentRepositoryTest {
     @Autowired
     private CrudRepository<Person> personCrudRepository;
 
+    @BeforeAll
+    public static void init( @Autowired ImportXml importXml){
+        importXml.saveStaffInDb();
+    }
+
     @DisplayName("TaskDocumentRepository create test successful")
     @Test
     void taskDocumentRepositoryCreateTest() {
         TaskDocument taskDocument = (TaskDocument) taskDocumentFactory.create();
+
         UUID uuid = taskDocument.getId();
         taskDocumentCrudRepository.create(taskDocument);
         Assertions.assertTrue(taskDocumentCrudRepository.getById(uuid.toString()).isPresent());
         TaskDocument taskDocumentDB = taskDocumentCrudRepository.getById(uuid.toString()).get();
-        Assertions.assertTrue(personCrudRepository.getById(taskDocumentDB.getAuthor().getId().toString()).isPresent());
-        Person author = personCrudRepository.getById(taskDocumentDB.getAuthor().getId().toString()).get();
-        Assertions.assertTrue(personCrudRepository.getById(taskDocumentDB.getResponsible().getId().toString()).isPresent());
-        Person responsible = personCrudRepository.getById(taskDocumentDB.getResponsible().getId().toString()).get();
-        Assertions.assertTrue(personCrudRepository.getById(taskDocumentDB.getControlPerson().getId().toString()).isPresent());
-        Person controlPerson = personCrudRepository.getById(taskDocumentDB.getControlPerson().getId().toString()).get();
-        taskDocumentDB.setAuthor(author);
-        taskDocumentDB.setResponsible(responsible);
-        taskDocumentDB.setControlPerson(controlPerson);
+
+        Person person=personCrudRepository.getById(taskDocumentDB.getAuthor().getId().toString()).get();
+
+        Assertions.assertEquals(person,taskDocument.getAuthor());
+
+        taskDocumentDB.setAuthor(taskDocument.getAuthor());
+        taskDocumentDB.setResponsible(taskDocument.getResponsible());
+        taskDocumentDB.setControlPerson(taskDocument.getControlPerson());
         Assertions.assertEquals(taskDocument, taskDocumentDB);
     }
 

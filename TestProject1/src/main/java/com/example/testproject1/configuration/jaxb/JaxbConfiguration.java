@@ -1,9 +1,11 @@
 package com.example.testproject1.configuration.jaxb;
 
 import com.example.testproject1.model.dto.DepartmentListXmlDTO;
+import com.example.testproject1.model.dto.JobTittlleXmlDTO;
 import com.example.testproject1.model.dto.OrganizationListXmlDTO;
 import com.example.testproject1.model.dto.PersonListXmlDTO;
 import com.example.testproject1.model.staff.Department;
+import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +31,7 @@ public class JaxbConfiguration {
     public JAXBContext getContext() {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(PersonListXmlDTO.class, DepartmentListXmlDTO.class,
-                    OrganizationListXmlDTO.class, Person.class, Department.class, Organization.class);
+                    OrganizationListXmlDTO.class, Person.class, Department.class, Organization.class, JobTittle.class, JobTittlleXmlDTO.class);
             return jaxbContext;
         } catch (JAXBException e) {
             throw new RuntimeException(e);

@@ -1,6 +1,7 @@
 package com.example.testproject1.service.dbservice.outgoingdocument;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -98,15 +99,14 @@ public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<OutgoingDocument> update(OutgoingDocument outgoingDocument) {
+    public OutgoingDocument update(OutgoingDocument outgoingDocument) throws UpdateException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у OutgoingDocument с id {0}", outgoingDocument.getId().toString()));
         int updateCount = outgoingDocumentRepository.update(outgoingDocument);
         if (updateCount > 0) {
             LOGGER.info(UPDATE_SUCCESS);
-            return Optional.ofNullable(outgoingDocument);
+            return outgoingDocument;
         }
-        LOGGER.error(UPDATE_FAIL);
-        return Optional.empty();
+        throw new UpdateException(UPDATE_FAIL);
     }
 
     /**

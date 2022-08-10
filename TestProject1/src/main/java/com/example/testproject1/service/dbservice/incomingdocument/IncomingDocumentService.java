@@ -1,6 +1,7 @@
 package com.example.testproject1.service.dbservice.incomingdocument;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -99,15 +100,14 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<IncomingDocument> update(IncomingDocument incomingDocument) {
+    public IncomingDocument update(IncomingDocument incomingDocument) throws UpdateException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у IncomingDocument с id {0}", incomingDocument.getId().toString()));
         int updateCount = incomingDocumentRepository.update(incomingDocument);
         if (updateCount > 0) {
             LOGGER.info(UPDATE_SUCCESS);
-            return Optional.ofNullable(incomingDocument);
+            return incomingDocument;
         }
-        LOGGER.error(UPDATE_FAIL);
-        return Optional.empty();
+        throw new UpdateException(UPDATE_FAIL);
     }
 
     /**

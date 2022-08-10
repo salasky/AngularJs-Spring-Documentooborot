@@ -73,23 +73,12 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
         //Мапим baseDocument к incomingDocument
         BaseDocument baseDocument = baseDocumentMapper.mapRow(rs, rowNum);
 
-        IncomingDocument incomingDocument = new IncomingDocument();
-        incomingDocument.setNumber(rs.getLong(INCOMING_DOCUMENT_NUMBER));
-        incomingDocument.setDateOfRegistration(rs.getTimestamp(INCOMING_DOCUMENT_DATE_OF_REGISTRATION));
-        incomingDocument.setId(baseDocument.getId());
-        incomingDocument.setName(baseDocument.getName());
-        incomingDocument.setText(baseDocument.getText());
-        incomingDocument.setAuthor(baseDocument.getAuthor());
-        incomingDocument.setRegNumber(baseDocument.getRegNumber());
-        incomingDocument.setCreatingDate(baseDocument.getCreatingDate());
-
         //Мапим Person(sender) к incomingDocument
         Person sender = new Person();
         sender.setId(UUID.fromString(rs.getString(PERSON_SENDER_ID)));
         sender.setFirstName(rs.getString(PERSON_SENDER_FIRST_NAME));
         sender.setSecondName(rs.getString(PERSON_SENDER_SECOND_NAME));
         sender.setLastName(rs.getString(PERSON_SENDER_LAST_NAME));
-        incomingDocument.setSender(sender);
 
         //Мапим Person(destination) к incomingDocument
         Person destination = new Person();
@@ -98,8 +87,16 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
         destination.setSecondName(rs.getString(PERSON_DESTINATION_SECOND_NAME));
         destination.setLastName(rs.getString(PERSON_DESTINATION_LAST_NAME));
 
-        incomingDocument.setDestination(destination);
-
-        return incomingDocument;
+        return (IncomingDocument) IncomingDocument.newBuilder()
+                .setIncomingDocumentNumber(rs.getLong(INCOMING_DOCUMENT_NUMBER))
+                .setIncomingDocumentDate(rs.getTimestamp(INCOMING_DOCUMENT_DATE_OF_REGISTRATION))
+                .setIncomingDestination(destination)
+                .setIncomingSender(sender)
+                .setDocId(baseDocument.getId())
+                .setDocName(baseDocument.getName())
+                .setDocText(baseDocument.getText())
+                .setDocAuthor(baseDocument.getAuthor())
+                .setDocRegNumber(baseDocument.getRegNumber())
+                .setDocDate(baseDocument.getCreatingDate()).build();
     }
 }

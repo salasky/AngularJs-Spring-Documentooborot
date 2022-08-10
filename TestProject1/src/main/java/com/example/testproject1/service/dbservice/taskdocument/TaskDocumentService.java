@@ -1,6 +1,7 @@
 package com.example.testproject1.service.dbservice.taskdocument;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -94,15 +95,14 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<TaskDocument> update(TaskDocument taskDocument) {
+    public TaskDocument update(TaskDocument taskDocument) throws UpdateException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у TaskDocument с id {0}", taskDocument.getId().toString()));
         int updateCount = taskDocumentRepository.update(taskDocument);
         if (updateCount > 0) {
             LOGGER.info(UPDATE_SUCCESS);
-            return Optional.ofNullable(taskDocument);
+            return taskDocument;
         }
-        LOGGER.error(UPDATE_FAIL);
-        return Optional.empty();
+        throw new UpdateException(UPDATE_FAIL);
     }
 
     /**

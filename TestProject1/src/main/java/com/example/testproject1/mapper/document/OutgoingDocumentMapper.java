@@ -52,14 +52,6 @@ public class OutgoingDocumentMapper implements RowMapper<OutgoingDocument> {
     public OutgoingDocument mapRow(ResultSet rs, int rowNum) throws SQLException {
         //Мапим baseDocument к incomingDocument
         BaseDocument baseDocument = baseDocumentMapper.mapRow(rs, rowNum);
-        OutgoingDocument outgoingDocument = new OutgoingDocument();
-        outgoingDocument.setDeliveryType(DocumentDeliveryType.valueOf(rs.getString(OUTGOING_DELIVERY_TYPE)));
-        outgoingDocument.setId(baseDocument.getId());
-        outgoingDocument.setName(baseDocument.getName());
-        outgoingDocument.setText(baseDocument.getText());
-        outgoingDocument.setAuthor(baseDocument.getAuthor());
-        outgoingDocument.setRegNumber(baseDocument.getRegNumber());
-        outgoingDocument.setCreatingDate(baseDocument.getCreatingDate());
 
         //Мапим Person(sender) к outgoingDocument
         Person sender = new Person();
@@ -68,8 +60,14 @@ public class OutgoingDocumentMapper implements RowMapper<OutgoingDocument> {
         sender.setSecondName(rs.getString(PERSON_SENDER_SECOND_NAME));
         sender.setLastName(rs.getString(PERSON_SENDER_LAST_NAME));
 
-        outgoingDocument.setSender(sender);
-
-        return outgoingDocument;
+        return  (OutgoingDocument) OutgoingDocument.newBuilder()
+                .setDocDeliveryType(DocumentDeliveryType.valueOf(rs.getString(OUTGOING_DELIVERY_TYPE)))
+                .setDocSender(sender)
+                .setDocId(baseDocument.getId())
+                .setDocName(baseDocument.getName())
+                .setDocText(baseDocument.getText())
+                .setDocAuthor(baseDocument.getAuthor())
+                .setDocRegNumber(baseDocument.getRegNumber())
+                .setDocDate(baseDocument.getCreatingDate()).build();
     }
 }

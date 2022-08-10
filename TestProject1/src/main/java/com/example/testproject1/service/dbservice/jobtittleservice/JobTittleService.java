@@ -1,6 +1,7 @@
 package com.example.testproject1.service.dbservice.jobtittleservice;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -98,15 +99,14 @@ public class JobTittleService implements CrudService<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<JobTittle> update(JobTittle jobTittle) {
+    public JobTittle update(JobTittle jobTittle) throws UpdateException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у JobTittle с id {0}", jobTittle.getUuid().toString()));
         int updateCount = jobTittleRepository.update(jobTittle);
         if (updateCount == 1) {
             LOGGER.info(UPDATE_SUCCESS);
-            return Optional.ofNullable(jobTittle);
+            return jobTittle;
         }
-        LOGGER.error(UPDATE_FAIL);
-        return Optional.empty();
+        throw new UpdateException(UPDATE_FAIL);
     }
 
     /**

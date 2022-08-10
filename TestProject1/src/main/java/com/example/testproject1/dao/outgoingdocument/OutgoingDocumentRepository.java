@@ -1,7 +1,7 @@
 package com.example.testproject1.dao.outgoingdocument;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.dao.basedocument.BaseDocumentRepository;
+import com.example.testproject1.dao.basedocument.BaseDocumentRepositoryImpl;
 import com.example.testproject1.mapper.document.OutgoingDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
@@ -31,8 +31,8 @@ import static com.example.testproject1.queryholder.outgoingdocumentquery.Outgoin
  * @author smigranov
  */
 @Repository("OutgoingDocumentRepository")
-public class OutgoingDocumentRepository implements CrudRepository<OutgoingDocument> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OutgoingDocumentRepository.class);
+public class OutgoingDocumentRepository extends BaseDocumentRepositoryImpl implements CrudRepository<OutgoingDocument> {
+
     /**
      * Бин JdbcTemplate
      */
@@ -43,11 +43,6 @@ public class OutgoingDocumentRepository implements CrudRepository<OutgoingDocume
      */
     @Autowired
     private OutgoingDocumentMapper outgoingDocumentMapper;
-    /**
-     * Сервис для работы с {@link BaseDocument}
-     */
-    @Autowired
-    private BaseDocumentRepository baseDocumentRepository;
     /**
      * Сервис для работы с {@link Person}
      */
@@ -60,15 +55,9 @@ public class OutgoingDocumentRepository implements CrudRepository<OutgoingDocume
     @Override
     public OutgoingDocument create(OutgoingDocument outgoingDocument) {
         if (outgoingDocument != null) {
-                BaseDocument baseDocument = new BaseDocument();
-                baseDocument.setId(outgoingDocument.getId());
-                baseDocument.setName(outgoingDocument.getName());
-                baseDocument.setText(outgoingDocument.getText());
-                baseDocument.setRegNumber(outgoingDocument.getRegNumber());
-                baseDocument.setCreatingDate(outgoingDocument.getCreatingDate());
-                baseDocument.setAuthor(outgoingDocument.getAuthor());
-                baseDocumentRepository.create(baseDocument);
-                personService.create(outgoingDocument.getSender());
+
+                super.create(outgoingDocument);
+
                 jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
                         outgoingDocument.getSender().getId().toString(),
                         outgoingDocument.getDeliveryType().toString());
@@ -98,9 +87,9 @@ public class OutgoingDocumentRepository implements CrudRepository<OutgoingDocume
      */
     @Override
     public int update(OutgoingDocument outgoingDocument) {
-        int baseDocumentCount = baseDocumentRepository.update(outgoingDocument);
+        int count=super.update(outgoingDocument);
         return jdbcTemplate.update(OUTGOING_DOCUMENT_UPDATE_QUERY, outgoingDocument.getSender().getId().toString(),
-                outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString()) + baseDocumentCount;
+                outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString()) + count;
     }
 
     /**

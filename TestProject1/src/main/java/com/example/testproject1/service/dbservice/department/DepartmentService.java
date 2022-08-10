@@ -1,6 +1,7 @@
 package com.example.testproject1.service.dbservice.department;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.UpdateException;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -99,15 +100,14 @@ public class DepartmentService implements CrudService<Department> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<Department> update(Department department) {
+    public Department update(Department department) throws UpdateException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у Department с id {0}", department.getId().toString()));
         int updateCount = departmentRepository.update(department);
         if (updateCount == 1) {
             LOGGER.info(UPDATE_SUCCESS);
-            return Optional.ofNullable(department);
+            return department;
         }
-        LOGGER.error(UPDATE_FAIL);
-        return Optional.empty();
+        throw new UpdateException(UPDATE_FAIL);
     }
 
     /**

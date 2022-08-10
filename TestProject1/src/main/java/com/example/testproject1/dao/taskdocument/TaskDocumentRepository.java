@@ -1,9 +1,10 @@
 package com.example.testproject1.dao.taskdocument;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.dao.basedocument.BaseDocumentRepository;
+import com.example.testproject1.dao.basedocument.BaseDocumentRepositoryImpl;
 import com.example.testproject1.mapper.document.TaskDocumentMapper;
 import com.example.testproject1.model.document.BaseDocument;
+import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -31,8 +32,8 @@ import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumen
  * @author smigranov
  */
 @Repository("TaskDocumentRepository")
-public class TaskDocumentRepository implements CrudRepository<TaskDocument> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentRepository.class);
+public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implements CrudRepository<TaskDocument> {
+
     /**
      * Бин JdbcTemplate
      */
@@ -43,11 +44,7 @@ public class TaskDocumentRepository implements CrudRepository<TaskDocument> {
      */
     @Autowired
     private TaskDocumentMapper taskDocumentMapper;
-    /**
-     * Сервис для работы с {@link BaseDocument}
-     */
-    @Autowired
-    private BaseDocumentRepository baseDocumentRepository;
+
     /**
      * Сервис для работы с {@link Person}
      */
@@ -60,16 +57,8 @@ public class TaskDocumentRepository implements CrudRepository<TaskDocument> {
     @Override
     public TaskDocument create(TaskDocument taskDocument) {
         if (taskDocument != null) {
-                BaseDocument baseDocument = new BaseDocument();
-                baseDocument.setId(taskDocument.getId());
-                baseDocument.setName(taskDocument.getName());
-                baseDocument.setText(taskDocument.getText());
-                baseDocument.setRegNumber(taskDocument.getRegNumber());
-                baseDocument.setCreatingDate(taskDocument.getCreatingDate());
-                baseDocument.setAuthor(taskDocument.getAuthor());
-                baseDocumentRepository.create(baseDocument);
-                personService.create(taskDocument.getControlPerson());
-                personService.create(taskDocument.getResponsible());
+                super.create(taskDocument);
+
                 jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate()
                         , taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
                         taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
@@ -99,7 +88,7 @@ public class TaskDocumentRepository implements CrudRepository<TaskDocument> {
      */
     @Override
     public int update(TaskDocument taskDocument) {
-        int baseDocumentCount = baseDocumentRepository.update(taskDocument);
+        int baseDocumentCount = super.update(taskDocument);
         return jdbcTemplate.update(TASK_DOCUMENT_UPDATE_QUERY, taskDocument.getOutDate(), taskDocument.getExecPeriod(),
                 taskDocument.getResponsible().getId().toString(), taskDocument.getSignOfControl(),
                 taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString()) + baseDocumentCount;

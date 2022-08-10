@@ -61,8 +61,7 @@ public class PersonRepository implements CrudRepository<Person> {
     public Person create(Person person) {
         if (person != null) {
                 isNotExistElseThrow(person);
-                jobTittleService.create(person.getJobTittle());
-                departmentService.create(person.getDepartment());
+
                 jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
                         person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
                         person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());

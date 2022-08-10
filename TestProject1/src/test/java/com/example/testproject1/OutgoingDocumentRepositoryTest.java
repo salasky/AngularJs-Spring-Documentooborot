@@ -4,7 +4,9 @@ import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.docfactory.OutgoingDocumentFactory;
+import com.example.testproject1.service.importxmltodatabase.Impl.ImportXmlmpl;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,11 @@ public class OutgoingDocumentRepositoryTest {
 
     @Autowired
     private CrudRepository<Person> personCrudRepository;
+
+    @BeforeAll
+    public static void init( @Autowired ImportXmlmpl importXmlmpl){
+        importXmlmpl.saveStaffInDb();
+    }
 
     @DisplayName("OutgoingDocumentRepository create test successful")
     @Test
