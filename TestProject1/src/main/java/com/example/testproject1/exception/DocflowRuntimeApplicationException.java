@@ -1,5 +1,8 @@
 package com.example.testproject1.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 /**
  * Класс исключений для ExceptionHandler
  *
