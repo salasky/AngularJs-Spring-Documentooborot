@@ -24,7 +24,7 @@ public interface CrudService<T> {
      *
      * @return возвращает List<> объектов указанного типа
      */
-    List<T> getall();
+    List<T> getAll();
 
     /**
      * Метод получения объекта указанного типа из базы по id

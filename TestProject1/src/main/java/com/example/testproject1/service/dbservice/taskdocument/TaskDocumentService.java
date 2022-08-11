@@ -48,7 +48,7 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
      */
     @Transactional
     @Override
-    public List<TaskDocument> getall() {
+    public List<TaskDocument> getAll() {
         LOGGER.info("Попытка выдачи всех TaskDocument");
         return taskDocumentRepository.getAll();
     }

@@ -51,7 +51,7 @@ public class DepartmentService implements CrudService<Department> {
      */
     @Transactional
     @Override
-    public List<Department> getall() {
+    public List<Department> getAll() {
         LOGGER.info("Попытка выдачи всех Department");
         return departmentRepository.getAll();
     }

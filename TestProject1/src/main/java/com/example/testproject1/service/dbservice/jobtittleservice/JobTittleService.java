@@ -47,7 +47,7 @@ public class JobTittleService implements CrudService<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public List<JobTittle> getall() {
+    public List<JobTittle> getAll() {
         LOGGER.info("Попытка выдачи всех JobTittle");
         return jobTittleRepository.getAll();
     }
