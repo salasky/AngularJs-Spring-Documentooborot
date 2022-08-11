@@ -21,7 +21,6 @@ import java.util.Optional;
  *
  * @author smigranov
  */
-@Transactional
 @Service("PersonService")
 @Order(value = 4)
 public class PersonService implements CrudService<Person> {
@@ -31,62 +30,28 @@ public class PersonService implements CrudService<Person> {
      */
     @Autowired
     private CrudRepository<Person> personRepository;
-    /**
-     * Лог при успешном сохранении
-     */
-    private final String CREATE_SUCCESS = "Person успешно сохранен";
-    /**
-     * Лог при неудачном сохранении
-     */
-    private final String CREATE_FAIL = "Неудачная попытка сохранения Person";
-    /**
-     * Лог при выдаче всех Person
-     */
-    private final String GET_ALL_ATTEMPT = "Попытка выдачи всех Person";
-    /**
-     * Лог при выдаче Person по id
-     */
-    private final String GET_BY_ID_ATTEMPT = "Попытка получить Person по id";
-    /**
-     * Лог при успешном обновлении
-     */
-    private final String UPDATE_SUCCESS = "Person успешно обновлен";
-    /**
-     * Лог при неудачном обновлении
-     */
-    private final String UPDATE_FAIL = "Неудачная попытка обновления Person";
-    /**
-     * Лог при попытке удаления всех записей
-     */
-    private final String DELETE_SUCCESS = "Попытка удаления записей из таблицы Person";
-    /**
-     * Лог при успешном удалении записи по id
-     */
-    private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы Person успешно удалена";
-    /**
-     * Лог при неудачном удалении удалении записи по id
-     */
-    private final String DELETE_BY_ID_FAIL = "Запись из таблицы Person не удалена";
 
     /**
      * {@inheritDoc}
      */
+    @Transactional
     @Override
     public Person create(Person person) throws DocflowRuntimeApplicationException {
         Person personDB = personRepository.create(person);
         if (personDB != null) {
-            LOGGER.info(CREATE_SUCCESS);
+            LOGGER.info("Person успешно сохранен");
             return personDB;
         }
-        throw new DocflowRuntimeApplicationException(CREATE_FAIL);
+        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения Person");
     }
 
     /**
      * {@inheritDoc}
      */
+    @Transactional
     @Override
     public List<Person> getall() {
-        LOGGER.info(GET_ALL_ATTEMPT);
+        LOGGER.info("Попытка выдачи всех Person");
         return personRepository.getAll();
     }
 
@@ -95,7 +60,7 @@ public class PersonService implements CrudService<Person> {
      */
     @Override
     public Optional<Person> getById(String id) {
-        LOGGER.info(GET_BY_ID_ATTEMPT);
+        LOGGER.info("Попытка получить Person по id");
         return personRepository.getById(id);
     }
 
@@ -107,10 +72,10 @@ public class PersonService implements CrudService<Person> {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у Person с id {0}", person.getId().toString()));
         int updateCount = personRepository.update(person);
         if (updateCount == 1) {
-            LOGGER.info(UPDATE_SUCCESS);
+            LOGGER.info("Person успешно обновлен");
             return person;
         }
-        throw new DocflowRuntimeApplicationException(UPDATE_FAIL);
+        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления Person");
     }
 
     /**
@@ -118,7 +83,7 @@ public class PersonService implements CrudService<Person> {
      */
     @Override
     public void deleteAll() {
-        LOGGER.info(DELETE_SUCCESS);
+        LOGGER.info("Попытка удаления записей из таблицы Person");
         personRepository.deleteAll();
     }
 
@@ -130,7 +95,7 @@ public class PersonService implements CrudService<Person> {
         try {
             personRepository.deleteById(id);
         } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException(DELETE_BY_ID_FAIL);
+            throw new DocflowRuntimeApplicationException("Запись из таблицы Person не удалена");
         }
     }
 }

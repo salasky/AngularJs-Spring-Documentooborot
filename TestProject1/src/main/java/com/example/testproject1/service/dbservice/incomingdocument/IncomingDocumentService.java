@@ -20,7 +20,6 @@ import java.util.Optional;
  *
  * @author smigranov
  */
-@Transactional
 @Service("IncomingDocumentService")
 public class IncomingDocumentService implements CrudService<IncomingDocument> {
 
@@ -30,62 +29,28 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      */
     @Autowired
     private CrudRepository<IncomingDocument> incomingDocumentRepository;
-    /**
-     * Лог при успешном сохранении
-     */
-    private final String CREATE_SUCCESS = "IncomingDocument успешно сохранен";
-    /**
-     * Лог при неудачном сохранении
-     */
-    private final String CREATE_FAIL = "Неудачная попытка сохранения IncomingDocument";
-    /**
-     * Лог при выдаче всех IncomingDocument
-     */
-    private final String GET_ALL_ATTEMPT = "Попытка выдачи всех IncomingDocument";
-    /**
-     * Лог при выдаче IncomingDocument по id
-     */
-    private final String GET_BY_ID_ATTEMPT = "Попытка получить IncomingDocument по id";
-    /**
-     * Лог при успешном обновлении
-     */
-    private final String UPDATE_SUCCESS = "IncomingDocument успешно обновлен";
-    /**
-     * Лог при неудачном обновлении
-     */
-    private final String UPDATE_FAIL = "Неудачная попытка обновления IncomingDocument";
-    /**
-     * Лог при попытке удаления всех записей
-     */
-    private final String DELETE_SUCCESS = "Попытка удаления записей из таблицы incoming_document";
-    /**
-     * Лог при успешном удалении записи по id
-     */
-    private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы incoming_document успешно удалена";
-    /**
-     * Лог при неудачном удалении удалении записи по id
-     */
-    private final String DELETE_BY_ID_FAIL = "Запись из таблицы incoming_document не удалена";
 
     /**
      * {@inheritDoc}
      */
+    @Transactional
     @Override
     public IncomingDocument create(IncomingDocument incomingDocument) throws DocflowRuntimeApplicationException {
         IncomingDocument incomingDocumentDB = incomingDocumentRepository.create(incomingDocument);
         if (incomingDocumentDB != null) {
-            LOGGER.info(CREATE_SUCCESS);
+            LOGGER.info("IncomingDocument успешно сохранен");
             return incomingDocumentDB;
         }
-        throw new DocflowRuntimeApplicationException(CREATE_FAIL);
+        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения IncomingDocument");
     }
 
     /**
      * {@inheritDoc}
      */
+    @Transactional
     @Override
     public List<IncomingDocument> getall() {
-        LOGGER.info(GET_ALL_ATTEMPT);
+        LOGGER.info("Попытка выдачи всех IncomingDocument");
         return incomingDocumentRepository.getAll();
     }
 
@@ -94,7 +59,7 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      */
     @Override
     public Optional<IncomingDocument> getById(String id) {
-        LOGGER.info(GET_BY_ID_ATTEMPT);
+        LOGGER.info("Попытка получить IncomingDocument по id");
         return incomingDocumentRepository.getById(id);
     }
 
@@ -106,10 +71,10 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у IncomingDocument с id {0}", incomingDocument.getId().toString()));
         int updateCount = incomingDocumentRepository.update(incomingDocument);
         if (updateCount > 0) {
-            LOGGER.info(UPDATE_SUCCESS);
+            LOGGER.info("IncomingDocument успешно обновлен");
             return incomingDocument;
         }
-        throw new DocflowRuntimeApplicationException(UPDATE_FAIL);
+        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления IncomingDocument");
     }
 
     /**
@@ -117,7 +82,7 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      */
     @Override
     public void deleteAll() {
-        LOGGER.info(DELETE_SUCCESS);
+        LOGGER.info("Попытка удаления записей из таблицы incoming_document");
         incomingDocumentRepository.deleteAll();
     }
 
@@ -129,7 +94,7 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
         try {
             incomingDocumentRepository.deleteById(id);
         } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException(DELETE_BY_ID_FAIL);
+            throw new DocflowRuntimeApplicationException("Запись из таблицы incoming_document не удалена");
         }
     }
 }

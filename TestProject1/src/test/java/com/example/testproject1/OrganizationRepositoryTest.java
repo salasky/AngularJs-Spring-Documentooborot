@@ -4,6 +4,7 @@ import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.model.staff.Organization;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,51 +21,55 @@ class OrganizationRepositoryTest {
     @Autowired
     private CrudRepository<Organization> organizationCrudRepository;
 
+    @BeforeAll
+    public static void init(
+            @Autowired CrudRepository<Organization> organizationRepository) {
+        if (organizationRepository.getAll().size() == 0) {
+            Organization organization = Organization.newBuilder()
+                    .setId(UUID.randomUUID())
+                    .setFullName("FullName")
+                    .setShortName("organizationShortName")
+                    .setSupervisor("orgSupervisor")
+                    .setContactNumber("897643567895").build();
+            organizationRepository.create(organization);
+        }
+    }
+
+    private Organization getOrganization() {
+        return Organization.newBuilder()
+                .setId(UUID.randomUUID())
+                .setFullName("FullName")
+                .setShortName("organizationShortName")
+                .setSupervisor("orgSupervisor")
+                .setContactNumber("897643567895").build();
+    }
+
     @DisplayName("OrganizationRepository create test successful")
     @Test
     void organizationRepositoryCreateTest() {
-        Organization organization = new Organization();
-        UUID uuid = UUID.randomUUID();
-        organization.setId(uuid);
-        organization.setFullName("Neft");
-        organization.setShortName("NFT");
-        organization.setSupervisor("VVP");
-        organization.setContactNumber("678908i765");
-        organizationCrudRepository.create(organization);
+        Organization organizationEx = getOrganization();
+        UUID uuid = organizationEx.getId();
+        organizationCrudRepository.create(organizationEx);
         Assertions.assertTrue(organizationCrudRepository.getById(uuid.toString()).isPresent());
-        Organization organizationDB = organizationCrudRepository.getById(uuid.toString()).get();
-        Assertions.assertEquals("Neft", organizationDB.getFullName());
-        Assertions.assertEquals("NFT", organizationDB.getShortName());
-        Assertions.assertEquals("VVP", organizationDB.getSupervisor());
-        Assertions.assertEquals("678908i765", organizationDB.getContactNumber());
+        Organization organizationActual = organizationCrudRepository.getById(uuid.toString()).get();
+        Assertions.assertEquals(organizationEx, organizationActual);
     }
 
     @DisplayName("OrganizationRepository deleteAll test successful")
     @Test
     void organizationRepositoryDeleteAllTest() {
-        Organization organization = new Organization();
-        UUID uuid = UUID.randomUUID();
-        organization.setId(uuid);
-        organization.setFullName("OilAndGas");
-        organization.setShortName("OGS");
-        organization.setSupervisor("MMN");
-        organization.setContactNumber("67328i765");
-        organizationCrudRepository.create(organization);
+        if (organizationCrudRepository.getAll().isEmpty()) {
+            organizationCrudRepository.create(getOrganization());
+        }
         organizationCrudRepository.deleteAll();
         Assertions.assertTrue(organizationCrudRepository.getAll().isEmpty());
-        Assertions.assertEquals(0, organizationCrudRepository.getAll().size());
     }
 
     @DisplayName("OrganizationRepository deleteById test successful")
     @Test
     void organizationRepositoryDeleteByIdTest() {
-        Organization organization = new Organization();
-        UUID uuid = UUID.randomUUID();
-        organization.setId(uuid);
-        organization.setFullName("OilAndGas");
-        organization.setShortName("OGS");
-        organization.setSupervisor("MMN");
-        organization.setContactNumber("67328i765");
+        Organization organization = getOrganization();
+        UUID uuid = organization.getId();
         organizationCrudRepository.create(organization);
         try {
             organizationCrudRepository.deleteById(uuid.toString());
@@ -77,18 +82,17 @@ class OrganizationRepositoryTest {
     @DisplayName("OrganizationRepository update test successful")
     @Test
     void organizationRepositoryUpdateTest() {
-        Organization organization = new Organization();
-        UUID uuid = UUID.randomUUID();
-        organization.setId(uuid);
-        organization.setFullName("OilAndGas");
-        organization.setShortName("OGS");
-        organization.setSupervisor("MMN");
-        organization.setContactNumber("67328i765");
+        Organization organization = getOrganization();
+        UUID uuid = organization.getId();
         organizationCrudRepository.create(organization);
-        organization.setFullName("NeftServices");
+        organization.setFullName("NeftServicesTest");
         organizationCrudRepository.update(organization);
+
         Assertions.assertTrue(organizationCrudRepository.getById(uuid.toString()).isPresent());
         Organization organizationDB = organizationCrudRepository.getById(uuid.toString()).get();
-        Assertions.assertEquals("NeftServices", organizationDB.getFullName());
+
+        organizationCrudRepository.update(organization);
+
+        Assertions.assertEquals("NeftServicesTest", organizationDB.getFullName());
     }
 }

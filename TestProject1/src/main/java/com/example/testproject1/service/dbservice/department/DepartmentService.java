@@ -23,7 +23,6 @@ import java.util.Optional;
  */
 @Service("DepartmentService")
 @Order(value = 3)
-@Transactional
 public class DepartmentService implements CrudService<Department> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentService.class);
@@ -32,58 +31,28 @@ public class DepartmentService implements CrudService<Department> {
      */
     @Autowired
     private CrudRepository<Department> departmentRepository;
-    /**
-     * Лог при успешном сохранении
-     */
-    private final String CREATE_SUCCESS = "Department успешно сохранен";
-    /**
-     * Лог при неудачном сохранении
-     */
-    private final String CREATE_FAIL = "Неудачная попытка сохранения Department";
-    /**
-     * Лог при выдаче всех Department
-     */
-    private final String GET_ALL_ATTEMPT = "Попытка выдачи всех Department";
-    /**
-     * Лог при выдаче Department по id
-     */
-    private final String GET_BY_ID_ATTEMPT = "Попытка получить Department по id";
-    /**
-     * Лог при успешном обновлении
-     */
-    private final String UPDATE_SUCCESS = "Department успешно обновлен";
-    /**
-     * Лог при неудачном обновлении
-     */
-    private final String UPDATE_FAIL = "Неудачная попытка обновления Department";
-    /**
-     * Лог при попытке удаления всех записей
-     */
-    private final String DELETE_SUCCESS = "Попытка удаления записей из таблицы department";
-    /**
-     * Лог при неудачном удалении удалении записи по id
-     */
-    private final String DELETE_BY_ID_FAIL = "Запись из таблицы department не удалена";
 
     /**
      * {@inheritDoc}
      */
+    @Transactional
     @Override
     public Department create(Department department) throws DocflowRuntimeApplicationException {
         Department departmentDB = departmentRepository.create(department);
         if (departmentDB != null) {
-            LOGGER.info(CREATE_SUCCESS);
+            LOGGER.info("Department успешно сохранен");
             return departmentDB;
         }
-        throw new DocflowRuntimeApplicationException(CREATE_FAIL);
+        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения Department");
     }
 
     /**
      * {@inheritDoc}
      */
+    @Transactional
     @Override
     public List<Department> getall() {
-        LOGGER.info(GET_ALL_ATTEMPT);
+        LOGGER.info("Попытка выдачи всех Department");
         return departmentRepository.getAll();
     }
 
@@ -92,7 +61,7 @@ public class DepartmentService implements CrudService<Department> {
      */
     @Override
     public Optional<Department> getById(String id) {
-        LOGGER.info(GET_BY_ID_ATTEMPT);
+        LOGGER.info("Попытка получить Department по id");
         return departmentRepository.getById(id);
     }
 
@@ -104,10 +73,10 @@ public class DepartmentService implements CrudService<Department> {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у Department с id {0}", department.getId().toString()));
         int updateCount = departmentRepository.update(department);
         if (updateCount == 1) {
-            LOGGER.info(UPDATE_SUCCESS);
+            LOGGER.info("Department успешно обновлен");
             return department;
         }
-        throw new DocflowRuntimeApplicationException(UPDATE_FAIL);
+        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления Department");
     }
 
     /**
@@ -115,7 +84,7 @@ public class DepartmentService implements CrudService<Department> {
      */
     @Override
     public void deleteAll() {
-        LOGGER.info(DELETE_SUCCESS);
+        LOGGER.info("Попытка удаления записей из таблицы department");
         departmentRepository.deleteAll();
     }
 
@@ -127,7 +96,7 @@ public class DepartmentService implements CrudService<Department> {
         try {
             departmentRepository.deleteById(id);
         } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException(DELETE_BY_ID_FAIL);
+            throw new DocflowRuntimeApplicationException("Запись из таблицы department не удалена");
         }
     }
 }

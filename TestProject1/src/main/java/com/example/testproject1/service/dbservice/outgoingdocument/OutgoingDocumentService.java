@@ -29,62 +29,28 @@ public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
      */
     @Autowired
     private CrudRepository<OutgoingDocument> outgoingDocumentRepository;
-    /**
-     * Лог при успешном сохранении
-     */
-    private final String CREATE_SUCCESS = "OutgoingDocument успешно сохранен";
-    /**
-     * Лог при неудачном сохранении
-     */
-    private final String CREATE_FAIL = "Неудачная попытка сохранения OutgoingDocument";
-    /**
-     * Лог при выдаче всех OutgoingDocument
-     */
-    private final String GET_ALL_ATTEMPT = "Попытка выдачи всех OutgoingDocument";
-    /**
-     * Лог при выдаче OutgoingDocument по id
-     */
-    private final String GET_BY_ID_ATTEMPT = "Попытка получить OutgoingDocument по id";
-    /**
-     * Лог при успешном обновлении
-     */
-    private final String UPDATE_SUCCESS = "OutgoingDocument успешно обновлен";
-    /**
-     * Лог при неудачном обновлении
-     */
-    private final String UPDATE_FAIL = "Неудачная попытка обновления OutgoingDocument";
-    /**
-     * Лог при попытке удаления всех записей
-     */
-    private final String DELETE_SUCCESS = "Попытка удаления записей из таблицы OutgoingDocument";
-    /**
-     * Лог при успешном удалении записи по id
-     */
-    private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы OutgoingDocument успешно удалена";
-    /**
-     * Лог при неудачном удалении удалении записи по id
-     */
-    private final String DELETE_BY_ID_FAIL = "Запись из таблицы OutgoingDocument не удалена";
 
     /**
      * {@inheritDoc}
      */
+    @Transactional
     @Override
     public OutgoingDocument create(OutgoingDocument outgoingDocument) throws DocflowRuntimeApplicationException {
         OutgoingDocument outgoingDocumentDB = outgoingDocumentRepository.create(outgoingDocument);
         if (outgoingDocumentDB != null) {
-            LOGGER.info(CREATE_SUCCESS);
+            LOGGER.info("OutgoingDocument успешно сохранен");
             return outgoingDocumentDB;
         }
-        throw new DocflowRuntimeApplicationException(CREATE_FAIL);
+        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения OutgoingDocument");
     }
 
     /**
      * {@inheritDoc}
      */
+    @Transactional
     @Override
     public List<OutgoingDocument> getall() {
-        LOGGER.info(GET_ALL_ATTEMPT);
+        LOGGER.info("Попытка выдачи всех OutgoingDocument");
         return outgoingDocumentRepository.getAll();
     }
 
@@ -93,7 +59,7 @@ public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
      */
     @Override
     public Optional<OutgoingDocument> getById(String id) {
-        LOGGER.info(GET_BY_ID_ATTEMPT);
+        LOGGER.info("Попытка получить OutgoingDocument по id");
         return outgoingDocumentRepository.getById(id);
     }
 
@@ -105,10 +71,10 @@ public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у OutgoingDocument с id {0}", outgoingDocument.getId().toString()));
         int updateCount = outgoingDocumentRepository.update(outgoingDocument);
         if (updateCount > 0) {
-            LOGGER.info(UPDATE_SUCCESS);
+            LOGGER.info("OutgoingDocument успешно обновлен");
             return outgoingDocument;
         }
-        throw new DocflowRuntimeApplicationException(UPDATE_FAIL);
+        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления OutgoingDocument");
     }
 
     /**
@@ -116,7 +82,7 @@ public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
      */
     @Override
     public void deleteAll() {
-        LOGGER.info(DELETE_SUCCESS);
+        LOGGER.info("Попытка удаления записей из таблицы OutgoingDocument");
         outgoingDocumentRepository.deleteAll();
     }
 
@@ -128,7 +94,7 @@ public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
         try {
             outgoingDocumentRepository.deleteById(id);
         } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException(DELETE_BY_ID_FAIL);
+            throw new DocflowRuntimeApplicationException("Запись из таблицы OutgoingDocument не удалена");
         }
     }
 }

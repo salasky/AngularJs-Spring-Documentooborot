@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -21,7 +20,6 @@ import java.util.Optional;
  *
  * @author smigranov
  */
-@Transactional
 @Order(value = 2)
 @Service("JobTittleService")
 public class JobTittleService implements CrudService<JobTittle> {
@@ -31,42 +29,6 @@ public class JobTittleService implements CrudService<JobTittle> {
      */
     @Autowired
     private CrudRepository<JobTittle> jobTittleRepository;
-    /**
-     * Лог при успешном сохранении
-     */
-    private final String CREATE_SUCCESS = "JobTittle успешно сохранен";
-    /**
-     * Лог при неудачном сохранении
-     */
-    private final String CREATE_FAIL = "Неудачная попытка сохранения JobTittle";
-    /**
-     * Лог при выдаче всех JobTittle
-     */
-    private final String GET_ALL_ATTEMPT = "Попытка выдачи всех JobTittle";
-    /**
-     * Лог при выдаче JobTittle по id
-     */
-    private final String GET_BY_ID_ATTEMPT = "Попытка получить JobTittle по id";
-    /**
-     * Лог при успешном обновлении
-     */
-    private final String UPDATE_SUCCESS = "JobTittle успешно обновлен";
-    /**
-     * Лог при неудачном обновлении
-     */
-    private final String UPDATE_FAIL = "Неудачная попытка обновления JobTittle";
-    /**
-     * Лог при попытке удаления всех записей
-     */
-    private final String DELETE_SUCCESS = "Попытка удаления записей из таблицы JobTittle";
-    /**
-     * Лог при успешном удалении записи по id
-     */
-    private final String DELETE_BY_ID_SUCCESS = "Запись из таблицы JobTittle успешно удалена";
-    /**
-     * Лог при неудачном удалении удалении записи по id
-     */
-    private final String DELETE_BY_ID_FAIL = "Запись из таблицы JobTittle не удалена";
 
     /**
      * {@inheritDoc}
@@ -75,10 +37,10 @@ public class JobTittleService implements CrudService<JobTittle> {
     public JobTittle create(JobTittle jobTittle) throws DocflowRuntimeApplicationException {
         JobTittle jobTittleDB = jobTittleRepository.create(jobTittle);
         if (jobTittleDB != null) {
-            LOGGER.info(CREATE_SUCCESS);
+            LOGGER.info("JobTittle успешно сохранен");
             return jobTittleDB;
         }
-        throw new DocflowRuntimeApplicationException(CREATE_FAIL);
+        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения JobTittle");
     }
 
     /**
@@ -86,7 +48,7 @@ public class JobTittleService implements CrudService<JobTittle> {
      */
     @Override
     public List<JobTittle> getall() {
-        LOGGER.info(GET_ALL_ATTEMPT);
+        LOGGER.info("Попытка выдачи всех JobTittle");
         return jobTittleRepository.getAll();
     }
 
@@ -95,7 +57,7 @@ public class JobTittleService implements CrudService<JobTittle> {
      */
     @Override
     public Optional<JobTittle> getById(String id) {
-        LOGGER.info(GET_BY_ID_ATTEMPT);
+        LOGGER.info("Попытка получить JobTittle по id");
         return jobTittleRepository.getById(id);
     }
 
@@ -107,10 +69,10 @@ public class JobTittleService implements CrudService<JobTittle> {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у JobTittle с id {0}", jobTittle.getUuid().toString()));
         int updateCount = jobTittleRepository.update(jobTittle);
         if (updateCount == 1) {
-            LOGGER.info(UPDATE_SUCCESS);
+            LOGGER.info("JobTittle успешно обновлен");
             return jobTittle;
         }
-        throw new DocflowRuntimeApplicationException(UPDATE_FAIL);
+        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления JobTittle");
     }
 
     /**
@@ -118,7 +80,7 @@ public class JobTittleService implements CrudService<JobTittle> {
      */
     @Override
     public void deleteAll() {
-        LOGGER.info(DELETE_SUCCESS);
+        LOGGER.info("Попытка удаления записей из таблицы JobTittle");
         jobTittleRepository.deleteAll();
     }
 
@@ -130,7 +92,7 @@ public class JobTittleService implements CrudService<JobTittle> {
         try {
             jobTittleRepository.deleteById(id);
         } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException(DELETE_BY_ID_FAIL);
+            throw new DocflowRuntimeApplicationException("Запись из таблицы JobTittle не удалена");
         }
     }
 }
