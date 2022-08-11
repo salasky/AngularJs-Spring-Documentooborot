@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.Optional;
  */
 @Service("DepartmentService")
 @Order(value = 3)
+@Transactional
 public class DepartmentService implements CrudService<Department> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentService.class);

@@ -1,7 +1,9 @@
 package com.example.testproject1.model.staff;
 
+import com.example.testproject1.model.dto.ReportForJsonDTO;
 import com.example.testproject1.service.jaxb.DateSQLTimeAdapter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import liquibase.pro.packaged.S;
 
 import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlElement;
@@ -12,6 +14,7 @@ import java.sql.Date;
 import java.text.MessageFormat;
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Класс Person наследуется от {@link Staff}
@@ -177,5 +180,67 @@ public class Person extends Staff implements Comparable<Person> {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), lastName, secondName, firstName, jobTittle, photo, birthDay, phoneNumber);
+    }
+    public static Person.PersonBuilder newBuilder() {
+        return new Person().new PersonBuilder();
+    }
+    /**
+     * Внутренний класс Builder
+     *
+     * @author smigranov
+     */
+    public class PersonBuilder {
+        public PersonBuilder setId(UUID uuid) {
+            Person.this.id = uuid;
+            return this;
+        }
+
+        public PersonBuilder setLastName(String lastName) {
+            Person.this.lastName = lastName;
+            return this;
+        }
+
+        public PersonBuilder setSecondName(String secondName) {
+            Person.this.secondName = secondName;
+            return this;
+        }
+
+        public PersonBuilder setFirstName(String firstName) {
+            Person.this.firstName = firstName;
+            return this;
+        }
+
+        public PersonBuilder setJobTittle(JobTittle jobTittle) {
+            Person.this.jobTittle = jobTittle;
+            return this;
+        }
+
+        public PersonBuilder setPhoto(String photo) {
+            Person.this.photo = photo;
+            return this;
+        }
+
+        public PersonBuilder setBirthDay(Date date) {
+            Person.this.birthDay = date;
+            return this;
+        }
+
+        public PersonBuilder setPhoneNumber(String phoneNumber) {
+            Person.this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public PersonBuilder setDepartment(Department department) {
+            Person.this.department = department;
+            return this;
+        }
+        /**
+         * Метод build
+         *
+         * @return Возвращает объект класса {@link Person}
+         */
+        public Person build() {
+            return Person.this;
+        }
     }
 }

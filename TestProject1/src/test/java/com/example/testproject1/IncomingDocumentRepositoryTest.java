@@ -3,6 +3,9 @@ package com.example.testproject1;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.model.document.IncomingDocument;
+import com.example.testproject1.model.staff.Department;
+import com.example.testproject1.model.staff.JobTittle;
+import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.importxmltodatabase.Impl.XmlToDataBaseImporterImpl;
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Optional;
 import java.util.UUID;
 
 @SpringBootTest
@@ -29,8 +34,43 @@ public class IncomingDocumentRepositoryTest {
 
 
     @BeforeAll
-    public static void init(@Autowired XmlToDataBaseImporterImpl importXmlmpl) {
-        importXmlmpl.saveStaffInDb();
+    public static void init(@Autowired CrudRepository<Organization> organizationRepository,
+                            @Autowired CrudRepository<JobTittle> jobTittleRepository,
+                            @Autowired CrudRepository<Department> departmentRepository,
+                            @Autowired CrudRepository<Person> personRepository) {
+        Organization organization=new Organization();
+        organization.setId(UUID.randomUUID());
+        organization.setFullName("organizationFullName");
+        organization.setShortName("organizationShortName");
+        organization.setSupervisor("orgSupervisor");
+        organization.setContactNumber("897643567895");
+        organizationRepository.create(organization);
+
+        JobTittle jobTittle=new JobTittle();
+        jobTittle.setUuid(UUID.randomUUID());
+        jobTittle.setName("JobName");
+        jobTittleRepository.create(jobTittle);
+        
+        Department department=new Department();
+        department.setId(UUID.randomUUID());
+        department.setFullName("departmentFullName");
+        department.setShortName("departmentShortName");
+        department.setSupervisor("VVP");
+        department.setContactNumber("89654345678");
+        department.setOrganization(organization);
+        departmentRepository.create(department);
+        
+        Person person=new Person();
+        person.setId(UUID.randomUUID());
+        person.setFirstName("FirstName");
+        person.setSecondName("SecondName");
+        person.setLastName("LastName");
+        person.setDepartment(department);
+        person.setJobTittle(jobTittle);
+        person.setBirthDay(new Date(System.currentTimeMillis()));
+        person.setPhoneNumber("98765678903");
+        person.setPhoto("https://www.baeldung.com/spring-boot-testing");
+        personRepository.create(person);
     }
 
     @DisplayName("IncomingDocumentRepository create test successful")
@@ -44,14 +84,15 @@ public class IncomingDocumentRepositoryTest {
         incomingDocument.setRegNumber(24335l);
         incomingDocument.setCreatingDate(new Timestamp(234));
         incomingDocument.setDateOfRegistration(new Timestamp(4354));
-        incomingDocument.setAuthor(personRepository.getAll().stream().findFirst().get());
-        incomingDocument.setSender(personRepository.getAll().stream().findFirst().get());
-        incomingDocument.setDestination(personRepository.getAll().stream().findFirst().get());
+        Person person= personRepository.getAll().stream().findFirst().get();
+        incomingDocument.setAuthor(person);
+        incomingDocument.setSender(person);
+        incomingDocument.setDestination(person);
         UUID uuid = incomingDocument.getId();
         incomingDocumentCrudRepository.create(incomingDocument);
-
-        Assertions.assertTrue(incomingDocumentCrudRepository.getById(uuid.toString()).isPresent());
-        IncomingDocument incomingDocumentDB = incomingDocumentCrudRepository.getById(uuid.toString()).get();
+        Optional<IncomingDocument> optionalIncomingDocument =  incomingDocumentCrudRepository.getById(uuid.toString());
+        Assertions.assertTrue(optionalIncomingDocument.isPresent());
+        IncomingDocument incomingDocumentDB = optionalIncomingDocument.get();
 
         Assertions.assertTrue(personRepository.getById(incomingDocumentDB.getAuthor().getId().toString()).isPresent());
         Person author = personRepository.getById(incomingDocumentDB.getAuthor().getId().toString()).get();
@@ -80,7 +121,6 @@ public class IncomingDocumentRepositoryTest {
             incomingDocument.setAuthor(personRepository.getAll().stream().findFirst().get());
             incomingDocument.setSender(personRepository.getAll().stream().findFirst().get());
             incomingDocument.setDestination(personRepository.getAll().stream().findFirst().get());
-            UUID uuid = incomingDocument.getId();
             incomingDocumentCrudRepository.create(incomingDocument);
         }
         incomingDocumentCrudRepository.deleteAll();

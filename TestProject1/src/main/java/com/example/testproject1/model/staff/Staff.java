@@ -24,6 +24,7 @@ public class Staff {
 
     @XmlAttribute
     public UUID getId() {
+
         return id;
     }
 

@@ -29,9 +29,8 @@ public class JobTittleMapper implements RowMapper<JobTittle> {
      */
     @Override
     public JobTittle mapRow(ResultSet rs, int rowNum) throws SQLException {
-        JobTittle jobTittle = new JobTittle();
-        jobTittle.setUuid(UUID.fromString(rs.getString(JOB_TITTLE_ID)));
-        jobTittle.setName(rs.getString(JOB_NAME));
-        return jobTittle;
+        return JobTittle.newBuilder()
+                .setUuid(UUID.fromString(rs.getString(JOB_TITTLE_ID)))
+                .setName(rs.getString(JOB_NAME)).build();
     }
 }

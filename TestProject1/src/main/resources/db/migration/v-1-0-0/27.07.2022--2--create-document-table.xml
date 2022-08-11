@@ -20,10 +20,8 @@
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="creating_date" type="TIMESTAMP">
-                <constraints nullable="false"/>
             </column>
             <column name="author_id" type="VARCHAR(64)">
-                <constraints nullable="false"/>
             </column>
         </createTable>
         <rollback>
@@ -44,19 +42,14 @@
                 <constraints primaryKey="true" primaryKeyName="PK_TASKDOCUMENT"/>
             </column>
             <column name="out_date" type="TIMESTAMP">
-                <constraints nullable="false"/>
             </column>
             <column name="exec_period" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
             <column name="responsible_id" type="VARCHAR(64)">
-                <constraints nullable="false"/>
             </column>
             <column name="sign_of_control" type="BOOLEAN">
-                <constraints nullable="false"/>
             </column>
             <column name="control_person_id" type="VARCHAR(64)">
-                <constraints nullable="false"/>
             </column>
         </createTable>
         <rollback>
@@ -91,16 +84,12 @@
                 <constraints primaryKey="true" primaryKeyName="PK_INCOMINGDOCUMENT"/>
             </column>
             <column name="sender_id" type="VARCHAR(64)">
-                <constraints nullable="false"/>
             </column>
             <column name="destination_id" type="VARCHAR(64)">
-                <constraints nullable="false"/>
             </column>
             <column name="number" type="BIGINT">
-                <constraints nullable="false"/>
             </column>
             <column name="date_of_registration" type="TIMESTAMP">
-                <constraints nullable="false"/>
             </column>
         </createTable>
         <rollback>
@@ -135,10 +124,8 @@
                 <constraints primaryKey="true" primaryKeyName="PK_OUTGOINGDOCUMENT"/>
             </column>
             <column name="sender_id" type="VARCHAR(64)">
-                <constraints nullable="false"/>
             </column>
             <column name="delivery_type" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
         </createTable>
         <rollback>

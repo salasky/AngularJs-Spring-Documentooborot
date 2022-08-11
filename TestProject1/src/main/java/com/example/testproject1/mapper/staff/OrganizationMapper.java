@@ -41,12 +41,11 @@ public class OrganizationMapper implements RowMapper<Organization> {
      */
     @Override
     public Organization mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Organization organization = new Organization();
-        organization.setId(UUID.fromString(rs.getString(ORGANIZATION_ID)));
-        organization.setFullName(rs.getString(ORGANIZATION_FULL_NAME));
-        organization.setShortName(rs.getString(ORGANIZATION_SHORT_NAME));
-        organization.setSupervisor(rs.getString(ORGANIZATION_SUPERVISOR));
-        organization.setContactNumber(rs.getString(ORGANIZATION_CONTACT_NUMBER));
-        return organization;
+        return Organization.newBuilder()
+                .setId(UUID.fromString(rs.getString(ORGANIZATION_ID)))
+                .setFullName(rs.getString(ORGANIZATION_FULL_NAME))
+                .setShortName(rs.getString(ORGANIZATION_SHORT_NAME))
+                .setSupervisor(rs.getString(ORGANIZATION_SUPERVISOR))
+                .setContactNumber(rs.getString(ORGANIZATION_CONTACT_NUMBER)).build();
     }
 }

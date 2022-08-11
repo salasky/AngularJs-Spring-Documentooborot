@@ -62,18 +62,18 @@ public class PersonMapper implements RowMapper<Person> {
      */
     @Override
     public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Person person = new Person();
-        person.setId(UUID.fromString(rs.getString(PERSON_ID)));
-        person.setFirstName(rs.getString(PERSON_FIRST_NAME));
-        person.setSecondName(rs.getString(PERSON_SECOND_NAME));
-        person.setLastName(rs.getString(PERSON_LAST_NAME));
-        person.setPhoto(rs.getString(PERSON_PHOTO));
-        person.setPhoneNumber(rs.getString(PERSON_PHONE_NUMBER));
-        person.setBirthDay((rs.getDate(PERSON_BIRTH_DAY)));
         Department department = departmentMapper.mapRow(rs, rowNum);
         JobTittle jobTittle = jobTittleMapper.mapRow(rs, rowNum);
-        person.setDepartment(department);
-        person.setJobTittle(jobTittle);
-        return person;
+
+        return Person.newBuilder()
+                .setId(UUID.fromString(rs.getString(PERSON_ID)))
+                .setFirstName(rs.getString(PERSON_FIRST_NAME))
+                .setSecondName(rs.getString(PERSON_SECOND_NAME))
+                .setLastName(rs.getString(PERSON_LAST_NAME))
+                .setPhoto(rs.getString(PERSON_PHOTO))
+                .setPhoneNumber(rs.getString(PERSON_PHONE_NUMBER))
+                .setBirthDay((rs.getDate(PERSON_BIRTH_DAY)))
+                .setJobTittle(jobTittle)
+                .setDepartment(department).build();
     }
 }

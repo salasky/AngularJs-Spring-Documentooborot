@@ -1,11 +1,14 @@
 package com.example.testproject1.model.staff;
 
+import com.example.testproject1.model.dto.ReportForJsonDTO;
+
 import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.text.MessageFormat;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Класс Организации.Наследуется от {@link Staff}
@@ -100,5 +103,43 @@ public class Organization extends Staff {
                         ", contactNumber= {4}");
         return form.format(taskArgs);
 
+    }
+    public static Organization.OrganizationBuilder newBuilder() {
+        return new Organization().new OrganizationBuilder();
+    }
+    /**
+     * Внутренний класс Builder
+     *
+     * @author smigranov
+     */
+    public class OrganizationBuilder {
+        public OrganizationBuilder setId(UUID uuid) {
+            Organization.this.id = uuid;
+            return this;
+        }
+        public OrganizationBuilder setFullName(String fullName) {
+            Organization.this.fullName = fullName;
+            return this;
+        }
+        public OrganizationBuilder setShortName(String shortName) {
+            Organization.this.shortName = shortName;
+            return this;
+        }
+        public OrganizationBuilder setSupervisor(String supervisor) {
+            Organization.this.supervisor = supervisor;
+            return this;
+        }
+        public OrganizationBuilder setContactNumber(String contactNumber) {
+            Organization.this.contactNumber = contactNumber;
+            return this;
+        }
+        /**
+         * Метод build
+         *
+         * @return Возвращает объект класса {@link Organization}
+         */
+        public Organization build() {
+            return Organization.this;
+        }
     }
 }

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.Optional;
  *
  * @author smigranov
  */
+@Transactional
 @Order(value = 2)
 @Service("JobTittleService")
 public class JobTittleService implements CrudService<JobTittle> {

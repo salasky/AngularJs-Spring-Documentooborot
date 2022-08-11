@@ -14,13 +14,10 @@
                 <constraints nullable="false"/>
             </column>
             <column name="short_name" type="VARCHAR(64)">
-                <constraints nullable="false"/>
             </column>
             <column name="supervisor" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
             <column name="contact_number" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
         </createTable>
         <rollback>
@@ -37,16 +34,12 @@
                 <constraints nullable="false"/>
             </column>
             <column name="short_name" type="VARCHAR(64)">
-                <constraints nullable="false"/>
             </column>
             <column name="supervisor" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
             <column name="contact_number" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
             <column name="organization_id" type="VARCHAR(64)">
-                <constraints nullable="false"/>
             </column>
         </createTable>
         <rollback>
@@ -87,23 +80,17 @@
                 <constraints nullable="false"/>
             </column>
             <column name="last_name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
             <column name="photo" type="VARCHAR(255)">
-                <constraints nullable="true"/>
             </column>
             <column name="job_tittle_id" type="VARCHAR(64)">
-                <constraints nullable="false"/>
             </column>
             <column name="department_id" type="VARCHAR(64)">
-                <constraints nullable="false"/>
             </column>
             <column name="phone_number" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
 
             <column name="birth_day" type="date">
-                <constraints nullable="false"/>
             </column>
         </createTable>
         <rollback>
