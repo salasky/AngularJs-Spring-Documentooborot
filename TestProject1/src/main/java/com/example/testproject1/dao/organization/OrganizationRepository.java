@@ -2,6 +2,7 @@ package com.example.testproject1.dao.organization;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.mapper.staff.OrganizationMapper;
 import com.example.testproject1.model.staff.Organization;
 import org.slf4j.Logger;
@@ -46,13 +47,13 @@ public class OrganizationRepository implements CrudRepository<Organization> {
      * {@inheritDoc}
      */
     @Override
-    public Organization create(Organization organization) {
+    public Organization create(Organization organization) throws DocflowRuntimeApplicationException {
         if (organization != null) {
             jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString()
                     , organization.getFullName(), organization.getShortName(), organization.getSupervisor(), organization.getContactNumber());
             return organization;
         } else {
-            throw new IllegalArgumentException("Organization не может быть null");
+            throw new DocflowRuntimeApplicationException("Organization не может быть null");
         }
     }
 

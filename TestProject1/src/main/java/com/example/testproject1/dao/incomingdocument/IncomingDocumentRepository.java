@@ -3,6 +3,7 @@ package com.example.testproject1.dao.incomingdocument;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.BaseDocumentRepositoryImpl;
 import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.mapper.document.IncomingDocumentMapper;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
@@ -51,7 +52,7 @@ public class IncomingDocumentRepository extends BaseDocumentRepositoryImpl imple
      * {@inheritDoc}
      */
     @Override
-    public IncomingDocument create(IncomingDocument incomingDocument) {
+    public IncomingDocument create(IncomingDocument incomingDocument) throws DocflowRuntimeApplicationException {
         if (incomingDocument != null) {
             super.create(incomingDocument);
             jdbcTemplate.update(INCOMING_DOCUMENT_CREATE_QUERY, incomingDocument.getId().toString(),
@@ -60,7 +61,7 @@ public class IncomingDocumentRepository extends BaseDocumentRepositoryImpl imple
                     incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
             return incomingDocument;
         } else {
-            throw new IllegalArgumentException("IncomingDocument не может быть null");
+            throw new DocflowRuntimeApplicationException("IncomingDocument не может быть null");
         }
     }
 

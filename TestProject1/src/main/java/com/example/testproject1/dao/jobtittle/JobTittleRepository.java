@@ -2,6 +2,7 @@ package com.example.testproject1.dao.jobtittle;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.exception.EntityExistInDataBaseException;
 import com.example.testproject1.mapper.staff.JobTittleMapper;
 import com.example.testproject1.model.staff.JobTittle;
@@ -64,12 +65,12 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public JobTittle create(JobTittle jobTittle) {
+    public JobTittle create(JobTittle jobTittle) throws DocflowRuntimeApplicationException {
         if (jobTittle != null) {
             jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getUuid().toString(), jobTittle.getName());
             return jobTittle;
         } else {
-            throw new IllegalArgumentException("JobTittle не может быть null");
+            throw new DocflowRuntimeApplicationException("JobTittle не может быть null");
         }
     }
 

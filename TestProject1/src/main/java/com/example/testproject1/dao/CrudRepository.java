@@ -1,6 +1,7 @@
 package com.example.testproject1.dao;
 
 import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +34,7 @@ public interface CrudRepository<T> {
      * @param obj объекта класса
      * @return возвращает Объект указанного класса
      */
-    T create(T obj);
+    T create(T obj) throws DocflowRuntimeApplicationException;
 
     /**
      * Метод обновления информации указанного объекта
