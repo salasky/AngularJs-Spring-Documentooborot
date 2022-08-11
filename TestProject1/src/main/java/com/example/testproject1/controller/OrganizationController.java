@@ -20,7 +20,7 @@ public class OrganizationController {
     private CrudService<Organization> organizationCrudService;
     @GetMapping
     public List<Organization> getAll(){
-        return organizationCrudService.getall();
+        return organizationCrudService.getAll();
     }
 
 }
