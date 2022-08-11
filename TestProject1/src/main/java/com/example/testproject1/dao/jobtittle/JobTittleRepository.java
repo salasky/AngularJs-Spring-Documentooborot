@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_GET_BY_ID_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_CREATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_DELETE_ALL_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_DELETE_BY_ID_QUERY;
@@ -56,11 +57,7 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
      */
     @Override
     public Optional<JobTittle> getById(String uuid) {
-        try {
-            return Optional.of(jdbcTemplate.queryForObject(JOB_TITTLE_GET_BY_ID_QUERY, jobTittleMapper, uuid));
-        } catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
+        return jdbcTemplate.query(JOB_TITTLE_GET_BY_ID_QUERY, jobTittleMapper, uuid).stream().findFirst();
     }
 
     /**
