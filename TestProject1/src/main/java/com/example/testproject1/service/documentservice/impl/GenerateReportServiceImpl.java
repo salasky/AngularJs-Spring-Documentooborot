@@ -63,9 +63,9 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     @Override
     public void saveReportByAuthor() {
         Map<Person, List<BaseDocument>> totalMap = new HashMap<>();
-        List<TaskDocument> taskDocumentList = taskDocumentService.getall();
-        List<IncomingDocument> incomingDocumentList = incomingDocumentService.getall();
-        List<OutgoingDocument> outgoingDocumentList = outgoingDocumentService.getall();
+        List<TaskDocument> taskDocumentList = taskDocumentService.getAll();
+        List<IncomingDocument> incomingDocumentList = incomingDocumentService.getAll();
+        List<OutgoingDocument> outgoingDocumentList = outgoingDocumentService.getAll();
 
         List<BaseDocument> baseDocuments = new ArrayList<>();
         baseDocuments.addAll(taskDocumentList);

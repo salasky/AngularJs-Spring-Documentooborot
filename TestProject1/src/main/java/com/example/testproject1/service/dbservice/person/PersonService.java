@@ -50,7 +50,7 @@ public class PersonService implements CrudService<Person> {
      */
     @Transactional
     @Override
-    public List<Person> getall() {
+    public List<Person> getAll() {
         LOGGER.info("Попытка выдачи всех Person");
         return personRepository.getAll();
     }

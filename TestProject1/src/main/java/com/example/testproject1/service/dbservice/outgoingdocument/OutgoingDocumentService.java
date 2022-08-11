@@ -49,7 +49,7 @@ public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
      */
     @Transactional
     @Override
-    public List<OutgoingDocument> getall() {
+    public List<OutgoingDocument> getAll() {
         LOGGER.info("Попытка выдачи всех OutgoingDocument");
         return outgoingDocumentRepository.getAll();
     }

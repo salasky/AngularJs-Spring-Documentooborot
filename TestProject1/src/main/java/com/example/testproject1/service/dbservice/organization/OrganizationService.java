@@ -52,7 +52,7 @@ public class OrganizationService implements CrudService<Organization> {
      */
     @Transactional
     @Override
-    public List<Organization> getall() {
+    public List<Organization> getAll() {
         LOGGER.info("Попытка выдачи всех Organization");
         return organizationRepository.getAll();
     }
