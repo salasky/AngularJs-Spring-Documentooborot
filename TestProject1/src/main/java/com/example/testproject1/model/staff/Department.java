@@ -1,15 +1,10 @@
 package com.example.testproject1.model.staff;
 
-import com.example.testproject1.model.document.BaseDocument;
-import com.example.testproject1.model.dto.ReportForJsonDTO;
-import liquibase.pro.packaged.S;
-
 import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.text.MessageFormat;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -123,6 +118,7 @@ public class Department extends Staff {
                         ", contactNumber= {4},organization = {5}");
         return form.format(taskArgs);
     }
+
     public static Department.DepartmentBuilder newBuilder() {
         return new Department().new DepartmentBuilder();
     }
@@ -143,22 +139,27 @@ public class Department extends Staff {
             Department.this.fullName = fullName;
             return this;
         }
+
         public DepartmentBuilder setShortName(String shortName) {
             Department.this.shortName = shortName;
             return this;
         }
+
         public DepartmentBuilder setSupervisor(String supervisor) {
             Department.this.supervisor = supervisor;
             return this;
         }
+
         public DepartmentBuilder setContactNumber(String contactNumber) {
             Department.this.contactNumber = contactNumber;
             return this;
         }
+
         public DepartmentBuilder setOrganization(Organization organization) {
             Department.this.organization = organization;
             return this;
         }
+
         /**
          * Метод build
          *

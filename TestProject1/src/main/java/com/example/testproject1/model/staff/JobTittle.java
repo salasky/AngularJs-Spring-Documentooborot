@@ -1,16 +1,11 @@
 package com.example.testproject1.model.staff;
 
-import com.example.testproject1.model.document.BaseDocument;
-import com.example.testproject1.model.dto.ReportForJsonDTO;
-import liquibase.pro.packaged.S;
-
 import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.text.MessageFormat;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -80,9 +75,11 @@ public class JobTittle {
         JobTittle jobTittle = (JobTittle) o;
         return Objects.equals(uuid, jobTittle.uuid) && Objects.equals(name, jobTittle.name);
     }
+
     public static JobTittle.JobTittleBuilder newBuilder() {
         return new JobTittle().new JobTittleBuilder();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -90,6 +87,7 @@ public class JobTittle {
     public int hashCode() {
         return Objects.hash(uuid, name);
     }
+
     /**
      * Внутренний класс Builder
      *
@@ -101,10 +99,12 @@ public class JobTittle {
             JobTittle.this.uuid = uuid;
             return this;
         }
+
         public JobTittleBuilder setName(String name) {
             JobTittle.this.name = name;
             return this;
         }
+
         /**
          * Метод build
          *

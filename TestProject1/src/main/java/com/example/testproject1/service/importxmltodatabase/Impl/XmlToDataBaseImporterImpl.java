@@ -31,12 +31,11 @@ public class XmlToDataBaseImporterImpl implements XmlToDataBaseImporter {
     }
 
     private void save(StorageService storageService, CrudService crudService) {
-        for (Object obj : storageService.getList()
-        ) {
+        for (Object obj : storageService.getList()) {
             try {
                 crudService.create(obj);
             } catch (DocflowRuntimeApplicationException e) {
-                LOGGER.error("Ошибка сохранения Staff сущности в базу данных");
+                LOGGER.error("Ошибка сохранения Staff сущности в базу данных",e);
             }
         }
     }

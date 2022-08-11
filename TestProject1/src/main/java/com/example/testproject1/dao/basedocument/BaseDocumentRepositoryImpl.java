@@ -8,11 +8,10 @@ import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumen
 import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumentQueryHolder.BASE_DOCUMENT_UPDATE_QUERY;
 
 /**
- * Класс реализующий интерфейс . Для выполнения операций с базой данных.
+ * Абстрактный класс для выполнения операций над {@link BaseDocument} в таблице base_document.
  *
  * @author smigranov
  */
-
 public abstract class BaseDocumentRepositoryImpl {
 
     /**

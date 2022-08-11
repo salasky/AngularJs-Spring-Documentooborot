@@ -1,9 +1,7 @@
 package com.example.testproject1.model.staff;
 
-import com.example.testproject1.model.dto.ReportForJsonDTO;
 import com.example.testproject1.service.jaxb.DateSQLTimeAdapter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import liquibase.pro.packaged.S;
 
 import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlElement;
@@ -181,9 +179,11 @@ public class Person extends Staff implements Comparable<Person> {
     public int hashCode() {
         return Objects.hash(super.hashCode(), lastName, secondName, firstName, jobTittle, photo, birthDay, phoneNumber);
     }
+
     public static Person.PersonBuilder newBuilder() {
         return new Person().new PersonBuilder();
     }
+
     /**
      * Внутренний класс Builder
      *
@@ -234,6 +234,7 @@ public class Person extends Staff implements Comparable<Person> {
             Person.this.department = department;
             return this;
         }
+
         /**
          * Метод build
          *

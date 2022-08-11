@@ -1,7 +1,5 @@
 package com.example.testproject1.model.staff;
 
-import com.example.testproject1.model.dto.ReportForJsonDTO;
-
 import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -104,9 +102,11 @@ public class Organization extends Staff {
         return form.format(taskArgs);
 
     }
+
     public static Organization.OrganizationBuilder newBuilder() {
         return new Organization().new OrganizationBuilder();
     }
+
     /**
      * Внутренний класс Builder
      *
@@ -117,22 +117,27 @@ public class Organization extends Staff {
             Organization.this.id = uuid;
             return this;
         }
+
         public OrganizationBuilder setFullName(String fullName) {
             Organization.this.fullName = fullName;
             return this;
         }
+
         public OrganizationBuilder setShortName(String shortName) {
             Organization.this.shortName = shortName;
             return this;
         }
+
         public OrganizationBuilder setSupervisor(String supervisor) {
             Organization.this.supervisor = supervisor;
             return this;
         }
+
         public OrganizationBuilder setContactNumber(String contactNumber) {
             Organization.this.contactNumber = contactNumber;
             return this;
         }
+
         /**
          * Метод build
          *

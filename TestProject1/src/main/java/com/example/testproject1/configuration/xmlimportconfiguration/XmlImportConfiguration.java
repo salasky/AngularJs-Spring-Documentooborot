@@ -30,6 +30,7 @@ public class XmlImportConfiguration {
 
     /**
      * Бин возвращающий сконфигурированный Map<StorageService, CrudService>
+     *
      * @return возвращает Map<StorageService, CrudService> c совпадающими значениями
      * в keys и values
      */
@@ -40,11 +41,12 @@ public class XmlImportConfiguration {
 
     /**
      * Вспомогательный метод для конфигурации map
-     * @param keys StorageService
+     *
+     * @param keys   StorageService
      * @param values CrudService
      * @return Map<StorageService, CrudService>
      */
-    Map<StorageService, CrudService> combineLists(List<StorageService> keys, List<CrudService> values) {
+    private Map<StorageService, CrudService> combineLists(List<StorageService> keys, List<CrudService> values) {
         if (keys.size() > values.size())
             throw new IllegalArgumentException("Unable to merge lists. StorageServiceList size must not be larger.");
         Map<StorageService, CrudService> map = new LinkedHashMap<>();
