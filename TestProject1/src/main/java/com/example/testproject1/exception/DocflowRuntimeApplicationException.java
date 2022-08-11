@@ -14,7 +14,9 @@ public class DocflowRuntimeApplicationException extends Exception {
      */
     private String message;
 
+
     public DocflowRuntimeApplicationException(String message) {
+        super(message);
         this.message = message;
     }
 

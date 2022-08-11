@@ -35,16 +35,14 @@ public class OrganizationController {
     public ResponseEntity<Organization> getById(@PathVariable String id) {
         Optional<Organization> organization=organizationCrudService.getById(id);
         if(organization.isPresent()){
-            throw new RuntimeException();
-            /*return ResponseEntity.status(HttpStatus.OK).body(organizationCrudService.getById(id).get());*/
+            return ResponseEntity.status(HttpStatus.OK).body(organizationCrudService.getById(id).get());
         }
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PostMapping("/add")
     public ResponseEntity<Organization> addOrganization(@RequestBody Organization organization) throws DocflowRuntimeApplicationException {
-        /*return ResponseEntity.status(HttpStatus.CREATED).body(organizationCrudService.create(organization));*/
-        throw new DocflowRuntimeApplicationException("d");
+        return ResponseEntity.status(HttpStatus.CREATED).body(organizationCrudService.create(organization));
     }
 
 
