@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_UPDATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_CREATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_DELETE_ALL_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_DELETE_BY_ID_QUERY;
@@ -59,14 +60,13 @@ public class PersonRepository implements CrudRepository<Person> {
      */
     @Override
     public Person create(Person person) throws DocflowRuntimeApplicationException {
-        if (person != null) {
-            jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
-                    person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
-                    person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
-            return person;
-        } else {
+        if (person == null) {
             throw new DocflowRuntimeApplicationException("Person не может быть null");
         }
+        jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
+                person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
+                person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
+        return person;
     }
 
     /**
@@ -90,10 +90,15 @@ public class PersonRepository implements CrudRepository<Person> {
      * {@inheritDoc}
      */
     @Override
-    public int update(Person person) {
-        return jdbcTemplate.update(PERSON_UPDATE_QUERY, person.getFirstName(), person.getSecondName(),
+    public Person update(Person person) throws DocflowRuntimeApplicationException {
+        if (person == null) {
+            throw new DocflowRuntimeApplicationException("Person не может быть null");
+
+        }
+        jdbcTemplate.update(PERSON_UPDATE_QUERY, person.getFirstName(), person.getSecondName(),
                 person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
                 person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay(), person.getId().toString());
+        return person;
     }
 
     /**
@@ -108,12 +113,8 @@ public class PersonRepository implements CrudRepository<Person> {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeleteByIdException {
-        int deleteCount = jdbcTemplate.update(PERSON_DELETE_BY_ID_QUERY, id);
-        if (deleteCount == 1) {
-            return true;
-        }
-        throw new DeleteByIdException("Person");
+    public void deleteById(String id) {
+        jdbcTemplate.update(PERSON_DELETE_BY_ID_QUERY, id);
     }
 
     /**

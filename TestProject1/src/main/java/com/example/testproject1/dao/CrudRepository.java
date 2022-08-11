@@ -1,6 +1,5 @@
 package com.example.testproject1.dao;
 
-import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 
 import java.util.List;
@@ -31,18 +30,18 @@ public interface CrudRepository<T> {
     /**
      * Метод сохранения объекта указанного класса в базу данных
      *
-     * @param obj объекта класса
+     * @param entity объекта класса
      * @return возвращает Объект указанного класса
      */
-    T create(T obj) throws DocflowRuntimeApplicationException;
+    T create(T entity) throws DocflowRuntimeApplicationException;
 
     /**
      * Метод обновления информации указанного объекта
      *
-     * @param obj объект класса
-     * @return возвращает количество измененных строк. 0 при неудаче.
+     * @param entity объект класса
+     * @return возвращает измененный объект
      */
-    int update(T obj);
+    T update(T entity) throws DocflowRuntimeApplicationException;
 
     /**
      * Метод удаления всех записей с таблицы
@@ -54,7 +53,7 @@ public interface CrudRepository<T> {
      *
      * @param id UUID в строковом формате
      */
-    boolean deleteById(String id) throws DeleteByIdException;
+    void deleteById(String id);
 
     /**
      * Метод проверки существования объекта в базе по переданному uuid

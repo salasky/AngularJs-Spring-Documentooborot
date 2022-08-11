@@ -35,12 +35,8 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
     @Transactional
     @Override
     public TaskDocument create(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
-        TaskDocument taskDocumentDB = taskDocumentRepository.create(taskDocument);
-        if (taskDocumentDB != null) {
-            LOGGER.info("TaskDocument успешно сохранен");
-            return taskDocumentDB;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения TaskDocument");
+        LOGGER.info("Попытка создания TaskDocument");
+        return taskDocumentRepository.create(taskDocument);
     }
 
     /**
@@ -68,12 +64,7 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
     @Override
     public TaskDocument update(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у TaskDocument с id {0}", taskDocument.getId().toString()));
-        int updateCount = taskDocumentRepository.update(taskDocument);
-        if (updateCount > 0) {
-            LOGGER.info("TaskDocument успешно обновлен");
-            return taskDocument;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления TaskDocument");
+        return taskDocumentRepository.update(taskDocument);
     }
 
     /**
@@ -89,11 +80,8 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) throws DocflowRuntimeApplicationException {
-        try {
-            taskDocumentRepository.deleteById(id);
-        } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException("Запись из таблицы TaskDocument не удалена");
-        }
+    public void deleteById(String id) {
+        LOGGER.info(MessageFormat.format("Попытка удаления TaskDocument с id {0}",id));
+        taskDocumentRepository.deleteById(id);
     }
 }

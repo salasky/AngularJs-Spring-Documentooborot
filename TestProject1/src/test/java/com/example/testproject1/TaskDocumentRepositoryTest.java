@@ -2,6 +2,7 @@ package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
@@ -36,7 +37,7 @@ public class TaskDocumentRepositoryTest {
     public static void init(@Autowired CrudRepository<Person> personRepository,
                             @Autowired CrudRepository<Organization> organizationRepository,
                             @Autowired CrudRepository<JobTittle> jobTittleRepository,
-                            @Autowired CrudRepository<Department> departmentRepository) {
+                            @Autowired CrudRepository<Department> departmentRepository) throws DocflowRuntimeApplicationException {
         if (personRepository.getAll().size() == 0) {
             Organization organization = Organization.newBuilder()
                     .setId(UUID.randomUUID())
@@ -94,7 +95,7 @@ public class TaskDocumentRepositoryTest {
 
     @DisplayName("TaskDocumentRepository create test successful")
     @Test
-    void taskDocumentRepositoryCreateTest() {
+    void taskDocumentRepositoryCreateTest() throws DocflowRuntimeApplicationException {
 
         TaskDocument taskDocumentExpected = getTaskDocument();
         UUID uuid = taskDocumentExpected.getId();
@@ -112,7 +113,7 @@ public class TaskDocumentRepositoryTest {
 
     @DisplayName("TaskDocumentRepository deleteAll test successful")
     @Test
-    void taskDocumentRepositoryDeleteAllTest() {
+    void taskDocumentRepositoryDeleteAllTest() throws DocflowRuntimeApplicationException {
         if (taskDocumentCrudRepository.getAll().isEmpty()) {
             taskDocumentCrudRepository.create(getTaskDocument());
         }
@@ -122,21 +123,17 @@ public class TaskDocumentRepositoryTest {
 
     @DisplayName("TaskDocumentRepository deleteById test successful")
     @Test
-    void taskDocumentRepositoryDeleteByIdTest() {
+    void taskDocumentRepositoryDeleteByIdTest() throws DocflowRuntimeApplicationException {
         TaskDocument taskDocument = getTaskDocument();
         UUID uuid = taskDocument.getId();
         taskDocumentCrudRepository.create(taskDocument);
-        try {
-            taskDocumentCrudRepository.deleteById(uuid.toString());
-        } catch (DeleteByIdException e) {
-            throw new RuntimeException(e);
-        }
+        taskDocumentCrudRepository.deleteById(uuid.toString());
         Assertions.assertTrue(taskDocumentCrudRepository.getById(uuid.toString()).isEmpty());
     }
 
     @DisplayName("TaskDocumentRepository update test successful")
     @Test
-    void taskDocumentRepositoryUpdateTest() {
+    void taskDocumentRepositoryUpdateTest() throws DocflowRuntimeApplicationException {
         if (taskDocumentCrudRepository.getAll().isEmpty()) {
             taskDocumentCrudRepository.create(getTaskDocument());
         }

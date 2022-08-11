@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.example.testproject1.queryholder.incomingdocumentquery.IncomingDocumentQueryHolder.INCOMING_DOCUMENT_UPDATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_GET_BY_ID_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_CREATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_DELETE_ALL_QUERY;
@@ -66,12 +67,11 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
      */
     @Override
     public JobTittle create(JobTittle jobTittle) throws DocflowRuntimeApplicationException {
-        if (jobTittle != null) {
-            jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getUuid().toString(), jobTittle.getName());
-            return jobTittle;
-        } else {
+        if (jobTittle == null) {
             throw new DocflowRuntimeApplicationException("JobTittle не может быть null");
         }
+        jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getUuid().toString(), jobTittle.getName());
+        return jobTittle;
     }
 
     /**
@@ -92,8 +92,12 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public int update(JobTittle jobTittle) {
-        return jdbcTemplate.update(JOB_TITTLE_UPDATE_ID_QUERY, jobTittle.getName(), jobTittle.getUuid().toString());
+    public JobTittle update(JobTittle jobTittle) throws DocflowRuntimeApplicationException {
+        if (jobTittle == null) {
+            throw new DocflowRuntimeApplicationException("JobTittle не может быть null");
+        }
+        jdbcTemplate.update(JOB_TITTLE_UPDATE_ID_QUERY, jobTittle.getName(), jobTittle.getUuid().toString());
+        return jobTittle;
     }
 
     /**
@@ -108,12 +112,8 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeleteByIdException {
-        int deleteCount = jdbcTemplate.update(JOB_TITTLE_DELETE_BY_ID_QUERY, id);
-        if (deleteCount == 1) {
-            return true;
-        }
-        throw new DeleteByIdException("JobTittle");
+    public void deleteById(String id) {
+        jdbcTemplate.update(JOB_TITTLE_DELETE_BY_ID_QUERY, id);
     }
 
     /**

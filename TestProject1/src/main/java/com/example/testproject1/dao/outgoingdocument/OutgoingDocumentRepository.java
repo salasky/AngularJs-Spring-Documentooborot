@@ -22,6 +22,7 @@ import static com.example.testproject1.queryholder.outgoingdocumentquery.Outgoin
 import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_GET_ALL_QUERY;
 import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_GET_BY_ID_QUERY;
 import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_UPDATE_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_UPDATE_QUERY;
 
 /**
  * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
@@ -52,15 +53,14 @@ public class OutgoingDocumentRepository extends BaseDocumentRepositoryImpl imple
      */
     @Override
     public OutgoingDocument create(OutgoingDocument outgoingDocument) throws DocflowRuntimeApplicationException {
-        if (outgoingDocument != null) {
-            super.create(outgoingDocument);
-            jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
-                    outgoingDocument.getSender().getId().toString(),
-                    outgoingDocument.getDeliveryType().toString());
-            return outgoingDocument;
-        } else {
+        if (outgoingDocument == null) {
             throw new DocflowRuntimeApplicationException("OutgoingDocument не может быть null");
         }
+        super.create(outgoingDocument);
+        jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
+                outgoingDocument.getSender().getId().toString(),
+                outgoingDocument.getDeliveryType().toString());
+        return outgoingDocument;
     }
 
     /**
@@ -84,10 +84,14 @@ public class OutgoingDocumentRepository extends BaseDocumentRepositoryImpl imple
      * {@inheritDoc}
      */
     @Override
-    public int update(OutgoingDocument outgoingDocument) {
-        int count = super.update(outgoingDocument);
-        return jdbcTemplate.update(OUTGOING_DOCUMENT_UPDATE_QUERY, outgoingDocument.getSender().getId().toString(),
-                outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString()) + count;
+    public OutgoingDocument update(OutgoingDocument outgoingDocument) throws DocflowRuntimeApplicationException {
+        super.update(outgoingDocument);
+        if (outgoingDocument == null) {
+            throw new DocflowRuntimeApplicationException("OutgoingDocument не может быть null");
+        }
+        jdbcTemplate.update(OUTGOING_DOCUMENT_UPDATE_QUERY, outgoingDocument.getSender().getId().toString(),
+                outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString());
+        return outgoingDocument;
     }
 
     /**
@@ -102,12 +106,8 @@ public class OutgoingDocumentRepository extends BaseDocumentRepositoryImpl imple
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeleteByIdException {
-        int deleteCount = jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_BY_ID_QUERY, id);
-        if (deleteCount == 1) {
-            return true;
-        }
-        throw new DeleteByIdException("OutgoingDocument");
+    public void deleteById(String id) {
+        jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_BY_ID_QUERY, id);
     }
 
     /**

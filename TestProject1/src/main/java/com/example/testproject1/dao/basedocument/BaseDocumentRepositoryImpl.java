@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumentQueryHolder.BASE_DOCUMENT_CREATE_QUERY;
 import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumentQueryHolder.BASE_DOCUMENT_UPDATE_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_UPDATE_QUERY;
 
 /**
  * Абстрактный класс для выполнения операций над {@link BaseDocument} в таблице base_document.
@@ -25,21 +26,24 @@ public abstract class BaseDocumentRepositoryImpl {
      * {@inheritDoc}
      */
     public BaseDocument create(BaseDocument baseDocument) throws DocflowRuntimeApplicationException {
-        if (baseDocument != null) {
-            jdbcTemplate.update(BASE_DOCUMENT_CREATE_QUERY, baseDocument.getId().toString(), baseDocument.getName(), baseDocument.getText(),
-                    baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString());
-            return baseDocument;
-        } else {
+        if (baseDocument==null) {
             throw new DocflowRuntimeApplicationException("BaseDocument не может быть null");
         }
+        jdbcTemplate.update(BASE_DOCUMENT_CREATE_QUERY, baseDocument.getId().toString(), baseDocument.getName(), baseDocument.getText(),
+                baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString());
+        return baseDocument;
     }
 
     /**
      * {@inheritDoc}
      */
-    public int update(BaseDocument baseDocument) {
-        return jdbcTemplate.update(BASE_DOCUMENT_UPDATE_QUERY, baseDocument.getName(), baseDocument.getText(),
+    public BaseDocument update(BaseDocument baseDocument) throws DocflowRuntimeApplicationException {
+        if (baseDocument == null) {
+            throw new DocflowRuntimeApplicationException("BaseDocument не может быть null");
+        }
+        jdbcTemplate.update(BASE_DOCUMENT_UPDATE_QUERY, baseDocument.getName(), baseDocument.getText(),
                 baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString(),
                 baseDocument.getId().toString());
+        return baseDocument;
     }
 }

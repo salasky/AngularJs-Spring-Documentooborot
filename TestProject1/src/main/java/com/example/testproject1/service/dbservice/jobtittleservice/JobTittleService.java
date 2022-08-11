@@ -67,12 +67,7 @@ public class JobTittleService implements CrudService<JobTittle> {
     @Override
     public JobTittle update(JobTittle jobTittle) throws DocflowRuntimeApplicationException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у JobTittle с id {0}", jobTittle.getUuid().toString()));
-        int updateCount = jobTittleRepository.update(jobTittle);
-        if (updateCount == 1) {
-            LOGGER.info("JobTittle успешно обновлен");
-            return jobTittle;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления JobTittle");
+        return jobTittleRepository.update(jobTittle);
     }
 
     /**
@@ -88,11 +83,8 @@ public class JobTittleService implements CrudService<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) throws DocflowRuntimeApplicationException {
-        try {
-            jobTittleRepository.deleteById(id);
-        } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException("Запись из таблицы JobTittle не удалена");
-        }
+    public void deleteById(String id) {
+        LOGGER.info(MessageFormat.format("Попытка удаления JobTittle с id {0}",id));
+        jobTittleRepository.deleteById(id);
     }
 }

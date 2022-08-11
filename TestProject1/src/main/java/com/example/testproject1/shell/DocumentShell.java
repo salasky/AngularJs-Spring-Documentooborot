@@ -2,7 +2,6 @@ package com.example.testproject1.shell;
 
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.documentservice.GenerateDocumentService;
@@ -13,10 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-
-import java.sql.Timestamp;
-import java.util.Random;
-import java.util.UUID;
 
 /**
  * Класс для работы с терминалом shell и запуска генерации документов и отчетов
@@ -50,7 +45,7 @@ public class DocumentShell {
     public void generate(@ShellOption(defaultValue = "1000") int a) {
         Integer countDocument = Integer.valueOf(a);
         LOGGER.info("Попытка сгенерировать документы");
-        generateDocumentService.createAndSaveDocument(countDocument);
+        generateDocumentService.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
         generateReportService.saveReportByAuthor();
     }

@@ -14,10 +14,10 @@ public interface CrudService<T> {
     /**
      * Метод сохранения объекта указанного класса в базу данных
      *
-     * @param object объекта класса
-     * @return возвращает Optional<Объект указанного класса>
+     * @param entity объекта класса
+     * @return возвращает Объект указанного класса
      */
-    T create(T object) throws DocflowRuntimeApplicationException;
+    T create(T entity) throws DocflowRuntimeApplicationException;
 
     /**
      * Метод получения всех объектов указанного из базы данных
@@ -37,10 +37,10 @@ public interface CrudService<T> {
     /**
      * Метод обновления информации указанного объекта
      *
-     * @param object объект указанного класса
-     * @return возвращает null или объект
+     * @param entity объект указанного класса
+     * @return возвращает объект
      */
-    T update(T object) throws DocflowRuntimeApplicationException;
+    T update(T entity) throws DocflowRuntimeApplicationException;
 
     /**
      * Метод удаления всех записей с таблицы
@@ -52,5 +52,5 @@ public interface CrudService<T> {
      *
      * @param id UUID в строковом формате
      */
-    void deleteById(String id) throws DocflowRuntimeApplicationException;
+    void deleteById(String id);
 }

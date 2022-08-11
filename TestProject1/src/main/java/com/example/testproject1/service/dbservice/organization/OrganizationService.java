@@ -39,12 +39,8 @@ public class OrganizationService implements CrudService<Organization> {
     @Transactional
     @Override
     public Organization create(Organization organization) throws DocflowRuntimeApplicationException {
-        Organization organizationDB = organizationRepository.create(organization);
-        if (organizationDB != null) {
-            LOGGER.info("Organization успешно сохранен");
-            return organizationDB;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения Organization");
+        LOGGER.info("Попытка создания Organization");
+        return organizationRepository.create(organization);
     }
 
     /**
@@ -72,12 +68,7 @@ public class OrganizationService implements CrudService<Organization> {
     @Override
     public Organization update(Organization organization) throws DocflowRuntimeApplicationException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у Organization с id {0}", organization.getId().toString()));
-        int updateCount = organizationRepository.update(organization);
-        if (updateCount == 1) {
-            LOGGER.info("Organization успешно обновлен");
-            return organization;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления Organization");
+        return organizationRepository.update(organization);
     }
 
     /**
@@ -93,11 +84,8 @@ public class OrganizationService implements CrudService<Organization> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) throws DocflowRuntimeApplicationException {
-        try {
-            organizationRepository.deleteById(id);
-        } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException("Запись из таблицы Organization не удалена");
-        }
+    public void deleteById(String id) {
+        LOGGER.info(MessageFormat.format("Попытка удаления Organization с id {0}",id));
+        organizationRepository.deleteById(id);
     }
 }

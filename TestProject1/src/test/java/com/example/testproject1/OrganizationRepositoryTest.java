@@ -2,6 +2,7 @@ package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.staff.Organization;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,7 +24,7 @@ class OrganizationRepositoryTest {
 
     @BeforeAll
     public static void init(
-            @Autowired CrudRepository<Organization> organizationRepository) {
+            @Autowired CrudRepository<Organization> organizationRepository) throws DocflowRuntimeApplicationException {
         if (organizationRepository.getAll().size() == 0) {
             Organization organization = Organization.newBuilder()
                     .setId(UUID.randomUUID())
@@ -46,7 +47,7 @@ class OrganizationRepositoryTest {
 
     @DisplayName("OrganizationRepository create test successful")
     @Test
-    void organizationRepositoryCreateTest() {
+    void organizationRepositoryCreateTest() throws DocflowRuntimeApplicationException {
         Organization organizationEx = getOrganization();
         UUID uuid = organizationEx.getId();
         organizationCrudRepository.create(organizationEx);
@@ -57,7 +58,7 @@ class OrganizationRepositoryTest {
 
     @DisplayName("OrganizationRepository deleteAll test successful")
     @Test
-    void organizationRepositoryDeleteAllTest() {
+    void organizationRepositoryDeleteAllTest() throws DocflowRuntimeApplicationException {
         if (organizationCrudRepository.getAll().isEmpty()) {
             organizationCrudRepository.create(getOrganization());
         }
@@ -67,21 +68,17 @@ class OrganizationRepositoryTest {
 
     @DisplayName("OrganizationRepository deleteById test successful")
     @Test
-    void organizationRepositoryDeleteByIdTest() {
+    void organizationRepositoryDeleteByIdTest() throws DocflowRuntimeApplicationException {
         Organization organization = getOrganization();
         UUID uuid = organization.getId();
         organizationCrudRepository.create(organization);
-        try {
-            organizationCrudRepository.deleteById(uuid.toString());
-        } catch (DeleteByIdException e) {
-            throw new RuntimeException(e);
-        }
+        organizationCrudRepository.deleteById(uuid.toString());
         Assertions.assertTrue(organizationCrudRepository.getById(uuid.toString()).isEmpty());
     }
 
     @DisplayName("OrganizationRepository update test successful")
     @Test
-    void organizationRepositoryUpdateTest() {
+    void organizationRepositoryUpdateTest() throws DocflowRuntimeApplicationException {
         Organization organization = getOrganization();
         UUID uuid = organization.getId();
         organizationCrudRepository.create(organization);

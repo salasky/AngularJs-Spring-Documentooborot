@@ -36,12 +36,8 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
     @Transactional
     @Override
     public IncomingDocument create(IncomingDocument incomingDocument) throws DocflowRuntimeApplicationException {
-        IncomingDocument incomingDocumentDB = incomingDocumentRepository.create(incomingDocument);
-        if (incomingDocumentDB != null) {
-            LOGGER.info("IncomingDocument успешно сохранен");
-            return incomingDocumentDB;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения IncomingDocument");
+        LOGGER.info("Попытка создания IncomingDocument");
+        return incomingDocumentRepository.create(incomingDocument);
     }
 
     /**
@@ -69,12 +65,7 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
     @Override
     public IncomingDocument update(IncomingDocument incomingDocument) throws DocflowRuntimeApplicationException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у IncomingDocument с id {0}", incomingDocument.getId().toString()));
-        int updateCount = incomingDocumentRepository.update(incomingDocument);
-        if (updateCount > 0) {
-            LOGGER.info("IncomingDocument успешно обновлен");
-            return incomingDocument;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления IncomingDocument");
+        return incomingDocumentRepository.update(incomingDocument);
     }
 
     /**
@@ -90,11 +81,8 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) throws DocflowRuntimeApplicationException {
-        try {
-            incomingDocumentRepository.deleteById(id);
-        } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException("Запись из таблицы incoming_document не удалена");
-        }
+    public void deleteById(String id) {
+        LOGGER.info(MessageFormat.format("Попытка удаления IncomingDocument с id {0}",id));
+        incomingDocumentRepository.deleteById(id);
     }
 }

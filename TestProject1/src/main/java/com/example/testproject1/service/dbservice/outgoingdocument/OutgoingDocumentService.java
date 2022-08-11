@@ -36,14 +36,9 @@ public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
     @Transactional
     @Override
     public OutgoingDocument create(OutgoingDocument outgoingDocument) throws DocflowRuntimeApplicationException {
-        OutgoingDocument outgoingDocumentDB = outgoingDocumentRepository.create(outgoingDocument);
-        if (outgoingDocumentDB != null) {
-            LOGGER.info("OutgoingDocument успешно сохранен");
-            return outgoingDocumentDB;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения OutgoingDocument");
+        LOGGER.info("Попытка создания OutgoingDocument");
+        return outgoingDocumentRepository.create(outgoingDocument);
     }
-
     /**
      * {@inheritDoc}
      */
@@ -69,12 +64,7 @@ public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
     @Override
     public OutgoingDocument update(OutgoingDocument outgoingDocument) throws DocflowRuntimeApplicationException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у OutgoingDocument с id {0}", outgoingDocument.getId().toString()));
-        int updateCount = outgoingDocumentRepository.update(outgoingDocument);
-        if (updateCount > 0) {
-            LOGGER.info("OutgoingDocument успешно обновлен");
-            return outgoingDocument;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления OutgoingDocument");
+        return outgoingDocumentRepository.update(outgoingDocument);
     }
 
     /**
@@ -90,11 +80,8 @@ public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) throws DocflowRuntimeApplicationException {
-        try {
-            outgoingDocumentRepository.deleteById(id);
-        } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException("Запись из таблицы OutgoingDocument не удалена");
-        }
+    public void deleteById(String id) {
+        LOGGER.info(MessageFormat.format("Попытка удаления OutgoingDocument с id {0}",id));
+       outgoingDocumentRepository.deleteById(id);
     }
 }

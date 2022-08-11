@@ -2,6 +2,7 @@ package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
@@ -36,7 +37,7 @@ public class IncomingDocumentRepositoryTest {
     public static void init(@Autowired CrudRepository<Person> personRepository,
                             @Autowired CrudRepository<Organization> organizationRepository,
                             @Autowired CrudRepository<JobTittle> jobTittleRepository,
-                            @Autowired CrudRepository<Department> departmentRepository) {
+                            @Autowired CrudRepository<Department> departmentRepository) throws DocflowRuntimeApplicationException {
         if (personRepository.getAll().size() == 0) {
             Organization organization = Organization.newBuilder()
                     .setId(UUID.randomUUID())
@@ -94,7 +95,7 @@ public class IncomingDocumentRepositoryTest {
 
     @DisplayName("IncomingDocumentRepository create test successful")
     @Test
-    void incomingDocumentRepositoryCreateTest() {
+    void incomingDocumentRepositoryCreateTest() throws DocflowRuntimeApplicationException {
 
         IncomingDocument incomingDocumentExpected = getIncomingDocument();
         UUID uuid = incomingDocumentExpected.getId();
@@ -112,7 +113,7 @@ public class IncomingDocumentRepositoryTest {
 
     @DisplayName("IncomingDocumentRepository deleteAll test successful")
     @Test
-    void incomingDocumentRepositoryDeleteAllTest() {
+    void incomingDocumentRepositoryDeleteAllTest() throws DocflowRuntimeApplicationException {
         if (incomingDocumentCrudRepository.getAll().isEmpty()) {
             incomingDocumentCrudRepository.create(getIncomingDocument());
         }
@@ -122,21 +123,17 @@ public class IncomingDocumentRepositoryTest {
 
     @DisplayName("IncomingDocumentRepository deleteById test successful")
     @Test
-    void incomingDocumentRepositoryDeleteByIdTest() {
+    void incomingDocumentRepositoryDeleteByIdTest() throws DocflowRuntimeApplicationException {
         IncomingDocument incomingDocument = getIncomingDocument();
         UUID uuid = incomingDocument.getId();
         incomingDocumentCrudRepository.create(incomingDocument);
-        try {
-            incomingDocumentCrudRepository.deleteById(uuid.toString());
-        } catch (DeleteByIdException e) {
-            throw new RuntimeException(e);
-        }
+        incomingDocumentCrudRepository.deleteById(uuid.toString());
         Assertions.assertTrue(incomingDocumentCrudRepository.getById(uuid.toString()).isEmpty());
     }
 
     @DisplayName("IncomingDocumentRepository update test successful")
     @Test
-    void incomingDocumentRepositoryUpdateTest() {
+    void incomingDocumentRepositoryUpdateTest() throws DocflowRuntimeApplicationException {
         if (incomingDocumentCrudRepository.getAll().isEmpty()) {
             incomingDocumentCrudRepository.create(getIncomingDocument());
         }

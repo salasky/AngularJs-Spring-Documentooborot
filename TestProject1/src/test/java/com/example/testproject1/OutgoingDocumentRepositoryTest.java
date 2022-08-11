@@ -2,6 +2,7 @@ package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.documentenum.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Department;
@@ -38,7 +39,7 @@ public class OutgoingDocumentRepositoryTest {
     public static void init(@Autowired CrudRepository<Person> personRepository,
                             @Autowired CrudRepository<Organization> organizationRepository,
                             @Autowired CrudRepository<JobTittle> jobTittleRepository,
-                            @Autowired CrudRepository<Department> departmentRepository) {
+                            @Autowired CrudRepository<Department> departmentRepository) throws DocflowRuntimeApplicationException {
         if (personRepository.getAll().size() == 0) {
             Organization organization = Organization.newBuilder()
                     .setId(UUID.randomUUID())
@@ -94,7 +95,7 @@ public class OutgoingDocumentRepositoryTest {
 
     @DisplayName("OutgoingDocumentRepository create test successful")
     @Test
-    void outgoingDocumentRepositoryCreateTest() {
+    void outgoingDocumentRepositoryCreateTest() throws DocflowRuntimeApplicationException {
 
         OutgoingDocument outgoingDocumentExpected = getOutgoingDocument();
         UUID uuid = outgoingDocumentExpected.getId();
@@ -113,7 +114,7 @@ public class OutgoingDocumentRepositoryTest {
 
     @DisplayName("OutgoingDocumentRepository deleteAll test successful")
     @Test
-    void outgoingDocumentRepositoryDeleteAllTest() {
+    void outgoingDocumentRepositoryDeleteAllTest() throws DocflowRuntimeApplicationException {
         if (outgoingDocumentCrudRepository.getAll().isEmpty()) {
             outgoingDocumentCrudRepository.create(getOutgoingDocument());
         }
@@ -123,21 +124,17 @@ public class OutgoingDocumentRepositoryTest {
 
     @DisplayName("OutgoingDocumentRepository deleteById test successful")
     @Test
-    void outgoingDocumentRepositoryDeleteByIdTest() {
+    void outgoingDocumentRepositoryDeleteByIdTest() throws DocflowRuntimeApplicationException {
         OutgoingDocument outgoingDocument = getOutgoingDocument();
         UUID uuid = outgoingDocument.getId();
         outgoingDocumentCrudRepository.create(outgoingDocument);
-        try {
-            outgoingDocumentCrudRepository.deleteById(uuid.toString());
-        } catch (DeleteByIdException e) {
-            throw new RuntimeException(e);
-        }
+        outgoingDocumentCrudRepository.deleteById(uuid.toString());
         Assertions.assertTrue(outgoingDocumentCrudRepository.getById(uuid.toString()).isEmpty());
     }
 
     @DisplayName("OutgoingDocumentRepository update test successful")
     @Test
-    void outgoingDocumentRepositoryUpdateTest() {
+    void outgoingDocumentRepositoryUpdateTest() throws DocflowRuntimeApplicationException {
         if (outgoingDocumentCrudRepository.getAll().isEmpty()) {
             outgoingDocumentCrudRepository.create(getOutgoingDocument());
         }

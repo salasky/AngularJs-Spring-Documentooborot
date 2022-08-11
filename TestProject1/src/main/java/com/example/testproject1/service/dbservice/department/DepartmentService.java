@@ -38,12 +38,8 @@ public class DepartmentService implements CrudService<Department> {
     @Transactional
     @Override
     public Department create(Department department) throws DocflowRuntimeApplicationException {
-        Department departmentDB = departmentRepository.create(department);
-        if (departmentDB != null) {
-            LOGGER.info("Department успешно сохранен");
-            return departmentDB;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения Department");
+        LOGGER.info("Попытка создания Department");
+        return departmentRepository.create(department);
     }
 
     /**
@@ -71,12 +67,7 @@ public class DepartmentService implements CrudService<Department> {
     @Override
     public Department update(Department department) throws DocflowRuntimeApplicationException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у Department с id {0}", department.getId().toString()));
-        int updateCount = departmentRepository.update(department);
-        if (updateCount == 1) {
-            LOGGER.info("Department успешно обновлен");
-            return department;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления Department");
+        return departmentRepository.update(department);
     }
 
     /**
@@ -92,11 +83,8 @@ public class DepartmentService implements CrudService<Department> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) throws DocflowRuntimeApplicationException {
-        try {
-            departmentRepository.deleteById(id);
-        } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException("Запись из таблицы department не удалена");
-        }
+    public void deleteById(String id){
+        LOGGER.info(MessageFormat.format("Попытка удаления Department с id {0}",id));
+        departmentRepository.deleteById(id);
     }
 }

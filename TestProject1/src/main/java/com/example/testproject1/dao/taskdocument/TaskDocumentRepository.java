@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_UPDATE_QUERY;
 import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumentQueryHolder.TASK_DOCUMENT_CREATE_QUERY;
 import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumentQueryHolder.TASK_DOCUMENT_DELETE_ALL_QUERY;
 import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumentQueryHolder.TASK_DOCUMENT_DELETE_BY_ID_QUERY;
@@ -52,15 +53,14 @@ public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implement
      */
     @Override
     public TaskDocument create(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
-        if (taskDocument != null) {
-            super.create(taskDocument);
-            jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate(),
-                    taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
-                    taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
-            return taskDocument;
-        } else {
+        if (taskDocument == null) {
             throw new DocflowRuntimeApplicationException("TaskDocument не может быть null");
         }
+        super.create(taskDocument);
+        jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate(),
+                taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
+                taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
+        return taskDocument;
     }
 
     /**
@@ -84,11 +84,15 @@ public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implement
      * {@inheritDoc}
      */
     @Override
-    public int update(TaskDocument taskDocument) {
-        int baseDocumentCount = super.update(taskDocument);
-        return jdbcTemplate.update(TASK_DOCUMENT_UPDATE_QUERY, taskDocument.getOutDate(), taskDocument.getExecPeriod(),
+    public TaskDocument update(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
+        super.update(taskDocument);
+        if (taskDocument == null) {
+            throw new DocflowRuntimeApplicationException("TaskDocument не может быть null");
+        }
+        jdbcTemplate.update(TASK_DOCUMENT_UPDATE_QUERY, taskDocument.getOutDate(), taskDocument.getExecPeriod(),
                 taskDocument.getResponsible().getId().toString(), taskDocument.getSignOfControl(),
-                taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString()) + baseDocumentCount;
+                taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString());
+        return taskDocument;
     }
 
     /**
@@ -103,12 +107,8 @@ public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implement
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeleteByIdException {
-        int deleteCount = jdbcTemplate.update(TASK_DOCUMENT_DELETE_BY_ID_QUERY, id);
-        if (deleteCount == 1) {
-            return true;
-        }
-        throw new DeleteByIdException("TaskDocument");
+    public void deleteById(String id) {
+        jdbcTemplate.update(TASK_DOCUMENT_DELETE_BY_ID_QUERY, id);
     }
 
     /**

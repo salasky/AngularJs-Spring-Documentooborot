@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_GET_BY_ID_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_UPDATE_ID_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_CREATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_DELETE_ALL_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_DELETE_BY_ID_QUERY;
@@ -48,22 +49,25 @@ public class OrganizationRepository implements CrudRepository<Organization> {
      */
     @Override
     public Organization create(Organization organization) throws DocflowRuntimeApplicationException {
-        if (organization != null) {
-            jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString()
-                    , organization.getFullName(), organization.getShortName(), organization.getSupervisor(), organization.getContactNumber());
-            return organization;
-        } else {
+        if (organization == null) {
             throw new DocflowRuntimeApplicationException("Organization не может быть null");
         }
+        jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString()
+                , organization.getFullName(), organization.getShortName(), organization.getSupervisor(), organization.getContactNumber());
+        return organization;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public int update(Organization organization) {
-        return jdbcTemplate.update(ORGANIZATION_UPDATE_QUERY, organization.getFullName(), organization.getShortName(),
+    public Organization update(Organization organization) throws DocflowRuntimeApplicationException {
+        if (organization == null) {
+            throw new DocflowRuntimeApplicationException("Organization не может быть null");
+        }
+        jdbcTemplate.update(ORGANIZATION_UPDATE_QUERY, organization.getFullName(), organization.getShortName(),
                 organization.getSupervisor(), organization.getContactNumber(), organization.getId().toString());
+        return organization;
     }
 
     /**
@@ -94,12 +98,8 @@ public class OrganizationRepository implements CrudRepository<Organization> {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeleteByIdException {
-        int deleteCount = jdbcTemplate.update(ORGANIZATION_DELETE_BY_ID_QUERY, id);
-        if (deleteCount == 1) {
-            return true;
-        }
-        throw new DeleteByIdException("Organization");
+    public void deleteById(String id) {
+        jdbcTemplate.update(ORGANIZATION_DELETE_BY_ID_QUERY, id);
     }
 
     /**

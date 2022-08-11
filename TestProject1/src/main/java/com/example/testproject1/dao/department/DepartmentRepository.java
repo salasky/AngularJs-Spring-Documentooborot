@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -69,24 +70,27 @@ public class DepartmentRepository implements CrudRepository<Department> {
      */
     @Override
     public Department create(Department department) throws DocflowRuntimeApplicationException {
-        if (department != null) {
-            jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
-                    , department.getFullName(), department.getShortName(), department.getSupervisor()
-                    , department.getContactNumber(), department.getOrganization().getId().toString());
-            return department;
-        } else {
+        if (department == null) {
             throw new DocflowRuntimeApplicationException("Department не может быть null");
         }
+        jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
+                , department.getFullName(), department.getShortName(), department.getSupervisor()
+                , department.getContactNumber(), department.getOrganization().getId().toString());
+        return department;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public int update(Department department) {
-        return jdbcTemplate.update(DEPARTMENT_UPDATE_QUERY, department.getFullName(), department.getShortName(),
+    public Department update(Department department) throws DocflowRuntimeApplicationException {
+        if (department == null) {
+            throw new DocflowRuntimeApplicationException("Department не может быть null");
+        }
+        jdbcTemplate.update(DEPARTMENT_UPDATE_QUERY, department.getFullName(), department.getShortName(),
                 department.getSupervisor(), department.getContactNumber(), department.getOrganization().getId().toString(),
                 department.getId().toString());
+        return department;
     }
 
     /**
@@ -101,12 +105,8 @@ public class DepartmentRepository implements CrudRepository<Department> {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeleteByIdException {
-        int deleteCount = jdbcTemplate.update(DEPARTMENT_DELETE_BY_ID_QUERY, id);
-        if (deleteCount == 1) {
-            return true;
-        }
-        throw new DeleteByIdException("Department");
+    public void deleteById(String id) {
+        jdbcTemplate.update(DEPARTMENT_DELETE_BY_ID_QUERY, id);
     }
 
     /**
