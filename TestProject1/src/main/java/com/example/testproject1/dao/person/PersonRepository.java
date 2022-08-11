@@ -2,6 +2,7 @@ package com.example.testproject1.dao.person;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.mapper.staff.PersonMapper;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
@@ -57,14 +58,14 @@ public class PersonRepository implements CrudRepository<Person> {
      * {@inheritDoc}
      */
     @Override
-    public Person create(Person person) {
+    public Person create(Person person) throws DocflowRuntimeApplicationException {
         if (person != null) {
             jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
                     person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
                     person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
             return person;
         } else {
-            throw new IllegalArgumentException("Person не может быть null");
+            throw new DocflowRuntimeApplicationException("Person не может быть null");
         }
     }
 

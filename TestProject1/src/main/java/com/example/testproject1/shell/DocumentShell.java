@@ -2,6 +2,7 @@ package com.example.testproject1.shell;
 
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.documentservice.GenerateDocumentService;
@@ -52,23 +53,5 @@ public class DocumentShell {
         generateDocumentService.createAndSaveDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
         generateReportService.saveReportByAuthor();
-    }
-
-    @ShellMethod
-    public void save() {
-        IncomingDocument incomingDocument = new IncomingDocument();
-        Random random = new Random();
-        incomingDocument.setId(UUID.randomUUID());
-        incomingDocument.setText("text");
-        incomingDocument.setName("name");
-        incomingDocument.setNumber(123l);
-        incomingDocument.setRegNumber(random.nextLong());
-        incomingDocument.setCreatingDate(new Timestamp(234));
-        incomingDocument.setDateOfRegistration(new Timestamp(4354));
-        incomingDocument.setAuthor(personCrudRepository.getAll().stream().findFirst().get());
-        incomingDocument.setSender(personCrudRepository.getAll().stream().findFirst().get());
-        incomingDocument.setDestination(personCrudRepository.getAll().stream().findFirst().get());
-
-        System.out.println(incomingDocumentCrudRepository.create(incomingDocument));
     }
 }

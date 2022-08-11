@@ -3,6 +3,7 @@ package com.example.testproject1.dao.taskdocument;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.BaseDocumentRepositoryImpl;
 import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.mapper.document.TaskDocumentMapper;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
@@ -50,7 +51,7 @@ public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implement
      * {@inheritDoc}
      */
     @Override
-    public TaskDocument create(TaskDocument taskDocument) {
+    public TaskDocument create(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
         if (taskDocument != null) {
             super.create(taskDocument);
             jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate(),
@@ -58,7 +59,7 @@ public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implement
                     taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
             return taskDocument;
         } else {
-            throw new IllegalArgumentException("TaskDocument не может быть null");
+            throw new DocflowRuntimeApplicationException("TaskDocument не может быть null");
         }
     }
 
