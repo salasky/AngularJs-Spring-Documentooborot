@@ -1,17 +1,21 @@
 package com.example.testproject1.dao.taskdocument;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.dao.basedocument.BaseDocumentRepositoryImpl;
-import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.dao.basedocument.AbstractBaseDocumentRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.mapper.document.TaskDocumentMapper;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.BatchUpdateException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,7 +33,7 @@ import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumen
  * @author smigranov
  */
 @Repository("TaskDocumentRepository")
-public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implements CrudRepository<TaskDocument> {
+public class TaskDocumentRepository extends AbstractBaseDocumentRepository implements CrudRepository<TaskDocument> {
     /**
      * Бин JdbcTemplate
      */
@@ -51,16 +55,19 @@ public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implement
      * {@inheritDoc}
      */
     @Override
-    public TaskDocument create(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
-        if (taskDocument != null) {
+    public TaskDocument create(TaskDocument taskDocument) {
+        if (taskDocument == null) {
+            throw new DocflowRuntimeApplicationException("TaskDocument не может быть null");
+        }
+        try {
             super.create(taskDocument);
             jdbcTemplate.update(TASK_DOCUMENT_CREATE_QUERY, taskDocument.getId().toString(), taskDocument.getOutDate(),
                     taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
                     taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
-            return taskDocument;
-        } else {
-            throw new DocflowRuntimeApplicationException("TaskDocument не может быть null");
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
         }
+        return taskDocument;
     }
 
     /**
@@ -75,8 +82,8 @@ public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implement
      * {@inheritDoc}
      */
     @Override
-    public Optional<TaskDocument> getById(String id) {
-        return jdbcTemplate.query(TASK_DOCUMENT_GET_BY_ID_QUERY, taskDocumentMapper, id)
+    public Optional<TaskDocument> getById(UUID id) {
+        return jdbcTemplate.query(TASK_DOCUMENT_GET_BY_ID_QUERY, taskDocumentMapper, id.toString())
                 .stream().findFirst();
     }
 
@@ -84,11 +91,19 @@ public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implement
      * {@inheritDoc}
      */
     @Override
-    public int update(TaskDocument taskDocument) {
-        int baseDocumentCount = super.update(taskDocument);
-        return jdbcTemplate.update(TASK_DOCUMENT_UPDATE_QUERY, taskDocument.getOutDate(), taskDocument.getExecPeriod(),
-                taskDocument.getResponsible().getId().toString(), taskDocument.getSignOfControl(),
-                taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString()) + baseDocumentCount;
+    public TaskDocument update(TaskDocument taskDocument) {
+        if (taskDocument == null) {
+            throw new DocflowRuntimeApplicationException("TaskDocument не может быть null");
+        }
+        try {
+            super.update(taskDocument);
+            jdbcTemplate.update(TASK_DOCUMENT_UPDATE_QUERY, taskDocument.getOutDate(), taskDocument.getExecPeriod(),
+                    taskDocument.getResponsible().getId().toString(), taskDocument.getSignOfControl(),
+                    taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка обновления", e);
+        }
+        return taskDocument;
     }
 
     /**
@@ -103,12 +118,8 @@ public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implement
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeleteByIdException {
-        int deleteCount = jdbcTemplate.update(TASK_DOCUMENT_DELETE_BY_ID_QUERY, id);
-        if (deleteCount == 1) {
-            return true;
-        }
-        throw new DeleteByIdException("TaskDocument");
+    public void deleteById(UUID id) {
+        jdbcTemplate.update(TASK_DOCUMENT_DELETE_BY_ID_QUERY, id.toString());
     }
 
     /**
@@ -118,5 +129,26 @@ public class TaskDocumentRepository extends BaseDocumentRepositoryImpl implement
     public boolean existById(UUID uuid) {
         return jdbcTemplate.query(TASK_DOCUMENT_GET_BY_ID_QUERY, taskDocumentMapper, uuid.toString())
                 .stream().findFirst().isPresent();
+    }
+
+    @Override
+    public void saveAll(List<TaskDocument> entityList) throws BatchUpdateException {
+        super.saveAllBase(entityList);
+        jdbcTemplate.batchUpdate(TASK_DOCUMENT_CREATE_QUERY, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, entityList.get(i).getId().toString());
+                ps.setTimestamp(2, entityList.get(i).getOutDate());
+                ps.setString(3, entityList.get(i).getExecPeriod());
+                ps.setString(4, entityList.get(i).getResponsible().getId().toString());
+                ps.setBoolean(5, entityList.get(i).getSignOfControl());
+                ps.setString(6, entityList.get(i).getControlPerson().getId().toString());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return entityList.size();
+            }
+        });
     }
 }

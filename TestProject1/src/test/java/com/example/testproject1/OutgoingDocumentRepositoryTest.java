@@ -1,7 +1,7 @@
 package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.documentenum.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Department;
@@ -18,6 +18,7 @@ import org.springframework.test.context.TestPropertySource;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
@@ -38,14 +39,14 @@ public class OutgoingDocumentRepositoryTest {
     public static void init(@Autowired CrudRepository<Person> personRepository,
                             @Autowired CrudRepository<Organization> organizationRepository,
                             @Autowired CrudRepository<JobTittle> jobTittleRepository,
-                            @Autowired CrudRepository<Department> departmentRepository) {
+                            @Autowired CrudRepository<Department> departmentRepository) throws DocflowRuntimeApplicationException {
         if (personRepository.getAll().size() == 0) {
             Organization organization = Organization.newBuilder()
                     .setId(UUID.randomUUID())
                     .setFullName("FullName")
                     .setShortName("organizationShortName")
                     .setSupervisor("orgSupervisor")
-                    .setContactNumber("897643567895").build();
+                    .setContactNumber(List.of("897643567895")).build();
             organizationRepository.create(organization);
 
             JobTittle jobTittle = JobTittle.newBuilder()
@@ -92,28 +93,28 @@ public class OutgoingDocumentRepositoryTest {
     }
 
 
-    @DisplayName("OutgoingDocumentRepository create test successful")
+    @DisplayName("OutgoingDocumentRepository create test")
     @Test
-    void outgoingDocumentRepositoryCreateTest() {
+    void outgoingDocumentRepositoryCreateTest() throws DocflowRuntimeApplicationException {
 
         OutgoingDocument outgoingDocumentExpected = getOutgoingDocument();
         UUID uuid = outgoingDocumentExpected.getId();
         outgoingDocumentCrudRepository.create(outgoingDocumentExpected);
 
-        Optional<OutgoingDocument> optionalOutgoingDocument = outgoingDocumentCrudRepository.getById(uuid.toString());
+        Optional<OutgoingDocument> optionalOutgoingDocument = outgoingDocumentCrudRepository.getById(uuid);
         Assertions.assertTrue(optionalOutgoingDocument.isPresent());
 
         OutgoingDocument outgoingDocumentActual = optionalOutgoingDocument.get();
-        Assertions.assertTrue(personRepository.getById(outgoingDocumentActual.getAuthor().getId().toString()).isPresent());
+        Assertions.assertTrue(personRepository.getById(outgoingDocumentActual.getAuthor().getId()).isPresent());
         outgoingDocumentActual.setAuthor(outgoingDocumentExpected.getAuthor());
         outgoingDocumentActual.setSender(outgoingDocumentExpected.getSender());
 
         Assertions.assertEquals(outgoingDocumentExpected, outgoingDocumentActual);
     }
 
-    @DisplayName("OutgoingDocumentRepository deleteAll test successful")
+    @DisplayName("OutgoingDocumentRepository deleteAll test")
     @Test
-    void outgoingDocumentRepositoryDeleteAllTest() {
+    void outgoingDocumentRepositoryDeleteAllTest() throws DocflowRuntimeApplicationException {
         if (outgoingDocumentCrudRepository.getAll().isEmpty()) {
             outgoingDocumentCrudRepository.create(getOutgoingDocument());
         }
@@ -121,23 +122,19 @@ public class OutgoingDocumentRepositoryTest {
         Assertions.assertTrue(outgoingDocumentCrudRepository.getAll().isEmpty());
     }
 
-    @DisplayName("OutgoingDocumentRepository deleteById test successful")
+    @DisplayName("OutgoingDocumentRepository deleteById test")
     @Test
-    void outgoingDocumentRepositoryDeleteByIdTest() {
+    void outgoingDocumentRepositoryDeleteByIdTest() throws DocflowRuntimeApplicationException {
         OutgoingDocument outgoingDocument = getOutgoingDocument();
         UUID uuid = outgoingDocument.getId();
         outgoingDocumentCrudRepository.create(outgoingDocument);
-        try {
-            outgoingDocumentCrudRepository.deleteById(uuid.toString());
-        } catch (DeleteByIdException e) {
-            throw new RuntimeException(e);
-        }
-        Assertions.assertTrue(outgoingDocumentCrudRepository.getById(uuid.toString()).isEmpty());
+        outgoingDocumentCrudRepository.deleteById(uuid);
+        Assertions.assertTrue(outgoingDocumentCrudRepository.getById(uuid).isEmpty());
     }
 
-    @DisplayName("OutgoingDocumentRepository update test successful")
+    @DisplayName("OutgoingDocumentRepository update test")
     @Test
-    void outgoingDocumentRepositoryUpdateTest() {
+    void outgoingDocumentRepositoryUpdateTest() throws DocflowRuntimeApplicationException {
         if (outgoingDocumentCrudRepository.getAll().isEmpty()) {
             outgoingDocumentCrudRepository.create(getOutgoingDocument());
         }
@@ -145,8 +142,8 @@ public class OutgoingDocumentRepositoryTest {
         UUID uuid = outgoingDocument.getId();
         outgoingDocument.setText("TestText");
         outgoingDocumentCrudRepository.update(outgoingDocument);
-        Assertions.assertTrue(outgoingDocumentCrudRepository.getById(uuid.toString()).isPresent());
-        OutgoingDocument outgoingDocumentDB = outgoingDocumentCrudRepository.getById(uuid.toString()).get();
+        Assertions.assertTrue(outgoingDocumentCrudRepository.getById(uuid).isPresent());
+        OutgoingDocument outgoingDocumentDB = outgoingDocumentCrudRepository.getById(uuid).get();
         Assertions.assertEquals("TestText", outgoingDocumentDB.getText());
     }
 }

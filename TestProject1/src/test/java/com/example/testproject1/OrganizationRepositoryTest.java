@@ -1,7 +1,7 @@
 package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.staff.Organization;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.sql.BatchUpdateException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
@@ -23,14 +26,14 @@ class OrganizationRepositoryTest {
 
     @BeforeAll
     public static void init(
-            @Autowired CrudRepository<Organization> organizationRepository) {
+            @Autowired CrudRepository<Organization> organizationRepository) throws DocflowRuntimeApplicationException {
         if (organizationRepository.getAll().size() == 0) {
             Organization organization = Organization.newBuilder()
                     .setId(UUID.randomUUID())
                     .setFullName("FullName")
                     .setShortName("organizationShortName")
                     .setSupervisor("orgSupervisor")
-                    .setContactNumber("897643567895").build();
+                    .setContactNumber(List.of("897643567895")).build();
             organizationRepository.create(organization);
         }
     }
@@ -41,23 +44,23 @@ class OrganizationRepositoryTest {
                 .setFullName("FullName")
                 .setShortName("organizationShortName")
                 .setSupervisor("orgSupervisor")
-                .setContactNumber("897643567895").build();
+                .setContactNumber(List.of("897643567895")).build();
     }
 
     @DisplayName("OrganizationRepository create test successful")
     @Test
-    void organizationRepositoryCreateTest() {
+    void organizationRepositoryCreateTest() throws DocflowRuntimeApplicationException {
         Organization organizationEx = getOrganization();
         UUID uuid = organizationEx.getId();
         organizationCrudRepository.create(organizationEx);
-        Assertions.assertTrue(organizationCrudRepository.getById(uuid.toString()).isPresent());
-        Organization organizationActual = organizationCrudRepository.getById(uuid.toString()).get();
+        Assertions.assertTrue(organizationCrudRepository.getById(uuid).isPresent());
+        Organization organizationActual = organizationCrudRepository.getById(uuid).get();
         Assertions.assertEquals(organizationEx, organizationActual);
     }
 
-    @DisplayName("OrganizationRepository deleteAll test successful")
+    @DisplayName("OrganizationRepository deleteAll test")
     @Test
-    void organizationRepositoryDeleteAllTest() {
+    void organizationRepositoryDeleteAllTest() throws DocflowRuntimeApplicationException {
         if (organizationCrudRepository.getAll().isEmpty()) {
             organizationCrudRepository.create(getOrganization());
         }
@@ -65,34 +68,49 @@ class OrganizationRepositoryTest {
         Assertions.assertTrue(organizationCrudRepository.getAll().isEmpty());
     }
 
-    @DisplayName("OrganizationRepository deleteById test successful")
+    @DisplayName("OrganizationRepository deleteById test")
     @Test
-    void organizationRepositoryDeleteByIdTest() {
+    void organizationRepositoryDeleteByIdTest() throws DocflowRuntimeApplicationException {
         Organization organization = getOrganization();
         UUID uuid = organization.getId();
         organizationCrudRepository.create(organization);
-        try {
-            organizationCrudRepository.deleteById(uuid.toString());
-        } catch (DeleteByIdException e) {
-            throw new RuntimeException(e);
-        }
-        Assertions.assertTrue(organizationCrudRepository.getById(uuid.toString()).isEmpty());
+        organizationCrudRepository.deleteById(uuid);
+        Assertions.assertTrue(organizationCrudRepository.getById(uuid).isEmpty());
     }
 
-    @DisplayName("OrganizationRepository update test successful")
+    @DisplayName("OrganizationRepository update test")
     @Test
-    void organizationRepositoryUpdateTest() {
+    void organizationRepositoryUpdateTest() throws DocflowRuntimeApplicationException {
         Organization organization = getOrganization();
         UUID uuid = organization.getId();
         organizationCrudRepository.create(organization);
         organization.setFullName("NeftServicesTest");
         organizationCrudRepository.update(organization);
 
-        Assertions.assertTrue(organizationCrudRepository.getById(uuid.toString()).isPresent());
-        Organization organizationDB = organizationCrudRepository.getById(uuid.toString()).get();
+        Assertions.assertTrue(organizationCrudRepository.getById(uuid).isPresent());
+        Organization organizationDB = organizationCrudRepository.getById(uuid).get();
 
         organizationCrudRepository.update(organization);
 
         Assertions.assertEquals("NeftServicesTest", organizationDB.getFullName());
+    }
+
+    @DisplayName("OrganizationRepository saveAll test")
+    @Test
+    void organizationRepositorySaveALLTest() throws DocflowRuntimeApplicationException {
+        Organization organization = getOrganization();
+        Organization organizationSecond = getOrganization();
+        UUID uuid = organization.getId();
+        UUID uuidSecond = organizationSecond.getId();
+        List<Organization> organizationList = new ArrayList<>();
+        organizationList.add(organization);
+        organizationList.add(organizationSecond);
+        try {
+            organizationCrudRepository.saveAll(organizationList);
+        } catch (BatchUpdateException e) {
+            throw new RuntimeException(e);
+        }
+        Assertions.assertTrue(organizationCrudRepository.getById(uuid).isPresent());
+        Assertions.assertTrue(organizationCrudRepository.getById(uuidSecond).isPresent());
     }
 }

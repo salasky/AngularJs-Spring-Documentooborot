@@ -47,8 +47,9 @@ public class XmlImportConfiguration {
      * @return Map<StorageService, CrudService>
      */
     private Map<StorageService, CrudService> combineLists(List<StorageService> keys, List<CrudService> values) {
-        if (keys.size() > values.size())
+        if (keys.size() > values.size()) {
             throw new IllegalArgumentException("Unable to merge lists. StorageServiceList size must not be larger.");
+        }
         Map<StorageService, CrudService> map = new LinkedHashMap<>();
         for (int i = 0; i < keys.size(); i++) {
             map.put(keys.get(i), values.get(i));

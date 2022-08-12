@@ -1,7 +1,6 @@
 package com.example.testproject1.service.dbservice.taskdocument;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -11,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.BatchUpdateException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Класс реализующий интерфейс {@link CrudService}. Для выполнения CRUD операций объектов класса {@link TaskDocument} к базе данных .
@@ -35,12 +36,8 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
     @Transactional
     @Override
     public TaskDocument create(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
-        TaskDocument taskDocumentDB = taskDocumentRepository.create(taskDocument);
-        if (taskDocumentDB != null) {
-            LOGGER.info("TaskDocument успешно сохранен");
-            return taskDocumentDB;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения TaskDocument");
+        LOGGER.info("Попытка создания TaskDocument");
+        return taskDocumentRepository.create(taskDocument);
     }
 
     /**
@@ -57,7 +54,7 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<TaskDocument> getById(String id) {
+    public Optional<TaskDocument> getById(UUID id) {
         LOGGER.info("Попытка получить TaskDocument по id");
         return taskDocumentRepository.getById(id);
     }
@@ -68,12 +65,7 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
     @Override
     public TaskDocument update(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у TaskDocument с id {0}", taskDocument.getId().toString()));
-        int updateCount = taskDocumentRepository.update(taskDocument);
-        if (updateCount > 0) {
-            LOGGER.info("TaskDocument успешно обновлен");
-            return taskDocument;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления TaskDocument");
+        return taskDocumentRepository.update(taskDocument);
     }
 
     /**
@@ -89,11 +81,14 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) throws DocflowRuntimeApplicationException {
-        try {
-            taskDocumentRepository.deleteById(id);
-        } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException("Запись из таблицы TaskDocument не удалена");
-        }
+    public void deleteById(UUID id) {
+        LOGGER.info(MessageFormat.format("Попытка удаления TaskDocument с id {0}", id.toString()));
+        taskDocumentRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveALL(List<TaskDocument> entityList) throws BatchUpdateException {
+        LOGGER.info("Попытка сохранения List<TaskDocument> в таблицу TaskDocument");
+        taskDocumentRepository.saveAll(entityList);
     }
 }

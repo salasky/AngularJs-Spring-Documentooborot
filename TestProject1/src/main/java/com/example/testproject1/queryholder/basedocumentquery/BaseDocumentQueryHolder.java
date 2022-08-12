@@ -18,11 +18,8 @@ public class BaseDocumentQueryHolder {
             "SELECT  base_document.id AS base_document_id, base_document.name AS base_document_name, ")
             .append("base_document.text AS base_document_text, base_document.reg_number AS base_document_number,")
             .append("base_document.creating_date AS base_document_date,")
-            .append("person.id AS person_id, person.first_name AS person_first_name, person.second_name AS person_second_name,")
-            .append("person.last_name AS person_last_name ")
-            .append("FROM base_document ")
-            .append("INNER JOIN person ")
-            .append("ON base_document.author_id=person.id ").toString();
+            .append("base_document.author_id AS person_id ")
+            .append("FROM base_document ").toString();
     /**
      * Запрос на получение объекта по id из таблицы base_document
      */

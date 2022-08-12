@@ -48,9 +48,7 @@ public class DepartmentMapper implements RowMapper<Department> {
      */
     @Override
     public Department mapRow(ResultSet rs, int rowNum) throws SQLException {
-
         Organization organization = organizationMapper.mapRow(rs, rowNum);
-
         return Department.newBuilder().setId(UUID.fromString(rs.getString(DEPARTMENT_ID)))
                 .setFullName(rs.getString(DEPARTMENT_FULL_NAME))
                 .setShortName(rs.getString(DEPARTMENT_SHORT_NAME))

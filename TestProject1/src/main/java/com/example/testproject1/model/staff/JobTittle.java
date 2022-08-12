@@ -28,11 +28,6 @@ public class JobTittle {
     @Column(name = "name")
     private String name;
 
-    public JobTittle(UUID uuid, String name) {
-        this.uuid = uuid;
-        this.name = name;
-    }
-
     public JobTittle() {
     }
 

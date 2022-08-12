@@ -35,35 +35,12 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
      * Название столбца для мапинга в поле sender_id
      */
     private final String PERSON_SENDER_ID = "person_sender_id";
-    /**
-     * Название столбца для мапинга в поле sender_first_name
-     */
-    private final String PERSON_SENDER_FIRST_NAME = "person_sender_first_name";
-    /**
-     * Название столбца для мапинга в поле sender_second_name
-     */
-    private final String PERSON_SENDER_SECOND_NAME = "person_sender_second_name";
-    /**
-     * Название столбца для мапинга в поле sender_last_name
-     */
-    private final String PERSON_SENDER_LAST_NAME = "person_sender_last_name";
 
     /**
      * Название столбца для мапинга в поле person_id
      */
     private final String PERSON_DESTINATION_ID = "person_destination_id";
-    /**
-     * Название столбца для мапинга в поле person_first_name
-     */
-    private final String PERSON_DESTINATION_FIRST_NAME = "person_destination_first_name";
-    /**
-     * Название столбца для мапинга в поле person_second_name
-     */
-    private final String PERSON_DESTINATION_SECOND_NAME = "person_destination_second_name";
-    /**
-     * Название столбца для мапинга в поле person_last_name
-     */
-    private final String PERSON_DESTINATION_LAST_NAME = "person_destination_last_name";
+
 
     /**
      * {@inheritDoc}
@@ -74,18 +51,12 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
         BaseDocument baseDocument = baseDocumentMapper.mapRow(rs, rowNum);
 
         //Мапим Person(sender) к incomingDocument
-        Person sender = new Person();
-        sender.setId(UUID.fromString(rs.getString(PERSON_SENDER_ID)));
-        sender.setFirstName(rs.getString(PERSON_SENDER_FIRST_NAME));
-        sender.setSecondName(rs.getString(PERSON_SENDER_SECOND_NAME));
-        sender.setLastName(rs.getString(PERSON_SENDER_LAST_NAME));
+        Person sender = Person.newBuilder()
+                .setId(UUID.fromString(rs.getString(PERSON_SENDER_ID))).build();
 
         //Мапим Person(destination) к incomingDocument
-        Person destination = new Person();
-        destination.setId(UUID.fromString(rs.getString(PERSON_DESTINATION_ID)));
-        destination.setFirstName(rs.getString(PERSON_DESTINATION_FIRST_NAME));
-        destination.setSecondName(rs.getString(PERSON_DESTINATION_SECOND_NAME));
-        destination.setLastName(rs.getString(PERSON_DESTINATION_LAST_NAME));
+        Person destination = Person.newBuilder()
+                .setId(UUID.fromString(rs.getString(PERSON_DESTINATION_ID))).build();
 
         return (IncomingDocument) IncomingDocument.newBuilder()
                 .setIncomingDocumentNumber(rs.getLong(INCOMING_DOCUMENT_NUMBER))

@@ -1,17 +1,21 @@
 package com.example.testproject1.dao.incomingdocument;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.dao.basedocument.BaseDocumentRepositoryImpl;
-import com.example.testproject1.exception.DeleteByIdException;
+import com.example.testproject1.dao.basedocument.AbstractBaseDocumentRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.mapper.document.IncomingDocumentMapper;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.BatchUpdateException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,7 +33,7 @@ import static com.example.testproject1.queryholder.incomingdocumentquery.Incomin
  * @author smigranov
  */
 @Repository("IncomingDocumentRepository")
-public class IncomingDocumentRepository extends BaseDocumentRepositoryImpl implements CrudRepository<IncomingDocument> {
+public class IncomingDocumentRepository extends AbstractBaseDocumentRepository implements CrudRepository<IncomingDocument> {
 
     /**
      * Бин JdbcTemplate
@@ -52,17 +56,20 @@ public class IncomingDocumentRepository extends BaseDocumentRepositoryImpl imple
      * {@inheritDoc}
      */
     @Override
-    public IncomingDocument create(IncomingDocument incomingDocument) throws DocflowRuntimeApplicationException {
-        if (incomingDocument != null) {
+    public IncomingDocument create(IncomingDocument incomingDocument) {
+        if (incomingDocument == null) {
+            throw new DocflowRuntimeApplicationException("IncomingDocument не может быть null");
+        }
+        try {
             super.create(incomingDocument);
             jdbcTemplate.update(INCOMING_DOCUMENT_CREATE_QUERY, incomingDocument.getId().toString(),
                     incomingDocument.getSender().getId().toString(),
                     incomingDocument.getDestination().getId().toString(),
                     incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
-            return incomingDocument;
-        } else {
-            throw new DocflowRuntimeApplicationException("IncomingDocument не может быть null");
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
         }
+        return incomingDocument;
     }
 
     /**
@@ -77,8 +84,8 @@ public class IncomingDocumentRepository extends BaseDocumentRepositoryImpl imple
      * {@inheritDoc}
      */
     @Override
-    public Optional<IncomingDocument> getById(String id) {
-        return jdbcTemplate.query(INCOMING_DOCUMENT_GET_BY_ID_QUERY, incomingDocumentMapper, id)
+    public Optional<IncomingDocument> getById(UUID id) {
+        return jdbcTemplate.query(INCOMING_DOCUMENT_GET_BY_ID_QUERY, incomingDocumentMapper, id.toString())
                 .stream().findFirst();
     }
 
@@ -86,11 +93,19 @@ public class IncomingDocumentRepository extends BaseDocumentRepositoryImpl imple
      * {@inheritDoc}
      */
     @Override
-    public int update(IncomingDocument incomingDocument) {
-        int baseDocumentCount = super.update(incomingDocument);
-        return jdbcTemplate.update(INCOMING_DOCUMENT_UPDATE_QUERY, incomingDocument.getSender().getId().toString(),
-                incomingDocument.getDestination().getId().toString(), incomingDocument.getNumber(),
-                incomingDocument.getDateOfRegistration(), incomingDocument.getId().toString()) + baseDocumentCount;
+    public IncomingDocument update(IncomingDocument incomingDocument) {
+        if (incomingDocument == null) {
+            throw new DocflowRuntimeApplicationException("IncomingDocument не может быть null");
+        }
+        try {
+            super.update(incomingDocument);
+            jdbcTemplate.update(INCOMING_DOCUMENT_UPDATE_QUERY, incomingDocument.getSender().getId().toString(),
+                    incomingDocument.getDestination().getId().toString(), incomingDocument.getNumber(),
+                    incomingDocument.getDateOfRegistration(), incomingDocument.getId().toString());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка обновления", e);
+        }
+        return incomingDocument;
     }
 
     /**
@@ -105,12 +120,8 @@ public class IncomingDocumentRepository extends BaseDocumentRepositoryImpl imple
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeleteByIdException {
-        int deleteCount = jdbcTemplate.update(INCOMING_DOCUMENT_DELETE_BY_ID_QUERY, id);
-        if (deleteCount == 1) {
-            return true;
-        }
-        throw new DeleteByIdException("IncomingDocument");
+    public void deleteById(UUID id) {
+        jdbcTemplate.update(INCOMING_DOCUMENT_DELETE_BY_ID_QUERY, id.toString());
     }
 
     /**
@@ -120,6 +131,26 @@ public class IncomingDocumentRepository extends BaseDocumentRepositoryImpl imple
     public boolean existById(UUID uuid) {
         return jdbcTemplate.query(INCOMING_DOCUMENT_GET_BY_ID_QUERY, incomingDocumentMapper, uuid.toString())
                 .stream().findFirst().isPresent();
+    }
+
+    @Override
+    public void saveAll(List<IncomingDocument> entityList) throws BatchUpdateException {
+        super.saveAllBase(entityList);
+        jdbcTemplate.batchUpdate(INCOMING_DOCUMENT_CREATE_QUERY, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, entityList.get(i).getId().toString());
+                ps.setString(2, entityList.get(i).getSender().getId().toString());
+                ps.setString(3, entityList.get(i).getDestination().getId().toString());
+                ps.setLong(4, entityList.get(i).getNumber());
+                ps.setTimestamp(5, entityList.get(i).getDateOfRegistration());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return entityList.size();
+            }
+        });
     }
 }
 

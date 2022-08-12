@@ -1,8 +1,6 @@
 package com.example.testproject1.dao;
 
-import com.example.testproject1.exception.DeleteByIdException;
-import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-
+import java.sql.BatchUpdateException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,23 +24,23 @@ public interface CrudRepository<T> {
      * @param id нужного объекта
      * @return возвращает null или объект
      */
-    Optional<T> getById(String id);
+    Optional<T> getById(UUID id);
 
     /**
      * Метод сохранения объекта указанного класса в базу данных
      *
-     * @param obj объекта класса
+     * @param entity объекта класса
      * @return возвращает Объект указанного класса
      */
-    T create(T obj) throws DocflowRuntimeApplicationException;
+    T create(T entity);
 
     /**
      * Метод обновления информации указанного объекта
      *
-     * @param obj объект класса
-     * @return возвращает количество измененных строк. 0 при неудаче.
+     * @param entity объект класса
+     * @return возвращает измененный объект
      */
-    int update(T obj);
+    T update(T entity);
 
     /**
      * Метод удаления всех записей с таблицы
@@ -54,7 +52,7 @@ public interface CrudRepository<T> {
      *
      * @param id UUID в строковом формате
      */
-    boolean deleteById(String id) throws DeleteByIdException;
+    void deleteById(UUID id);
 
     /**
      * Метод проверки существования объекта в базе по переданному uuid
@@ -63,4 +61,12 @@ public interface CrudRepository<T> {
      * @return возвращает true при существовании записи и false при отсутствии
      */
     boolean existById(UUID uuid);
+
+    /**
+     * Метод сохранения List объектов указанного класса в базу данных
+     *
+     * @param entityList List объекта класса
+     * @return возвращает Объект указанного класса
+     */
+    void saveAll(List<T> entityList) throws BatchUpdateException;
 }

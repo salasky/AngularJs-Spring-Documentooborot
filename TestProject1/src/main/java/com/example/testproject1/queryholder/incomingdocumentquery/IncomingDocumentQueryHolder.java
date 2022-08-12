@@ -15,26 +15,16 @@ public class IncomingDocumentQueryHolder {
      * Запрос на получение всех объектов из таблицы incoming_document
      */
     public static final String INCOMING_DOCUMENT_GET_ALL_QUERY = new StringBuilder()
-            .append("                    SELECT   base_document.id AS base_document_id,  ")
-            .append("                    base_document.name AS base_document_name, base_document.text AS base_document_text, ")
-            .append("                    base_document.reg_number AS base_document_number, base_document.creating_date AS base_document_date, ")
-            .append("                    person.id AS person_id, person.first_name AS person_first_name, person.second_name AS person_second_name,  ")
-            .append("                    person.last_name AS person_last_name, ")
-            .append("                    incoming_document.number AS incoming_document_number, ")
-            .append("                    incoming_document.date_of_registration AS incoming_document_date_of_registration, sender.id AS person_sender_id, ")
-            .append("                    sender.first_name AS person_sender_first_name, sender.second_name AS person_sender_second_name,  ")
-            .append("                    sender.last_name AS person_sender_last_name,")
-            .append("                    destination.id AS person_destination_id, destination.first_name AS person_destination_first_name,  ")
-            .append("                    destination.second_name AS person_destination_second_name, destination.last_name AS person_destination_last_name  ")
-            .append("                    FROM incoming_document  ")
-            .append("                    INNER JOIN base_document  ")
-            .append("                        ON base_document.id=incoming_document.base_document_id ")
-            .append("                    INNER JOIN person  ")
-            .append("                        ON base_document.author_id=person.id   ")
-            .append("                    INNER JOIN person AS sender ")
-            .append("                        ON incoming_document.sender_id=sender.id ")
-            .append("                    INNER JOIN person AS destination ")
-            .append("                        ON incoming_document.destination_id=destination.id ").toString();
+            .append(" SELECT   base_document.id AS base_document_id,  ")
+            .append(" base_document.name AS base_document_name, base_document.text AS base_document_text, ")
+            .append(" base_document.reg_number AS base_document_number, base_document.creating_date AS base_document_date, ")
+            .append(" base_document.author_id AS person_id, ")
+            .append(" incoming_document.number AS incoming_document_number, ")
+            .append(" incoming_document.date_of_registration AS incoming_document_date_of_registration, incoming_document.sender_id AS person_sender_id, ")
+            .append(" incoming_document.destination_id AS person_destination_id ")
+            .append(" FROM incoming_document  ")
+            .append(" INNER JOIN base_document  ")
+            .append("     ON base_document.id=incoming_document.base_document_id ").toString();
     /**
      * Запрос на получение объекта по id из таблицы incoming_document
      */

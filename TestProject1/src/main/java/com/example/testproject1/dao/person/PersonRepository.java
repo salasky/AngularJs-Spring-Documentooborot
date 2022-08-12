@@ -1,7 +1,6 @@
 package com.example.testproject1.dao.person;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.mapper.staff.PersonMapper;
 import com.example.testproject1.model.staff.Department;
@@ -11,9 +10,14 @@ import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.BatchUpdateException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -58,15 +62,18 @@ public class PersonRepository implements CrudRepository<Person> {
      * {@inheritDoc}
      */
     @Override
-    public Person create(Person person) throws DocflowRuntimeApplicationException {
-        if (person != null) {
+    public Person create(Person person) {
+        if (person == null) {
+            throw new DocflowRuntimeApplicationException("Person не может быть null");
+        }
+        try {
             jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
                     person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
                     person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
-            return person;
-        } else {
-            throw new DocflowRuntimeApplicationException("Person не может быть null");
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
         }
+        return person;
     }
 
     /**
@@ -81,8 +88,8 @@ public class PersonRepository implements CrudRepository<Person> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<Person> getById(String id) {
-        return jdbcTemplate.query(PERSON_GET_BY_ID_QUERY, personMapper, id)
+    public Optional<Person> getById(UUID id) {
+        return jdbcTemplate.query(PERSON_GET_BY_ID_QUERY, personMapper, id.toString())
                 .stream().findFirst();
     }
 
@@ -90,10 +97,18 @@ public class PersonRepository implements CrudRepository<Person> {
      * {@inheritDoc}
      */
     @Override
-    public int update(Person person) {
-        return jdbcTemplate.update(PERSON_UPDATE_QUERY, person.getFirstName(), person.getSecondName(),
-                person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
-                person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay(), person.getId().toString());
+    public Person update(Person person) {
+        if (person == null) {
+            throw new DocflowRuntimeApplicationException("Person не может быть null");
+        }
+        try {
+            jdbcTemplate.update(PERSON_UPDATE_QUERY, person.getFirstName(), person.getSecondName(),
+                    person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
+                    person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay(), person.getId().toString());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+        }
+        return person;
     }
 
     /**
@@ -108,12 +123,8 @@ public class PersonRepository implements CrudRepository<Person> {
      * {@inheritDoc}
      */
     @Override
-    public boolean deleteById(String id) throws DeleteByIdException {
-        int deleteCount = jdbcTemplate.update(PERSON_DELETE_BY_ID_QUERY, id);
-        if (deleteCount == 1) {
-            return true;
-        }
-        throw new DeleteByIdException("Person");
+    public void deleteById(UUID id) {
+        jdbcTemplate.update(PERSON_DELETE_BY_ID_QUERY, id.toString());
     }
 
     /**
@@ -123,5 +134,28 @@ public class PersonRepository implements CrudRepository<Person> {
     public boolean existById(UUID uuid) {
         return jdbcTemplate.query(PERSON_GET_BY_ID_QUERY, personMapper, uuid.toString())
                 .stream().findFirst().isPresent();
+    }
+
+    @Override
+    public void saveAll(List<Person> entityList) throws BatchUpdateException {
+        jdbcTemplate.batchUpdate(PERSON_CREATE_QUERY, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, entityList.get(i).getId().toString());
+                ps.setString(2, entityList.get(i).getFirstName());
+                ps.setString(3, entityList.get(i).getSecondName());
+                ps.setString(4, entityList.get(i).getLastName());
+                ps.setString(5, entityList.get(i).getPhoto());
+                ps.setString(6, entityList.get(i).getJobTittle().getUuid().toString());
+                ps.setString(7, entityList.get(i).getDepartment().getId().toString());
+                ps.setString(8, entityList.get(i).getPhoneNumber());
+                ps.setDate(9, entityList.get(i).getBirthDay());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return entityList.size();
+            }
+        });
     }
 }

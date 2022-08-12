@@ -11,5 +11,5 @@ public interface GenerateDocumentService {
      *
      * @param count Количество генерируемых документов каждого типа
      */
-    void createAndSaveDocument(Integer count);
+    void generateDocument(int count);
 }

@@ -1,8 +1,6 @@
 package com.example.testproject1.service.dbservice.incomingdocument;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeleteByIdException;
-import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -11,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.BatchUpdateException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Класс реализующий интерфейс {@link CrudService}. Для выполнения CRUD операций объектов класса {@link  IncomingDocument} к базе данных .
@@ -35,13 +35,9 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      */
     @Transactional
     @Override
-    public IncomingDocument create(IncomingDocument incomingDocument) throws DocflowRuntimeApplicationException {
-        IncomingDocument incomingDocumentDB = incomingDocumentRepository.create(incomingDocument);
-        if (incomingDocumentDB != null) {
-            LOGGER.info("IncomingDocument успешно сохранен");
-            return incomingDocumentDB;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения IncomingDocument");
+    public IncomingDocument create(IncomingDocument incomingDocument) {
+        LOGGER.info("Попытка создания IncomingDocument");
+        return incomingDocumentRepository.create(incomingDocument);
     }
 
     /**
@@ -58,7 +54,7 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<IncomingDocument> getById(String id) {
+    public Optional<IncomingDocument> getById(UUID id) {
         LOGGER.info("Попытка получить IncomingDocument по id");
         return incomingDocumentRepository.getById(id);
     }
@@ -67,14 +63,9 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      * {@inheritDoc}
      */
     @Override
-    public IncomingDocument update(IncomingDocument incomingDocument) throws DocflowRuntimeApplicationException {
+    public IncomingDocument update(IncomingDocument incomingDocument) {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у IncomingDocument с id {0}", incomingDocument.getId().toString()));
-        int updateCount = incomingDocumentRepository.update(incomingDocument);
-        if (updateCount > 0) {
-            LOGGER.info("IncomingDocument успешно обновлен");
-            return incomingDocument;
-        }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка обновления IncomingDocument");
+        return incomingDocumentRepository.update(incomingDocument);
     }
 
     /**
@@ -90,11 +81,14 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) throws DocflowRuntimeApplicationException {
-        try {
-            incomingDocumentRepository.deleteById(id);
-        } catch (DeleteByIdException e) {
-            throw new DocflowRuntimeApplicationException("Запись из таблицы incoming_document не удалена");
-        }
+    public void deleteById(UUID id) {
+        LOGGER.info(MessageFormat.format("Попытка удаления IncomingDocument с id {0}", id.toString()));
+        incomingDocumentRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveALL(List<IncomingDocument> entityList) throws BatchUpdateException {
+        LOGGER.info("Попытка сохранения List<IncomingDocument> в таблицу IncomingDocument");
+        incomingDocumentRepository.saveAll(entityList);
     }
 }

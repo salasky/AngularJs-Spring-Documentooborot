@@ -64,7 +64,6 @@ public class PersonMapper implements RowMapper<Person> {
     public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
         Department department = departmentMapper.mapRow(rs, rowNum);
         JobTittle jobTittle = jobTittleMapper.mapRow(rs, rowNum);
-
         return Person.newBuilder()
                 .setId(UUID.fromString(rs.getString(PERSON_ID)))
                 .setFirstName(rs.getString(PERSON_FIRST_NAME))

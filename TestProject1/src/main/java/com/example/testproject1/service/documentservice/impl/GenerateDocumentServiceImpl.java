@@ -51,7 +51,7 @@ public class GenerateDocumentServiceImpl implements GenerateDocumentService {
      * {@inheritDoc}
      */
     @Override
-    public void createAndSaveDocument(Integer count) {
+    public void generateDocument(int count) {
         if (personCrudRepository.getAll().size() == 0) {
             xmlToDataBaseImporter.saveStaffInDb();
         }

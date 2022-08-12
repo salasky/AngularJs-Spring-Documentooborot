@@ -32,18 +32,6 @@ public class OutgoingDocumentMapper implements RowMapper<OutgoingDocument> {
      * Название столбца для мапинга в поле person_sender_id
      */
     private final String PERSON_SENDER_ID = "person_sender_id";
-    /**
-     * Название столбца для мапинга в поле person_sender_first_name
-     */
-    private final String PERSON_SENDER_FIRST_NAME = "person_sender_first_name";
-    /**
-     * Название столбца для мапинга в поле person_sender_second_name
-     */
-    private final String PERSON_SENDER_SECOND_NAME = "person_sender_second_name";
-    /**
-     * Название столбца для мапинга в поле person_sender_last_name
-     */
-    private final String PERSON_SENDER_LAST_NAME = "person_sender_last_name";
 
     /**
      * {@inheritDoc}
@@ -56,9 +44,6 @@ public class OutgoingDocumentMapper implements RowMapper<OutgoingDocument> {
         //Мапим Person(sender) к outgoingDocument
         Person sender = new Person();
         sender.setId(UUID.fromString(rs.getString(PERSON_SENDER_ID)));
-        sender.setFirstName(rs.getString(PERSON_SENDER_FIRST_NAME));
-        sender.setSecondName(rs.getString(PERSON_SENDER_SECOND_NAME));
-        sender.setLastName(rs.getString(PERSON_SENDER_LAST_NAME));
 
         return (OutgoingDocument) OutgoingDocument.newBuilder()
                 .setDocDeliveryType(DocumentDeliveryType.valueOf(rs.getString(OUTGOING_DELIVERY_TYPE)))

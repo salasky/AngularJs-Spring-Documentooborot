@@ -1,9 +1,9 @@
 package com.example.testproject1.service.dbservice;
 
-import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-
+import java.sql.BatchUpdateException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Интерфейс для сервисов с CRUD операциями
@@ -14,10 +14,10 @@ public interface CrudService<T> {
     /**
      * Метод сохранения объекта указанного класса в базу данных
      *
-     * @param object объекта класса
-     * @return возвращает Optional<Объект указанного класса>
+     * @param entity объекта класса
+     * @return возвращает Объект указанного класса
      */
-    T create(T object) throws DocflowRuntimeApplicationException;
+    T create(T entity);
 
     /**
      * Метод получения всех объектов указанного из базы данных
@@ -32,15 +32,15 @@ public interface CrudService<T> {
      * @param id нужного объекта
      * @return возвращает null или объект
      */
-    Optional<T> getById(String id);
+    Optional<T> getById(UUID id);
 
     /**
      * Метод обновления информации указанного объекта
      *
-     * @param object объект указанного класса
-     * @return возвращает null или объект
+     * @param entity объект указанного класса
+     * @return возвращает объект
      */
-    T update(T object) throws DocflowRuntimeApplicationException;
+    T update(T entity);
 
     /**
      * Метод удаления всех записей с таблицы
@@ -52,5 +52,12 @@ public interface CrudService<T> {
      *
      * @param id UUID в строковом формате
      */
-    void deleteById(String id) throws DocflowRuntimeApplicationException;
+    void deleteById(UUID id);
+
+    /**
+     * Метод сохранения List объектов указанного класса в базу данных
+     *
+     * @param entityList List объектов класса
+     */
+    void saveALL(List<T> entityList) throws BatchUpdateException;
 }
