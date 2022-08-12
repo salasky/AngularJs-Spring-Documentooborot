@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.sql.BatchUpdateException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -104,7 +105,11 @@ class OrganizationRepositoryTest {
         List<Organization> organizationList = new ArrayList<>();
         organizationList.add(organization);
         organizationList.add(organizationSecond);
-        organizationCrudRepository.saveAll(organizationList);
+        try {
+            organizationCrudRepository.saveAll(organizationList);
+        } catch (BatchUpdateException e) {
+            throw new RuntimeException(e);
+        }
         Assertions.assertTrue(organizationCrudRepository.getById(uuid).isPresent());
         Assertions.assertTrue(organizationCrudRepository.getById(uuidSecond).isPresent());
     }
