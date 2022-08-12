@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -32,10 +33,10 @@ public class Organization extends Staff {
     @Column(name = "supervisor")
     private String supervisor;
     /**
-     * Контактный телефон организации
+     * Контактные телефоны организации
      */
     @Column(name = "contact_number")
-    private String contactNumber;
+    private List<String> contactNumber;
 
     @XmlElement(name = "fullName")
     public String getFullName() {
@@ -65,11 +66,11 @@ public class Organization extends Staff {
     }
 
     @XmlElement(name = "contactNumber")
-    public String getContactNumber() {
+    public List<String> getContactNumber() {
         return contactNumber;
     }
 
-    public void setContactNumber(String contactNumber) {
+    public void setContactNumber(List<String> contactNumber) {
         this.contactNumber = contactNumber;
     }
 
@@ -133,7 +134,7 @@ public class Organization extends Staff {
             return this;
         }
 
-        public OrganizationBuilder setContactNumber(String contactNumber) {
+        public OrganizationBuilder setContactNumber(List<String> contactNumber) {
             Organization.this.contactNumber = contactNumber;
             return this;
         }

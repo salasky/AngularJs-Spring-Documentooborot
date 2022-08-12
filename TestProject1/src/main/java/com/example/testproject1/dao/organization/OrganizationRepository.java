@@ -16,8 +16,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
-import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_CREATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_CREATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_DELETE_ALL_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_DELETE_BY_ID_QUERY;
@@ -52,8 +52,9 @@ public class OrganizationRepository implements CrudRepository<Organization> {
         if (organization == null) {
             throw new DocflowRuntimeApplicationException("Organization не может быть null");
         }
-        jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString()
-                , organization.getFullName(), organization.getShortName(), organization.getSupervisor(), organization.getContactNumber());
+        jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString(),
+                organization.getFullName(), organization.getShortName(), organization.getSupervisor(),
+                organization.getContactNumber().toString().replaceAll(", |\\[|\\]", ""));
         return organization;
     }
 
@@ -66,7 +67,8 @@ public class OrganizationRepository implements CrudRepository<Organization> {
             throw new DocflowRuntimeApplicationException("Organization не может быть null");
         }
         jdbcTemplate.update(ORGANIZATION_UPDATE_QUERY, organization.getFullName(), organization.getShortName(),
-                organization.getSupervisor(), organization.getContactNumber(), organization.getId().toString());
+                organization.getSupervisor(), organization.getContactNumber().toString().replaceAll(", |\\[|\\]", ""),
+                organization.getId().toString());
         return organization;
     }
 
@@ -120,7 +122,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
                 ps.setString(2, entityList.get(i).getFullName());
                 ps.setString(3, entityList.get(i).getSupervisor());
                 ps.setString(4, entityList.get(i).getShortName());
-                ps.setString(5, entityList.get(i).getContactNumber());
+                ps.setString(5, entityList.get(i).getContactNumber().toString());
             }
             @Override
             public int getBatchSize() {

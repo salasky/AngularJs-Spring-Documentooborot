@@ -41,16 +41,6 @@ public class DocumentShell {
      */
     @Autowired
     private GenerateReportService generateReportService;
-    @Autowired
-    private CrudRepository<Organization> organizationCrudRepository;
-    @Autowired
-    private CrudRepository<Department> departmentCrudRepository;
-    @Autowired
-    private CrudRepository<JobTittle> jobTittleCrudRepository;
-    @Autowired
-    private CrudRepository<Person> personCrudRepository;
-    @Autowired
-    private CrudRepository<IncomingDocument> incomingDocumentCrudRepository;
 
     /**
      * Shell метод генерации документов и создания отчетов по ним
@@ -64,72 +54,5 @@ public class DocumentShell {
         generateDocumentService.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
         generateReportService.saveReportByAuthor();
-    }
-    @ShellMethod
-    public void  get(){
-        Organization organization=Organization.newBuilder()
-                .setId(UUID.randomUUID())
-                .setFullName("FullName")
-                .setShortName("organizationShortName")
-                .setSupervisor("orgSupervisor")
-                .setContactNumber("897643567895").build();
-        UUID orgUid=organization.getId();
-        List<Organization> organizationList=new ArrayList<>();
-        organizationList.add(organization);
-        organizationList.stream().forEach(System.out::println);
-        organizationCrudRepository.saveAll(organizationList);
-        Department department=Department.newBuilder()
-                .setId(UUID.randomUUID())
-                .setFullName("DepFwullName")
-                .setShortName("DeporganizationShortName")
-                .setSupervisor("DeporgSupervisor")
-                .setContactNumber("Dep897643567895")
-                .setOrganization(organization).build();
-        List<Department> departmentList=new ArrayList<>();
-        departmentList.add(department);
-        departmentCrudRepository.saveAll(departmentList);
-
-        JobTittle jobTittle=JobTittle.newBuilder()
-                .setUuid(UUID.randomUUID())
-                .setName("JobName")
-                .build();
-        JobTittle jobTittle2=JobTittle.newBuilder()
-                .setUuid(UUID.randomUUID())
-                .setName("Job2Name")
-                .build();
-        List<JobTittle> jobTittleList=new ArrayList<>();
-        jobTittleList.add(jobTittle);
-        jobTittleList.add(jobTittle2);
-        jobTittleCrudRepository.saveAll(jobTittleList);
-
-        Person person = Person.newBuilder()
-                .setId(UUID.randomUUID())
-                .setFirstName("FirstName")
-                .setSecondName("SecondName")
-                .setLastName("LastName")
-                .setDepartment(department)
-                .setJobTittle(jobTittle)
-                .setBirthDay(new Date(System.currentTimeMillis()))
-                .setPhoneNumber("98765678903")
-                .setPhoto("https://www.baeldung.com/spring-boot-testing").build();
-        List<Person> personList=new ArrayList<>();
-        personList.add(person);
-        personCrudRepository.saveAll(personList);
-
-        Random random = new Random();
-        IncomingDocument incomingDocument= (IncomingDocument) IncomingDocument.newBuilder()
-                .setIncomingSender(person)
-                .setIncomingDestination(person)
-                .setIncomingDocumentNumber(132l)
-                .setIncomingDocumentDate(new Timestamp(System.currentTimeMillis()))
-                .setDocId(UUID.randomUUID())
-                .setDocText("text")
-                .setDocName("name")
-                .setDocRegNumber(random.nextLong())
-                .setDocDate(new Timestamp(234))
-                .setDocAuthor(person).build();
-        List<IncomingDocument> incomingDocumentList=new ArrayList<>();
-        incomingDocumentList.add(incomingDocument);
-        incomingDocumentCrudRepository.saveAll(incomingDocumentList);
     }
 }

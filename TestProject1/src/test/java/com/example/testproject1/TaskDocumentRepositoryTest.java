@@ -17,6 +17,7 @@ import org.springframework.test.context.TestPropertySource;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
@@ -43,7 +44,7 @@ public class TaskDocumentRepositoryTest {
                     .setFullName("FullName")
                     .setShortName("organizationShortName")
                     .setSupervisor("orgSupervisor")
-                    .setContactNumber("897643567895").build();
+                    .setContactNumber(List.of("897643567895")).build();
             organizationRepository.create(organization);
 
             JobTittle jobTittle = JobTittle.newBuilder()
@@ -92,7 +93,7 @@ public class TaskDocumentRepositoryTest {
                 .setDocAuthor(person).build();
     }
 
-    @DisplayName("TaskDocumentRepository create test successful")
+    @DisplayName("TaskDocumentRepository create test")
     @Test
     void taskDocumentRepositoryCreateTest() throws DocflowRuntimeApplicationException {
 
@@ -110,7 +111,7 @@ public class TaskDocumentRepositoryTest {
         Assertions.assertEquals(taskDocumentExpected, taskDocumentActual);
     }
 
-    @DisplayName("TaskDocumentRepository deleteAll test successful")
+    @DisplayName("TaskDocumentRepository deleteAll test")
     @Test
     void taskDocumentRepositoryDeleteAllTest() throws DocflowRuntimeApplicationException {
         if (taskDocumentCrudRepository.getAll().isEmpty()) {
@@ -120,7 +121,7 @@ public class TaskDocumentRepositoryTest {
         Assertions.assertTrue(taskDocumentCrudRepository.getAll().isEmpty());
     }
 
-    @DisplayName("TaskDocumentRepository deleteById test successful")
+    @DisplayName("TaskDocumentRepository deleteById test")
     @Test
     void taskDocumentRepositoryDeleteByIdTest() throws DocflowRuntimeApplicationException {
         TaskDocument taskDocument = getTaskDocument();
@@ -130,7 +131,7 @@ public class TaskDocumentRepositoryTest {
         Assertions.assertTrue(taskDocumentCrudRepository.getById(uuid).isEmpty());
     }
 
-    @DisplayName("TaskDocumentRepository update test successful")
+    @DisplayName("TaskDocumentRepository update test")
     @Test
     void taskDocumentRepositoryUpdateTest() throws DocflowRuntimeApplicationException {
         if (taskDocumentCrudRepository.getAll().isEmpty()) {

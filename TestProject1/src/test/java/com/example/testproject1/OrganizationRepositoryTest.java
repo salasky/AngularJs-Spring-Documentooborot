@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
@@ -30,7 +32,7 @@ class OrganizationRepositoryTest {
                     .setFullName("FullName")
                     .setShortName("organizationShortName")
                     .setSupervisor("orgSupervisor")
-                    .setContactNumber("897643567895").build();
+                    .setContactNumber(List.of("897643567895")).build();
             organizationRepository.create(organization);
         }
     }
@@ -41,7 +43,7 @@ class OrganizationRepositoryTest {
                 .setFullName("FullName")
                 .setShortName("organizationShortName")
                 .setSupervisor("orgSupervisor")
-                .setContactNumber("897643567895").build();
+                .setContactNumber(List.of("897643567895")).build();
     }
 
     @DisplayName("OrganizationRepository create test successful")
@@ -55,7 +57,7 @@ class OrganizationRepositoryTest {
         Assertions.assertEquals(organizationEx, organizationActual);
     }
 
-    @DisplayName("OrganizationRepository deleteAll test successful")
+    @DisplayName("OrganizationRepository deleteAll test")
     @Test
     void organizationRepositoryDeleteAllTest() throws DocflowRuntimeApplicationException {
         if (organizationCrudRepository.getAll().isEmpty()) {
@@ -65,7 +67,7 @@ class OrganizationRepositoryTest {
         Assertions.assertTrue(organizationCrudRepository.getAll().isEmpty());
     }
 
-    @DisplayName("OrganizationRepository deleteById test successful")
+    @DisplayName("OrganizationRepository deleteById test")
     @Test
     void organizationRepositoryDeleteByIdTest() throws DocflowRuntimeApplicationException {
         Organization organization = getOrganization();
@@ -75,7 +77,7 @@ class OrganizationRepositoryTest {
         Assertions.assertTrue(organizationCrudRepository.getById(uuid).isEmpty());
     }
 
-    @DisplayName("OrganizationRepository update test successful")
+    @DisplayName("OrganizationRepository update test")
     @Test
     void organizationRepositoryUpdateTest() throws DocflowRuntimeApplicationException {
         Organization organization = getOrganization();
@@ -90,5 +92,20 @@ class OrganizationRepositoryTest {
         organizationCrudRepository.update(organization);
 
         Assertions.assertEquals("NeftServicesTest", organizationDB.getFullName());
+    }
+
+    @DisplayName("OrganizationRepository saveAll test")
+    @Test
+    void organizationRepositorySaveALLTest() throws DocflowRuntimeApplicationException {
+        Organization organization = getOrganization();
+        Organization organizationSecond=getOrganization();
+        UUID uuid = organization.getId();
+        UUID uuidSecond=organizationSecond.getId();
+        List<Organization> organizationList=new ArrayList<>();
+        organizationList.add(organization);
+        organizationList.add(organizationSecond);
+        organizationCrudRepository.saveAll(organizationList);
+        Assertions.assertTrue(organizationCrudRepository.getById(uuid).isPresent());
+        Assertions.assertTrue(organizationCrudRepository.getById(uuidSecond).isPresent());
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -46,6 +47,6 @@ public class OrganizationMapper implements RowMapper<Organization> {
                 .setFullName(rs.getString(ORGANIZATION_FULL_NAME))
                 .setShortName(rs.getString(ORGANIZATION_SHORT_NAME))
                 .setSupervisor(rs.getString(ORGANIZATION_SUPERVISOR))
-                .setContactNumber(rs.getString(ORGANIZATION_CONTACT_NUMBER)).build();
+                .setContactNumber(List.of(rs.getString(ORGANIZATION_CONTACT_NUMBER))).build();
     }
 }

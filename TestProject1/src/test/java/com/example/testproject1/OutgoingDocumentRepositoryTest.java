@@ -18,6 +18,7 @@ import org.springframework.test.context.TestPropertySource;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
@@ -45,7 +46,7 @@ public class OutgoingDocumentRepositoryTest {
                     .setFullName("FullName")
                     .setShortName("organizationShortName")
                     .setSupervisor("orgSupervisor")
-                    .setContactNumber("897643567895").build();
+                    .setContactNumber(List.of("897643567895")).build();
             organizationRepository.create(organization);
 
             JobTittle jobTittle = JobTittle.newBuilder()
@@ -92,7 +93,7 @@ public class OutgoingDocumentRepositoryTest {
     }
 
 
-    @DisplayName("OutgoingDocumentRepository create test successful")
+    @DisplayName("OutgoingDocumentRepository create test")
     @Test
     void outgoingDocumentRepositoryCreateTest() throws DocflowRuntimeApplicationException {
 
@@ -111,7 +112,7 @@ public class OutgoingDocumentRepositoryTest {
         Assertions.assertEquals(outgoingDocumentExpected, outgoingDocumentActual);
     }
 
-    @DisplayName("OutgoingDocumentRepository deleteAll test successful")
+    @DisplayName("OutgoingDocumentRepository deleteAll test")
     @Test
     void outgoingDocumentRepositoryDeleteAllTest() throws DocflowRuntimeApplicationException {
         if (outgoingDocumentCrudRepository.getAll().isEmpty()) {
@@ -121,7 +122,7 @@ public class OutgoingDocumentRepositoryTest {
         Assertions.assertTrue(outgoingDocumentCrudRepository.getAll().isEmpty());
     }
 
-    @DisplayName("OutgoingDocumentRepository deleteById test successful")
+    @DisplayName("OutgoingDocumentRepository deleteById test")
     @Test
     void outgoingDocumentRepositoryDeleteByIdTest() throws DocflowRuntimeApplicationException {
         OutgoingDocument outgoingDocument = getOutgoingDocument();
@@ -131,7 +132,7 @@ public class OutgoingDocumentRepositoryTest {
         Assertions.assertTrue(outgoingDocumentCrudRepository.getById(uuid).isEmpty());
     }
 
-    @DisplayName("OutgoingDocumentRepository update test successful")
+    @DisplayName("OutgoingDocumentRepository update test")
     @Test
     void outgoingDocumentRepositoryUpdateTest() throws DocflowRuntimeApplicationException {
         if (outgoingDocumentCrudRepository.getAll().isEmpty()) {
