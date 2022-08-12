@@ -1,7 +1,6 @@
 package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Department;
@@ -101,10 +100,10 @@ public class TaskDocumentRepositoryTest {
         UUID uuid = taskDocumentExpected.getId();
         taskDocumentCrudRepository.create(taskDocumentExpected);
 
-        Optional<TaskDocument> optionalTaskDocument = taskDocumentCrudRepository.getById(uuid.toString());
+        Optional<TaskDocument> optionalTaskDocument = taskDocumentCrudRepository.getById(uuid);
         Assertions.assertTrue(optionalTaskDocument.isPresent());
         TaskDocument taskDocumentActual = optionalTaskDocument.get();
-        Assertions.assertTrue(personRepository.getById(taskDocumentActual.getAuthor().getId().toString()).isPresent());
+        Assertions.assertTrue(personRepository.getById(taskDocumentActual.getAuthor().getId()).isPresent());
         taskDocumentActual.setAuthor(taskDocumentExpected.getAuthor());
         taskDocumentActual.setControlPerson(taskDocumentExpected.getControlPerson());
         taskDocumentActual.setResponsible(taskDocumentExpected.getResponsible());
@@ -127,8 +126,8 @@ public class TaskDocumentRepositoryTest {
         TaskDocument taskDocument = getTaskDocument();
         UUID uuid = taskDocument.getId();
         taskDocumentCrudRepository.create(taskDocument);
-        taskDocumentCrudRepository.deleteById(uuid.toString());
-        Assertions.assertTrue(taskDocumentCrudRepository.getById(uuid.toString()).isEmpty());
+        taskDocumentCrudRepository.deleteById(uuid);
+        Assertions.assertTrue(taskDocumentCrudRepository.getById(uuid).isEmpty());
     }
 
     @DisplayName("TaskDocumentRepository update test successful")
@@ -141,8 +140,8 @@ public class TaskDocumentRepositoryTest {
         UUID uuid = taskDocument.getId();
         taskDocument.setText("TestText");
         taskDocumentCrudRepository.update(taskDocument);
-        Assertions.assertTrue(taskDocumentCrudRepository.getById(uuid.toString()).isPresent());
-        TaskDocument taskDocumentDB = taskDocumentCrudRepository.getById(uuid.toString()).get();
+        Assertions.assertTrue(taskDocumentCrudRepository.getById(uuid).isPresent());
+        TaskDocument taskDocumentDB = taskDocumentCrudRepository.getById(uuid).get();
         Assertions.assertEquals("TestText", taskDocumentDB.getText());
     }
 }

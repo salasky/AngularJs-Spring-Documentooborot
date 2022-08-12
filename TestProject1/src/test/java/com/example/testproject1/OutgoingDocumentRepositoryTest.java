@@ -1,7 +1,6 @@
 package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.documentenum.DocumentDeliveryType;
@@ -101,11 +100,11 @@ public class OutgoingDocumentRepositoryTest {
         UUID uuid = outgoingDocumentExpected.getId();
         outgoingDocumentCrudRepository.create(outgoingDocumentExpected);
 
-        Optional<OutgoingDocument> optionalOutgoingDocument = outgoingDocumentCrudRepository.getById(uuid.toString());
+        Optional<OutgoingDocument> optionalOutgoingDocument = outgoingDocumentCrudRepository.getById(uuid);
         Assertions.assertTrue(optionalOutgoingDocument.isPresent());
 
         OutgoingDocument outgoingDocumentActual = optionalOutgoingDocument.get();
-        Assertions.assertTrue(personRepository.getById(outgoingDocumentActual.getAuthor().getId().toString()).isPresent());
+        Assertions.assertTrue(personRepository.getById(outgoingDocumentActual.getAuthor().getId()).isPresent());
         outgoingDocumentActual.setAuthor(outgoingDocumentExpected.getAuthor());
         outgoingDocumentActual.setSender(outgoingDocumentExpected.getSender());
 
@@ -128,8 +127,8 @@ public class OutgoingDocumentRepositoryTest {
         OutgoingDocument outgoingDocument = getOutgoingDocument();
         UUID uuid = outgoingDocument.getId();
         outgoingDocumentCrudRepository.create(outgoingDocument);
-        outgoingDocumentCrudRepository.deleteById(uuid.toString());
-        Assertions.assertTrue(outgoingDocumentCrudRepository.getById(uuid.toString()).isEmpty());
+        outgoingDocumentCrudRepository.deleteById(uuid);
+        Assertions.assertTrue(outgoingDocumentCrudRepository.getById(uuid).isEmpty());
     }
 
     @DisplayName("OutgoingDocumentRepository update test successful")
@@ -142,8 +141,8 @@ public class OutgoingDocumentRepositoryTest {
         UUID uuid = outgoingDocument.getId();
         outgoingDocument.setText("TestText");
         outgoingDocumentCrudRepository.update(outgoingDocument);
-        Assertions.assertTrue(outgoingDocumentCrudRepository.getById(uuid.toString()).isPresent());
-        OutgoingDocument outgoingDocumentDB = outgoingDocumentCrudRepository.getById(uuid.toString()).get();
+        Assertions.assertTrue(outgoingDocumentCrudRepository.getById(uuid).isPresent());
+        OutgoingDocument outgoingDocumentDB = outgoingDocumentCrudRepository.getById(uuid).get();
         Assertions.assertEquals("TestText", outgoingDocumentDB.getText());
     }
 }

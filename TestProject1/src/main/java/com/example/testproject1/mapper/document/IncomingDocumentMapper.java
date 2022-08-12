@@ -74,18 +74,18 @@ public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
         BaseDocument baseDocument = baseDocumentMapper.mapRow(rs, rowNum);
 
         //Мапим Person(sender) к incomingDocument
-        Person sender = new Person();
-        sender.setId(UUID.fromString(rs.getString(PERSON_SENDER_ID)));
-        sender.setFirstName(rs.getString(PERSON_SENDER_FIRST_NAME));
-        sender.setSecondName(rs.getString(PERSON_SENDER_SECOND_NAME));
-        sender.setLastName(rs.getString(PERSON_SENDER_LAST_NAME));
+        Person sender = Person.newBuilder()
+                .setId(UUID.fromString(rs.getString(PERSON_SENDER_ID)))
+                .setFirstName(rs.getString(PERSON_SENDER_FIRST_NAME))
+                .setSecondName(rs.getString(PERSON_SENDER_SECOND_NAME))
+                .setLastName(rs.getString(PERSON_SENDER_LAST_NAME)).build();
 
         //Мапим Person(destination) к incomingDocument
-        Person destination = new Person();
-        destination.setId(UUID.fromString(rs.getString(PERSON_DESTINATION_ID)));
-        destination.setFirstName(rs.getString(PERSON_DESTINATION_FIRST_NAME));
-        destination.setSecondName(rs.getString(PERSON_DESTINATION_SECOND_NAME));
-        destination.setLastName(rs.getString(PERSON_DESTINATION_LAST_NAME));
+        Person destination = Person.newBuilder()
+                .setId(UUID.fromString(rs.getString(PERSON_DESTINATION_ID)))
+                .setFirstName(rs.getString(PERSON_DESTINATION_FIRST_NAME))
+                .setSecondName(rs.getString(PERSON_DESTINATION_SECOND_NAME))
+                .setLastName(rs.getString(PERSON_DESTINATION_LAST_NAME)).build();
 
         return (IncomingDocument) IncomingDocument.newBuilder()
                 .setIncomingDocumentNumber(rs.getLong(INCOMING_DOCUMENT_NUMBER))

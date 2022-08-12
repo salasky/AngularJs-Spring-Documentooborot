@@ -1,7 +1,5 @@
 package com.example.testproject1.dao;
 
-import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,7 +23,7 @@ public interface CrudRepository<T> {
      * @param id нужного объекта
      * @return возвращает null или объект
      */
-    Optional<T> getById(String id);
+    Optional<T> getById(UUID id);
 
     /**
      * Метод сохранения объекта указанного класса в базу данных
@@ -33,7 +31,7 @@ public interface CrudRepository<T> {
      * @param entity объекта класса
      * @return возвращает Объект указанного класса
      */
-    T create(T entity) throws DocflowRuntimeApplicationException;
+    T create(T entity);
 
     /**
      * Метод обновления информации указанного объекта
@@ -41,7 +39,7 @@ public interface CrudRepository<T> {
      * @param entity объект класса
      * @return возвращает измененный объект
      */
-    T update(T entity) throws DocflowRuntimeApplicationException;
+    T update(T entity);
 
     /**
      * Метод удаления всех записей с таблицы
@@ -53,7 +51,7 @@ public interface CrudRepository<T> {
      *
      * @param id UUID в строковом формате
      */
-    void deleteById(String id);
+    void deleteById(UUID id);
 
     /**
      * Метод проверки существования объекта в базе по переданному uuid
@@ -62,4 +60,11 @@ public interface CrudRepository<T> {
      * @return возвращает true при существовании записи и false при отсутствии
      */
     boolean existById(UUID uuid);
+    /**
+     * Метод сохранения List объектов указанного класса в базу данных
+     *
+     * @param entityList  List объекта класса
+     * @return возвращает Объект указанного класса
+     */
+    void saveAll(List<T> entityList);
 }

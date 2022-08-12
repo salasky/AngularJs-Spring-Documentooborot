@@ -8,6 +8,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс для десериализация JobTittlle из XML
+ *
+ * @author smigranov 
+ */
 @XmlRootElement
 public class JobTittlleXmlDTO {
     /**

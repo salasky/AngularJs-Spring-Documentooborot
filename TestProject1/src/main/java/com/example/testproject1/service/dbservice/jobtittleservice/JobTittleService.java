@@ -1,7 +1,6 @@
 package com.example.testproject1.service.dbservice.jobtittleservice;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Класс реализующий интерфейс {@link CrudService}. Для выполнения CRUD операций объектов класса {@link  JobTittle} к базе данных .
@@ -34,7 +34,7 @@ public class JobTittleService implements CrudService<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public JobTittle create(JobTittle jobTittle) throws DocflowRuntimeApplicationException {
+    public JobTittle create(JobTittle jobTittle) {
         JobTittle jobTittleDB = jobTittleRepository.create(jobTittle);
         if (jobTittleDB != null) {
             LOGGER.info("JobTittle успешно сохранен");
@@ -56,7 +56,7 @@ public class JobTittleService implements CrudService<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<JobTittle> getById(String id) {
+    public Optional<JobTittle> getById(UUID id) {
         LOGGER.info("Попытка получить JobTittle по id");
         return jobTittleRepository.getById(id);
     }
@@ -65,7 +65,7 @@ public class JobTittleService implements CrudService<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public JobTittle update(JobTittle jobTittle) throws DocflowRuntimeApplicationException {
+    public JobTittle update(JobTittle jobTittle) {
         LOGGER.info(MessageFormat.format("Попытка изменить данные у JobTittle с id {0}", jobTittle.getUuid().toString()));
         return jobTittleRepository.update(jobTittle);
     }
@@ -83,8 +83,14 @@ public class JobTittleService implements CrudService<JobTittle> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) {
-        LOGGER.info(MessageFormat.format("Попытка удаления JobTittle с id {0}",id));
+    public void deleteById(UUID id) {
+        LOGGER.info(MessageFormat.format("Попытка удаления JobTittle с id {0}", id.toString()));
         jobTittleRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveALL(List<JobTittle> entityList) {
+        LOGGER.info("Попытка сохранения List<JobTittle> в таблицу JobTittle");
+        jobTittleRepository.saveAll(entityList);
     }
 }

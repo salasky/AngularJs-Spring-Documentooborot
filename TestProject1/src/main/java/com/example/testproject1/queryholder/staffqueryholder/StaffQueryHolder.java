@@ -42,7 +42,6 @@ public class StaffQueryHolder {
      */
     public static final String DEPARTMENT_UPDATE_QUERY = "UPDATE department SET full_name=?, short_name=?, supervisor=?, contact_number=?, organization_id=? WHERE id=?";
 
-
     /**
      * Запрос на создание записи в таблице jobTittle
      */

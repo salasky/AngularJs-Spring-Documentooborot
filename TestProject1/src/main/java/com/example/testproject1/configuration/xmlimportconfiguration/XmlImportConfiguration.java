@@ -2,7 +2,6 @@ package com.example.testproject1.configuration.xmlimportconfiguration;
 
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.staffservice.StorageService;
-import liquibase.pro.packaged.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,7 +47,7 @@ public class XmlImportConfiguration {
      * @return Map<StorageService, CrudService>
      */
     private Map<StorageService, CrudService> combineLists(List<StorageService> keys, List<CrudService> values) {
-        if (keys.size() > values.size()){
+        if (keys.size() > values.size()) {
             throw new IllegalArgumentException("Unable to merge lists. StorageServiceList size must not be larger.");
         }
         Map<StorageService, CrudService> map = new LinkedHashMap<>();

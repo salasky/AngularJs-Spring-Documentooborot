@@ -1,7 +1,6 @@
 package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.staff.Organization;
 import org.junit.jupiter.api.Assertions;
@@ -51,8 +50,8 @@ class OrganizationRepositoryTest {
         Organization organizationEx = getOrganization();
         UUID uuid = organizationEx.getId();
         organizationCrudRepository.create(organizationEx);
-        Assertions.assertTrue(organizationCrudRepository.getById(uuid.toString()).isPresent());
-        Organization organizationActual = organizationCrudRepository.getById(uuid.toString()).get();
+        Assertions.assertTrue(organizationCrudRepository.getById(uuid).isPresent());
+        Organization organizationActual = organizationCrudRepository.getById(uuid).get();
         Assertions.assertEquals(organizationEx, organizationActual);
     }
 
@@ -72,8 +71,8 @@ class OrganizationRepositoryTest {
         Organization organization = getOrganization();
         UUID uuid = organization.getId();
         organizationCrudRepository.create(organization);
-        organizationCrudRepository.deleteById(uuid.toString());
-        Assertions.assertTrue(organizationCrudRepository.getById(uuid.toString()).isEmpty());
+        organizationCrudRepository.deleteById(uuid);
+        Assertions.assertTrue(organizationCrudRepository.getById(uuid).isEmpty());
     }
 
     @DisplayName("OrganizationRepository update test successful")
@@ -85,8 +84,8 @@ class OrganizationRepositoryTest {
         organization.setFullName("NeftServicesTest");
         organizationCrudRepository.update(organization);
 
-        Assertions.assertTrue(organizationCrudRepository.getById(uuid.toString()).isPresent());
-        Organization organizationDB = organizationCrudRepository.getById(uuid.toString()).get();
+        Assertions.assertTrue(organizationCrudRepository.getById(uuid).isPresent());
+        Organization organizationDB = organizationCrudRepository.getById(uuid).get();
 
         organizationCrudRepository.update(organization);
 

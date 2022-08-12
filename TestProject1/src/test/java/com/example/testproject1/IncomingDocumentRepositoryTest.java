@@ -1,7 +1,6 @@
 package com.example.testproject1;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Department;
@@ -101,10 +100,10 @@ public class IncomingDocumentRepositoryTest {
         UUID uuid = incomingDocumentExpected.getId();
         incomingDocumentCrudRepository.create(incomingDocumentExpected);
 
-        Optional<IncomingDocument> optionalIncomingDocument = incomingDocumentCrudRepository.getById(uuid.toString());
+        Optional<IncomingDocument> optionalIncomingDocument = incomingDocumentCrudRepository.getById(uuid);
         Assertions.assertTrue(optionalIncomingDocument.isPresent());
         IncomingDocument incomingDocumentActual = optionalIncomingDocument.get();
-        Assertions.assertTrue(personRepository.getById(incomingDocumentActual.getAuthor().getId().toString()).isPresent());
+        Assertions.assertTrue(personRepository.getById(incomingDocumentActual.getAuthor().getId()).isPresent());
         incomingDocumentActual.setAuthor(incomingDocumentExpected.getAuthor());
         incomingDocumentActual.setSender(incomingDocumentExpected.getSender());
         incomingDocumentActual.setDestination(incomingDocumentExpected.getDestination());
@@ -127,8 +126,8 @@ public class IncomingDocumentRepositoryTest {
         IncomingDocument incomingDocument = getIncomingDocument();
         UUID uuid = incomingDocument.getId();
         incomingDocumentCrudRepository.create(incomingDocument);
-        incomingDocumentCrudRepository.deleteById(uuid.toString());
-        Assertions.assertTrue(incomingDocumentCrudRepository.getById(uuid.toString()).isEmpty());
+        incomingDocumentCrudRepository.deleteById(uuid);
+        Assertions.assertTrue(incomingDocumentCrudRepository.getById(uuid).isEmpty());
     }
 
     @DisplayName("IncomingDocumentRepository update test successful")
@@ -142,8 +141,8 @@ public class IncomingDocumentRepositoryTest {
         incomingDocument.setText("TestText");
         incomingDocument.setNumber(12l);
         incomingDocumentCrudRepository.update(incomingDocument);
-        Assertions.assertTrue(incomingDocumentCrudRepository.getById(uuid.toString()).isPresent());
-        IncomingDocument incomingDocumentDB = incomingDocumentCrudRepository.getById(uuid.toString()).get();
+        Assertions.assertTrue(incomingDocumentCrudRepository.getById(uuid).isPresent());
+        IncomingDocument incomingDocumentDB = incomingDocumentCrudRepository.getById(uuid).get();
         Assertions.assertEquals("TestText", incomingDocumentDB.getText());
         Assertions.assertEquals(12l, incomingDocumentDB.getNumber());
     }

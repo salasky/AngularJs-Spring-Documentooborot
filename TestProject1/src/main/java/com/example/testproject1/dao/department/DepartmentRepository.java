@@ -1,7 +1,6 @@
 package com.example.testproject1.dao.department;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.mapper.staff.DepartmentMapper;
 import com.example.testproject1.model.staff.Department;
@@ -10,9 +9,11 @@ import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -61,15 +62,15 @@ public class DepartmentRepository implements CrudRepository<Department> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<Department> getById(String id) {
-        return jdbcTemplate.query(DEPARTMENT_GET_BY_ID_QUERY, departmentMapper, id).stream().findFirst();
+    public Optional<Department> getById(UUID id) {
+        return jdbcTemplate.query(DEPARTMENT_GET_BY_ID_QUERY, departmentMapper, id.toString()).stream().findFirst();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Department create(Department department) throws DocflowRuntimeApplicationException {
+    public Department create(Department department) {
         if (department == null) {
             throw new DocflowRuntimeApplicationException("Department не может быть null");
         }
@@ -83,7 +84,7 @@ public class DepartmentRepository implements CrudRepository<Department> {
      * {@inheritDoc}
      */
     @Override
-    public Department update(Department department) throws DocflowRuntimeApplicationException {
+    public Department update(Department department) {
         if (department == null) {
             throw new DocflowRuntimeApplicationException("Department не может быть null");
         }
@@ -105,8 +106,8 @@ public class DepartmentRepository implements CrudRepository<Department> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) {
-        jdbcTemplate.update(DEPARTMENT_DELETE_BY_ID_QUERY, id);
+    public void deleteById(UUID id) {
+        jdbcTemplate.update(DEPARTMENT_DELETE_BY_ID_QUERY, id.toString());
     }
 
     /**
@@ -117,4 +118,24 @@ public class DepartmentRepository implements CrudRepository<Department> {
         return jdbcTemplate.query(DEPARTMENT_GET_BY_ID_QUERY, departmentMapper, uuid.toString())
                 .stream().findFirst().isPresent();
     }
+
+    @Override
+    public void saveAll(List<Department> departmentList) {
+        jdbcTemplate.batchUpdate(DEPARTMENT_CREATE_QUERY, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, departmentList.get(i).getId().toString());
+                ps.setString(2, departmentList.get(i).getFullName());
+                ps.setString(3, departmentList.get(i).getShortName());
+                ps.setString(4, departmentList.get(i).getSupervisor());
+                ps.setString(5, departmentList.get(i).getContactNumber());
+                ps.setString(6, departmentList.get(i).getOrganization().getId().toString());
+            }
+            @Override
+            public int getBatchSize() {
+                return departmentList.size();
+            }
+        });
+    }
+
 }

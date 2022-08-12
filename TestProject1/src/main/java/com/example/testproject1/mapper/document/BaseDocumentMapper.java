@@ -59,11 +59,11 @@ public class BaseDocumentMapper implements RowMapper<BaseDocument> {
      */
     @Override
     public BaseDocument mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Person person = new Person();
-        person.setId(UUID.fromString(rs.getString(PERSON_ID)));
-        person.setFirstName(rs.getString(PERSON_FIRST_NAME));
-        person.setSecondName(rs.getString(PERSON_SECOND_NAME));
-        person.setLastName(rs.getString(PERSON_LAST_NAME));
+        Person person=Person.newBuilder().
+                setId(UUID.fromString(rs.getString(PERSON_ID)))
+                .setFirstName(rs.getString(PERSON_FIRST_NAME))
+                .setSecondName(rs.getString(PERSON_SECOND_NAME))
+                .setLastName(rs.getString(PERSON_LAST_NAME)).build();
 
         return BaseDocument.newBuilder().setDocId(UUID.fromString(rs.getString(BASE_DOCUMENT_ID)))
                 .setDocName(rs.getString(BASE_DOCUMENT_NAME))

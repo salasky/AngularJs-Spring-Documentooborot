@@ -1,23 +1,23 @@
 package com.example.testproject1.dao.organization;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DeleteByIdException;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.mapper.staff.OrganizationMapper;
 import com.example.testproject1.model.staff.Organization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_GET_BY_ID_QUERY;
-import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_UPDATE_ID_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_CREATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_CREATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_DELETE_ALL_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_DELETE_BY_ID_QUERY;
@@ -48,7 +48,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
      * {@inheritDoc}
      */
     @Override
-    public Organization create(Organization organization) throws DocflowRuntimeApplicationException {
+    public Organization create(Organization organization) {
         if (organization == null) {
             throw new DocflowRuntimeApplicationException("Organization не может быть null");
         }
@@ -61,7 +61,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
      * {@inheritDoc}
      */
     @Override
-    public Organization update(Organization organization) throws DocflowRuntimeApplicationException {
+    public Organization update(Organization organization) {
         if (organization == null) {
             throw new DocflowRuntimeApplicationException("Organization не может быть null");
         }
@@ -82,8 +82,8 @@ public class OrganizationRepository implements CrudRepository<Organization> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<Organization> getById(String uuid) {
-        return jdbcTemplate.query(ORGANIZATION_GET_BY_ID_QUERY, organizationMapper, uuid).stream().findFirst();
+    public Optional<Organization> getById(UUID uuid) {
+        return jdbcTemplate.query(ORGANIZATION_GET_BY_ID_QUERY, organizationMapper, uuid.toString()).stream().findFirst();
     }
 
     /**
@@ -98,8 +98,8 @@ public class OrganizationRepository implements CrudRepository<Organization> {
      * {@inheritDoc}
      */
     @Override
-    public void deleteById(String id) {
-        jdbcTemplate.update(ORGANIZATION_DELETE_BY_ID_QUERY, id);
+    public void deleteById(UUID id) {
+        jdbcTemplate.update(ORGANIZATION_DELETE_BY_ID_QUERY, id.toString());
     }
 
     /**
@@ -110,4 +110,23 @@ public class OrganizationRepository implements CrudRepository<Organization> {
         return jdbcTemplate.query(ORGANIZATION_GET_BY_ID_QUERY, organizationMapper, uuid.toString())
                 .stream().findFirst().isPresent();
     }
+
+    @Override
+    public void saveAll(List<Organization> entityList) {
+        jdbcTemplate.batchUpdate(ORGANIZATION_CREATE_QUERY, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, entityList.get(i).getId().toString());
+                ps.setString(2, entityList.get(i).getFullName());
+                ps.setString(3, entityList.get(i).getSupervisor());
+                ps.setString(4, entityList.get(i).getShortName());
+                ps.setString(5, entityList.get(i).getContactNumber());
+            }
+            @Override
+            public int getBatchSize() {
+                return entityList.size();
+            }
+        });
+    }
+
 }

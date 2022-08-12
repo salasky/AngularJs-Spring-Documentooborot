@@ -5,7 +5,7 @@ package com.example.testproject1.exception;
  *
  * @author smigranov
  */
-public class DocflowRuntimeApplicationException extends Exception {
+public class DocflowRuntimeApplicationException extends RuntimeException {
     /**
      * Информация о исключении
      */
