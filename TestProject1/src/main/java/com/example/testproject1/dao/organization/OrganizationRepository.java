@@ -54,7 +54,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
         }
         jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString(),
                 organization.getFullName(), organization.getShortName(), organization.getSupervisor(),
-                organization.getContactNumber().toString().replaceAll(", |\\[|\\]", ""));
+                organization.getContactNumber().toString().replaceAll("\\[|\\]", ""));
         return organization;
     }
 
@@ -67,7 +67,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
             throw new DocflowRuntimeApplicationException("Organization не может быть null");
         }
         jdbcTemplate.update(ORGANIZATION_UPDATE_QUERY, organization.getFullName(), organization.getShortName(),
-                organization.getSupervisor(), organization.getContactNumber().toString().replaceAll(", |\\[|\\]", ""),
+                organization.getSupervisor(), organization.getContactNumber().toString().replaceAll("\\[|\\]", ""),
                 organization.getId().toString());
         return organization;
     }
