@@ -10,6 +10,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.BatchUpdateException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
@@ -89,7 +90,7 @@ public class OrganizationService implements CrudService<Organization> {
     }
 
     @Override
-    public void saveALL(List<Organization> entityList) {
+    public void saveALL(List<Organization> entityList) throws BatchUpdateException {
         LOGGER.info("Попытка сохранения List<Organization> в таблицу Organization");
         organizationRepository.saveAll(entityList);
     }

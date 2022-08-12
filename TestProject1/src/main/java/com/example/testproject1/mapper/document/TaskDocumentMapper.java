@@ -40,33 +40,10 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
      */
     private final String PERSON_RESPONSE_ID = "person_response_id";
     /**
-     * Название столбца для мапинга в поле person_response_first_name
-     */
-    private final String PERSON_RESPONSE_FIRST_NAME = "person_response_first_name";
-    /**
-     * Название столбца для мапинга в поле person_response_second_name
-     */
-    private final String PERSON_RESPONSE_SECOND_NAME = "person_response_second_name";
-    /**
-     * Название столбца для мапинга в поле person_response_last_name
-     */
-    private final String PERSON_RESPONSE_LAST_NAME = "person_response_last_name";
-    /**
      * Название столбца для мапинга в поле person_control_id
      */
     private final String PERSON_CONTROL_ID = "person_control_id";
-    /**
-     * Название столбца для мапинга в поле person_control_first_name
-     */
-    private final String PERSON_CONTROL_FIRST_NAME = "person_control_first_name";
-    /**
-     * Название столбца для мапинга в поле person_control_second_name
-     */
-    private final String PERSON_CONTROL_SECOND_NAME = "person_control_second_name";
-    /**
-     * Название столбца для мапинга в поле person_control_last_name
-     */
-    private final String PERSON_CONTROL_LAST_NAME = "person_control_last_name";
+
 
     /**
      * {@inheritDoc}
@@ -79,16 +56,10 @@ public class TaskDocumentMapper implements RowMapper<TaskDocument> {
         //Мапим Person(responsible) к taskDocument
         Person response = new Person();
         response.setId(UUID.fromString(rs.getString(PERSON_RESPONSE_ID)));
-        response.setFirstName(rs.getString(PERSON_RESPONSE_FIRST_NAME));
-        response.setSecondName(rs.getString(PERSON_RESPONSE_SECOND_NAME));
-        response.setLastName(rs.getString(PERSON_RESPONSE_LAST_NAME));
 
         //Мапим Person(control_person) к taskDocument
         Person controlPerson = new Person();
         controlPerson.setId(UUID.fromString(rs.getString(PERSON_CONTROL_ID)));
-        controlPerson.setFirstName(rs.getString(PERSON_CONTROL_FIRST_NAME));
-        controlPerson.setSecondName(rs.getString(PERSON_CONTROL_SECOND_NAME));
-        controlPerson.setLastName(rs.getString(PERSON_CONTROL_LAST_NAME));
 
         return (TaskDocument) TaskDocument.newBuilder()
                 .setTaskDate(rs.getTimestamp(TASK_DOCUMENT_OUT_DATE))

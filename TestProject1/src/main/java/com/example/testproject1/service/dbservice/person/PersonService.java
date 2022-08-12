@@ -10,6 +10,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.BatchUpdateException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
@@ -87,7 +88,7 @@ public class PersonService implements CrudService<Person> {
     }
 
     @Override
-    public void saveALL(List<Person> entityList) {
+    public void saveALL(List<Person> entityList) throws BatchUpdateException {
         LOGGER.info("Попытка сохранения List<Person> в таблицу Person");
         personRepository.saveAll(entityList);
     }

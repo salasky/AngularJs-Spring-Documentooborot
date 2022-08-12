@@ -10,17 +10,18 @@ import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.BatchUpdateException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_CREATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_CREATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_DELETE_ALL_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_DELETE_BY_ID_QUERY;
@@ -65,9 +66,13 @@ public class PersonRepository implements CrudRepository<Person> {
         if (person == null) {
             throw new DocflowRuntimeApplicationException("Person не может быть null");
         }
-        jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
-                person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
-                person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
+        try {
+            jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
+                    person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
+                    person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+        }
         return person;
     }
 
@@ -96,9 +101,13 @@ public class PersonRepository implements CrudRepository<Person> {
         if (person == null) {
             throw new DocflowRuntimeApplicationException("Person не может быть null");
         }
-        jdbcTemplate.update(PERSON_UPDATE_QUERY, person.getFirstName(), person.getSecondName(),
-                person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
-                person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay(), person.getId().toString());
+        try {
+            jdbcTemplate.update(PERSON_UPDATE_QUERY, person.getFirstName(), person.getSecondName(),
+                    person.getLastName(), person.getPhoto(), person.getJobTittle().getUuid().toString(),
+                    person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay(), person.getId().toString());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+        }
         return person;
     }
 
@@ -128,7 +137,7 @@ public class PersonRepository implements CrudRepository<Person> {
     }
 
     @Override
-    public void saveAll(List<Person> entityList) {
+    public void saveAll(List<Person> entityList) throws BatchUpdateException {
         jdbcTemplate.batchUpdate(PERSON_CREATE_QUERY, new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
@@ -142,6 +151,7 @@ public class PersonRepository implements CrudRepository<Person> {
                 ps.setString(8, entityList.get(i).getPhoneNumber());
                 ps.setDate(9, entityList.get(i).getBirthDay());
             }
+
             @Override
             public int getBatchSize() {
                 return entityList.size();

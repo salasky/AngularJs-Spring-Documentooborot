@@ -7,16 +7,17 @@ import com.example.testproject1.model.staff.Organization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.BatchUpdateException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_CREATE_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_DELETE_ALL_QUERY;
@@ -43,6 +44,11 @@ public class OrganizationRepository implements CrudRepository<Organization> {
      */
     @Autowired
     private OrganizationMapper organizationMapper;
+    /**
+     * Регулярное выражение для замены [] List.
+     * Так как в безе хранится String, а поле имеет формат List<String>
+     */
+    String regex = "\\[|\\]";
 
     /**
      * {@inheritDoc}
@@ -52,9 +58,13 @@ public class OrganizationRepository implements CrudRepository<Organization> {
         if (organization == null) {
             throw new DocflowRuntimeApplicationException("Organization не может быть null");
         }
-        jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString(),
-                organization.getFullName(), organization.getShortName(), organization.getSupervisor(),
-                organization.getContactNumber().toString().replaceAll("\\[|\\]", ""));
+        try {
+            jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString(),
+                    organization.getFullName(), organization.getShortName(), organization.getSupervisor(),
+                    organization.getContactNumber().toString().replaceAll(regex, ""));
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+        }
         return organization;
     }
 
@@ -66,9 +76,13 @@ public class OrganizationRepository implements CrudRepository<Organization> {
         if (organization == null) {
             throw new DocflowRuntimeApplicationException("Organization не может быть null");
         }
-        jdbcTemplate.update(ORGANIZATION_UPDATE_QUERY, organization.getFullName(), organization.getShortName(),
-                organization.getSupervisor(), organization.getContactNumber().toString().replaceAll("\\[|\\]", ""),
-                organization.getId().toString());
+        try {
+            jdbcTemplate.update(ORGANIZATION_UPDATE_QUERY, organization.getFullName(), organization.getShortName(),
+                    organization.getSupervisor(), organization.getContactNumber().toString().replaceAll(regex, ""),
+                    organization.getId().toString());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка обновления", e);
+        }
         return organization;
     }
 
@@ -114,7 +128,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
     }
 
     @Override
-    public void saveAll(List<Organization> entityList) {
+    public void saveAll(List<Organization> entityList) throws BatchUpdateException {
         jdbcTemplate.batchUpdate(ORGANIZATION_CREATE_QUERY, new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
@@ -124,6 +138,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
                 ps.setString(4, entityList.get(i).getShortName());
                 ps.setString(5, entityList.get(i).getContactNumber().toString());
             }
+
             @Override
             public int getBatchSize() {
                 return entityList.size();

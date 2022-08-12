@@ -7,10 +7,12 @@ import com.example.testproject1.model.staff.JobTittle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.BatchUpdateException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -23,7 +25,6 @@ import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHo
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_GET_ALL_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_GET_BY_ID_QUERY;
 import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.JOB_TITTLE_UPDATE_ID_QUERY;
-import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.ORGANIZATION_CREATE_QUERY;
 
 /**
  * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
@@ -68,7 +69,11 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
         if (jobTittle == null) {
             throw new DocflowRuntimeApplicationException("JobTittle не может быть null");
         }
-        jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getUuid().toString(), jobTittle.getName());
+        try {
+            jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getUuid().toString(), jobTittle.getName());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+        }
         return jobTittle;
     }
 
@@ -81,7 +86,11 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
         if (jobTittle == null) {
             throw new DocflowRuntimeApplicationException("JobTittle не может быть null");
         }
-        jdbcTemplate.update(JOB_TITTLE_UPDATE_ID_QUERY, jobTittle.getName(), jobTittle.getUuid().toString());
+        try {
+            jdbcTemplate.update(JOB_TITTLE_UPDATE_ID_QUERY, jobTittle.getName(), jobTittle.getUuid().toString());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка обновления", e);
+        }
         return jobTittle;
     }
 
@@ -111,13 +120,14 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
     }
 
     @Override
-    public void saveAll(List<JobTittle> entityList) {
+    public void saveAll(List<JobTittle> entityList) throws BatchUpdateException {
         jdbcTemplate.batchUpdate(JOB_TITTLE_CREATE_QUERY, new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
                 ps.setString(1, entityList.get(i).getUuid().toString());
                 ps.setString(2, entityList.get(i).getName());
             }
+
             @Override
             public int getBatchSize() {
                 return entityList.size();

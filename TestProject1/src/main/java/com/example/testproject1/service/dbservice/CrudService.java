@@ -1,5 +1,6 @@
 package com.example.testproject1.service.dbservice;
 
+import java.sql.BatchUpdateException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -52,10 +53,11 @@ public interface CrudService<T> {
      * @param id UUID в строковом формате
      */
     void deleteById(UUID id);
+
     /**
      * Метод сохранения List объектов указанного класса в базу данных
      *
      * @param entityList List объектов класса
      */
-    void saveALL(List<T> entityList);
+    void saveALL(List<T> entityList) throws BatchUpdateException;
 }

@@ -41,29 +41,14 @@ public class BaseDocumentMapper implements RowMapper<BaseDocument> {
      * Название столбца для мапинга в поле person_id
      */
     private final String PERSON_ID = "person_id";
-    /**
-     * Название столбца для мапинга в поле person_first_name
-     */
-    private final String PERSON_FIRST_NAME = "person_first_name";
-    /**
-     * Название столбца для мапинга в поле person_second_name
-     */
-    private final String PERSON_SECOND_NAME = "person_second_name";
-    /**
-     * Название столбца для мапинга в поле person_last_name
-     */
-    private final String PERSON_LAST_NAME = "person_last_name";
 
     /**
      * {@inheritDoc}
      */
     @Override
     public BaseDocument mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Person person=Person.newBuilder().
-                setId(UUID.fromString(rs.getString(PERSON_ID)))
-                .setFirstName(rs.getString(PERSON_FIRST_NAME))
-                .setSecondName(rs.getString(PERSON_SECOND_NAME))
-                .setLastName(rs.getString(PERSON_LAST_NAME)).build();
+        Person person = Person.newBuilder().
+                setId(UUID.fromString(rs.getString(PERSON_ID))).build();
 
         return BaseDocument.newBuilder().setDocId(UUID.fromString(rs.getString(BASE_DOCUMENT_ID)))
                 .setDocName(rs.getString(BASE_DOCUMENT_NAME))

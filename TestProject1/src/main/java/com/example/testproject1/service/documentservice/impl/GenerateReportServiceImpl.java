@@ -56,6 +56,11 @@ public class GenerateReportServiceImpl implements GenerateReportService {
      */
     @Autowired
     private CrudService<OutgoingDocument> outgoingDocumentService;
+    /**
+     * Бин CrudService
+     */
+    @Autowired
+    private CrudService<Person> personCrudService;
 
     /**
      * {@inheritDoc}
@@ -63,14 +68,22 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     @Override
     public void saveReportByAuthor() {
         List<TaskDocument> taskDocumentList = taskDocumentService.getAll();
-        List<IncomingDocument> incomingDocumentList = incomingDocumentService.getAll();
         List<OutgoingDocument> outgoingDocumentList = outgoingDocumentService.getAll();
+        List<IncomingDocument> incomingDocumentList = incomingDocumentService.getAll();
+
+        incomingDocumentList.stream()
+                .forEach(s -> s.setAuthor(personCrudService.getById(s.getAuthor().getId()).get()));
+        outgoingDocumentList.stream()
+                .forEach(s -> s.setAuthor(personCrudService.getById(s.getAuthor().getId()).get()));
+        taskDocumentList.stream()
+                .forEach(s -> s.setAuthor(personCrudService.getById(s.getAuthor().getId()).get()));
         List<BaseDocument> baseDocuments = new ArrayList<>();
         baseDocuments.addAll(taskDocumentList);
-        baseDocuments.addAll(incomingDocumentList);
         baseDocuments.addAll(outgoingDocumentList);
+        baseDocuments.addAll(incomingDocumentList);
 
-        Map<Person, List<BaseDocument>> totalMap =putBaseDocumentInMap(baseDocuments);
+
+        Map<Person, List<BaseDocument>> totalMap = putBaseDocumentInMap(baseDocuments);
 
         LOGGER.info(new StringBuilder("Путь к файлам:").append(SHORT_PATH).toString());
         for (Map.Entry<Person, List<BaseDocument>> entry : totalMap.entrySet()) {
@@ -80,10 +93,11 @@ public class GenerateReportServiceImpl implements GenerateReportService {
 
     /**
      * Метод записи List<{@link BaseDocument}> в Map по авторам
+     *
      * @param baseDocuments List<{@link BaseDocument}
-     * @return Map<Person,List<BaseDocument>>
+     * @return Map<Person, List < BaseDocument>>
      */
-    private Map<Person,List<BaseDocument>> putBaseDocumentInMap(List<BaseDocument> baseDocuments){
+    private Map<Person, List<BaseDocument>> putBaseDocumentInMap(List<BaseDocument> baseDocuments) {
         Map<Person, List<BaseDocument>> totalMap = new HashMap<>();
         for (BaseDocument baseDocument : baseDocuments) {
             List<BaseDocument> baseDocumentList = new ArrayList<>();

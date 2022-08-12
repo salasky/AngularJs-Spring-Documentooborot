@@ -21,25 +21,12 @@ public class TaskDocumentQueryHolder {
             .append(" base_document.id AS base_document_id, base_document.name AS base_document_name,")
             .append(" base_document.text AS base_document_text, base_document.reg_number AS base_document_number,")
             .append(" base_document.creating_date AS base_document_date,")
-            .append(" person.id AS person_id, person.first_name AS person_first_name, person.second_name AS person_second_name,")
-            .append(" person.last_name AS person_last_name, ")
-            .append(" response.id AS person_response_id,")
-            .append(" response.first_name AS person_response_first_name,")
-            .append(" response.second_name AS person_response_second_name,")
-            .append(" response.last_name AS person_response_last_name,")
-            .append(" controlPerson.id AS person_control_id,")
-            .append(" controlPerson.first_name AS person_control_first_name,")
-            .append(" controlPerson.second_name AS person_control_second_name,")
-            .append(" controlPerson.last_name AS person_control_last_name ")
+            .append(" base_document.author_id AS person_id,")
+            .append(" task_document.responsible_id AS person_response_id,")
+            .append(" task_document.control_person_id AS person_control_id ")
             .append(" FROM task_document")
             .append(" INNER JOIN base_document")
-            .append("     ON base_document.id=task_document.base_document_id ")
-            .append(" INNER JOIN person ")
-            .append("     ON base_document.author_id=person.id ")
-            .append(" INNER JOIN person AS response ")
-            .append("     ON task_document.responsible_id=response.id")
-            .append(" INNER JOIN person AS controlPerson ")
-            .append("     ON task_document.control_person_id=controlPerson.id ").toString();
+            .append("     ON base_document.id=task_document.base_document_id ").toString();
     /**
      * Запрос на получение объекта по id из таблицы task_document
      */

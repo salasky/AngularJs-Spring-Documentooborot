@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
+import java.sql.BatchUpdateException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
@@ -89,7 +90,7 @@ public class JobTittleService implements CrudService<JobTittle> {
     }
 
     @Override
-    public void saveALL(List<JobTittle> entityList) {
+    public void saveALL(List<JobTittle> entityList) throws BatchUpdateException {
         LOGGER.info("Попытка сохранения List<JobTittle> в таблицу JobTittle");
         jobTittleRepository.saveAll(entityList);
     }

@@ -9,10 +9,12 @@ import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.BatchUpdateException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -74,9 +76,13 @@ public class DepartmentRepository implements CrudRepository<Department> {
         if (department == null) {
             throw new DocflowRuntimeApplicationException("Department не может быть null");
         }
-        jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
-                , department.getFullName(), department.getShortName(), department.getSupervisor()
-                , department.getContactNumber(), department.getOrganization().getId().toString());
+        try {
+            jdbcTemplate.update(DEPARTMENT_CREATE_QUERY, department.getId().toString()
+                    , department.getFullName(), department.getShortName(), department.getSupervisor()
+                    , department.getContactNumber(), department.getOrganization().getId().toString());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+        }
         return department;
     }
 
@@ -88,9 +94,13 @@ public class DepartmentRepository implements CrudRepository<Department> {
         if (department == null) {
             throw new DocflowRuntimeApplicationException("Department не может быть null");
         }
-        jdbcTemplate.update(DEPARTMENT_UPDATE_QUERY, department.getFullName(), department.getShortName(),
-                department.getSupervisor(), department.getContactNumber(), department.getOrganization().getId().toString(),
-                department.getId().toString());
+        try {
+            jdbcTemplate.update(DEPARTMENT_UPDATE_QUERY, department.getFullName(), department.getShortName(),
+                    department.getSupervisor(), department.getContactNumber(), department.getOrganization().getId().toString(),
+                    department.getId().toString());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+        }
         return department;
     }
 
@@ -120,7 +130,7 @@ public class DepartmentRepository implements CrudRepository<Department> {
     }
 
     @Override
-    public void saveAll(List<Department> departmentList) {
+    public void saveAll(List<Department> departmentList) throws BatchUpdateException {
         jdbcTemplate.batchUpdate(DEPARTMENT_CREATE_QUERY, new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
@@ -131,11 +141,11 @@ public class DepartmentRepository implements CrudRepository<Department> {
                 ps.setString(5, departmentList.get(i).getContactNumber());
                 ps.setString(6, departmentList.get(i).getOrganization().getId().toString());
             }
+
             @Override
             public int getBatchSize() {
                 return departmentList.size();
             }
         });
     }
-
 }

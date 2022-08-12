@@ -1,5 +1,6 @@
 package com.example.testproject1.dao;
 
+import java.sql.BatchUpdateException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -60,11 +61,12 @@ public interface CrudRepository<T> {
      * @return возвращает true при существовании записи и false при отсутствии
      */
     boolean existById(UUID uuid);
+
     /**
      * Метод сохранения List объектов указанного класса в базу данных
      *
-     * @param entityList  List объекта класса
+     * @param entityList List объекта класса
      * @return возвращает Объект указанного класса
      */
-    void saveAll(List<T> entityList);
+    void saveAll(List<T> entityList) throws BatchUpdateException;
 }

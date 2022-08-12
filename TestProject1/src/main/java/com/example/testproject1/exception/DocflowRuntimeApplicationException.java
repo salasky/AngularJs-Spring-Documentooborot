@@ -6,20 +6,12 @@ package com.example.testproject1.exception;
  * @author smigranov
  */
 public class DocflowRuntimeApplicationException extends RuntimeException {
-    /**
-     * Информация о исключении
-     */
-    private String message;
 
-    public DocflowRuntimeApplicationException(String message) {
-        this.message = message;
+    public DocflowRuntimeApplicationException(String message, Throwable cause) {
+        super(message, cause);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        return message;
+    public DocflowRuntimeApplicationException(String message) {
+        super(message);
     }
 }

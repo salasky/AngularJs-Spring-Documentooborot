@@ -98,10 +98,10 @@ class OrganizationRepositoryTest {
     @Test
     void organizationRepositorySaveALLTest() throws DocflowRuntimeApplicationException {
         Organization organization = getOrganization();
-        Organization organizationSecond=getOrganization();
+        Organization organizationSecond = getOrganization();
         UUID uuid = organization.getId();
-        UUID uuidSecond=organizationSecond.getId();
-        List<Organization> organizationList=new ArrayList<>();
+        UUID uuidSecond = organizationSecond.getId();
+        List<Organization> organizationList = new ArrayList<>();
         organizationList.add(organization);
         organizationList.add(organizationSecond);
         organizationCrudRepository.saveAll(organizationList);

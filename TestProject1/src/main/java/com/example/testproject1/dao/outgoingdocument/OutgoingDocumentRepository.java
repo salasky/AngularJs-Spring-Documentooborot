@@ -8,17 +8,18 @@ import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.BatchUpdateException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.testproject1.queryholder.incomingdocumentquery.IncomingDocumentQueryHolder.INCOMING_DOCUMENT_CREATE_QUERY;
 import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_CREATE_QUERY;
 import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_DELETE_ALL_QUERY;
 import static com.example.testproject1.queryholder.outgoingdocumentquery.OutgoingDocumentQueryHolder.OUTGOING_DOCUMENT_DELETE_BY_ID_QUERY;
@@ -32,7 +33,7 @@ import static com.example.testproject1.queryholder.outgoingdocumentquery.Outgoin
  * @author smigranov
  */
 @Repository("OutgoingDocumentRepository")
-public class OutgoingDocumentRepositoryAbstract extends AbstractBaseDocumentRepository implements CrudRepository<OutgoingDocument> {
+public class OutgoingDocumentRepository extends AbstractBaseDocumentRepository implements CrudRepository<OutgoingDocument> {
 
     /**
      * Бин JdbcTemplate
@@ -58,10 +59,14 @@ public class OutgoingDocumentRepositoryAbstract extends AbstractBaseDocumentRepo
         if (outgoingDocument == null) {
             throw new DocflowRuntimeApplicationException("OutgoingDocument не может быть null");
         }
-        super.create(outgoingDocument);
-        jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
-                outgoingDocument.getSender().getId().toString(),
-                outgoingDocument.getDeliveryType().toString());
+        try {
+            super.create(outgoingDocument);
+            jdbcTemplate.update(OUTGOING_DOCUMENT_CREATE_QUERY, outgoingDocument.getId().toString(),
+                    outgoingDocument.getSender().getId().toString(),
+                    outgoingDocument.getDeliveryType().toString());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+        }
         return outgoingDocument;
     }
 
@@ -87,12 +92,16 @@ public class OutgoingDocumentRepositoryAbstract extends AbstractBaseDocumentRepo
      */
     @Override
     public OutgoingDocument update(OutgoingDocument outgoingDocument) {
-        super.update(outgoingDocument);
         if (outgoingDocument == null) {
             throw new DocflowRuntimeApplicationException("OutgoingDocument не может быть null");
         }
-        jdbcTemplate.update(OUTGOING_DOCUMENT_UPDATE_QUERY, outgoingDocument.getSender().getId().toString(),
-                outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString());
+        try {
+            super.update(outgoingDocument);
+            jdbcTemplate.update(OUTGOING_DOCUMENT_UPDATE_QUERY, outgoingDocument.getSender().getId().toString(),
+                    outgoingDocument.getDeliveryType().toString(), outgoingDocument.getId().toString());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка обновления", e);
+        }
         return outgoingDocument;
     }
 
@@ -122,7 +131,7 @@ public class OutgoingDocumentRepositoryAbstract extends AbstractBaseDocumentRepo
     }
 
     @Override
-    public void saveAll(List<OutgoingDocument> entityList) {
+    public void saveAll(List<OutgoingDocument> entityList) throws BatchUpdateException {
         super.saveAllBase(entityList);
         jdbcTemplate.batchUpdate(OUTGOING_DOCUMENT_CREATE_QUERY, new BatchPreparedStatementSetter() {
             @Override
@@ -131,6 +140,7 @@ public class OutgoingDocumentRepositoryAbstract extends AbstractBaseDocumentRepo
                 ps.setString(2, entityList.get(i).getSender().getId().toString());
                 ps.setString(3, entityList.get(i).getDeliveryType().toString());
             }
+
             @Override
             public int getBatchSize() {
                 return entityList.size();

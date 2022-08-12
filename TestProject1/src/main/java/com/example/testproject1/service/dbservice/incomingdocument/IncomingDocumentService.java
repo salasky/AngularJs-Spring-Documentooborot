@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.BatchUpdateException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
@@ -86,7 +87,7 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
     }
 
     @Override
-    public void saveALL(List<IncomingDocument> entityList) {
+    public void saveALL(List<IncomingDocument> entityList) throws BatchUpdateException {
         LOGGER.info("Попытка сохранения List<IncomingDocument> в таблицу IncomingDocument");
         incomingDocumentRepository.saveAll(entityList);
     }

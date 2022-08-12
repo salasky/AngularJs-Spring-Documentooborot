@@ -8,10 +8,12 @@ import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.BatchUpdateException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,7 +26,6 @@ import static com.example.testproject1.queryholder.incomingdocumentquery.Incomin
 import static com.example.testproject1.queryholder.incomingdocumentquery.IncomingDocumentQueryHolder.INCOMING_DOCUMENT_GET_ALL_QUERY;
 import static com.example.testproject1.queryholder.incomingdocumentquery.IncomingDocumentQueryHolder.INCOMING_DOCUMENT_GET_BY_ID_QUERY;
 import static com.example.testproject1.queryholder.incomingdocumentquery.IncomingDocumentQueryHolder.INCOMING_DOCUMENT_UPDATE_QUERY;
-import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.PERSON_CREATE_QUERY;
 
 /**
  * Класс реализующий интерфейс {@link CrudRepository}. Для выполнения операций с базой данных.
@@ -32,7 +33,7 @@ import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHo
  * @author smigranov
  */
 @Repository("IncomingDocumentRepository")
-public class IncomingDocumentRepositoryAbstract extends AbstractBaseDocumentRepository implements CrudRepository<IncomingDocument> {
+public class IncomingDocumentRepository extends AbstractBaseDocumentRepository implements CrudRepository<IncomingDocument> {
 
     /**
      * Бин JdbcTemplate
@@ -59,11 +60,15 @@ public class IncomingDocumentRepositoryAbstract extends AbstractBaseDocumentRepo
         if (incomingDocument == null) {
             throw new DocflowRuntimeApplicationException("IncomingDocument не может быть null");
         }
-        super.create(incomingDocument);
-        jdbcTemplate.update(INCOMING_DOCUMENT_CREATE_QUERY, incomingDocument.getId().toString(),
-                incomingDocument.getSender().getId().toString(),
-                incomingDocument.getDestination().getId().toString(),
-                incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
+        try {
+            super.create(incomingDocument);
+            jdbcTemplate.update(INCOMING_DOCUMENT_CREATE_QUERY, incomingDocument.getId().toString(),
+                    incomingDocument.getSender().getId().toString(),
+                    incomingDocument.getDestination().getId().toString(),
+                    incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+        }
         return incomingDocument;
     }
 
@@ -92,10 +97,14 @@ public class IncomingDocumentRepositoryAbstract extends AbstractBaseDocumentRepo
         if (incomingDocument == null) {
             throw new DocflowRuntimeApplicationException("IncomingDocument не может быть null");
         }
-        super.update(incomingDocument);
-        jdbcTemplate.update(INCOMING_DOCUMENT_UPDATE_QUERY, incomingDocument.getSender().getId().toString(),
-                incomingDocument.getDestination().getId().toString(), incomingDocument.getNumber(),
-                incomingDocument.getDateOfRegistration(), incomingDocument.getId().toString());
+        try {
+            super.update(incomingDocument);
+            jdbcTemplate.update(INCOMING_DOCUMENT_UPDATE_QUERY, incomingDocument.getSender().getId().toString(),
+                    incomingDocument.getDestination().getId().toString(), incomingDocument.getNumber(),
+                    incomingDocument.getDateOfRegistration(), incomingDocument.getId().toString());
+        } catch (DataAccessException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка обновления", e);
+        }
         return incomingDocument;
     }
 
@@ -125,7 +134,7 @@ public class IncomingDocumentRepositoryAbstract extends AbstractBaseDocumentRepo
     }
 
     @Override
-    public void saveAll(List<IncomingDocument> entityList) {
+    public void saveAll(List<IncomingDocument> entityList) throws BatchUpdateException {
         super.saveAllBase(entityList);
         jdbcTemplate.batchUpdate(INCOMING_DOCUMENT_CREATE_QUERY, new BatchPreparedStatementSetter() {
             @Override
@@ -136,6 +145,7 @@ public class IncomingDocumentRepositoryAbstract extends AbstractBaseDocumentRepo
                 ps.setLong(4, entityList.get(i).getNumber());
                 ps.setTimestamp(5, entityList.get(i).getDateOfRegistration());
             }
+
             @Override
             public int getBatchSize() {
                 return entityList.size();

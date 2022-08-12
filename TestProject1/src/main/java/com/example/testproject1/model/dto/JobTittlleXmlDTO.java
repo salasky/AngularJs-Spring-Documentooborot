@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Класс для десериализация JobTittlle из XML
  *
- * @author smigranov 
+ * @author smigranov
  */
 @XmlRootElement
 public class JobTittlleXmlDTO {

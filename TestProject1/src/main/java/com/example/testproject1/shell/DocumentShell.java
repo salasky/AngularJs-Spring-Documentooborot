@@ -16,11 +16,9 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.sql.BatchUpdateException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -41,6 +39,16 @@ public class DocumentShell {
      */
     @Autowired
     private GenerateReportService generateReportService;
+    @Autowired
+    private CrudRepository<Organization> organizationCrudRepository;
+    @Autowired
+    private CrudRepository<Department> departmentCrudRepository;
+    @Autowired
+    private CrudRepository<JobTittle> jobTittleCrudRepository;
+    @Autowired
+    private CrudRepository<Person> personCrudRepository;
+    @Autowired
+    private CrudRepository<IncomingDocument> incomingDocumentCrudRepository;
 
     /**
      * Shell метод генерации документов и создания отчетов по ним
@@ -54,5 +62,33 @@ public class DocumentShell {
         generateDocumentService.generateDocument(countDocument);
         LOGGER.info("Попытка сформировать отчет по документам");
         generateReportService.saveReportByAuthor();
+    }
+
+    @ShellMethod
+    public void get() {
+        Organization organization = Organization.newBuilder()
+                .setId(UUID.randomUUID())
+                .setFullName("FullName")
+                .setShortName("organizationShortName")
+                .setSupervisor("orgSupervisor")
+                .setContactNumber(List.of("897643567895")).build();
+        UUID orgUid = organization.getId();
+        Organization organization2 = Organization.newBuilder()
+                .setId(organization.getId())
+                .setFullName("FullName")
+                .setShortName("organizationShortName")
+                .setSupervisor("orgSupervisor")
+                .setContactNumber(List.of("897643567895")).build();
+
+        List<Organization> organizationList = new ArrayList<>();
+        organizationList.add(organization);
+        organizationList.add(organization2);
+        organizationList.stream().forEach(System.out::println);
+
+        try {
+            organizationCrudRepository.saveAll(organizationList);
+        } catch (BatchUpdateException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
