@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,11 +51,16 @@ public class OrganizationController {
     /**
      * Метод получения сущности по id
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<Organization> getById(@PathVariable String id) {
-        Optional<Organization> organization = organizationCrudService.getById(UUID.fromString(id));
-        if (organization.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(organization.get());
+    @GetMapping("/id")
+    public ResponseEntity<Organization> getById(@Valid @RequestBody Index index) {
+        try {
+            UUID id = UUID.fromString(index.getId());
+            Optional<Organization> organization = organizationCrudService.getById(id);
+            if (organization.isPresent()) {
+                return ResponseEntity.status(HttpStatus.OK).body(organization.get());
+            }
+        } catch (RuntimeException e) {
+            throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
         }
         return ResponseEntity.status(HttpStatus.OK).build();
     }
