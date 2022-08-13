@@ -37,6 +37,9 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
     @Override
     public IncomingDocument create(IncomingDocument incomingDocument) {
         LOGGER.info("Попытка создания IncomingDocument");
+        if (incomingDocument.getId() == null) {
+            incomingDocument.setId(UUID.randomUUID());
+        }
         return incomingDocumentRepository.create(incomingDocument);
     }
 

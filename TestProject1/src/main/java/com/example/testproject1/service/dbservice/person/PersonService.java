@@ -38,6 +38,9 @@ public class PersonService implements CrudService<Person> {
     @Override
     public Person create(Person person) {
         LOGGER.info("Попытка создания Person");
+        if (person.getId() == null) {
+            person.setId(UUID.randomUUID());
+        }
         return personRepository.create(person);
     }
 

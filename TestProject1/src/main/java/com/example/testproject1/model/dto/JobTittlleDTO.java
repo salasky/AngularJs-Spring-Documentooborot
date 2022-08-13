@@ -14,7 +14,7 @@ import java.util.List;
  * @author smigranov
  */
 @XmlRootElement
-public class JobTittlleXmlDTO {
+public class JobTittlleDTO {
     /**
      * List Job
      */

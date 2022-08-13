@@ -37,6 +37,9 @@ public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
     @Override
     public OutgoingDocument create(OutgoingDocument outgoingDocument) {
         LOGGER.info("Попытка создания OutgoingDocument");
+        if (outgoingDocument.getId() == null) {
+            outgoingDocument.setId(UUID.randomUUID());
+        }
         return outgoingDocumentRepository.create(outgoingDocument);
     }
 

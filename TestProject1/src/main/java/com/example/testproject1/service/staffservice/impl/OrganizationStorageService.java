@@ -1,7 +1,7 @@
 package com.example.testproject1.service.staffservice.impl;
 
 import com.example.testproject1.configuration.cache.CaffeineConfig;
-import com.example.testproject1.model.dto.OrganizationListXmlDTO;
+import com.example.testproject1.model.dto.OrganizationListDTO;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.jaxb.JaxbReader;
 import com.example.testproject1.service.staffservice.StorageService;
@@ -41,8 +41,8 @@ public class OrganizationStorageService implements StorageService<Organization> 
     @Override
     public List<Organization> getList() {
         LOGGER.info("Begin find Organization ");
-        OrganizationListXmlDTO organizationListXmlDTO = jaxbReader.jaxbXMLToObject(FILE_NAME);
-        List<Organization> organizationList = organizationListXmlDTO.getOrganizationList();
+        OrganizationListDTO organizationListDTO = jaxbReader.jaxbXMLToObject(FILE_NAME);
+        List<Organization> organizationList = organizationListDTO.getOrganizationList();
         LOGGER.info("Find Organization result");
         return organizationList;
     }

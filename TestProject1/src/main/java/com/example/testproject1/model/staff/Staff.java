@@ -1,5 +1,6 @@
 package com.example.testproject1.model.staff;
 
+
 import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -7,6 +8,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import java.text.MessageFormat;
 import java.util.Objects;
 import java.util.UUID;
+
 
 /**
  * Базовый класс BaseDocument для {@link Person},{@link Department}, {@link Organization}
@@ -24,7 +26,6 @@ public class Staff {
 
     @XmlAttribute
     public UUID getId() {
-
         return id;
     }
 

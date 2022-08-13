@@ -1,6 +1,6 @@
 package com.example.testproject1.service.staffservice.impl;
 
-import com.example.testproject1.model.dto.PersonListXmlDTO;
+import com.example.testproject1.model.dto.PersonListDTO;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.jaxb.JaxbReader;
 import com.example.testproject1.service.staffservice.StorageService;
@@ -26,14 +26,7 @@ public class PersonStorageService implements StorageService<Person> {
      * Имя файла для jaxb анмаршалинга
      */
     private final String FILE_NAME_PERSONS = "persons.xml";
-    /**
-     * Имя файла для jaxb анмаршалинга
-     */
-    private final String FILE_NAME_ORGANIZATIONS = "organizations.xml";
-    /**
-     * Имя файла для jaxb анмаршалинга
-     */
-    private final String FILE_NAME_DEPARTMENTS = "departments.xml";
+
     /**
      * Бин для чтения информации из xml файла
      */
@@ -48,8 +41,8 @@ public class PersonStorageService implements StorageService<Person> {
     @Override
     public List<Person> getList() {
         LOGGER.info("Begin find Person in xml file");
-        PersonListXmlDTO personListXmlDTO = jaxbReader.jaxbXMLToObject(FILE_NAME_PERSONS);
-        List<Person> personList = personListXmlDTO.getPersonList();
+        PersonListDTO personListDTO = jaxbReader.jaxbXMLToObject(FILE_NAME_PERSONS);
+        List<Person> personList = personListDTO.getPersonList();
         LOGGER.info("Find result");
         return personList;
     }

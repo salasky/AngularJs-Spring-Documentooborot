@@ -62,10 +62,10 @@ public class OrganizationRepository implements CrudRepository<Organization> {
             jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString(),
                     organization.getFullName(), organization.getShortName(), organization.getSupervisor(),
                     organization.getContactNumber().toString().replaceAll(regex, ""));
+            return organization;
         } catch (DataAccessException e) {
             throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
         }
-        return organization;
     }
 
     /**

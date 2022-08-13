@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<departmentListXmlDTO>
+<departmentListDTO>
     <departmentList>
         <department id="00210db1-6e32-4096-b662-85d8b4aeaebb">
             <contactNumber>89654456</contactNumber>
@@ -38,4 +38,4 @@
             </organization>
         </department>
     </departmentList>
-</departmentListXmlDTO>
+</departmentListDTO>

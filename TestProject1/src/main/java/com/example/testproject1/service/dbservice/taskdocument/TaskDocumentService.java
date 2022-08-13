@@ -37,6 +37,9 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
     @Override
     public TaskDocument create(TaskDocument taskDocument) throws DocflowRuntimeApplicationException {
         LOGGER.info("Попытка создания TaskDocument");
+        if (taskDocument.getId() == null) {
+            taskDocument.setId(UUID.randomUUID());
+        }
         return taskDocumentRepository.create(taskDocument);
     }
 

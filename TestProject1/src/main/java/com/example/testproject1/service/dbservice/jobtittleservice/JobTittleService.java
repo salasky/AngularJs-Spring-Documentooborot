@@ -1,7 +1,6 @@
 package com.example.testproject1.service.dbservice.jobtittleservice;
 
 import com.example.testproject1.dao.CrudRepository;
-import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -36,12 +35,11 @@ public class JobTittleService implements CrudService<JobTittle> {
      */
     @Override
     public JobTittle create(JobTittle jobTittle) {
-        JobTittle jobTittleDB = jobTittleRepository.create(jobTittle);
-        if (jobTittleDB != null) {
-            LOGGER.info("JobTittle успешно сохранен");
-            return jobTittleDB;
+        LOGGER.info("Попытка создания JobTittle");
+        if (jobTittle.getUuid() == null) {
+            jobTittle.setUuid(UUID.randomUUID());
         }
-        throw new DocflowRuntimeApplicationException("Неудачная попытка сохранения JobTittle");
+        return jobTittleRepository.create(jobTittle);
     }
 
     /**

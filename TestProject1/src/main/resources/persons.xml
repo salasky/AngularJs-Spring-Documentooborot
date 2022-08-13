@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<personListXmlDTO>
+<personListDTO>
     <personList>
         <person id="9245da16-15fa-4eed-a1b7-37aa78216e23">
             <secondName>Ivanov</secondName>
@@ -117,4 +117,4 @@
             </department>
         </person>
     </personList>
-</personListXmlDTO>
+</personListDTO>

@@ -40,6 +40,9 @@ public class OrganizationService implements CrudService<Organization> {
     @Override
     public Organization create(Organization organization) {
         LOGGER.info("Попытка создания Organization");
+        if (organization.getId() == null) {
+            organization.setId(UUID.randomUUID());
+        }
         return organizationRepository.create(organization);
     }
 
@@ -92,6 +95,7 @@ public class OrganizationService implements CrudService<Organization> {
     @Override
     public void saveALL(List<Organization> entityList) throws BatchUpdateException {
         LOGGER.info("Попытка сохранения List<Organization> в таблицу Organization");
+        entityList.stream().filter(entity -> entity.getId() == null).forEach(entity -> entity.setId(UUID.randomUUID()));
         organizationRepository.saveAll(entityList);
     }
 }

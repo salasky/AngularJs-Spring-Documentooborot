@@ -17,7 +17,7 @@ import java.util.List;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PersonListXmlDTO {
+public class PersonListDTO {
     /**
      * Хранит список {@link Person}
      */

@@ -14,7 +14,7 @@ import java.util.List;
  * @author smigranov
  */
 @XmlRootElement
-public class DepartmentListXmlDTO {
+public class DepartmentListDTO {
     /**
      * List Подразделений
      */

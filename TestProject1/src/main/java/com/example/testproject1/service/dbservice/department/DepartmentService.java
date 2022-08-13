@@ -39,6 +39,9 @@ public class DepartmentService implements CrudService<Department> {
     @Override
     public Department create(Department department) {
         LOGGER.info("Попытка создания Department");
+        if (department.getId() == null) {
+            department.setId(UUID.randomUUID());
+        }
         return departmentRepository.create(department);
     }
 
