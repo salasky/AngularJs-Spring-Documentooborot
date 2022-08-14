@@ -1,6 +1,6 @@
 package com.example.testproject1.service.staffservice.impl;
 
-import com.example.testproject1.model.dto.JobTittlleDTO;
+import com.example.testproject1.model.dto.JobTittleListDTO;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.service.jaxb.JaxbReader;
 import com.example.testproject1.service.staffservice.StorageService;
@@ -39,8 +39,8 @@ public class JobStorageService implements StorageService<JobTittle> {
     @Override
     public List<JobTittle> getList() {
         LOGGER.info("Begin find job ");
-        JobTittlleDTO jobTittlleDTO = jaxbReader.jaxbXMLToObject(FILE_NAME);
-        List<JobTittle> jobTittleList = jobTittlleDTO.getDepartmentList();
+        JobTittleListDTO jobTittleListDTO = jaxbReader.jaxbXMLToObject(FILE_NAME);
+        List<JobTittle> jobTittleList = jobTittleListDTO.getJobList();
         LOGGER.info("Find job result");
         return jobTittleList;
     }

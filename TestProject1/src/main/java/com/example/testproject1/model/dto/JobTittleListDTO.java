@@ -14,18 +14,18 @@ import java.util.List;
  * @author smigranov
  */
 @XmlRootElement
-public class JobTittlleDTO {
+public class JobTittleListDTO {
     /**
      * List Job
      */
     @XmlElementWrapper(name = "jobList")
     @XmlElement(name = "job")
-    private final List<JobTittle> jobTittleList = new ArrayList<>();
+    private final List<JobTittle> jobList = new ArrayList<>();
 
     /**
      * Метод получения списка подразделений
      */
-    public List<JobTittle> getDepartmentList() {
-        return jobTittleList;
+    public List<JobTittle> getJobList() {
+        return jobList;
     }
 }

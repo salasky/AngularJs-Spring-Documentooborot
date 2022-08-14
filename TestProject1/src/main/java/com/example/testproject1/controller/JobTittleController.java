@@ -1,10 +1,9 @@
 package com.example.testproject1.controller;
 
-
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
+import com.example.testproject1.model.dto.JobTittleListDTO;
 import com.example.testproject1.model.dto.MessageResponseDTO;
-import com.example.testproject1.model.dto.OrganizationListDTO;
-import com.example.testproject1.model.staff.Organization;
+import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,42 +25,42 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Класс контроллер для сущности {@link Organization}
+ * Класс контроллер для сущности {@link JobTittle}
  *
  * @author smigranov
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/organizations")
-public class OrganizationController {
+@RequestMapping("/jobs")
+public class JobTittleController {
     /**
-     * Сервис для работы с организациями
+     * Сервис для работы с jobTittle
      */
     @Autowired
-    private CrudService<Organization> organizationCrudService;
+    private CrudService<JobTittle> jobTittleCrudService;
 
     /**
      * Метод получения сущностей
      */
     @GetMapping
-    public ResponseEntity<List<Organization>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(organizationCrudService.getAll());
+    public ResponseEntity<List<JobTittle>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(jobTittleCrudService.getAll());
     }
 
     /**
      * Метод получения сущности по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Organization> getById(@PathVariable String id) {
+    public ResponseEntity<JobTittle> getById(@PathVariable String id) {
         UUID uuid;
         try {
             uuid = UUID.fromString(id);
         } catch (RuntimeException e) {
             throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
         }
-        Optional<Organization> organization = organizationCrudService.getById(uuid);
-        if (organization.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(organization.get());
+        Optional<JobTittle> jobTittle = jobTittleCrudService.getById(uuid);
+        if (jobTittle.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(jobTittle.get());
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -70,25 +69,25 @@ public class OrganizationController {
      * Метод добавления сущности
      */
     @PostMapping("/add")
-    public ResponseEntity<Organization> addOrganization(@Valid @RequestBody Organization organization) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(organizationCrudService.create(organization));
+    public ResponseEntity<JobTittle> addOrganization(@Valid @RequestBody JobTittle jobTittle) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(jobTittleCrudService.create(jobTittle));
     }
 
     /**
      * Метод сохранения List сущностей
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody OrganizationListDTO organizationList) throws BatchUpdateException {
-        organizationCrudService.saveALL(organizationList.getOrganizationList());
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Организации успешно сохранены"));
+    public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody JobTittleListDTO jobTittleListDTO) throws BatchUpdateException {
+        jobTittleCrudService.saveALL(jobTittleListDTO.getJobList());
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Должноасти успешно сохранены"));
     }
 
     /**
      * Метод обновления сущностей
      */
     @PutMapping("/update")
-    public ResponseEntity<Organization> update(@Valid @RequestBody Organization organization) {
-        return ResponseEntity.status(HttpStatus.OK).body(organizationCrudService.update(organization));
+    public ResponseEntity<JobTittle> update(@Valid @RequestBody JobTittle jobTittle) {
+        return ResponseEntity.status(HttpStatus.OK).body(jobTittleCrudService.update(jobTittle));
     }
 
     /**
@@ -98,12 +97,12 @@ public class OrganizationController {
     public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable String id) {
         UUID uuid;
         try {
-             uuid = UUID.fromString(id);
+            uuid = UUID.fromString(id);
         } catch (RuntimeException e) {
             throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
         }
-        organizationCrudService.deleteById(uuid);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Организация успешно удалена"));
+        jobTittleCrudService.deleteById(uuid);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Должноасть успешно удалена"));
     }
 
     /**
@@ -111,7 +110,7 @@ public class OrganizationController {
      */
     @DeleteMapping("/deleteAll")
     public ResponseEntity<MessageResponseDTO> deleteById() {
-        organizationCrudService.deleteAll();
-        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Организации успешно удалены"));
+        jobTittleCrudService.deleteAll();
+        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Должноасти успешно удалены"));
     }
 }

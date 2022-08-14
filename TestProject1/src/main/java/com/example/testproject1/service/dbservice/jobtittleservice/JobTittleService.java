@@ -36,8 +36,8 @@ public class JobTittleService implements CrudService<JobTittle> {
     @Override
     public JobTittle create(JobTittle jobTittle) {
         LOGGER.info("Попытка создания JobTittle");
-        if (jobTittle.getUuid() == null) {
-            jobTittle.setUuid(UUID.randomUUID());
+        if (jobTittle.getId() == null) {
+            jobTittle.setId(UUID.randomUUID());
         }
         return jobTittleRepository.create(jobTittle);
     }
@@ -65,7 +65,7 @@ public class JobTittleService implements CrudService<JobTittle> {
      */
     @Override
     public JobTittle update(JobTittle jobTittle) {
-        LOGGER.info(MessageFormat.format("Попытка изменить данные у JobTittle с id {0}", jobTittle.getUuid().toString()));
+        LOGGER.info(MessageFormat.format("Попытка изменить данные у JobTittle с id {0}", jobTittle.getId().toString()));
         return jobTittleRepository.update(jobTittle);
     }
 
@@ -90,6 +90,7 @@ public class JobTittleService implements CrudService<JobTittle> {
     @Override
     public void saveALL(List<JobTittle> entityList) throws BatchUpdateException {
         LOGGER.info("Попытка сохранения List<JobTittle> в таблицу JobTittle");
+        entityList.stream().filter(entity -> entity.getId() == null).forEach(entity -> entity.setId(UUID.randomUUID()));
         jobTittleRepository.saveAll(entityList);
     }
 }

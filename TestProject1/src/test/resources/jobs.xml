@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<jobTittlleDTO>
+<jobTittleListDTO>
     <jobList>
         <job id="00210db1-6e32-4096-b662-85d8b4aeaebb">
             <jobTittleName>JS Junior</jobTittleName>
@@ -14,4 +14,4 @@
             <jobTittleName>Product Manager</jobTittleName>
         </job>
     </jobList>
-</jobTittlleDTO>
+</jobTittleListDTO>

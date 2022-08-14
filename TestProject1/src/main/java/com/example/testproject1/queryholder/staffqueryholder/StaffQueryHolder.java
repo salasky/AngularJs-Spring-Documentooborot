@@ -80,7 +80,6 @@ public class StaffQueryHolder {
             .append("organization.full_name AS organization_full_name, organization.short_name AS organization_short_name,")
             .append("organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number ")
             .append("FROM organization").toString();
-
     /**
      * Запрос на получение объекта по id из таблицы organization
      */

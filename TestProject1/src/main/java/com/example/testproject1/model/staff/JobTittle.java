@@ -1,6 +1,8 @@
 package com.example.testproject1.model.staff;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,10 +23,12 @@ public class JobTittle {
      * Идентификатор должности
      */
     @Column(name = "id")
-    private UUID uuid;
+    private UUID id;
     /**
      * Наименование должности
      */
+    @NotNull
+    @Size(min = 2)
     @Column(name = "name")
     private String name;
 
@@ -32,12 +36,12 @@ public class JobTittle {
     }
 
     @XmlAttribute(name = "id")
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     @XmlElement(name = "jobTittleName")
@@ -54,7 +58,7 @@ public class JobTittle {
      */
     @Override
     public String toString() {
-        Object[] jobTittleArgs = {uuid, name};
+        Object[] jobTittleArgs = {id, name};
         MessageFormat form = new MessageFormat(
                 "id {0}, jobTittleName= {1}");
         return form.format(jobTittleArgs);
@@ -68,7 +72,7 @@ public class JobTittle {
         if (this == o) return true;
         if (!(o instanceof JobTittle)) return false;
         JobTittle jobTittle = (JobTittle) o;
-        return Objects.equals(uuid, jobTittle.uuid) && Objects.equals(name, jobTittle.name);
+        return Objects.equals(id, jobTittle.id) && Objects.equals(name, jobTittle.name);
     }
 
     public static JobTittle.JobTittleBuilder newBuilder() {
@@ -80,7 +84,7 @@ public class JobTittle {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, name);
+        return Objects.hash(id, name);
     }
 
     /**
@@ -91,7 +95,7 @@ public class JobTittle {
     public class JobTittleBuilder {
 
         public JobTittleBuilder setUuid(UUID uuid) {
-            JobTittle.this.uuid = uuid;
+            JobTittle.this.id = uuid;
             return this;
         }
 

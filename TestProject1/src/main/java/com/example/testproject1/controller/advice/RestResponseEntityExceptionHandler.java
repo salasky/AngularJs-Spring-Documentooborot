@@ -30,7 +30,7 @@ public class RestResponseEntityExceptionHandler
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<Object> handleAccessRuntimeException(RuntimeException ex, WebRequest request) {
         return new ResponseEntity<Object>(
-                "ВСЕ ХЕРНЯ!ПЕРЕДЕЛЫВАЙ RuntimeException! " + ex.getMessage(), new HttpHeaders(), HttpStatus.CONFLICT);
+                "ВСЕ ХЕРНЯ!ПЕРЕДЕЛЫВАЙ RuntimeException! " + ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     /**

@@ -1,7 +1,7 @@
 package com.example.testproject1.configuration.jaxb;
 
 import com.example.testproject1.model.dto.DepartmentListDTO;
-import com.example.testproject1.model.dto.JobTittlleDTO;
+import com.example.testproject1.model.dto.JobTittleListDTO;
 import com.example.testproject1.model.dto.OrganizationListDTO;
 import com.example.testproject1.model.dto.PersonListDTO;
 import com.example.testproject1.model.staff.Department;
@@ -31,7 +31,7 @@ public class JaxbConfiguration {
     public JAXBContext getContext() {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(PersonListDTO.class, DepartmentListDTO.class,
-                    OrganizationListDTO.class, Person.class, Department.class, Organization.class, JobTittle.class, JobTittlleDTO.class);
+                    OrganizationListDTO.class, Person.class, Department.class, Organization.class, JobTittle.class, JobTittleListDTO.class);
             return jaxbContext;
         } catch (JAXBException e) {
             throw new RuntimeException(e);
