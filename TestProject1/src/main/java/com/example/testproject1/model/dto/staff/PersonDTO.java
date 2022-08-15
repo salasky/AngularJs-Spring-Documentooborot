@@ -2,12 +2,7 @@ package com.example.testproject1.model.dto.staff;
 
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
-import com.example.testproject1.model.staff.Organization;
-import com.example.testproject1.model.staff.Person;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.UUID;
 
@@ -125,7 +120,7 @@ public class PersonDTO {
     public void setDepartmentId(UUID departmentId) {
         this.departmentId = departmentId;
     }
-    
+
     public static PersonDTO.PersonDtoBuilder newBuilder() {
         return new PersonDTO().new PersonDtoBuilder();
     }
@@ -141,6 +136,7 @@ public class PersonDTO {
             PersonDTO.this.id = uuid;
             return this;
         }
+
         public PersonDtoBuilder setLastName(String lastName) {
             PersonDTO.this.lastName = lastName;
             return this;
@@ -180,6 +176,7 @@ public class PersonDTO {
             PersonDTO.this.departmentId = department.getId();
             return this;
         }
+
         /**
          * Метод build
          *

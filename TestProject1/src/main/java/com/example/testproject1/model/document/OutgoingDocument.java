@@ -4,10 +4,8 @@ import com.example.testproject1.model.documentenum.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Person;
 
 import javax.persistence.Column;
-import javax.persistence.PrePersist;
 import java.text.MessageFormat;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Класc исходящих документов. Наследник {@link BaseDocument}

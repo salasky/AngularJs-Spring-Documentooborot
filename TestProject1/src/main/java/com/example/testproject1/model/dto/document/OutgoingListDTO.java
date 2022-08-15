@@ -1,6 +1,5 @@
 package com.example.testproject1.model.dto.document;
 
-import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

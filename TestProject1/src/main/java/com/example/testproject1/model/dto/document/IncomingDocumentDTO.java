@@ -74,7 +74,7 @@ public class IncomingDocumentDTO extends BaseDocumentDTO {
      * @author smigranov
      */
     public class IncomingDocumentDtoBuilder extends BaseDocumentDTOBuilder {
-        
+
         public IncomingDocumentDtoBuilder setIncomingSender(Person sender) {
             IncomingDocumentDTO.this.senderId = sender.getId();
             return this;
@@ -94,6 +94,7 @@ public class IncomingDocumentDTO extends BaseDocumentDTO {
             IncomingDocumentDTO.this.dateOfRegistration = date;
             return this;
         }
+
         /**
          * Метод build
          *

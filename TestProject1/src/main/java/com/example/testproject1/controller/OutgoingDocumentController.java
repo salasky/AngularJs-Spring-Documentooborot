@@ -3,7 +3,6 @@ package com.example.testproject1.controller;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.dto.MessageResponseDTO;
-import com.example.testproject1.model.dto.document.IncomingDocumentDTO;
 import com.example.testproject1.model.dto.document.OutgoingDocumentDTO;
 import com.example.testproject1.model.dto.document.OutgoingListDTO;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -46,6 +45,7 @@ public class OutgoingDocumentController {
      */
     @Autowired
     private CrudFacadeService<OutgoingDocumentDTO> outgoingDocumentDTOFacadeService;
+
     /**
      * Метод получения сущностей
      */

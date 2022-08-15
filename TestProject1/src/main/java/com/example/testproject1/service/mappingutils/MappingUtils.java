@@ -22,8 +22,8 @@ public class MappingUtils {
     /**
      * Department из entity в dto
      */
-    public DepartmentDTO mapDepartmentToDto(Department department){
-       return DepartmentDTO.newBuilder()
+    public DepartmentDTO mapDepartmentToDto(Department department) {
+        return DepartmentDTO.newBuilder()
                 .setId(department.getId())
                 .setFullName(department.getFullName())
                 .setShortName(department.getShortName())
@@ -31,6 +31,7 @@ public class MappingUtils {
                 .setContactNumber(department.getContactNumber())
                 .setOrganization(department.getOrganization()).build();
     }
+
     /**
      * Department из dto в entity
      */
@@ -47,7 +48,7 @@ public class MappingUtils {
     /**
      * Person из entity в dto
      */
-    public PersonDTO mapPersonToDto(Person person){
+    public PersonDTO mapPersonToDto(Person person) {
         return PersonDTO.newBuilder()
                 .setId(person.getId())
                 .setFirstName(person.getFirstName())
@@ -59,10 +60,11 @@ public class MappingUtils {
                 .setPhoto(person.getPhoto())
                 .setBirthDay(person.getBirthDay()).build();
     }
+
     /**
      * Person из dto в entity
      */
-    public Person mapDtoToPerson(PersonDTO personDTO){
+    public Person mapDtoToPerson(PersonDTO personDTO) {
         return Person.newBuilder()
                 .setId(personDTO.getId())
                 .setFirstName(personDTO.getFirstName())
@@ -74,10 +76,11 @@ public class MappingUtils {
                 .setPhoto(personDTO.getPhoto())
                 .setBirthDay(personDTO.getBirthDay()).build();
     }
+
     /**
      * IncomingDocument из entity в dto
      */
-    public IncomingDocumentDTO mapIncomingDocumentToDto(IncomingDocument incomingDocument){
+    public IncomingDocumentDTO mapIncomingDocumentToDto(IncomingDocument incomingDocument) {
         return (IncomingDocumentDTO) IncomingDocumentDTO.newBuilder()
                 .setIncomingDocumentDate(incomingDocument.getDateOfRegistration())
                 .setIncomingDocumentNumber(incomingDocument.getNumber())
@@ -90,10 +93,11 @@ public class MappingUtils {
                 .setRegNumber(incomingDocument.getRegNumber())
                 .setDate(incomingDocument.getCreatingDate()).build();
     }
+
     /**
      * IncomingDocument из dto в entity
      */
-    public IncomingDocument mapDtoToIncomingDocument(IncomingDocumentDTO incomingDocumentDTO){
+    public IncomingDocument mapDtoToIncomingDocument(IncomingDocumentDTO incomingDocumentDTO) {
         return (IncomingDocument) IncomingDocument.newBuilder()
                 .setIncomingDocumentDate(incomingDocumentDTO.getDateOfRegistration())
                 .setIncomingDocumentNumber(incomingDocumentDTO.getNumber())
@@ -110,7 +114,7 @@ public class MappingUtils {
     /**
      * OutgoingDocument из entity в dto
      */
-    public OutgoingDocumentDTO mapOutgoingDocumentToDto(OutgoingDocument outgoingDocument){
+    public OutgoingDocumentDTO mapOutgoingDocumentToDto(OutgoingDocument outgoingDocument) {
         return (OutgoingDocumentDTO) OutgoingDocumentDTO.newBuilder()
                 .setSender(outgoingDocument.getSender())
                 .setDocumentDeliveryType(outgoingDocument.getDeliveryType())
@@ -121,10 +125,11 @@ public class MappingUtils {
                 .setRegNumber(outgoingDocument.getRegNumber())
                 .setDate(outgoingDocument.getCreatingDate()).build();
     }
+
     /**
      * OutgoingDocument из dto в entity
      */
-    public OutgoingDocument mapDtoToOutgoingDocument(OutgoingDocumentDTO outgoingDocumentDTO){
+    public OutgoingDocument mapDtoToOutgoingDocument(OutgoingDocumentDTO outgoingDocumentDTO) {
         return (OutgoingDocument) OutgoingDocument.newBuilder()
                 .setDocSender(Person.newBuilder().setId(outgoingDocumentDTO.getSenderId()).build())
                 .setDocDeliveryType(outgoingDocumentDTO.getDeliveryType())

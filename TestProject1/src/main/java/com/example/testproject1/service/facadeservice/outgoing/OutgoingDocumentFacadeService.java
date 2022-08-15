@@ -1,8 +1,6 @@
 package com.example.testproject1.service.facadeservice.outgoing;
 
-import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
-import com.example.testproject1.model.dto.document.IncomingDocumentDTO;
 import com.example.testproject1.model.dto.document.OutgoingDocumentDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
@@ -22,7 +20,7 @@ import java.util.stream.Collectors;
  * @author smigranov
  */
 @Service
-public class OutgoingDocumentFacadeService implements CrudFacadeService<OutgoingDocumentDTO>{
+public class OutgoingDocumentFacadeService implements CrudFacadeService<OutgoingDocumentDTO> {
     /**
      * OutgoingDocument сервис
      */
@@ -33,48 +31,53 @@ public class OutgoingDocumentFacadeService implements CrudFacadeService<Outgoing
      */
     @Autowired
     private MappingUtils mappingUtils;
+
     /**
      * {@inheritDoc}
      */
     @Override
     public OutgoingDocumentDTO create(OutgoingDocumentDTO entity) {
-        OutgoingDocument outgoingDocument=mappingUtils.mapDtoToOutgoingDocument(entity);
+        OutgoingDocument outgoingDocument = mappingUtils.mapDtoToOutgoingDocument(entity);
         return mappingUtils.mapOutgoingDocumentToDto(outgoingDocumentCrudService.create(outgoingDocument));
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public List<OutgoingDocumentDTO> getAll() {
-        List<OutgoingDocument> outgoingDocumentList=outgoingDocumentCrudService.getAll();
-        return outgoingDocumentList.stream().map(s->mappingUtils.mapOutgoingDocumentToDto(s)).collect(Collectors.toList());
+        List<OutgoingDocument> outgoingDocumentList = outgoingDocumentCrudService.getAll();
+        return outgoingDocumentList.stream().map(s -> mappingUtils.mapOutgoingDocumentToDto(s)).collect(Collectors.toList());
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public Optional<OutgoingDocumentDTO> getById(UUID id) {
-        Optional<OutgoingDocument> optionalOutgoingDocument=outgoingDocumentCrudService.getById(id);
-        if(optionalOutgoingDocument.isPresent()){
+        Optional<OutgoingDocument> optionalOutgoingDocument = outgoingDocumentCrudService.getById(id);
+        if (optionalOutgoingDocument.isPresent()) {
             return Optional.ofNullable(mappingUtils.mapOutgoingDocumentToDto(optionalOutgoingDocument.get()));
         }
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public OutgoingDocumentDTO update(OutgoingDocumentDTO entity) {
-        OutgoingDocument outgoingDocument=mappingUtils.mapDtoToOutgoingDocument(entity);
+        OutgoingDocument outgoingDocument = mappingUtils.mapDtoToOutgoingDocument(entity);
         return mappingUtils.mapOutgoingDocumentToDto(outgoingDocumentCrudService.update(outgoingDocument));
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void saveAll(List<OutgoingDocumentDTO> entityList) throws BatchUpdateException {
-        List<OutgoingDocument> outgoingDocumentList=entityList.stream()
-                .map(s->mappingUtils.mapDtoToOutgoingDocument(s)).collect(Collectors.toList());
+        List<OutgoingDocument> outgoingDocumentList = entityList.stream()
+                .map(s -> mappingUtils.mapDtoToOutgoingDocument(s)).collect(Collectors.toList());
         outgoingDocumentCrudService.saveALL(outgoingDocumentList);
     }
 }

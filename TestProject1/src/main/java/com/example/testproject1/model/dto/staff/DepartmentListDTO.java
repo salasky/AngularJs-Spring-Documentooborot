@@ -1,7 +1,6 @@
 package com.example.testproject1.model.dto.staff;
 
 import com.example.testproject1.model.staff.Department;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;

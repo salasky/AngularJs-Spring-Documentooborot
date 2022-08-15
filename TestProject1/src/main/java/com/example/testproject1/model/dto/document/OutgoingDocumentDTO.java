@@ -1,13 +1,10 @@
 package com.example.testproject1.model.dto.document;
 
-import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.documentenum.DocumentDeliveryType;
 import com.example.testproject1.model.staff.Person;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
 import java.util.UUID;
 
 /**

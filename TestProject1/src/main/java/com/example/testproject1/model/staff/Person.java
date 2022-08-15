@@ -1,9 +1,7 @@
 package com.example.testproject1.model.staff;
 
 import com.example.testproject1.service.jaxb.DateSQLTimeAdapter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;

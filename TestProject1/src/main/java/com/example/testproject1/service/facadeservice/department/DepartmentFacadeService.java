@@ -37,42 +37,46 @@ public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO>
      */
     @Override
     public DepartmentDTO create(DepartmentDTO entity) {
-        Department department=mappingUtils.mapDtoToDepartment(entity);
+        Department department = mappingUtils.mapDtoToDepartment(entity);
         return mappingUtils.mapDepartmentToDto(departmentCrudService.create(department));
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public List<DepartmentDTO> getAll() {
-        List<Department> departmentList=departmentCrudService.getAll();
-        return departmentList.stream().map(s->mappingUtils.mapDepartmentToDto(s)).collect(Collectors.toList());
+        List<Department> departmentList = departmentCrudService.getAll();
+        return departmentList.stream().map(s -> mappingUtils.mapDepartmentToDto(s)).collect(Collectors.toList());
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public Optional<DepartmentDTO> getById(UUID id) {
-        Optional<Department> optionalDepartment=departmentCrudService.getById(id);
-        if(optionalDepartment.isPresent()){
+        Optional<Department> optionalDepartment = departmentCrudService.getById(id);
+        if (optionalDepartment.isPresent()) {
             return Optional.ofNullable(mappingUtils.mapDepartmentToDto(optionalDepartment.get()));
         }
         return Optional.empty();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public DepartmentDTO update(DepartmentDTO entity) {
-        Department department=mappingUtils.mapDtoToDepartment(entity);
+        Department department = mappingUtils.mapDtoToDepartment(entity);
         return mappingUtils.mapDepartmentToDto(departmentCrudService.update(department));
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void saveAll(List<DepartmentDTO> entityList) throws BatchUpdateException {
-        List<Department> departmentList=entityList.stream().map(s->mappingUtils.mapDtoToDepartment(s)).collect(Collectors.toList());
+        List<Department> departmentList = entityList.stream().map(s -> mappingUtils.mapDtoToDepartment(s)).collect(Collectors.toList());
         departmentCrudService.saveALL(departmentList);
     }
 }

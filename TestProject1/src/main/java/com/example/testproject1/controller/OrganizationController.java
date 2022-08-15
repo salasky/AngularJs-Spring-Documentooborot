@@ -98,7 +98,7 @@ public class OrganizationController {
     public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable String id) {
         UUID uuid;
         try {
-             uuid = UUID.fromString(id);
+            uuid = UUID.fromString(id);
         } catch (RuntimeException e) {
             throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
         }

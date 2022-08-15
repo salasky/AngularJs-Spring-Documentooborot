@@ -1,7 +1,6 @@
 package com.example.testproject1.model.dto.staff;
 
 import com.example.testproject1.model.staff.Person;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

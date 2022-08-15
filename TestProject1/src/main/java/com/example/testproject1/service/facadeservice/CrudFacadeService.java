@@ -17,7 +17,7 @@ public interface CrudFacadeService<T> {
      * @param entity объекта класса
      * @return возвращает DTO объект
      */
-     T create(T entity);
+    T create(T entity);
 
     /**
      * Метод получения всех объектов указанного из базы данных
@@ -41,6 +41,7 @@ public interface CrudFacadeService<T> {
      * @return возвращает объект DTO
      */
     T update(T entity);
+
     /**
      * Метод сохранения List объектов указанного класса в базу данных
      *

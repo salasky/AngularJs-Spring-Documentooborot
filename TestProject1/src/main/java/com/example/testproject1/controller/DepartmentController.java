@@ -1,9 +1,9 @@
 package com.example.testproject1.controller;
 
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
+import com.example.testproject1.model.dto.MessageResponseDTO;
 import com.example.testproject1.model.dto.staff.DepartmentDTO;
 import com.example.testproject1.model.dto.staff.DepartmentDTOListCRUD;
-import com.example.testproject1.model.dto.MessageResponseDTO;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
@@ -45,6 +45,7 @@ public class DepartmentController {
      */
     @Autowired
     private CrudFacadeService<DepartmentDTO> departmentDTOCrudFacadeService;
+
     /**
      * Метод получения сущностей
      */

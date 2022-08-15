@@ -1,10 +1,8 @@
 package com.example.testproject1.model.dto.document;
 
 import com.example.testproject1.model.document.BaseDocument;
-import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
 
-import javax.persistence.Column;
 import java.sql.Timestamp;
 import java.util.UUID;
 
@@ -86,6 +84,7 @@ public class BaseDocumentDTO {
     public void setAuthorId(UUID authorId) {
         this.authorId = authorId;
     }
+
     public static BaseDocumentDTO.BaseDocumentDTOBuilder newBuilder() {
         return new BaseDocumentDTO().new BaseDocumentDTOBuilder();
     }
