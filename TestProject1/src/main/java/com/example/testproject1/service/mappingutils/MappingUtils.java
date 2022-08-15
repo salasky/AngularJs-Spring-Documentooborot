@@ -1,7 +1,9 @@
 package com.example.testproject1.service.mappingutils;
 
 import com.example.testproject1.model.document.IncomingDocument;
+import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.dto.document.IncomingDocumentDTO;
+import com.example.testproject1.model.dto.document.OutgoingDocumentDTO;
 import com.example.testproject1.model.dto.staff.DepartmentDTO;
 import com.example.testproject1.model.dto.staff.PersonDTO;
 import com.example.testproject1.model.staff.Department;
@@ -103,5 +105,34 @@ public class MappingUtils {
                 .setDocAuthor(Person.newBuilder().setId(incomingDocumentDTO.getAuthorId()).build())
                 .setDocRegNumber(incomingDocumentDTO.getRegNumber())
                 .setDocDate(incomingDocumentDTO.getCreatingDate()).build();
+    }
+
+    /**
+     * OutgoingDocument из entity в dto
+     */
+    public OutgoingDocumentDTO mapOutgoingDocumentToDto(OutgoingDocument outgoingDocument){
+        return (OutgoingDocumentDTO) OutgoingDocumentDTO.newBuilder()
+                .setSender(outgoingDocument.getSender())
+                .setDocumentDeliveryType(outgoingDocument.getDeliveryType())
+                .setId(outgoingDocument.getId())
+                .setName(outgoingDocument.getName())
+                .setText(outgoingDocument.getText())
+                .setAuthor(outgoingDocument.getAuthor())
+                .setRegNumber(outgoingDocument.getRegNumber())
+                .setDate(outgoingDocument.getCreatingDate()).build();
+    }
+    /**
+     * OutgoingDocument из dto в entity
+     */
+    public OutgoingDocument mapDtoToOutgoingDocument(OutgoingDocumentDTO outgoingDocumentDTO){
+        return (OutgoingDocument) OutgoingDocument.newBuilder()
+                .setDocSender(Person.newBuilder().setId(outgoingDocumentDTO.getSenderId()).build())
+                .setDocDeliveryType(outgoingDocumentDTO.getDeliveryType())
+                .setDocId(outgoingDocumentDTO.getId())
+                .setDocName(outgoingDocumentDTO.getName())
+                .setDocText(outgoingDocumentDTO.getText())
+                .setDocAuthor(Person.newBuilder().setId(outgoingDocumentDTO.getAuthorId()).build())
+                .setDocRegNumber(outgoingDocumentDTO.getRegNumber())
+                .setDocDate(outgoingDocumentDTO.getCreatingDate()).build();
     }
 }

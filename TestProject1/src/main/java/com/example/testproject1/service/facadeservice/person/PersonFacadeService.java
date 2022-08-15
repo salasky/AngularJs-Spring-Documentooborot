@@ -68,7 +68,9 @@ public class PersonFacadeService implements CrudFacadeService<PersonDTO>{
         Person person=mappingUtils.mapDtoToPerson(entity);
         return mappingUtils.mapPersonToDto(personCrudService.update(person));
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveAll(List<PersonDTO> entityList) throws BatchUpdateException {
         List<Person> personList=entityList.stream().map(s->mappingUtils.mapDtoToPerson(s)).collect(Collectors.toList());

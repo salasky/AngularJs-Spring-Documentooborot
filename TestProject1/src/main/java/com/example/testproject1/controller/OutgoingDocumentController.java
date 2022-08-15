@@ -3,8 +3,11 @@ package com.example.testproject1.controller;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.dto.MessageResponseDTO;
+import com.example.testproject1.model.dto.document.IncomingDocumentDTO;
+import com.example.testproject1.model.dto.document.OutgoingDocumentDTO;
 import com.example.testproject1.model.dto.document.OutgoingListDTO;
 import com.example.testproject1.service.dbservice.CrudService;
+import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,27 +42,32 @@ public class OutgoingDocumentController {
     @Autowired
     private CrudService<OutgoingDocument> outgoingDocumentCrudService;
     /**
+     * Фасадный Сервис для работы с OutgoingDocument
+     */
+    @Autowired
+    private CrudFacadeService<OutgoingDocumentDTO> outgoingDocumentDTOFacadeService;
+    /**
      * Метод получения сущностей
      */
     @GetMapping
-    public ResponseEntity<List<OutgoingDocument>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(outgoingDocumentCrudService.getAll());
+    public ResponseEntity<List<OutgoingDocumentDTO>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(outgoingDocumentDTOFacadeService.getAll());
     }
 
     /**
      * Метод получения сущности по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<OutgoingDocument> getById(@PathVariable String id) {
+    public ResponseEntity<OutgoingDocumentDTO> getById(@PathVariable String id) {
         UUID uuid;
         try {
             uuid = UUID.fromString(id);
         } catch (RuntimeException e) {
             throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
         }
-        Optional<OutgoingDocument> outgoingDocument = outgoingDocumentCrudService.getById(uuid);
-        if (outgoingDocument.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(outgoingDocument.get());
+        Optional<OutgoingDocumentDTO> outgoingDocumentDTO = outgoingDocumentDTOFacadeService.getById(uuid);
+        if (outgoingDocumentDTO.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(outgoingDocumentDTO.get());
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -68,8 +76,8 @@ public class OutgoingDocumentController {
      * Метод добавления сущности
      */
     @PostMapping("/add")
-    public ResponseEntity<OutgoingDocument> addOrganization(@Valid @RequestBody OutgoingDocument outgoingDocument) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(outgoingDocumentCrudService.create(outgoingDocument));
+    public ResponseEntity<OutgoingDocumentDTO> addOrganization(@Valid @RequestBody OutgoingDocumentDTO outgoingDocumentDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(outgoingDocumentDTOFacadeService.create(outgoingDocumentDTO));
     }
 
     /**
@@ -77,7 +85,7 @@ public class OutgoingDocumentController {
      */
     @PostMapping("/saveAll")
     public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody OutgoingListDTO outgoingListDTO) throws BatchUpdateException {
-        outgoingDocumentCrudService.saveALL(outgoingListDTO.getOutgoingDocuments());
+        outgoingDocumentDTOFacadeService.saveAll(outgoingListDTO.getOutgoingDocuments());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Исходящие документы успешно сохранены"));
     }
 
@@ -85,8 +93,8 @@ public class OutgoingDocumentController {
      * Метод обновления сущностей
      */
     @PutMapping("/update")
-    public ResponseEntity<OutgoingDocument> update(@Valid @RequestBody OutgoingDocument outgoingDocument) {
-        return ResponseEntity.status(HttpStatus.OK).body(outgoingDocumentCrudService.update(outgoingDocument));
+    public ResponseEntity<OutgoingDocumentDTO> update(@Valid @RequestBody OutgoingDocumentDTO outgoingDocumentDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(outgoingDocumentDTOFacadeService.update(outgoingDocumentDTO));
     }
 
     /**

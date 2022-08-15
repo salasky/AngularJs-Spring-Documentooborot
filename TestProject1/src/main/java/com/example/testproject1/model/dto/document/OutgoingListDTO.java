@@ -16,7 +16,7 @@ public class OutgoingListDTO {
     /**
      * List OutgoingDocument
      */
-    private final List<OutgoingDocument> outgoingDocuments = new ArrayList<>();
+    private final List<OutgoingDocumentDTO> outgoingDocuments = new ArrayList<>();
 
     /**
      * Метод получения списка OutgoingDocument
@@ -24,7 +24,7 @@ public class OutgoingListDTO {
      * @return {@link List} объектов {@link OutgoingDocument}
      */
     @JsonProperty("list")
-    public List<OutgoingDocument> getOutgoingDocuments() {
+    public List<OutgoingDocumentDTO> getOutgoingDocuments() {
         return outgoingDocuments;
     }
 }

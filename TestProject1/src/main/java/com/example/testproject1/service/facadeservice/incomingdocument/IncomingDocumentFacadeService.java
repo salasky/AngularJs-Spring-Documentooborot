@@ -68,7 +68,9 @@ public class IncomingDocumentFacadeService implements CrudFacadeService<Incoming
         IncomingDocument incomingDocument=mappingUtils.mapDtoToIncomingDocument(entity);
         return mappingUtils.mapIncomingDocumentToDto(incomingDocumentCrudService.update(incomingDocument));
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveAll(List<IncomingDocumentDTO> entityList) throws BatchUpdateException {
         List<IncomingDocument> incomingDocumentList=entityList.stream()
