@@ -1,6 +1,7 @@
 package com.example.testproject1.model.dto;
 
 import com.example.testproject1.model.staff.Organization;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -27,6 +28,7 @@ public class OrganizationListDTO {
      *
      * @return {@link List} объектов {@link Organization}
      */
+    @JsonProperty("list")
     public final List<Organization> getOrganizationList() {
         return organizationList;
     }

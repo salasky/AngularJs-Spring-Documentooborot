@@ -94,6 +94,7 @@ public class DepartmentService implements CrudService<Department> {
     @Override
     public void saveALL(List<Department> entityList) throws BatchUpdateException {
         LOGGER.info("Попытка сохранения List<Department> в таблицу department");
+        entityList.stream().filter(entity -> entity.getId() == null).forEach(entity -> entity.setId(UUID.randomUUID()));
         departmentRepository.saveAll(entityList);
     }
 }

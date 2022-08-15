@@ -1,6 +1,7 @@
 package com.example.testproject1.model.dto;
 
 import com.example.testproject1.model.staff.Person;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -30,7 +31,7 @@ public class PersonListDTO {
      *
      * @return @return {@link List} объектов {@link Person}
      */
-
+    @JsonProperty("list")
     public List<Person> getPersonList() {
         return personList;
     }
