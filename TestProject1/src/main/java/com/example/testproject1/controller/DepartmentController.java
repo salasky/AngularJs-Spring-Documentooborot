@@ -1,10 +1,12 @@
 package com.example.testproject1.controller;
 
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
+import com.example.testproject1.model.dto.DepartmentDTO;
 import com.example.testproject1.model.dto.DepartmentListDTO;
 import com.example.testproject1.model.dto.MessageResponseDTO;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
+import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,27 +41,32 @@ public class DepartmentController {
     @Autowired
     private CrudService<Department> departmentCrudService;
     /**
+     * Фасадный Сервис для работы с Department
+     */
+    @Autowired
+    private CrudFacadeService<DepartmentDTO,Department> departmentDTOCrudFacadeService;
+    /**
      * Метод получения сущностей
      */
     @GetMapping
-    public ResponseEntity<List<Department>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(departmentCrudService.getAll());
+    public ResponseEntity<List<DepartmentDTO>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(departmentDTOCrudFacadeService.getAll());
     }
 
     /**
      * Метод получения сущности по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Department> getById(@PathVariable String id) {
+    public ResponseEntity<DepartmentDTO> getById(@PathVariable String id) {
         UUID uuid;
         try {
             uuid = UUID.fromString(id);
         } catch (RuntimeException e) {
             throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
         }
-        Optional<Department> department = departmentCrudService.getById(uuid);
-        if (department.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(department.get());
+        Optional<DepartmentDTO> departmentDTO = departmentDTOCrudFacadeService.getById(uuid);
+        if (departmentDTO.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(departmentDTO.get());
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -68,8 +75,8 @@ public class DepartmentController {
      * Метод добавления сущности
      */
     @PostMapping("/add")
-    public ResponseEntity<Department> addOrganization(@Valid @RequestBody Department department) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(departmentCrudService.create(department));
+    public ResponseEntity<DepartmentDTO> addDepartment(@Valid @RequestBody Department department) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(departmentDTOCrudFacadeService.create(department));
     }
 
     /**
@@ -85,8 +92,8 @@ public class DepartmentController {
      * Метод обновления сущностей
      */
     @PutMapping("/update")
-    public ResponseEntity<Department> update(@Valid @RequestBody Department department) {
-        return ResponseEntity.status(HttpStatus.OK).body(departmentCrudService.update(department));
+    public ResponseEntity<DepartmentDTO> update(@Valid @RequestBody Department department) {
+        return ResponseEntity.status(HttpStatus.OK).body(departmentDTOCrudFacadeService.update(department));
     }
 
     /**

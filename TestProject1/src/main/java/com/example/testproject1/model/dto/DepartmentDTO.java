@@ -1,5 +1,7 @@
 package com.example.testproject1.model.dto;
 
+import com.example.testproject1.model.staff.Organization;
+
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -16,7 +18,6 @@ public class DepartmentDTO {
     /**
      * Полное название департамента
      */
-    @NotNull
     private String fullName;
     /**
      * Короткое название департамента
@@ -25,7 +26,6 @@ public class DepartmentDTO {
     /**
      * Руководитель департамента
      */
-    @NotNull
     private String supervisor;
     /**
      * Контактный телефон департамента
@@ -34,7 +34,6 @@ public class DepartmentDTO {
     /**
      * Организация подразделения
      */
-    @NotNull
     private UUID organizationId;
 
     public String getFullName() {
@@ -83,5 +82,56 @@ public class DepartmentDTO {
 
     public void setOrganizationiD(UUID organizationiD) {
         this.organizationId = organizationiD;
+    }
+
+    public static DepartmentDTO.DepartmentDtoBuilder newBuilder() {
+        return new DepartmentDTO().new DepartmentDtoBuilder();
+    }
+
+    /**
+     * Внутренний класс Builder
+     *
+     * @author smigranov
+     */
+    public class DepartmentDtoBuilder {
+
+        public DepartmentDTO.DepartmentDtoBuilder setId(UUID uuid) {
+            DepartmentDTO.this.id = uuid;
+            return this;
+        }
+
+        public DepartmentDTO.DepartmentDtoBuilder setFullName(String fullName) {
+            DepartmentDTO.this.fullName = fullName;
+            return this;
+        }
+
+        public DepartmentDTO.DepartmentDtoBuilder setShortName(String shortName) {
+            DepartmentDTO.this.shortName = shortName;
+            return this;
+        }
+
+        public DepartmentDTO.DepartmentDtoBuilder setSupervisor(String supervisor) {
+            DepartmentDTO.this.supervisor = supervisor;
+            return this;
+        }
+
+        public DepartmentDTO.DepartmentDtoBuilder setContactNumber(String contactNumber) {
+            DepartmentDTO.this.contactNumber = contactNumber;
+            return this;
+        }
+
+        public DepartmentDTO.DepartmentDtoBuilder setOrganization(Organization organization) {
+            DepartmentDTO.this.organizationId = organization.getId();
+            return this;
+        }
+
+        /**
+         * Метод build
+         *
+         * @return Возвращает объект класса {@link DepartmentDTO}
+         */
+        public DepartmentDTO build() {
+            return DepartmentDTO.this;
+        }
     }
 }
