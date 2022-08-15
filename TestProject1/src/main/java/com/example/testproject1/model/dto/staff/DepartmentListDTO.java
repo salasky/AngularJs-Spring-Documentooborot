@@ -1,4 +1,4 @@
-package com.example.testproject1.model.dto;
+package com.example.testproject1.model.dto.staff;
 
 import com.example.testproject1.model.staff.Department;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,7 +28,6 @@ public class DepartmentListDTO {
      *
      * @return {@link List} объектов {@link Department}
      */
-    @JsonProperty("list")
     public List<Department> getDepartmentList() {
         return departmentList;
     }

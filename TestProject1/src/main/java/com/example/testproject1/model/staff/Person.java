@@ -3,9 +3,11 @@ package com.example.testproject1.model.staff;
 import com.example.testproject1.service.jaxb.DateSQLTimeAdapter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -34,12 +36,14 @@ public class Person extends Staff implements Comparable<Person> {
      */
     @NotNull
     @Column(name = "second_name")
+    @Size(min = 2)
     private String secondName;
     /**
      * Имя
      */
     @Column(name = "first_name")
     @NotNull
+    @Size(min = 2)
     private String firstName;
     /**
      * Должность

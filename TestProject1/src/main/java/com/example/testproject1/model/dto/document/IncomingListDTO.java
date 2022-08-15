@@ -1,4 +1,4 @@
-package com.example.testproject1.model.dto;
+package com.example.testproject1.model.dto.document;
 
 import com.example.testproject1.model.document.IncomingDocument;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +15,7 @@ public class IncomingListDTO {
     /**
      * List IncomingDocument
      */
-    private final List<IncomingDocument> incomingDocumentList = new ArrayList<>();
+    private final List<IncomingDocumentDTO> incomingDocumentList = new ArrayList<>();
 
     /**
      * Метод получения списка IncomingDocument
@@ -23,7 +23,7 @@ public class IncomingListDTO {
      * @return {@link List} объектов {@link IncomingDocument}
      */
     @JsonProperty("list")
-    public List<IncomingDocument> getIncomingDocumentList() {
+    public List<IncomingDocumentDTO> getIncomingDocumentList() {
         return incomingDocumentList;
     }
 }

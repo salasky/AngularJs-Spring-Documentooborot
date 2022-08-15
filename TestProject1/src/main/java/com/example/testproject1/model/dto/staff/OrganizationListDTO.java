@@ -1,4 +1,4 @@
-package com.example.testproject1.model.dto;
+package com.example.testproject1.model.dto.staff;
 
 import com.example.testproject1.model.staff.Organization;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,9 +1,9 @@
 package com.example.testproject1.configuration.jaxb;
 
-import com.example.testproject1.model.dto.DepartmentListDTO;
-import com.example.testproject1.model.dto.JobTittleListDTO;
-import com.example.testproject1.model.dto.OrganizationListDTO;
-import com.example.testproject1.model.dto.PersonListDTO;
+import com.example.testproject1.model.dto.staff.DepartmentListDTO;
+import com.example.testproject1.model.dto.staff.JobTittleListDTO;
+import com.example.testproject1.model.dto.staff.OrganizationListDTO;
+import com.example.testproject1.model.dto.staff.PersonListDTO;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;

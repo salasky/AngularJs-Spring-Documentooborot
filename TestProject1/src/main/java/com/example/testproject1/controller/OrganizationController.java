@@ -3,7 +3,7 @@ package com.example.testproject1.controller;
 
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.dto.MessageResponseDTO;
-import com.example.testproject1.model.dto.OrganizationListDTO;
+import com.example.testproject1.model.dto.staff.OrganizationListDTO;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.example.testproject1.service.facadeservice.department;
 
-import com.example.testproject1.model.dto.DepartmentDTO;
+import com.example.testproject1.model.dto.staff.DepartmentDTO;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
@@ -8,6 +8,7 @@ import com.example.testproject1.service.mappingutils.MappingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.BatchUpdateException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
  * @author smigranov
  */
 @Service
-public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO,Department> {
+public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO> {
     /**
      * Department сервис
      */
@@ -35,8 +36,9 @@ public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO,
      * {@inheritDoc}
      */
     @Override
-    public DepartmentDTO create(Department entity) {
-        return mappingUtils.mapDepartmentToDto(departmentCrudService.create(entity));
+    public DepartmentDTO create(DepartmentDTO entity) {
+        Department department=mappingUtils.mapDtoToDepartment(entity);
+        return mappingUtils.mapDepartmentToDto(departmentCrudService.create(department));
     }
     /**
      * {@inheritDoc}
@@ -61,7 +63,14 @@ public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO,
      * {@inheritDoc}
      */
     @Override
-    public DepartmentDTO update(Department entity) {
-        return mappingUtils.mapDepartmentToDto(departmentCrudService.update(entity));
+    public DepartmentDTO update(DepartmentDTO entity) {
+        Department department=mappingUtils.mapDtoToDepartment(entity);
+        return mappingUtils.mapDepartmentToDto(departmentCrudService.update(department));
+    }
+
+    @Override
+    public void saveAll(List<DepartmentDTO> entityList) throws BatchUpdateException {
+        List<Department> departmentList=entityList.stream().map(s->mappingUtils.mapDtoToDepartment(s)).collect(Collectors.toList());
+        departmentCrudService.saveALL(departmentList);
     }
 }

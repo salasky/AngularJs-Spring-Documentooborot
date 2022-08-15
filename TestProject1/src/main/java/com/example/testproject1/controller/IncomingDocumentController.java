@@ -2,11 +2,11 @@ package com.example.testproject1.controller;
 
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.IncomingDocument;
-import com.example.testproject1.model.dto.DepartmentListDTO;
-import com.example.testproject1.model.dto.IncomingListDTO;
+import com.example.testproject1.model.dto.document.IncomingDocumentDTO;
+import com.example.testproject1.model.dto.document.IncomingListDTO;
 import com.example.testproject1.model.dto.MessageResponseDTO;
-import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
+import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,25 +36,30 @@ public class IncomingDocumentController {
     @Autowired
     private CrudService<IncomingDocument> incomingDocumentCrudService;
     /**
+     * Фасадный Сервис для работы с IncomingDocument
+     */
+    @Autowired
+    private CrudFacadeService<IncomingDocumentDTO> incomingDocumentDTOFacadeService;
+    /**
      * Метод получения сущностей
      */
     @GetMapping
-    public ResponseEntity<List<IncomingDocument>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(incomingDocumentCrudService.getAll());
+    public ResponseEntity<List<IncomingDocumentDTO>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(incomingDocumentDTOFacadeService.getAll());
     }
 
     /**
      * Метод получения сущности по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<IncomingDocument> getById(@PathVariable String id) {
+    public ResponseEntity<IncomingDocumentDTO> getById(@PathVariable String id) {
         UUID uuid;
         try {
             uuid = UUID.fromString(id);
         } catch (RuntimeException e) {
             throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
         }
-        Optional<IncomingDocument> incomingDocument = incomingDocumentCrudService.getById(uuid);
+        Optional<IncomingDocumentDTO> incomingDocument = incomingDocumentDTOFacadeService.getById(uuid);
         if (incomingDocument.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(incomingDocument.get());
         }
@@ -65,8 +70,8 @@ public class IncomingDocumentController {
      * Метод добавления сущности
      */
     @PostMapping("/add")
-    public ResponseEntity<IncomingDocument> addOrganization(@Valid @RequestBody IncomingDocument incomingDocument) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(incomingDocumentCrudService.create(incomingDocument));
+    public ResponseEntity<IncomingDocumentDTO> addOrganization(@Valid @RequestBody IncomingDocumentDTO incomingDocumentDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(incomingDocumentDTOFacadeService.create(incomingDocumentDTO));
     }
 
     /**
@@ -74,7 +79,7 @@ public class IncomingDocumentController {
      */
     @PostMapping("/saveAll")
     public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody IncomingListDTO incomingListDTO) throws BatchUpdateException {
-        incomingDocumentCrudService.saveALL(incomingListDTO.getIncomingDocumentList());
+        incomingDocumentDTOFacadeService.saveAll(incomingListDTO.getIncomingDocumentList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Входящие документы успешно сохранены"));
     }
 
@@ -82,8 +87,8 @@ public class IncomingDocumentController {
      * Метод обновления сущностей
      */
     @PutMapping("/update")
-    public ResponseEntity<IncomingDocument> update(@Valid @RequestBody IncomingDocument incomingDocument) {
-        return ResponseEntity.status(HttpStatus.OK).body(incomingDocumentCrudService.update(incomingDocument));
+    public ResponseEntity<IncomingDocumentDTO> update(@Valid @RequestBody IncomingDocumentDTO incomingDocumentDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(incomingDocumentDTOFacadeService.update(incomingDocumentDTO));
     }
 
     /**

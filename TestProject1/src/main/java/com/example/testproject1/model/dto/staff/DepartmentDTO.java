@@ -1,8 +1,8 @@
-package com.example.testproject1.model.dto;
+package com.example.testproject1.model.dto.staff;
 
 import com.example.testproject1.model.staff.Organization;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
@@ -76,12 +76,12 @@ public class DepartmentDTO {
         this.id = id;
     }
 
-    public UUID getOrganizationiD() {
+    public UUID getOrganizationId() {
         return organizationId;
     }
 
-    public void setOrganizationiD(UUID organizationiD) {
-        this.organizationId = organizationiD;
+    public void setOrganizationId(UUID organizationId) {
+        this.organizationId = organizationId;
     }
 
     public static DepartmentDTO.DepartmentDtoBuilder newBuilder() {

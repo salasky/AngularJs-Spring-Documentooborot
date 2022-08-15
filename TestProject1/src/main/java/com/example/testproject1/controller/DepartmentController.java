@@ -1,8 +1,8 @@
 package com.example.testproject1.controller;
 
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.model.dto.DepartmentDTO;
-import com.example.testproject1.model.dto.DepartmentListDTO;
+import com.example.testproject1.model.dto.staff.DepartmentDTO;
+import com.example.testproject1.model.dto.staff.DepartmentDTOListCRUD;
 import com.example.testproject1.model.dto.MessageResponseDTO;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -44,7 +44,7 @@ public class DepartmentController {
      * Фасадный Сервис для работы с Department
      */
     @Autowired
-    private CrudFacadeService<DepartmentDTO,Department> departmentDTOCrudFacadeService;
+    private CrudFacadeService<DepartmentDTO> departmentDTOCrudFacadeService;
     /**
      * Метод получения сущностей
      */
@@ -75,16 +75,16 @@ public class DepartmentController {
      * Метод добавления сущности
      */
     @PostMapping("/add")
-    public ResponseEntity<DepartmentDTO> addDepartment(@Valid @RequestBody Department department) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(departmentDTOCrudFacadeService.create(department));
+    public ResponseEntity<DepartmentDTO> addDepartment(@Valid @RequestBody DepartmentDTO departmentDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(departmentDTOCrudFacadeService.create(departmentDTO));
     }
 
     /**
      * Метод сохранения List сущностей
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody DepartmentListDTO departmentListDTO) throws BatchUpdateException {
-        departmentCrudService.saveALL(departmentListDTO.getDepartmentList());
+    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody DepartmentDTOListCRUD departmentDTOListCRUD) throws BatchUpdateException {
+        departmentDTOCrudFacadeService.saveAll(departmentDTOListCRUD.getDepartmentList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Подразделения успешно сохранены"));
     }
 
@@ -92,8 +92,8 @@ public class DepartmentController {
      * Метод обновления сущностей
      */
     @PutMapping("/update")
-    public ResponseEntity<DepartmentDTO> update(@Valid @RequestBody Department department) {
-        return ResponseEntity.status(HttpStatus.OK).body(departmentDTOCrudFacadeService.update(department));
+    public ResponseEntity<DepartmentDTO> update(@Valid @RequestBody DepartmentDTO departmentDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(departmentDTOCrudFacadeService.update(departmentDTO));
     }
 
     /**

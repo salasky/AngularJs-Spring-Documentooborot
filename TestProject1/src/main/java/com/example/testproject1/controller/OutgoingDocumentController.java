@@ -2,10 +2,8 @@ package com.example.testproject1.controller;
 
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.OutgoingDocument;
-import com.example.testproject1.model.dto.DepartmentListDTO;
 import com.example.testproject1.model.dto.MessageResponseDTO;
-import com.example.testproject1.model.dto.OutgoingListDTO;
-import com.example.testproject1.model.staff.Department;
+import com.example.testproject1.model.dto.document.OutgoingListDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -2,9 +2,11 @@ package com.example.testproject1.controller;
 
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.dto.MessageResponseDTO;
-import com.example.testproject1.model.dto.PersonListDTO;
+import com.example.testproject1.model.dto.staff.PersonDTO;
+import com.example.testproject1.model.dto.staff.PersonDtoListCRUD;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
+import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,27 +35,31 @@ public class PersonController {
      */
     @Autowired
     private CrudService<Person> personCrudService;
-
+    /**
+     * Фасадный Сервис для работы с Person
+     */
+    @Autowired
+    private CrudFacadeService<PersonDTO> personDTOPersonCrudFacadeService;
     /**
      * Метод получения сущностей
      */
     @GetMapping
-    public ResponseEntity<List<Person>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(personCrudService.getAll());
+    public ResponseEntity<List<PersonDTO>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(personDTOPersonCrudFacadeService.getAll());
     }
 
     /**
      * Метод получения сущности по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Person> getById(@PathVariable String id) {
+    public ResponseEntity<PersonDTO> getById(@PathVariable String id) {
         UUID uuid;
         try {
             uuid = UUID.fromString(id);
         } catch (RuntimeException e) {
             throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
         }
-        Optional<Person> person = personCrudService.getById(uuid);
+        Optional<PersonDTO> person = personDTOPersonCrudFacadeService.getById(uuid);
         if (person.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(person.get());
         }
@@ -64,16 +70,16 @@ public class PersonController {
      * Метод добавления сущности
      */
     @PostMapping("/add")
-    public ResponseEntity<Person> addOrganization(@Valid @RequestBody Person person) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(personCrudService.create(person));
+    public ResponseEntity<PersonDTO> addOrganization(@Valid @RequestBody PersonDTO personDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(personDTOPersonCrudFacadeService.create(personDTO));
     }
 
     /**
      * Метод сохранения List сущностей
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody PersonListDTO personListDTO) throws BatchUpdateException {
-        personCrudService.saveALL(personListDTO.getPersonList());
+    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody PersonDtoListCRUD personDtoListCRUD) throws BatchUpdateException {
+        personDTOPersonCrudFacadeService.saveAll(personDtoListCRUD.getPersonList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Persons успешно сохранены"));
     }
 
@@ -81,8 +87,8 @@ public class PersonController {
      * Метод обновления сущностей
      */
     @PutMapping("/update")
-    public ResponseEntity<Person> update(@Valid @RequestBody Person person) {
-        return ResponseEntity.status(HttpStatus.OK).body(personCrudService.update(person));
+    public ResponseEntity<PersonDTO> update(@Valid @RequestBody PersonDTO personDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(personDTOPersonCrudFacadeService.update(personDTO));
     }
 
     /**
