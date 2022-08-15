@@ -6,6 +6,7 @@ import com.example.testproject1.mapper.staff.DepartmentMapper;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.dbservice.CrudService;
+import com.example.testproject1.service.mappingutils.MappingUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class DepartmentRepository implements CrudRepository<Department> {
      * Сервис для работы с {@link Organization}
      */
     @Autowired
-    private CrudService<Organization> organizationService;
+    private MappingUtils mappingUtils;
 
     /**
      * {@inheritDoc}

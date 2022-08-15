@@ -93,6 +93,7 @@ public class PersonService implements CrudService<Person> {
     @Override
     public void saveALL(List<Person> entityList) throws BatchUpdateException {
         LOGGER.info("Попытка сохранения List<Person> в таблицу Person");
+        entityList.stream().filter(entity -> entity.getId() == null).forEach(entity -> entity.setId(UUID.randomUUID()));
         personRepository.saveAll(entityList);
     }
 }

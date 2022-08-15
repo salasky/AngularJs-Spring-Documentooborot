@@ -92,6 +92,7 @@ public class TaskDocumentService implements CrudService<TaskDocument> {
     @Override
     public void saveALL(List<TaskDocument> entityList) throws BatchUpdateException {
         LOGGER.info("Попытка сохранения List<TaskDocument> в таблицу TaskDocument");
+        entityList.stream().filter(entity -> entity.getId() == null).forEach(entity -> entity.setId(UUID.randomUUID()));
         taskDocumentRepository.saveAll(entityList);
     }
 }

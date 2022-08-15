@@ -4,6 +4,8 @@ package com.example.testproject1.model.document;
 import com.example.testproject1.model.staff.Person;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.PrePersist;
 import java.sql.Timestamp;
 import java.text.MessageFormat;
 import java.util.Comparator;

@@ -45,11 +45,6 @@ public class OutgoingDocumentRepository extends AbstractBaseDocumentRepository i
      */
     @Autowired
     private OutgoingDocumentMapper outgoingDocumentMapper;
-    /**
-     * Сервис для работы с {@link Person}
-     */
-    @Autowired
-    private CrudService<Person> personService;
 
     /**
      * {@inheritDoc}

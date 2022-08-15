@@ -1,5 +1,6 @@
 package com.example.testproject1.configuration.xmlimportconfiguration;
 
+import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.staffservice.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Класс для конфигурации импорта xml в базу данных

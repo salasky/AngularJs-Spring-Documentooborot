@@ -1,8 +1,10 @@
 package com.example.testproject1.controller;
 
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
+import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.dto.DepartmentListDTO;
 import com.example.testproject1.model.dto.MessageResponseDTO;
+import com.example.testproject1.model.dto.OutgoingListDTO;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,41 +27,41 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Класс контроллер для сущности {@link com.example.testproject1.model.staff.Department}
+ * Класс контроллер для сущности {@link com.example.testproject1.model.document.OutgoingDocument}
  *
  * @author smigranov
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/departments")
-public class DepartmentController {
+@RequestMapping("/outgoingdocuments")
+public class OutgoingDocumentController {
     /**
-     * Сервис для работы с Department
+     * Сервис для работы с OutgoingDocument
      */
     @Autowired
-    private CrudService<Department> departmentCrudService;
+    private CrudService<OutgoingDocument> outgoingDocumentCrudService;
     /**
      * Метод получения сущностей
      */
     @GetMapping
-    public ResponseEntity<List<Department>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(departmentCrudService.getAll());
+    public ResponseEntity<List<OutgoingDocument>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(outgoingDocumentCrudService.getAll());
     }
 
     /**
      * Метод получения сущности по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Department> getById(@PathVariable String id) {
+    public ResponseEntity<OutgoingDocument> getById(@PathVariable String id) {
         UUID uuid;
         try {
             uuid = UUID.fromString(id);
         } catch (RuntimeException e) {
             throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
         }
-        Optional<Department> department = departmentCrudService.getById(uuid);
-        if (department.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(department.get());
+        Optional<OutgoingDocument> outgoingDocument = outgoingDocumentCrudService.getById(uuid);
+        if (outgoingDocument.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(outgoingDocument.get());
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -68,25 +70,25 @@ public class DepartmentController {
      * Метод добавления сущности
      */
     @PostMapping("/add")
-    public ResponseEntity<Department> addOrganization(@Valid @RequestBody Department department) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(departmentCrudService.create(department));
+    public ResponseEntity<OutgoingDocument> addOrganization(@Valid @RequestBody OutgoingDocument outgoingDocument) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(outgoingDocumentCrudService.create(outgoingDocument));
     }
 
     /**
      * Метод сохранения List сущностей
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody DepartmentListDTO departmentListDTO) throws BatchUpdateException {
-        departmentCrudService.saveALL(departmentListDTO.getDepartmentList());
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Подразделения успешно сохранены"));
+    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody OutgoingListDTO outgoingListDTO) throws BatchUpdateException {
+        outgoingDocumentCrudService.saveALL(outgoingListDTO.getOutgoingDocuments());
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Исходящие документы успешно сохранены"));
     }
 
     /**
      * Метод обновления сущностей
      */
     @PutMapping("/update")
-    public ResponseEntity<Department> update(@Valid @RequestBody Department department) {
-        return ResponseEntity.status(HttpStatus.OK).body(departmentCrudService.update(department));
+    public ResponseEntity<OutgoingDocument> update(@Valid @RequestBody OutgoingDocument outgoingDocument) {
+        return ResponseEntity.status(HttpStatus.OK).body(outgoingDocumentCrudService.update(outgoingDocument));
     }
 
     /**
@@ -100,8 +102,8 @@ public class DepartmentController {
         } catch (RuntimeException e) {
             throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
         }
-        departmentCrudService.deleteById(uuid);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Подразделение успешно удалено"));
+        outgoingDocumentCrudService.deleteById(uuid);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Исходящий документ успешно удален"));
     }
 
     /**
@@ -109,7 +111,7 @@ public class DepartmentController {
      */
     @DeleteMapping("/deleteAll")
     public ResponseEntity<MessageResponseDTO> deleteById() {
-        departmentCrudService.deleteAll();
-        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Подразделения успешно удалены"));
+        outgoingDocumentCrudService.deleteAll();
+        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Исходящие документы успешно удалены"));
     }
 }
