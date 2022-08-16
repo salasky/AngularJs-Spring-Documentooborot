@@ -1,6 +1,7 @@
 package com.example.testproject1.service.dbservice.organization;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -93,9 +94,13 @@ public class OrganizationService implements CrudService<Organization> {
     }
 
     @Override
-    public void saveAll(List<Organization> entityList) throws BatchUpdateException {
+    public void saveAll(List<Organization> entityList) {
         LOGGER.info("Попытка сохранения List<Organization> в таблицу Organization");
         entityList.stream().filter(entity -> entity.getId() == null).forEach(entity -> entity.setId(UUID.randomUUID()));
-        organizationRepository.saveAll(entityList);
+        try {
+            organizationRepository.saveAll(entityList);
+        } catch (BatchUpdateException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+        }
     }
 }

@@ -8,7 +8,6 @@ import com.example.testproject1.service.mappingutils.IncomingDocumentMapperAbstr
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.BatchUpdateException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -74,7 +73,7 @@ public class IncomingDocumentFacadeService implements CrudFacadeService<Incoming
      * {@inheritDoc}
      */
     @Override
-    public void saveAll(List<IncomingDocumentDTO> entityList) throws BatchUpdateException {
+    public void saveAll(List<IncomingDocumentDTO> entityList) {
         incomingDocumentCrudService.saveAll(mapper.dtoListToList(entityList));
     }
 }

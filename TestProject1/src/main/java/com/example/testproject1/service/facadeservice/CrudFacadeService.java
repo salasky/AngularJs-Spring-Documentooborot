@@ -1,6 +1,5 @@
 package com.example.testproject1.service.facadeservice;
 
-import java.sql.BatchUpdateException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -47,6 +46,6 @@ public interface CrudFacadeService<T> {
      *
      * @param entityList List объектов класса
      */
-    void saveAll(List<T> entityList) throws BatchUpdateException;
+    void saveAll(List<T> entityList);
 
 }

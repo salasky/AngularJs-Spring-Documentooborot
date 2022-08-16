@@ -8,7 +8,6 @@ import com.example.testproject1.service.mappingutils.PersonMapperAbstract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.BatchUpdateException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -74,7 +73,7 @@ public class PersonFacadeService implements CrudFacadeService<PersonDTO> {
      * {@inheritDoc}
      */
     @Override
-    public void saveAll(List<PersonDTO> entityList) throws BatchUpdateException {
+    public void saveAll(List<PersonDTO> entityList) {
         personCrudService.saveAll(mapper.dtoListToList(entityList));
     }
 }

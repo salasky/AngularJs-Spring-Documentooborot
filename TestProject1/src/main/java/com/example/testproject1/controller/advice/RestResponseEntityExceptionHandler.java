@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -29,18 +30,18 @@ public class RestResponseEntityExceptionHandler
      * Метод перехвата RuntimeException
      */
     @ExceptionHandler({RuntimeException.class})
-    public ResponseEntity<RestErrorDto> handleAccessRuntimeException(RuntimeException ex, WebRequest request) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new RestErrorDto(ex.getMessage()));
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public RestErrorDto handleAccessRuntimeException(RuntimeException ex) {
+        return new RestErrorDto(ex.getMessage());
     }
 
     /**
      * Метод перехвата Exception
      */
     @ExceptionHandler({Exception.class})
-    public ResponseEntity<RestErrorDto> handleAccessException(Exception ex, WebRequest request) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new RestErrorDto(ex.getMessage()));
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public RestErrorDto handleAccessException(Exception ex) {
+        return new RestErrorDto(ex.getMessage());
     }
 
     /**

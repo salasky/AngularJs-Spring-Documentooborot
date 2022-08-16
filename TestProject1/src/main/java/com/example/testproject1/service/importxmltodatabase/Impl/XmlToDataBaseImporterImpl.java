@@ -4,12 +4,8 @@ import com.example.testproject1.configuration.xmlimportconfiguration.XmlImportCo
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.importxmltodatabase.XmlToDataBaseImporter;
 import com.example.testproject1.service.staffservice.StorageService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.BatchUpdateException;
 
 
 /**
@@ -19,7 +15,6 @@ import java.sql.BatchUpdateException;
  */
 @Service
 public class XmlToDataBaseImporterImpl implements XmlToDataBaseImporter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(XmlToDataBaseImporterImpl.class);
     @Autowired
     private XmlImportConfiguration xmlImportConfiguration;
 
@@ -32,10 +27,6 @@ public class XmlToDataBaseImporterImpl implements XmlToDataBaseImporter {
     }
 
     private <T> void save(StorageService<T> storageService, CrudService crudService) {
-        try {
-            crudService.saveAll(storageService.getList());
-        } catch (BatchUpdateException e) {
-            LOGGER.error("Ошибка сохранения", e.toString());
-        }
+        crudService.saveAll(storageService.getList());
     }
 }

@@ -28,9 +28,6 @@ public class JobTittle {
     @Column(name = "name")
     private String name;
 
-    public JobTittle() {
-    }
-
     @XmlAttribute(name = "id")
     public UUID getId() {
         return id;

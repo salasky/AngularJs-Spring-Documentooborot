@@ -1,6 +1,7 @@
 package com.example.testproject1.service.dbservice.incomingdocument;
 
 import com.example.testproject1.dao.CrudRepository;
+import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.service.dbservice.CrudService;
 import org.slf4j.Logger;
@@ -90,9 +91,13 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
     }
 
     @Override
-    public void saveAll(List<IncomingDocument> entityList) throws BatchUpdateException {
+    public void saveAll(List<IncomingDocument> entityList) {
         LOGGER.info("Попытка сохранения List<IncomingDocument> в таблицу IncomingDocument");
         entityList.stream().filter(entity -> entity.getId() == null).forEach(entity -> entity.setId(UUID.randomUUID()));
-        incomingDocumentRepository.saveAll(entityList);
+        try {
+            incomingDocumentRepository.saveAll(entityList);
+        } catch (BatchUpdateException e) {
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+        }
     }
 }
