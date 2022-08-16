@@ -1,7 +1,6 @@
 package com.example.testproject1.model.dto.document;
 
 import com.example.testproject1.model.document.BaseDocument;
-import com.example.testproject1.model.staff.Person;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -83,59 +82,6 @@ public class BaseDocumentDTO {
 
     public void setAuthorId(UUID authorId) {
         this.authorId = authorId;
-    }
-
-    public static BaseDocumentDTO.BaseDocumentDTOBuilder newBuilder() {
-        return new BaseDocumentDTO().new BaseDocumentDTOBuilder();
-    }
-
-    /**
-     * Внутренний класс Builder
-     *
-     * @author smigranov
-     */
-    public class BaseDocumentDTOBuilder {
-        public BaseDocumentDTOBuilder() {
-        }
-
-        public BaseDocumentDTOBuilder setId(UUID Id) {
-            BaseDocumentDTO.this.id = Id;
-            return this;
-        }
-
-        public BaseDocumentDTOBuilder setName(String docName) {
-            BaseDocumentDTO.this.name = docName;
-            return this;
-        }
-
-        public BaseDocumentDTOBuilder setText(String docText) {
-            BaseDocumentDTO.this.text = docText;
-            return this;
-        }
-
-        public BaseDocumentDTOBuilder setRegNumber(Long docRegNumber) {
-            BaseDocumentDTO.this.regNumber = docRegNumber;
-            return this;
-        }
-
-        public BaseDocumentDTOBuilder setDate(Timestamp docDate) {
-            BaseDocumentDTO.this.creatingDate = docDate;
-            return this;
-        }
-
-        public BaseDocumentDTOBuilder setAuthor(Person docAuthor) {
-            BaseDocumentDTO.this.authorId = docAuthor.getId();
-            return this;
-        }
-
-        /**
-         * Метод build
-         *
-         * @return возвращает объект класса {@link BaseDocument}
-         */
-        public BaseDocumentDTO build() {
-            return BaseDocumentDTO.this;
-        }
     }
 }
 

@@ -58,14 +58,8 @@ public class OutgoingDocumentController {
      * Метод получения сущности по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<OutgoingDocumentDTO> getById(@PathVariable String id) {
-        UUID uuid;
-        try {
-            uuid = UUID.fromString(id);
-        } catch (RuntimeException e) {
-            throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
-        }
-        Optional<OutgoingDocumentDTO> outgoingDocumentDTO = outgoingDocumentDTOFacadeService.getById(uuid);
+    public ResponseEntity<OutgoingDocumentDTO> getById(@PathVariable UUID id) {
+        Optional<OutgoingDocumentDTO> outgoingDocumentDTO = outgoingDocumentDTOFacadeService.getById(id);
         if (outgoingDocumentDTO.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(outgoingDocumentDTO.get());
         }

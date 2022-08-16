@@ -4,7 +4,7 @@ import com.example.testproject1.model.dto.staff.DepartmentDTO;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
-import com.example.testproject1.service.mappingutils.MappingUtils;
+import com.example.testproject1.service.mappingutils.DepartmentMapperAbstract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,6 @@ import java.sql.BatchUpdateException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Класс реализующий интерфейс {@link CrudFacadeService}. Для выполнения CRUD операций к базе данных.
@@ -30,15 +29,15 @@ public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO>
      * Mapper DTO to Entity, Entity to DTO
      */
     @Autowired
-    private MappingUtils mappingUtils;
+    private DepartmentMapperAbstract mapper;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public DepartmentDTO create(DepartmentDTO entity) {
-        Department department = mappingUtils.mapDtoToDepartment(entity);
-        return mappingUtils.mapDepartmentToDto(departmentCrudService.create(department));
+        Department department = mapper.dtoToDepartment(entity);
+        return mapper.departmentToDTO(departmentCrudService.create(department));
     }
 
     /**
@@ -47,7 +46,7 @@ public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO>
     @Override
     public List<DepartmentDTO> getAll() {
         List<Department> departmentList = departmentCrudService.getAll();
-        return departmentList.stream().map(s -> mappingUtils.mapDepartmentToDto(s)).collect(Collectors.toList());
+        return mapper.listToDtoList(departmentList);
     }
 
     /**
@@ -57,7 +56,7 @@ public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO>
     public Optional<DepartmentDTO> getById(UUID id) {
         Optional<Department> optionalDepartment = departmentCrudService.getById(id);
         if (optionalDepartment.isPresent()) {
-            return Optional.ofNullable(mappingUtils.mapDepartmentToDto(optionalDepartment.get()));
+            return Optional.ofNullable(mapper.departmentToDTO(optionalDepartment.get()));
         }
         return Optional.empty();
     }
@@ -67,8 +66,8 @@ public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO>
      */
     @Override
     public DepartmentDTO update(DepartmentDTO entity) {
-        Department department = mappingUtils.mapDtoToDepartment(entity);
-        return mappingUtils.mapDepartmentToDto(departmentCrudService.update(department));
+        Department department = mapper.dtoToDepartment(entity);
+        return mapper.departmentToDTO(departmentCrudService.update(department));
     }
 
     /**
@@ -76,7 +75,6 @@ public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO>
      */
     @Override
     public void saveAll(List<DepartmentDTO> entityList) throws BatchUpdateException {
-        List<Department> departmentList = entityList.stream().map(s -> mappingUtils.mapDtoToDepartment(s)).collect(Collectors.toList());
-        departmentCrudService.saveAll(departmentList);
+        departmentCrudService.saveAll(mapper.dtoListToList(entityList));
     }
 }

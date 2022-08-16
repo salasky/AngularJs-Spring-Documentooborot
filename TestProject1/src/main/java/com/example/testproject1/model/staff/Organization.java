@@ -1,7 +1,6 @@
 package com.example.testproject1.model.staff;
 
 import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -21,25 +20,21 @@ public class Organization extends Staff {
     /**
      * Полное название организации
      */
-    @NotNull
     @Column(name = "full_name")
     private String fullName;
     /**
      * Короткое название организации
      */
-    @NotNull
     @Column(name = "short_name")
     private String shortName;
     /**
      * Руководитель организации
      */
-    @NotNull
     @Column(name = "supervisor")
     private String supervisor;
     /**
      * Контактные телефоны организации
      */
-    @NotNull
     @Column(name = "contact_number")
     private List<String> contactNumber;
 

@@ -1,6 +1,5 @@
 package com.example.testproject1.controller;
 
-import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.dto.MessageResponseDTO;
 import com.example.testproject1.model.dto.document.IncomingDocumentDTO;
@@ -53,14 +52,8 @@ public class IncomingDocumentController {
      * Метод получения сущности по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<IncomingDocumentDTO> getById(@PathVariable String id) {
-        UUID uuid;
-        try {
-            uuid = UUID.fromString(id);
-        } catch (RuntimeException e) {
-            throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
-        }
-        Optional<IncomingDocumentDTO> incomingDocument = incomingDocumentDTOFacadeService.getById(uuid);
+    public ResponseEntity<IncomingDocumentDTO> getById(@PathVariable UUID id) {
+        Optional<IncomingDocumentDTO> incomingDocument = incomingDocumentDTOFacadeService.getById(id);
         if (incomingDocument.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(incomingDocument.get());
         }
@@ -96,14 +89,8 @@ public class IncomingDocumentController {
      * Метод удаления сущности по id
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable String id) {
-        UUID uuid;
-        try {
-            uuid = UUID.fromString(id);
-        } catch (RuntimeException e) {
-            throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
-        }
-        incomingDocumentCrudService.deleteById(uuid);
+    public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable UUID id) {
+        incomingDocumentCrudService.deleteById(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Входящий документ успешно удалено"));
     }
 

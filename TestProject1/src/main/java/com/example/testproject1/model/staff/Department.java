@@ -1,9 +1,6 @@
 package com.example.testproject1.model.staff;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -23,13 +20,11 @@ public class Department extends Staff {
      * Полное название департамента
      */
     @Column(name = "full_name")
-    @NotNull
     private String fullName;
     /**
      * Короткое название департамента
      */
     @Column(name = "short_name")
-    @NotNull
     private String shortName;
     /**
      * Руководитель департамента
@@ -45,8 +40,6 @@ public class Department extends Staff {
      * Организация подразделения
      */
     @Column(name = "organization")
-    @NotNull
-    @JsonProperty("organization")
     private Organization organization;
 
     @XmlElement(name = "fullName")

@@ -3,8 +3,6 @@ package com.example.testproject1.model.dto.staff;
 import com.example.testproject1.model.staff.Person;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +15,6 @@ public class PersonDtoListCRUD {
     /**
      * Хранит список {@link Person}
      */
-    @XmlElementWrapper(name = "personList")
-    @XmlElement(name = "person")
     private final List<PersonDTO> personList = new ArrayList<>();
 
     /**

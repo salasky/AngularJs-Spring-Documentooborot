@@ -1,9 +1,7 @@
 package com.example.testproject1.controller;
 
-import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.dto.MessageResponseDTO;
-import com.example.testproject1.model.dto.document.IncomingDocumentDTO;
 import com.example.testproject1.model.dto.document.TaskDocumentDTO;
 import com.example.testproject1.model.dto.document.TaskListDTO;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -41,6 +39,7 @@ public class TaskDocumentController {
      */
     @Autowired
     private CrudFacadeService<TaskDocumentDTO> taskDocumentDTOFacadeService;
+
     /**
      * Метод получения сущностей
      */
@@ -53,14 +52,8 @@ public class TaskDocumentController {
      * Метод получения сущности по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<TaskDocumentDTO> getById(@PathVariable String id) {
-        UUID uuid;
-        try {
-            uuid = UUID.fromString(id);
-        } catch (RuntimeException e) {
-            throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
-        }
-        Optional<TaskDocumentDTO> taskDocumentDTO = taskDocumentDTOFacadeService.getById(uuid);
+    public ResponseEntity<TaskDocumentDTO> getById(@PathVariable UUID id) {
+        Optional<TaskDocumentDTO> taskDocumentDTO = taskDocumentDTOFacadeService.getById(id);
         if (taskDocumentDTO.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(taskDocumentDTO.get());
         }
@@ -96,14 +89,8 @@ public class TaskDocumentController {
      * Метод удаления сущности по id
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable String id) {
-        UUID uuid;
-        try {
-            uuid = UUID.fromString(id);
-        } catch (RuntimeException e) {
-            throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
-        }
-        taskDocumentCrudService.deleteById(uuid);
+    public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable UUID id) {
+        taskDocumentCrudService.deleteById(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("TaskDocument успешно удален"));
     }
 

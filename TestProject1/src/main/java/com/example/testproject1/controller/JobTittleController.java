@@ -1,6 +1,5 @@
 package com.example.testproject1.controller;
 
-import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.dto.MessageResponseDTO;
 import com.example.testproject1.model.dto.staff.JobTittleListDTO;
 import com.example.testproject1.model.staff.JobTittle;
@@ -51,14 +50,8 @@ public class JobTittleController {
      * Метод получения сущности по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<JobTittle> getById(@PathVariable String id) {
-        UUID uuid;
-        try {
-            uuid = UUID.fromString(id);
-        } catch (RuntimeException e) {
-            throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
-        }
-        Optional<JobTittle> jobTittle = jobTittleCrudService.getById(uuid);
+    public ResponseEntity<JobTittle> getById(@PathVariable UUID id) {
+        Optional<JobTittle> jobTittle = jobTittleCrudService.getById(id);
         if (jobTittle.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(jobTittle.get());
         }
@@ -79,7 +72,7 @@ public class JobTittleController {
     @PostMapping("/saveAll")
     public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody JobTittleListDTO jobTittleListDTO) throws BatchUpdateException {
         jobTittleCrudService.saveAll(jobTittleListDTO.getJobList());
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Должноасти успешно сохранены"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Должности успешно сохранены"));
     }
 
     /**
@@ -94,15 +87,9 @@ public class JobTittleController {
      * Метод удаления сущности по id
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable String id) {
-        UUID uuid;
-        try {
-            uuid = UUID.fromString(id);
-        } catch (RuntimeException e) {
-            throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
-        }
-        jobTittleCrudService.deleteById(uuid);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Должноасть успешно удалена"));
+    public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable UUID id) {
+        jobTittleCrudService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Должность успешно удалена"));
     }
 
     /**
@@ -111,6 +98,6 @@ public class JobTittleController {
     @DeleteMapping("/deleteAll")
     public ResponseEntity<MessageResponseDTO> deleteById() {
         jobTittleCrudService.deleteAll();
-        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Должноасти успешно удалены"));
+        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Должности успешно удалены"));
     }
 }

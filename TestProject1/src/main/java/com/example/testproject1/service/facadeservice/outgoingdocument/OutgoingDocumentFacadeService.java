@@ -4,7 +4,7 @@ import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.dto.document.OutgoingDocumentDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
-import com.example.testproject1.service.mappingutils.MappingUtils;
+import com.example.testproject1.service.mappingutils.OutgoingDocumentMapperAbsract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,6 @@ import java.sql.BatchUpdateException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Класс реализующий интерфейс {@link CrudFacadeService}. Для выполнения CRUD операций к базе данных.
@@ -30,15 +29,15 @@ public class OutgoingDocumentFacadeService implements CrudFacadeService<Outgoing
      * Mapper DTO to Entity, Entity to DTO
      */
     @Autowired
-    private MappingUtils mappingUtils;
+    private OutgoingDocumentMapperAbsract mapper;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public OutgoingDocumentDTO create(OutgoingDocumentDTO entity) {
-        OutgoingDocument outgoingDocument = mappingUtils.mapDtoToOutgoingDocument(entity);
-        return mappingUtils.mapOutgoingDocumentToDto(outgoingDocumentCrudService.create(outgoingDocument));
+        OutgoingDocument outgoingDocument = mapper.dtoToOutgoing(entity);
+        return mapper.outgoingToDTO(outgoingDocumentCrudService.create(outgoingDocument));
     }
 
     /**
@@ -47,7 +46,7 @@ public class OutgoingDocumentFacadeService implements CrudFacadeService<Outgoing
     @Override
     public List<OutgoingDocumentDTO> getAll() {
         List<OutgoingDocument> outgoingDocumentList = outgoingDocumentCrudService.getAll();
-        return outgoingDocumentList.stream().map(s -> mappingUtils.mapOutgoingDocumentToDto(s)).collect(Collectors.toList());
+        return mapper.listToDtoList(outgoingDocumentList);
     }
 
     /**
@@ -57,7 +56,7 @@ public class OutgoingDocumentFacadeService implements CrudFacadeService<Outgoing
     public Optional<OutgoingDocumentDTO> getById(UUID id) {
         Optional<OutgoingDocument> optionalOutgoingDocument = outgoingDocumentCrudService.getById(id);
         if (optionalOutgoingDocument.isPresent()) {
-            return Optional.ofNullable(mappingUtils.mapOutgoingDocumentToDto(optionalOutgoingDocument.get()));
+            return Optional.ofNullable(mapper.outgoingToDTO(optionalOutgoingDocument.get()));
         }
         return Optional.empty();
     }
@@ -67,8 +66,8 @@ public class OutgoingDocumentFacadeService implements CrudFacadeService<Outgoing
      */
     @Override
     public OutgoingDocumentDTO update(OutgoingDocumentDTO entity) {
-        OutgoingDocument outgoingDocument = mappingUtils.mapDtoToOutgoingDocument(entity);
-        return mappingUtils.mapOutgoingDocumentToDto(outgoingDocumentCrudService.update(outgoingDocument));
+        OutgoingDocument outgoingDocument = mapper.dtoToOutgoing(entity);
+        return mapper.outgoingToDTO(outgoingDocumentCrudService.update(outgoingDocument));
     }
 
     /**
@@ -76,8 +75,6 @@ public class OutgoingDocumentFacadeService implements CrudFacadeService<Outgoing
      */
     @Override
     public void saveAll(List<OutgoingDocumentDTO> entityList) throws BatchUpdateException {
-        List<OutgoingDocument> outgoingDocumentList = entityList.stream()
-                .map(s -> mappingUtils.mapDtoToOutgoingDocument(s)).collect(Collectors.toList());
-        outgoingDocumentCrudService.saveAll(outgoingDocumentList);
+        outgoingDocumentCrudService.saveAll(mapper.dtoListToList(entityList));
     }
 }

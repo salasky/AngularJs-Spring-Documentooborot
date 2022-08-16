@@ -4,7 +4,7 @@ import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.dto.document.IncomingDocumentDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
-import com.example.testproject1.service.mappingutils.MappingUtils;
+import com.example.testproject1.service.mappingutils.IncomingDocumentMapperAbstract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,6 @@ import java.sql.BatchUpdateException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Класс реализующий интерфейс {@link CrudFacadeService}. Для выполнения CRUD операций к базе данных.
@@ -30,15 +29,15 @@ public class IncomingDocumentFacadeService implements CrudFacadeService<Incoming
      * Mapper DTO to Entity, Entity to DTO
      */
     @Autowired
-    private MappingUtils mappingUtils;
+    private IncomingDocumentMapperAbstract mapper;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public IncomingDocumentDTO create(IncomingDocumentDTO entity) {
-        IncomingDocument incomingDocument = mappingUtils.mapDtoToIncomingDocument(entity);
-        return mappingUtils.mapIncomingDocumentToDto(incomingDocumentCrudService.create(incomingDocument));
+        IncomingDocument incomingDocument = mapper.dtoToIncoming(entity);
+        return mapper.incomingToDTO(incomingDocumentCrudService.create(incomingDocument));
     }
 
     /**
@@ -47,7 +46,7 @@ public class IncomingDocumentFacadeService implements CrudFacadeService<Incoming
     @Override
     public List<IncomingDocumentDTO> getAll() {
         List<IncomingDocument> incomingDocumentList = incomingDocumentCrudService.getAll();
-        return incomingDocumentList.stream().map(s -> mappingUtils.mapIncomingDocumentToDto(s)).collect(Collectors.toList());
+        return mapper.listToDtoList(incomingDocumentList);
     }
 
     /**
@@ -57,7 +56,7 @@ public class IncomingDocumentFacadeService implements CrudFacadeService<Incoming
     public Optional<IncomingDocumentDTO> getById(UUID id) {
         Optional<IncomingDocument> optionalIncomingDocument = incomingDocumentCrudService.getById(id);
         if (optionalIncomingDocument.isPresent()) {
-            return Optional.ofNullable(mappingUtils.mapIncomingDocumentToDto(optionalIncomingDocument.get()));
+            return Optional.ofNullable(mapper.incomingToDTO(optionalIncomingDocument.get()));
         }
         return Optional.empty();
     }
@@ -67,8 +66,8 @@ public class IncomingDocumentFacadeService implements CrudFacadeService<Incoming
      */
     @Override
     public IncomingDocumentDTO update(IncomingDocumentDTO entity) {
-        IncomingDocument incomingDocument = mappingUtils.mapDtoToIncomingDocument(entity);
-        return mappingUtils.mapIncomingDocumentToDto(incomingDocumentCrudService.update(incomingDocument));
+        IncomingDocument incomingDocument = mapper.dtoToIncoming(entity);
+        return mapper.incomingToDTO(incomingDocumentCrudService.update(incomingDocument));
     }
 
     /**
@@ -76,8 +75,6 @@ public class IncomingDocumentFacadeService implements CrudFacadeService<Incoming
      */
     @Override
     public void saveAll(List<IncomingDocumentDTO> entityList) throws BatchUpdateException {
-        List<IncomingDocument> incomingDocumentList = entityList.stream()
-                .map(s -> mappingUtils.mapDtoToIncomingDocument(s)).collect(Collectors.toList());
-        incomingDocumentCrudService.saveAll(incomingDocumentList);
+        incomingDocumentCrudService.saveAll(mapper.dtoListToList(entityList));
     }
 }

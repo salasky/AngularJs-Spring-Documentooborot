@@ -10,6 +10,9 @@ import java.util.UUID;
  * @author smigranov
  */
 public class DepartmentDTO {
+    public DepartmentDTO() {
+    }
+
     /**
      * UUID департамента
      */

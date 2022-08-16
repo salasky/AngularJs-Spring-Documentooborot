@@ -84,7 +84,7 @@ public class TaskDocumentRepositoryTest {
                 .setTaskResponsPerson(person)
                 .setTaskDate(new Timestamp(System.currentTimeMillis()))
                 .setTaskSignOfControl(true)
-                .setTaskExecPeriod("2 дня")
+                .setTaskExecPeriod("2 day")
                 .setDocId(UUID.randomUUID())
                 .setDocText("text")
                 .setDocName("name")

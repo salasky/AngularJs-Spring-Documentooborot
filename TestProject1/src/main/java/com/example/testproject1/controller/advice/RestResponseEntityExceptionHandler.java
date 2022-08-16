@@ -1,5 +1,6 @@
 package com.example.testproject1.controller.advice;
 
+import com.example.testproject1.model.dto.RestErrorDto;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -28,32 +29,43 @@ public class RestResponseEntityExceptionHandler
      * Метод перехвата RuntimeException
      */
     @ExceptionHandler({RuntimeException.class})
-    public ResponseEntity<Object> handleAccessRuntimeException(RuntimeException ex, WebRequest request) {
-        return new ResponseEntity<Object>(
-                "RuntimeException! " + ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<RestErrorDto> handleAccessRuntimeException(RuntimeException ex, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new RestErrorDto(ex.getMessage()));
     }
 
     /**
      * Метод перехвата Exception
      */
     @ExceptionHandler({Exception.class})
-    public ResponseEntity<Object> handleAccessException(Exception ex, WebRequest request) {
-        return new ResponseEntity<Object>(
-                " Exception! " + ex.getMessage(), new HttpHeaders(), HttpStatus.FORBIDDEN);
+    public ResponseEntity<RestErrorDto> handleAccessException(Exception ex, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new RestErrorDto(ex.getMessage()));
     }
 
     /**
      * Метод перехвата MethodArgumentNotValidException (Ошибки при валидации)
      */
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) {
+    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                               HttpHeaders headers, HttpStatus status, WebRequest request) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        return new ResponseEntity<>(errors, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RestErrorDto(errors.toString()));
     }
+
+    /**
+     * Метод для обнаружения внутренней ошибки сервера
+     */
+    @Override
+    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body,
+                                                             HttpHeaders headers, HttpStatus status, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new RestErrorDto(ex.getMessage()));
+    }
+
 }

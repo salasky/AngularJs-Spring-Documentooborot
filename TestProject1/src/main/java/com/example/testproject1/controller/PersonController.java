@@ -1,6 +1,5 @@
 package com.example.testproject1.controller;
 
-import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.dto.MessageResponseDTO;
 import com.example.testproject1.model.dto.staff.PersonDTO;
 import com.example.testproject1.model.dto.staff.PersonDtoListCRUD;
@@ -54,14 +53,8 @@ public class PersonController {
      * Метод получения сущности по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<PersonDTO> getById(@PathVariable String id) {
-        UUID uuid;
-        try {
-            uuid = UUID.fromString(id);
-        } catch (RuntimeException e) {
-            throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
-        }
-        Optional<PersonDTO> person = personDTOPersonCrudFacadeService.getById(uuid);
+    public ResponseEntity<PersonDTO> getById(@PathVariable UUID id) {
+        Optional<PersonDTO> person = personDTOPersonCrudFacadeService.getById(id);
         if (person.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(person.get());
         }
@@ -97,14 +90,8 @@ public class PersonController {
      * Метод удаления сущности по id
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable String id) {
-        UUID uuid;
-        try {
-            uuid = UUID.fromString(id);
-        } catch (RuntimeException e) {
-            throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
-        }
-        personCrudService.deleteById(uuid);
+    public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable UUID id) {
+        personCrudService.deleteById(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Person успешно удален"));
     }
 

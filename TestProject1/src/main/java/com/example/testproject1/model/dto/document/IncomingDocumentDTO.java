@@ -33,12 +33,16 @@ public class IncomingDocumentDTO extends BaseDocumentDTO {
         return senderId;
     }
 
-    public void setSenderId(UUID senderId) {
-        this.senderId = senderId;
+    public void setSenderId(Person sender) {
+        this.senderId = sender.getId();
     }
 
     public UUID getDestinationId() {
         return destinationId;
+    }
+
+    public void setSenderId(UUID senderId) {
+        this.senderId = senderId;
     }
 
     public void setDestinationId(UUID destinationId) {
@@ -61,48 +65,5 @@ public class IncomingDocumentDTO extends BaseDocumentDTO {
         this.dateOfRegistration = dateOfRegistration;
     }
 
-    /**
-     * @return возвращает объект builder
-     */
-    public static IncomingDocumentDtoBuilder newBuilder() {
-        return new IncomingDocumentDTO().new IncomingDocumentDtoBuilder();
-    }
-
-    /**
-     * Внутренний класс Builder
-     *
-     * @author smigranov
-     */
-    public class IncomingDocumentDtoBuilder extends BaseDocumentDTOBuilder {
-
-        public IncomingDocumentDtoBuilder setIncomingSender(Person sender) {
-            IncomingDocumentDTO.this.senderId = sender.getId();
-            return this;
-        }
-
-        public IncomingDocumentDtoBuilder setIncomingDestination(Person destination) {
-            IncomingDocumentDTO.this.destinationId = destination.getId();
-            return this;
-        }
-
-        public IncomingDocumentDtoBuilder setIncomingDocumentNumber(Long documentNumber) {
-            IncomingDocumentDTO.this.number = documentNumber;
-            return this;
-        }
-
-        public IncomingDocumentDtoBuilder setIncomingDocumentDate(Timestamp date) {
-            IncomingDocumentDTO.this.dateOfRegistration = date;
-            return this;
-        }
-
-        /**
-         * Метод build
-         *
-         * @return Возвращает объект класса {@link IncomingDocumentDTO}
-         */
-        public IncomingDocumentDTO build() {
-            return IncomingDocumentDTO.this;
-        }
-    }
 }
 

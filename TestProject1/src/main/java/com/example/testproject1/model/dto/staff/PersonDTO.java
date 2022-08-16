@@ -1,8 +1,5 @@
 package com.example.testproject1.model.dto.staff;
 
-import com.example.testproject1.model.staff.Department;
-import com.example.testproject1.model.staff.JobTittle;
-
 import java.sql.Date;
 import java.util.UUID;
 
@@ -85,9 +82,6 @@ public class PersonDTO {
         return jobTittleId;
     }
 
-    public void setJobTittleId(UUID jobTittleId) {
-        this.jobTittleId = jobTittleId;
-    }
 
     public String getPhoto() {
         return photo;
@@ -117,73 +111,11 @@ public class PersonDTO {
         return departmentId;
     }
 
+    public void setJobTittleId(UUID jobTittleId) {
+        this.jobTittleId = jobTittleId;
+    }
+
     public void setDepartmentId(UUID departmentId) {
         this.departmentId = departmentId;
-    }
-
-    public static PersonDTO.PersonDtoBuilder newBuilder() {
-        return new PersonDTO().new PersonDtoBuilder();
-    }
-
-    /**
-     * Внутренний класс Builder
-     *
-     * @author smigranov
-     */
-    public class PersonDtoBuilder {
-
-        public PersonDtoBuilder setId(UUID uuid) {
-            PersonDTO.this.id = uuid;
-            return this;
-        }
-
-        public PersonDtoBuilder setLastName(String lastName) {
-            PersonDTO.this.lastName = lastName;
-            return this;
-        }
-
-        public PersonDtoBuilder setSecondName(String secondName) {
-            PersonDTO.this.secondName = secondName;
-            return this;
-        }
-
-        public PersonDtoBuilder setFirstName(String firstName) {
-            PersonDTO.this.firstName = firstName;
-            return this;
-        }
-
-        public PersonDtoBuilder setJobTittle(JobTittle jobTittle) {
-            PersonDTO.this.jobTittleId = jobTittle.getId();
-            return this;
-        }
-
-        public PersonDtoBuilder setPhoto(String photo) {
-            PersonDTO.this.photo = photo;
-            return this;
-        }
-
-        public PersonDtoBuilder setBirthDay(Date date) {
-            PersonDTO.this.birthDay = date;
-            return this;
-        }
-
-        public PersonDtoBuilder setPhoneNumber(String phoneNumber) {
-            PersonDTO.this.phoneNumber = phoneNumber;
-            return this;
-        }
-
-        public PersonDtoBuilder setDepartment(Department department) {
-            PersonDTO.this.departmentId = department.getId();
-            return this;
-        }
-
-        /**
-         * Метод build
-         *
-         * @return Возвращает объект класса {@link PersonDTO}
-         */
-        public PersonDTO build() {
-            return PersonDTO.this;
-        }
     }
 }
