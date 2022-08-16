@@ -1,4 +1,4 @@
-package com.example.testproject1.service.facadeservice.outgoing;
+package com.example.testproject1.service.facadeservice.outgoingdocument;
 
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.dto.document.OutgoingDocumentDTO;
@@ -78,6 +78,6 @@ public class OutgoingDocumentFacadeService implements CrudFacadeService<Outgoing
     public void saveAll(List<OutgoingDocumentDTO> entityList) throws BatchUpdateException {
         List<OutgoingDocument> outgoingDocumentList = entityList.stream()
                 .map(s -> mappingUtils.mapDtoToOutgoingDocument(s)).collect(Collectors.toList());
-        outgoingDocumentCrudService.saveALL(outgoingDocumentList);
+        outgoingDocumentCrudService.saveAll(outgoingDocumentList);
     }
 }

@@ -33,7 +33,7 @@ public class XmlToDataBaseImporterImpl implements XmlToDataBaseImporter {
 
     private <T> void save(StorageService<T> storageService, CrudService crudService) {
         try {
-            crudService.saveALL(storageService.getList());
+            crudService.saveAll(storageService.getList());
         } catch (BatchUpdateException e) {
             LOGGER.error("Ошибка сохранения", e.toString());
         }

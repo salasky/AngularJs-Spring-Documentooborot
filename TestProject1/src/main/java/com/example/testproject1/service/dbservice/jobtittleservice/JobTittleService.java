@@ -88,7 +88,7 @@ public class JobTittleService implements CrudService<JobTittle> {
     }
 
     @Override
-    public void saveALL(List<JobTittle> entityList) throws BatchUpdateException {
+    public void saveAll(List<JobTittle> entityList) throws BatchUpdateException {
         LOGGER.info("Попытка сохранения List<JobTittle> в таблицу JobTittle");
         entityList.stream().filter(entity -> entity.getId() == null).forEach(entity -> entity.setId(UUID.randomUUID()));
         jobTittleRepository.saveAll(entityList);

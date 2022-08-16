@@ -77,6 +77,6 @@ public class PersonFacadeService implements CrudFacadeService<PersonDTO> {
     @Override
     public void saveAll(List<PersonDTO> entityList) throws BatchUpdateException {
         List<Person> personList = entityList.stream().map(s -> mappingUtils.mapDtoToPerson(s)).collect(Collectors.toList());
-        personCrudService.saveALL(personList);
+        personCrudService.saveAll(personList);
     }
 }

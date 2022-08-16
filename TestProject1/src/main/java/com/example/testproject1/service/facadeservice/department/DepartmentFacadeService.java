@@ -77,6 +77,6 @@ public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO>
     @Override
     public void saveAll(List<DepartmentDTO> entityList) throws BatchUpdateException {
         List<Department> departmentList = entityList.stream().map(s -> mappingUtils.mapDtoToDepartment(s)).collect(Collectors.toList());
-        departmentCrudService.saveALL(departmentList);
+        departmentCrudService.saveAll(departmentList);
     }
 }

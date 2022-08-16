@@ -90,7 +90,7 @@ public class IncomingDocumentService implements CrudService<IncomingDocument> {
     }
 
     @Override
-    public void saveALL(List<IncomingDocument> entityList) throws BatchUpdateException {
+    public void saveAll(List<IncomingDocument> entityList) throws BatchUpdateException {
         LOGGER.info("Попытка сохранения List<IncomingDocument> в таблицу IncomingDocument");
         entityList.stream().filter(entity -> entity.getId() == null).forEach(entity -> entity.setId(UUID.randomUUID()));
         incomingDocumentRepository.saveAll(entityList);

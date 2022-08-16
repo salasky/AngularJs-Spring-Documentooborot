@@ -15,7 +15,7 @@ public class TaskListDTO {
     /**
      * List TaskDocument
      */
-    private final List<TaskDocument> taskDocumentList = new ArrayList<>();
+    private final List<TaskDocumentDTO> taskDocumentList = new ArrayList<>();
 
     /**
      * Метод получения списка IncomingDocument
@@ -23,7 +23,7 @@ public class TaskListDTO {
      * @return {@link List} объектов {@link TaskDocument}
      */
     @JsonProperty("list")
-    public List<TaskDocument> getTaskDocumentList() {
+    public List<TaskDocumentDTO> getTaskDocumentList() {
         return taskDocumentList;
     }
 }

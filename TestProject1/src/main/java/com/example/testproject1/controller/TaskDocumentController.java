@@ -3,8 +3,11 @@ package com.example.testproject1.controller;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.dto.MessageResponseDTO;
+import com.example.testproject1.model.dto.document.IncomingDocumentDTO;
+import com.example.testproject1.model.dto.document.TaskDocumentDTO;
 import com.example.testproject1.model.dto.document.TaskListDTO;
 import com.example.testproject1.service.dbservice.CrudService;
+import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,29 +36,33 @@ public class TaskDocumentController {
      */
     @Autowired
     private CrudService<TaskDocument> taskDocumentCrudService;
-
+    /**
+     * Фасадный Сервис для работы с TaskDocument
+     */
+    @Autowired
+    private CrudFacadeService<TaskDocumentDTO> taskDocumentDTOFacadeService;
     /**
      * Метод получения сущностей
      */
     @GetMapping
-    public ResponseEntity<List<TaskDocument>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(taskDocumentCrudService.getAll());
+    public ResponseEntity<List<TaskDocumentDTO>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(taskDocumentDTOFacadeService.getAll());
     }
 
     /**
      * Метод получения сущности по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<TaskDocument> getById(@PathVariable String id) {
+    public ResponseEntity<TaskDocumentDTO> getById(@PathVariable String id) {
         UUID uuid;
         try {
             uuid = UUID.fromString(id);
         } catch (RuntimeException e) {
             throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
         }
-        Optional<TaskDocument> taskDocument = taskDocumentCrudService.getById(uuid);
-        if (taskDocument.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(taskDocument.get());
+        Optional<TaskDocumentDTO> taskDocumentDTO = taskDocumentDTOFacadeService.getById(uuid);
+        if (taskDocumentDTO.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(taskDocumentDTO.get());
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -64,8 +71,8 @@ public class TaskDocumentController {
      * Метод добавления сущности
      */
     @PostMapping("/add")
-    public ResponseEntity<TaskDocument> addOrganization(@Valid @RequestBody TaskDocument taskDocument) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(taskDocumentCrudService.create(taskDocument));
+    public ResponseEntity<TaskDocumentDTO> addOrganization(@Valid @RequestBody TaskDocumentDTO taskDocument) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(taskDocumentDTOFacadeService.create(taskDocument));
     }
 
     /**
@@ -73,16 +80,16 @@ public class TaskDocumentController {
      */
     @PostMapping("/saveAll")
     public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody TaskListDTO taskListDTO) throws BatchUpdateException {
-        taskDocumentCrudService.saveALL(taskListDTO.getTaskDocumentList());
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Task успешно сохранен"));
+        taskDocumentDTOFacadeService.saveAll(taskListDTO.getTaskDocumentList());
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Поручения успешно сохранены"));
     }
 
     /**
      * Метод обновления сущностей
      */
     @PutMapping("/update")
-    public ResponseEntity<TaskDocument> update(@Valid @RequestBody TaskDocument taskDocument) {
-        return ResponseEntity.status(HttpStatus.OK).body(taskDocumentCrudService.update(taskDocument));
+    public ResponseEntity<TaskDocumentDTO> update(@Valid @RequestBody TaskDocumentDTO taskDocumentDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(taskDocumentDTOFacadeService.update(taskDocumentDTO));
     }
 
     /**

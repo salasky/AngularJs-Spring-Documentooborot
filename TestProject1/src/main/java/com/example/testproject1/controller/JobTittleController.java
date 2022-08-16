@@ -78,7 +78,7 @@ public class JobTittleController {
      */
     @PostMapping("/saveAll")
     public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody JobTittleListDTO jobTittleListDTO) throws BatchUpdateException {
-        jobTittleCrudService.saveALL(jobTittleListDTO.getJobList());
+        jobTittleCrudService.saveAll(jobTittleListDTO.getJobList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Должноасти успешно сохранены"));
     }
 

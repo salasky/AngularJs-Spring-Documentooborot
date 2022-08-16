@@ -59,5 +59,5 @@ public interface CrudService<T> {
      *
      * @param entityList List объектов класса
      */
-    void saveALL(List<T> entityList) throws BatchUpdateException;
+    void saveAll(List<T> entityList) throws BatchUpdateException;
 }

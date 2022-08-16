@@ -79,7 +79,7 @@ public class OrganizationController {
      */
     @PostMapping("/saveAll")
     public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody OrganizationListDTO organizationList) throws BatchUpdateException {
-        organizationCrudService.saveALL(organizationList.getOrganizationList());
+        organizationCrudService.saveAll(organizationList.getOrganizationList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Организации успешно сохранены"));
     }
 

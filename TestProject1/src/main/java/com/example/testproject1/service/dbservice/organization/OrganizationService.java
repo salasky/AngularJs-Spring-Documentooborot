@@ -93,7 +93,7 @@ public class OrganizationService implements CrudService<Organization> {
     }
 
     @Override
-    public void saveALL(List<Organization> entityList) throws BatchUpdateException {
+    public void saveAll(List<Organization> entityList) throws BatchUpdateException {
         LOGGER.info("Попытка сохранения List<Organization> в таблицу Organization");
         entityList.stream().filter(entity -> entity.getId() == null).forEach(entity -> entity.setId(UUID.randomUUID()));
         organizationRepository.saveAll(entityList);

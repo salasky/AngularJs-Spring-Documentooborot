@@ -2,8 +2,10 @@ package com.example.testproject1.service.mappingutils;
 
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
+import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.dto.document.IncomingDocumentDTO;
 import com.example.testproject1.model.dto.document.OutgoingDocumentDTO;
+import com.example.testproject1.model.dto.document.TaskDocumentDTO;
 import com.example.testproject1.model.dto.staff.DepartmentDTO;
 import com.example.testproject1.model.dto.staff.PersonDTO;
 import com.example.testproject1.model.staff.Department;
@@ -139,5 +141,40 @@ public class MappingUtils {
                 .setDocAuthor(Person.newBuilder().setId(outgoingDocumentDTO.getAuthorId()).build())
                 .setDocRegNumber(outgoingDocumentDTO.getRegNumber())
                 .setDocDate(outgoingDocumentDTO.getCreatingDate()).build();
+    }
+    /**
+     * TaskDocument из entity в dto
+     */
+    public TaskDocumentDTO mapTaskDocumentToDto(TaskDocument taskDocument) {
+        return (TaskDocumentDTO) TaskDocumentDTO.newBuilder()
+                .setTaskControlPerson(taskDocument.getControlPerson())
+                .setTaskDate(taskDocument.getOutDate())
+                .setTaskExecPeriod(taskDocument.getExecPeriod())
+                .setTaskResponsPerson(taskDocument.getResponsible())
+                .setTaskSignOfControl(taskDocument.getSignOfControl())
+                .setId(taskDocument.getId())
+                .setName(taskDocument.getName())
+                .setText(taskDocument.getText())
+                .setAuthor(taskDocument.getAuthor())
+                .setRegNumber(taskDocument.getRegNumber())
+                .setDate(taskDocument.getCreatingDate()).build();
+    }
+
+    /**
+     * TaskDocument из dto в entity
+     */
+    public TaskDocument mapDtoToTaskDocument(TaskDocumentDTO taskDocumentDTO) {
+        return (TaskDocument) TaskDocument.newBuilder()
+                .setTaskControlPerson(Person.newBuilder().setId(taskDocumentDTO.getControlPersonId()).build())
+                .setTaskDate(taskDocumentDTO.getOutDate())
+                .setTaskExecPeriod(taskDocumentDTO.getExecPeriod())
+                .setTaskResponsPerson(Person.newBuilder().setId(taskDocumentDTO.getResponsibleId()).build())
+                .setTaskSignOfControl(taskDocumentDTO.getSignOfControl())
+                .setDocId(taskDocumentDTO.getId())
+                .setDocName(taskDocumentDTO.getName())
+                .setDocText(taskDocumentDTO.getText())
+                .setDocAuthor(Person.newBuilder().setId(taskDocumentDTO.getAuthorId()).build())
+                .setDocRegNumber(taskDocumentDTO.getRegNumber())
+                .setDocDate(taskDocumentDTO.getCreatingDate()).build();
     }
 }

@@ -78,6 +78,6 @@ public class IncomingDocumentFacadeService implements CrudFacadeService<Incoming
     public void saveAll(List<IncomingDocumentDTO> entityList) throws BatchUpdateException {
         List<IncomingDocument> incomingDocumentList = entityList.stream()
                 .map(s -> mappingUtils.mapDtoToIncomingDocument(s)).collect(Collectors.toList());
-        incomingDocumentCrudService.saveALL(incomingDocumentList);
+        incomingDocumentCrudService.saveAll(incomingDocumentList);
     }
 }
