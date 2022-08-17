@@ -3,10 +3,10 @@ package com.example.testproject1.dao.taskdocument;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.AbstractBaseDocumentRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.service.sqlmapper.document.TaskDocumentMapper;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
+import com.example.testproject1.service.sqlmapper.document.TaskDocumentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -58,7 +58,7 @@ public class TaskDocumentRepository extends AbstractBaseDocumentRepository imple
                     taskDocument.getExecPeriod(), taskDocument.getResponsible().getId().toString(),
                     taskDocument.getSignOfControl(), taskDocument.getControlPerson().getId().toString());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения TaskDocument", e);
         }
         return taskDocument;
     }
@@ -94,7 +94,7 @@ public class TaskDocumentRepository extends AbstractBaseDocumentRepository imple
                     taskDocument.getResponsible().getId().toString(), taskDocument.getSignOfControl(),
                     taskDocument.getControlPerson().getId().toString(), taskDocument.getId().toString());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка обновления", e);
+            throw new DocflowRuntimeApplicationException("Ошибка обновления TaskDocument", e);
         }
         return taskDocument;
     }

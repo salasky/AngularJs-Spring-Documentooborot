@@ -1,4 +1,4 @@
-package com.example.testproject1.model.dto.document;
+package com.example.testproject1.model.dto.documentdto;
 
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.documentenum.DocumentDeliveryType;
@@ -19,7 +19,7 @@ public class OutgoingDocumentDTO extends BaseDocumentDTO {
     /**
      * способ доставки
      */
-    @NotNull
+    @NotNull(message = "deliveryType не может быть null")
     private DocumentDeliveryType deliveryType;
 
     public UUID getSenderId() {

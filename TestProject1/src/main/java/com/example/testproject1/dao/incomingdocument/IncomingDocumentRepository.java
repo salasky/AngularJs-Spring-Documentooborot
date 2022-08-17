@@ -3,10 +3,10 @@ package com.example.testproject1.dao.incomingdocument;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.AbstractBaseDocumentRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.service.sqlmapper.document.IncomingDocumentMapper;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
+import com.example.testproject1.service.sqlmapper.document.IncomingDocumentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -59,7 +59,7 @@ public class IncomingDocumentRepository extends AbstractBaseDocumentRepository i
                     incomingDocument.getDestination().getId().toString(),
                     incomingDocument.getNumber(), incomingDocument.getDateOfRegistration());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения IncomingDocument", e);
         }
         return incomingDocument;
     }
@@ -95,7 +95,7 @@ public class IncomingDocumentRepository extends AbstractBaseDocumentRepository i
                     incomingDocument.getDestination().getId().toString(), incomingDocument.getNumber(),
                     incomingDocument.getDateOfRegistration(), incomingDocument.getId().toString());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка обновления", e);
+            throw new DocflowRuntimeApplicationException("Ошибка обновления IncomingDocument", e);
         }
         return incomingDocument;
     }

@@ -1,7 +1,7 @@
 package com.example.testproject1.service.staffservice.impl;
 
 import com.example.testproject1.configuration.cache.CaffeineConfig;
-import com.example.testproject1.model.dto.staff.DepartmentListDTO;
+import com.example.testproject1.model.dto.staffdto.DepartmentListXmlDto;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.jaxb.JaxbReader;
 import com.example.testproject1.service.staffservice.StorageService;
@@ -40,8 +40,8 @@ public class DepartmentStorageService implements StorageService<Department> {
     @Override
     public List<Department> getList() {
         LOGGER.info("Begin find Department ");
-        DepartmentListDTO departmentListDTO = jaxbReader.jaxbXMLToObject(FILE_NAME);
-        List<Department> departmentList = departmentListDTO.getDepartmentList();
+        DepartmentListXmlDto departmentListXmlDto = jaxbReader.jaxbXMLToObject(FILE_NAME);
+        List<Department> departmentList = departmentListXmlDto.getDepartmentList();
         LOGGER.info("Find Department result");
         return departmentList;
     }

@@ -1,7 +1,8 @@
-package com.example.testproject1.model.dto.document;
+package com.example.testproject1.model.dto.documentdto;
 
 import com.example.testproject1.model.document.BaseDocument;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.UUID;
 
@@ -18,14 +19,17 @@ public class BaseDocumentDTO {
     /**
      * название документа
      */
+    @NotNull(message = "name не может быть null")
     protected String name;
     /**
      * Tекст документа
      */
+    @NotNull(message = "text не может быть null")
     protected String text;
     /**
      * Регистрационный номер документа
      */
+    @NotNull(message = "regNumber не может быть null")
     protected Long regNumber;
     /**
      * дата регистрации документа
@@ -34,6 +38,7 @@ public class BaseDocumentDTO {
     /**
      * автор id документа
      */
+    @NotNull(message = "authorId не может быть null")
     protected UUID authorId;
 
     public UUID getId() {

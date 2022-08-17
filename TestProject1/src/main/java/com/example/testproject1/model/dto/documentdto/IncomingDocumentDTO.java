@@ -1,7 +1,6 @@
-package com.example.testproject1.model.dto.document;
+package com.example.testproject1.model.dto.documentdto;
 
 import com.example.testproject1.model.document.IncomingDocument;
-import com.example.testproject1.model.staff.Person;
 
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
@@ -16,17 +15,17 @@ public class IncomingDocumentDTO extends BaseDocumentDTO {
     /**
      * отправитель id
      */
-    @NotNull
+    @NotNull(message = "senderId не может быть null")
     private UUID senderId;
     /**
      * адресат id
      */
-    @NotNull
+    @NotNull(message = "destinationId не может быть null")
     private UUID destinationId;
     /**
      * исходящий номер
      */
-    @NotNull
+    @NotNull(message = "number не может быть null")
     private Long number;
     /**
      * исходящая дата регистрации
@@ -35,10 +34,6 @@ public class IncomingDocumentDTO extends BaseDocumentDTO {
 
     public UUID getSenderId() {
         return senderId;
-    }
-
-    public void setSenderId(Person sender) {
-        this.senderId = sender.getId();
     }
 
     public UUID getDestinationId() {

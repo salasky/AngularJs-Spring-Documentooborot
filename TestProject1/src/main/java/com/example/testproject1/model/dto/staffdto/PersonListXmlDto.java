@@ -1,4 +1,4 @@
-package com.example.testproject1.model.dto.staff;
+package com.example.testproject1.model.dto.staffdto;
 
 import com.example.testproject1.model.staff.Person;
 
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PersonListDTO {
+public class PersonListXmlDto {
     /**
      * Хранит список {@link Person}
      */

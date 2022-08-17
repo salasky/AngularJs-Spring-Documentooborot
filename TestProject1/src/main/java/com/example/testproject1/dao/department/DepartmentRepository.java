@@ -2,8 +2,8 @@ package com.example.testproject1.dao.department;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.service.sqlmapper.staff.DepartmentMapper;
 import com.example.testproject1.model.staff.Department;
+import com.example.testproject1.service.sqlmapper.staff.DepartmentMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +70,7 @@ public class DepartmentRepository implements CrudRepository<Department> {
                     , department.getFullName(), department.getShortName(), department.getSupervisor()
                     , department.getContactNumber(), department.getOrganization().getId().toString());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения Department", e);
         }
         return department;
     }
@@ -88,7 +88,7 @@ public class DepartmentRepository implements CrudRepository<Department> {
                     department.getSupervisor(), department.getContactNumber(), department.getOrganization().getId().toString(),
                     department.getId().toString());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения Department", e);
         }
         return department;
     }

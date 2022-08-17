@@ -1,10 +1,12 @@
 package com.example.testproject1.controller;
 
 
-import com.example.testproject1.model.utility.MessageResponseDTO;
-import com.example.testproject1.model.dto.staff.OrganizationListDTO;
+import com.example.testproject1.model.dto.staffdto.OrganizationDTO;
+import com.example.testproject1.model.dto.staffdto.OrganizationListForMapping;
 import com.example.testproject1.model.staff.Organization;
+import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.service.dbservice.CrudService;
+import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,23 +35,25 @@ public class OrganizationController {
 
     @Autowired
     private CrudService<Organization> organizationCrudService;
+    @Autowired
+    private CrudFacadeService<OrganizationDTO> organizationCrudFacadeService;
 
     /**
      * Метод получения Organizations
      */
     @GetMapping
-    public ResponseEntity<List<Organization>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(organizationCrudService.getAll());
+    public ResponseEntity<List<OrganizationDTO>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(organizationCrudFacadeService.getAll());
     }
 
     /**
      * Метод получения Organization по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Organization> getById(@PathVariable UUID id) {
-        Optional<Organization> organization = organizationCrudService.getById(id);
-        if (organization.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(organization.get());
+    public ResponseEntity<OrganizationDTO> getById(@PathVariable UUID id) {
+        Optional<OrganizationDTO> organizationDTO = organizationCrudFacadeService.getById(id);
+        if (organizationDTO.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(organizationDTO.get());
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -58,25 +62,25 @@ public class OrganizationController {
      * Метод добавления Organization
      */
     @PostMapping("/add")
-    public ResponseEntity<Organization> addOrganization(@Valid @RequestBody Organization organization) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(organizationCrudService.create(organization));
+    public ResponseEntity<OrganizationDTO> addOrganization(@Valid @RequestBody OrganizationDTO organizationDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(organizationCrudFacadeService.create(organizationDTO));
     }
 
     /**
      * Метод сохранения List Organization
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody OrganizationListDTO organizationList) {
-        organizationCrudService.saveAll(organizationList.getOrganizationList());
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Организации успешно сохранены"));
+    public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody OrganizationListForMapping organizationList) {
+        organizationCrudFacadeService.saveAll(organizationList.getOrganizationList());
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Organization успешно сохранены"));
     }
 
     /**
      * Метод обновления Organization
      */
     @PutMapping("/update")
-    public ResponseEntity<Organization> update(@Valid @RequestBody Organization organization) {
-        return ResponseEntity.status(HttpStatus.OK).body(organizationCrudService.update(organization));
+    public ResponseEntity<OrganizationDTO> update(@Valid @RequestBody OrganizationDTO organizationDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(organizationCrudFacadeService.update(organizationDTO));
     }
 
     /**

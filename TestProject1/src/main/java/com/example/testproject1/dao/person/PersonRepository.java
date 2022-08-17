@@ -2,11 +2,11 @@ package com.example.testproject1.dao.person;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.service.sqlmapper.staff.PersonMapper;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
+import com.example.testproject1.service.sqlmapper.staff.PersonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +63,7 @@ public class PersonRepository implements CrudRepository<Person> {
                     person.getLastName(), person.getPhoto(), person.getJobTittle().getId().toString(),
                     person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения Person", e);
         }
         return person;
     }
@@ -98,7 +98,7 @@ public class PersonRepository implements CrudRepository<Person> {
                     person.getLastName(), person.getPhoto(), person.getJobTittle().getId().toString(),
                     person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay(), person.getId().toString());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения Person", e);
         }
         return person;
     }

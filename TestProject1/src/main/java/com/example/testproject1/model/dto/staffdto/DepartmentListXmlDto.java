@@ -1,4 +1,4 @@
-package com.example.testproject1.model.dto.staff;
+package com.example.testproject1.model.dto.staffdto;
 
 import com.example.testproject1.model.staff.Department;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @author smigranov
  */
 @XmlRootElement
-public class DepartmentListDTO {
+public class DepartmentListXmlDto {
     /**
      * List Подразделений
      */

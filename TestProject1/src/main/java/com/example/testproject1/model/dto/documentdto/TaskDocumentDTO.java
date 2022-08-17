@@ -1,4 +1,4 @@
-package com.example.testproject1.model.dto.document;
+package com.example.testproject1.model.dto.documentdto;
 
 import com.example.testproject1.model.document.TaskDocument;
 
@@ -23,7 +23,7 @@ public class TaskDocumentDTO extends BaseDocumentDTO {
     /**
      * ответственный исполнитель
      */
-    @NotNull
+    @NotNull(message = "responsibleId не может быть null")
     private UUID responsibleId;
     /**
      * признак контрольности
@@ -74,9 +74,4 @@ public class TaskDocumentDTO extends BaseDocumentDTO {
     public void setControlPersonId(UUID controlPersonId) {
         this.controlPersonId = controlPersonId;
     }
-
-    /**
-     * @return возвращает объект builder
-     */
-
 }

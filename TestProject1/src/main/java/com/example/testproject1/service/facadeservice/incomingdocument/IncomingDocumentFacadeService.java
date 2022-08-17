@@ -1,7 +1,7 @@
 package com.example.testproject1.service.facadeservice.incomingdocument;
 
 import com.example.testproject1.model.document.IncomingDocument;
-import com.example.testproject1.model.dto.document.IncomingDocumentDTO;
+import com.example.testproject1.model.dto.documentdto.IncomingDocumentDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import com.example.testproject1.service.mappingutils.IncomingDocumentMapper;

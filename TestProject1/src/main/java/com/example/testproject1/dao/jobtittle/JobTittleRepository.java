@@ -2,8 +2,8 @@ package com.example.testproject1.dao.jobtittle;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.service.sqlmapper.staff.JobTittleMapper;
 import com.example.testproject1.model.staff.JobTittle;
+import com.example.testproject1.service.sqlmapper.staff.JobTittleMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +68,7 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
         try {
             jdbcTemplate.update(JOB_TITTLE_CREATE_QUERY, jobTittle.getId().toString(), jobTittle.getName());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения JobTittle", e);
         }
         return jobTittle;
     }
@@ -85,7 +85,7 @@ public class JobTittleRepository implements CrudRepository<JobTittle> {
         try {
             jdbcTemplate.update(JOB_TITTLE_UPDATE_ID_QUERY, jobTittle.getName(), jobTittle.getId().toString());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка обновления", e);
+            throw new DocflowRuntimeApplicationException("Ошибка обновления JobTittle", e);
         }
         return jobTittle;
     }

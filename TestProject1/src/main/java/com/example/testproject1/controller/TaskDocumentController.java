@@ -1,9 +1,9 @@
 package com.example.testproject1.controller;
 
 import com.example.testproject1.model.document.TaskDocument;
+import com.example.testproject1.model.dto.documentdto.TaskDocumentDTO;
+import com.example.testproject1.model.dto.documentdto.TaskDocumentDtoListForMapping;
 import com.example.testproject1.model.utility.MessageResponseDTO;
-import com.example.testproject1.model.dto.document.TaskDocumentDTO;
-import com.example.testproject1.model.dto.document.TaskDocumentDtoListForMapping;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 /**
  * Класс контроллер для сущности {@link TaskDocument}
  *

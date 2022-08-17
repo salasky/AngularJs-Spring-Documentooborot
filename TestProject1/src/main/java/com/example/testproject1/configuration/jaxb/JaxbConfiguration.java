@@ -1,9 +1,9 @@
 package com.example.testproject1.configuration.jaxb;
 
-import com.example.testproject1.model.dto.staff.DepartmentListDTO;
-import com.example.testproject1.model.dto.staff.JobTittleListDTO;
-import com.example.testproject1.model.dto.staff.OrganizationListDTO;
-import com.example.testproject1.model.dto.staff.PersonListDTO;
+import com.example.testproject1.model.dto.staffdto.DepartmentListXmlDto;
+import com.example.testproject1.model.dto.staffdto.JobTittleListXmlDto;
+import com.example.testproject1.model.dto.staffdto.OrganizationListXmlDto;
+import com.example.testproject1.model.dto.staffdto.PersonListXmlDto;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Organization;
@@ -30,8 +30,8 @@ public class JaxbConfiguration {
     @Bean
     public JAXBContext getContext() {
         try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(PersonListDTO.class, DepartmentListDTO.class,
-                    OrganizationListDTO.class, Person.class, Department.class, Organization.class, JobTittle.class, JobTittleListDTO.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(PersonListXmlDto.class, DepartmentListXmlDto.class,
+                    OrganizationListXmlDto.class, Person.class, Department.class, Organization.class, JobTittle.class, JobTittleListXmlDto.class);
             return jaxbContext;
         } catch (JAXBException e) {
             throw new RuntimeException(e);

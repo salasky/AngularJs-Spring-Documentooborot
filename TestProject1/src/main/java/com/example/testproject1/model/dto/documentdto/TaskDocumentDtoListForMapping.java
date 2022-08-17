@@ -1,4 +1,4 @@
-package com.example.testproject1.model.dto.document;
+package com.example.testproject1.model.dto.documentdto;
 
 import com.example.testproject1.model.document.TaskDocument;
 import com.fasterxml.jackson.annotation.JsonProperty;

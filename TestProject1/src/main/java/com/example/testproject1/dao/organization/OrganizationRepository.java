@@ -2,8 +2,8 @@ package com.example.testproject1.dao.organization;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.service.sqlmapper.staff.OrganizationMapper;
 import com.example.testproject1.model.staff.Organization;
+import com.example.testproject1.service.sqlmapper.staff.OrganizationMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +60,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
                     organization.getContactNumber().toString().replaceAll(regex, ""));
             return organization;
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения Organization", e);
         }
     }
 
@@ -77,7 +77,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
                     organization.getSupervisor(), organization.getContactNumber().toString().replaceAll(regex, ""),
                     organization.getId().toString());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка обновления", e);
+            throw new DocflowRuntimeApplicationException("Ошибка обновления Organization", e);
         }
         return organization;
     }
@@ -130,8 +130,8 @@ public class OrganizationRepository implements CrudRepository<Organization> {
             public void setValues(PreparedStatement ps, int i) throws SQLException {
                 ps.setString(1, entityList.get(i).getId().toString());
                 ps.setString(2, entityList.get(i).getFullName());
-                ps.setString(3, entityList.get(i).getSupervisor());
-                ps.setString(4, entityList.get(i).getShortName());
+                ps.setString(3, entityList.get(i).getShortName());
+                ps.setString(4, entityList.get(i).getSupervisor());
                 ps.setString(5, entityList.get(i).getContactNumber().toString());
             }
 

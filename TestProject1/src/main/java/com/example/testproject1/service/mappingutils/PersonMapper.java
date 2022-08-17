@@ -1,6 +1,6 @@
 package com.example.testproject1.service.mappingutils;
 
-import com.example.testproject1.model.dto.staff.PersonDTO;
+import com.example.testproject1.model.dto.staffdto.PersonDTO;
 import com.example.testproject1.model.staff.Person;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;

@@ -1,9 +1,9 @@
 package com.example.testproject1.controller;
 
-import com.example.testproject1.model.utility.MessageResponseDTO;
-import com.example.testproject1.model.dto.staff.DepartmentDTO;
-import com.example.testproject1.model.dto.staff.DepartmentDtoListForMapping;
+import com.example.testproject1.model.dto.staffdto.DepartmentDTO;
+import com.example.testproject1.model.dto.staffdto.DepartmentDtoListForMapping;
 import com.example.testproject1.model.staff.Department;
+import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;

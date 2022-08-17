@@ -1,9 +1,11 @@
 package com.example.testproject1.controller;
 
-import com.example.testproject1.model.utility.MessageResponseDTO;
-import com.example.testproject1.model.dto.staff.JobTittleListDTO;
+import com.example.testproject1.model.dto.staffdto.JobTittleDTO;
+import com.example.testproject1.model.dto.staffdto.JobTittleDtoListForMapping;
 import com.example.testproject1.model.staff.JobTittle;
+import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.service.dbservice.CrudService;
+import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,22 +35,25 @@ public class JobTittleController {
     @Autowired
     private CrudService<JobTittle> jobTittleCrudService;
 
+    @Autowired
+    private CrudFacadeService<JobTittleDTO> jobTittleCrudFacadeService;
+
     /**
      * Метод получения JobTittle
      */
     @GetMapping
-    public ResponseEntity<List<JobTittle>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(jobTittleCrudService.getAll());
+    public ResponseEntity<List<JobTittleDTO>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(jobTittleCrudFacadeService.getAll());
     }
 
     /**
      * Метод получения JobTittle по id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<JobTittle> getById(@PathVariable UUID id) {
-        Optional<JobTittle> jobTittle = jobTittleCrudService.getById(id);
-        if (jobTittle.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(jobTittle.get());
+    public ResponseEntity<JobTittleDTO> getById(@PathVariable UUID id) {
+        Optional<JobTittleDTO> jobTittleDTO = jobTittleCrudFacadeService.getById(id);
+        if (jobTittleDTO.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(jobTittleDTO.get());
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -57,25 +62,25 @@ public class JobTittleController {
      * Метод добавления JobTittle
      */
     @PostMapping("/add")
-    public ResponseEntity<JobTittle> addJobTittle(@Valid @RequestBody JobTittle jobTittle) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(jobTittleCrudService.create(jobTittle));
+    public ResponseEntity<JobTittleDTO> addJobTittle(@Valid @RequestBody JobTittleDTO jobTittleDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(jobTittleCrudFacadeService.create(jobTittleDTO));
     }
 
     /**
      * Метод сохранения List JobTittle
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody JobTittleListDTO jobTittleListDTO) {
-        jobTittleCrudService.saveAll(jobTittleListDTO.getJobList());
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Должности успешно сохранены"));
+    public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody JobTittleDtoListForMapping jobTittleDtoListForMapping) {
+        jobTittleCrudFacadeService.saveAll(jobTittleDtoListForMapping.getJobList());
+        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("JobTittles успешно сохранены"));
     }
 
     /**
      * Метод обновления JobTittle
      */
     @PutMapping("/update")
-    public ResponseEntity<JobTittle> update(@Valid @RequestBody JobTittle jobTittle) {
-        return ResponseEntity.status(HttpStatus.OK).body(jobTittleCrudService.update(jobTittle));
+    public ResponseEntity<JobTittleDTO> update(@Valid @RequestBody JobTittleDTO jobTittleDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(jobTittleCrudFacadeService.update(jobTittleDTO));
     }
 
     /**
@@ -84,7 +89,7 @@ public class JobTittleController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable UUID id) {
         jobTittleCrudService.deleteById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Должность успешно удалена"));
+        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("JobTittle успешно удалена"));
     }
 
     /**
@@ -93,6 +98,6 @@ public class JobTittleController {
     @DeleteMapping("/deleteAll")
     public ResponseEntity<MessageResponseDTO> deleteAll() {
         jobTittleCrudService.deleteAll();
-        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Должности успешно удалены"));
+        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("JobTittle успешно удалены"));
     }
 }

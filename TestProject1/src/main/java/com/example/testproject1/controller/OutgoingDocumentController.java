@@ -1,9 +1,9 @@
 package com.example.testproject1.controller;
 
 import com.example.testproject1.model.document.OutgoingDocument;
+import com.example.testproject1.model.dto.documentdto.OutgoingDocumentDTO;
+import com.example.testproject1.model.dto.documentdto.OutgoingDocumentDtoListForMapping;
 import com.example.testproject1.model.utility.MessageResponseDTO;
-import com.example.testproject1.model.dto.document.OutgoingDocumentDTO;
-import com.example.testproject1.model.dto.document.OutgoingDocumentDtoListForMapping;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;

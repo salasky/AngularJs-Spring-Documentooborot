@@ -1,6 +1,8 @@
 package com.example.testproject1.controller.advice;
 
 import com.example.testproject1.model.utility.RestErrorMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,14 +25,16 @@ import java.util.Map;
  */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
-public class RestResponseEntityExceptionHandler
-        extends ResponseEntityExceptionHandler {
+public class RestResponseEntityExceptionHandler {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RestResponseEntityExceptionHandler.class);
+
     /**
      * Метод перехвата RuntimeException
      */
     @ExceptionHandler({RuntimeException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public RestErrorMessage handleAccessRuntimeException(RuntimeException ex) {
+        LOGGER.error(ex.getMessage());
         return new RestErrorMessage(ex.getMessage());
     }
 
@@ -41,15 +44,16 @@ public class RestResponseEntityExceptionHandler
     @ExceptionHandler({Exception.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public RestErrorMessage handleAccessException(Exception ex) {
+        LOGGER.error(ex.getMessage());
         return new RestErrorMessage(ex.getMessage());
     }
 
     /**
      * Метод перехвата MethodArgumentNotValidException (Ошибки при валидации)
      */
-    @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                HttpHeaders headers, HttpStatus status, WebRequest request) {
+        LOGGER.error(ex.getMessage());
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
@@ -62,9 +66,9 @@ public class RestResponseEntityExceptionHandler
     /**
      * Метод для обнаружения внутренней ошибки сервера
      */
-    @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body,
                                                              HttpHeaders headers, HttpStatus status, WebRequest request) {
+        LOGGER.error(ex.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new RestErrorMessage(ex.getMessage()));
     }

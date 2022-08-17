@@ -1,6 +1,6 @@
 package com.example.testproject1.service.mappingutils;
 
-import com.example.testproject1.model.dto.staff.DepartmentDTO;
+import com.example.testproject1.model.dto.staffdto.DepartmentDTO;
 import com.example.testproject1.model.staff.Department;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -8,6 +8,11 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
+/**
+ * Интерфейс маппера для сущности {@link Department}
+ *
+ * @author smigranov
+ */
 @Mapper(builder = @Builder(disableBuilder = true), componentModel = "spring")
 public abstract class DepartmentMapper {
 

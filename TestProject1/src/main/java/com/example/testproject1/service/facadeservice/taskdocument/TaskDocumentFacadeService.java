@@ -1,7 +1,7 @@
 package com.example.testproject1.service.facadeservice.taskdocument;
 
 import com.example.testproject1.model.document.TaskDocument;
-import com.example.testproject1.model.dto.document.TaskDocumentDTO;
+import com.example.testproject1.model.dto.documentdto.TaskDocumentDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import com.example.testproject1.service.mappingutils.TaskDocumentMapper;
@@ -49,7 +49,7 @@ public class TaskDocumentFacadeService implements CrudFacadeService<TaskDocument
      */
     @Override
     public Optional<TaskDocumentDTO> getById(UUID id) {
-            return Optional.ofNullable(mapper.taskToDTO(taskDocumentCrudService.getById(id).get()));
+        return Optional.ofNullable(mapper.taskToDTO(taskDocumentCrudService.getById(id).get()));
     }
 
     /**

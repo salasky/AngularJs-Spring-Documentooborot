@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<organizationListDTO>
+<organizationListXmlDto>
     <organizationList>
         <organization id="9d5be39c-78ce-47a3-aead-54c2594383ee">
             <contactNumber>876543567</contactNumber>
@@ -20,4 +20,4 @@
             <supervisor>Potapov Igor</supervisor>
         </organization>
     </organizationList>
-</organizationListDTO>
+</organizationListXmlDto>

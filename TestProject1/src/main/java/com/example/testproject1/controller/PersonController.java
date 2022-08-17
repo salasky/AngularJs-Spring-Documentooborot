@@ -1,9 +1,9 @@
 package com.example.testproject1.controller;
 
-import com.example.testproject1.model.utility.MessageResponseDTO;
-import com.example.testproject1.model.dto.staff.PersonDTO;
-import com.example.testproject1.model.dto.staff.PersonDtoListForMapping;
+import com.example.testproject1.model.dto.staffdto.PersonDTO;
+import com.example.testproject1.model.dto.staffdto.PersonDtoListForMapping;
 import com.example.testproject1.model.staff.Person;
+import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 /**
  * Класс контроллер для сущности {@link Person}
  *

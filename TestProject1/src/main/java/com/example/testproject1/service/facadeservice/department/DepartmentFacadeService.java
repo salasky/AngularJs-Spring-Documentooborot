@@ -1,6 +1,6 @@
 package com.example.testproject1.service.facadeservice.department;
 
-import com.example.testproject1.model.dto.staff.DepartmentDTO;
+import com.example.testproject1.model.dto.staffdto.DepartmentDTO;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;

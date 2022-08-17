@@ -1,7 +1,6 @@
-package com.example.testproject1.model.dto.staff;
+package com.example.testproject1.model.dto.staffdto;
 
 import com.example.testproject1.model.staff.JobTittle;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -14,8 +13,8 @@ import java.util.List;
  *
  * @author smigranov
  */
-@XmlRootElement
-public class JobTittleListDTO {
+@XmlRootElement(name = "jobTittleListXmlDto")
+public class JobTittleListXmlDto {
     /**
      * List Job
      */
@@ -26,7 +25,6 @@ public class JobTittleListDTO {
     /**
      * Метод получения списка подразделений
      */
-    @JsonProperty("list")
     public List<JobTittle> getJobList() {
         return jobList;
     }

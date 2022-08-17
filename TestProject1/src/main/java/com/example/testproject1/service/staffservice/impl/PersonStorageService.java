@@ -1,6 +1,6 @@
 package com.example.testproject1.service.staffservice.impl;
 
-import com.example.testproject1.model.dto.staff.PersonListDTO;
+import com.example.testproject1.model.dto.staffdto.PersonListXmlDto;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.jaxb.JaxbReader;
 import com.example.testproject1.service.staffservice.StorageService;
@@ -39,8 +39,8 @@ public class PersonStorageService implements StorageService<Person> {
     @Override
     public List<Person> getList() {
         LOGGER.info("Begin find Person in xml file");
-        PersonListDTO personListDTO = jaxbReader.jaxbXMLToObject(FILE_NAME_PERSONS);
-        List<Person> personList = personListDTO.getPersonList();
+        PersonListXmlDto personListXmlDto = jaxbReader.jaxbXMLToObject(FILE_NAME_PERSONS);
+        List<Person> personList = personListXmlDto.getPersonList();
         LOGGER.info("Find result");
         return personList;
     }

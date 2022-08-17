@@ -1,7 +1,8 @@
-package com.example.testproject1.model.dto.staff;
+package com.example.testproject1.model.dto.staffdto;
 
 import com.example.testproject1.model.staff.Organization;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
@@ -10,9 +11,6 @@ import java.util.UUID;
  * @author smigranov
  */
 public class DepartmentDTO {
-    public DepartmentDTO() {
-    }
-
     /**
      * UUID департамента
      */
@@ -20,6 +18,7 @@ public class DepartmentDTO {
     /**
      * Полное название департамента
      */
+    @NotNull(message = "fullName не может быть null")
     private String fullName;
     /**
      * Короткое название департамента
@@ -36,6 +35,7 @@ public class DepartmentDTO {
     /**
      * Организация подразделения
      */
+    @NotNull(message = "organizationId не может быть null")
     private UUID organizationId;
 
     public String getFullName() {

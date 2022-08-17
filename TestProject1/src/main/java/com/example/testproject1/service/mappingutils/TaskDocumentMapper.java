@@ -1,7 +1,7 @@
 package com.example.testproject1.service.mappingutils;
 
 import com.example.testproject1.model.document.TaskDocument;
-import com.example.testproject1.model.dto.document.TaskDocumentDTO;
+import com.example.testproject1.model.dto.documentdto.TaskDocumentDTO;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

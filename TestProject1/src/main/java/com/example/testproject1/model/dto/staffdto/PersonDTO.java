@@ -1,5 +1,6 @@
-package com.example.testproject1.model.dto.staff;
+package com.example.testproject1.model.dto.staffdto;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.UUID;
 
@@ -20,14 +21,17 @@ public class PersonDTO {
     /**
      * Фамилия
      */
+    @NotNull(message = "secondName не может быть null")
     private String secondName;
     /**
      * Имя
      */
+    @NotNull(message = "firstName не может быть null")
     private String firstName;
     /**
      * Должность id
      */
+    @NotNull(message = "jobTittleId не может быть null")
     private UUID jobTittleId;
     /**
      * Ссылка на фото
@@ -36,6 +40,7 @@ public class PersonDTO {
     /**
      * Дата рождения
      */
+    @NotNull(message = "birthDay не может быть null")
     private Date birthDay;
     /**
      * Номер телефона
@@ -44,6 +49,7 @@ public class PersonDTO {
     /**
      * Департамент id работника
      */
+    @NotNull(message = "departmentId не может быть null")
     private UUID departmentId;
 
     public UUID getId() {

@@ -17,8 +17,6 @@ import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumen
 import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumentQueryHolder.BASE_DOCUMENT_DELETE_ALL_QUERY;
 import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumentQueryHolder.BASE_DOCUMENT_DELETE_BY_ID_QUERY;
 import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumentQueryHolder.BASE_DOCUMENT_UPDATE_QUERY;
-import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_DELETE_ALL_QUERY;
-import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumentQueryHolder.TASK_DOCUMENT_DELETE_BY_ID_QUERY;
 
 /**
  * Абстрактный класс для выполнения операций над {@link BaseDocument} в таблице base_document.
@@ -41,7 +39,7 @@ public abstract class AbstractBaseDocumentRepository {
             jdbcTemplate.update(BASE_DOCUMENT_CREATE_QUERY, baseDocument.getId().toString(), baseDocument.getName(), baseDocument.getText(),
                     baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка сохранения", e);
+            throw new DocflowRuntimeApplicationException("Ошибка сохранения BaseDocument", e);
         }
         return baseDocument;
     }
@@ -58,7 +56,7 @@ public abstract class AbstractBaseDocumentRepository {
                     baseDocument.getRegNumber(), baseDocument.getCreatingDate(), baseDocument.getAuthor().getId().toString(),
                     baseDocument.getId().toString());
         } catch (DataAccessException e) {
-            throw new DocflowRuntimeApplicationException("Ошибка обновления", e);
+            throw new DocflowRuntimeApplicationException("Ошибка обновления BaseDocument", e);
         }
         return baseDocument;
 
@@ -82,9 +80,11 @@ public abstract class AbstractBaseDocumentRepository {
             }
         });
     }
+
     public void deleteAll() {
         jdbcTemplate.update(BASE_DOCUMENT_DELETE_ALL_QUERY);
     }
+
     public void deleteById(UUID id) {
         jdbcTemplate.update(BASE_DOCUMENT_DELETE_BY_ID_QUERY, id.toString());
     }
