@@ -28,14 +28,10 @@ import org.springframework.stereotype.Service;
 public class GenerateDocumentServiceImpl implements GenerateDocumentService {
     private static final Logger LOGGER = LoggerFactory.getLogger(GenerateDocumentServiceImpl.class);
 
-    /**
-     * Объект класса {@link DocumentService}
-     */
+
     @Autowired
     private DocumentService documentService;
-    /**
-     * Инжектим все бины классов реализующих интерфейс Factory
-     */
+
     @Autowired
     private TaskDocumentFactory taskDocumentFactory;
     @Autowired

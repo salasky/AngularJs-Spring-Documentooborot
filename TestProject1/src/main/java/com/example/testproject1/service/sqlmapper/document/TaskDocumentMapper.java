@@ -1,4 +1,4 @@
-package com.example.testproject1.mapper.document;
+package com.example.testproject1.service.sqlmapper.document;
 
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.TaskDocument;
@@ -18,9 +18,7 @@ import java.util.UUID;
  */
 @Component
 public class TaskDocumentMapper implements RowMapper<TaskDocument> {
-    /**
-     * Бин маппер {@link BaseDocument}
-     */
+
     @Autowired
     private BaseDocumentMapper baseDocumentMapper;
     /**

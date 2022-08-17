@@ -4,7 +4,7 @@ import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.dto.document.TaskDocumentDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
-import com.example.testproject1.service.mappingutils.TaskDocumentMapperAbstract;
+import com.example.testproject1.service.mappingutils.TaskDocumentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,16 +19,12 @@ import java.util.UUID;
  */
 @Service
 public class TaskDocumentFacadeService implements CrudFacadeService<TaskDocumentDTO> {
-    /**
-     * Department сервис
-     */
+
     @Autowired
     private CrudService<TaskDocument> taskDocumentCrudService;
-    /**
-     * Mapper DTO to Entity, Entity to DTO
-     */
+
     @Autowired
-    private TaskDocumentMapperAbstract mapper;
+    private TaskDocumentMapper mapper;
 
     /**
      * {@inheritDoc}
@@ -53,11 +49,7 @@ public class TaskDocumentFacadeService implements CrudFacadeService<TaskDocument
      */
     @Override
     public Optional<TaskDocumentDTO> getById(UUID id) {
-        Optional<TaskDocument> optionalTaskDocument = taskDocumentCrudService.getById(id);
-        if (optionalTaskDocument.isPresent()) {
-            return Optional.ofNullable(mapper.taskToDTO(optionalTaskDocument.get()));
-        }
-        return Optional.empty();
+            return Optional.ofNullable(mapper.taskToDTO(taskDocumentCrudService.getById(id).get()));
     }
 
     /**

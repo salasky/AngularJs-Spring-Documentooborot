@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 import java.util.List;
 
 @Mapper(builder = @Builder(disableBuilder = true), componentModel = "spring")
-public abstract class PersonMapperAbstract {
+public abstract class PersonMapper {
     @Mapping(target = "jobTittleId", source = "person.jobTittle.id")
     @Mapping(target = "departmentId", source = "person.department.id")
     public abstract PersonDTO personToDTO(Person person);

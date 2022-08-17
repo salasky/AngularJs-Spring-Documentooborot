@@ -4,7 +4,7 @@ import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.document.TaskDocument;
-import com.example.testproject1.model.dto.ReportForJsonDTO;
+import com.example.testproject1.model.utility.ReportForJsonDTO;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.documentservice.GenerateReportService;
@@ -35,30 +35,19 @@ public class GenerateReportServiceImpl implements GenerateReportService {
      */
     private static final String SHORT_PATH = ClassLoader.getSystemClassLoader().getResource("").getPath();
     private static final Logger LOGGER = LoggerFactory.getLogger(GenerateReportServiceImpl.class);
-    /**
-     * Объект для библиотеки Fasterxml Jackson
-     * с настройками даты
-     */
+
     @Autowired
     private ObjectMapper objectMapper;
-    /**
-     * Бин CrudService
-     */
+
     @Autowired
     private CrudService<TaskDocument> taskDocumentService;
-    /**
-     * Бин CrudService
-     */
+
     @Autowired
     private CrudService<IncomingDocument> incomingDocumentService;
-    /**
-     * Бин CrudService
-     */
+
     @Autowired
     private CrudService<OutgoingDocument> outgoingDocumentService;
-    /**
-     * Бин CrudService
-     */
+
     @Autowired
     private CrudService<Person> personCrudService;
 

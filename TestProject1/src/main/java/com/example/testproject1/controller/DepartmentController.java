@@ -1,8 +1,8 @@
 package com.example.testproject1.controller;
 
-import com.example.testproject1.model.dto.MessageResponseDTO;
+import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.model.dto.staff.DepartmentDTO;
-import com.example.testproject1.model.dto.staff.DepartmentDTOListCRUD;
+import com.example.testproject1.model.dto.staff.DepartmentDtoListForMapping;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
@@ -31,19 +31,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/departments")
 public class DepartmentController {
-    /**
-     * Сервис для работы с Department
-     */
+
     @Autowired
     private CrudService<Department> departmentCrudService;
-    /**
-     * Фасадный Сервис для работы с Department
-     */
     @Autowired
     private CrudFacadeService<DepartmentDTO> departmentDTOCrudFacadeService;
 
     /**
-     * Метод получения сущностей
+     * Метод получения сущностей Department
      */
     @GetMapping
     public ResponseEntity<List<DepartmentDTO>> getAll() {
@@ -51,7 +46,7 @@ public class DepartmentController {
     }
 
     /**
-     * Метод получения сущности по id
+     * Метод получения сущности Department по id
      */
     @GetMapping("/{id}")
     public ResponseEntity<DepartmentDTO> getById(@PathVariable UUID id) {
@@ -63,7 +58,7 @@ public class DepartmentController {
     }
 
     /**
-     * Метод добавления сущности
+     * Метод добавления Department
      */
     @PostMapping("/add")
     public ResponseEntity<DepartmentDTO> addDepartment(@Valid @RequestBody DepartmentDTO departmentDTO) {
@@ -71,16 +66,16 @@ public class DepartmentController {
     }
 
     /**
-     * Метод сохранения List сущностей
+     * Метод сохранения List Department
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody DepartmentDTOListCRUD departmentDTOListCRUD) {
-        departmentDTOCrudFacadeService.saveAll(departmentDTOListCRUD.getDepartmentList());
+    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody DepartmentDtoListForMapping departmentDtoListForMapping) {
+        departmentDTOCrudFacadeService.saveAll(departmentDtoListForMapping.getDepartmentList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Подразделения успешно сохранены"));
     }
 
     /**
-     * Метод обновления сущностей
+     * Метод обновления Department
      */
     @PutMapping("/update")
     public ResponseEntity<DepartmentDTO> update(@Valid @RequestBody DepartmentDTO departmentDTO) {
@@ -88,19 +83,19 @@ public class DepartmentController {
     }
 
     /**
-     * Метод удаления сущности по id
+     * Метод удаления Department по id
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable UUID id) {
         departmentCrudService.deleteById(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Подразделение успешно удалено"));
+        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Подразделение успешно удалено"));
     }
 
     /**
-     * Метод удаления всех сущностей
+     * Метод удаления всех Department
      */
     @DeleteMapping("/deleteAll")
-    public ResponseEntity<MessageResponseDTO> deleteById() {
+    public ResponseEntity<MessageResponseDTO> deleteAll() {
         departmentCrudService.deleteAll();
         return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Подразделения успешно удалены"));
     }

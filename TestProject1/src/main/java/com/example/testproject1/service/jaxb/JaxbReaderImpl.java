@@ -19,9 +19,7 @@ import java.text.MessageFormat;
 @Service
 public class JaxbReaderImpl implements JaxbReader {
     private static final Logger LOGGER = LoggerFactory.getLogger(JaxbReaderImpl.class);
-    /**
-     * Бин jaxb context-а
-     */
+
     @Autowired
     private JAXBContext jaxbContext;
 

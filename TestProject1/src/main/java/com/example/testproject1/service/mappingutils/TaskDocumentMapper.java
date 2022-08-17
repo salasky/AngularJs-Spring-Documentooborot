@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 import java.util.List;
 
 @Mapper(builder = @Builder(disableBuilder = true), componentModel = "spring")
-public abstract class TaskDocumentMapperAbstract {
+public abstract class TaskDocumentMapper {
 
     @Mapping(target = "authorId", source = "taskDocument.author.id")
     @Mapping(target = "responsibleId", source = "taskDocument.responsible.id")

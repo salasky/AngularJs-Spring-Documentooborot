@@ -2,7 +2,7 @@ package com.example.testproject1.dao.jobtittle;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.mapper.staff.JobTittleMapper;
+import com.example.testproject1.service.sqlmapper.staff.JobTittleMapper;
 import com.example.testproject1.model.staff.JobTittle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,14 +34,10 @@ import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHo
 @Repository("JobTittleRepository")
 public class JobTittleRepository implements CrudRepository<JobTittle> {
     private static final Logger LOGGER = LoggerFactory.getLogger(JobTittleRepository.class);
-    /**
-     * Маппер для извлечения {@link JobTittle}
-     */
+
     @Autowired
     private JobTittleMapper jobTittleMapper;
-    /**
-     * Бин JdbcTemplate
-     */
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

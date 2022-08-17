@@ -1,6 +1,6 @@
 package com.example.testproject1.model.dto.document;
 
-import com.example.testproject1.model.document.TaskDocument;
+import com.example.testproject1.model.document.IncomingDocument;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
@@ -11,19 +11,19 @@ import java.util.List;
  *
  * @author smigranov
  */
-public class TaskListDTO {
+public class IncomingDocumentDtoListForMapping {
     /**
-     * List TaskDocument
+     * List IncomingDocument
      */
-    private final List<TaskDocumentDTO> taskDocumentList = new ArrayList<>();
+    private final List<IncomingDocumentDTO> incomingDocumentList = new ArrayList<>();
 
     /**
      * Метод получения списка IncomingDocument
      *
-     * @return {@link List} объектов {@link TaskDocument}
+     * @return {@link List} объектов {@link IncomingDocument}
      */
     @JsonProperty("list")
-    public List<TaskDocumentDTO> getTaskDocumentList() {
-        return taskDocumentList;
+    public List<IncomingDocumentDTO> getIncomingDocumentList() {
+        return incomingDocumentList;
     }
 }

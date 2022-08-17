@@ -2,7 +2,7 @@ package com.example.testproject1.dao.person;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.mapper.staff.PersonMapper;
+import com.example.testproject1.service.sqlmapper.staff.PersonMapper;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.staff.Person;
@@ -37,24 +37,16 @@ import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHo
 @Repository("PersonRepository")
 public class PersonRepository implements CrudRepository<Person> {
     private static final Logger LOGGER = LoggerFactory.getLogger(PersonRepository.class);
-    /**
-     * Бин JdbcTemplate
-     */
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    /**
-     * Маппер для извлечения {@link Person}
-     */
+
     @Autowired
     private PersonMapper personMapper;
-    /**
-     * Сервис для работы с {@link Department}
-     */
+
     @Autowired
     private CrudService<Department> departmentService;
-    /**
-     * Сервис для работы с {@link Department}
-     */
+
     @Autowired
     private CrudService<JobTittle> jobTittleService;
 

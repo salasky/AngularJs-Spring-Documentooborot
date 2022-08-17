@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 import java.util.List;
 
 @Mapper(builder = @Builder(disableBuilder = true), componentModel = "spring")
-public abstract class OutgoingDocumentMapperAbsract {
+public abstract class OutgoingDocumentMapper {
 
     @Mapping(target = "authorId", source = "outgoingDocument.author.id")
     @Mapping(target = "senderId", source = "outgoingDocument.sender.id")

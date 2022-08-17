@@ -1,4 +1,4 @@
-package com.example.testproject1.mapper.staff;
+package com.example.testproject1.service.sqlmapper.staff;
 
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.staff.Organization;
@@ -17,9 +17,7 @@ import java.util.UUID;
  */
 @Component
 public class DepartmentMapper implements RowMapper<Department> {
-    /**
-     * Бин маппер {@link Organization}
-     */
+
     @Autowired
     private OrganizationMapper organizationMapper;
     /**

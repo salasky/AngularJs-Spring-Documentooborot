@@ -17,14 +17,10 @@ import java.util.Map;
  */
 @Configuration
 public class XmlImportConfiguration {
-    /**
-     * Лист StorageService для получения Staff сущностей из xml
-     */
+
     @Autowired
     private List<StorageService> storageServiceList;
-    /**
-     * Лист CrudService для сохранения Staff сущностей из xml в базу данных
-     */
+
     @Autowired
     private List<CrudService> crudServiceList;
 

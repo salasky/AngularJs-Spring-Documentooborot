@@ -3,6 +3,7 @@ package com.example.testproject1.model.dto.document;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.UUID;
 
@@ -15,14 +16,17 @@ public class IncomingDocumentDTO extends BaseDocumentDTO {
     /**
      * отправитель id
      */
+    @NotNull
     private UUID senderId;
     /**
      * адресат id
      */
+    @NotNull
     private UUID destinationId;
     /**
      * исходящий номер
      */
+    @NotNull
     private Long number;
     /**
      * исходящая дата регистрации

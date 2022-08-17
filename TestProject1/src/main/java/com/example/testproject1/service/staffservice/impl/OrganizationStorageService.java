@@ -27,9 +27,7 @@ public class OrganizationStorageService implements StorageService<Organization> 
      * Имя файла для jaxb анмаршалинга
      */
     private final String FILE_NAME = "organizations.xml";
-    /**
-     * Бин для чтения информации из xml файла
-     */
+
     @Autowired
     private JaxbReader jaxbReader;
 

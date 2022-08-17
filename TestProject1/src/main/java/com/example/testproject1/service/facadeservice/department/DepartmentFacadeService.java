@@ -4,7 +4,7 @@ import com.example.testproject1.model.dto.staff.DepartmentDTO;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
-import com.example.testproject1.service.mappingutils.DepartmentMapperAbstract;
+import com.example.testproject1.service.mappingutils.DepartmentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,16 +19,12 @@ import java.util.UUID;
  */
 @Service
 public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO> {
-    /**
-     * Department сервис
-     */
+
     @Autowired
     private CrudService<Department> departmentCrudService;
-    /**
-     * Mapper DTO to Entity, Entity to DTO
-     */
+
     @Autowired
-    private DepartmentMapperAbstract mapper;
+    private DepartmentMapper mapper;
 
     /**
      * {@inheritDoc}
@@ -53,11 +49,7 @@ public class DepartmentFacadeService implements CrudFacadeService<DepartmentDTO>
      */
     @Override
     public Optional<DepartmentDTO> getById(UUID id) {
-        Optional<Department> optionalDepartment = departmentCrudService.getById(id);
-        if (optionalDepartment.isPresent()) {
-            return Optional.ofNullable(mapper.departmentToDTO(optionalDepartment.get()));
-        }
-        return Optional.empty();
+        return Optional.ofNullable(mapper.departmentToDTO(departmentCrudService.getById(id).get()));
     }
 
     /**

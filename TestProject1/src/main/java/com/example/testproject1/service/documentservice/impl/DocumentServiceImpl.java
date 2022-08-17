@@ -18,19 +18,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class DocumentServiceImpl implements DocumentService {
 
-    /**
-     * Бин сервиса для работы с поручениями
-     */
+
     @Autowired
     private CrudService<TaskDocument> taskDocumentService;
-    /**
-     * Бин сервиса для работы с входящими документами
-     */
+
     @Autowired
     private CrudService<IncomingDocument> incomingDocumentService;
-    /**
-     * Бин сервиса для работы с исходящими документами
-     */
+
     @Autowired
     private CrudService<OutgoingDocument> outgoingDocumentService;
 

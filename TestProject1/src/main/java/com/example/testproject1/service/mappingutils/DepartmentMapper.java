@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 import java.util.List;
 
 @Mapper(builder = @Builder(disableBuilder = true), componentModel = "spring")
-public abstract class DepartmentMapperAbstract {
+public abstract class DepartmentMapper {
 
     @Mapping(target = "organizationId", source = "department.organization.id")
     public abstract DepartmentDTO departmentToDTO(Department department);

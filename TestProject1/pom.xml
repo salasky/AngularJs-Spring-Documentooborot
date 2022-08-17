@@ -24,6 +24,8 @@
         <jakarta.persistence.version>2.2.3</jakarta.persistence.version>
         <org.liquibase.version>4.10.0</org.liquibase.version>
         <org.junit.jupiter.version>5.8.1</org.junit.jupiter.version>
+        <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
+        <org.mockito.version>4.6.1</org.mockito.version>
     </properties>
     <dependencies>
         <dependency>
@@ -121,8 +123,16 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.5.2.Final</version>
+            <version>${org.mapstruct.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${org.mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>

@@ -4,7 +4,7 @@ import com.example.testproject1.model.dto.staff.PersonDTO;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
-import com.example.testproject1.service.mappingutils.PersonMapperAbstract;
+import com.example.testproject1.service.mappingutils.PersonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,16 +19,12 @@ import java.util.UUID;
  */
 @Service
 public class PersonFacadeService implements CrudFacadeService<PersonDTO> {
-    /**
-     * Person сервис
-     */
+
     @Autowired
     private CrudService<Person> personCrudService;
-    /**
-     * Mapper Entity to DTO
-     */
+
     @Autowired
-    private PersonMapperAbstract mapper;
+    private PersonMapper mapper;
 
     /**
      * {@inheritDoc}
@@ -53,11 +49,7 @@ public class PersonFacadeService implements CrudFacadeService<PersonDTO> {
      */
     @Override
     public Optional<PersonDTO> getById(UUID id) {
-        Optional<Person> optionalPerson = personCrudService.getById(id);
-        if (optionalPerson.isPresent()) {
-            return Optional.ofNullable(mapper.personToDTO(optionalPerson.get()));
-        }
-        return Optional.empty();
+        return Optional.ofNullable(mapper.personToDTO(personCrudService.getById(id).get()));
     }
 
     /**

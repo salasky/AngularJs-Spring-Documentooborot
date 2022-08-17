@@ -18,14 +18,10 @@ import org.springframework.shell.standard.ShellOption;
 @ShellComponent
 public class DocumentShell {
     private static final Logger LOGGER = LoggerFactory.getLogger(DocumentShell.class);
-    /**
-     * Autowired бина класса {@link GenerateDocumentService}
-     */
+
     @Autowired
     private GenerateDocumentService generateDocumentService;
-    /**
-     * Autowired бина класса {@link GenerateReportService}
-     */
+
     @Autowired
     private GenerateReportService generateReportService;
 

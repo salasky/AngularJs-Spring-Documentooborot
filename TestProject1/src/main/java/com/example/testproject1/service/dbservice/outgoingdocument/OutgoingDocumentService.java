@@ -25,9 +25,7 @@ import java.util.UUID;
 @Service("OutgoingDocumentService")
 public class OutgoingDocumentService implements CrudService<OutgoingDocument> {
     private static final Logger LOGGER = LoggerFactory.getLogger(OutgoingDocumentService.class);
-    /**
-     * Бин {@link CrudRepository}
-     */
+
     @Autowired
     private CrudRepository<OutgoingDocument> outgoingDocumentRepository;
 

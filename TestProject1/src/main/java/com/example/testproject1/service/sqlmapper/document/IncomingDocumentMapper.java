@@ -1,4 +1,4 @@
-package com.example.testproject1.mapper.document;
+package com.example.testproject1.service.sqlmapper.document;
 
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.document.IncomingDocument;
@@ -18,9 +18,7 @@ import java.util.UUID;
  */
 @Component
 public class IncomingDocumentMapper implements RowMapper<IncomingDocument> {
-    /**
-     * Бин маппер {@link BaseDocument}
-     */
+
     @Autowired
     private BaseDocumentMapper baseDocumentMapper;
     /**

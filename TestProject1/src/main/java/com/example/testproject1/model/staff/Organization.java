@@ -38,10 +38,6 @@ public class Organization extends Staff {
     @Column(name = "contact_number")
     private List<String> contactNumber;
 
-    public UUID getId() {
-        return super.getId();
-    }
-
     @XmlElement(name = "fullName")
     public String getFullName() {
         return fullName;

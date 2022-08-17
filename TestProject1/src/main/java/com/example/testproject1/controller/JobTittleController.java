@@ -1,6 +1,6 @@
 package com.example.testproject1.controller;
 
-import com.example.testproject1.model.dto.MessageResponseDTO;
+import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.model.dto.staff.JobTittleListDTO;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -29,14 +29,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/jobs")
 public class JobTittleController {
-    /**
-     * Сервис для работы с jobTittle
-     */
+
     @Autowired
     private CrudService<JobTittle> jobTittleCrudService;
 
     /**
-     * Метод получения сущностей
+     * Метод получения JobTittle
      */
     @GetMapping
     public ResponseEntity<List<JobTittle>> getAll() {
@@ -44,7 +42,7 @@ public class JobTittleController {
     }
 
     /**
-     * Метод получения сущности по id
+     * Метод получения JobTittle по id
      */
     @GetMapping("/{id}")
     public ResponseEntity<JobTittle> getById(@PathVariable UUID id) {
@@ -56,15 +54,15 @@ public class JobTittleController {
     }
 
     /**
-     * Метод добавления сущности
+     * Метод добавления JobTittle
      */
     @PostMapping("/add")
-    public ResponseEntity<JobTittle> addOrganization(@Valid @RequestBody JobTittle jobTittle) {
+    public ResponseEntity<JobTittle> addJobTittle(@Valid @RequestBody JobTittle jobTittle) {
         return ResponseEntity.status(HttpStatus.CREATED).body(jobTittleCrudService.create(jobTittle));
     }
 
     /**
-     * Метод сохранения List сущностей
+     * Метод сохранения List JobTittle
      */
     @PostMapping("/saveAll")
     public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody JobTittleListDTO jobTittleListDTO) {
@@ -73,7 +71,7 @@ public class JobTittleController {
     }
 
     /**
-     * Метод обновления сущностей
+     * Метод обновления JobTittle
      */
     @PutMapping("/update")
     public ResponseEntity<JobTittle> update(@Valid @RequestBody JobTittle jobTittle) {
@@ -81,19 +79,19 @@ public class JobTittleController {
     }
 
     /**
-     * Метод удаления сущности по id
+     * Метод удаления JobTittle по id
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable UUID id) {
         jobTittleCrudService.deleteById(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Должность успешно удалена"));
+        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Должность успешно удалена"));
     }
 
     /**
-     * Метод удаления всех сущностей
+     * Метод удаления всех JobTittle
      */
     @DeleteMapping("/deleteAll")
-    public ResponseEntity<MessageResponseDTO> deleteById() {
+    public ResponseEntity<MessageResponseDTO> deleteAll() {
         jobTittleCrudService.deleteAll();
         return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Должности успешно удалены"));
     }

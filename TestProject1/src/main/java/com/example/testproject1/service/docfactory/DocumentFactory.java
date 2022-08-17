@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author smigranov
  */
 public abstract class DocumentFactory<T extends BaseDocument.BaseDocumentBuilder> implements Factory<BaseDocument> {
-    /**
-     * Autowired бина {@link Randomizer}
-     */
+
     @Autowired
     protected Randomizer randomizer;
 

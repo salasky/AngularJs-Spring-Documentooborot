@@ -2,7 +2,7 @@ package com.example.testproject1.dao.department;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.mapper.staff.DepartmentMapper;
+import com.example.testproject1.service.sqlmapper.staff.DepartmentMapper;
 import com.example.testproject1.model.staff.Department;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,14 +34,10 @@ import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHo
 @Repository("DepartmentRepository")
 public class DepartmentRepository implements CrudRepository<Department> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentRepository.class);
-    /**
-     * Бин JdbcTemplate
-     */
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    /**
-     * Маппер для извлечения {@link Department}
-     */
+
     @Autowired
     private DepartmentMapper departmentMapper;
 

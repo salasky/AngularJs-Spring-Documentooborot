@@ -22,9 +22,7 @@ import java.util.UUID;
  */
 @Service
 public class Randomizer {
-    /**
-     * Бин для получения списка пользователей
-     */
+
     @Autowired
     private StorageService<Person> personStorageService;
     /**

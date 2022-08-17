@@ -24,9 +24,7 @@ import java.util.UUID;
 @Service("TaskDocumentService")
 public class TaskDocumentService implements CrudService<TaskDocument> {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskDocumentService.class);
-    /**
-     * Бин {@link CrudRepository}
-     */
+
     @Autowired
     private CrudRepository<TaskDocument> taskDocumentRepository;
 

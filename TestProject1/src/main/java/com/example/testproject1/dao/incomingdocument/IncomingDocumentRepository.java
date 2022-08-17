@@ -3,7 +3,7 @@ package com.example.testproject1.dao.incomingdocument;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.AbstractBaseDocumentRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.mapper.document.IncomingDocumentMapper;
+import com.example.testproject1.service.sqlmapper.document.IncomingDocumentMapper;
 import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -35,20 +35,12 @@ import static com.example.testproject1.queryholder.incomingdocumentquery.Incomin
 @Repository("IncomingDocumentRepository")
 public class IncomingDocumentRepository extends AbstractBaseDocumentRepository implements CrudRepository<IncomingDocument> {
 
-    /**
-     * Бин JdbcTemplate
-     */
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    /**
-     * Маппер для извлечения {@link IncomingDocument}
-     */
+
     @Autowired
     private IncomingDocumentMapper incomingDocumentMapper;
 
-    /**
-     * Сервис для работы с {@link Person}
-     */
     @Autowired
     private CrudService<Person> personService;
 
@@ -114,6 +106,7 @@ public class IncomingDocumentRepository extends AbstractBaseDocumentRepository i
     @Override
     public void deleteAll() {
         jdbcTemplate.update(INCOMING_DOCUMENT_DELETE_ALL_QUERY);
+        super.deleteAll();
     }
 
     /**
@@ -122,6 +115,7 @@ public class IncomingDocumentRepository extends AbstractBaseDocumentRepository i
     @Override
     public void deleteById(UUID id) {
         jdbcTemplate.update(INCOMING_DOCUMENT_DELETE_BY_ID_QUERY, id.toString());
+        super.deleteById(id);
     }
 
     /**

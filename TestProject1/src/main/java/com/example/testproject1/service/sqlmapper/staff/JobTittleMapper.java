@@ -1,4 +1,4 @@
-package com.example.testproject1.mapper.staff;
+package com.example.testproject1.service.sqlmapper.staff;
 
 import com.example.testproject1.model.staff.JobTittle;
 import org.springframework.jdbc.core.RowMapper;

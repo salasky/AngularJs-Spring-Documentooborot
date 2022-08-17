@@ -27,9 +27,7 @@ import java.util.UUID;
 public class DepartmentService implements CrudService<Department> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentService.class);
-    /**
-     * Бин {@link CrudRepository}
-     */
+
     @Autowired
     private CrudRepository<Department> departmentRepository;
 

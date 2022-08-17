@@ -11,9 +11,14 @@ import java.sql.BatchUpdateException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumentQueryHolder.BASE_DOCUMENT_CREATE_QUERY;
+import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumentQueryHolder.BASE_DOCUMENT_DELETE_ALL_QUERY;
+import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumentQueryHolder.BASE_DOCUMENT_DELETE_BY_ID_QUERY;
 import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumentQueryHolder.BASE_DOCUMENT_UPDATE_QUERY;
+import static com.example.testproject1.queryholder.staffqueryholder.StaffQueryHolder.DEPARTMENT_DELETE_ALL_QUERY;
+import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumentQueryHolder.TASK_DOCUMENT_DELETE_BY_ID_QUERY;
 
 /**
  * Абстрактный класс для выполнения операций над {@link BaseDocument} в таблице base_document.
@@ -22,9 +27,6 @@ import static com.example.testproject1.queryholder.basedocumentquery.BaseDocumen
  */
 public abstract class AbstractBaseDocumentRepository {
 
-    /**
-     * Бин JdbcTemplate
-     */
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -79,6 +81,11 @@ public abstract class AbstractBaseDocumentRepository {
                 return entityList.size();
             }
         });
-
+    }
+    public void deleteAll() {
+        jdbcTemplate.update(BASE_DOCUMENT_DELETE_ALL_QUERY);
+    }
+    public void deleteById(UUID id) {
+        jdbcTemplate.update(BASE_DOCUMENT_DELETE_BY_ID_QUERY, id.toString());
     }
 }

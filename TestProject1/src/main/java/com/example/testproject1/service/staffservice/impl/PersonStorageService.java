@@ -27,9 +27,7 @@ public class PersonStorageService implements StorageService<Person> {
      */
     private final String FILE_NAME_PERSONS = "persons.xml";
 
-    /**
-     * Бин для чтения информации из xml файла
-     */
+
     @Autowired
     private JaxbReader jaxbReader;
 

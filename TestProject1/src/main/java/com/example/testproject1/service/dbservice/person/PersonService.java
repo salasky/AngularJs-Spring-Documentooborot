@@ -26,9 +26,7 @@ import java.util.UUID;
 @Order(value = 4)
 public class PersonService implements CrudService<Person> {
     private static final Logger LOGGER = LoggerFactory.getLogger(PersonService.class);
-    /**
-     * Бин {@link CrudRepository}
-     */
+
     @Autowired
     private CrudRepository<Person> personRepository;
 

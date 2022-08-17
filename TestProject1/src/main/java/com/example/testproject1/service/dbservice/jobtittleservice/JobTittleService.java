@@ -25,9 +25,7 @@ import java.util.UUID;
 @Service("JobTittleService")
 public class JobTittleService implements CrudService<JobTittle> {
     private static final Logger LOGGER = LoggerFactory.getLogger(JobTittleService.class);
-    /**
-     * Бин {@link CrudRepository}
-     */
+
     @Autowired
     private CrudRepository<JobTittle> jobTittleRepository;
 

@@ -1,4 +1,4 @@
-package com.example.testproject1.mapper.document;
+package com.example.testproject1.service.sqlmapper.document;
 
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Person;

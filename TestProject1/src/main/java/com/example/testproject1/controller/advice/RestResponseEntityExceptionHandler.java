@@ -1,6 +1,6 @@
 package com.example.testproject1.controller.advice;
 
-import com.example.testproject1.model.dto.RestErrorDto;
+import com.example.testproject1.model.utility.RestErrorMessage;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -31,8 +31,8 @@ public class RestResponseEntityExceptionHandler
      */
     @ExceptionHandler({RuntimeException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public RestErrorDto handleAccessRuntimeException(RuntimeException ex) {
-        return new RestErrorDto(ex.getMessage());
+    public RestErrorMessage handleAccessRuntimeException(RuntimeException ex) {
+        return new RestErrorMessage(ex.getMessage());
     }
 
     /**
@@ -40,8 +40,8 @@ public class RestResponseEntityExceptionHandler
      */
     @ExceptionHandler({Exception.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public RestErrorDto handleAccessException(Exception ex) {
-        return new RestErrorDto(ex.getMessage());
+    public RestErrorMessage handleAccessException(Exception ex) {
+        return new RestErrorMessage(ex.getMessage());
     }
 
     /**
@@ -56,7 +56,7 @@ public class RestResponseEntityExceptionHandler
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RestErrorDto(errors.toString()));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RestErrorMessage(errors.toString()));
     }
 
     /**
@@ -66,7 +66,7 @@ public class RestResponseEntityExceptionHandler
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body,
                                                              HttpHeaders headers, HttpStatus status, WebRequest request) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new RestErrorDto(ex.getMessage()));
+                .body(new RestErrorMessage(ex.getMessage()));
     }
 
 }

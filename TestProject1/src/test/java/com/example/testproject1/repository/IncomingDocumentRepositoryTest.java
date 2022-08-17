@@ -1,4 +1,4 @@
-package com.example.testproject1;
+package com.example.testproject1.repository;
 
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;

@@ -1,4 +1,4 @@
-package com.example.testproject1.model.dto;
+package com.example.testproject1.model.utility;
 
 import com.example.testproject1.model.document.BaseDocument;
 import com.example.testproject1.model.staff.Person;

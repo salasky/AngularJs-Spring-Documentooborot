@@ -1,9 +1,9 @@
 package com.example.testproject1.controller;
 
 import com.example.testproject1.model.document.TaskDocument;
-import com.example.testproject1.model.dto.MessageResponseDTO;
+import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.model.dto.document.TaskDocumentDTO;
-import com.example.testproject1.model.dto.document.TaskListDTO;
+import com.example.testproject1.model.dto.document.TaskDocumentDtoListForMapping;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,23 +22,23 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+/**
+ * Класс контроллер для сущности {@link TaskDocument}
+ *
+ * @author smigranov
+ */
 @RestController
 @RequestMapping("/taskdocuments")
 public class TaskDocumentController {
-    /**
-     * Сервис для работы с taskdocument
-     */
+
     @Autowired
     private CrudService<TaskDocument> taskDocumentCrudService;
-    /**
-     * Фасадный Сервис для работы с TaskDocument
-     */
+
     @Autowired
     private CrudFacadeService<TaskDocumentDTO> taskDocumentDTOFacadeService;
 
     /**
-     * Метод получения сущностей
+     * Метод получения TaskDocuments
      */
     @GetMapping
     public ResponseEntity<List<TaskDocumentDTO>> getAll() {
@@ -46,7 +46,7 @@ public class TaskDocumentController {
     }
 
     /**
-     * Метод получения сущности по id
+     * Метод получения TaskDocument по id
      */
     @GetMapping("/{id}")
     public ResponseEntity<TaskDocumentDTO> getById(@PathVariable UUID id) {
@@ -58,24 +58,24 @@ public class TaskDocumentController {
     }
 
     /**
-     * Метод добавления сущности
+     * Метод добавления TaskDocument
      */
     @PostMapping("/add")
-    public ResponseEntity<TaskDocumentDTO> addOrganization(@Valid @RequestBody TaskDocumentDTO taskDocument) {
+    public ResponseEntity<TaskDocumentDTO> addTaskDocument(@Valid @RequestBody TaskDocumentDTO taskDocument) {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskDocumentDTOFacadeService.create(taskDocument));
     }
 
     /**
-     * Метод сохранения List сущностей
+     * Метод сохранения List TaskDocument
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody TaskListDTO taskListDTO) {
-        taskDocumentDTOFacadeService.saveAll(taskListDTO.getTaskDocumentList());
+    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody TaskDocumentDtoListForMapping taskDocumentDtoListForMapping) {
+        taskDocumentDTOFacadeService.saveAll(taskDocumentDtoListForMapping.getTaskDocumentList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Поручения успешно сохранены"));
     }
 
     /**
-     * Метод обновления сущностей
+     * Метод обновления TaskDocument
      */
     @PutMapping("/update")
     public ResponseEntity<TaskDocumentDTO> update(@Valid @RequestBody TaskDocumentDTO taskDocumentDTO) {
@@ -83,19 +83,19 @@ public class TaskDocumentController {
     }
 
     /**
-     * Метод удаления сущности по id
+     * Метод удаления TaskDocument по id
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable UUID id) {
         taskDocumentCrudService.deleteById(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("TaskDocument успешно удален"));
+        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("TaskDocument успешно удален"));
     }
 
     /**
-     * Метод удаления всех сущностей
+     * Метод удаления всех TaskDocument
      */
     @DeleteMapping("/deleteAll")
-    public ResponseEntity<MessageResponseDTO> deleteById() {
+    public ResponseEntity<MessageResponseDTO> deleteAll() {
         taskDocumentCrudService.deleteAll();
         return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("TaskDocuments успешно удалены"));
     }

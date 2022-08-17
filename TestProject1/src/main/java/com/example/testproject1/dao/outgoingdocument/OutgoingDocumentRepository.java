@@ -3,7 +3,7 @@ package com.example.testproject1.dao.outgoingdocument;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.AbstractBaseDocumentRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.mapper.document.OutgoingDocumentMapper;
+import com.example.testproject1.service.sqlmapper.document.OutgoingDocumentMapper;
 import com.example.testproject1.model.document.OutgoingDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -33,14 +33,9 @@ import static com.example.testproject1.queryholder.outgoingdocumentquery.Outgoin
 @Repository("OutgoingDocumentRepository")
 public class OutgoingDocumentRepository extends AbstractBaseDocumentRepository implements CrudRepository<OutgoingDocument> {
 
-    /**
-     * Бин JdbcTemplate
-     */
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    /**
-     * Маппер для извлечения {@link OutgoingDocument}
-     */
+
     @Autowired
     private OutgoingDocumentMapper outgoingDocumentMapper;
 
@@ -104,6 +99,7 @@ public class OutgoingDocumentRepository extends AbstractBaseDocumentRepository i
     @Override
     public void deleteAll() {
         jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_ALL_QUERY);
+        super.deleteAll();
     }
 
     /**
@@ -112,6 +108,7 @@ public class OutgoingDocumentRepository extends AbstractBaseDocumentRepository i
     @Override
     public void deleteById(UUID id) {
         jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_BY_ID_QUERY, id.toString());
+        super.deleteById(id);
     }
 
     /**

@@ -1,8 +1,8 @@
 package com.example.testproject1.controller;
 
-import com.example.testproject1.model.dto.MessageResponseDTO;
+import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.model.dto.staff.PersonDTO;
-import com.example.testproject1.model.dto.staff.PersonDtoListCRUD;
+import com.example.testproject1.model.dto.staff.PersonDtoListForMapping;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
@@ -22,24 +22,23 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+/**
+ * Класс контроллер для сущности {@link Person}
+ *
+ * @author smigranov
+ */
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
-    /**
-     * Сервис для работы с person
-     */
+
     @Autowired
     private CrudService<Person> personCrudService;
-    /**
-     * Фасадный Сервис для работы с Person
-     */
 
     @Autowired
     private CrudFacadeService<PersonDTO> personDTOPersonCrudFacadeService;
 
     /**
-     * Метод получения сущностей
+     * Метод получения Persons
      */
     @GetMapping
     public ResponseEntity<List<PersonDTO>> getAll() {
@@ -47,7 +46,7 @@ public class PersonController {
     }
 
     /**
-     * Метод получения сущности по id
+     * Метод получения Person по id
      */
     @GetMapping("/{id}")
     public ResponseEntity<PersonDTO> getById(@PathVariable UUID id) {
@@ -59,24 +58,24 @@ public class PersonController {
     }
 
     /**
-     * Метод добавления сущности
+     * Метод добавления Person
      */
     @PostMapping("/add")
-    public ResponseEntity<PersonDTO> addOrganization(@Valid @RequestBody PersonDTO personDTO) {
+    public ResponseEntity<PersonDTO> addPerson(@Valid @RequestBody PersonDTO personDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(personDTOPersonCrudFacadeService.create(personDTO));
     }
 
     /**
-     * Метод сохранения List сущностей
+     * Метод сохранения List Person
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody PersonDtoListCRUD personDtoListCRUD) {
-        personDTOPersonCrudFacadeService.saveAll(personDtoListCRUD.getPersonList());
+    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody PersonDtoListForMapping personDtoListForMapping) {
+        personDTOPersonCrudFacadeService.saveAll(personDtoListForMapping.getPersonList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Persons успешно сохранены"));
     }
 
     /**
-     * Метод обновления сущностей
+     * Метод обновления Person
      */
     @PutMapping("/update")
     public ResponseEntity<PersonDTO> update(@Valid @RequestBody PersonDTO personDTO) {
@@ -84,19 +83,19 @@ public class PersonController {
     }
 
     /**
-     * Метод удаления сущности по id
+     * Метод удаления Person по id
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable UUID id) {
         personCrudService.deleteById(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Person успешно удален"));
+        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Person успешно удален"));
     }
 
     /**
-     * Метод удаления всех сущностей
+     * Метод удаления всех Person
      */
     @DeleteMapping("/deleteAll")
-    public ResponseEntity<MessageResponseDTO> deleteById() {
+    public ResponseEntity<MessageResponseDTO> deleteAll() {
         personCrudService.deleteAll();
         return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Persons успешно удалены"));
     }

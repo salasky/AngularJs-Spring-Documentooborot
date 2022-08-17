@@ -4,7 +4,7 @@ import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.dto.document.OutgoingDocumentDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
-import com.example.testproject1.service.mappingutils.OutgoingDocumentMapperAbsract;
+import com.example.testproject1.service.mappingutils.OutgoingDocumentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,16 +19,12 @@ import java.util.UUID;
  */
 @Service
 public class OutgoingDocumentFacadeService implements CrudFacadeService<OutgoingDocumentDTO> {
-    /**
-     * OutgoingDocument сервис
-     */
+
     @Autowired
     private CrudService<OutgoingDocument> outgoingDocumentCrudService;
-    /**
-     * Mapper DTO to Entity, Entity to DTO
-     */
+
     @Autowired
-    private OutgoingDocumentMapperAbsract mapper;
+    private OutgoingDocumentMapper mapper;
 
     /**
      * {@inheritDoc}
@@ -53,11 +49,7 @@ public class OutgoingDocumentFacadeService implements CrudFacadeService<Outgoing
      */
     @Override
     public Optional<OutgoingDocumentDTO> getById(UUID id) {
-        Optional<OutgoingDocument> optionalOutgoingDocument = outgoingDocumentCrudService.getById(id);
-        if (optionalOutgoingDocument.isPresent()) {
-            return Optional.ofNullable(mapper.outgoingToDTO(optionalOutgoingDocument.get()));
-        }
-        return Optional.empty();
+        return Optional.ofNullable(mapper.outgoingToDTO(outgoingDocumentCrudService.getById(id).get()));
     }
 
     /**

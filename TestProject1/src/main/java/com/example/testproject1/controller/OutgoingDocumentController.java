@@ -1,10 +1,9 @@
 package com.example.testproject1.controller;
 
-import com.example.testproject1.exception.DocflowRuntimeApplicationException;
 import com.example.testproject1.model.document.OutgoingDocument;
-import com.example.testproject1.model.dto.MessageResponseDTO;
+import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.model.dto.document.OutgoingDocumentDTO;
-import com.example.testproject1.model.dto.document.OutgoingListDTO;
+import com.example.testproject1.model.dto.document.OutgoingDocumentDtoListForMapping;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,19 +31,15 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/outgoingdocuments")
 public class OutgoingDocumentController {
-    /**
-     * Сервис для работы с OutgoingDocument
-     */
+
     @Autowired
     private CrudService<OutgoingDocument> outgoingDocumentCrudService;
-    /**
-     * Фасадный Сервис для работы с OutgoingDocument
-     */
+
     @Autowired
     private CrudFacadeService<OutgoingDocumentDTO> outgoingDocumentDTOFacadeService;
 
     /**
-     * Метод получения сущностей
+     * Метод получения OutgoingDocuments
      */
     @GetMapping
     public ResponseEntity<List<OutgoingDocumentDTO>> getAll() {
@@ -52,7 +47,7 @@ public class OutgoingDocumentController {
     }
 
     /**
-     * Метод получения сущности по id
+     * Метод получения OutgoingDocument по id
      */
     @GetMapping("/{id}")
     public ResponseEntity<OutgoingDocumentDTO> getById(@PathVariable UUID id) {
@@ -64,24 +59,24 @@ public class OutgoingDocumentController {
     }
 
     /**
-     * Метод добавления сущности
+     * Метод добавления OutgoingDocument
      */
     @PostMapping("/add")
-    public ResponseEntity<OutgoingDocumentDTO> addOrganization(@Valid @RequestBody OutgoingDocumentDTO outgoingDocumentDTO) {
+    public ResponseEntity<OutgoingDocumentDTO> addOutgoingDocument(@Valid @RequestBody OutgoingDocumentDTO outgoingDocumentDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(outgoingDocumentDTOFacadeService.create(outgoingDocumentDTO));
     }
 
     /**
-     * Метод сохранения List сущностей
+     * Метод сохранения List OutgoingDocument
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody OutgoingListDTO outgoingListDTO) {
-        outgoingDocumentDTOFacadeService.saveAll(outgoingListDTO.getOutgoingDocuments());
+    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody OutgoingDocumentDtoListForMapping outgoingDocumentDtoListForMapping) {
+        outgoingDocumentDTOFacadeService.saveAll(outgoingDocumentDtoListForMapping.getOutgoingDocuments());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Исходящие документы успешно сохранены"));
     }
 
     /**
-     * Метод обновления сущностей
+     * Метод обновления OutgoingDocument
      */
     @PutMapping("/update")
     public ResponseEntity<OutgoingDocumentDTO> update(@Valid @RequestBody OutgoingDocumentDTO outgoingDocumentDTO) {
@@ -89,25 +84,19 @@ public class OutgoingDocumentController {
     }
 
     /**
-     * Метод удаления сущности по id
+     * Метод удаления OutgoingDocument по id
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable String id) {
-        UUID uuid;
-        try {
-            uuid = UUID.fromString(id);
-        } catch (RuntimeException e) {
-            throw new DocflowRuntimeApplicationException("Введен не валидный UUID");
-        }
-        outgoingDocumentCrudService.deleteById(uuid);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Исходящий документ успешно удален"));
+    public ResponseEntity<MessageResponseDTO> deleteById(@PathVariable UUID id) {
+        outgoingDocumentCrudService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Исходящий документ успешно удален"));
     }
 
     /**
-     * Метод удаления всех сущностей
+     * Метод удаления всех OutgoingDocument
      */
     @DeleteMapping("/deleteAll")
-    public ResponseEntity<MessageResponseDTO> deleteById() {
+    public ResponseEntity<MessageResponseDTO> deleteAll() {
         outgoingDocumentCrudService.deleteAll();
         return ResponseEntity.status(HttpStatus.OK).body(new MessageResponseDTO("Исходящие документы успешно удалены"));
     }

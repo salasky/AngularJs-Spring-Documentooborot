@@ -1,4 +1,4 @@
-package com.example.testproject1.model.dto;
+package com.example.testproject1.model.utility;
 
 /**
  * Класс для сообщений отправляемых через контроллер

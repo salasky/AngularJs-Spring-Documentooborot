@@ -1,8 +1,8 @@
-package com.example.testproject1.model.dto;
+package com.example.testproject1.model.utility;
 
 import java.sql.Timestamp;
 
-public class RestErrorDto {
+public class RestErrorMessage {
     /**
      * Отправляемая на UI ошибка
      */
@@ -12,7 +12,7 @@ public class RestErrorDto {
      */
     private Timestamp timestamp;
 
-    public RestErrorDto(String errorMessage) {
+    public RestErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
         this.timestamp = new Timestamp(System.currentTimeMillis());
     }

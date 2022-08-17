@@ -26,9 +26,7 @@ public class JobStorageService implements StorageService<JobTittle> {
      * Имя файла для jaxb анмаршалинга
      */
     private final String FILE_NAME = "jobs.xml";
-    /**
-     * Бин для чтения информации из xml файла
-     */
+
     @Autowired
     private JaxbReader jaxbReader;
 

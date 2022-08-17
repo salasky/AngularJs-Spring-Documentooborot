@@ -28,9 +28,7 @@ import java.util.UUID;
 public class OrganizationService implements CrudService<Organization> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationService.class);
-    /**
-     * Бин {@link CrudRepository}
-     */
+
     @Autowired
     private CrudRepository<Organization> organizationRepository;
 

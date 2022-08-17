@@ -3,7 +3,7 @@ package com.example.testproject1.dao.taskdocument;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.AbstractBaseDocumentRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.mapper.document.TaskDocumentMapper;
+import com.example.testproject1.service.sqlmapper.document.TaskDocumentMapper;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -34,20 +34,13 @@ import static com.example.testproject1.queryholder.taskdocumentquery.TaskDocumen
  */
 @Repository("TaskDocumentRepository")
 public class TaskDocumentRepository extends AbstractBaseDocumentRepository implements CrudRepository<TaskDocument> {
-    /**
-     * Бин JdbcTemplate
-     */
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    /**
-     * Маппер для извлечения {@link TaskDocument}
-     */
+
     @Autowired
     private TaskDocumentMapper taskDocumentMapper;
 
-    /**
-     * Сервис для работы с {@link Person}
-     */
     @Autowired
     private CrudService<Person> personService;
 
@@ -112,6 +105,7 @@ public class TaskDocumentRepository extends AbstractBaseDocumentRepository imple
     @Override
     public void deleteAll() {
         jdbcTemplate.update(TASK_DOCUMENT_DELETE_ALL_QUERY);
+        super.deleteAll();
     }
 
     /**
@@ -120,6 +114,7 @@ public class TaskDocumentRepository extends AbstractBaseDocumentRepository imple
     @Override
     public void deleteById(UUID id) {
         jdbcTemplate.update(TASK_DOCUMENT_DELETE_BY_ID_QUERY, id.toString());
+        super.deleteById(id);
     }
 
     /**
