@@ -34,7 +34,6 @@ public class OutgoingDocumentController {
 
     @Autowired
     private CrudService<OutgoingDocument> outgoingDocumentCrudService;
-
     @Autowired
     private CrudFacadeService<OutgoingDocumentDTO> outgoingDocumentDTOFacadeService;
 

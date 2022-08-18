@@ -1,4 +1,4 @@
-package com.example.testproject1.service.mappingutils;
+package com.example.testproject1.service.mappingdto;
 
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.dto.documentdto.OutgoingDocumentDTO;

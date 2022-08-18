@@ -4,7 +4,7 @@ import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.dto.documentdto.TaskDocumentDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
-import com.example.testproject1.service.mappingutils.TaskDocumentMapper;
+import com.example.testproject1.service.mappingdto.TaskDocumentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

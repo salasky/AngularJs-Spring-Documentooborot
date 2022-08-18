@@ -4,7 +4,7 @@ import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.dto.documentdto.OutgoingDocumentDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
-import com.example.testproject1.service.mappingutils.OutgoingDocumentMapper;
+import com.example.testproject1.service.mappingdto.OutgoingDocumentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

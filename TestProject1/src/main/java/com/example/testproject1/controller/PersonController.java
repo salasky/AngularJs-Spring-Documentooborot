@@ -34,7 +34,6 @@ public class PersonController {
 
     @Autowired
     private CrudService<Person> personCrudService;
-
     @Autowired
     private CrudFacadeService<PersonDTO> personDTOPersonCrudFacadeService;
 

@@ -1,4 +1,4 @@
-package com.example.testproject1.service.mappingutils;
+package com.example.testproject1.service.mappingdto;
 
 import com.example.testproject1.model.dto.staffdto.OrganizationDTO;
 import com.example.testproject1.model.staff.Organization;
@@ -16,10 +16,8 @@ import java.util.List;
 public interface OrganizationMapper {
 
     OrganizationDTO sourceToDto(Organization source);
-
     Organization dtoToSource(OrganizationDTO destination);
 
-    public abstract List<OrganizationDTO> listToDto(List<Organization> transactions);
-
-    public abstract List<Organization> dtoToList(List<OrganizationDTO> transactions);
+    List<OrganizationDTO> listToDto(List<Organization> transactions);
+    List<Organization> dtoToList(List<OrganizationDTO> transactions);
 }

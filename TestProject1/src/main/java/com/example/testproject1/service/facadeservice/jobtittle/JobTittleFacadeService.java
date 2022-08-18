@@ -4,7 +4,7 @@ import com.example.testproject1.model.dto.staffdto.JobTittleDTO;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
-import com.example.testproject1.service.mappingutils.JobTittleMapper;
+import com.example.testproject1.service.mappingdto.JobTittleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
