@@ -1,7 +1,7 @@
 package com.example.testproject1.controller;
 
 import com.example.testproject1.model.dto.staffdto.PersonDTO;
-import com.example.testproject1.model.dto.staffdto.PersonDtoListForMapping;
+import com.example.testproject1.model.dto.staffdto.PersonDtoList;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -69,8 +69,8 @@ public class PersonController {
      * Метод сохранения List Person
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody PersonDtoListForMapping personDtoListForMapping) {
-        personDTOPersonCrudFacadeService.saveAll(personDtoListForMapping.getPersonList());
+    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody PersonDtoList personDtoList) {
+        personDTOPersonCrudFacadeService.saveAll(personDtoList.getPersonList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Persons успешно сохранены"));
     }
 

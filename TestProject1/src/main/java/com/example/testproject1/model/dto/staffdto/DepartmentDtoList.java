@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author smigranov
  */
-public class DepartmentDtoListForMapping {
+public class DepartmentDtoList {
     /**
      * List Подразделений
      */

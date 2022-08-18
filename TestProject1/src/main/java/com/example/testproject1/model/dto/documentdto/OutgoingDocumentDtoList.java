@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author smigranov
  */
-public class OutgoingDocumentDtoListForMapping {
+public class OutgoingDocumentDtoList {
     /**
      * List OutgoingDocument
      */

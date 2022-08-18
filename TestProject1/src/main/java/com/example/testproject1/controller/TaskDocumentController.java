@@ -2,7 +2,7 @@ package com.example.testproject1.controller;
 
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.dto.documentdto.TaskDocumentDTO;
-import com.example.testproject1.model.dto.documentdto.TaskDocumentDtoListForMapping;
+import com.example.testproject1.model.dto.documentdto.TaskDocumentDtoList;
 import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
@@ -69,8 +69,8 @@ public class TaskDocumentController {
      * Метод сохранения List TaskDocument
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody TaskDocumentDtoListForMapping taskDocumentDtoListForMapping) {
-        taskDocumentDTOFacadeService.saveAll(taskDocumentDtoListForMapping.getTaskDocumentList());
+    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody TaskDocumentDtoList taskDocumentDtoList) {
+        taskDocumentDTOFacadeService.saveAll(taskDocumentDtoList.getTaskDocumentList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Поручения успешно сохранены"));
     }
 

@@ -2,7 +2,7 @@ package com.example.testproject1.controller;
 
 
 import com.example.testproject1.model.dto.staffdto.OrganizationDTO;
-import com.example.testproject1.model.dto.staffdto.OrganizationListForMapping;
+import com.example.testproject1.model.dto.staffdto.OrganizationDtoList;
 import com.example.testproject1.model.staff.Organization;
 import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -70,8 +70,8 @@ public class OrganizationController {
      * Метод сохранения List Organization
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody OrganizationListForMapping organizationList) {
-        organizationCrudFacadeService.saveAll(organizationList.getOrganizationList());
+    public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody OrganizationDtoList organizationDtoList) {
+        organizationCrudFacadeService.saveAll(organizationDtoList.getOrganizationList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Organization успешно сохранены"));
     }
 

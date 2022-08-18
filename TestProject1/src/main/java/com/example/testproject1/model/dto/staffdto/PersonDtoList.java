@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author smigranov
  */
-public class PersonDtoListForMapping {
+public class PersonDtoList {
     /**
      * Хранит список {@link Person}
      */

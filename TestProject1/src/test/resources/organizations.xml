@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <organizationListXmlDto>
-    <organizationList>
+    <organizationDtoList>
         <organization id="9d5be39c-78ce-47a3-aead-54c2594383ee">
             <contactNumber>876543567</contactNumber>
             <fullName>Nefteaftomatoika</fullName>
@@ -19,5 +19,5 @@
             <shortName>Cr</shortName>
             <supervisor>Potapov Igor</supervisor>
         </organization>
-    </organizationList>
+    </organizationDtoList>
 </organizationListXmlDto>

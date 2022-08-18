@@ -1,7 +1,7 @@
 package com.example.testproject1.controller;
 
 import com.example.testproject1.model.dto.staffdto.DepartmentDTO;
-import com.example.testproject1.model.dto.staffdto.DepartmentDtoListForMapping;
+import com.example.testproject1.model.dto.staffdto.DepartmentDtoList;
 import com.example.testproject1.model.staff.Department;
 import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -69,8 +69,8 @@ public class DepartmentController {
      * Метод сохранения List Department
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody DepartmentDtoListForMapping departmentDtoListForMapping) {
-        departmentDTOCrudFacadeService.saveAll(departmentDtoListForMapping.getDepartmentList());
+    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody DepartmentDtoList departmentDtoList) {
+        departmentDTOCrudFacadeService.saveAll(departmentDtoList.getDepartmentList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Подразделения успешно сохранены"));
     }
 

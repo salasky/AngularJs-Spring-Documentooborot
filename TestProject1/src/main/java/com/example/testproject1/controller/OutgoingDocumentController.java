@@ -2,7 +2,7 @@ package com.example.testproject1.controller;
 
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.model.dto.documentdto.OutgoingDocumentDTO;
-import com.example.testproject1.model.dto.documentdto.OutgoingDocumentDtoListForMapping;
+import com.example.testproject1.model.dto.documentdto.OutgoingDocumentDtoList;
 import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.service.dbservice.CrudService;
 import com.example.testproject1.service.facadeservice.CrudFacadeService;
@@ -69,8 +69,8 @@ public class OutgoingDocumentController {
      * Метод сохранения List OutgoingDocument
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody OutgoingDocumentDtoListForMapping outgoingDocumentDtoListForMapping) {
-        outgoingDocumentDTOFacadeService.saveAll(outgoingDocumentDtoListForMapping.getOutgoingDocuments());
+    public ResponseEntity<MessageResponseDTO> saveAll(@Valid @RequestBody OutgoingDocumentDtoList outgoingDocumentDtoList) {
+        outgoingDocumentDTOFacadeService.saveAll(outgoingDocumentDtoList.getOutgoingDocuments());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("Исходящие документы успешно сохранены"));
     }
 

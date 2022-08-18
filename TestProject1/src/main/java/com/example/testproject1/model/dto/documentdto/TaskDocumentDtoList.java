@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author smigranov
  */
-public class TaskDocumentDtoListForMapping {
+public class TaskDocumentDtoList {
     /**
      * List TaskDocument
      */

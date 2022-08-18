@@ -1,7 +1,7 @@
 package com.example.testproject1.controller;
 
 import com.example.testproject1.model.dto.staffdto.JobTittleDTO;
-import com.example.testproject1.model.dto.staffdto.JobTittleDtoListForMapping;
+import com.example.testproject1.model.dto.staffdto.JobTittleDtoList;
 import com.example.testproject1.model.staff.JobTittle;
 import com.example.testproject1.model.utility.MessageResponseDTO;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -70,8 +70,8 @@ public class JobTittleController {
      * Метод сохранения List JobTittle
      */
     @PostMapping("/saveAll")
-    public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody JobTittleDtoListForMapping jobTittleDtoListForMapping) {
-        jobTittleCrudFacadeService.saveAll(jobTittleDtoListForMapping.getJobList());
+    public ResponseEntity<MessageResponseDTO> saveAll(@RequestBody JobTittleDtoList jobTittleDtoList) {
+        jobTittleCrudFacadeService.saveAll(jobTittleDtoList.getJobList());
         return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponseDTO("JobTittles успешно сохранены"));
     }
 
