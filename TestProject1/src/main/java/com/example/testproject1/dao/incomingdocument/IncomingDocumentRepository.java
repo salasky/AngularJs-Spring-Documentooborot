@@ -106,8 +106,11 @@ public class IncomingDocumentRepository extends AbstractBaseDocumentRepository i
      */
     @Override
     public void deleteAll() {
+        List<IncomingDocument> incomingDocumentList=jdbcTemplate.query(INCOMING_DOCUMENT_GET_ALL_QUERY, incomingDocumentMapper);
         jdbcTemplate.update(INCOMING_DOCUMENT_DELETE_ALL_QUERY);
-        super.deleteAll();
+        for (IncomingDocument incoming: incomingDocumentList) {
+            super.deleteById(incoming.getId());
+        }
     }
 
     /**

@@ -3,6 +3,7 @@ package com.example.testproject1.dao.taskdocument;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.AbstractBaseDocumentRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
+import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;
@@ -104,8 +105,11 @@ public class TaskDocumentRepository extends AbstractBaseDocumentRepository imple
      */
     @Override
     public void deleteAll() {
+        List<TaskDocument> taskDocumentList=jdbcTemplate.query(TASK_DOCUMENT_GET_ALL_QUERY, taskDocumentMapper);
         jdbcTemplate.update(TASK_DOCUMENT_DELETE_ALL_QUERY);
-        super.deleteAll();
+        for (TaskDocument taskDocument: taskDocumentList) {
+            super.deleteById(taskDocument.getId());
+        }
     }
 
     /**

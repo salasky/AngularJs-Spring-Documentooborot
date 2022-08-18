@@ -3,6 +3,7 @@ package com.example.testproject1.dao.outgoingdocument;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.AbstractBaseDocumentRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
+import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.OutgoingDocument;
 import com.example.testproject1.service.sqlmapper.document.OutgoingDocumentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,8 +99,11 @@ public class OutgoingDocumentRepository extends AbstractBaseDocumentRepository i
      */
     @Override
     public void deleteAll() {
+        List<OutgoingDocument> outgoingDocumentList=jdbcTemplate.query(OUTGOING_DOCUMENT_GET_ALL_QUERY, outgoingDocumentMapper);
         jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_ALL_QUERY);
-        super.deleteAll();
+        for (OutgoingDocument outgoingDocument: outgoingDocumentList) {
+            super.deleteById(outgoingDocument.getId());
+        }
     }
 
     /**
