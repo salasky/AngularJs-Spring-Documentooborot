@@ -60,7 +60,7 @@
     <changeSet author="smigranov" id="13">
         <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="task_document"
                                  constraintName="FK_TASK_BASEDOCUMENT"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="base_document" validate="true"/>
     </changeSet>
 
@@ -100,7 +100,7 @@
     <changeSet author="smigranov" id="17">
         <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="incoming_document"
                                  constraintName="FK_INCOMINGDOCUMENT_BASEDOCUMENT"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="base_document" validate="true"/>
     </changeSet>
 
@@ -136,7 +136,7 @@
     <changeSet author="smigranov" id="21">
         <addForeignKeyConstraint baseColumnNames="base_document_id" baseTableName="outgoing_document"
                                  constraintName="FK_OUTGOINGDOCUMENT_BASEDOCUMENT"
-                                 deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="RESTRICT"
                                  referencedColumnNames="id" referencedTableName="base_document" validate="true"/>
     </changeSet>
 
