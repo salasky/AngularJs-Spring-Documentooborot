@@ -50,7 +50,7 @@ public class RestResponseEntityExceptionHandler {
     /**
      * Метод перехвата MethodArgumentNotValidException (Ошибки при валидации)
      */
-    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+    public ResponseEntity<RestErrorMessage> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                HttpHeaders headers, HttpStatus status, WebRequest request) {
         LOGGER.error(ex.getMessage());
         Map<String, String> errors = new HashMap<>();
@@ -65,7 +65,7 @@ public class RestResponseEntityExceptionHandler {
     /**
      * Метод для обнаружения внутренней ошибки сервера
      */
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body,
+    public ResponseEntity<RestErrorMessage> handleExceptionInternal(Exception ex, Object body,
                                                              HttpHeaders headers, HttpStatus status, WebRequest request) {
         LOGGER.error(ex.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
