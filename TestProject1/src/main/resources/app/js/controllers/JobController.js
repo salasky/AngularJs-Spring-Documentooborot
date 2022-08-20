@@ -70,7 +70,6 @@ var app = angular.module("Job", []);
     alert($scope.error_message="Error! "+response.data.errorMessage+response.data.timestamp);
 
 }
-
     //Clear the form
     function _clearFormData() {
     $scope.jobForm.id = -1;
