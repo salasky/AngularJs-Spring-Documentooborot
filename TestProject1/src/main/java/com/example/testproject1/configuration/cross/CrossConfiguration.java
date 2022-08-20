@@ -17,7 +17,7 @@ import java.util.Arrays;
  */
 @Configuration
 public class CrossConfiguration {
-    @Bean
+/*    @Bean
     public CorsConfigurationSource corsConfigurationSource() throws UnknownHostException {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(InetAddress.getLocalHost().toString()));
@@ -27,5 +27,5 @@ public class CrossConfiguration {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
+    }*/
 }
