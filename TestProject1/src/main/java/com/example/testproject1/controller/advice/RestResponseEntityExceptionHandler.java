@@ -28,16 +28,6 @@ public class RestResponseEntityExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestResponseEntityExceptionHandler.class);
 
     /**
-     * Метод перехвата RuntimeException
-     */
-    @ExceptionHandler({RuntimeException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public RestErrorMessage handleAccessRuntimeException(RuntimeException ex) {
-        LOGGER.error(ex.getMessage());
-        return new RestErrorMessage(ex.getMessage());
-    }
-
-    /**
      * Метод перехвата Exception
      */
     @ExceptionHandler({Exception.class})
