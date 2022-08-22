@@ -26,7 +26,6 @@ import java.util.Map;
 @RestControllerAdvice
 public class RestResponseEntityExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestResponseEntityExceptionHandler.class);
-
     /**
      * Метод перехвата Exception
      */
@@ -36,30 +35,4 @@ public class RestResponseEntityExceptionHandler {
         LOGGER.error(ex.getMessage());
         return new RestErrorMessage(ex.getMessage());
     }
-
-    /**
-     * Метод перехвата MethodArgumentNotValidException (Ошибки при валидации)
-     */
-    public ResponseEntity<RestErrorMessage> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                               HttpHeaders headers, HttpStatus status, WebRequest request) {
-        LOGGER.error(ex.getMessage());
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RestErrorMessage(errors.toString()));
-    }
-
-    /**
-     * Метод для обнаружения внутренней ошибки сервера
-     */
-    public ResponseEntity<RestErrorMessage> handleExceptionInternal(Exception ex, Object body,
-                                                             HttpHeaders headers, HttpStatus status, WebRequest request) {
-        LOGGER.error(ex.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new RestErrorMessage(ex.getMessage()));
-    }
-
 }
