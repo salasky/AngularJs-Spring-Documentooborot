@@ -60,7 +60,7 @@ public class PersonRepository implements CrudRepository<Person> {
         }
         try {
             jdbcTemplate.update(PERSON_CREATE_QUERY, person.getId().toString(), person.getFirstName(), person.getSecondName(),
-                    person.getLastName(), person.getPhoto(), person.getJobTittle().getId().toString(),
+                    person.getLastName(), person.getPhotoRef(), person.getJobTittle().getId().toString(),
                     person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay());
         } catch (DataAccessException e) {
             throw new DocflowRuntimeApplicationException("Ошибка сохранения Person", e);
@@ -95,7 +95,7 @@ public class PersonRepository implements CrudRepository<Person> {
         }
         try {
             jdbcTemplate.update(PERSON_UPDATE_QUERY, person.getFirstName(), person.getSecondName(),
-                    person.getLastName(), person.getPhoto(), person.getJobTittle().getId().toString(),
+                    person.getLastName(), person.getPhotoRef(), person.getJobTittle().getId().toString(),
                     person.getDepartment().getId().toString(), person.getPhoneNumber(), person.getBirthDay(), person.getId().toString());
         } catch (DataAccessException e) {
             throw new DocflowRuntimeApplicationException("Ошибка сохранения Person", e);
@@ -137,7 +137,7 @@ public class PersonRepository implements CrudRepository<Person> {
                 ps.setString(2, entityList.get(i).getFirstName());
                 ps.setString(3, entityList.get(i).getSecondName());
                 ps.setString(4, entityList.get(i).getLastName());
-                ps.setString(5, entityList.get(i).getPhoto());
+                ps.setString(5, entityList.get(i).getPhotoRef());
                 ps.setString(6, entityList.get(i).getJobTittle().getId().toString());
                 ps.setString(7, entityList.get(i).getDepartment().getId().toString());
                 ps.setString(8, entityList.get(i).getPhoneNumber());

@@ -26,6 +26,7 @@
         <org.junit.jupiter.version>5.8.1</org.junit.jupiter.version>
         <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
         <org.mockito.version>4.6.1</org.mockito.version>
+        <org.apache.maven.plugins.version>3.5.1</org.apache.maven.plugins.version>
     </properties>
     <dependencies>
         <dependency>
@@ -163,13 +164,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>${org.apache.maven.plugins.version}</version>
                 <configuration>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
                             <artifactId>mapstruct-processor</artifactId>
-                            <version>1.5.2.Final</version>
+                            <version>${org.mapstruct.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

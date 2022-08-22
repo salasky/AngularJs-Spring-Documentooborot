@@ -15,31 +15,31 @@ public class BaseDocumentDTO {
     /**
      * идентификатор документа
      */
-    protected UUID id;
+    private UUID id;
     /**
      * название документа
      */
     @NotNull(message = "name не может быть null")
-    protected String name;
+    private String name;
     /**
      * Tекст документа
      */
     @NotNull(message = "text не может быть null")
-    protected String text;
+    private String text;
     /**
      * Регистрационный номер документа
      */
     @NotNull(message = "regNumber не может быть null")
-    protected Long regNumber;
+    private Long regNumber;
     /**
      * дата регистрации документа
      */
-    protected Timestamp creatingDate;
+    private Timestamp creatingDate;
     /**
      * автор id документа
      */
     @NotNull(message = "authorId не может быть null")
-    protected UUID authorId;
+    private UUID authorId;
 
     public UUID getId() {
         return id;

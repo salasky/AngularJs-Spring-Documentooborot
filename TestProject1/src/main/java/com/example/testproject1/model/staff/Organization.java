@@ -15,7 +15,7 @@ import java.util.UUID;
  * @author smigranov
  */
 @XmlRootElement
-@XmlType(name = "organization", propOrder = {"fullName", "shortName", "supervisor", "contactNumber"})
+@XmlType(name = "organization", propOrder = {"fullName", "shortName", "supervisor", "contactNumbers"})
 public class Organization extends Staff {
     /**
      * Полное название организации
@@ -36,7 +36,7 @@ public class Organization extends Staff {
      * Контактные телефоны организации
      */
     @Column(name = "contact_number")
-    private List<String> contactNumber;
+    private List<String> contactNumbers;
 
     @XmlElement(name = "fullName")
     public String getFullName() {
@@ -65,13 +65,13 @@ public class Organization extends Staff {
         this.supervisor = supervisor;
     }
 
-    @XmlElement(name = "contactNumber")
-    public List<String> getContactNumber() {
-        return contactNumber;
+    @XmlElement(name = "contactNumbers")
+    public List<String> getContactNumbers() {
+        return contactNumbers;
     }
 
-    public void setContactNumber(List<String> contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setContactNumbers(List<String> contactNumbers) {
+        this.contactNumbers = contactNumbers;
     }
 
     /**
@@ -83,7 +83,7 @@ public class Organization extends Staff {
         if (!(o instanceof Organization)) return false;
         if (!super.equals(o)) return false;
         Organization that = (Organization) o;
-        return Objects.equals(fullName, that.fullName) && Objects.equals(shortName, that.shortName) && Objects.equals(supervisor, that.supervisor) && Objects.equals(contactNumber, that.contactNumber);
+        return Objects.equals(fullName, that.fullName) && Objects.equals(shortName, that.shortName) && Objects.equals(supervisor, that.supervisor) && Objects.equals(contactNumbers, that.contactNumbers);
     }
 
     /**
@@ -91,12 +91,12 @@ public class Organization extends Staff {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), fullName, shortName, supervisor, contactNumber);
+        return Objects.hash(super.hashCode(), fullName, shortName, supervisor, contactNumbers);
     }
 
     @Override
     public String toString() {
-        Object[] taskArgs = {id, fullName, shortName, supervisor, contactNumber};
+        Object[] taskArgs = {id, fullName, shortName, supervisor, contactNumbers};
         MessageFormat form = new MessageFormat(
                 "Organization id= {0} fullName= {1}, shortName= {2}, supervisor= {3}" +
                         ", contactNumber= {4}");
@@ -135,7 +135,7 @@ public class Organization extends Staff {
         }
 
         public OrganizationBuilder setContactNumber(List<String> contactNumber) {
-            Organization.this.contactNumber = contactNumber;
+            Organization.this.contactNumbers = contactNumber;
             return this;
         }
 
