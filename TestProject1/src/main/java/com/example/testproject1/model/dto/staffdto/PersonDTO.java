@@ -36,7 +36,7 @@ public class PersonDTO {
     /**
      * Ссылка на фото
      */
-    private String photo;
+    private String photoRef;
     /**
      * Дата рождения
      */
@@ -89,12 +89,12 @@ public class PersonDTO {
     }
 
 
-    public String getPhoto() {
-        return photo;
+    public String getPhotoRef() {
+        return photoRef;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPhotoRef(String photoRef) {
+        this.photoRef = photoRef;
     }
 
     public Date getBirthDay() {

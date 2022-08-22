@@ -105,7 +105,11 @@ public class TaskDocumentRepository extends AbstractBaseDocumentRepository imple
      */
     @Override
     public void deleteAll() {
+        List<TaskDocument> taskDocumentList=jdbcTemplate.query(TASK_DOCUMENT_GET_ALL_QUERY, taskDocumentMapper);
         jdbcTemplate.update(TASK_DOCUMENT_DELETE_ALL_QUERY);
+        for (TaskDocument taskDocument: taskDocumentList) {
+            super.deleteById(taskDocument.getId());
+        }
     }
 
     /**

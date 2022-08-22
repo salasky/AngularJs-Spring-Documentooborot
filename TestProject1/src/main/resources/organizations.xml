@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <organizationListXmlDto>
-    <organizationDtoList>
+    <organizationList>
         <organization id="9d5be39c-78ce-47a3-aead-54c2594383ee">
-            <contactNumber>876543567</contactNumber>
+            <contactNumbers>876543567</contactNumbers>
             <fullName>Nefteaftomatoika</fullName>
             <shortName>Nft</shortName>
             <supervisor>Petrov Ivan</supervisor>
         </organization>
         <organization id="e0624899-1ce6-48bc-9ec5-009026bc3282">
-            <contactNumber>7566543567, 343436543</contactNumber>
+            <contactNumbers>7566543567, 343436543</contactNumbers>
             <fullName>Oil and Gas Systems</fullName>
             <shortName>OGS</shortName>
             <supervisor>Nikulin Andrey</supervisor>
         </organization>
         <organization id="6bf45942-4509-4ae8-8ea4-d5c38a6849b1">
-            <contactNumber>4366543567</contactNumber>
+            <contactNumbers>4366543567</contactNumbers>
             <fullName>Citros</fullName>
             <shortName>Cr</shortName>
             <supervisor>Potapov Igor</supervisor>
         </organization>
-    </organizationDtoList>
+    </organizationList>
 </organizationListXmlDto>

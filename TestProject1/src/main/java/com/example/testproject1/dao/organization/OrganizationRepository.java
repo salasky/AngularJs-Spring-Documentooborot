@@ -57,7 +57,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
         try {
             jdbcTemplate.update(ORGANIZATION_CREATE_QUERY, organization.getId().toString(),
                     organization.getFullName(), organization.getShortName(), organization.getSupervisor(),
-                    organization.getContactNumber().toString().replaceAll(regex, ""));
+                    organization.getContactNumbers().toString().replaceAll(regex, ""));
             return organization;
         } catch (DataAccessException e) {
             throw new DocflowRuntimeApplicationException("Ошибка сохранения Organization", e);
@@ -74,7 +74,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
         }
         try {
             jdbcTemplate.update(ORGANIZATION_UPDATE_QUERY, organization.getFullName(), organization.getShortName(),
-                    organization.getSupervisor(), organization.getContactNumber().toString().replaceAll(regex, ""),
+                    organization.getSupervisor(), organization.getContactNumbers().toString().replaceAll(regex, ""),
                     organization.getId().toString());
         } catch (DataAccessException e) {
             throw new DocflowRuntimeApplicationException("Ошибка обновления Organization", e);
@@ -132,7 +132,7 @@ public class OrganizationRepository implements CrudRepository<Organization> {
                 ps.setString(2, entityList.get(i).getFullName());
                 ps.setString(3, entityList.get(i).getShortName());
                 ps.setString(4, entityList.get(i).getSupervisor());
-                ps.setString(5, entityList.get(i).getContactNumber().toString());
+                ps.setString(5, entityList.get(i).getContactNumbers().toString());
             }
 
             @Override

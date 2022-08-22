@@ -19,7 +19,7 @@ import java.util.UUID;
  * @author smigranov
  */
 @XmlRootElement
-@XmlType(name = "person", propOrder = {"secondName", "firstName", "lastName", "jobTittle", "birthDay", "phoneNumber", "photo", "department"})
+@XmlType(name = "person", propOrder = {"secondName", "firstName", "lastName", "jobTittle", "birthDay", "phoneNumber", "photoRef", "department"})
 public class Person extends Staff implements Comparable<Person> {
     /**
      * Отчество
@@ -45,7 +45,7 @@ public class Person extends Staff implements Comparable<Person> {
      * Ссылка на фото
      */
     @Column(name = "photo")
-    private String photo;
+    private String photoRef;
     /**
      * Дата рождения
      */
@@ -98,13 +98,13 @@ public class Person extends Staff implements Comparable<Person> {
         this.jobTittle = jobTittle;
     }
 
-    @XmlElement(name = "photo")
-    public String getPhoto() {
-        return photo;
+    @XmlElement(name = "photoRef")
+    public String getPhotoRef() {
+        return photoRef;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPhotoRef(String photoRef) {
+        this.photoRef = photoRef;
     }
 
     @XmlElement(name = "birthDay")
@@ -140,7 +140,7 @@ public class Person extends Staff implements Comparable<Person> {
      */
     @Override
     public String toString() {
-        Object[] personArgs = {id, lastName, secondName, firstName, jobTittle, photo, birthDay, phoneNumber};
+        Object[] personArgs = {id, lastName, secondName, firstName, jobTittle, photoRef, birthDay, phoneNumber};
         MessageFormat form = new MessageFormat(
                 "id {0}, lastName= {1}, secondName= {2}, firstName= {3}, jobTittle= {4}, photo= {5}, birthDay= {6}, phoneNumber={7}");
         return form.format(personArgs);
@@ -163,7 +163,7 @@ public class Person extends Staff implements Comparable<Person> {
         if (!(o instanceof Person)) return false;
         if (!super.equals(o)) return false;
         Person person = (Person) o;
-        return Objects.equals(lastName, person.lastName) && Objects.equals(secondName, person.secondName) && Objects.equals(firstName, person.firstName) && Objects.equals(jobTittle, person.jobTittle) && Objects.equals(photo, person.photo) && Objects.equals(birthDay, person.birthDay) && Objects.equals(phoneNumber, person.phoneNumber);
+        return Objects.equals(lastName, person.lastName) && Objects.equals(secondName, person.secondName) && Objects.equals(firstName, person.firstName) && Objects.equals(jobTittle, person.jobTittle) && Objects.equals(photoRef, person.photoRef) && Objects.equals(birthDay, person.birthDay) && Objects.equals(phoneNumber, person.phoneNumber);
     }
 
     /**
@@ -171,7 +171,7 @@ public class Person extends Staff implements Comparable<Person> {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), lastName, secondName, firstName, jobTittle, photo, birthDay, phoneNumber);
+        return Objects.hash(super.hashCode(), lastName, secondName, firstName, jobTittle, photoRef, birthDay, phoneNumber);
     }
 
     public static Person.PersonBuilder newBuilder() {
@@ -210,7 +210,7 @@ public class Person extends Staff implements Comparable<Person> {
         }
 
         public PersonBuilder setPhoto(String photo) {
-            Person.this.photo = photo;
+            Person.this.photoRef = photo;
             return this;
         }
 

@@ -23,7 +23,7 @@ public class OrganizationDTO {
     /**
      * Контактные телефоны организации
      */
-    private List<String> contactNumber;
+    private List<String> contactNumbers;
 
     public String getFullName() {
         return fullName;
@@ -49,12 +49,12 @@ public class OrganizationDTO {
         this.supervisor = supervisor;
     }
 
-    public List<String> getContactNumber() {
-        return contactNumber;
+    public List<String> getContactNumbers() {
+        return contactNumbers;
     }
 
-    public void setContactNumber(List<String> contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setContactNumbers(List<String> contactNumbers) {
+        this.contactNumbers = contactNumbers;
     }
 
     public UUID getId() {

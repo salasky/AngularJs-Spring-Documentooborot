@@ -10,7 +10,7 @@
                 <jobTittleName>JS Junior</jobTittleName>
             </jobTittle>
             <phoneNumber>687546346</phoneNumber>
-            <photo>http//:dssf.png</photo>
+            <photoRef>http//:dssf.png</photoRef>
             <department id="00210db1-6e32-4096-b662-85d8b4aeaebb">
                 <contactNumber>89654456</contactNumber>
                 <fullName>Market-based</fullName>
@@ -33,7 +33,7 @@
             <jobTittle id="0b75a556-9b7e-4f89-b2f8-d1a10e991a0a">
                 <jobTittleName>Java Junior</jobTittleName>
             </jobTittle>
-            <photo>http//:sddf.png</photo>
+            <photoRef>http//:sddf.png</photoRef>
             <department id="0b75a556-9b7e-4f89-b2f8-d1a10e991a0a">
                 <contactNumber>8965444556</contactNumber>
                 <fullName>Information Technology</fullName>
@@ -53,7 +53,7 @@
             <lastName>Vagizovich</lastName>
             <birthDay>2007-01-14</birthDay>
             <phoneNumber>84827546346</phoneNumber>
-            <photo>http//:salmig.png</photo>
+            <photoRef>http//:salmig.png</photoRef>
             <jobTittle id="f24d321e-6b78-4cf8-bdab-892e0d34fd63">
                 <jobTittleName>Hr manager</jobTittleName>
             </jobTittle>
@@ -79,7 +79,7 @@
             <jobTittle id="f24d321e-6b78-4cf8-bdab-892e0d34fd63">
                 <jobTittleName>Hr manager</jobTittleName>
             </jobTittle>
-            <photo>http//:guba.png</photo>
+            <photoRef>http//:guba.png</photoRef>
             <department id="f24d321e-6b78-4cf8-bdab-892e0d34fd63">
                 <contactNumber>896544560</contactNumber>
                 <fullName>HR-department</fullName>
@@ -102,7 +102,7 @@
             <jobTittle id="26648939-04fd-4359-8c55-4a7e9b21a6e9">
                 <jobTittleName>Product Manager</jobTittleName>
             </jobTittle>
-            <photo>http//:hdf.png</photo>
+            <photoRef>http//:hdf.png</photoRef>
             <department id="f24d321e-6b78-4cf8-bdab-892e0d34fd63">
                 <contactNumber>896544560</contactNumber>
                 <fullName>HR-department</fullName>
