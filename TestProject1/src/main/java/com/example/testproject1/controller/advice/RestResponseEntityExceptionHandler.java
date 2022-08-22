@@ -23,7 +23,6 @@ import java.util.Map;
  *
  * @author smigranov
  */
-@Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
 public class RestResponseEntityExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestResponseEntityExceptionHandler.class);
