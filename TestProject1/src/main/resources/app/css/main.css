@@ -1,0 +1,58 @@
+html{
+    font-size: 16px;
+
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    background-color: #FFFFFF;
+    min-width: 320px;
+
+}
+image{
+    max-width: available;
+    max-height: available;
+}
+section{
+    padding: 50px 0;
+}
+a{
+    color:#111;
+}
+a:hover{
+    color: #555;
+}
+/*HEADER*/
+.navbar-expand-lg{
+    color: #111;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.navbar-expand-lg li a::after{
+    content:'';
+    display: block;
+    width: 100%;
+    background-color: #111;
+    height: 1px;
+    transition: all .3s;
+    transform: scale(0);
+}
+.navbar-expand-lg li a:hover::after{
+    transform: scale(1);
+}
+/*HEADER*/
+
+.spielbox h2{
+    margin-bottom:80px;
+    color:#FFFFFF;
+}
+.greetingtext{
+    color: darkslategray;
+    margin-right: 480px;
+    margin-left: 250px;
+    text-transform: uppercase;
+    background: snow;
+    font-style: italic;
+}

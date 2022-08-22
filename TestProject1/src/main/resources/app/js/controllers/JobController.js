@@ -5,7 +5,6 @@ var app = angular.module("Job", []);
     $scope.jobForm = {
     id : -1,
     name : ""};
-
     _refreshCustomerData();
 
     //HTTP POST/PUT methods for add/edit job
@@ -35,17 +34,18 @@ var app = angular.module("Job", []);
 }).then( _success, _error );
 };
     //HTTP DELETE- delete job by Id
-    $scope.deleteJob = function(customer) {
+    $scope.deleteJob = function(job) {
     $http({
     method : 'DELETE',
-    url : 'http://localhost:8080/jobs/' + customer.id
+    url : 'http://localhost:8080/jobs/' + job.id
 }).then(_success, _error);
 };
 
     // In case of edit, populate form fields and assign form.id with job id
-    $scope.editJob = function(customer) {
-    $scope.jobForm.name = customer.name;
-    $scope.jobForm.id = customer.id;};
+    $scope.editJob = function(job) {
+    $scope.jobForm.name = job.name;
+    $scope.jobForm.id = job.id;
+    };
 
     /* Private Methods */
     //HTTP GET- get all jobs collection
