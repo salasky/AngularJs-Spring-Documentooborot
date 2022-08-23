@@ -99,11 +99,7 @@ public class OutgoingDocumentRepository extends AbstractBaseDocumentRepository i
      */
     @Override
     public void deleteAll() {
-        List<OutgoingDocument> outgoingDocumentList=jdbcTemplate.query(OUTGOING_DOCUMENT_GET_ALL_QUERY, outgoingDocumentMapper);
         jdbcTemplate.update(OUTGOING_DOCUMENT_DELETE_ALL_QUERY);
-        for (OutgoingDocument outgoingDocument: outgoingDocumentList) {
-            super.deleteById(outgoingDocument.getId());
-        }
     }
 
     /**

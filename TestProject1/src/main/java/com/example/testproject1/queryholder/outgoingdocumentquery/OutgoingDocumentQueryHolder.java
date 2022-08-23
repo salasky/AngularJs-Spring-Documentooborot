@@ -38,7 +38,12 @@ public class OutgoingDocumentQueryHolder {
     /**
      * Запрос на удаление всех записей в таблице outgoing_document
      */
-    public static final String OUTGOING_DOCUMENT_DELETE_ALL_QUERY = "DELETE FROM outgoing_document";
+    public static final String OUTGOING_DOCUMENT_DELETE_ALL_QUERY =  new StringBuilder("DELETE FROM base_document ")
+            .append(" WHERE base_document.id IN (")
+            .append(" SELECT base_document.id ")
+            .append(" FROM base_document ")
+            .append(" INNER JOIN outgoing_document  ")
+            .append("     ON base_document.id=outgoing_document.base_document_id)").toString();
     /**
      * Запрос на удаление записи по id в таблице outgoing_document
      */
