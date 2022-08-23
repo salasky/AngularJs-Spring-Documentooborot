@@ -39,7 +39,12 @@ public class TaskDocumentQueryHolder {
     /**
      * Запрос на удаление всех записей в таблице task_document
      */
-    public static final String TASK_DOCUMENT_DELETE_ALL_QUERY = "DELETE FROM task_document";
+    public static final String TASK_DOCUMENT_DELETE_ALL_QUERY = new StringBuilder("DELETE FROM base_document ")
+            .append(" WHERE base_document.id IN (")
+            .append(" SELECT base_document.id ")
+            .append(" FROM base_document ")
+            .append(" INNER JOIN task_document  ")
+            .append("     ON base_document.id=task_document.base_document_id)").toString();
     /**
      * Запрос на удаление записи по id в таблице task_document
      */
