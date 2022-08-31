@@ -32,6 +32,7 @@ angular
                     }else{
                         $scope.tabs.push(tabNo);
                         $scope.activeTabNo = tabNo;
+
                     }
                 }, function errorCallback(response) {
                     console.log(response.statusText);

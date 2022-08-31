@@ -6,7 +6,8 @@
 <body>
 
 <h2 class="spielboxDepartments">OutgoingDocuments
-    <button ng-click="openModal()" class="label label-success">Add</button>
+    <img style="max-height: 30px" src="/app/img/documentCreate.png">
+    <button ng-click="openModal()" class="label label-success">Create</button>
 </h2>
 
 <div class="splitleft">
@@ -43,8 +44,9 @@
             <div class="tablecontent">
                 <div class="content-box">
                     <ul class="nav nav-tabs">
-                        <li ng-repeat="tab in tabs" ng-class="{true:'active',false:''}[tab.index==activeTabNo]">
-                            <a href="javascript:void(0)" ng-click="activeTab(tab)">{{tab.index}}<i
+                        <li ng-repeat="tab in tabs" ng-class="{true:'active',false:''}[tab==activeTabNo]">
+                            <a href="javascript:void(0)" ng-click="activeTab(tab)">{{tab.index}}
+                                <img style="max-height: 20px" src="/app/img/document.png"><i
                                     class="glyphicon glyphicon-remove" ng-click="remove($index)"></i></a>
                         </li>
                     </ul>

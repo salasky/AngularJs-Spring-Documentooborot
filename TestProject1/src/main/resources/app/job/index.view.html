@@ -6,6 +6,7 @@
 <body>
 
 <h2 class="spielboxJobs">Jobs
+    <img style="max-height: 30px" src="/app/img/job.png">
     <button ng-click="openModal()" class="label label-success">Add</button>
 </h2>
 <div class="splitleft">
@@ -14,11 +15,13 @@
             <thead>
             <tr>
                 <th>Id</th>
+                <th>UUID</th>
                 <th>Name</th>
             </tr>
             </thead>
             <tr ng-repeat="job in rootJobs" ng-class="{active : isSelected(job)}">
                 <td>{{ $index + 1 }}</td>
+                <td  height=10px ><a ng-click="openModal(job)">{{ job.id }}</a></td>
                 <td><a ng-click="openModal(job)">{{ job.name }}</a></td>
             </tr>
         </table>

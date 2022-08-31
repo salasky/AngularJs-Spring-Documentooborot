@@ -6,6 +6,7 @@
 <body>
 
 <h2 class="spielboxDepartments">Departments
+    <img style="max-height: 40px" src="/app/img/department.png">
     <button ng-click="openModal()" class="label label-success">Add</button>
 </h2>
 
@@ -44,18 +45,16 @@
             <div class="tablecontent">
 
                 <ul class="nav nav-tabs">
-
                     <li ng-repeat="tab in tabs track by $index"
-                        ng-class="{true:'active',false:''}[tab.index==activeTabNo]">
-                        <a href="javascript:void(0)" ng-click="activeTab(tab)">{{tab.index}} <i
-                                class="glyphicon glyphicon-remove" ng-click="remove($index)"></i></a>
+                        ng-class="{true:'active',false:''}[tab==activeTabNo]">
+                        <a href="javascript:void(0)" ng-click="activeTab(tab)">{{tab.index}} <img style="max-height: 20px" src="/app/img/department.png">
+                            <i class="glyphicon glyphicon-remove" ng-click="remove($index)"></i></a>
                     </li>
 
                 </ul>
                 <div class="tab-content">
 
                     <div class="tab-pane" ng-repeat="tab in tabs" ng-class="{true:'active',false:''}[tab==activeTabNo]">
-
                         <div ng-app="app" class="modal-body" id="modal-body">
                             <form class="form-horizontal" name="contact">
                                 <div class="form-group">
