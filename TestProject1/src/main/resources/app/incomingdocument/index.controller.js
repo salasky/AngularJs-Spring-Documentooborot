@@ -27,8 +27,12 @@ angular
                     let tabNo = incomingDocument;
                     tabNo.author = $scope.author;
                     tabNo.index = incomingDocument.name + ' ' + incomingDocument.id.substring(0, 3)
-                    $scope.tabs.push(tabNo);
-                    $scope.activeTabNo = tabNo;
+                    if($scope.tabs.includes(tabNo)){
+                        $scope.activeTabNo = tabNo;
+                    }else{
+                        $scope.tabs.push(tabNo);
+                        $scope.activeTabNo = tabNo;
+                    }
                 }, function errorCallback(response) {
                     console.log(response.statusText);
                 });

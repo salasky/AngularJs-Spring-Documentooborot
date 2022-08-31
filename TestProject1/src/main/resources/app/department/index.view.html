@@ -23,7 +23,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="department in rootDepartments" ng-class="{active : isSelected(department)}">
+            <tr ng-repeat="department in rootDepartments ">
                 <td>{{ $index + 1 }}</td>
                 <td><a ng-click="openModal(department)">{{ department.fullName }}</a></td>
                 <td>{{ department.shortName }}</td>

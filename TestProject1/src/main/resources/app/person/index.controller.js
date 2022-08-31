@@ -67,8 +67,13 @@ angular
                             tabNo.department = $scope.department;
                             tabNo.job = $scope.job;
                             tabNo.index = person.secondName + ' ' + person.id.substring(0, 3)
-                            $scope.tabs.push(tabNo);
-                            $scope.activeTabNo = tabNo;
+                            if($scope.tabs.includes(tabNo)){
+                                $scope.activeTabNo = tabNo;
+                            }else{
+                                $scope.tabs.push(tabNo);
+                                $scope.activeTabNo = tabNo;
+                            }
+
                         }, function errorCallback(response) {
                             console.log(response.statusText);
                         });

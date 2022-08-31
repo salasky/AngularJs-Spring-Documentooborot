@@ -26,8 +26,12 @@ app.controller('OutgoingDocument.IndexController', function ($compile, $sce, $sc
             let tabNo = outgoingDocument;
             tabNo.author = $scope.author;
             tabNo.index = outgoingDocument.name + ' ' + outgoingDocument.id.substring(0, 3)
-            $scope.tabs.push(tabNo);
-            $scope.activeTabNo = tabNo;
+            if($scope.tabs.includes(tabNo)){
+                $scope.activeTabNo = tabNo;
+            }else{
+                $scope.tabs.push(tabNo);
+                $scope.activeTabNo = tabNo;
+            }
 
         }, function errorCallback(response) {
             console.log(response.statusText);

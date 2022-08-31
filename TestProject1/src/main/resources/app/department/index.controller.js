@@ -44,12 +44,15 @@ angular
                     url: 'http://localhost:8080/organizations/' + department.organizationId
                 }).then(function successCallback(response) {
                     $scope.organization = response.data;
-
-                    let tabNo = department
-                    tabNo.organization = $scope.organization
-                    tabNo.index = department.fullName + ' ' + department.id.substring(0, 3)
-                    $scope.tabs.push(tabNo);
-                    $scope.activeTabNo = tabNo;
+                        let tabNo = department
+                        tabNo.organization = $scope.organization
+                        tabNo.index = department.fullName + ' ' + department.id.substring(0, 3)
+                    if($scope.tabs.includes(tabNo)){
+                        $scope.activeTabNo = tabNo;
+                    }else{
+                        $scope.tabs.push(tabNo);
+                        $scope.activeTabNo = tabNo;
+                    }
 
                 }, function errorCallback(response) {
                     console.log(response.statusText);
