@@ -75,8 +75,8 @@ angular
         $scope.ok = function () {
             $scope.personsForm.departmentId = $scope.myDepartment.id;
             $scope.personsForm.jobTittleId = $scope.myJob.id;
-            var method = "";
-            var url = "";
+            let method = "";
+            let url = "";
             if ($scope.personsForm.id == -1) {
                 $scope.personsForm.id = null
                 method = "POST";

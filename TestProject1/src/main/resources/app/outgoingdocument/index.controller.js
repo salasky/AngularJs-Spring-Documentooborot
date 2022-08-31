@@ -1,6 +1,6 @@
 console.clear();
 
-var app = angular.module('app');
+let app = angular.module('app');
 
 
 app.controller('OutgoingDocument.IndexController', function ($compile, $sce, $scope, $window, $uibModal, $http, $rootScope) {
@@ -39,7 +39,7 @@ app.controller('OutgoingDocument.IndexController', function ($compile, $sce, $sc
     };
 
     $scope.openModal = function (outgoingDocument) {
-        var modalInstance = $uibModal.open({
+        let modalInstance = $uibModal.open({
             templateUrl: 'outgoingdocument/modalWindow.html',
             controller: 'OutgoingDocumentModalController',
             backdrop: false,

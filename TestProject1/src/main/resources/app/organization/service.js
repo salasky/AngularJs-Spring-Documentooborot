@@ -3,7 +3,7 @@
 
     angular.module('app')
         .factory('restapi', ['$http', function ($http) {
-            var myJson = {};
+            let myJson = {};
             myJson.get = $http({
                 method: 'GET',
                 url: 'http://localhost:8080/organizations'

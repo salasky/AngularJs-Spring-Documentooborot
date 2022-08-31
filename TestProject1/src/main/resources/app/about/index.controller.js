@@ -6,7 +6,7 @@
         .controller('About.IndexController', Controller);
 
     function Controller($scope) {
-        var vm = this;
+        let vm = this;
 
         initController();
 

@@ -32,7 +32,7 @@ angular
             }
 
             $scope.openModal = function (jobs) {
-                var modalInstance = $uibModal.open({
+                let modalInstance = $uibModal.open({
                     templateUrl: 'job/modalWindow.html',
                     controller: 'jobsModalController',
                     backdrop: false,

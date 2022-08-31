@@ -60,7 +60,7 @@ angular
             };
 
             $scope.openOrganizationModal = function () {
-                var modalInstance = $uibModal.open({
+                let modalInstance = $uibModal.open({
                     templateUrl: 'organization/modalWindow.html',
                     controller: 'modalController',
                     backdrop: false,
@@ -75,7 +75,7 @@ angular
 
 
             $scope.openModal = function (department) {
-                var modalInstance = $uibModal.open({
+                let modalInstance = $uibModal.open({
                     templateUrl: 'department/modalWindow.html',
                     controller: 'DepartmentModalController',
                     backdrop: false,

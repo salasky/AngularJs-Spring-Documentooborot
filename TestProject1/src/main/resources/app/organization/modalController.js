@@ -57,8 +57,8 @@ angular
     }
 
     $scope.ok = function () {
-        var method = "";
-        var url = "";
+        let method = "";
+        let url = "";
         if ($scope.organizationsForm.id == -1) {
             $scope.organizationsForm.id = null
             $scope.organizationsForm.contactNumbers = Array.of($scope.organizationsForm.contactNumbers);

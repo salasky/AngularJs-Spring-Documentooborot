@@ -80,8 +80,8 @@ angular
         $scope.taskDocumentForm.authorId = $scope.myAuthor.id;
         $scope.taskDocumentForm.responsibleId = $scope.myResponsible.id;
         $scope.taskDocumentForm.controlPersonId = $scope.myControlPerson.id;
-        var method = "";
-        var url = "";
+        let method = "";
+        let url = "";
         if ($scope.taskDocumentForm.id == -1) {
             $scope.taskDocumentForm.id = null
             method = "POST";

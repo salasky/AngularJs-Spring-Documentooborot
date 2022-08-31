@@ -41,7 +41,7 @@ angular
 
 
             $scope.openModal = function (taskDocument) {
-                var modalInstance = $uibModal.open({
+                let modalInstance = $uibModal.open({
                     templateUrl: 'taskdocument/modalWindow.html',
                     controller: 'TaskDocumentModalController',
                     backdrop: false,

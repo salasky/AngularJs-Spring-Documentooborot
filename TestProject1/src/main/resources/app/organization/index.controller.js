@@ -34,7 +34,7 @@ angular
             }
 
             $scope.openModal = function (organization) {
-                var modalInstance = $uibModal.open({
+                let modalInstance = $uibModal.open({
                     templateUrl: 'organization/modalWindow.html',
                     controller: 'modalController',
                     backdrop: false,

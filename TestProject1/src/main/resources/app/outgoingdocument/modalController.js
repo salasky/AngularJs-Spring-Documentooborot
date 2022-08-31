@@ -86,8 +86,8 @@ angular
         $scope.outgoingDocumentForm.authorId = $scope.myAuthor.id;
         $scope.outgoingDocumentForm.senderId = $scope.mySender.id;
         $scope.outgoingDocumentForm.deliveryType = $scope.myDeliveryType.label;
-        var method = "";
-        var url = "";
+        let method = "";
+        let url = "";
         if ($scope.outgoingDocumentForm.id == -1) {
             $scope.outgoingDocumentForm.id = null
             method = "POST";

@@ -32,7 +32,7 @@ angular
             }
 
             $scope.openModal = function (person) {
-                var modalInstance = $uibModal.open({
+                let modalInstance = $uibModal.open({
                     templateUrl: 'person/modalWindow.html',
                     controller: 'PersonModalController',
                     backdrop: false,
@@ -62,7 +62,7 @@ angular
                             url: 'http://localhost:8080/jobs/' + person.jobTittleId
                         }).then(function successCallback(response) {
                             $scope.job = response.data;
-                            var tabNo = person;
+                            let tabNo = person;
                             tabNo.organization = $scope.organization;
                             tabNo.department = $scope.department;
                             tabNo.job = $scope.job;
@@ -110,7 +110,7 @@ angular
             };
 
             $scope.openOrganizationModal = function () {
-                var modalInstance = $uibModal.open({
+                let modalInstance = $uibModal.open({
                     templateUrl: 'organization/modalWindow.html',
                     controller: 'modalController',
                     backdrop: false,
@@ -125,7 +125,7 @@ angular
 
 
             $scope.openDepartmentModal = function () {
-                var modalInstance = $uibModal.open({
+                let modalInstance = $uibModal.open({
                     templateUrl: 'department/modalWindow.html',
                     controller: 'DepartmentModalController',
                     backdrop: false,
@@ -139,7 +139,7 @@ angular
             };
 
             $scope.openJobModal = function () {
-                var modalInstance = $uibModal.open({
+                let modalInstance = $uibModal.open({
                     templateUrl: 'job/modalWindow.html',
                     controller: 'jobsModalController',
                     backdrop: false,

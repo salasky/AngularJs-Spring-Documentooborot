@@ -38,8 +38,8 @@ angular
 
 
     $scope.ok = function () {
-        var method = "";
-        var url = "";
+        let method = "";
+        let url = "";
         if ($scope.jobsForm.id == -1) {
             $scope.jobsForm.id = null
             method = "POST";
