@@ -16,8 +16,10 @@ import java.util.List;
 public interface OrganizationMapper {
 
     OrganizationDTO sourceToDto(Organization source);
+
     Organization dtoToSource(OrganizationDTO destination);
 
     List<OrganizationDTO> listToDto(List<Organization> transactions);
+
     List<Organization> dtoToList(List<OrganizationDTO> transactions);
 }

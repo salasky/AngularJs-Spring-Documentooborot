@@ -1,0 +1,75 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">OutgoingDocument</h3>
+</div>
+
+<div ng-app="app" class="modal-body" id="modal-body">
+    <form class="form-horizontal" name="contact">
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Name:</label>
+            <div class="col-lg-8">
+                <input class="form-control" type="text" id="fullName" name="fullName"
+                       ng-model="outgoingDocumentForm.name "></div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Text:</label>
+            <div class="col-lg-8">
+                <input class="form-control" type="text" id="text" name="text" ng-model="outgoingDocumentForm.text">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-3 control-label">RegNumber :</label>
+            <div class="col-lg-8">
+                <input class="form-control" type="text" id="regNumber" name="regNumber"
+                       ng-model="outgoingDocumentForm.regNumber"></div>
+        </div>
+
+        <label class="col-lg-3 control-label">Creating Date:</label>
+        <div class="input-group" style="width:200px">
+            <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd hh:m:ss"
+                   ng-model="outgoingDocumentForm.creatingDate" is-open="isDatepickerOpen"
+                   datepicker-options="datepickerOptions" ng-required="true" close-text="Close"
+                   alt-input-formats="altInputFormats"/>
+            <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="isDatepickerOpen = !isDatepickerOpen">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+        </div>
+        <br>
+
+
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Author:</label>
+            <div class="col-lg-8">
+                <select ng-model="myAuthor" ng-options="person.secondName for person in persons"></select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Sender:</label>
+            <div class="col-lg-8">
+                <select ng-model="mySender" ng-options="person.secondName for person in persons"></select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Delivery Type:</label>
+            <div class="col-lg-8">
+                <select ng-model="myDeliveryType"
+                        ng-options="deliveryType.label for deliveryType in deliveryTypes"></select>
+            </div>
+        </div>
+
+
+    </form>
+
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-danger" type="button" ng-click="deleteOutgoingDocuments()">Delete</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+
+</div>

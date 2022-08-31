@@ -3,7 +3,6 @@ package com.example.testproject1.dao.taskdocument;
 import com.example.testproject1.dao.CrudRepository;
 import com.example.testproject1.dao.basedocument.AbstractBaseDocumentRepository;
 import com.example.testproject1.exception.DocflowRuntimeApplicationException;
-import com.example.testproject1.model.document.IncomingDocument;
 import com.example.testproject1.model.document.TaskDocument;
 import com.example.testproject1.model.staff.Person;
 import com.example.testproject1.service.dbservice.CrudService;

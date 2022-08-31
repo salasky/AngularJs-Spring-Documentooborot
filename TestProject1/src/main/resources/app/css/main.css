@@ -1,37 +1,43 @@
-html{
+html {
     font-size: 16px;
 
 }
-body{
+
+body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 400;
     color: #000000;
     background-color: #FFFFFF;
     min-width: 320px;
+}
 
+.navbar-brand > img {
+    margin-bottom: 50px;
+    max-width: 85px;
 }
-image{
-    max-width: available;
-    max-height: available;
-}
-section{
+
+section {
     padding: 50px 0;
 }
-a{
-    color:#111;
+
+a {
+    color: #111;
 }
-a:hover{
+
+a:hover {
     color: #555;
 }
+
 /*HEADER*/
-.navbar-expand-lg{
+.navbar-expand-lg {
     color: #111;
     font-weight: 500;
     text-transform: uppercase;
 }
-.navbar-expand-lg li a::after{
-    content:'';
+
+.navbar-expand-lg li a::after {
+    content: '';
     display: block;
     width: 100%;
     background-color: #111;
@@ -39,20 +45,247 @@ a:hover{
     transition: all .3s;
     transform: scale(0);
 }
-.navbar-expand-lg li a:hover::after{
+
+.navbar-expand-lg li a:hover::after {
     transform: scale(1);
 }
+
 /*HEADER*/
 
-.spielbox h2{
-    margin-bottom:80px;
-    color:#FFFFFF;
+.spielboxJobs {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 30%;
+    background: SteelBlue;
+    margin: 30px 40px;
+    padding: 15px;
+    color: white;
 }
-.greetingtext{
+
+.spielboxDepartments {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 30%;
+    background: SteelBlue;
+    margin: 30px 40px;
+    padding: 15px;
+    color: white;
+}
+
+.spielboxOrganizations {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 30%;
+    background: SteelBlue;
+    margin: 30px 40px;
+    padding: 15px;
+    color: white;
+}
+
+
+.greetingtext {
     color: darkslategray;
     margin-right: 480px;
     margin-left: 250px;
     text-transform: uppercase;
     background: snow;
     font-style: italic;
+}
+
+.blue-button {
+    background: #25A6E1;
+    padding: 3px 5px;
+    color: #fff;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 4px;
+    border: 1px solid #1A87B9
+}
+
+.red-button {
+    background: #CD5C5C;
+    padding: 3px 5px;
+    color: #fff;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 4px;
+    border: 1px solid #CD5C5C
+}
+
+#wrapper {
+    font: 20px Calibri;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.table-person {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    width: 100%;
+    border: 2px double black;
+    height: 600px;
+    overflow-y: scroll;
+    display: block;
+}
+
+.table-organization {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    width: 100%;
+    border: 2px double black;
+    height: 600px;
+    overflow-y: scroll;
+    display: block;
+}
+
+.table-department {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    width: 100%;
+    border: 2px double black;
+    height: 600px;
+    overflow-y: scroll;
+    display: block;
+}
+
+.table-job {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    width: 100%;
+    border: 2px double black;
+    height: 600px;
+    overflow-y: scroll;
+    display: block;
+}
+
+.table-document {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    width: 105%;
+    border: 2px double black;
+    height: 610px;
+    overflow-y: scroll;
+    display: block;
+}
+
+caption {
+    text-align: center;
+    color: silver;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px;
+}
+
+
+th {
+    background: SteelBlue;
+    color: white;
+    border: 1px double black;
+}
+
+tbody tr:nth-child(even) {
+    background: WhiteSmoke;
+    border: 1px solid black;
+}
+
+tbody tr td:nth-child(2) {
+    text-align: center;
+    border: 1px solid black;
+    text-decoration: underline;
+}
+
+tbody tr td:nth-child(3), tbody tr td:nth-child(4) {
+    text-align: center;
+    font-family: monospace;
+}
+
+tfoot {
+    background: SeaGreen;
+    color: white;
+    text-align: right;
+}
+
+tfoot tr th:last-child {
+    font-family: monospace;
+    display: block;
+}
+
+td, th {
+    border: 1px solid gray;
+    width: 50px;
+    height: 50px;
+    text-align: left;
+    padding: 5px 10px;
+    border: 1px solid black;
+
+}
+
+.organization-form {
+    margin-left: 75px;
+}
+
+.red-button-organization {
+    background: #CD5C5C;
+    margin-left: 50px;
+    color: #fff;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 4px;
+    border: 1px solid #CD5C5C
+}
+
+.info-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 0px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+}
+
+
+.splitleft {
+    height: 60%;
+    width: 50%;
+    position: absolute;
+    left: 0;
+
+}
+
+.splitright {
+    height: 60%;
+    width: 60%;
+    position: absolute;
+    right: 0;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 34%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.centered2 {
+    position: absolute;
+    top: -20%;
+    left: 0%;
+    text-align: center;
+}
+
+.tab-content {
+    width: 600px;
+}
+
+.content-box {
+    width: 1150px;
+    height: 100px;
+    overflow-y: scroll;
+
 }

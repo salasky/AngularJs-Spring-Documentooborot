@@ -1,0 +1,102 @@
+<html>
+<head ng-app="app" ng-controller="Department.IndexController as temp2">
+    <title>Departments</title>
+
+    <head>
+<body>
+
+<h2 class="spielboxDepartments">Departments
+    <button ng-click="openModal()" class="label label-success">Add</button>
+</h2>
+
+<div class="splitleft">
+    <div class="centered">
+        <table class="table-department">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Short Name</th>
+                <th>Supervisor</th>
+                <th>Contact Number</th>
+                <th class="small">Organization</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="department in rootDepartments" ng-class="{active : isSelected(department)}">
+                <td>{{ $index + 1 }}</td>
+                <td><a ng-click="openModal(department)">{{ department.fullName }}</a></td>
+                <td>{{ department.shortName }}</td>
+                <td>{{ department.supervisor }}</td>
+                <td>{{ department.contactNumber }}</td>
+                <td>
+                    <button ng-click="info(department)" class="info-button">info</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="splitright">
+    <div class="centered2">
+        <div class="tablebox">
+            <div class="tablecontent">
+
+                <ul class="nav nav-tabs">
+
+                    <li ng-repeat="tab in tabs track by $index"
+                        ng-class="{true:'active',false:''}[tab.index==activeTabNo]">
+                        <a href="javascript:void(0)" ng-click="activeTab(tab)">{{tab.index}} <i
+                                class="glyphicon glyphicon-remove" ng-click="remove($index)"></i></a>
+                    </li>
+
+                </ul>
+                <div class="tab-content">
+
+                    <div class="tab-pane" ng-repeat="tab in tabs" ng-class="{true:'active',false:''}[tab==activeTabNo]">
+
+                        <div ng-app="app" class="modal-body" id="modal-body">
+                            <form class="form-horizontal" name="contact">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Full name:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" type="text" id="fullName" name="fullName"
+                                               ng-model="tab.organization.fullName "></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Short Name:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" type="text" id="shortName" name="shortName"
+                                               ng-model="tab.organization.shortName"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Supervisor:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" type="text" id="supervisor" name="supervisor"
+                                               ng-model="tab.organization.supervisor "></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Contact Numbers:</label>
+                                    <div class="col-lg-8">
+                                        <textarea class="form-control" rows="2" name="contactNumbers"
+                                                  ng-model="tab.organization.contactNumbers "></textarea>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <button ng-if="activeTabNo!=0" ng-click="openOrganizationModal()" class="info-button">Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

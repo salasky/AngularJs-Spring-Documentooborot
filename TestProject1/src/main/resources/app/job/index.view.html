@@ -1,0 +1,36 @@
+<html>
+<head ng-app="app" ng-controller="Job.IndexController">
+    <title>Jobs</title>
+
+    <head>
+<body>
+
+<h2 class="spielboxJobs">Jobs
+    <button ng-click="openModal()" class="label label-success">Add</button>
+</h2>
+<div class="splitleft">
+    <div class="centered">
+        <table class="table-job">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="job in rootJobs" ng-class="{active : isSelected(job)}">
+                <td>{{ $index + 1 }}</td>
+                <td><a ng-click="openModal(job)">{{ job.name }}</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="splitright">
+    <div class="centered2">
+        <h2>Salavat Migranov</h2>
+        <p>Some text here too.</p>
+    </div>
+</div>
+
+</body>
+</html>

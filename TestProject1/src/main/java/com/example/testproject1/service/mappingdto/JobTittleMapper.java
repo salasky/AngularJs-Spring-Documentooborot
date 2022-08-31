@@ -16,8 +16,10 @@ import java.util.List;
 public interface JobTittleMapper {
 
     JobTittleDTO sourceToDto(JobTittle source);
+
     JobTittle dtoToSource(JobTittleDTO destination);
 
     List<JobTittleDTO> listToDto(List<JobTittle> transactions);
+
     List<JobTittle> dtoToList(List<JobTittleDTO> transactions);
 }

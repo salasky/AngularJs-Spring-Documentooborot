@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <jobTittleListXmlDto>
     <jobList>
-        <job id="00210db1-6e32-4096-b662-85d8b4aeaebb">
+        <job id="34d53a22-a34a-4ff3-a592-fba79994e4a5">
             <jobTittleName>JS Junior</jobTittleName>
         </job>
-        <job id="0b75a556-9b7e-4f89-b2f8-d1a10e991a0a">
+        <job id="e83831ca-115b-46da-aaf7-be6dab6797f2">
             <jobTittleName>Java Junior</jobTittleName>
         </job>
-        <job id="f24d321e-6b78-4cf8-bdab-892e0d34fd63">
+        <job id="82cc9708-16f3-4806-a0e0-2649a1cd4827">
             <jobTittleName>Hr manager</jobTittleName>
         </job>
-        <job id="26648939-04fd-4359-8c55-4a7e9b21a6e9">
+        <job id="eb5141a0-75af-4f47-98ff-cacdee1d8e97">
             <jobTittleName>Product Manager</jobTittleName>
         </job>
     </jobList>

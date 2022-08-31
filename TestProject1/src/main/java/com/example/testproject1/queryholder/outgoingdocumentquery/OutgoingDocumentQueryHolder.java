@@ -38,7 +38,7 @@ public class OutgoingDocumentQueryHolder {
     /**
      * Запрос на удаление всех записей в таблице outgoing_document
      */
-    public static final String OUTGOING_DOCUMENT_DELETE_ALL_QUERY =  new StringBuilder("DELETE FROM base_document ")
+    public static final String OUTGOING_DOCUMENT_DELETE_ALL_QUERY = new StringBuilder("DELETE FROM base_document ")
             .append(" WHERE base_document.id IN (")
             .append(" SELECT base_document.id ")
             .append(" FROM base_document ")

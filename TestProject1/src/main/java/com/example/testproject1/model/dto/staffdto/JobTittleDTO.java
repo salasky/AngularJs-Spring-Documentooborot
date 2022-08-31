@@ -1,5 +1,7 @@
 package com.example.testproject1.model.dto.staffdto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 public class JobTittleDTO {
@@ -10,6 +12,8 @@ public class JobTittleDTO {
     /**
      * Наименование должности
      */
+    @NotNull(message = "name не должно null")
+    @NotEmpty(message = "name не должно быть пустым")
     private String name;
 
     public UUID getId() {

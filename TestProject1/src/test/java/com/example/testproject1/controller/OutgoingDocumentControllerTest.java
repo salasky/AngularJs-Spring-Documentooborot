@@ -125,7 +125,8 @@ public class OutgoingDocumentControllerTest {
     @DisplayName("Test outgoingDocument getAll")
     void testGetAll() {
         ResponseEntity<List<OutgoingDocumentDTO>> response = restTemplate.exchange("/outgoingdocuments", HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<OutgoingDocumentDTO>>() {});
+                new ParameterizedTypeReference<List<OutgoingDocumentDTO>>() {
+                });
         List<OutgoingDocumentDTO> outgoingDocumentDTOS = response.getBody();
         Assertions.assertEquals(outgoingDocumentDTOS.size(), 1);
         Assertions.assertEquals(outgoingDocumentDTOS.stream().findFirst().get().getName(), "Name");

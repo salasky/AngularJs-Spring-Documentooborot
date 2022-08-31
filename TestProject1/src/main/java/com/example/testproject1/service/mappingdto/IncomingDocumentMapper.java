@@ -22,5 +22,6 @@ public abstract class IncomingDocumentMapper {
     public abstract IncomingDocument dtoToIncoming(IncomingDocumentDTO incomingDocumentDTO);
 
     public abstract List<IncomingDocumentDTO> listToDtoList(List<IncomingDocument> taskDocumentList);
+
     public abstract List<IncomingDocument> dtoListToList(List<IncomingDocumentDTO> taskDocumentList);
 }

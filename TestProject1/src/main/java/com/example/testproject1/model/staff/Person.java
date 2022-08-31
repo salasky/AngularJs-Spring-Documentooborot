@@ -89,7 +89,7 @@ public class Person extends Staff implements Comparable<Person> {
         this.firstName = firstName;
     }
 
-    @XmlElement(name = "jobTittle")
+    @XmlElement(name = "job")
     public JobTittle getJobTittle() {
         return jobTittle;
     }

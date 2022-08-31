@@ -1,0 +1,94 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">TaskDocument</h3>
+</div>
+
+<div ng-app="app" class="modal-body" id="modal-body">
+    <form class="form-horizontal" name="contact">
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Name:</label>
+            <div class="col-lg-8">
+                <input class="form-control" type="text" id="fullName" name="fullName"
+                       ng-model="taskDocumentForm.name "></div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Text:</label>
+            <div class="col-lg-8">
+                <input class="form-control" type="text" id="text" name="text" ng-model="taskDocumentForm.text">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-3 control-label">RegNumber :</label>
+            <div class="col-lg-8">
+                <input class="form-control" type="text" id="regNumber" name="regNumber"
+                       ng-model="taskDocumentForm.regNumber"></div>
+        </div>
+
+
+        <label class="col-lg-3 control-label">Creating Date:</label>
+        <div class="input-group" style="width:200px">
+            <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd hh:m:ss"
+                   ng-model="taskDocumentForm.creatingDate" is-open="isDatepickerOpen"
+                   datepicker-options="datepickerOptions" ng-required="true" close-text="Close"
+                   alt-input-formats="altInputFormats"/>
+            <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="isDatepickerOpen = !isDatepickerOpen">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Author:</label>
+            <div class="col-lg-8">
+                <select ng-model="myAuthor" ng-options="person.secondName for person in persons"></select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Responsible:</label>
+            <div class="col-lg-8">
+                <select ng-model="myResponsible" ng-options="person.secondName for person in persons"></select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Control Person:</label>
+            <div class="col-lg-8">
+                <select ng-model="myControlPerson" ng-options="person.secondName for person in persons"></select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Execution Period :</label>
+            <div class="col-lg-8">
+                <input class="form-control" type="text" id="execPeriod" name="execPeriod"
+                       ng-model="taskDocumentForm.execPeriod"></div>
+        </div>
+
+
+        <label class="col-lg-3 control-label">Out Date:</label>
+        <div class="input-group" style="width:200px">
+            <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd hh:m:ss"
+                   ng-model="taskDocumentForm.outDate" is-open="isDatepickerOpen2"
+                   datepicker-options="datepickerOptions" ng-required="true" close-text="Close"
+                   alt-input-formats="altInputFormats"/>
+            <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="isDatepickerOpen2 = !isDatepickerOpen2">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+        </div>
+        <br>
+
+    </form>
+
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-danger" type="button" ng-click="deleteTaskDocuments()">Delete</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+
+</div>

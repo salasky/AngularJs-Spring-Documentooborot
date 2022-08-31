@@ -6,18 +6,18 @@
             <firstName>Ivan</firstName>
             <lastName>Ivanovich</lastName>
             <birthDay>1973-03-14</birthDay>
-            <jobTittle id="00210db1-6e32-4096-b662-85d8b4aeaebb">
+            <job id="34d53a22-a34a-4ff3-a592-fba79994e4a5">
                 <jobTittleName>JS Junior</jobTittleName>
-            </jobTittle>
+            </job>
             <phoneNumber>687546346</phoneNumber>
             <photoRef>http//:dssf.png</photoRef>
-            <department id="00210db1-6e32-4096-b662-85d8b4aeaebb">
+            <department id="0cf07073-da16-4080-ac39-774aa9218ec9">
                 <contactNumber>89654456</contactNumber>
                 <fullName>Market-based</fullName>
                 <shortName>Mk</shortName>
                 <supervisor>Tom Hanks</supervisor>
                 <organization id="9d5be39c-78ce-47a3-aead-54c2594383ee">
-                    <contactNumber>876543567</contactNumber>
+                    <contactNumbers>876543567</contactNumbers>
                     <fullName>Nefteaftomatoika</fullName>
                     <shortName>Nft</shortName>
                     <supervisor>Petrov Ivan</supervisor>
@@ -30,17 +30,17 @@
             <lastName>Nikolayevich</lastName>
             <birthDay>1957-06-17</birthDay>
             <phoneNumber>6827546346</phoneNumber>
-            <jobTittle id="0b75a556-9b7e-4f89-b2f8-d1a10e991a0a">
-                <jobTittleName>Java Junior</jobTittleName>
-            </jobTittle>
+            <job id="34d53a22-a34a-4ff3-a592-fba79994e4a5">
+                <jobTittleName>JS Junior</jobTittleName>
+            </job>
             <photoRef>http//:sddf.png</photoRef>
-            <department id="0b75a556-9b7e-4f89-b2f8-d1a10e991a0a">
+            <department id="7b3b92f1-bc9c-42af-acbb-f91ee4d26439">
                 <contactNumber>8965444556</contactNumber>
                 <fullName>Information Technology</fullName>
                 <shortName>IT</shortName>
                 <supervisor>Rakhimov Ural</supervisor>
                 <organization id="e0624899-1ce6-48bc-9ec5-009026bc3282">
-                    <contactNumber>7566543567, 343436543</contactNumber>
+                    <contactNumbers>7566543567, 343436543</contactNumbers>
                     <fullName>Oil and Gas Systems</fullName>
                     <shortName>OGS</shortName>
                     <supervisor>Nikulin Andrey</supervisor>
@@ -54,16 +54,16 @@
             <birthDay>2007-01-14</birthDay>
             <phoneNumber>84827546346</phoneNumber>
             <photoRef>http//:salmig.png</photoRef>
-            <jobTittle id="f24d321e-6b78-4cf8-bdab-892e0d34fd63">
-                <jobTittleName>Hr manager</jobTittleName>
-            </jobTittle>
-            <department id="0b75a556-9b7e-4f89-b2f8-d1a10e991a0a">
+            <job id="e83831ca-115b-46da-aaf7-be6dab6797f2">
+                <jobTittleName>Java Junior</jobTittleName>
+            </job>
+            <department id="7b3b92f1-bc9c-42af-acbb-f91ee4d26439">
                 <contactNumber>8965444556</contactNumber>
                 <fullName>Information Technology</fullName>
                 <shortName>IT</shortName>
                 <supervisor>Rakhimov Ural</supervisor>
                 <organization id="e0624899-1ce6-48bc-9ec5-009026bc3282">
-                    <contactNumber>7566543567, 343436543</contactNumber>
+                    <contactNumbers>7566543567, 343436543</contactNumbers>
                     <fullName>Oil and Gas Systems</fullName>
                     <shortName>OGS</shortName>
                     <supervisor>Nikulin Andrey</supervisor>
@@ -76,17 +76,17 @@
             <lastName>Kinigaleevich</lastName>
             <birthDay>2009-06-03</birthDay>
             <phoneNumber>8423546346</phoneNumber>
-            <jobTittle id="f24d321e-6b78-4cf8-bdab-892e0d34fd63">
+            <job id="82cc9708-16f3-4806-a0e0-2649a1cd4827">
                 <jobTittleName>Hr manager</jobTittleName>
-            </jobTittle>
+            </job>
             <photoRef>http//:guba.png</photoRef>
-            <department id="f24d321e-6b78-4cf8-bdab-892e0d34fd63">
+            <department id="ef9afb25-73ce-444c-a745-7d34f1a78a21">
                 <contactNumber>896544560</contactNumber>
                 <fullName>HR-department</fullName>
                 <shortName>HR</shortName>
                 <supervisor>Kate Devids</supervisor>
                 <organization id="e0624899-1ce6-48bc-9ec5-009026bc3282">
-                    <contactNumber>7566543567, 343436543</contactNumber>
+                    <contactNumbers>7566543567, 343436543</contactNumbers>
                     <fullName>Oil and Gas Systems</fullName>
                     <shortName>OGS</shortName>
                     <supervisor>Nikulin Andrey</supervisor>
@@ -99,17 +99,17 @@
             <lastName>Petrovich</lastName>
             <birthDay>2000-09-01</birthDay>
             <phoneNumber>84243546346</phoneNumber>
-            <jobTittle id="26648939-04fd-4359-8c55-4a7e9b21a6e9">
+            <job id="eb5141a0-75af-4f47-98ff-cacdee1d8e97">
                 <jobTittleName>Product Manager</jobTittleName>
-            </jobTittle>
+            </job>
             <photoRef>http//:hdf.png</photoRef>
-            <department id="f24d321e-6b78-4cf8-bdab-892e0d34fd63">
+            <department id="ef9afb25-73ce-444c-a745-7d34f1a78a21">
                 <contactNumber>896544560</contactNumber>
                 <fullName>HR-department</fullName>
                 <shortName>HR</shortName>
                 <supervisor>Kate Devids</supervisor>
                 <organization id="e0624899-1ce6-48bc-9ec5-009026bc3282">
-                    <contactNumber>7566543567, 343436543</contactNumber>
+                    <contactNumbers>7566543567, 343436543</contactNumbers>
                     <fullName>Oil and Gas Systems</fullName>
                     <shortName>OGS</shortName>
                     <supervisor>Nikulin Andrey</supervisor>

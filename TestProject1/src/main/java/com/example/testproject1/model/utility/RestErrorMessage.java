@@ -1,6 +1,7 @@
 package com.example.testproject1.model.utility;
 
 import java.sql.Timestamp;
+
 /**
  * Класс для ошибок отправляемых на UI
  *

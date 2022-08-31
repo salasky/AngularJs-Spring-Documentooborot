@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <departmentListXmlDto>
     <departmentList>
-        <department id="00210db1-6e32-4096-b662-85d8b4aeaebb">
+        <department id="0cf07073-da16-4080-ac39-774aa9218ec9">
             <contactNumber>89654456</contactNumber>
             <fullName>Market-based</fullName>
             <shortName>Mk</shortName>
@@ -13,7 +13,7 @@
                 <supervisor>Petrov Ivan</supervisor>
             </organization>
         </department>
-        <department id="0b75a556-9b7e-4f89-b2f8-d1a10e991a0a">
+        <department id="7b3b92f1-bc9c-42af-acbb-f91ee4d26439">
             <contactNumber>8965444556</contactNumber>
             <fullName>Information Technology</fullName>
             <shortName>IT</shortName>
@@ -25,7 +25,7 @@
                 <supervisor>Nikulin Andrey</supervisor>
             </organization>
         </department>
-        <department id="f24d321e-6b78-4cf8-bdab-892e0d34fd63">
+        <department id="ef9afb25-73ce-444c-a745-7d34f1a78a21">
             <contactNumber>896544560</contactNumber>
             <fullName>HR-department</fullName>
             <shortName>HR</shortName>

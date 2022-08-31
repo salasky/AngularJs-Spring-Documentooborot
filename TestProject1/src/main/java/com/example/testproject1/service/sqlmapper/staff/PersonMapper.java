@@ -52,13 +52,18 @@ public class PersonMapper implements RowMapper<Person> {
      * Название столбца для мапинга в поле person_birth_day
      */
     private final String PERSON_BIRTH_DAY = "person_birth_day";
+    /**
+     * Название столбца для мапинаг
+     */
+    private final String DEPARTMENT_ID = "department_id";
 
     /**
      * {@inheritDoc}
      */
     @Override
     public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Department department = departmentMapper.mapRow(rs, rowNum);
+
+        Department department = Department.newBuilder().setId(UUID.fromString(rs.getString(DEPARTMENT_ID))).build();
         JobTittle jobTittle = jobTittleMapper.mapRow(rs, rowNum);
         return Person.newBuilder()
                 .setId(UUID.fromString(rs.getString(PERSON_ID)))

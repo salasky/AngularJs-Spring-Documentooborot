@@ -24,7 +24,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -126,7 +125,8 @@ public class IncomingDocumentControllerTest {
     @DisplayName("Test incomingDocument getAll")
     void testGetAll() {
         ResponseEntity<List<IncomingDocumentDTO>> response = restTemplate.exchange("/incomingdocuments", HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<IncomingDocumentDTO>>() {});
+                new ParameterizedTypeReference<List<IncomingDocumentDTO>>() {
+                });
         List<IncomingDocumentDTO> taskDocumentDTOList = response.getBody();
         Assertions.assertEquals(taskDocumentDTOList.size(), 1);
         Assertions.assertEquals(taskDocumentDTOList.stream().findFirst().get().getName(), "Name");

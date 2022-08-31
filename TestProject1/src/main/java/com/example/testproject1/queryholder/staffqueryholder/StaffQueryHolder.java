@@ -111,19 +111,13 @@ public class StaffQueryHolder {
             .append("SELECT  person.id AS person_id, person.first_name AS person_first_name, person.second_name AS person_second_name,")
             .append("person.last_name AS person_last_name, person.photo AS person_photo, person.phone_number AS person_phone_number,")
             .append("person.birth_day AS person_birth_day,")
-            .append("department.id AS department_id, department.full_name AS department_full_name,")
-            .append("department.short_name AS department_short_name, department.supervisor AS department_supervisor,")
-            .append("department.contact_number AS department_contact_number, organization.id AS organization_id ,")
-            .append("organization.full_name AS organization_full_name, organization.short_name AS organization_short_name,")
-            .append("organization.supervisor AS organization_supervisor, organization.contact_number AS organization_contact_number, ")
+
+            .append("person.department_id AS department_id, ")
+
             .append("job_tittle.id AS job_tittle_id, job_tittle.name AS job_name  ")
             .append("FROM person ")
-            .append("INNER JOIN department ")
-            .append("    ON person.department_id=department_id ")
             .append("INNER JOIN job_tittle ")
-            .append("    ON person.job_tittle_id=job_tittle.id ")
-            .append("INNER JOIN organization ")
-            .append("   ON organization.id=department.organization_id ").toString();
+            .append("    ON person.job_tittle_id=job_tittle.id ").toString();
     /**
      * Запрос на получение объекта по id из таблицы person
      */

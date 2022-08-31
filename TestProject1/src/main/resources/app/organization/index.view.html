@@ -1,0 +1,44 @@
+<html>
+<head ng-app="app" ng-controller="Organization.IndexController">
+    <title>Organizations</title>
+
+    <head>
+<body>
+
+
+<h2 class="spielboxOrganizations">Organizations
+    <button ng-click="openModal()" class="label label-success">Add</button>
+</h2>
+<div class="splitleft">
+    <div class="centered">
+
+        <table class="table-organization">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Short Name</th>
+                <th>Supervisor</th>
+                <th>Contact Numbers</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="organization in rootOrganizations" ng-class="{active : isSelected(organization)}">
+                <td>{{ $index + 1 }}</td>
+                <td><a ng-click="openModal(organization)">{{ organization.fullName }}</a></td>
+                <td>{{ organization.shortName }}</td>
+                <td>{{ organization.supervisor }}</td>
+                <td>{{ organization.contactNumbers }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="splitright">
+    <div class="centered2">
+        <h2>Salavat Migranov</h2>
+        <p>Some text here too.</p>
+    </div>
+</div>
+
+</body>
+</html>
