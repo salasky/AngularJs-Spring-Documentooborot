@@ -19,7 +19,10 @@ public class CrossConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*");
+                        .allowedOrigins("*")
+                        .allowedMethods("*")
+                        .maxAge(3600)
+                        .allowedHeaders("*");
             }
         };
     }
