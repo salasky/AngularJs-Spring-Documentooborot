@@ -1,6 +1,6 @@
 angular
     .module('app')
-    .controller('Job.IndexController', ['$scope', '$http', '$uibModal', '$rootScope',
+    .controller('JobController', ['$scope', '$http', '$uibModal', '$rootScope',
 
         function ($scope, $http, $uibModal, $rootScope) {
 

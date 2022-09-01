@@ -1,6 +1,6 @@
 angular
     .module('app')
-    .controller('Person.IndexController', ['$scope', '$http', '$uibModal', '$rootScope',
+    .controller('PersonController', ['$scope', '$http', '$uibModal', '$rootScope',
         function ($scope, $http, $uibModal, $rootScope) {
             _refreshCustomerData();
             $scope.department = "";

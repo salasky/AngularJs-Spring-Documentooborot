@@ -3,7 +3,7 @@ console.clear();
 let app = angular.module('app');
 
 
-app.controller('OutgoingDocument.IndexController', function ($compile, $sce, $scope, $window, $uibModal, $http, $rootScope) {
+app.controller('OutgoingDocumentController', function ($compile, $sce, $scope, $window, $uibModal, $http, $rootScope) {
     _refreshOutgoingDocuments();
 
     function _refreshOutgoingDocuments() {

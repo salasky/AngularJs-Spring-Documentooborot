@@ -1,6 +1,6 @@
 angular
     .module('app')
-    .controller('Organization.IndexController', ['$scope', '$http', '$uibModal', 'restapi', '$rootScope',
+    .controller('OrganizationController', ['$scope', '$http', '$uibModal', 'restapi', '$rootScope',
 
         function ($scope, $http, $uibModal, restapi, $rootScope) {
 

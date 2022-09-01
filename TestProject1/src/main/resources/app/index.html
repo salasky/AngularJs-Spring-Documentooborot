@@ -3,8 +3,8 @@
 <!-- define angular app -->
 <html ng-app="app">
 
-<head>
-
+<head >
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
             integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
@@ -26,61 +26,69 @@
 
 <body>
 <!-- NAVIGATION -->
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <a class="navbar-brand" ui-sref="home">
-                <img alt="Brand" src="img/brand.png">
-            </a>
+<header class="clearfix">
+    <div class="containers">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" ui-sref="home">
+                        <img alt="Brand" src="img/brand.png">
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a ui-sref="home">Home <span class="sr-only">(current)</span></a></li>
+                        <li><a ui-sref="person">Persons</a></li>
+
+                        <li class="dropdown">
+                            <a ui-sref="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false">Documents <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a ui-sref="incomingDocument">IncomingDocument</a></li>
+                                <li><a ui-sref="outgoingDocument">OutgoingDocument</a></li>
+                                <li><a ui-sref="taskDocument">TaskDocument</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a ui-sref="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false">Staff <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a ui-sref="job">Job</a></li>
+                                <li><a ui-sref="department">Department</a></li>
+                                <li><a ui-sref="organization">Organization</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a ui-sref="about">About</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.coe.int/ru/web/help-country/home"><i class="fa fa-info"
+                                                                                                       aria-hidden="true"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://citros.ru/contacts/"><i class="fa fa-address-book"
+                                                                                      aria-hidden="true"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://t.me/sall"><i class="fa fa-telegram" aria-hidden="true"></i></a>
+                        </li>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
         </div>
+    </div>
+</header>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a ui-sref="home">Home <span class="sr-only">(current)</span></a></li>
-                <li><a ui-sref="person">Persons</a></li>
-
-                <li class="dropdown">
-                    <a ui-sref="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Documents <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a ui-sref="incomingDocument">IncomingDocument</a></li>
-                        <li><a ui-sref="outgoingDocument">OutgoingDocument</a></li>
-                        <li><a ui-sref="taskDocument">TaskDocument</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a ui-sref="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Staff <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a ui-sref="job">Job</a></li>
-                        <li><a ui-sref="department">Department</a></li>
-                        <li><a ui-sref="organization">Organization</a></li>
-                    </ul>
-                </li>
-
-                <li><a ui-sref="about">About</a></li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item">
-                    <a class="nav-link" href="https://www.coe.int/ru/web/help-country/home"><i class="fa fa-info"
-                                                                                               aria-hidden="true"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://citros.ru/contacts/"><i class="fa fa-address-book"
-                                                                              aria-hidden="true"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://t.me/sall"><i class="fa fa-telegram" aria-hidden="true"></i></a>
-                </li>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
 
 <div id="main">
     <!-- angular templating -->
@@ -89,7 +97,7 @@
 
 <footer>
     <h2>Hello world!!!</h2>
-    <a class="nav-link" ui-sref="test-page"><i class="fa fa-diamond" aria-hidden="true"></i></i></a>
+    <a class="nav-link" href="https://bitbucket.blogic.ru/users/smigranov/repos/testrepo/pull-requests/5/overview"><i class="fa fa-diamond" aria-hidden="true"></i></i></a>
 </footer>
 
 <!-- angular -->
@@ -106,30 +114,29 @@
 <script src="http://ui-grid.info/release/ui-grid.js"></script>
 
 <script type="text/javascript" src="app.js"></script>
-<script type="text/javascript" src="home/index.controller.js"></script>
 <script type="text/javascript" src="about/index.controller.js"></script>
-<script type="text/javascript" src="job/index.controller.js"></script>
-<script type="text/javascript" src="job/modalController.js"></script>
-<script type="text/javascript" src="organization/modalController.js"></script>
-<script type="text/javascript" src="organization/index.controller.js"></script>
+<script type="text/javascript" src="job/job-controller.js"></script>
+<script type="text/javascript" src="job/job-modalController.js"></script>
+<script type="text/javascript" src="organization/organization-modalController.js"></script>
+<script type="text/javascript" src="organization/organization-controller.js"></script>
 <script type="text/javascript" src="organization/service.js"></script>
 <script type="text/javascript" src="lib/directives.js"></script>
 <script>document.write('<base href="' + document.location + '" />');</script>
 
-<script type="text/javascript" src="department/modalController.js"></script>
-<script type="text/javascript" src="department/index.controller.js"></script>
+<script type="text/javascript" src="department/department-modalController.js"></script>
+<script type="text/javascript" src="department/department-controller.js"></script>
 
-<script type="text/javascript" src="person/modalController.js"></script>
-<script type="text/javascript" src="person/index.controller.js"></script>
+<script type="text/javascript" src="person/person-modalController.js"></script>
+<script type="text/javascript" src="person/person-controller.js"></script>
 
-<script type="text/javascript" src="incomingdocument/modalController.js"></script>
-<script type="text/javascript" src="incomingdocument/index.controller.js"></script>
-<script type="text/javascript" src="taskdocument/modalController.js"></script>
-<script type="text/javascript" src="taskdocument/index.controller.js"></script>
-<script type="text/javascript" src="outgoingdocument/modalController.js"></script>
-<script type="text/javascript" src="outgoingdocument/index.controller.js"></script>
+<script type="text/javascript" src="incomingdocument/incomingDocument-modalController.js"></script>
+<script type="text/javascript" src="incomingdocument/incomingDocument-controller.js"></script>
+<script type="text/javascript" src="taskdocument/task-document-modalController.js"></script>
+<script type="text/javascript" src="taskdocument/task-document.controller.js"></script>
+<script type="text/javascript" src="outgoingdocument/outgoing-document-modalController.js"></script>
+<script type="text/javascript" src="outgoingdocument/outgoing-document-controller.js"></script>
 
-<script type="text/javascript" src="test-page/index.controller.js"></script>
+<script type="text/javascript" src="service/restApiServices.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"

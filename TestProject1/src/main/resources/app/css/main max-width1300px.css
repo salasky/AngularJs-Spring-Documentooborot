@@ -52,7 +52,7 @@
 
     .navbar-brand > img {
         margin-bottom: 10px;
-        max-width: 35px;
+        max-width: 65px;
     }
 
 
@@ -73,17 +73,14 @@
     }
 
     .navbar-expand-lg li a::after {
-        content: '';
-        display: block;
-        width: 50%;
+
         background-color: #111;
         height: 1px;
-        transition: all .3s;
-        transform: scale(1);
+
     }
 
     .navbar-expand-lg li a:hover::after {
-        transform: scale(1);
+        transform: scale(10);
     }
 
     /*HEADER*/
@@ -211,8 +208,13 @@
         width: 100%;
         height: 30px;
     }
-    .imageHeader{
-        max-height: 23px;
-    }
-
 }
+
+
+
+
+
+
+
+
+

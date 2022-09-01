@@ -1,21 +1,18 @@
 <html>
-<head ng-app="app" ng-controller="IncomingDocument.IndexController as temp2">
-    <title>IncomingDocuments</title>
+<head ng-app="app" ng-controller="TaskDocumentController">
+    <title>TaskDocuments</title>
 
     <head>
 <body>
 
-
-    <h2 class="spielbox">IncomingDocuments
-        <img class="imageHeader" src="/app/img/documentCreate.png">
-        <button ng-click="openModal()" class="label label-success">Create</button>
-    </h2>
-
-
+<h2 class="spielbox">TaskDocuments
+    <img class="imageHeader" src="/app/img/documentCreate.png">
+    <button ng-click="openModal()" class="label label-success">Create</button>
+</h2>
 
 <div class="splitleft">
     <div class="centered">
-        <table class="table-document">
+        <table class="table-department">
             <thead>
             <tr>
                 <th>Id</th>
@@ -26,14 +23,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="incomingDocument in rootIncomingDocuments track by $index"
-                ng-class="{active : isSelected(incomingDocument)}">
+            <tr ng-repeat="taskDocument in rootTaskDocuments track by $index"
+                ng-class="{active : isSelected(taskDocument)}">
                 <td>{{ $index + 1 }}</td>
-                <td><a ng-click="openModal(incomingDocument)">{{ incomingDocument.name }}</a></td>
-                <td>{{ incomingDocument.text }}</td>
-                <td>{{ incomingDocument.regNumber }}</td>
+                <td><a ng-click="openModal(taskDocument)">{{ taskDocument.name }}</a></td>
+                <td>{{ taskDocument.text }}</td>
+                <td>{{ taskDocument.regNumber }}</td>
                 <td>
-                    <button ng-click="info(incomingDocument)" class="info-button">info</button>
+                    <button ng-click="info(taskDocument)" class="info-button">info</button>
                 </td>
             </tr>
             </tbody>
@@ -45,7 +42,6 @@
     <div class="centered2">
         <div class="tablebox">
             <div class="tablecontent">
-
                 <div class="content-box">
                     <ul class="nav nav-tabs">
                         <li ng-repeat="tab in tabs" ng-class="{true:'active',false:''}[tab==activeTabNo]">
@@ -92,18 +88,24 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-lg-3 control-label">Number:</label>
+                                    <label class="col-lg-3 control-label">Execution Period:</label>
                                     <div class="col-lg-8">
                                         <input class="form-control" type="text" id="number" name="number"
-                                               ng-model="tab.number "></div>
+                                               ng-model="tab.execPeriod "></div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-lg-3 control-label">Date Of Registration:</label>
+                                    <label class="col-lg-3 control-label">Out Date:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" id="dateOfRegistration"
-                                               name="dateOfRegistration"
-                                               ng-model="tab.dateOfRegistration "></div>
+                                        <input class="form-control" type="text" id="outDate" name="outDate"
+                                               ng-model="tab.outDate "></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Control:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" type="text" id="signOfControl" name="signOfControl"
+                                               ng-model="tab.signOfControl "></div>
                                 </div>
                             </form>
 

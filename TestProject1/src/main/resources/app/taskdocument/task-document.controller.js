@@ -1,54 +1,54 @@
 angular
     .module('app')
-    .controller('IncomingDocument.IndexController', ['$scope', '$http', '$uibModal', '$rootScope',
+    .controller('TaskDocumentController', ['$scope', '$http', '$uibModal', '$rootScope',
 
         function ($scope, $http, $uibModal, $rootScope) {
-            _refreshIncomingDocuments();
+            _refreshDocuments();
 
-            function _refreshIncomingDocuments() {
+            function _refreshDocuments() {
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/incomingdocuments'
+                    url: 'http://localhost:8080/taskdocuments'
                 }).then(function successCallback(response) {
-                    $rootScope.rootIncomingDocuments = response.data;
+                    $rootScope.rootTaskDocuments = response.data;
                 }, function errorCallback(response) {
                     console.log(response.statusText);
                 });
             }
 
 
-            function personInfo(incomingDocument) {
+            function personInfo(taskDocument) {
                 $http({
                     method: 'GET',
-                    url: 'http://localhost:8080/persons/' + incomingDocument.authorId
+                    url: 'http://localhost:8080/persons/' + taskDocument.authorId
                 }).then(function successCallback(response) {
                     $scope.author = response.data;
 
-                    let tabNo = incomingDocument;
+                    let tabNo = taskDocument;
                     tabNo.author = $scope.author;
-                    tabNo.index = incomingDocument.name + ' ' + incomingDocument.id.substring(0, 3)
+                    tabNo.index = taskDocument.name + ' ' + taskDocument.id.substring(0, 3)
                     if($scope.tabs.includes(tabNo)){
                         $scope.activeTabNo = tabNo;
                     }else{
                         $scope.tabs.push(tabNo);
                         $scope.activeTabNo = tabNo;
-
                     }
+
                 }, function errorCallback(response) {
                     console.log(response.statusText);
                 });
             };
 
 
-            $scope.openModal = function (incomingDocument) {
+            $scope.openModal = function (taskDocument) {
                 let modalInstance = $uibModal.open({
-                    templateUrl: 'incomingdocument/modalWindow.html',
-                    controller: 'IncomingDocumentModalController',
+                    templateUrl: 'taskdocument/modalWindow.html',
+                    controller: 'TaskDocumentModalController',
                     backdrop: false,
                     size: 'm',
                     animation: true,
                     resolve: {
-                        syncData: () => incomingDocument,
+                        syncData: () => taskDocument,
                     }
                 });
                 return modalInstance;
@@ -58,8 +58,9 @@ angular
             $scope.activeTabNo = 0;
             $scope.tabs = [];
 
-            $scope.info = function (incomingDocument) {
-                personInfo(incomingDocument);
+
+            $scope.info = function (taskDocument) {
+                personInfo(taskDocument);
             };
 
             $scope.remove = function (index) {

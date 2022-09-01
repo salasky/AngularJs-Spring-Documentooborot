@@ -1,8 +1,9 @@
 angular
-    .module('app').controller('DepartmentModalController', function ($scope, $uibModalInstance, $http, syncData, $rootScope) {
-
-    $scope.data = syncData;
-    $scope.departmentsForm = {
+    .module('app').controller('DepartmentModalController', function ($uibModalInstance, $http, syncData, $rootScope) {
+    let vm=this;
+ 
+    vm.data = syncData;
+    vm.departmentsForm = {
         id: -1,
         fullName: "",
         shortName: "",
@@ -10,33 +11,27 @@ angular
         contactNumber: "",
         organizationId: ""
     };
-    $scope.organizations = [];
+    vm.organizations = [];
 
-    if ($scope.data != undefined) {
-        editDepartment($scope.data);
+    if (vm.data != undefined) {
+        editDepartment(vm.data);
     } else {
         addDepartment();
-    }
-    ;
+    };
 
     function editDepartment(department) {
         loadOrganizationData()
-        $scope.departmentsForm.id = department.id;
-        $scope.departmentsForm.fullName = department.fullName;
-        $scope.departmentsForm.shortName = department.shortName;
-        $scope.departmentsForm.supervisor = department.supervisor;
-        $scope.departmentsForm.contactNumber = department.contactNumber;
-        $scope.departmentsForm.organizationId = department.organizationId;
+        vm.departmentsForm=department;
     }
 
     function addDepartment() {
         loadOrganizationData()
-        $scope.departmentsForm.id = -1;
-        $scope.departmentsForm.fullName = "";
-        $scope.departmentsForm.shortName = "";
-        $scope.departmentsForm.supervisor = "";
-        $scope.departmentsForm.contactNumber = "";
-        $scope.departmentsForm.organizationId = "";
+        vm.departmentsForm.id = -1;
+        vm.departmentsForm.fullName = "";
+        vm.departmentsForm.shortName = "";
+        vm.departmentsForm.supervisor = "";
+        vm.departmentsForm.contactNumber = "";
+        vm.departmentsForm.organizationId = "";
     }
 
     function _success(response) {
@@ -45,12 +40,12 @@ angular
 
     function _error(response) {
         console.log(response);
-        alert($scope.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
+        alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
 
     }
 
     function _refreshCustomerData() {
-        $scope.departments = [];
+        vm.departments = [];
         $http({
             method: 'GET',
             url: 'http://localhost:8080/departments'
@@ -61,13 +56,13 @@ angular
         });
     }
 
-    $scope.ok = function () {
-        $scope.departmentsForm.organizationId = $scope.myOrganization.id;
+    vm.ok = function () {
+        vm.departmentsForm.organizationId = vm.myOrganization.id;
 
         let method = "";
         let url = "";
-        if ($scope.departmentsForm.id == -1) {
-            $scope.departmentsForm.id = null
+        if (vm.departmentsForm.id == -1) {
+            vm.departmentsForm.id = null
             method = "POST";
             url = 'http://localhost:8080/departments/add';
         } else {
@@ -78,7 +73,7 @@ angular
         $http({
             method: method,
             url: url,
-            data: angular.toJson($scope.departmentsForm),
+            data: angular.toJson(vm.departmentsForm),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -86,14 +81,14 @@ angular
         $uibModalInstance.close();
     }
 
-    $scope.cancel = function () {
+    vm.cancel = function () {
         $uibModalInstance.close()
     }
 
-    $scope.deleteDepartment = function () {
+    vm.deleteDepartment = function () {
         $http({
             method: 'DELETE',
-            url: 'http://localhost:8080/departments/' + $scope.data.id
+            url: 'http://localhost:8080/departments/' + vm.data.id
         }).then(_success, _error);
     };
 
@@ -103,10 +98,10 @@ angular
             method: 'GET',
             url: 'http://localhost:8080/organizations'
         }).then(function successCallback(response) {
-            $scope.organizations = response.data;
-            for (const el of $scope.organizations) {
-                if (el.id == $scope.data.organizationId) {
-                    $scope.myOrganization = el;
+            vm.organizations = response.data;
+            for (const el of vm.organizations) {
+                if (el.id == vm.data.organizationId) {
+                    vm.myOrganization = el;
                 }
             }
         }, function errorCallback(response) {

@@ -28,58 +28,55 @@ function config($stateProvider, $urlRouterProvider) {
         })
         .state('job', {
             url: '/job',
-            templateUrl: 'job/index.view.html',
-            controller: 'Job.IndexController',
+            templateUrl: 'job/job-index.html',
+            controller: 'JobController',
             controllerAs: 'vm'
         })
         .state('organization', {
             url: '/organization',
-            templateUrl: 'organization/index.view.html',
-            controller: 'Organization.IndexController',
+            templateUrl: 'organization/organization-index.html',
+            controller: 'OrganizationController',
             controllerAs: 'vm'
         })
         .state('department', {
             url: '/department',
-            templateUrl: 'department/index.view.html',
-            controller: 'Department.IndexController',
+            templateUrl: 'department/department-index.html',
+            controller: 'DepartmentController',
             controllerAs: 'vm'
         })
         .state('person', {
             url: '/person',
-            templateUrl: 'person/index.view.html',
-            controller: 'Person.IndexController',
+            templateUrl: 'person/person-index.html',
+            controller: 'PersonController',
             controllerAs: 'vm'
         })
         .state('incomingDocument', {
             url: '/incomingDocument',
-            templateUrl: 'incomingdocument/index.view.html',
-            controller: 'IncomingDocument.IndexController',
+            templateUrl: 'incomingdocument/incomingDocument-index.html',
+            controller: 'IncomingDocumentController',
             controllerAs: 'vm'
         })
         .state('taskDocument', {
             url: '/taskDocument',
-            templateUrl: 'taskdocument/index.view.html',
-            controller: 'TaskDocument.IndexController',
+            templateUrl: 'taskdocument/task-document-index.html',
+            controller: 'TaskDocumentController',
             controllerAs: 'vm'
         })
 
         .state('outgoingDocument', {
             url: '/outgoingDocument',
-            templateUrl: 'outgoingdocument/index.view.html',
-            controller: 'OutgoingDocument.IndexController',
+            templateUrl: 'outgoingdocument/outgoing-document-view.html',
+            controller: 'OutgoingDocumentController',
             controllerAs: 'vm'
         })
     ;
 }
 
 function run($rootScope) {
-    $rootScope.moduleName = "app";
-    $rootScope.message = "Hello AngularJS";
     $rootScope.rootJobs = [];
     $rootScope.rootOrganizations = [];
     $rootScope.rootDepartments = [];
     $rootScope.rootPersons = [];
-
     $rootScope.rootIncomingDocuments = [];
     $rootScope.rootOutgoingDocuments = [];
     $rootScope.rootTaskDocuments = [];

@@ -1,5 +1,5 @@
 <html>
-<head ng-app="app" ng-controller="Department.IndexController as temp2">
+<head ng-app="app" ng-controller="DepartmentController">
     <title>Departments</title>
 
     <head>
@@ -7,7 +7,7 @@
 
 <h2 class="spielbox">Departments
     <img class="imageHeader" src="/app/img/department.png">
-    <button ng-click="openModal()" class="label label-success">Add</button>
+    <button ng-click="vm.openModal()" class="label label-success">Add</button>
 </h2>
 
 <div class="splitleft">
@@ -26,12 +26,12 @@
             <tbody>
             <tr ng-repeat="department in rootDepartments ">
                 <td>{{ $index + 1 }}</td>
-                <td><a ng-click="openModal(department)">{{ department.fullName }}</a></td>
+                <td><a ng-click="vm.openModal(department)">{{ department.fullName }}</a></td>
                 <td>{{ department.shortName }}</td>
                 <td>{{ department.supervisor }}</td>
                 <td>{{ department.contactNumber }}</td>
                 <td>
-                    <button ng-click="info(department)" class="info-button">info</button>
+                    <button ng-click="vm.info(department)" class="info-button">info</button>
                 </td>
             </tr>
             </tbody>
@@ -45,16 +45,16 @@
             <div class="tablecontent">
 
                 <ul class="nav nav-tabs">
-                    <li ng-repeat="tab in tabs track by $index"
-                        ng-class="{true:'active',false:''}[tab==activeTabNo]">
-                        <a href="javascript:void(0)" ng-click="activeTab(tab)">{{tab.index}} <img style="max-height: 20px" src="/app/img/department.png">
-                            <i class="glyphicon glyphicon-remove" ng-click="remove($index)"></i></a>
+                    <li ng-repeat="tab in vm.tabs track by $index"
+                        ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
+                        <a href="javascript:void(0)" ng-click="vm.activeTab(tab)">{{tab.index}} <img style="max-height: 20px" src="/app/img/department.png">
+                            <i class="glyphicon glyphicon-remove" ng-click="vm.remove($index)"></i></a>
                     </li>
 
                 </ul>
                 <div class="tab-content">
 
-                    <div class="tab-pane" ng-repeat="tab in tabs" ng-class="{true:'active',false:''}[tab==activeTabNo]">
+                    <div class="tab-pane" ng-repeat="tab in vm.tabs" ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
                         <div ng-app="app" class="modal-body" id="modal-body">
                             <form class="form-horizontal" name="contact">
                                 <div class="form-group">
@@ -88,7 +88,7 @@
                             </form>
 
                         </div>
-                        <button ng-if="activeTabNo!=0" ng-click="openOrganizationModal()" class="info-button">Edit
+                        <button ng-if="vm.activeTabNo!=0" ng-click="vm.openOrganizationModal()" class="info-button">Edit
                         </button>
                     </div>
                 </div>
