@@ -1,9 +1,9 @@
 angular
     .module('app')
-    .controller('DepartmentController', ['$http', '$uibModal', '$rootScope','dataService',
+    .controller('DepartmentController',DepartmentController );
+        DepartmentController.$inject=['$http', '$uibModal', '$rootScope','dataService'];
 
-        function ( $http, $uibModal, $rootScope,dataService) {
-
+        function DepartmentController ( $http, $uibModal, $rootScope,dataService) {
             let vm=this;
             _refreshCustomerData();
 
@@ -95,4 +95,4 @@ angular
                         vm.activeTabNo = tabNo;
                     };
 
-                }]);
+                };

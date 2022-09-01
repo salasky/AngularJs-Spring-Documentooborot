@@ -1,6 +1,10 @@
 angular
-    .module('app').controller('IncomingDocumentModalController', function ($uibModalInstance, $http, syncData, $rootScope) {
-    let vm=this;
+    .module('app')
+    .controller('IncomingDocumentModalController', IncomingDocumentModalController);
+
+function IncomingDocumentModalController($uibModalInstance, $http, syncData, $rootScope) {
+
+    let vm = this;
     vm.data = syncData;
     vm.incomingDocumentForm = {
         id: -1,
@@ -130,5 +134,5 @@ angular
             console.log(response.statusText);
         });
     }
-});
+};
 

@@ -1,5 +1,9 @@
 angular
-    .module('app').controller('modalController', function ( $uibModalInstance, $http, syncData, $rootScope) {
+    .module('app')
+    .controller('modalController',modalController );
+
+function modalController ( $uibModalInstance, $http, syncData, $rootScope) {
+
     let vm=this;
     vm.data = syncData;
 
@@ -90,5 +94,5 @@ angular
         }).then(_success, _error);
         $uibModalInstance.close();
     };
-});
+};
 

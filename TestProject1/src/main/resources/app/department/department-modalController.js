@@ -1,7 +1,11 @@
 angular
-    .module('app').controller('DepartmentModalController', function ($uibModalInstance, $http, syncData, $rootScope) {
-    let vm=this;
- 
+    .module('app')
+    .controller('DepartmentModalController', DepartmentModalController);
+
+DepartmentModalController.$inject = ['$http', '$uibModalInstance', '$rootScope', 'syncData'];
+
+function DepartmentModalController($http, $uibModalInstance, $rootScope, syncData,) {
+    let vm = this;
     vm.data = syncData;
     vm.departmentsForm = {
         id: -1,
@@ -17,11 +21,12 @@ angular
         editDepartment(vm.data);
     } else {
         addDepartment();
-    };
+    }
+    ;
 
     function editDepartment(department) {
         loadOrganizationData()
-        vm.departmentsForm=department;
+        vm.departmentsForm = department;
     }
 
     function addDepartment() {
@@ -109,5 +114,5 @@ angular
             console.log(response.statusText);
         });
     }
-});
+};
 

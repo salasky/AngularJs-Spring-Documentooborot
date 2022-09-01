@@ -1,5 +1,9 @@
 angular
-    .module('app').controller('jobsModalController', function ($uibModalInstance, $http, syncData, $window, $rootScope) {
+    .module('app')
+    .controller('jobsModalController',jobsModalController );
+
+function jobsModalController ( $uibModalInstance, $http, syncData, $window, $rootScope) {
+
         
     let vm=this;
     vm.data = syncData;
@@ -81,5 +85,5 @@ angular
         });
 
     }
-});
+};
 

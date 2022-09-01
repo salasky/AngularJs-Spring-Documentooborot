@@ -1,7 +1,8 @@
 angular
     .module('app')
-    .controller('PersonController', ['$http', '$uibModal', '$rootScope',
-        function ( $http, $uibModal, $rootScope) {
+    .controller('PersonController',PersonController );
+
+function PersonController (  $http, $uibModal, $rootScope) {
             let vm=this;
             _refreshCustomerData();
             vm.department = "";
@@ -153,7 +154,7 @@ angular
                 return modalInstance;
             };
 
-        }]);
+        };
 
 
 

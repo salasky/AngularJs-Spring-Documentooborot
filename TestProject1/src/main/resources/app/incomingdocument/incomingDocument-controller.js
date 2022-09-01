@@ -1,8 +1,9 @@
 angular
     .module('app')
-    .controller('IncomingDocumentController', ['$http', '$uibModal', '$rootScope',
+    .controller('IncomingDocumentController',IncomingDocumentController );
 
-        function ( $http, $uibModal, $rootScope) {
+function IncomingDocumentController ( $http, $uibModal, $rootScope) {
+
             let vm=this;
             _refreshIncomingDocuments();
 
@@ -77,8 +78,7 @@ angular
             vm.activeTab = function (tabNo) {
                 vm.activeTabNo = tabNo;
             };
-
-        }]);
+        };
 
 
 

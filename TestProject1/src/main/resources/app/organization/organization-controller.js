@@ -1,8 +1,8 @@
 angular
     .module('app')
-    .controller('OrganizationController', [ '$http', '$uibModal', 'restapi', '$rootScope',
+    .controller('OrganizationController',OrganizationController );
 
-        function ($http, $uibModal, restapi, $rootScope) {
+function OrganizationController ( $http, $uibModal, restapi, $rootScope) {
             let vm=this;
             _refreshCustomerData();
 
@@ -40,4 +40,4 @@ angular
                 });
                 return modalInstance;
             };
-        }])
+        };

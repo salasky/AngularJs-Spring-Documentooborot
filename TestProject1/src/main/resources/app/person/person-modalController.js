@@ -1,5 +1,8 @@
 angular
-    .module('app').controller('PersonModalController', function ( $uibModalInstance, $http, syncData, $rootScope) {
+    .module('app')
+    .controller('PersonModalController',PersonModalController );
+
+function PersonModalController ($uibModalInstance, $http, syncData, $rootScope) {
         let vm=this;
         
         vm.data = syncData;
@@ -142,6 +145,5 @@ angular
                 console.log(response.statusText);
             });
         }
-    }
-);
+    };
 

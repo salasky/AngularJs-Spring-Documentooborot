@@ -1,5 +1,8 @@
 angular
-    .module('app').controller('OutgoingDocumentModalController', function ($uibModalInstance, $http, syncData, $rootScope) {
+    .module('app')
+    .controller('OutgoingDocumentModalController',OutgoingDocumentModalController );
+
+function OutgoingDocumentModalController ($uibModalInstance, $http, syncData, $rootScope) {
     let vm=this;
     vm.data = syncData;
     vm.outgoingDocumentForm = {
@@ -137,5 +140,5 @@ angular
             console.log(response.statusText);
         });
     }
-});
+};
 

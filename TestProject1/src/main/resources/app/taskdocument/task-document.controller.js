@@ -1,8 +1,9 @@
 angular
     .module('app')
-    .controller('TaskDocumentController', ['$http', '$uibModal', '$rootScope',
-        function ( $http, $uibModal, $rootScope) {
-            
+    .controller('TaskDocumentController',TaskDocumentController );
+
+function TaskDocumentController ($http, $uibModal, $rootScope) {
+
             let vm=this;
             _refreshDocuments();
 
@@ -80,7 +81,7 @@ angular
                 vm.activeTabNo = tabNo;
             };
 
-        }]);
+        };
 
 
 

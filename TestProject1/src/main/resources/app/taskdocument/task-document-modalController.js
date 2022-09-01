@@ -1,6 +1,8 @@
 angular
-    .module('app').controller('TaskDocumentModalController', function ($uibModalInstance, $http, syncData, $rootScope) {
-    
+    .module('app')
+    .controller('TaskDocumentModalController',TaskDocumentModalController );
+
+function TaskDocumentModalController ($uibModalInstance, $http, syncData, $rootScope) {
     let vm=this;
     vm.data = syncData;
     vm.taskDocumentForm = {
@@ -136,5 +138,5 @@ angular
             console.log(response.statusText);
         });
     }
-});
+};
 

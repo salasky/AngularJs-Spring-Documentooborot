@@ -1,8 +1,9 @@
 angular
     .module('app')
-    .controller('JobController', ['$http', '$uibModal', '$rootScope',
+    .controller('JobController',JobController );
 
-        function ($http, $uibModal, $rootScope) {
+
+function JobController ($http, $uibModal, $rootScope) {
             let vm=this;
             _refreshCustomerData();
 
@@ -44,4 +45,4 @@ angular
                 });
                 return modalInstance;
             };
-        }])
+        };

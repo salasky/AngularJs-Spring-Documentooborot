@@ -1,11 +1,9 @@
-console.clear();
+angular
+    .module('app')
+    .controller('OutgoingDocumentController',OutgoingDocumentController );
 
-let app = angular.module('app');
-
-
-app.controller('OutgoingDocumentController', function ($compile, $sce, $window, $uibModal, $http, $rootScope) {
+function OutgoingDocumentController ( $compile, $sce, $window, $uibModal, $http, $rootScope) {
     let vm=this;
-    
     _refreshOutgoingDocuments();
     function _refreshOutgoingDocuments() {
         $http({
@@ -81,7 +79,7 @@ app.controller('OutgoingDocumentController', function ($compile, $sce, $window, 
     };
 
 
-});
+};
 
 
 
