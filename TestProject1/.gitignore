@@ -10,7 +10,7 @@ derby.log
 /src/main/resources/*.json
 /src/main/java/META-INF/
 /src/main/java/javadoc/
-/src/main/resources/*.png
+/src/main/resources/app/img
 .mvn
 **/package.html
 ### STS ###
