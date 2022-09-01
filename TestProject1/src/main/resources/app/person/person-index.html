@@ -6,7 +6,7 @@
 
 <h2 class="spielbox">Persons
     <img style="max-height: 30px" src="/app/img/userIcon.png">
-    <button ng-click="openModal()" class="label label-success">Add</button>
+    <button ng-click="vm.openModal()" class="label label-success">Add</button>
 </h2>
 
 <div class="splitleft">
@@ -23,13 +23,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="person in rootPersons" ng-class="{active : isSelected(person)}">
+            <tr ng-repeat="person in rootPersons">
                 <td>{{ $index + 1 }}</td>
-                <td><a ng-click="openModal(person)">{{ person.secondName }}</a></td>
-                <td><a ng-click="openModal(person)">{{ person.firstName }}</a></td>
-                <td><a ng-click="openModal(person)">{{ person.lastName }}</a></td>
+                <td><a ng-click="vm.openModal(person)">{{ person.secondName }}</a></td>
+                <td><a ng-click="vm.openModal(person)">{{ person.firstName }}</a></td>
+                <td><a ng-click="vm.openModal(person)">{{ person.lastName }}</a></td>
                 <td>
-                    <button ng-click="info(person)" class="info-button">info</button>
+                    <button ng-click="vm.info(person)" class="info-button">info</button>
                 </td>
             </tr>
             </tbody>
@@ -43,14 +43,14 @@
             <div class="tablecontent">
                 <ul class="nav nav-tabs">
 
-                    <li ng-repeat="tab in tabs" ng-class="{true:'active',false:''}[tab==activeTabNo]">
-                        <a href="javascript:void(0)" ng-click="activeTab(tab)">{{tab.index}}
+                    <li ng-repeat="tab in vm.tabs" ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
+                        <a href="javascript:void(0)" ng-click="vm.activeTab(tab)">{{tab.index}}
                             <img style="max-height: 20px" src="/app/img/user.png"><i
-                                class="glyphicon glyphicon-remove" ng-click="remove($index)"></i></a>
+                                class="glyphicon glyphicon-remove" ng-click="vm.remove($index)"></i></a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane" ng-repeat="tab in tabs" ng-class="{true:'active',false:''}[tab==activeTabNo]">
+                    <div class="tab-pane" ng-repeat="tab in vm.tabs" ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
                         <div ng-app="app" class="modal-body" id="modal-body">
 
                             <form class="form-horizontal" name="contact">
@@ -83,7 +83,7 @@
                                                   ng-model="tab.organization.contactNumbers "></textarea>
                                     </div>
                                 </div>
-                                <button ng-if="activeTabNo!=0" ng-click="openOrganizationModal()" class="info-button">
+                                <button ng-if="activeTabNo!=0" ng-click="vm.openOrganizationModal()" class="info-button">
                                     Edit
                                 </button>
                             </form>
@@ -118,7 +118,7 @@
                                         <input class="form-control" type="text" id="contactDep" name="supervisor"
                                                ng-model="tab.department.contactNumber "></div>
                                 </div>
-                                <button ng-if="activeTabNo!=0" ng-click="openDepartmentModal()" class="info-button">
+                                <button ng-if="activeTabNo!=0" ng-click="vm.openDepartmentModal()" class="info-button">
                                     Edit
                                 </button>
                             </form>
@@ -133,7 +133,7 @@
                                                ng-model="tab.job.name "></div>
                                 </div>
 
-                                <button ng-if="activeTabNo!=0" ng-click="openJobModal()" class="info-button">Edit
+                                <button ng-if="activeTabNo!=0" ng-click="vm.openJobModal()" class="info-button">Edit
                                 </button>
                             </form>
 

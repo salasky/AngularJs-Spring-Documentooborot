@@ -1,17 +1,18 @@
 angular
     .module('app')
-    .controller('PersonController', ['$scope', '$http', '$uibModal', '$rootScope',
-        function ($scope, $http, $uibModal, $rootScope) {
+    .controller('PersonController', ['$http', '$uibModal', '$rootScope',
+        function ( $http, $uibModal, $rootScope) {
+            let vm=this;
             _refreshCustomerData();
-            $scope.department = "";
-            $scope.job = "";
-            $scope.organization = "";
+            vm.department = "";
+            vm.job = "";
+            vm.organization = "";
 
             /* Private Methods */
 
             //HTTP GET- get all organizations collection
             function _refreshCustomerData() {
-                $scope.persons = [];
+                vm.persons = [];
                 $http({
                     method: 'GET',
                     url: 'http://localhost:8080/persons'
@@ -28,13 +29,13 @@ angular
 
             function _error(response) {
                 console.log(response);
-                alert($scope.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
+                alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
             }
 
-            $scope.openModal = function (person) {
+            vm.openModal = function (person) {
                 let modalInstance = $uibModal.open({
                     templateUrl: 'person/modalWindow.html',
-                    controller: 'PersonModalController',
+                    controller: 'PersonModalController as vm',
                     backdrop: false,
                     size: 'm',
                     animation: true,
@@ -50,28 +51,28 @@ angular
                     method: 'GET',
                     url: 'http://localhost:8080/departments/' + person.departmentId
                 }).then(function successCallback(response) {
-                    $scope.department = response.data;
+                    vm.department = response.data;
                     //После загрузки информации о департаменте, загружаем информацию о организации
                     $http({
                         method: 'GET',
-                        url: 'http://localhost:8080/organizations/' + $scope.department.organizationId
+                        url: 'http://localhost:8080/organizations/' + vm.department.organizationId
                     }).then(function successCallback(response) {
-                        $scope.organization = response.data;
+                        vm.organization = response.data;
                         $http({
                             method: 'GET',
                             url: 'http://localhost:8080/jobs/' + person.jobTittleId
                         }).then(function successCallback(response) {
-                            $scope.job = response.data;
+                            vm.job = response.data;
                             let tabNo = person;
-                            tabNo.organization = $scope.organization;
-                            tabNo.department = $scope.department;
-                            tabNo.job = $scope.job;
+                            tabNo.organization = vm.organization;
+                            tabNo.department = vm.department;
+                            tabNo.job = vm.job;
                             tabNo.index = person.secondName + ' ' + person.id.substring(0, 3)
-                            if($scope.tabs.includes(tabNo)){
-                                $scope.activeTabNo = tabNo;
+                            if(vm.tabs.includes(tabNo)){
+                                vm.activeTabNo = tabNo;
                             }else{
-                                $scope.tabs.push(tabNo);
-                                $scope.activeTabNo = tabNo;
+                                vm.tabs.push(tabNo);
+                                vm.activeTabNo = tabNo;
                             }
 
                         }, function errorCallback(response) {
@@ -87,66 +88,66 @@ angular
 
             };
 
-            $scope.activeTabNo = 0;
-            $scope.tabs = [];
+            vm.activeTabNo = 0;
+            vm.tabs = [];
 
-            $scope.info = function (person) {
+            vm.info = function (person) {
                 staffInfoGet(person);
             };
-            $scope.remove = function (index) {
+            vm.remove = function (index) {
                 if (index === 0) {
-                    if ($scope.activeTabNo === $scope.tabs[0]) {
-                        $scope.activeTabNo = 0;
+                    if (vm.activeTabNo === vm.tabs[0]) {
+                        vm.activeTabNo = 0;
                     }
                 } else {
-                    if ($scope.activeTabNo === $scope.tabs[index]) {
-                        $scope.activeTabNo = $scope.tabs[index - 1];
+                    if (vm.activeTabNo === vm.tabs[index]) {
+                        vm.activeTabNo = vm.tabs[index - 1];
                     }
                 }
-                $scope.tabs.splice(index, 1);
+                vm.tabs.splice(index, 1);
             };
-            $scope.activeTab = function (tabNo) {
-                $scope.activeTabNo = tabNo;
+            vm.activeTab = function (tabNo) {
+                vm.activeTabNo = tabNo;
             };
 
-            $scope.openOrganizationModal = function () {
+            vm.openOrganizationModal = function () {
                 let modalInstance = $uibModal.open({
                     templateUrl: 'organization/modalWindow.html',
-                    controller: 'modalController',
+                    controller: 'modalController as vm',
                     backdrop: false,
                     size: 'm',
                     animation: true,
                     resolve: {
-                        syncData: () => $scope.organization,
+                        syncData: () => vm.organization,
                     }
                 });
                 return modalInstance;
             }
 
 
-            $scope.openDepartmentModal = function () {
+            vm.openDepartmentModal = function () {
                 let modalInstance = $uibModal.open({
                     templateUrl: 'department/modalWindow.html',
-                    controller: 'DepartmentModalController',
+                    controller: 'DepartmentModalController as vm',
                     backdrop: false,
                     size: 'm',
                     animation: true,
                     resolve: {
-                        syncData: () => $scope.department,
+                        syncData: () => vm.department,
                     }
                 });
                 return modalInstance;
             };
 
-            $scope.openJobModal = function () {
+            vm.openJobModal = function () {
                 let modalInstance = $uibModal.open({
                     templateUrl: 'job/modalWindow.html',
-                    controller: 'jobsModalController',
+                    controller: 'jobsModalController as vm',
                     backdrop: false,
                     size: 'm',
                     animation: true,
                     resolve: {
-                        syncData: () => $scope.job,
+                        syncData: () => vm.job,
                     }
                 });
                 return modalInstance;

@@ -1,8 +1,9 @@
 angular
-    .module('app').controller('TaskDocumentModalController', function ($scope, $uibModalInstance, $http, syncData, $rootScope) {
-
-    $scope.data = syncData;
-    $scope.taskDocumentForm = {
+    .module('app').controller('TaskDocumentModalController', function ($uibModalInstance, $http, syncData, $rootScope) {
+    
+    let vm=this;
+    vm.data = syncData;
+    vm.taskDocumentForm = {
         id: -1,
         name: "",
         text: "",
@@ -16,10 +17,10 @@ angular
         controlPersonId: ""
     }
 
-    $scope.persons = [];
+    vm.persons = [];
 
-    if ($scope.data != undefined) {
-        editDocument($scope.data);
+    if (vm.data != undefined) {
+        editDocument(vm.data);
     } else {
         addDocument();
     }
@@ -27,32 +28,32 @@ angular
 
     function editDocument(taskDocument) {
         loadPersonData()
-        $scope.taskDocumentForm.id = taskDocument.id;
-        $scope.taskDocumentForm.name = taskDocument.name;
-        $scope.taskDocumentForm.text = taskDocument.text;
-        $scope.taskDocumentForm.regNumber = taskDocument.regNumber;
-        $scope.taskDocumentForm.creatingDate = new Date(taskDocument.creatingDate);
-        $scope.taskDocumentForm.authorId = taskDocument.authorId;
-        $scope.taskDocumentForm.execPeriod = taskDocument.execPeriod;
-        $scope.taskDocumentForm.responsibleId = taskDocument.responsibleId;
-        $scope.taskDocumentForm.controlPersonId = taskDocument.controlPersonId;
-        $scope.taskDocumentForm.signOfControl = taskDocument.signOfControl;
-        $scope.taskDocumentForm.outDate = new Date(taskDocument.outDate);
+        vm.taskDocumentForm.id = taskDocument.id;
+        vm.taskDocumentForm.name = taskDocument.name;
+        vm.taskDocumentForm.text = taskDocument.text;
+        vm.taskDocumentForm.regNumber = taskDocument.regNumber;
+        vm.taskDocumentForm.creatingDate = new Date(taskDocument.creatingDate);
+        vm.taskDocumentForm.authorId = taskDocument.authorId;
+        vm.taskDocumentForm.execPeriod = taskDocument.execPeriod;
+        vm.taskDocumentForm.responsibleId = taskDocument.responsibleId;
+        vm.taskDocumentForm.controlPersonId = taskDocument.controlPersonId;
+        vm.taskDocumentForm.signOfControl = taskDocument.signOfControl;
+        vm.taskDocumentForm.outDate = new Date(taskDocument.outDate);
     }
 
     function addDocument() {
         loadPersonData()
-        $scope.taskDocumentForm.id = -1;
-        $scope.taskDocumentForm.name = "";
-        $scope.taskDocumentForm.text = "";
-        $scope.taskDocumentForm.regNumber = "";
-        $scope.taskDocumentForm.creatingDate = "";
-        $scope.taskDocumentForm.authorId = "";
-        $scope.taskDocumentForm.execPeriod = "";
-        $scope.taskDocumentForm.responsibleId = "";
-        $scope.taskDocumentForm.controlPersonId = "";
-        $scope.taskDocumentForm.signOfControl = "";
-        $scope.taskDocumentForm.outDate = "";
+        vm.taskDocumentForm.id = -1;
+        vm.taskDocumentForm.name = "";
+        vm.taskDocumentForm.text = "";
+        vm.taskDocumentForm.regNumber = "";
+        vm.taskDocumentForm.creatingDate = "";
+        vm.taskDocumentForm.authorId = "";
+        vm.taskDocumentForm.execPeriod = "";
+        vm.taskDocumentForm.responsibleId = "";
+        vm.taskDocumentForm.controlPersonId = "";
+        vm.taskDocumentForm.signOfControl = "";
+        vm.taskDocumentForm.outDate = "";
 
     }
 
@@ -62,7 +63,7 @@ angular
 
     function _error(response) {
         console.log(response);
-        alert($scope.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
+        alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
     }
 
     function _refreshDocuments() {
@@ -76,14 +77,14 @@ angular
         });
     }
 
-    $scope.ok = function () {
-        $scope.taskDocumentForm.authorId = $scope.myAuthor.id;
-        $scope.taskDocumentForm.responsibleId = $scope.myResponsible.id;
-        $scope.taskDocumentForm.controlPersonId = $scope.myControlPerson.id;
+    vm.ok = function () {
+        vm.taskDocumentForm.authorId = vm.myAuthor.id;
+        vm.taskDocumentForm.responsibleId = vm.myResponsible.id;
+        vm.taskDocumentForm.controlPersonId = vm.myControlPerson.id;
         let method = "";
         let url = "";
-        if ($scope.taskDocumentForm.id == -1) {
-            $scope.taskDocumentForm.id = null
+        if (vm.taskDocumentForm.id == -1) {
+            vm.taskDocumentForm.id = null
             method = "POST";
             url = 'http://localhost:8080/taskdocuments/add';
         } else {
@@ -93,7 +94,7 @@ angular
         $http({
             method: method,
             url: url,
-            data: angular.toJson($scope.taskDocumentForm),
+            data: angular.toJson(vm.taskDocumentForm),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -101,15 +102,16 @@ angular
         $uibModalInstance.close();
     }
 
-    $scope.cancel = function () {
+    vm.cancel = function () {
         $uibModalInstance.close()
     }
 
-    $scope.deleteTaskDocuments = function () {
+    vm.deleteTaskDocuments = function () {
         $http({
             method: 'DELETE',
-            url: 'http://localhost:8080/taskdocuments/' + $scope.data.id
+            url: 'http://localhost:8080/taskdocuments/' + vm.data.id
         }).then(_success, _error);
+        $uibModalInstance.close();
     };
 
 
@@ -118,16 +120,16 @@ angular
             method: 'GET',
             url: 'http://localhost:8080/persons'
         }).then(function successCallback(response) {
-            $scope.persons = response.data;
-            for (const el of $scope.persons) {
-                if (el.id == $scope.data.authorId) {
-                    $scope.myAuthor = el;
+            vm.persons = response.data;
+            for (const el of vm.persons) {
+                if (el.id == vm.data.authorId) {
+                    vm.myAuthor = el;
                 }
-                if (el.id == $scope.data.responsibleId) {
-                    $scope.myResponsible = el;
+                if (el.id == vm.data.responsibleId) {
+                    vm.myResponsible = el;
                 }
-                if (el.id == $scope.data.controlPersonId) {
-                    $scope.myControlPerson = el;
+                if (el.id == vm.data.controlPersonId) {
+                    vm.myControlPerson = el;
                 }
             }
         }, function errorCallback(response) {

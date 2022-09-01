@@ -8,7 +8,7 @@
 <div>
     <h2 class="spielbox">Organizations
         <img class="imageHeader" src="/app/img/organization.png">
-        <button ng-click="openModal()" class="label label-success">Add</button>
+        <button ng-click="vm.openModal()" class="label label-success">Add</button>
     </h2>
 </div>
 
@@ -24,9 +24,9 @@
                 <th>Contact Numbers</th>
             </tr>
             </thead>
-            <tr ng-repeat="organization in rootOrganizations" ng-class="{active : isSelected(organization)}">
+            <tr ng-repeat="organization in rootOrganizations">
                 <td>{{ $index + 1 }}</td>
-                <td><a ng-click="openModal(organization)">{{ organization.fullName }}</a></td>
+                <td><a ng-click="vm.openModal(organization)">{{ organization.fullName }}</a></td>
                 <td>{{ organization.shortName }}</td>
                 <td>{{ organization.supervisor }}</td>
                 <td>{{ organization.contactNumbers }}</td>

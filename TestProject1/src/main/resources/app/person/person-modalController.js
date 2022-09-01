@@ -1,8 +1,9 @@
 angular
-    .module('app').controller('PersonModalController', function ($scope, $uibModalInstance, $http, syncData, $rootScope) {
-
-        $scope.data = syncData;
-        $scope.personsForm = {
+    .module('app').controller('PersonModalController', function ( $uibModalInstance, $http, syncData, $rootScope) {
+        let vm=this;
+        
+        vm.data = syncData;
+        vm.personsForm = {
             id: -1,
             lastName: "",
             secondName: "",
@@ -14,12 +15,12 @@ angular
             departmentId: "",
 
         };
-        $scope.departments = [];
-        $scope.jobs = [];
+        vm.departments = [];
+        vm.jobs = [];
 
 
-        if ($scope.data != undefined) {
-            editPerson($scope.data);
+        if (vm.data != undefined) {
+            editPerson(vm.data);
         } else {
             addPerson();
         }
@@ -28,26 +29,26 @@ angular
         function editPerson(person) {
             loadDepartmentData()
             loadJobData();
-            $scope.personsForm.id = person.id;
-            $scope.personsForm.lastName = person.lastName;
-            $scope.personsForm.secondName = person.secondName;
-            $scope.personsForm.firstName = person.firstName;
-            $scope.personsForm.photoRef = person.photoRef;
-            $scope.personsForm.birthDay = person.birthDay;
-            $scope.personsForm.phoneNumber = person.phoneNumber;
-            $scope.personsForm.birthDay = new Date(person.birthDay);
+            vm.personsForm.id = person.id;
+            vm.personsForm.lastName = person.lastName;
+            vm.personsForm.secondName = person.secondName;
+            vm.personsForm.firstName = person.firstName;
+            vm.personsForm.photoRef = person.photoRef;
+            vm.personsForm.birthDay = person.birthDay;
+            vm.personsForm.phoneNumber = person.phoneNumber;
+            vm.personsForm.birthDay = new Date(person.birthDay);
         }
 
         function addPerson() {
             loadDepartmentData()
             loadJobData();
-            $scope.personsForm.id = -1;
-            $scope.personsForm.lastName = "";
-            $scope.personsForm.secondName = "";
-            $scope.personsForm.firstName = "";
-            $scope.personsForm.photoRef = "";
-            $scope.personsForm.birthDay = "";
-            $scope.personsForm.phoneNumber = "";
+            vm.personsForm.id = -1;
+            vm.personsForm.lastName = "";
+            vm.personsForm.secondName = "";
+            vm.personsForm.firstName = "";
+            vm.personsForm.photoRef = "";
+            vm.personsForm.birthDay = "";
+            vm.personsForm.phoneNumber = "";
         }
 
         function _success(response) {
@@ -56,12 +57,12 @@ angular
 
         function _error(response) {
             console.log(response);
-            alert($scope.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
+            alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
 
         }
 
         function _refreshCustomerData() {
-            $scope.persons = [];
+            vm.persons = [];
             $http({
                 method: 'GET',
                 url: 'http://localhost:8080/persons'
@@ -72,13 +73,13 @@ angular
             });
         }
 
-        $scope.ok = function () {
-            $scope.personsForm.departmentId = $scope.myDepartment.id;
-            $scope.personsForm.jobTittleId = $scope.myJob.id;
+        vm.ok = function () {
+            vm.personsForm.departmentId = vm.myDepartment.id;
+            vm.personsForm.jobTittleId = vm.myJob.id;
             let method = "";
             let url = "";
-            if ($scope.personsForm.id == -1) {
-                $scope.personsForm.id = null
+            if (vm.personsForm.id == -1) {
+                vm.personsForm.id = null
                 method = "POST";
                 url = 'http://localhost:8080/persons/add';
             } else {
@@ -89,7 +90,7 @@ angular
             $http({
                 method: method,
                 url: url,
-                data: angular.toJson($scope.personsForm),
+                data: angular.toJson(vm.personsForm),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -97,15 +98,16 @@ angular
             $uibModalInstance.close();
         }
 
-        $scope.cancel = function () {
+        vm.cancel = function () {
             $uibModalInstance.close()
         }
 
-        $scope.deletePerson = function () {
+        vm.deletePerson = function () {
             $http({
                 method: 'DELETE',
-                url: 'http://localhost:8080/persons/' + $scope.data.id
+                url: 'http://localhost:8080/persons/' + vm.data.id
             }).then(_success, _error);
+            $uibModalInstance.close();
         };
 
 
@@ -114,10 +116,10 @@ angular
                 method: 'GET',
                 url: 'http://localhost:8080/departments'
             }).then(function successCallback(response) {
-                $scope.departments = response.data;
-                for (const el of $scope.departments) {
-                    if (el.id == $scope.data.departmentId) {
-                        $scope.myDepartment = el;
+                vm.departments = response.data;
+                for (const el of vm.departments) {
+                    if (el.id == vm.data.departmentId) {
+                        vm.myDepartment = el;
                     }
                 }
             }, function errorCallback(response) {
@@ -130,10 +132,10 @@ angular
                 method: 'GET',
                 url: 'http://localhost:8080/jobs'
             }).then(function successCallback(response) {
-                $scope.jobs = response.data;
-                for (const el of $scope.jobs) {
-                    if (el.id == $scope.data.jobTittleId) {
-                        $scope.myJob = el;
+                vm.jobs = response.data;
+                for (const el of vm.jobs) {
+                    if (el.id == vm.data.jobTittleId) {
+                        vm.myJob = el;
                     }
                 }
             }, function errorCallback(response) {

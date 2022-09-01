@@ -1,17 +1,11 @@
 angular
     .module('app')
-    .controller('OrganizationController', ['$scope', '$http', '$uibModal', 'restapi', '$rootScope',
+    .controller('OrganizationController', [ '$http', '$uibModal', 'restapi', '$rootScope',
 
-        function ($scope, $http, $uibModal, restapi, $rootScope) {
-
+        function ($http, $uibModal, restapi, $rootScope) {
+            let vm=this;
             _refreshCustomerData();
 
-            $scope.deleteOrganization = function (organization) {
-                $http({
-                    method: 'DELETE',
-                    url: 'http://localhost:8080/organizations/' + organization.id
-                }).then(_success, _error);
-            };
 
             /* Private Methods */
 
@@ -29,14 +23,14 @@ angular
 
             function _error(response) {
                 console.log(response);
-                alert($scope.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
+                alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
 
             }
 
-            $scope.openModal = function (organization) {
+            vm.openModal = function (organization) {
                 let modalInstance = $uibModal.open({
                     templateUrl: 'organization/modalWindow.html',
-                    controller: 'modalController',
+                    controller: 'modalController as vm',
                     backdrop: false,
                     size: 'm',
                     animation: true,

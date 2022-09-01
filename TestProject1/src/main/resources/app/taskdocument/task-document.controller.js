@@ -1,8 +1,9 @@
 angular
     .module('app')
-    .controller('TaskDocumentController', ['$scope', '$http', '$uibModal', '$rootScope',
-
-        function ($scope, $http, $uibModal, $rootScope) {
+    .controller('TaskDocumentController', ['$http', '$uibModal', '$rootScope',
+        function ( $http, $uibModal, $rootScope) {
+            
+            let vm=this;
             _refreshDocuments();
 
             function _refreshDocuments() {
@@ -22,16 +23,16 @@ angular
                     method: 'GET',
                     url: 'http://localhost:8080/persons/' + taskDocument.authorId
                 }).then(function successCallback(response) {
-                    $scope.author = response.data;
+                    vm.author = response.data;
 
                     let tabNo = taskDocument;
-                    tabNo.author = $scope.author;
+                    tabNo.author = vm.author;
                     tabNo.index = taskDocument.name + ' ' + taskDocument.id.substring(0, 3)
-                    if($scope.tabs.includes(tabNo)){
-                        $scope.activeTabNo = tabNo;
+                    if(vm.tabs.includes(tabNo)){
+                        vm.activeTabNo = tabNo;
                     }else{
-                        $scope.tabs.push(tabNo);
-                        $scope.activeTabNo = tabNo;
+                        vm.tabs.push(tabNo);
+                        vm.activeTabNo = tabNo;
                     }
 
                 }, function errorCallback(response) {
@@ -40,10 +41,10 @@ angular
             };
 
 
-            $scope.openModal = function (taskDocument) {
+            vm.openModal = function (taskDocument) {
                 let modalInstance = $uibModal.open({
                     templateUrl: 'taskdocument/modalWindow.html',
-                    controller: 'TaskDocumentModalController',
+                    controller: 'TaskDocumentModalController as vm',
                     backdrop: false,
                     size: 'm',
                     animation: true,
@@ -55,28 +56,28 @@ angular
             };
 
 
-            $scope.activeTabNo = 0;
-            $scope.tabs = [];
+            vm.activeTabNo = 0;
+            vm.tabs = [];
 
 
-            $scope.info = function (taskDocument) {
+            vm.info = function (taskDocument) {
                 personInfo(taskDocument);
             };
 
-            $scope.remove = function (index) {
+            vm.remove = function (index) {
                 if (index === 0) {
-                    if ($scope.activeTabNo === $scope.tabs[0]) {
-                        $scope.activeTabNo = 0;
+                    if (vm.activeTabNo === vm.tabs[0]) {
+                        vm.activeTabNo = 0;
                     }
                 } else {
-                    if ($scope.activeTabNo === $scope.tabs[index]) {
-                        $scope.activeTabNo = $scope.tabs[index - 1];
+                    if (vm.activeTabNo === vm.tabs[index]) {
+                        vm.activeTabNo = vm.tabs[index - 1];
                     }
                 }
-                $scope.tabs.splice(index, 1);
+                vm.tabs.splice(index, 1);
             };
-            $scope.activeTab = function (tabNo) {
-                $scope.activeTabNo = tabNo;
+            vm.activeTab = function (tabNo) {
+                vm.activeTabNo = tabNo;
             };
 
         }]);

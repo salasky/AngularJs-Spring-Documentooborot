@@ -10,26 +10,26 @@
             <label class="col-lg-3 control-label">Second Name:</label>
             <div class="col-lg-8">
                 <input class="form-control" type="text" id="fullName" name="fullName"
-                       ng-model="personsForm.secondName "></div>
+                       ng-model="vm.personsForm.secondName "></div>
         </div>
         <div class="form-group">
             <label class="col-lg-3 control-label">First Name :</label>
             <div class="col-lg-8">
                 <input class="form-control" type="text" id="shortName" name="shortName"
-                       ng-model="personsForm.firstName"></div>
+                       ng-model="vm.personsForm.firstName"></div>
         </div>
 
         <div class="form-group">
             <label class="col-lg-3 control-label">Last Name :</label>
             <div class="col-lg-8">
                 <input class="form-control" type="text" id="supervisor" name="supervisor"
-                       ng-model="personsForm.lastName "></div>
+                       ng-model="vm.personsForm.lastName "></div>
         </div>
 
         <div class="form-group">
             <label class="col-lg-3 control-label">PhotoRef:</label>
             <div class="col-lg-8">
-                <input class="form-control" type="text" id="photoRef" name="photoRef" ng-model="personsForm.photoRef ">
+                <input class="form-control" type="text" id="photoRef" name="photoRef" ng-model="vm.personsForm.photoRef ">
             </div>
         </div>
 
@@ -37,26 +37,26 @@
             <label class="col-lg-3 control-label">Phone Number:</label>
             <div class="col-lg-8">
                 <input class="form-control" type="text" id="phoneNumber" name="phoneNumber"
-                       ng-model="personsForm.phoneNumber "></div>
+                       ng-model="vm.personsForm.phoneNumber "></div>
         </div>
 
         <div class="form-group">
             <label class="col-lg-3 control-label">Department:</label>
             <div class="col-lg-8">
-                <select ng-model="myDepartment" ng-options="department.fullName for department in departments"></select>
+                <select ng-model="vm.myDepartment" ng-options="department.fullName for department in vm.departments"></select>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-lg-3 control-label">Job:</label>
             <div class="col-lg-8">
-                <select ng-model="myJob" ng-options="job.name for job in jobs"></select>
+                <select ng-model="vm.myJob" ng-options="job.name for job in vm.jobs"></select>
             </div>
         </div>
 
         <label class="col-lg-3 control-label">Birth Day:</label>
         <div class="input-group" style="width:200px">
-            <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="personsForm.birthDay "
+            <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="vm.personsForm.birthDay "
                    is-open="isDatepickerOpen"
                    datepicker-options="datepickerOptions" ng-required="true" close-text="Close"
                    alt-input-formats="altInputFormats"/>
@@ -73,8 +73,8 @@
 
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    <button class="btn btn-danger" type="button" ng-click="deletePerson()">Delete</button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>
+    <button class="btn btn-danger" type="button" ng-click="vm.deletePerson()">Delete</button>
+    <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
 
 </div>

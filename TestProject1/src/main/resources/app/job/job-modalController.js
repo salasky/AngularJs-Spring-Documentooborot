@@ -1,14 +1,15 @@
 angular
-    .module('app').controller('jobsModalController', function ($scope, $uibModalInstance, $http, syncData, $window, $rootScope) {
+    .module('app').controller('jobsModalController', function ($uibModalInstance, $http, syncData, $window, $rootScope) {
+        
+    let vm=this;
+    vm.data = syncData;
 
-    $scope.data = syncData;
-
-    $scope.jobsForm = {
+    vm.jobsForm = {
         id: -1,
         name: ""
     };
-    if ($scope.data != undefined) {
-        editJob($scope.data);
+    if (vm.data != undefined) {
+        editJob(vm.data);
     } else {
         addJob();
     }
@@ -16,14 +17,12 @@ angular
 
 
     function editJob(job) {
-        $scope.jobsForm.id = job.id;
-        $scope.jobsForm.name = job.name;
-
+        vm.jobsForm=job;
     }
 
     function addJob() {
-        $scope.jobsForm.id = -1;
-        $scope.jobsForm.name = "";
+        vm.jobsForm.id = -1;
+        vm.jobsForm.name = "";
     }
 
     function _success(response) {
@@ -32,16 +31,16 @@ angular
 
     function _error(response) {
         console.log(response);
-        alert($scope.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
+        alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
 
     }
 
 
-    $scope.ok = function () {
+    vm.ok = function () {
         let method = "";
         let url = "";
-        if ($scope.jobsForm.id == -1) {
-            $scope.jobsForm.id = null
+        if (vm.jobsForm.id == -1) {
+            vm.jobsForm.id = null
             method = "POST";
             url = 'http://localhost:8080/jobs/add';
         } else {
@@ -51,7 +50,7 @@ angular
         $http({
             method: method,
             url: url,
-            data: angular.toJson($scope.jobsForm),
+            data: angular.toJson(vm.jobsForm),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -59,15 +58,16 @@ angular
         $uibModalInstance.close();
     }
 
-    $scope.cancel = function () {
+    vm.cancel = function () {
         $uibModalInstance.close()
     }
 
-    $scope.deleteJob = function () {
+    vm.deleteJob = function () {
         $http({
             method: 'DELETE',
-            url: 'http://localhost:8080/jobs/' + $scope.data.id
+            url: 'http://localhost:8080/jobs/' + vm.data.id
         }).then(_success, _error);
+        $uibModalInstance.close();
     };
 
     function _refreshCustomerData() {

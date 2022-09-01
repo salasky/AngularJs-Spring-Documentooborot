@@ -1,5 +1,5 @@
 <html>
-<head ng-app="app" ng-controller="IncomingDocumentController as temp2">
+<head ng-app="app" ng-controller="IncomingDocumentController">
     <title>IncomingDocuments</title>
 
     <head>
@@ -8,9 +8,8 @@
 
     <h2 class="spielbox">IncomingDocuments
         <img class="imageHeader" src="/app/img/documentCreate.png">
-        <button ng-click="openModal()" class="label label-success">Create</button>
+        <button ng-click="vm.openModal()" class="label label-success">Create</button>
     </h2>
-
 
 
 <div class="splitleft">
@@ -26,14 +25,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="incomingDocument in rootIncomingDocuments track by $index"
-                ng-class="{active : isSelected(incomingDocument)}">
+            <tr ng-repeat="incomingDocument in rootIncomingDocuments track by $index">
                 <td>{{ $index + 1 }}</td>
-                <td><a ng-click="openModal(incomingDocument)">{{ incomingDocument.name }}</a></td>
+                <td><a ng-click="vm.openModal(incomingDocument)">{{ incomingDocument.name }}</a></td>
                 <td>{{ incomingDocument.text }}</td>
                 <td>{{ incomingDocument.regNumber }}</td>
                 <td>
-                    <button ng-click="info(incomingDocument)" class="info-button">info</button>
+                    <button ng-click="vm.info(incomingDocument)" class="info-button">info</button>
                 </td>
             </tr>
             </tbody>
@@ -48,16 +46,16 @@
 
                 <div class="content-box">
                     <ul class="nav nav-tabs">
-                        <li ng-repeat="tab in tabs" ng-class="{true:'active',false:''}[tab==activeTabNo]">
-                            <a href="javascript:void(0)" ng-click="activeTab(tab)">{{tab.index}}
+                        <li ng-repeat="tab in vm.tabs" ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
+                            <a href="javascript:void(0)" ng-click="vm.activeTab(tab)">{{tab.index}}
                                 <img style="max-height: 20px" src="/app/img/document.png"><i
-                                    class="glyphicon glyphicon-remove" ng-click="remove($index)"></i></a>
+                                    class="glyphicon glyphicon-remove" ng-click="vm.remove($index)"></i></a>
                         </li>
                     </ul>
                 </div>
                 <div class="tab-content">
 
-                    <div class="tab-pane" ng-repeat="tab in tabs" ng-class="{true:'active',false:''}[tab==activeTabNo]">
+                    <div class="tab-pane" ng-repeat="tab in vm.tabs" ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
 
 
                         <div ng-app="app" class="modal-body" id="modal-body">
@@ -137,10 +135,7 @@
                                         <input class="form-control" type="text" id="birthDay" name="birthDay"
                                                ng-model="tab.author.birthDay "></div>
                                 </div>
-
                             </form>
-
-
                         </div>
                     </div>
                 </div>

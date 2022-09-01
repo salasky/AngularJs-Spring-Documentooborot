@@ -1,8 +1,8 @@
 angular
-    .module('app').controller('IncomingDocumentModalController', function ($scope, $uibModalInstance, $http, syncData, $rootScope) {
-
-    $scope.data = syncData;
-    $scope.incomingDocumentForm = {
+    .module('app').controller('IncomingDocumentModalController', function ($uibModalInstance, $http, syncData, $rootScope) {
+    let vm=this;
+    vm.data = syncData;
+    vm.incomingDocumentForm = {
         id: -1,
         name: "",
         text: "",
@@ -14,10 +14,10 @@ angular
         number: "",
         dateOfRegistration: ""
     }
-    $scope.persons = [];
+    vm.persons = [];
 
-    if ($scope.data != undefined) {
-        editDocument($scope.data);
+    if (vm.data != undefined) {
+        editDocument(vm.data);
     } else {
         addDocument();
     }
@@ -25,30 +25,30 @@ angular
 
     function editDocument(incomingDocument) {
         loadPersonData()
-        $scope.incomingDocumentForm.id = incomingDocument.id;
-        $scope.incomingDocumentForm.name = incomingDocument.name;
-        $scope.incomingDocumentForm.text = incomingDocument.text;
-        $scope.incomingDocumentForm.regNumber = incomingDocument.regNumber;
-        $scope.incomingDocumentForm.creatingDate = new Date(incomingDocument.creatingDate);
-        $scope.incomingDocumentForm.authorId = incomingDocument.authorId;
-        $scope.incomingDocumentForm.senderId = incomingDocument.senderId;
-        $scope.incomingDocumentForm.destinationId = incomingDocument.destinationId;
-        $scope.incomingDocumentForm.number = incomingDocument.number;
-        $scope.incomingDocumentForm.dateOfRegistration = new Date(incomingDocument.dateOfRegistration);
+        vm.incomingDocumentForm.id = incomingDocument.id;
+        vm.incomingDocumentForm.name = incomingDocument.name;
+        vm.incomingDocumentForm.text = incomingDocument.text;
+        vm.incomingDocumentForm.regNumber = incomingDocument.regNumber;
+        vm.incomingDocumentForm.creatingDate = new Date(incomingDocument.creatingDate);
+        vm.incomingDocumentForm.authorId = incomingDocument.authorId;
+        vm.incomingDocumentForm.senderId = incomingDocument.senderId;
+        vm.incomingDocumentForm.destinationId = incomingDocument.destinationId;
+        vm.incomingDocumentForm.number = incomingDocument.number;
+        vm.incomingDocumentForm.dateOfRegistration = new Date(incomingDocument.dateOfRegistration);
     }
 
     function addDocument() {
         loadPersonData()
-        $scope.incomingDocumentForm.id = -1;
-        $scope.incomingDocumentForm.name = "";
-        $scope.incomingDocumentForm.text = "";
-        $scope.incomingDocumentForm.regNumber = "";
-        $scope.incomingDocumentForm.creatingDate = "";
-        $scope.incomingDocumentForm.authorId = "";
-        $scope.incomingDocumentForm.senderId = "";
-        $scope.incomingDocumentForm.destinationId = "";
-        $scope.incomingDocumentForm.number = "";
-        $scope.incomingDocumentForm.dateOfRegistration = "";
+        vm.incomingDocumentForm.id = -1;
+        vm.incomingDocumentForm.name = "";
+        vm.incomingDocumentForm.text = "";
+        vm.incomingDocumentForm.regNumber = "";
+        vm.incomingDocumentForm.creatingDate = "";
+        vm.incomingDocumentForm.authorId = "";
+        vm.incomingDocumentForm.senderId = "";
+        vm.incomingDocumentForm.destinationId = "";
+        vm.incomingDocumentForm.number = "";
+        vm.incomingDocumentForm.dateOfRegistration = "";
     }
 
     function _success(response) {
@@ -57,7 +57,7 @@ angular
 
     function _error(response) {
         console.log(response);
-        alert($scope.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
+        alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
     }
 
     function _refreshIncomingDocuments() {
@@ -71,14 +71,14 @@ angular
         });
     }
 
-    $scope.ok = function () {
-        $scope.incomingDocumentForm.authorId = $scope.myAuthor.id;
-        $scope.incomingDocumentForm.senderId = $scope.mySender.id;
-        $scope.incomingDocumentForm.destinationId = $scope.myDestination.id;
+    vm.ok = function () {
+        vm.incomingDocumentForm.authorId = vm.myAuthor.id;
+        vm.incomingDocumentForm.senderId = vm.mySender.id;
+        vm.incomingDocumentForm.destinationId = vm.myDestination.id;
         let method = "";
         let url = "";
-        if ($scope.incomingDocumentForm.id == -1) {
-            $scope.incomingDocumentForm.id = null
+        if (vm.incomingDocumentForm.id == -1) {
+            vm.incomingDocumentForm.id = null
             method = "POST";
             url = 'http://localhost:8080/incomingdocuments/add';
         } else {
@@ -88,7 +88,7 @@ angular
         $http({
             method: method,
             url: url,
-            data: angular.toJson($scope.incomingDocumentForm),
+            data: angular.toJson(vm.incomingDocumentForm),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -96,15 +96,16 @@ angular
         $uibModalInstance.close();
     }
 
-    $scope.cancel = function () {
+    vm.cancel = function () {
         $uibModalInstance.close()
     }
 
-    $scope.deleteIncomingDocuments = function () {
+    vm.deleteIncomingDocuments = function () {
         $http({
             method: 'DELETE',
-            url: 'http://localhost:8080/incomingdocuments/' + $scope.data.id
+            url: 'http://localhost:8080/incomingdocuments/' + vm.data.id
         }).then(_success, _error);
+        $uibModalInstance.close();
     };
 
 
@@ -113,16 +114,16 @@ angular
             method: 'GET',
             url: 'http://localhost:8080/persons'
         }).then(function successCallback(response) {
-            $scope.persons = response.data;
-            for (const el of $scope.persons) {
-                if (el.id == $scope.data.authorId) {
-                    $scope.myAuthor = el;
+            vm.persons = response.data;
+            for (const el of vm.persons) {
+                if (el.id == vm.data.authorId) {
+                    vm.myAuthor = el;
                 }
-                if (el.id == $scope.data.senderId) {
-                    $scope.mySender = el;
+                if (el.id == vm.data.senderId) {
+                    vm.mySender = el;
                 }
-                if (el.id == $scope.data.destinationId) {
-                    $scope.myDestination = el;
+                if (el.id == vm.data.destinationId) {
+                    vm.myDestination = el;
                 }
             }
         }, function errorCallback(response) {

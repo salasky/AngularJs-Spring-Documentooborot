@@ -1,8 +1,9 @@
 angular
     .module('app')
-    .controller('IncomingDocumentController', ['$scope', '$http', '$uibModal', '$rootScope',
+    .controller('IncomingDocumentController', ['$http', '$uibModal', '$rootScope',
 
-        function ($scope, $http, $uibModal, $rootScope) {
+        function ( $http, $uibModal, $rootScope) {
+            let vm=this;
             _refreshIncomingDocuments();
 
             function _refreshIncomingDocuments() {
@@ -22,17 +23,16 @@ angular
                     method: 'GET',
                     url: 'http://localhost:8080/persons/' + incomingDocument.authorId
                 }).then(function successCallback(response) {
-                    $scope.author = response.data;
+                    vm.author = response.data;
 
                     let tabNo = incomingDocument;
-                    tabNo.author = $scope.author;
+                    tabNo.author = vm.author;
                     tabNo.index = incomingDocument.name + ' ' + incomingDocument.id.substring(0, 3)
-                    if($scope.tabs.includes(tabNo)){
-                        $scope.activeTabNo = tabNo;
+                    if(vm.tabs.includes(tabNo)){
+                        vm.activeTabNo = tabNo;
                     }else{
-                        $scope.tabs.push(tabNo);
-                        $scope.activeTabNo = tabNo;
-
+                        vm.tabs.push(tabNo);
+                        vm.activeTabNo = tabNo;
                     }
                 }, function errorCallback(response) {
                     console.log(response.statusText);
@@ -40,10 +40,10 @@ angular
             };
 
 
-            $scope.openModal = function (incomingDocument) {
+            vm.openModal = function (incomingDocument) {
                 let modalInstance = $uibModal.open({
                     templateUrl: 'incomingdocument/modalWindow.html',
-                    controller: 'IncomingDocumentModalController',
+                    controller: 'IncomingDocumentModalController as vm',
                     backdrop: false,
                     size: 'm',
                     animation: true,
@@ -55,27 +55,27 @@ angular
             };
 
 
-            $scope.activeTabNo = 0;
-            $scope.tabs = [];
+            vm.activeTabNo = 0;
+            vm.tabs = [];
 
-            $scope.info = function (incomingDocument) {
+            vm.info = function (incomingDocument) {
                 personInfo(incomingDocument);
             };
 
-            $scope.remove = function (index) {
+            vm.remove = function (index) {
                 if (index === 0) {
-                    if ($scope.activeTabNo === $scope.tabs[0]) {
-                        $scope.activeTabNo = 0;
+                    if (vm.activeTabNo === vm.tabs[0]) {
+                        vm.activeTabNo = 0;
                     }
                 } else {
-                    if ($scope.activeTabNo === $scope.tabs[index]) {
-                        $scope.activeTabNo = $scope.tabs[index - 1];
+                    if (vm.activeTabNo === vm.tabs[index]) {
+                        vm.activeTabNo = vm.tabs[index - 1];
                     }
                 }
-                $scope.tabs.splice(index, 1);
+                vm.tabs.splice(index, 1);
             };
-            $scope.activeTab = function (tabNo) {
-                $scope.activeTabNo = tabNo;
+            vm.activeTab = function (tabNo) {
+                vm.activeTabNo = tabNo;
             };
 
         }]);

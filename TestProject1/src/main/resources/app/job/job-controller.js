@@ -1,9 +1,9 @@
 angular
     .module('app')
-    .controller('JobController', ['$scope', '$http', '$uibModal', '$rootScope',
+    .controller('JobController', ['$http', '$uibModal', '$rootScope',
 
-        function ($scope, $http, $uibModal, $rootScope) {
-
+        function ($http, $uibModal, $rootScope) {
+            let vm=this;
             _refreshCustomerData();
 
 
@@ -28,13 +28,13 @@ angular
 
             function _error(response) {
                 console.log(response);
-                alert($scope.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
+                alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
             }
 
-            $scope.openModal = function (jobs) {
+            vm.openModal = function (jobs) {
                 let modalInstance = $uibModal.open({
                     templateUrl: 'job/modalWindow.html',
-                    controller: 'jobsModalController',
+                    controller: 'jobsModalController as vm',
                     backdrop: false,
                     size: 'm',
                     animation: true,

@@ -90,6 +90,7 @@ angular
             method: 'DELETE',
             url: 'http://localhost:8080/departments/' + vm.data.id
         }).then(_success, _error);
+        $uibModalInstance.close();
     };
 
 

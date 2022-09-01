@@ -3,9 +3,10 @@ console.clear();
 let app = angular.module('app');
 
 
-app.controller('OutgoingDocumentController', function ($compile, $sce, $scope, $window, $uibModal, $http, $rootScope) {
+app.controller('OutgoingDocumentController', function ($compile, $sce, $window, $uibModal, $http, $rootScope) {
+    let vm=this;
+    
     _refreshOutgoingDocuments();
-
     function _refreshOutgoingDocuments() {
         $http({
             method: 'GET',
@@ -22,15 +23,15 @@ app.controller('OutgoingDocumentController', function ($compile, $sce, $scope, $
             method: 'GET',
             url: 'http://localhost:8080/persons/' + outgoingDocument.authorId
         }).then(function successCallback(response) {
-            $scope.author = response.data;
+            vm.author = response.data;
             let tabNo = outgoingDocument;
-            tabNo.author = $scope.author;
+            tabNo.author = vm.author;
             tabNo.index = outgoingDocument.name + ' ' + outgoingDocument.id.substring(0, 3)
-            if($scope.tabs.includes(tabNo)){
-                $scope.activeTabNo = tabNo;
+            if(vm.tabs.includes(tabNo)){
+                vm.activeTabNo = tabNo;
             }else{
-                $scope.tabs.push(tabNo);
-                $scope.activeTabNo = tabNo;
+                vm.tabs.push(tabNo);
+                vm.activeTabNo = tabNo;
             }
 
         }, function errorCallback(response) {
@@ -38,10 +39,10 @@ app.controller('OutgoingDocumentController', function ($compile, $sce, $scope, $
         });
     };
 
-    $scope.openModal = function (outgoingDocument) {
+    vm.openModal = function (outgoingDocument) {
         let modalInstance = $uibModal.open({
             templateUrl: 'outgoingdocument/modalWindow.html',
-            controller: 'OutgoingDocumentModalController',
+            controller: 'OutgoingDocumentModalController as vm',
             backdrop: false,
             size: 'm',
             animation: true,
@@ -53,30 +54,30 @@ app.controller('OutgoingDocumentController', function ($compile, $sce, $scope, $
     };
 
 
-    $scope.activeTabNo = 0;
-    $scope.tabs = [];
-    $scope.outgoingDocument = "";
+    vm.activeTabNo = 0;
+    vm.tabs = [];
+    vm.outgoingDocument = "";
 
 
-    $scope.info = function (outgoingDocument) {
+    vm.info = function (outgoingDocument) {
         personInfo(outgoingDocument);
 
     };
 
-    $scope.remove = function (index) {
+    vm.remove = function (index) {
         if (index === 0) {
-            if ($scope.activeTabNo === $scope.tabs[0]) {
-                $scope.activeTabNo = 0;
+            if (vm.activeTabNo === vm.tabs[0]) {
+                vm.activeTabNo = 0;
             }
         } else {
-            if ($scope.activeTabNo === $scope.tabs[index]) {
-                $scope.activeTabNo = $scope.tabs[index - 1];
+            if (vm.activeTabNo === vm.tabs[index]) {
+                vm.activeTabNo = vm.tabs[index - 1];
             }
         }
-        $scope.tabs.splice(index, 1);
+        vm.tabs.splice(index, 1);
     };
-    $scope.activeTab = function (tabNo) {
-        $scope.activeTabNo = tabNo;
+    vm.activeTab = function (tabNo) {
+        vm.activeTabNo = tabNo;
     };
 
 

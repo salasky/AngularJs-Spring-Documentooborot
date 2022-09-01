@@ -1,17 +1,17 @@
 angular
-    .module('app').controller('modalController', function ($scope, $uibModalInstance, $http, syncData, $rootScope) {
+    .module('app').controller('modalController', function ( $uibModalInstance, $http, syncData, $rootScope) {
+    let vm=this;
+    vm.data = syncData;
 
-    $scope.data = syncData;
-
-    $scope.organizationsForm = {
+    vm.organizationsForm = {
         id: -1,
         fullName: "",
         shortName: "",
         supervisor: "",
         contactNumbers: ""
     };
-    if ($scope.data != undefined) {
-        editOrganization($scope.data);
+    if (vm.data != undefined) {
+        editOrganization(vm.data);
     } else {
         addOrganization();
     }
@@ -19,19 +19,15 @@ angular
 
 
     function editOrganization(organization) {
-        $scope.organizationsForm.id = organization.id;
-        $scope.organizationsForm.fullName = organization.fullName;
-        $scope.organizationsForm.shortName = organization.shortName;
-        $scope.organizationsForm.supervisor = organization.supervisor;
-        $scope.organizationsForm.contactNumbers = organization.contactNumbers;
+        vm.organizationsForm=organization;
     }
 
     function addOrganization() {
-        $scope.organizationsForm.id = -1;
-        $scope.organizationsForm.fullName = "";
-        $scope.organizationsForm.shortName = "";
-        $scope.organizationsForm.supervisor = "";
-        $scope.organizationsForm.contactNumbers = "";
+        vm.organizationsForm.id = -1;
+        vm.organizationsForm.fullName = "";
+        vm.organizationsForm.shortName = "";
+        vm.organizationsForm.supervisor = "";
+        vm.organizationsForm.contactNumbers = "";
     }
 
     function _success(response) {
@@ -40,7 +36,7 @@ angular
 
     function _error(response) {
         console.log(response);
-        alert($scope.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
+        alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
 
     }
 
@@ -56,17 +52,17 @@ angular
 
     }
 
-    $scope.ok = function () {
+    vm.ok = function () {
         let method = "";
         let url = "";
-        if ($scope.organizationsForm.id == -1) {
-            $scope.organizationsForm.id = null
-            $scope.organizationsForm.contactNumbers = Array.of($scope.organizationsForm.contactNumbers);
+        if (vm.organizationsForm.id == -1) {
+            vm.organizationsForm.id = null
+            vm.organizationsForm.contactNumbers = Array.of(vm.organizationsForm.contactNumbers);
             method = "POST";
             url = 'http://localhost:8080/organizations/add';
         } else {
-            if (!Array.isArray($scope.organizationsForm.contactNumbers)) {
-                $scope.organizationsForm.contactNumbers = Array.of($scope.organizationsForm.contactNumbers);
+            if (!Array.isArray(vm.organizationsForm.contactNumbers)) {
+                vm.organizationsForm.contactNumbers = Array.of(vm.organizationsForm.contactNumbers);
             }
             method = "PUT";
             url = 'http://localhost:8080/organizations/update';
@@ -74,7 +70,7 @@ angular
         $http({
             method: method,
             url: url,
-            data: angular.toJson($scope.organizationsForm),
+            data: angular.toJson(vm.organizationsForm),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -82,17 +78,17 @@ angular
         $uibModalInstance.close();
     }
 
-    $scope.cancel = function () {
+    vm.cancel = function () {
         $uibModalInstance.close()
     }
 
 
-    $scope.deleteOrganization = function () {
+    vm.deleteOrganization = function () {
         $http({
             method: 'DELETE',
-            url: 'http://localhost:8080/organizations/' + $scope.data.id
+            url: 'http://localhost:8080/organizations/' + vm.data.id
         }).then(_success, _error);
+        $uibModalInstance.close();
     };
-
 });
 
