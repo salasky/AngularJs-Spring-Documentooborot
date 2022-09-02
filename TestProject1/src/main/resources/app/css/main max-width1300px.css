@@ -1,8 +1,9 @@
-@media screen and (max-width: 1300px){
-    .splitright{
+@media screen and (max-width: 1300px) {
+    .splitright {
         width: 0;
     }
-    .splitleft{
+
+    .splitleft {
         height: 70%;
         width: 150%;
         position: absolute;
@@ -15,30 +16,37 @@
         top: 45%;
         text-align: center;
     }
-    .centered2{
+
+    .centered2 {
         width: 0;
     }
-    .table-person{
+
+    .table-person {
         margin-top: 20px;
         height: 450px;
     }
-    .table-department{
+
+    .table-department {
         margin-top: 20px;
         height: 450px;
     }
-    .table-job{
+
+    .table-job {
         margin-top: 20px;
         height: 450px;
     }
-    .table-organization{
+
+    .table-organization {
         margin-top: 20px;
         height: 450px;
     }
-    .table-document{
+
+    .table-document {
         margin-top: 20px;
         height: 450px;
         display: block;
     }
+
     html {
         font-size: 12px;
     }
@@ -54,7 +62,6 @@
         margin-bottom: 10px;
         max-width: 65px;
     }
-
 
 
     a {
@@ -84,8 +91,6 @@
     }
 
     /*HEADER*/
-
-
     .greetingtext {
         color: darkslategray;
         margin-right: 80px;
@@ -106,13 +111,15 @@
         -webkit-border-radius: 4px;
         border: 1px solid #1A87B9
     }
-    .label label-success{
+
+    .label label-success {
         background: #CD5C5C;
         color: #d3d3d3;
         font-family: 'Helvetica Neue', sans-serif;
         font-size: 2px;
         border: 1px solid #CD5C5C
     }
+
     .red-button {
         background: #CD5C5C;
         font-family: 'Helvetica Neue', sans-serif;
@@ -172,7 +179,7 @@
     td, th {
         border: 1px solid gray;
         width: 30px;
-        height:30px;
+        height: 30px;
         text-align: left;
         padding: 3px 3px;
         border: 1px solid black;
@@ -200,11 +207,13 @@
     .tab-content {
         width: 200px;
     }
-    body h2{
+
+    body h2 {
         font-size: 15px;
         width: 100px;
     }
-    .spielbox{
+
+    .spielbox {
         width: 100%;
         height: 30px;
     }

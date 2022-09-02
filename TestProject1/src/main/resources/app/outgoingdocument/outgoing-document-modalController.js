@@ -1,9 +1,9 @@
 angular
     .module('app')
-    .controller('OutgoingDocumentModalController',OutgoingDocumentModalController );
+    .controller('OutgoingDocumentModalController', OutgoingDocumentModalController);
 
-function OutgoingDocumentModalController ($uibModalInstance, dataService, syncData, $rootScope) {
-    let vm=this;
+function OutgoingDocumentModalController($uibModalInstance, dataService, syncData, $rootScope) {
+    let vm = this;
     vm.data = syncData;
     vm.outgoingDocumentForm = {
         id: -1,
@@ -30,7 +30,7 @@ function OutgoingDocumentModalController ($uibModalInstance, dataService, syncDa
         }
     }
 
-    if (vm.data ) {
+    if (vm.data) {
         editDocument(vm.data);
     } else {
         addDocument();
@@ -74,7 +74,7 @@ function OutgoingDocumentModalController ($uibModalInstance, dataService, syncDa
     }
 
     function _refreshOutgoingDocuments() {
-        let dataPromise =  dataService.getData('http://localhost:8080/outgoingdocuments');
+        let dataPromise = dataService.getData('http://localhost:8080/outgoingdocuments');
         dataPromise.then(function (value) {
             $rootScope.rootOutgoingDocuments = value;
         }).catch(error => console.error(error));
@@ -86,11 +86,12 @@ function OutgoingDocumentModalController ($uibModalInstance, dataService, syncDa
         vm.outgoingDocumentForm.deliveryType = vm.myDeliveryType.label;
         if (vm.outgoingDocumentForm.id == -1) {
             vm.outgoingDocumentForm.id = null
-            dataService.postData('http://localhost:8080/outgoingdocuments/add',vm.outgoingDocumentForm)
+            dataService.postData('http://localhost:8080/outgoingdocuments/add', vm.outgoingDocumentForm)
                 .then(_refreshOutgoingDocuments)
-                .catch(error => console.error(error));;
+                .catch(error => console.error(error));
+            ;
         } else {
-            dataService.putData('http://localhost:8080/outgoingdocuments/update',vm.outgoingDocumentForm)
+            dataService.putData('http://localhost:8080/outgoingdocuments/update', vm.outgoingDocumentForm)
                 .then(_refreshOutgoingDocuments)
                 .catch(error => console.error(error));
         }
@@ -109,7 +110,7 @@ function OutgoingDocumentModalController ($uibModalInstance, dataService, syncDa
     };
 
     function loadPersonData() {
-        let dataPromise =  dataService.getData('http://localhost:8080/persons');
+        let dataPromise = dataService.getData('http://localhost:8080/persons');
         dataPromise.then(function (value) {
             vm.persons = value;
             for (const el of vm.persons) {

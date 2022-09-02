@@ -15,12 +15,11 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
     };
     vm.organizations = [];
 
-    if (vm.data ) {
+    if (vm.data) {
         editDepartment(vm.data);
     } else {
         addDepartment();
     }
-    ;
 
     function editDepartment(department) {
         loadOrganizationData()
@@ -44,7 +43,7 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
 
 
     function _refreshCustomerData() {
-        let dataPromise =  dataService.getData('http://localhost:8080/departments');
+        let dataPromise = dataService.getData('http://localhost:8080/departments');
         dataPromise.then(function (value) {
             $rootScope.rootDepartments = value;
         }).catch(error => console.error(error));
@@ -53,15 +52,15 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
     vm.ok = function () {
         vm.departmentsForm.organizationId = vm.myOrganization.id;
 
-        if (vm.departmentsForm.id == -1) {
+        if (vm.departmentsForm.id === -1) {
             vm.departmentsForm.id = null
-            dataService.postData('http://localhost:8080/departments/add',vm.departmentsForm)
+            dataService.postData('http://localhost:8080/departments/add', vm.departmentsForm)
                 .then(_refreshCustomerData)
-                .catch(error => console.error(error));;
+                .catch(error => console.error(error));
         } else {
-            dataService.putData('http://localhost:8080/departments/update',vm.departmentsForm)
+            dataService.putData('http://localhost:8080/departments/update', vm.departmentsForm)
                 .then(_refreshCustomerData)
-                .catch(error => console.error(error));;
+                .catch(error => console.error(error));
         }
         $uibModalInstance.close();
     }
@@ -73,13 +72,13 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
     vm.deleteDepartment = function () {
         dataService.deleteData('http://localhost:8080/departments/' + vm.data.id)
             .then(_refreshCustomerData)
-            .catch(error => console.error(error));;
+            .catch(error => console.error(error));
         $uibModalInstance.close();
     };
 
 
     function loadOrganizationData() {
-        let dataPromise =  dataService.getData('http://localhost:8080/organizations');
+        let dataPromise = dataService.getData('http://localhost:8080/organizations');
         dataPromise.then(function (value) {
             vm.organizations = value;
             for (const el of vm.organizations) {
@@ -89,5 +88,5 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
             }
         }).catch(error => console.error(error));
     }
-};
+}
 

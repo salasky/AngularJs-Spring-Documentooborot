@@ -55,9 +55,8 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
         vm.incomingDocumentForm.dateOfRegistration = "";
     }
 
-
     function _refreshIncomingDocuments() {
-        let dataPromise =  dataService.getData('http://localhost:8080/incomingdocuments');
+        let dataPromise = dataService.getData('http://localhost:8080/incomingdocuments');
         dataPromise.then(function (value) {
             $rootScope.rootIncomingDocuments = value;
         }).catch(error => console.error(error));
@@ -70,12 +69,12 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
 
         if (vm.incomingDocumentForm.id == -1) {
             vm.incomingDocumentForm.id = null
-            dataService.postData('http://localhost:8080/incomingdocuments/add',vm.incomingDocumentForm)
+            dataService.postData('http://localhost:8080/incomingdocuments/add', vm.incomingDocumentForm)
                 .then(_refreshIncomingDocuments)
-                .catch(error => console.error(error));;
+                .catch(error => console.error(error));
 
         } else {
-            dataService.putData('http://localhost:8080/incomingdocuments/update',vm.incomingDocumentForm)
+            dataService.putData('http://localhost:8080/incomingdocuments/update', vm.incomingDocumentForm)
                 .then(_refreshIncomingDocuments)
                 .catch(error => console.error(error));
         }
@@ -93,9 +92,8 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
         $uibModalInstance.close();
     };
 
-
     function loadPersonData() {
-        let dataPromise =  dataService.getData('http://localhost:8080/persons');
+        let dataPromise = dataService.getData('http://localhost:8080/persons');
         dataPromise.then(function (value) {
             vm.persons = value;
             for (const el of vm.persons) {
@@ -111,5 +109,5 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
             }
         }).catch(error => console.error(error));
     }
-};
+}
 

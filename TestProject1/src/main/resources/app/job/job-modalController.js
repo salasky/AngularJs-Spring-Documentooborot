@@ -12,7 +12,7 @@ function jobsModalController($uibModalInstance, $http, syncData, dataService, $r
         id: -1,
         name: ""
     };
-    if (vm.data ) {
+    if (vm.data) {
         editJob(vm.data);
     } else {
         addJob();

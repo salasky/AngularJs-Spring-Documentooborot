@@ -21,9 +21,11 @@ section {
 a {
     color: #111;
 }
-.imageHeader{
+
+.imageHeader {
     max-height: 30px;
 }
+
 a:hover {
     color: #555;
 }
@@ -59,6 +61,7 @@ a:hover {
     color: white;
 
 }
+
 .greetingtext {
     color: darkslategray;
     margin-right: 480px;

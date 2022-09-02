@@ -1,35 +1,36 @@
 angular
     .module('app')
-    .controller('OutgoingDocumentController',OutgoingDocumentController );
+    .controller('OutgoingDocumentController', OutgoingDocumentController);
 
-function OutgoingDocumentController ( $compile, $sce, $window, $uibModal, dataService, $rootScope) {
-    let vm=this;
+function OutgoingDocumentController($compile, $sce, $window, $uibModal, dataService, $rootScope) {
+    let vm = this;
     _refreshOutgoingDocuments();
+
     function _refreshOutgoingDocuments() {
-        let dataPromise =  dataService.getData('http://localhost:8080/outgoingdocuments');
+        let dataPromise = dataService.getData('http://localhost:8080/outgoingdocuments');
         dataPromise.then(function (value) {
             $rootScope.rootOutgoingDocuments = value;
         }).catch(error => console.error(error));
     }
 
     function personInfo(outgoingDocument) {
-        let dataPromise =  dataService.getData('http://localhost:8080/persons/' + outgoingDocument.authorId);
+        let dataPromise = dataService.getData('http://localhost:8080/persons/' + outgoingDocument.authorId);
         dataPromise.then(function (value) {
             vm.author = value;
             let tabNo = outgoingDocument;
             tabNo.author = vm.author;
             tabNo.index = outgoingDocument.name + ' ' + outgoingDocument.id.substring(0, 3)
-            if(vm.tabs.includes(tabNo)){
+            if (vm.tabs.includes(tabNo)) {
                 vm.activeTabNo = tabNo;
-            }else{
+            } else {
                 vm.tabs.push(tabNo);
                 vm.activeTabNo = tabNo;
             }
         }).catch(error => console.error(error));
-    };
+    }
 
     vm.openModal = function (outgoingDocument) {
-        let modalInstance = $uibModal.open({
+        return $uibModal.open({
             templateUrl: 'outgoingdocument/modalWindow.html',
             controller: 'OutgoingDocumentModalController as vm',
             backdrop: false,
@@ -39,14 +40,11 @@ function OutgoingDocumentController ( $compile, $sce, $window, $uibModal, dataSe
                 syncData: () => outgoingDocument,
             }
         });
-        return modalInstance;
     };
-
 
     vm.activeTabNo = 0;
     vm.tabs = [];
     vm.outgoingDocument = "";
-
 
     vm.info = function (outgoingDocument) {
         personInfo(outgoingDocument);
@@ -68,7 +66,7 @@ function OutgoingDocumentController ( $compile, $sce, $window, $uibModal, dataSe
     vm.activeTab = function (tabNo) {
         vm.activeTabNo = tabNo;
     };
-};
+}
 
 
 

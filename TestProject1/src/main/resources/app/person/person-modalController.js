@@ -22,12 +22,11 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
     vm.jobs = [];
 
 
-    if (vm.data ) {
+    if (vm.data) {
         editPerson(vm.data);
     } else {
         addPerson();
     }
-    ;
 
     function editPerson(person) {
         loadDepartmentData()
@@ -70,7 +69,6 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
             dataService.postData('http://localhost:8080/persons/add', vm.personsForm)
                 .then(_refreshCustomerData)
                 .catch(error => console.error(error));
-            ;
         } else {
             dataService.putData('http://localhost:8080/persons/update', vm.personsForm)
                 .then(_refreshCustomerData)
@@ -89,7 +87,6 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
             .catch(error => console.error(error));
         $uibModalInstance.close();
     };
-
 
     function loadDepartmentData() {
         let dataPromise = dataService.getData('http://localhost:8080/departments');
@@ -114,5 +111,5 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
             }
         }).catch(error => console.error(error));
     }
-};
+}
 

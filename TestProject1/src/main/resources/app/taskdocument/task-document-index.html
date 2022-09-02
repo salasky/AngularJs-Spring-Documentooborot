@@ -46,13 +46,14 @@
                         <li ng-repeat="tab in vm.tabs" ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
                             <a href="javascript:void(0)" ng-click="vm.activeTab(tab)">{{tab.index}}
                                 <img style="max-height: 20px" src="/app/img/document.png"><i
-                                    class="glyphicon glyphicon-remove" ng-click="vm.remove($index)"></i></a>
+                                        class="glyphicon glyphicon-remove" ng-click="vm.remove($index)"></i></a>
                         </li>
                     </ul>
                 </div>
                 <div class="tab-content">
 
-                    <div class="tab-pane" ng-repeat="tab in vm.tabs" ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
+                    <div class="tab-pane" ng-repeat="tab in vm.tabs"
+                         ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
 
 
                         <div ng-app="app" class="modal-body" id="modal-body">

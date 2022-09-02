@@ -11,8 +11,8 @@ angular
                 });
             return deferred.promise;
         },
-        postData: function (url,dataForm) {
-           return  $http({
+        postData: function (url, dataForm) {
+            return $http({
                 method: "POST",
                 url: url,
                 data: angular.toJson(dataForm),
@@ -21,22 +21,24 @@ angular
                 }
             });
         },
-        putData: function (url,dataForm) {
-            return  $http({
+        putData: function (url, dataForm) {
+            return $http({
                 method: "PUT",
                 url: url,
                 data: angular.toJson(dataForm),
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            });},
+            });
+        },
         deleteData: function (url) {
-            return  $http({
+            return $http({
                 method: "DELETE",
                 url: url,
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            });}
+            });
+        }
     }
 });

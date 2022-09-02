@@ -3,7 +3,6 @@
 </div>
 
 
-
 <div ng-app="app" class="modal-body" id="modal-body">
     <form class="form-horizontal" name="contact">
         <div class="form-group">
@@ -29,7 +28,8 @@
         <div class="form-group">
             <label class="col-lg-3 control-label">PhotoRef:</label>
             <div class="col-lg-8">
-                <input class="form-control" type="text" id="photoRef" name="photoRef" ng-model="vm.personsForm.photoRef ">
+                <input class="form-control" type="text" id="photoRef" name="photoRef"
+                       ng-model="vm.personsForm.photoRef ">
             </div>
         </div>
 
@@ -43,7 +43,8 @@
         <div class="form-group">
             <label class="col-lg-3 control-label">Department:</label>
             <div class="col-lg-8">
-                <select ng-model="vm.myDepartment" ng-options="department.fullName for department in vm.departments"></select>
+                <select ng-model="vm.myDepartment"
+                        ng-options="department.fullName for department in vm.departments"></select>
             </div>
         </div>
 
@@ -56,7 +57,8 @@
 
         <label class="col-lg-3 control-label">Birth Day:</label>
         <div class="input-group" style="width:200px">
-            <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="vm.personsForm.birthDay "
+            <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy"
+                   ng-model="vm.personsForm.birthDay "
                    is-open="isDatepickerOpen"
                    datepicker-options="datepickerOptions" ng-required="true" close-text="Close"
                    alt-input-formats="altInputFormats"/>
