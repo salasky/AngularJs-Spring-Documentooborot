@@ -12,17 +12,9 @@ angular
                 let dataPromise =  dataService.getData('http://localhost:8080/departments');
                 dataPromise.then(function (value) {
                     $rootScope.rootDepartments = value;
-                })
+                }).catch(error => console.error(error));
             }
 
-            function _success(response) {
-                _refreshCustomerData();
-            }
-
-            function _error(response) {
-                console.log(response);
-                alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
-            }
 
             vm.openOrganizationModal = function () {
                     let modalInstance = $uibModal.open({
@@ -66,7 +58,7 @@ angular
                                  vm.tabs.push(tabNo);
                                  vm.activeTabNo = tabNo;
                              }
-                        });
+                        }).catch(error => console.error(error));
                     };
 
                     vm.activeTabNo = 0;

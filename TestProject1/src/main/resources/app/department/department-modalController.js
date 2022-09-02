@@ -58,7 +58,7 @@ function DepartmentModalController($http, $uibModalInstance, $rootScope, syncDat
         let dataPromise =  dataService.getData('http://localhost:8080/departments');
         dataPromise.then(function (value) {
             $rootScope.rootDepartments = value;
-        })
+        }).catch(error => console.error(error));
     }
 
     vm.ok = function () {
@@ -69,10 +69,12 @@ function DepartmentModalController($http, $uibModalInstance, $rootScope, syncDat
         if (vm.departmentsForm.id == -1) {
             vm.departmentsForm.id = null
             dataService.postData('http://localhost:8080/departments/add',vm.departmentsForm)
-                .then(_refreshCustomerData);
+                .then(_refreshCustomerData)
+                .catch(error => console.error(error));;
         } else {
             dataService.putData('http://localhost:8080/departments/update',vm.departmentsForm)
-                .then(_refreshCustomerData);
+                .then(_refreshCustomerData)
+                .catch(error => console.error(error));;
         }
         $uibModalInstance.close();
     }
@@ -83,7 +85,8 @@ function DepartmentModalController($http, $uibModalInstance, $rootScope, syncDat
 
     vm.deleteDepartment = function () {
         dataService.deleteData('http://localhost:8080/departments/' + vm.data.id)
-            .then(_refreshCustomerData);
+            .then(_refreshCustomerData)
+            .catch(error => console.error(error));;
         $uibModalInstance.close();
     };
 
@@ -97,8 +100,7 @@ function DepartmentModalController($http, $uibModalInstance, $rootScope, syncDat
                     vm.myOrganization = el;
                 }
             }
-        })
-
+        }).catch(error => console.error(error));
     }
 };
 
