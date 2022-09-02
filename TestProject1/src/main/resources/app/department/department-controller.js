@@ -59,7 +59,6 @@ function DepartmentController( $uibModal, $rootScope, dataService) {
 
     vm.activeTabNo = 0;
     vm.tabs = [];
-    vm.department = "";
 
     vm.info = function (department) {
         organizationInfo(department);
