@@ -3,7 +3,7 @@ angular
     .controller('DepartmentController', DepartmentController);
 
 
-function DepartmentController($http, $uibModal, $rootScope, dataService) {
+function DepartmentController( $uibModal, $rootScope, dataService) {
     let vm = this;
 
     _refreshCustomerData();

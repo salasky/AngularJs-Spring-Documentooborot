@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('jobsModalController', jobsModalController);
 
-function jobsModalController($uibModalInstance, $http, syncData, dataService, $rootScope) {
+function jobsModalController($uibModalInstance, syncData, dataService, $rootScope) {
 
 
     let vm = this;

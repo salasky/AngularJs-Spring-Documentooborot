@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('IncomingDocumentController', IncomingDocumentController);
 
-function IncomingDocumentController($http, $uibModal, $rootScope, dataService) {
+function IncomingDocumentController($uibModal, $rootScope, dataService) {
 
     let vm = this;
     _refreshIncomingDocuments();
