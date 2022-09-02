@@ -73,24 +73,6 @@
     }
 
     /*HEADER*/
-    .navbar-expand-lg {
-        color: #111;
-        font-weight: 200;
-        text-transform: uppercase;
-    }
-
-    .navbar-expand-lg li a::after {
-
-        background-color: #111;
-        height: 1px;
-
-    }
-
-    .navbar-expand-lg li a:hover::after {
-        transform: scale(10);
-    }
-
-    /*HEADER*/
     .greetingtext {
         color: darkslategray;
         margin-right: 80px;

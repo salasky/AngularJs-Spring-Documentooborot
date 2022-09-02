@@ -31,25 +31,6 @@ a:hover {
 }
 
 /*HEADER*/
-.navbar-expand-lg {
-    color: #111;
-    font-weight: 500;
-    text-transform: uppercase;
-}
-
-.navbar-expand-lg li a::after {
-    content: '';
-    display: block;
-    width: 100%;
-    background-color: #111;
-    height: 1px;
-    transition: all .3s;
-    transform: scale(0);
-}
-
-.navbar-expand-lg li a:hover::after {
-    transform: scale(1);
-}
 
 /*HEADER*/
 
