@@ -2,30 +2,22 @@ angular
     .module('app')
     .controller('TaskDocumentController',TaskDocumentController );
 
-function TaskDocumentController ($http, $uibModal, $rootScope) {
+function TaskDocumentController (dataService, $uibModal, $rootScope) {
 
             let vm=this;
             _refreshDocuments();
 
             function _refreshDocuments() {
-                $http({
-                    method: 'GET',
-                    url: 'http://localhost:8080/taskdocuments'
-                }).then(function successCallback(response) {
-                    $rootScope.rootTaskDocuments = response.data;
-                }, function errorCallback(response) {
-                    console.log(response.statusText);
-                });
+                let dataPromise =  dataService.getData('http://localhost:8080/taskdocuments');
+                dataPromise.then(function (value) {
+                    $rootScope.rootTaskDocuments = value;
+                }).catch(error => console.error(error));
             }
 
-
             function personInfo(taskDocument) {
-                $http({
-                    method: 'GET',
-                    url: 'http://localhost:8080/persons/' + taskDocument.authorId
-                }).then(function successCallback(response) {
-                    vm.author = response.data;
-
+                let dataPromise =  dataService.getData('http://localhost:8080/persons/' + taskDocument.authorId);
+                dataPromise.then(function (value) {
+                    vm.author = value;
                     let tabNo = taskDocument;
                     tabNo.author = vm.author;
                     tabNo.index = taskDocument.name + ' ' + taskDocument.id.substring(0, 3)
@@ -35,10 +27,7 @@ function TaskDocumentController ($http, $uibModal, $rootScope) {
                         vm.tabs.push(tabNo);
                         vm.activeTabNo = tabNo;
                     }
-
-                }, function errorCallback(response) {
-                    console.log(response.statusText);
-                });
+                }).catch(error => console.error(error));
             };
 
 

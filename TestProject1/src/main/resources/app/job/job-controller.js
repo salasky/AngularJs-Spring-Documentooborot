@@ -3,7 +3,7 @@ angular
     .controller('JobController',JobController );
 
 
-function JobController ($http, $uibModal, $rootScope) {
+function JobController ($uibModal, $rootScope, dataService) {
             let vm=this;
             _refreshCustomerData();
 
@@ -12,15 +12,10 @@ function JobController ($http, $uibModal, $rootScope) {
 
             //HTTP GET- get all jobs collection
             function _refreshCustomerData() {
-                $http({
-                    method: 'GET',
-                    url: 'http://localhost:8080/jobs'
-                }).then(function successCallback(response) {
-                    $rootScope.rootJobs = response.data;
-                }, function errorCallback(response) {
-                    console.log(response.statusText);
-                });
-
+                let dataPromise =  dataService.getData('http://localhost:8080/jobs');
+                dataPromise.then(function (value) {
+                    $rootScope.rootJobs = value;
+                }).catch(error => console.error(error));
             }
 
             function _success(response) {

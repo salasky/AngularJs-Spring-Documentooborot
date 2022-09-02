@@ -2,9 +2,7 @@ angular
     .module('app')
     .controller('DepartmentModalController', DepartmentModalController);
 
-DepartmentModalController.$inject = ['$http', '$uibModalInstance', '$rootScope', 'syncData','dataService'];
-
-function DepartmentModalController($http, $uibModalInstance, $rootScope, syncData, dataService) {
+function DepartmentModalController($uibModalInstance, $rootScope, syncData, dataService) {
     let vm = this;
     vm.data = syncData;
     vm.departmentsForm = {
@@ -17,7 +15,7 @@ function DepartmentModalController($http, $uibModalInstance, $rootScope, syncDat
     };
     vm.organizations = [];
 
-    if (vm.data != undefined) {
+    if (vm.data ) {
         editDepartment(vm.data);
     } else {
         addDepartment();
@@ -44,15 +42,6 @@ function DepartmentModalController($http, $uibModalInstance, $rootScope, syncDat
         vm.departmentsForm.organizationId = "";
     }
 
-    function _success(response) {
-        _refreshCustomerData();
-    }
-
-    function _error(response) {
-        console.log(response);
-        alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
-
-    }
 
     function _refreshCustomerData() {
         let dataPromise =  dataService.getData('http://localhost:8080/departments');
@@ -64,8 +53,6 @@ function DepartmentModalController($http, $uibModalInstance, $rootScope, syncDat
     vm.ok = function () {
         vm.departmentsForm.organizationId = vm.myOrganization.id;
 
-        let method = "";
-        let url = "";
         if (vm.departmentsForm.id == -1) {
             vm.departmentsForm.id = null
             dataService.postData('http://localhost:8080/departments/add',vm.departmentsForm)

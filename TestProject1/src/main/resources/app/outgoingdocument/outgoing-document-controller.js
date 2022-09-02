@@ -2,26 +2,20 @@ angular
     .module('app')
     .controller('OutgoingDocumentController',OutgoingDocumentController );
 
-function OutgoingDocumentController ( $compile, $sce, $window, $uibModal, $http, $rootScope) {
+function OutgoingDocumentController ( $compile, $sce, $window, $uibModal, dataService, $rootScope) {
     let vm=this;
     _refreshOutgoingDocuments();
     function _refreshOutgoingDocuments() {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8080/outgoingdocuments'
-        }).then(function successCallback(response) {
-            $rootScope.rootOutgoingDocuments = response.data;
-        }, function errorCallback(response) {
-            console.log(response.statusText);
-        });
+        let dataPromise =  dataService.getData('http://localhost:8080/outgoingdocuments');
+        dataPromise.then(function (value) {
+            $rootScope.rootOutgoingDocuments = value;
+        }).catch(error => console.error(error));
     }
 
     function personInfo(outgoingDocument) {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8080/persons/' + outgoingDocument.authorId
-        }).then(function successCallback(response) {
-            vm.author = response.data;
+        let dataPromise =  dataService.getData('http://localhost:8080/persons/' + outgoingDocument.authorId);
+        dataPromise.then(function (value) {
+            vm.author = value;
             let tabNo = outgoingDocument;
             tabNo.author = vm.author;
             tabNo.index = outgoingDocument.name + ' ' + outgoingDocument.id.substring(0, 3)
@@ -31,10 +25,7 @@ function OutgoingDocumentController ( $compile, $sce, $window, $uibModal, $http,
                 vm.tabs.push(tabNo);
                 vm.activeTabNo = tabNo;
             }
-
-        }, function errorCallback(response) {
-            console.log(response.statusText);
-        });
+        }).catch(error => console.error(error));
     };
 
     vm.openModal = function (outgoingDocument) {
@@ -77,8 +68,6 @@ function OutgoingDocumentController ( $compile, $sce, $window, $uibModal, $http,
     vm.activeTab = function (tabNo) {
         vm.activeTabNo = tabNo;
     };
-
-
 };
 
 

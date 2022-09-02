@@ -2,35 +2,18 @@ angular
     .module('app')
     .controller('PersonController',PersonController );
 
-function PersonController (  $http, $uibModal, $rootScope) {
+function PersonController (dataService, $uibModal, $rootScope) {
             let vm=this;
             _refreshCustomerData();
             vm.department = "";
             vm.job = "";
             vm.organization = "";
 
-            /* Private Methods */
-
-            //HTTP GET- get all organizations collection
             function _refreshCustomerData() {
-                vm.persons = [];
-                $http({
-                    method: 'GET',
-                    url: 'http://localhost:8080/persons'
-                }).then(function successCallback(response) {
-                    $rootScope.rootPersons = response.data;
-                }, function errorCallback(response) {
-                    console.log(response.statusText);
-                });
-            }
-
-            function _success(response) {
-                _refreshCustomerData();
-            }
-
-            function _error(response) {
-                console.log(response);
-                alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
+                let dataPromise =  dataService.getData('http://localhost:8080/persons');
+                dataPromise.then(function (value) {
+                    $rootScope.rootPersons = value;
+                }).catch(error => console.error(error));
             }
 
             vm.openModal = function (person) {
@@ -48,22 +31,16 @@ function PersonController (  $http, $uibModal, $rootScope) {
             };
 
             function staffInfoGet(person) {
-                $http({
-                    method: 'GET',
-                    url: 'http://localhost:8080/departments/' + person.departmentId
-                }).then(function successCallback(response) {
-                    vm.department = response.data;
-                    //После загрузки информации о департаменте, загружаем информацию о организации
-                    $http({
-                        method: 'GET',
-                        url: 'http://localhost:8080/organizations/' + vm.department.organizationId
-                    }).then(function successCallback(response) {
-                        vm.organization = response.data;
-                        $http({
-                            method: 'GET',
-                            url: 'http://localhost:8080/jobs/' + person.jobTittleId
-                        }).then(function successCallback(response) {
-                            vm.job = response.data;
+                let dataPromise =  dataService.getData('http://localhost:8080/departments/' + person.departmentId);
+                dataPromise.then(function (value) {
+                    vm.department= value;
+                    let dataPromise =  dataService.getData('http://localhost:8080/organizations/' + vm.department.organizationId);
+                    dataPromise.then(function (value) {
+                        vm.organization = value;
+
+                        let dataPromise =  dataService.getData('http://localhost:8080/jobs/' + person.jobTittleId);
+                        dataPromise.then(function (value) {
+                            vm.job = value;
                             let tabNo = person;
                             tabNo.organization = vm.organization;
                             tabNo.department = vm.department;
@@ -75,18 +52,9 @@ function PersonController (  $http, $uibModal, $rootScope) {
                                 vm.tabs.push(tabNo);
                                 vm.activeTabNo = tabNo;
                             }
-
-                        }, function errorCallback(response) {
-                            console.log(response.statusText);
-                        });
-                    }, function errorCallback(response) {
-                        console.log(response.statusText);
-                    });
-
-                }, function errorCallback(response) {
-                    console.log(response.statusText);
-                });
-
+                        }).catch(error => console.error(error));
+                    }).catch(error => console.error(error));
+                }).catch(error => console.error(error));
             };
 
             vm.activeTabNo = 0;

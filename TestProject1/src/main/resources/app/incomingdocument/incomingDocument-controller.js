@@ -2,30 +2,23 @@ angular
     .module('app')
     .controller('IncomingDocumentController',IncomingDocumentController );
 
-function IncomingDocumentController ( $http, $uibModal, $rootScope) {
+function IncomingDocumentController ( $http, $uibModal, $rootScope, dataService) {
 
             let vm=this;
             _refreshIncomingDocuments();
 
             function _refreshIncomingDocuments() {
-                $http({
-                    method: 'GET',
-                    url: 'http://localhost:8080/incomingdocuments'
-                }).then(function successCallback(response) {
-                    $rootScope.rootIncomingDocuments = response.data;
-                }, function errorCallback(response) {
-                    console.log(response.statusText);
-                });
+                let dataPromise =  dataService.getData('http://localhost:8080/incomingdocuments');
+                dataPromise.then(function (value) {
+                    $rootScope.rootIncomingDocuments = value;
+                }).catch(error => console.error(error));
             }
 
 
             function personInfo(incomingDocument) {
-                $http({
-                    method: 'GET',
-                    url: 'http://localhost:8080/persons/' + incomingDocument.authorId
-                }).then(function successCallback(response) {
-                    vm.author = response.data;
-
+                let dataPromise =  dataService.getData('http://localhost:8080/persons/' + incomingDocument.authorId);
+                dataPromise.then(function (value) {
+                    vm.author = value;
                     let tabNo = incomingDocument;
                     tabNo.author = vm.author;
                     tabNo.index = incomingDocument.name + ' ' + incomingDocument.id.substring(0, 3)
@@ -35,9 +28,7 @@ function IncomingDocumentController ( $http, $uibModal, $rootScope) {
                         vm.tabs.push(tabNo);
                         vm.activeTabNo = tabNo;
                     }
-                }, function errorCallback(response) {
-                    console.log(response.statusText);
-                });
+                }).catch(error => console.error(error));
             };
 
 

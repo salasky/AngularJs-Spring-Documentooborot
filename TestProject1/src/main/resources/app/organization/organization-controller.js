@@ -2,29 +2,16 @@ angular
     .module('app')
     .controller('OrganizationController',OrganizationController );
 
-function OrganizationController ( $http, $uibModal, restapi, $rootScope) {
+function OrganizationController ( $uibModal, dataService, $rootScope) {
             let vm=this;
             _refreshCustomerData();
 
-
-            /* Private Methods */
-
             //HTTP GET- get all organizations collection
             function _refreshCustomerData() {
-                restapi.all().then(function (resp) {
-                    $rootScope.rootOrganizations = resp;
-                });
-
-            }
-
-            function _success(response) {
-                _refreshCustomerData();
-            }
-
-            function _error(response) {
-                console.log(response);
-                alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
-
+                let dataPromise =  dataService.getData('http://localhost:8080/organizations');
+                dataPromise.then(function (value) {
+                    $rootScope.rootOrganizations = value;
+                }).catch(error => console.error(error));
             }
 
             vm.openModal = function (organization) {

@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('OutgoingDocumentModalController',OutgoingDocumentModalController );
 
-function OutgoingDocumentModalController ($uibModalInstance, $http, syncData, $rootScope) {
+function OutgoingDocumentModalController ($uibModalInstance, dataService, syncData, $rootScope) {
     let vm=this;
     vm.data = syncData;
     vm.outgoingDocumentForm = {
@@ -26,12 +26,11 @@ function OutgoingDocumentModalController ($uibModalInstance, $http, syncData, $r
         for (const el of vm.deliveryTypes) {
             if (el.label == incomingDocument.deliveryType) {
                 vm.myDeliveryType = el;
-
             }
         }
     }
 
-    if (vm.data != undefined) {
+    if (vm.data ) {
         editDocument(vm.data);
     } else {
         addDocument();
@@ -75,38 +74,26 @@ function OutgoingDocumentModalController ($uibModalInstance, $http, syncData, $r
     }
 
     function _refreshOutgoingDocuments() {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8080/outgoingdocuments'
-        }).then(function successCallback(response) {
-            $rootScope.rootOutgoingDocuments = response.data;
-        }, function errorCallback(response) {
-            console.log(response.statusText);
-        });
+        let dataPromise =  dataService.getData('http://localhost:8080/outgoingdocuments');
+        dataPromise.then(function (value) {
+            $rootScope.rootOutgoingDocuments = value;
+        }).catch(error => console.error(error));
     }
 
     vm.ok = function () {
         vm.outgoingDocumentForm.authorId = vm.myAuthor.id;
         vm.outgoingDocumentForm.senderId = vm.mySender.id;
         vm.outgoingDocumentForm.deliveryType = vm.myDeliveryType.label;
-        let method = "";
-        let url = "";
         if (vm.outgoingDocumentForm.id == -1) {
             vm.outgoingDocumentForm.id = null
-            method = "POST";
-            url = 'http://localhost:8080/outgoingdocuments/add';
+            dataService.postData('http://localhost:8080/outgoingdocuments/add',vm.outgoingDocumentForm)
+                .then(_refreshOutgoingDocuments)
+                .catch(error => console.error(error));;
         } else {
-            method = "PUT";
-            url = 'http://localhost:8080/outgoingdocuments/update';
+            dataService.putData('http://localhost:8080/outgoingdocuments/update',vm.outgoingDocumentForm)
+                .then(_refreshOutgoingDocuments)
+                .catch(error => console.error(error));
         }
-        $http({
-            method: method,
-            url: url,
-            data: angular.toJson(vm.outgoingDocumentForm),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(_success, _error);
         $uibModalInstance.close();
     }
 
@@ -115,19 +102,16 @@ function OutgoingDocumentModalController ($uibModalInstance, $http, syncData, $r
     }
 
     vm.deleteOutgoingDocuments = function () {
-        $http({
-            method: 'DELETE',
-            url: 'http://localhost:8080/outgoingdocuments/' + vm.data.id
-        }).then(_success, _error);
+        dataService.deleteData('http://localhost:8080/outgoingdocuments/' + vm.data.id)
+            .then(_refreshOutgoingDocuments)
+            .catch(error => console.error(error));
         $uibModalInstance.close();
     };
 
     function loadPersonData() {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8080/persons'
-        }).then(function successCallback(response) {
-            vm.persons = response.data;
+        let dataPromise =  dataService.getData('http://localhost:8080/persons');
+        dataPromise.then(function (value) {
+            vm.persons = value;
             for (const el of vm.persons) {
                 if (el.id == vm.data.authorId) {
                     vm.myAuthor = el;
@@ -136,9 +120,7 @@ function OutgoingDocumentModalController ($uibModalInstance, $http, syncData, $r
                     vm.mySender = el;
                 }
             }
-        }, function errorCallback(response) {
-            console.log(response.statusText);
-        });
+        }).catch(error => console.error(error));
     }
 };
 

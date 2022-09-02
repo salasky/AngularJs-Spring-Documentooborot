@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('TaskDocumentModalController',TaskDocumentModalController );
 
-function TaskDocumentModalController ($uibModalInstance, $http, syncData, $rootScope) {
+function TaskDocumentModalController ($uibModalInstance, dataService, syncData, $rootScope) {
     let vm=this;
     vm.data = syncData;
     vm.taskDocumentForm = {
@@ -21,7 +21,7 @@ function TaskDocumentModalController ($uibModalInstance, $http, syncData, $rootS
 
     vm.persons = [];
 
-    if (vm.data != undefined) {
+    if (vm.data ) {
         editDocument(vm.data);
     } else {
         addDocument();
@@ -59,48 +59,28 @@ function TaskDocumentModalController ($uibModalInstance, $http, syncData, $rootS
 
     }
 
-    function _success(response) {
-        _refreshDocuments();
-    }
-
-    function _error(response) {
-        console.log(response);
-        alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
-    }
 
     function _refreshDocuments() {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8080/taskdocuments'
-        }).then(function successCallback(response) {
-            $rootScope.rootTaskDocuments = response.data;
-        }, function errorCallback(response) {
-            console.log(response.statusText);
-        });
+        let dataPromise =  dataService.getData('http://localhost:8080/taskdocuments');
+        dataPromise.then(function (value) {
+            $rootScope.rootTaskDocuments = value;
+        }).catch(error => console.error(error));
     }
 
     vm.ok = function () {
         vm.taskDocumentForm.authorId = vm.myAuthor.id;
         vm.taskDocumentForm.responsibleId = vm.myResponsible.id;
         vm.taskDocumentForm.controlPersonId = vm.myControlPerson.id;
-        let method = "";
-        let url = "";
         if (vm.taskDocumentForm.id == -1) {
             vm.taskDocumentForm.id = null
-            method = "POST";
-            url = 'http://localhost:8080/taskdocuments/add';
+            dataService.postData('http://localhost:8080/taskdocuments/add',vm.taskDocumentForm)
+                .then(_refreshDocuments)
+                .catch(error => console.error(error));;
         } else {
-            method = "PUT";
-            url = 'http://localhost:8080/taskdocuments/update';
+            dataService.putData('http://localhost:8080/taskdocuments/update',vm.taskDocumentForm)
+                .then(_refreshDocuments)
+                .catch(error => console.error(error));
         }
-        $http({
-            method: method,
-            url: url,
-            data: angular.toJson(vm.taskDocumentForm),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(_success, _error);
         $uibModalInstance.close();
     }
 
@@ -109,20 +89,17 @@ function TaskDocumentModalController ($uibModalInstance, $http, syncData, $rootS
     }
 
     vm.deleteTaskDocuments = function () {
-        $http({
-            method: 'DELETE',
-            url: 'http://localhost:8080/taskdocuments/' + vm.data.id
-        }).then(_success, _error);
+        dataService.deleteData('http://localhost:8080/taskdocuments/' + vm.data.id)
+            .then(_refreshDocuments)
+            .catch(error => console.error(error));
         $uibModalInstance.close();
     };
 
 
     function loadPersonData() {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8080/persons'
-        }).then(function successCallback(response) {
-            vm.persons = response.data;
+        let dataPromise =  dataService.getData('http://localhost:8080/persons');
+        dataPromise.then(function (value) {
+            vm.persons = value;
             for (const el of vm.persons) {
                 if (el.id == vm.data.authorId) {
                     vm.myAuthor = el;
@@ -134,9 +111,7 @@ function TaskDocumentModalController ($uibModalInstance, $http, syncData, $rootS
                     vm.myControlPerson = el;
                 }
             }
-        }, function errorCallback(response) {
-            console.log(response.statusText);
-        });
+        }).catch(error => console.error(error));
     }
 };
 

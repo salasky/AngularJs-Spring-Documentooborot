@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('IncomingDocumentModalController', IncomingDocumentModalController);
 
-function IncomingDocumentModalController($uibModalInstance, $http, syncData, $rootScope) {
+function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope, dataService) {
 
     let vm = this;
     vm.data = syncData;
@@ -20,7 +20,7 @@ function IncomingDocumentModalController($uibModalInstance, $http, syncData, $ro
     }
     vm.persons = [];
 
-    if (vm.data != undefined) {
+    if (vm.data) {
         editDocument(vm.data);
     } else {
         addDocument();
@@ -55,48 +55,30 @@ function IncomingDocumentModalController($uibModalInstance, $http, syncData, $ro
         vm.incomingDocumentForm.dateOfRegistration = "";
     }
 
-    function _success(response) {
-        _refreshIncomingDocuments();
-    }
-
-    function _error(response) {
-        console.log(response);
-        alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
-    }
 
     function _refreshIncomingDocuments() {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8080/incomingdocuments'
-        }).then(function successCallback(response) {
-            $rootScope.rootIncomingDocuments = response.data;
-        }, function errorCallback(response) {
-            console.log(response.statusText);
-        });
+        let dataPromise =  dataService.getData('http://localhost:8080/incomingdocuments');
+        dataPromise.then(function (value) {
+            $rootScope.rootIncomingDocuments = value;
+        }).catch(error => console.error(error));
     }
 
     vm.ok = function () {
         vm.incomingDocumentForm.authorId = vm.myAuthor.id;
         vm.incomingDocumentForm.senderId = vm.mySender.id;
         vm.incomingDocumentForm.destinationId = vm.myDestination.id;
-        let method = "";
-        let url = "";
+
         if (vm.incomingDocumentForm.id == -1) {
             vm.incomingDocumentForm.id = null
-            method = "POST";
-            url = 'http://localhost:8080/incomingdocuments/add';
+            dataService.postData('http://localhost:8080/incomingdocuments/add',vm.incomingDocumentForm)
+                .then(_refreshIncomingDocuments)
+                .catch(error => console.error(error));;
+
         } else {
-            method = "PUT";
-            url = 'http://localhost:8080/incomingdocuments/update';
+            dataService.putData('http://localhost:8080/incomingdocuments/update',vm.incomingDocumentForm)
+                .then(_refreshIncomingDocuments)
+                .catch(error => console.error(error));
         }
-        $http({
-            method: method,
-            url: url,
-            data: angular.toJson(vm.incomingDocumentForm),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(_success, _error);
         $uibModalInstance.close();
     }
 
@@ -105,20 +87,17 @@ function IncomingDocumentModalController($uibModalInstance, $http, syncData, $ro
     }
 
     vm.deleteIncomingDocuments = function () {
-        $http({
-            method: 'DELETE',
-            url: 'http://localhost:8080/incomingdocuments/' + vm.data.id
-        }).then(_success, _error);
+        dataService.deleteData('http://localhost:8080/incomingdocuments/' + vm.data.id)
+            .then(_refreshIncomingDocuments)
+            .catch(error => console.error(error));
         $uibModalInstance.close();
     };
 
 
     function loadPersonData() {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8080/persons'
-        }).then(function successCallback(response) {
-            vm.persons = response.data;
+        let dataPromise =  dataService.getData('http://localhost:8080/persons');
+        dataPromise.then(function (value) {
+            vm.persons = value;
             for (const el of vm.persons) {
                 if (el.id == vm.data.authorId) {
                     vm.myAuthor = el;
@@ -130,9 +109,7 @@ function IncomingDocumentModalController($uibModalInstance, $http, syncData, $ro
                     vm.myDestination = el;
                 }
             }
-        }, function errorCallback(response) {
-            console.log(response.statusText);
-        });
+        }).catch(error => console.error(error));
     }
 };
 

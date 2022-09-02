@@ -1,18 +1,18 @@
 angular
     .module('app')
-    .controller('jobsModalController',jobsModalController );
+    .controller('jobsModalController', jobsModalController);
 
-function jobsModalController ( $uibModalInstance, $http, syncData, $window, $rootScope) {
+function jobsModalController($uibModalInstance, $http, syncData, dataService, $rootScope) {
 
-        
-    let vm=this;
+
+    let vm = this;
     vm.data = syncData;
 
     vm.jobsForm = {
         id: -1,
         name: ""
     };
-    if (vm.data != undefined) {
+    if (vm.data ) {
         editJob(vm.data);
     } else {
         addJob();
@@ -21,7 +21,7 @@ function jobsModalController ( $uibModalInstance, $http, syncData, $window, $roo
 
 
     function editJob(job) {
-        vm.jobsForm=job;
+        vm.jobsForm = job;
     }
 
     function addJob() {
@@ -41,24 +41,16 @@ function jobsModalController ( $uibModalInstance, $http, syncData, $window, $roo
 
 
     vm.ok = function () {
-        let method = "";
-        let url = "";
         if (vm.jobsForm.id == -1) {
             vm.jobsForm.id = null
-            method = "POST";
-            url = 'http://localhost:8080/jobs/add';
+            dataService.postData('http://localhost:8080/jobs/add', vm.jobsForm)
+                .then(_refreshCustomerData)
+                .catch(error => console.error(error));
         } else {
-            method = "PUT";
-            url = 'http://localhost:8080/jobs/update';
+            dataService.putData('http://localhost:8080/jobs/update', vm.jobsForm)
+                .then(_refreshCustomerData)
+                .catch(error => console.error(error));
         }
-        $http({
-            method: method,
-            url: url,
-            data: angular.toJson(vm.jobsForm),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(_success, _error);
         $uibModalInstance.close();
     }
 
@@ -67,23 +59,17 @@ function jobsModalController ( $uibModalInstance, $http, syncData, $window, $roo
     }
 
     vm.deleteJob = function () {
-        $http({
-            method: 'DELETE',
-            url: 'http://localhost:8080/jobs/' + vm.data.id
-        }).then(_success, _error);
+        dataService.deleteData('http://localhost:8080/jobs/' + vm.data.id)
+            .then(_refreshCustomerData)
+            .catch(error => console.error(error));
         $uibModalInstance.close();
     };
 
     function _refreshCustomerData() {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8080/jobs'
-        }).then(function successCallback(response) {
-            $rootScope.rootJobs = response.data;
-        }, function errorCallback(response) {
-            console.log(response.statusText);
-        });
-
+        let dataPromise = dataService.getData('http://localhost:8080/jobs');
+        dataPromise.then(function (value) {
+            $rootScope.rootJobs = value;
+        }).catch(error => console.error(error));
     }
 };
 
