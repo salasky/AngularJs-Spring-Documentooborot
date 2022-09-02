@@ -1,4 +1,5 @@
-app.factory('dataService', function ($http, $q) {
+angular
+    .module('app').factory('dataService', function ($http, $q) {
     return {
         getData: function (url) {
             let deferred = $q.defer();
@@ -10,9 +11,32 @@ app.factory('dataService', function ($http, $q) {
                 });
             return deferred.promise;
         },
+        postData: function (url,dataForm) {
+           return  $http({
+                method: "POST",
+                url: url,
+                data: angular.toJson(dataForm),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+        putData: function (url,dataForm) {
+            return  $http({
+                method: "PUT",
+                url: url,
+                data: angular.toJson(dataForm),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });},
         deleteData: function (url) {
-            let deferred = $q.defer();
-            $http({method: 'DELETE', url: url});
-        }
+            return  $http({
+                method: "DELETE",
+                url: url,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });}
     }
 });

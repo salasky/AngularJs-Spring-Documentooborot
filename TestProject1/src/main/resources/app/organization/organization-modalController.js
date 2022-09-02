@@ -14,12 +14,11 @@ function modalController ( $uibModalInstance, $http, syncData, $rootScope) {
         supervisor: "",
         contactNumbers: ""
     };
-    if (vm.data != undefined) {
+    if (vm.data) {
         editOrganization(vm.data);
     } else {
         addOrganization();
-    }
-    ;
+    };
 
 
     function editOrganization(organization) {

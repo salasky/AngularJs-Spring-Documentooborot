@@ -2,9 +2,9 @@ angular
     .module('app')
     .controller('DepartmentModalController', DepartmentModalController);
 
-DepartmentModalController.$inject = ['$http', '$uibModalInstance', '$rootScope', 'syncData'];
+DepartmentModalController.$inject = ['$http', '$uibModalInstance', '$rootScope', 'syncData','dataService'];
 
-function DepartmentModalController($http, $uibModalInstance, $rootScope, syncData,) {
+function DepartmentModalController($http, $uibModalInstance, $rootScope, syncData, dataService) {
     let vm = this;
     vm.data = syncData;
     vm.departmentsForm = {
@@ -26,7 +26,12 @@ function DepartmentModalController($http, $uibModalInstance, $rootScope, syncDat
 
     function editDepartment(department) {
         loadOrganizationData()
-        vm.departmentsForm = department;
+        vm.departmentsForm.id = department.id;
+        vm.departmentsForm.fullName = department.fullName;
+        vm.departmentsForm.shortName = department.shortName;
+        vm.departmentsForm.supervisor = department.supervisor;
+        vm.departmentsForm.contactNumber = department.contactNumber;
+        vm.departmentsForm.organizationId = department.organizationId;
     }
 
     function addDepartment() {
@@ -50,15 +55,10 @@ function DepartmentModalController($http, $uibModalInstance, $rootScope, syncDat
     }
 
     function _refreshCustomerData() {
-        vm.departments = [];
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8080/departments'
-        }).then(function successCallback(response) {
-            $rootScope.rootDepartments = response.data;
-        }, function errorCallback(response) {
-            console.log(response.statusText);
-        });
+        let dataPromise =  dataService.getData('http://localhost:8080/departments');
+        dataPromise.then(function (value) {
+            $rootScope.rootDepartments = value;
+        })
     }
 
     vm.ok = function () {
@@ -68,21 +68,12 @@ function DepartmentModalController($http, $uibModalInstance, $rootScope, syncDat
         let url = "";
         if (vm.departmentsForm.id == -1) {
             vm.departmentsForm.id = null
-            method = "POST";
-            url = 'http://localhost:8080/departments/add';
+            dataService.postData('http://localhost:8080/departments/add',vm.departmentsForm)
+                .then(_refreshCustomerData);
         } else {
-
-            method = "PUT";
-            url = 'http://localhost:8080/departments/update';
+            dataService.putData('http://localhost:8080/departments/update',vm.departmentsForm)
+                .then(_refreshCustomerData);
         }
-        $http({
-            method: method,
-            url: url,
-            data: angular.toJson(vm.departmentsForm),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(_success, _error);
         $uibModalInstance.close();
     }
 
@@ -91,28 +82,23 @@ function DepartmentModalController($http, $uibModalInstance, $rootScope, syncDat
     }
 
     vm.deleteDepartment = function () {
-        $http({
-            method: 'DELETE',
-            url: 'http://localhost:8080/departments/' + vm.data.id
-        }).then(_success, _error);
+        dataService.deleteData('http://localhost:8080/departments/' + vm.data.id)
+            .then(_refreshCustomerData);
         $uibModalInstance.close();
     };
 
 
     function loadOrganizationData() {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8080/organizations'
-        }).then(function successCallback(response) {
-            vm.organizations = response.data;
+        let dataPromise =  dataService.getData('http://localhost:8080/organizations');
+        dataPromise.then(function (value) {
+            vm.organizations = value;
             for (const el of vm.organizations) {
                 if (el.id == vm.data.organizationId) {
                     vm.myOrganization = el;
                 }
             }
-        }, function errorCallback(response) {
-            console.log(response.statusText);
-        });
+        })
+
     }
 };
 

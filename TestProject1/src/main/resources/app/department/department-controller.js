@@ -1,17 +1,17 @@
 angular
     .module('app')
     .controller('DepartmentController',DepartmentController );
-        DepartmentController.$inject=['$http', '$uibModal', '$rootScope','dataService'];
+
 
         function DepartmentController ( $http, $uibModal, $rootScope,dataService) {
             let vm=this;
+
             _refreshCustomerData();
 
-
-            function _refreshCustomerData() {
-                let dataPromise=dataService.getData('http://localhost:8080/departments');
-                dataPromise.then(function (value){
-                    $rootScope.rootDepartments=value;
+             function _refreshCustomerData() {
+                let dataPromise =  dataService.getData('http://localhost:8080/departments');
+                dataPromise.then(function (value) {
+                    $rootScope.rootDepartments = value;
                 })
             }
 
@@ -53,19 +53,19 @@ angular
                         return modalInstance;
                     };
 
-                    function organizationInfo(department) {
-                        let dataPromise=dataService.getData('http://localhost:8080/organizations/'+department.organizationId);
-                        dataPromise.then(function (value){
-                            vm.organization=value;
-                            let tabNo = department
-                            tabNo.organization = value;
-                            tabNo.index = department.fullName + ' ' + department.id.substring(0, 3)
-                            if (vm.tabs.includes(tabNo)) {
-                                vm.activeTabNo = tabNo;
-                            } else {
-                                vm.tabs.push(tabNo);
-                                vm.activeTabNo = tabNo;
-                            }
+                     function organizationInfo(department) {
+                        let dataPromise = dataService.getData('http://localhost:8080/organizations/' + department.organizationId);
+                         dataPromise.then(function (value) {
+                            vm.organization = value;
+                             let tabNo = department
+                             tabNo.organization = vm.organization;
+                             tabNo.index = department.fullName + ' ' + department.id.substring(0, 3)
+                             if (vm.tabs.includes(tabNo)) {
+                                 vm.activeTabNo = tabNo;
+                             } else {
+                                 vm.tabs.push(tabNo);
+                                 vm.activeTabNo = tabNo;
+                             }
                         });
                     };
 
@@ -73,10 +73,8 @@ angular
                     vm.tabs = [];
                     vm.department = "";
 
-                    vm.info = async function (department) {
-
-                        await organizationInfo(department);
-
+                    vm.info = function (department) {
+                        organizationInfo(department);
 
                     };
                     vm.remove = function (index) {
