@@ -3,7 +3,7 @@ angular
     .controller('OutgoingDocumentModalController', OutgoingDocumentModalController);
 
 function OutgoingDocumentModalController($uibModalInstance, dataService, syncData, $rootScope) {
-    let vm = this;
+    const vm = this;
     vm.data = syncData;
     vm.outgoingDocumentForm = {
         id: -1,
@@ -48,7 +48,6 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
         vm.outgoingDocumentForm.authorId = incomingDocument.authorId;
         vm.outgoingDocumentForm.senderId = incomingDocument.senderId;
         vm.outgoingDocumentForm.deliveryType = incomingDocument.deliveryType;
-
     }
 
     function addDocument() {
@@ -61,20 +60,10 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
         vm.outgoingDocumentForm.authorId = "";
         vm.outgoingDocumentForm.senderId = "";
         vm.outgoingDocumentForm.deliveryType = "";
-
-    }
-
-    function _success(response) {
-        _refreshOutgoingDocuments();
-    }
-
-    function _error(response) {
-        console.log(response);
-        alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
     }
 
     function _refreshOutgoingDocuments() {
-        let dataPromise = dataService.getData('http://localhost:8080/outgoingdocuments');
+        const dataPromise = dataService.getData('http://localhost:8080/outgoingdocuments');
         dataPromise.then(function (value) {
             $rootScope.rootOutgoingDocuments = value;
         }).catch(error => console.error(error));

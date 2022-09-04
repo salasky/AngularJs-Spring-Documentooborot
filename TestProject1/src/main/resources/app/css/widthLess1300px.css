@@ -21,31 +21,59 @@
         width: 0;
     }
 
-    .table-person {
-        margin-top: 20px;
-        height: 450px;
-    }
-
-    .table-department {
-        margin-top: 20px;
-        height: 450px;
-    }
-
-    .table-job {
-        margin-top: 20px;
-        height: 450px;
-    }
-
-    .table-organization {
-        margin-top: 20px;
-        height: 450px;
-    }
-
     .table-document {
-        margin-top: 20px;
+        font-family: "Helvetica Neue", Helvetica, sans-serif;
+        width: 100%;
+
+        border: 2px double black;
         height: 450px;
+        overflow-y: scroll;
         display: block;
     }
+
+    .table-document th{
+        background: SteelBlue;
+        color: white;
+        border: 1px double black;
+    }
+
+    .table-document tr:nth-child(even){
+        background: WhiteSmoke;
+        border: 1px solid black;
+    }
+
+    .table-document tr td:nth-child(2){
+        text-align: center;
+        border: 1px solid black;
+        text-decoration: underline;
+        cursor: pointer;
+        color: #1A87B9;
+    }
+
+    .table-document tr td:nth-child(2){
+        text-align: center;
+        border: 1px solid black;
+        text-decoration: underline;
+    }
+    .table-document tr td:nth-child(3),table-document tr td:nth-child(4),table-document tr td:nth-child(5){
+        text-align: center;
+        font-family: monospace;
+    }
+
+    .table-document td,th{
+        border: 1px solid gray;
+        width: 50px;
+        height: 50px;
+        text-align: left;
+        padding: 5px 10px;
+        border: 1px solid black;
+    }
+
+
+    .organization-form {
+        margin-left: 75px;
+    }
+
 
     html {
         font-size: 12px;
@@ -64,13 +92,6 @@
     }
 
 
-    a {
-        color: #111;
-    }
-
-    a:hover {
-        color: #555;
-    }
 
     /*HEADER*/
     .greetingtext {
@@ -109,68 +130,6 @@
         border: 1px solid #CD5C5C
     }
 
-    #wrapper {
-        font: 5px Calibri;
-        width: 100px;
-        margin: 0 auto;
-    }
-
-
-    caption {
-        text-align: center;
-        color: silver;
-        font-weight: bold;
-        text-transform: uppercase;
-        padding: 5px;
-    }
-
-
-    th {
-        background: SteelBlue;
-        color: white;
-        border: 1px double black;
-    }
-
-    tbody tr:nth-child(even) {
-        background: WhiteSmoke;
-        border: 1px solid black;
-    }
-
-    tbody tr td:nth-child(2) {
-        text-align: center;
-        border: 1px solid black;
-        text-decoration: underline;
-    }
-
-    tbody tr td:nth-child(3), tbody tr td:nth-child(4) {
-        text-align: center;
-        font-family: monospace;
-    }
-
-    tfoot {
-        background: SeaGreen;
-        color: white;
-        text-align: right;
-    }
-
-    tfoot tr th:last-child {
-        font-family: monospace;
-        display: block;
-    }
-
-    td, th {
-        border: 1px solid gray;
-        width: 30px;
-        height: 30px;
-        text-align: left;
-        padding: 3px 3px;
-        border: 1px solid black;
-    }
-
-    .organization-form {
-        margin-left: 75px;
-    }
-
     .red-button-organization {
         background: #CD5C5C;
         font-family: 'Helvetica Neue', sans-serif;
@@ -200,12 +159,3 @@
         height: 30px;
     }
 }
-
-
-
-
-
-
-
-
-

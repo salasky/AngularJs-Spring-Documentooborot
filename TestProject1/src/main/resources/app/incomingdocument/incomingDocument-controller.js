@@ -4,19 +4,20 @@ angular
 
 function IncomingDocumentController($uibModal, $rootScope, dataService) {
 
-    let vm = this;
+    const vm = this;
+    vm.activeTabNo = 0;
+    vm.tabs = [];
     _refreshIncomingDocuments();
 
     function _refreshIncomingDocuments() {
-        let dataPromise = dataService.getData('http://localhost:8080/incomingdocuments');
+        const dataPromise = dataService.getData('http://localhost:8080/incomingdocuments');
         dataPromise.then(function (value) {
             $rootScope.rootIncomingDocuments = value;
         }).catch(error => console.error(error));
     }
 
-
     function personInfo(incomingDocument) {
-        let dataPromise = dataService.getData('http://localhost:8080/persons/' + incomingDocument.authorId);
+        const dataPromise = dataService.getData('http://localhost:8080/persons/' + incomingDocument.authorId);
         dataPromise.then(function (value) {
             vm.author = value;
             let tabNo = incomingDocument;
@@ -46,10 +47,6 @@ function IncomingDocumentController($uibModal, $rootScope, dataService) {
         return modalInstance;
     };
 
-
-    vm.activeTabNo = 0;
-    vm.tabs = [];
-
     vm.info = function (incomingDocument) {
         personInfo(incomingDocument);
     };
@@ -66,7 +63,7 @@ function IncomingDocumentController($uibModal, $rootScope, dataService) {
         }
         vm.tabs.splice(index, 1);
     };
-    vm.activeTab = function (tabNo) {
+    vm.activateTab = function (tabNo) {
         vm.activeTabNo = tabNo;
     };
 };

@@ -3,19 +3,20 @@ angular
     .controller('TaskDocumentController', TaskDocumentController);
 
 function TaskDocumentController(dataService, $uibModal, $rootScope) {
-
-    let vm = this;
+    const vm = this;
+    vm.activeTabNo = 0;
+    vm.tabs = [];
     _refreshDocuments();
 
     function _refreshDocuments() {
-        let dataPromise = dataService.getData('http://localhost:8080/taskdocuments');
+        const dataPromise = dataService.getData('http://localhost:8080/taskdocuments');
         dataPromise.then(function (value) {
             $rootScope.rootTaskDocuments = value;
         }).catch(error => console.error(error));
     }
 
     function personInfo(taskDocument) {
-        let dataPromise = dataService.getData('http://localhost:8080/persons/' + taskDocument.authorId);
+        const dataPromise = dataService.getData('http://localhost:8080/persons/' + taskDocument.authorId);
         dataPromise.then(function (value) {
             vm.author = value;
             let tabNo = taskDocument;
@@ -31,7 +32,7 @@ function TaskDocumentController(dataService, $uibModal, $rootScope) {
     }
 
     vm.openModal = function (taskDocument) {
-        let modalInstance = $uibModal.open({
+        return $uibModal.open({
             templateUrl: 'taskdocument/modalWindow.html',
             controller: 'TaskDocumentModalController as vm',
             backdrop: false,
@@ -41,11 +42,7 @@ function TaskDocumentController(dataService, $uibModal, $rootScope) {
                 syncData: () => taskDocument,
             }
         });
-        return modalInstance;
     };
-
-    vm.activeTabNo = 0;
-    vm.tabs = [];
 
     vm.info = function (taskDocument) {
         personInfo(taskDocument);
@@ -63,7 +60,7 @@ function TaskDocumentController(dataService, $uibModal, $rootScope) {
         }
         vm.tabs.splice(index, 1);
     };
-    vm.activeTab = function (tabNo) {
+    vm.activateTab = function (tabNo) {
         vm.activeTabNo = tabNo;
     };
 

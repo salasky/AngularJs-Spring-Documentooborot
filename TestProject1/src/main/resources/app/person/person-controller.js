@@ -3,21 +3,24 @@ angular
     .controller('PersonController', PersonController);
 
 function PersonController(dataService, $uibModal, $rootScope) {
-    let vm = this;
-    _refreshCustomerData();
+    const vm = this;
     vm.department = "";
     vm.job = "";
     vm.organization = "";
+    vm.activeTabNo = 0;
+    vm.tabs = [];
+
+    _refreshCustomerData();
 
     function _refreshCustomerData() {
-        let dataPromise = dataService.getData('http://localhost:8080/persons');
+        const dataPromise = dataService.getData('http://localhost:8080/persons');
         dataPromise.then(function (value) {
             $rootScope.rootPersons = value;
         }).catch(error => console.error(error));
     }
 
     vm.openModal = function (person) {
-        let modalInstance = $uibModal.open({
+        const modalInstance = $uibModal.open({
             templateUrl: 'person/modalWindow.html',
             controller: 'PersonModalController as vm',
             backdrop: false,
@@ -31,15 +34,15 @@ function PersonController(dataService, $uibModal, $rootScope) {
     };
 
     function staffInfoGet(person) {
-        let dataPromise = dataService.getData('http://localhost:8080/departments/' + person.departmentId);
-        dataPromise.then(function (value) {
+        const dataPromiseDepartment = dataService.getData('http://localhost:8080/departments/' + person.departmentId);
+        dataPromiseDepartment.then(function (value) {
             vm.department = value;
-            let dataPromise = dataService.getData('http://localhost:8080/organizations/' + vm.department.organizationId);
-            dataPromise.then(function (value) {
+            const dataPromiseOrganization= dataService.getData('http://localhost:8080/organizations/' + vm.department.organizationId);
+            dataPromiseOrganization.then(function (value) {
                 vm.organization = value;
 
-                let dataPromise = dataService.getData('http://localhost:8080/jobs/' + person.jobTittleId);
-                dataPromise.then(function (value) {
+                const dataPromiseJob = dataService.getData('http://localhost:8080/jobs/' + person.jobTittleId);
+                dataPromiseJob.then(function (value) {
                     vm.job = value;
                     let tabNo = person;
                     tabNo.organization = vm.organization;
@@ -57,9 +60,6 @@ function PersonController(dataService, $uibModal, $rootScope) {
         }).catch(error => console.error(error));
     };
 
-    vm.activeTabNo = 0;
-    vm.tabs = [];
-
     vm.info = function (person) {
         staffInfoGet(person);
     };
@@ -75,7 +75,7 @@ function PersonController(dataService, $uibModal, $rootScope) {
         }
         vm.tabs.splice(index, 1);
     };
-    vm.activeTab = function (tabNo) {
+    vm.activateTab = function (tabNo) {
         vm.activeTabNo = tabNo;
     };
 

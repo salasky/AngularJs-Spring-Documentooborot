@@ -4,7 +4,7 @@ angular
 
 function modalController($uibModalInstance, syncData, $rootScope, dataService) {
 
-    let vm = this;
+    const vm = this;
     vm.data = syncData;
 
     vm.organizationsForm = {
@@ -19,7 +19,6 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService) {
     } else {
         addOrganization();
     }
-    ;
 
     function editOrganization(organization) {
         vm.organizationsForm = organization;
@@ -34,7 +33,7 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService) {
     }
 
     function _refreshCustomerData() {
-        let dataPromise = dataService.getData('http://localhost:8080/organizations');
+        const dataPromise = dataService.getData('http://localhost:8080/organizations');
         dataPromise.then(function (value) {
             $rootScope.rootOrganizations = value;
         }).catch(error => console.error(error));
@@ -48,7 +47,6 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService) {
             dataService.postData('http://localhost:8080/organizations/add', vm.organizationsForm)
                 .then(_refreshCustomerData)
                 .catch(error => console.error(error));
-
         } else {
             if (!Array.isArray(vm.organizationsForm.contactNumbers)) {
                 vm.organizationsForm.contactNumbers = Array.of(vm.organizationsForm.contactNumbers);
@@ -57,7 +55,6 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService) {
                 .then(_refreshCustomerData)
                 .catch(error => console.error(error));
         }
-
         $uibModalInstance.close();
     }
 

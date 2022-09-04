@@ -4,12 +4,13 @@ angular
 
 
 function DepartmentController( $uibModal, $rootScope, dataService) {
-    let vm = this;
-
+    const vm = this;
+    vm.activeTabNo = 0;
+    vm.tabs = [];
     _refreshCustomerData();
 
     function _refreshCustomerData() {
-        let dataPromise = dataService.getData('http://localhost:8080/departments');
+        const dataPromise = dataService.getData('http://localhost:8080/departments');
         dataPromise.then(function (value) {
             $rootScope.rootDepartments = value;
         }).catch(error => console.error(error));
@@ -42,7 +43,7 @@ function DepartmentController( $uibModal, $rootScope, dataService) {
     };
 
     function organizationInfo(department) {
-        let dataPromise = dataService.getData('http://localhost:8080/organizations/' + department.organizationId);
+        const dataPromise = dataService.getData('http://localhost:8080/organizations/' + department.organizationId);
         dataPromise.then(function (value) {
             vm.organization = value;
             let tabNo = department
@@ -56,9 +57,6 @@ function DepartmentController( $uibModal, $rootScope, dataService) {
             }
         }).catch(error => console.error(error));
     }
-
-    vm.activeTabNo = 0;
-    vm.tabs = [];
 
     vm.info = function (department) {
         organizationInfo(department);
@@ -76,7 +74,7 @@ function DepartmentController( $uibModal, $rootScope, dataService) {
         }
         vm.tabs.splice(index, 1);
     };
-    vm.activeTab = function (tabNo) {
+    vm.activateTab = function (tabNo) {
         vm.activeTabNo = tabNo;
     };
 

@@ -3,12 +3,11 @@ angular
     .controller('OrganizationController', OrganizationController);
 
 function OrganizationController($uibModal, dataService, $rootScope) {
-    let vm = this;
+    const vm = this;
     _refreshCustomerData();
 
-    //HTTP GET- get all organizations collection
     function _refreshCustomerData() {
-        let dataPromise = dataService.getData('http://localhost:8080/organizations');
+        const dataPromise = dataService.getData('http://localhost:8080/organizations');
         dataPromise.then(function (value) {
             $rootScope.rootOrganizations = value;
         }).catch(error => console.error(error));

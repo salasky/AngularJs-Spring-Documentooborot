@@ -2,7 +2,7 @@ angular
     .module('app').factory('dataService', function ($http, $q) {
     return {
         getData: function (url) {
-            let deferred = $q.defer();
+            const deferred = $q.defer();
             $http({method: 'GET', url: url})
                 .then(function success(response) {
                     deferred.resolve(response.data);

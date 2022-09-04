@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-<!-- define angular app -->
 <html ng-app="app">
 
 <head>
@@ -25,14 +24,12 @@
 </head>
 
 <body>
-<!-- NAVIGATION -->
-<header class="clearfix">
+
     <div class="containers">
 
         <nav class="navbar navbar-default">
             <div class="container-fluid">
 
-                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <a class="navbar-brand" ui-sref="home">
                         <img alt="Brand" src="img/brand.png">
@@ -46,7 +43,6 @@
                     </button>
                 </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a ui-sref="home">Home <span class="sr-only">(current)</span></a></li>
@@ -93,16 +89,15 @@
                         </li>
                         </li>
                     </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </div>
+            </div>
         </nav>
 
     </div>
     </div>
-</header>
+
 
 <div id="main">
-    <!-- angular templating -->
     <ui-view></ui-view>
 </div>
 
@@ -112,7 +107,6 @@
             class="fa fa-diamond" aria-hidden="true"></i></i></a>
 </footer>
 
-<!-- angular -->
 <script src="lib/angular.min-1.8.2.js"></script>
 <script src="lib/angular-animate.min-1.8.2.js"></script>
 <script src="lib/angular-touch.min-1.8.2.js"></script>

@@ -3,18 +3,22 @@ angular
     .controller('OutgoingDocumentController', OutgoingDocumentController);
 
 function OutgoingDocumentController($compile, $sce, $window, $uibModal, dataService, $rootScope) {
-    let vm = this;
+    const vm = this;
+    vm.activeTabNo = 0;
+    vm.tabs = [];
+    vm.outgoingDocument = "";
+
     _refreshOutgoingDocuments();
 
     function _refreshOutgoingDocuments() {
-        let dataPromise = dataService.getData('http://localhost:8080/outgoingdocuments');
+        const dataPromise = dataService.getData('http://localhost:8080/outgoingdocuments');
         dataPromise.then(function (value) {
             $rootScope.rootOutgoingDocuments = value;
         }).catch(error => console.error(error));
     }
 
     function personInfo(outgoingDocument) {
-        let dataPromise = dataService.getData('http://localhost:8080/persons/' + outgoingDocument.authorId);
+        const dataPromise = dataService.getData('http://localhost:8080/persons/' + outgoingDocument.authorId);
         dataPromise.then(function (value) {
             vm.author = value;
             let tabNo = outgoingDocument;
@@ -42,10 +46,6 @@ function OutgoingDocumentController($compile, $sce, $window, $uibModal, dataServ
         });
     };
 
-    vm.activeTabNo = 0;
-    vm.tabs = [];
-    vm.outgoingDocument = "";
-
     vm.info = function (outgoingDocument) {
         personInfo(outgoingDocument);
 
@@ -63,7 +63,7 @@ function OutgoingDocumentController($compile, $sce, $window, $uibModal, dataServ
         }
         vm.tabs.splice(index, 1);
     };
-    vm.activeTab = function (tabNo) {
+    vm.activateTab= function (tabNo) {
         vm.activeTabNo = tabNo;
     };
 }

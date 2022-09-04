@@ -2,7 +2,7 @@
 <head ng-app="app" ng-controller="DepartmentController">
     <title>Departments</title>
 
-    <head>
+</head>
 <body>
 
 <h2 class="spielbox">Departments
@@ -12,7 +12,7 @@
 
 <div class="splitleft">
     <div class="centered">
-        <table class="table-department">
+        <table class="table-document">
             <thead>
             <tr>
                 <th>Id</th>
@@ -47,7 +47,7 @@
                 <ul class="nav nav-tabs">
                     <li ng-repeat="tab in vm.tabs track by $index"
                         ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
-                        <a href="javascript:void(0)" ng-click="vm.activeTab(tab)">{{tab.index}} <img
+                        <a href="javascript:void(0)" ng-click="vm.activateTab(tab)">{{tab.index}} <img
                                 style="max-height: 20px" src="/app/img/department.png">
                             <i class="glyphicon glyphicon-remove" ng-click="vm.remove($index)"></i></a>
                     </li>

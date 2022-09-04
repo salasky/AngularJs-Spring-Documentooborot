@@ -3,7 +3,7 @@ angular
     .controller('TaskDocumentModalController', TaskDocumentModalController);
 
 function TaskDocumentModalController($uibModalInstance, dataService, syncData, $rootScope) {
-    let vm = this;
+    const vm = this;
     vm.data = syncData;
     vm.taskDocumentForm = {
         id: -1,
@@ -18,7 +18,6 @@ function TaskDocumentModalController($uibModalInstance, dataService, syncData, $
         signOfControl: "",
         controlPersonId: ""
     }
-
     vm.persons = [];
 
     if (vm.data) {
@@ -55,12 +54,11 @@ function TaskDocumentModalController($uibModalInstance, dataService, syncData, $
         vm.taskDocumentForm.controlPersonId = "";
         vm.taskDocumentForm.signOfControl = "";
         vm.taskDocumentForm.outDate = "";
-
     }
 
 
     function _refreshDocuments() {
-        let dataPromise = dataService.getData('http://localhost:8080/taskdocuments');
+        const dataPromise = dataService.getData('http://localhost:8080/taskdocuments');
         dataPromise.then(function (value) {
             $rootScope.rootTaskDocuments = value;
         }).catch(error => console.error(error));
@@ -94,9 +92,8 @@ function TaskDocumentModalController($uibModalInstance, dataService, syncData, $
         $uibModalInstance.close();
     };
 
-
     function loadPersonData() {
-        let dataPromise = dataService.getData('http://localhost:8080/persons');
+        const dataPromise = dataService.getData('http://localhost:8080/persons');
         dataPromise.then(function (value) {
             vm.persons = value;
             for (const el of vm.persons) {

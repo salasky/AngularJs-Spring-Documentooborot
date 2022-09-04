@@ -3,7 +3,7 @@ angular
     .controller('DepartmentModalController', DepartmentModalController);
 
 function DepartmentModalController($uibModalInstance, $rootScope, syncData, dataService) {
-    let vm = this;
+    const vm = this;
     vm.data = syncData;
     vm.departmentsForm = {
         id: -1,
@@ -43,7 +43,7 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
 
 
     function _refreshCustomerData() {
-        let dataPromise = dataService.getData('http://localhost:8080/departments');
+        const dataPromise = dataService.getData('http://localhost:8080/departments');
         dataPromise.then(function (value) {
             $rootScope.rootDepartments = value;
         }).catch(error => console.error(error));
@@ -78,7 +78,7 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
 
 
     function loadOrganizationData() {
-        let dataPromise = dataService.getData('http://localhost:8080/organizations');
+        const dataPromise = dataService.getData('http://localhost:8080/organizations');
         dataPromise.then(function (value) {
             vm.organizations = value;
             for (const el of vm.organizations) {

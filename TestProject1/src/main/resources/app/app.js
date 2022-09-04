@@ -3,10 +3,9 @@ angular.module('app', ['ui.router', 'ngTouch', 'ngAnimate', 'ui.bootstrap'])
     .run(run);
 
 function config($stateProvider, $urlRouterProvider) {
-    // default route
+
     $urlRouterProvider.otherwise("/");
 
-    // app routes
     $stateProvider
         .state('home', {
             url: '/',
@@ -22,7 +21,7 @@ function config($stateProvider, $urlRouterProvider) {
         })
         .state('about', {
             url: '/about',
-            templateUrl: 'about/index.view.html',
+            templateUrl: 'about/aboutIndex.html',
             controller: 'About.IndexController',
             controllerAs: 'vm'
         })
@@ -68,8 +67,7 @@ function config($stateProvider, $urlRouterProvider) {
             templateUrl: 'outgoingdocument/outgoing-document-view.html',
             controller: 'OutgoingDocumentController',
             controllerAs: 'vm'
-        })
-    ;
+        });
 }
 
 function run($rootScope) {

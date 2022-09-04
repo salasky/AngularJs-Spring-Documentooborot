@@ -86,7 +86,7 @@ public class Randomizer {
      * @return возвращает рандомный рег.номер типа {@link Long} в промежутке от 0 до 10000
      */
     public Long getRandDocumentRegNumber() {
-        return Math.abs(random.nextLong() / 1000);
+        return Math.abs(random.nextLong());
     }
 
     /**
@@ -177,7 +177,7 @@ public class Randomizer {
      * @return рандомный объект класса {@link Long} в промежутке от 0 до 10000 с использованием {@link Math#random()}
      */
     public Long getIncomingDocumentNumber() {
-        return Math.abs(random.nextLong() / 1000);
+        return Math.abs(random.nextLong());
     }
 
     /**

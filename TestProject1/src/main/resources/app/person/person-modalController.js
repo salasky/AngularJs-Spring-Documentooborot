@@ -3,7 +3,7 @@ angular
     .controller('PersonModalController', PersonModalController);
 
 function PersonModalController($uibModalInstance, dataService, syncData, $rootScope) {
-    let vm = this;
+    const vm = this;
 
     vm.data = syncData;
     vm.personsForm = {
@@ -54,7 +54,7 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
     }
 
     function _refreshCustomerData() {
-        let dataPromise = dataService.getData('http://localhost:8080/persons');
+        const dataPromise = dataService.getData('http://localhost:8080/persons');
         dataPromise.then(function (value) {
             $rootScope.rootPersons = value;
         }).catch(error => console.error(error));
@@ -89,7 +89,7 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
     };
 
     function loadDepartmentData() {
-        let dataPromise = dataService.getData('http://localhost:8080/departments');
+        const dataPromise = dataService.getData('http://localhost:8080/departments');
         dataPromise.then(function (value) {
             vm.departments = value;
             for (const el of vm.departments) {
@@ -101,7 +101,7 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
     }
 
     function loadJobData() {
-        let dataPromise = dataService.getData('http://localhost:8080/jobs');
+        const dataPromise = dataService.getData('http://localhost:8080/jobs');
         dataPromise.then(function (value) {
             vm.jobs = value;
             for (const el of vm.jobs) {

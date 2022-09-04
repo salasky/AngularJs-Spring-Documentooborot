@@ -4,8 +4,7 @@ angular
 
 function jobsModalController($uibModalInstance, syncData, dataService, $rootScope) {
 
-
-    let vm = this;
+    const vm = this;
     vm.data = syncData;
 
     vm.jobsForm = {
@@ -17,8 +16,6 @@ function jobsModalController($uibModalInstance, syncData, dataService, $rootScop
     } else {
         addJob();
     }
-    ;
-
 
     function editJob(job) {
         vm.jobsForm = job;
@@ -38,7 +35,6 @@ function jobsModalController($uibModalInstance, syncData, dataService, $rootScop
         alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
 
     }
-
 
     vm.ok = function () {
         if (vm.jobsForm.id == -1) {
@@ -66,7 +62,7 @@ function jobsModalController($uibModalInstance, syncData, dataService, $rootScop
     };
 
     function _refreshCustomerData() {
-        let dataPromise = dataService.getData('http://localhost:8080/jobs');
+        const dataPromise = dataService.getData('http://localhost:8080/jobs');
         dataPromise.then(function (value) {
             $rootScope.rootJobs = value;
         }).catch(error => console.error(error));

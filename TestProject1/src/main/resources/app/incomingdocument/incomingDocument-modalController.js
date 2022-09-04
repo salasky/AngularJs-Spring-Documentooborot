@@ -4,7 +4,7 @@ angular
 
 function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope, dataService) {
 
-    let vm = this;
+    const vm = this;
     vm.data = syncData;
     vm.incomingDocumentForm = {
         id: -1,
@@ -56,7 +56,7 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
     }
 
     function _refreshIncomingDocuments() {
-        let dataPromise = dataService.getData('http://localhost:8080/incomingdocuments');
+        const dataPromise = dataService.getData('http://localhost:8080/incomingdocuments');
         dataPromise.then(function (value) {
             $rootScope.rootIncomingDocuments = value;
         }).catch(error => console.error(error));
@@ -93,7 +93,7 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
     };
 
     function loadPersonData() {
-        let dataPromise = dataService.getData('http://localhost:8080/persons');
+        const dataPromise = dataService.getData('http://localhost:8080/persons');
         dataPromise.then(function (value) {
             vm.persons = value;
             for (const el of vm.persons) {
