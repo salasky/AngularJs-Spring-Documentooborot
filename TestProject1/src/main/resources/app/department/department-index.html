@@ -5,16 +5,12 @@
 </head>
 <body>
 
-
 <h2 class="spielbox">Departments
     <img class="imageHeader" src="/app/img/department.png">
     <button ng-click="vm.openModal()" class="label label-success">Add</button>
 </h2>
-<div ng-app="myApp">
-    <hello-world> </hello-world>
-</div>
-<div class="splitleft">
-    <div class="centered">
+
+<split-left>
         <table class="table-document">
             <thead>
             <tr>
@@ -39,67 +35,59 @@
             </tr>
             </tbody>
         </table>
-    </div>
-</div>
+</split-left>
 
-<div class="splitright">
-    <div class="centered2">
-        <div class="tablebox">
-            <div class="tablecontent">
-                <ul class="nav nav-tabs">
+<split-right>
+<ul class="nav nav-tabs">
                     <li ng-repeat="tab in vm.tabs track by $index"
                         ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
-                        <a ng-click="vm.activateTab(tab)">{{tab.index}} <img
-                                style="max-height: 20px" src="/app/img/department.png">
-                            <i class="glyphicon glyphicon-remove" ng-click="vm.remove($index)"></i></a>
-                    </li>
+<a ng-click="vm.activateTab(tab)">{{tab.index}} <img
+        style="max-height: 20px" src="/app/img/department.png">
+    <i class="glyphicon glyphicon-remove" ng-click="vm.remove($index)"></i></a>
+</li>
 
-                </ul>
-                <div class="tab-content">
+</ul>
+<div class="tab-content">
+    <div class="tab-pane" ng-repeat="tab in vm.tabs"
+         ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
+        <div ng-app="app" class="modal-body" id="modal-body">
+            <form class="form-horizontal" name="contact">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Full name:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" id="fullName" name="fullName"
+                               ng-model="tab.organization.fullName "></div>
+                </div>
 
-                    <div class="tab-pane" ng-repeat="tab in vm.tabs"
-                         ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
-                        <div ng-app="app" class="modal-body" id="modal-body">
-                            <form class="form-horizontal" name="contact">
-                                <div class="form-group">
-                                    <label class="col-lg-3 control-label">Full name:</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" type="text" id="fullName" name="fullName"
-                                               ng-model="tab.organization.fullName "></div>
-                                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Short Name:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" id="shortName" name="shortName"
+                               ng-model="tab.organization.shortName"></div>
+                </div>
 
-                                <div class="form-group">
-                                    <label class="col-lg-3 control-label">Short Name:</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" type="text" id="shortName" name="shortName"
-                                               ng-model="tab.organization.shortName"></div>
-                                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Supervisor:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" id="supervisor" name="supervisor"
+                               ng-model="tab.organization.supervisor "></div>
+                </div>
 
-                                <div class="form-group">
-                                    <label class="col-lg-3 control-label">Supervisor:</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" type="text" id="supervisor" name="supervisor"
-                                               ng-model="tab.organization.supervisor "></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-lg-3 control-label">Contact Numbers:</label>
-                                    <div class="col-lg-8">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Contact Numbers:</label>
+                    <div class="col-lg-8">
                                         <textarea class="form-control" rows="2" name="contactNumbers"
                                                   ng-model="tab.organization.contactNumbers "></textarea>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                        <button ng-if="vm.activeTabNo!=0" ng-click="vm.openOrganizationModal()" class="info-button">Edit
-                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
+
         </div>
+        <button ng-if="vm.activeTabNo!=0" ng-click="vm.openOrganizationModal()" class="info-button">Edit
+        </button>
     </div>
 </div>
+</split-right>
 
 </body>
 </html>

@@ -10,8 +10,7 @@
     <button ng-click="vm.openModal()" class="label label-success">Create</button>
 </h2>
 
-<div class="splitleft">
-    <div class="centered">
+<split-left>
         <table class="table-document">
             <thead>
             <tr>
@@ -34,13 +33,9 @@
             </tr>
             </tbody>
         </table>
-    </div>
-</div>
+</split-left>
 
-<div class="splitright">
-    <div class="centered2">
-        <div class="tablebox">
-            <div class="tablecontent">
+<split-right>
                 <div class="content-box">
                     <ul class="nav nav-tabs">
                         <li ng-repeat="tab in vm.tabs" ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
@@ -130,10 +125,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+</split-right>
 
 </body>
 </html>

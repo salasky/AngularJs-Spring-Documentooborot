@@ -8,8 +8,7 @@
     <img class="imageHeader" src="/app/img/job.png">
     <button ng-click="vm.openModal()" class="label label-success">Add</button>
 </h2>
-<div class="splitleft">
-    <div class="centered">
+<split-left>
         <table class="table-document">
             <thead>
             <tr>
@@ -24,15 +23,7 @@
                 <td><a ng-click="vm.openModal(job)">{{ job.name }}</a></td>
             </tr>
         </table>
-    </div>
-</div>
-
-<div class="splitright">
-    <div class="centered2">
-        <h2>Salavat Migranov</h2>
-        <p>Some text here too.</p>
-    </div>
-</div>
+</split-left>
 
 </body>
 </html>

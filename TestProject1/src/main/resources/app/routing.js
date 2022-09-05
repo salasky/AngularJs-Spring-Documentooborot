@@ -1,8 +1,6 @@
 
     angular.module('app')
-
-        .config(function ($stateProvider, $urlRouterProvider) {
-
+    .config(['$stateProvider','$urlRouterProvider',(function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise("/");
 
             $stateProvider
@@ -66,5 +64,6 @@
                     templateUrl: 'outgoingdocument/outgoing-document-view.html',
                     controller: 'OutgoingDocumentController',
                     controllerAs: 'vm'
-                })});
+                })
+    })])
 
