@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('IncomingDocumentController', IncomingDocumentController);
 
-function IncomingDocumentController($uibModal, $rootScope, dataService) {
+function IncomingDocumentController($uibModal, $rootScope, dataService, URLS) {
 
     const vm = this;
     vm.activeTabNo = 0;
@@ -10,15 +10,15 @@ function IncomingDocumentController($uibModal, $rootScope, dataService) {
     _refreshIncomingDocuments();
 
     function _refreshIncomingDocuments() {
-        const dataPromise = dataService.getData('http://localhost:8080/incomingdocuments');
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.incomingDocuments);
         dataPromise.then(function (incomingDocuments) {
             $rootScope.rootIncomingDocuments = incomingDocuments;
         }).catch(error => console.error(error));
     }
 
     function personInfo(incomingDocument) {
-        const dataPromise = dataService.getData('http://localhost:8080/persons/' + incomingDocument.authorId);
-        dataPromise.then(function (person) {
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.persons + incomingDocument.authorId);
+        dataPromise.then(function(person) {
             vm.author = person;
             let tabNo = incomingDocument;
             tabNo.author = vm.author;
@@ -31,7 +31,6 @@ function IncomingDocumentController($uibModal, $rootScope, dataService) {
             }
         }).catch(error => console.error(error));
     }
-
 
     vm.openModal = function (incomingDocument) {
         let modalInstance = $uibModal.open({

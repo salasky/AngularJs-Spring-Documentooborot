@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('TaskDocumentModalController', TaskDocumentModalController);
 
-function TaskDocumentModalController($uibModalInstance, dataService, syncData, $rootScope) {
+function TaskDocumentModalController($uibModalInstance, dataService, syncData, $rootScope, URLS) {
     const vm = this;
     vm.data = syncData;
     vm.taskDocumentForm = {
@@ -28,16 +28,8 @@ function TaskDocumentModalController($uibModalInstance, dataService, syncData, $
 
     function editDocument(taskDocument) {
         loadPersonData()
-        vm.taskDocumentForm.id = taskDocument.id;
-        vm.taskDocumentForm.name = taskDocument.name;
-        vm.taskDocumentForm.text = taskDocument.text;
-        vm.taskDocumentForm.regNumber = taskDocument.regNumber;
+        Object.assign( vm.taskDocumentForm, taskDocument);
         vm.taskDocumentForm.creatingDate = new Date(taskDocument.creatingDate);
-        vm.taskDocumentForm.authorId = taskDocument.authorId;
-        vm.taskDocumentForm.execPeriod = taskDocument.execPeriod;
-        vm.taskDocumentForm.responsibleId = taskDocument.responsibleId;
-        vm.taskDocumentForm.controlPersonId = taskDocument.controlPersonId;
-        vm.taskDocumentForm.signOfControl = taskDocument.signOfControl;
         vm.taskDocumentForm.outDate = new Date(taskDocument.outDate);
     }
 
@@ -58,7 +50,7 @@ function TaskDocumentModalController($uibModalInstance, dataService, syncData, $
 
 
     function _refreshDocuments() {
-        const dataPromise = dataService.getData('http://localhost:8080/taskdocuments');
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.taskDocuments);
         dataPromise.then(function (taskDocuments) {
             $rootScope.rootTaskDocuments = taskDocuments;
         }).catch(error => console.error(error));
@@ -70,11 +62,11 @@ function TaskDocumentModalController($uibModalInstance, dataService, syncData, $
         vm.taskDocumentForm.controlPersonId = vm.myControlPerson.id;
         if (vm.taskDocumentForm.id === -1) {
             vm.taskDocumentForm.id = null
-            dataService.postData('http://localhost:8080/taskdocuments/add', vm.taskDocumentForm)
+            dataService.postData(URLS.baseUrl+URLS.taskDocumentAdd, vm.taskDocumentForm)
                 .then(_refreshDocuments)
                 .catch(error => console.error(error));
         } else {
-            dataService.putData('http://localhost:8080/taskdocuments/update', vm.taskDocumentForm)
+            dataService.putData(URLS.baseUrl+URLS.taskDocumentUpdate, vm.taskDocumentForm)
                 .then(_refreshDocuments)
                 .catch(error => console.error(error));
         }
@@ -86,14 +78,14 @@ function TaskDocumentModalController($uibModalInstance, dataService, syncData, $
     }
 
     vm.deleteTaskDocuments = function () {
-        dataService.deleteData('http://localhost:8080/taskdocuments/' + vm.data.id)
+        dataService.deleteData(URLS.baseUrl+URLS.taskDocuments + vm.data.id)
             .then(_refreshDocuments)
             .catch(error => console.error(error));
         $uibModalInstance.close();
     };
 
     function loadPersonData() {
-        const dataPromise = dataService.getData('http://localhost:8080/persons');
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.persons);
         dataPromise.then(function (persons) {
             vm.persons = persons;
             for (const el of vm.persons) {

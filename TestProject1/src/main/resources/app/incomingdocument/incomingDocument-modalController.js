@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('IncomingDocumentModalController', IncomingDocumentModalController);
 
-function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope, dataService) {
+function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope, dataService, URLS) {
 
     const vm = this;
     vm.data = syncData;
@@ -29,15 +29,8 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
 
     function editDocument(incomingDocument) {
         loadPersonData()
-        vm.incomingDocumentForm.id = incomingDocument.id;
-        vm.incomingDocumentForm.name = incomingDocument.name;
-        vm.incomingDocumentForm.text = incomingDocument.text;
-        vm.incomingDocumentForm.regNumber = incomingDocument.regNumber;
+        Object.assign(vm.incomingDocumentForm, incomingDocument);
         vm.incomingDocumentForm.creatingDate = new Date(incomingDocument.creatingDate);
-        vm.incomingDocumentForm.authorId = incomingDocument.authorId;
-        vm.incomingDocumentForm.senderId = incomingDocument.senderId;
-        vm.incomingDocumentForm.destinationId = incomingDocument.destinationId;
-        vm.incomingDocumentForm.number = incomingDocument.number;
         vm.incomingDocumentForm.dateOfRegistration = new Date(incomingDocument.dateOfRegistration);
     }
 
@@ -56,7 +49,7 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
     }
 
     function _refreshIncomingDocuments() {
-        const dataPromise = dataService.getData('http://localhost:8080/incomingdocuments');
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.incomingDocuments);
         dataPromise.then(function (incomingDocuments) {
             $rootScope.rootIncomingDocuments = incomingDocuments;
         }).catch(error => console.error(error));
@@ -69,12 +62,12 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
 
         if (vm.incomingDocumentForm.id == -1) {
             vm.incomingDocumentForm.id = null
-            dataService.postData('http://localhost:8080/incomingdocuments/add', vm.incomingDocumentForm)
+            dataService.postData(URLS.baseUrl+URLS.incomingDocumentAdd, vm.incomingDocumentForm)
                 .then(_refreshIncomingDocuments)
                 .catch(error => console.error(error));
 
         } else {
-            dataService.putData('http://localhost:8080/incomingdocuments/update', vm.incomingDocumentForm)
+            dataService.putData(URLS.baseUrl+URLS.incomingDocumentUpdate, vm.incomingDocumentForm)
                 .then(_refreshIncomingDocuments)
                 .catch(error => console.error(error));
         }
@@ -86,14 +79,14 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
     }
 
     vm.deleteIncomingDocuments = function () {
-        dataService.deleteData('http://localhost:8080/incomingdocuments/' + vm.data.id)
+        dataService.deleteData(URLS.baseUrl+URLS.incomingDocuments + vm.data.id)
             .then(_refreshIncomingDocuments)
             .catch(error => console.error(error));
         $uibModalInstance.close();
     };
 
     function loadPersonData() {
-        const dataPromise = dataService.getData('http://localhost:8080/persons');
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.persons);
         dataPromise.then(function (persons) {
             vm.persons = persons;
             for (const el of vm.persons) {

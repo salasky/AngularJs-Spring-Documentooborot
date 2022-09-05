@@ -2,12 +2,12 @@ angular
     .module('app')
     .controller('OrganizationController', OrganizationController);
 
-function OrganizationController($uibModal, dataService, $rootScope) {
+function OrganizationController($uibModal, dataService, $rootScope, URLS) {
     const vm = this;
     _refreshCustomerData();
 
     function _refreshCustomerData() {
-        const dataPromise = dataService.getData('http://localhost:8080/organizations');
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.organizations);
         dataPromise.then(function (value) {
             $rootScope.rootOrganizations = value;
         }).catch(error => console.error(error));

@@ -3,12 +3,12 @@ angular
     .controller('JobController', JobController);
 
 
-function JobController($uibModal, $rootScope, dataService) {
+function JobController($uibModal, $rootScope, dataService, URLS) {
     const vm = this;
     _refreshCustomerData();
 
     function _refreshCustomerData() {
-        const dataPromise = dataService.getData('http://localhost:8080/jobs');
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.jobs);
         dataPromise.then(function (value) {
             $rootScope.rootJobs = value;
         }).catch(error => console.error(error));

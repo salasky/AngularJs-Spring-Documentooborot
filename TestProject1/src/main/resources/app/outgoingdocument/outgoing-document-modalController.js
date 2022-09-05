@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('OutgoingDocumentModalController', OutgoingDocumentModalController);
 
-function OutgoingDocumentModalController($uibModalInstance, dataService, syncData, $rootScope) {
+function OutgoingDocumentModalController($uibModalInstance, dataService, syncData, $rootScope, URLS) {
     const vm = this;
     vm.data = syncData;
     vm.outgoingDocumentForm = {
@@ -22,9 +22,9 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
         label: ""
     }
 
-    function selectMyDeliveryType(incomingDocument) {
+    function selectMyDeliveryType(outgoingDocument) {
         for (const el of vm.deliveryTypes) {
-            if (el.label == incomingDocument.deliveryType) {
+            if (el.label == outgoingDocument.deliveryType) {
                 vm.myDeliveryType = el;
             }
         }
@@ -35,19 +35,12 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
     } else {
         addDocument();
     }
-    ;
 
-    function editDocument(incomingDocument) {
+    function editDocument(outgoingDocument) {
         loadPersonData()
-        selectMyDeliveryType(incomingDocument);
-        vm.outgoingDocumentForm.id = incomingDocument.id;
-        vm.outgoingDocumentForm.name = incomingDocument.name;
-        vm.outgoingDocumentForm.text = incomingDocument.text;
-        vm.outgoingDocumentForm.regNumber = incomingDocument.regNumber;
-        vm.outgoingDocumentForm.creatingDate = new Date(incomingDocument.creatingDate);
-        vm.outgoingDocumentForm.authorId = incomingDocument.authorId;
-        vm.outgoingDocumentForm.senderId = incomingDocument.senderId;
-        vm.outgoingDocumentForm.deliveryType = incomingDocument.deliveryType;
+        selectMyDeliveryType(outgoingDocument);
+        Object.assign(vm.outgoingDocumentForm,outgoingDocument)
+        vm.outgoingDocumentForm.creatingDate = new Date(outgoingDocument.creatingDate);
     }
 
     function addDocument() {
@@ -63,7 +56,7 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
     }
 
     function _refreshOutgoingDocuments() {
-        const dataPromise = dataService.getData('http://localhost:8080/outgoingdocuments');
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.outgoingDocuments);
         dataPromise.then(function (value) {
             $rootScope.rootOutgoingDocuments = value;
         }).catch(error => console.error(error));
@@ -75,12 +68,12 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
         vm.outgoingDocumentForm.deliveryType = vm.myDeliveryType.label;
         if (vm.outgoingDocumentForm.id == -1) {
             vm.outgoingDocumentForm.id = null
-            dataService.postData('http://localhost:8080/outgoingdocuments/add', vm.outgoingDocumentForm)
+            dataService.postData(URLS.baseUrl+URLS.outgoingDocumentAdd, vm.outgoingDocumentForm)
                 .then(_refreshOutgoingDocuments)
                 .catch(error => console.error(error));
             ;
         } else {
-            dataService.putData('http://localhost:8080/outgoingdocuments/update', vm.outgoingDocumentForm)
+            dataService.putData(URLS.baseUrl+URLS.outgoingDocumentUpdate, vm.outgoingDocumentForm)
                 .then(_refreshOutgoingDocuments)
                 .catch(error => console.error(error));
         }
@@ -92,14 +85,14 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
     }
 
     vm.deleteOutgoingDocuments = function () {
-        dataService.deleteData('http://localhost:8080/outgoingdocuments/' + vm.data.id)
+        dataService.deleteData(URLS.baseUrl+URLS.outgoingDocuments + vm.data.id)
             .then(_refreshOutgoingDocuments)
             .catch(error => console.error(error));
         $uibModalInstance.close();
     };
 
     function loadPersonData() {
-        let dataPromise = dataService.getData('http://localhost:8080/persons');
+        let dataPromise = dataService.getData(URLS.baseUrl+URLS.persons);
         dataPromise.then(function (persons) {
             vm.persons = persons;
             for (const el of vm.persons) {

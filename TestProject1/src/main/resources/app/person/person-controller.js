@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('PersonController', PersonController);
 
-function PersonController(dataService, $uibModal, $rootScope) {
+function PersonController(dataService, $uibModal, $rootScope, URLS) {
     const vm = this;
     vm.department = "";
     vm.job = "";
@@ -13,7 +13,7 @@ function PersonController(dataService, $uibModal, $rootScope) {
     _refreshCustomerData();
 
     function _refreshCustomerData() {
-        const dataPromise = dataService.getData('http://localhost:8080/persons');
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.persons);
         dataPromise.then(function (persons) {
             $rootScope.rootPersons = persons;
         }).catch(error => console.error(error));
@@ -34,14 +34,14 @@ function PersonController(dataService, $uibModal, $rootScope) {
     };
 
     function staffInfoGet(person) {
-        const dataPromiseDepartment = dataService.getData('http://localhost:8080/departments/' + person.departmentId);
+        const dataPromiseDepartment = dataService.getData(URLS.baseUrl+URLS.departments + person.departmentId);
         dataPromiseDepartment.then(function (department) {
             vm.department = department;
-            const dataPromiseOrganization= dataService.getData('http://localhost:8080/organizations/' + vm.department.organizationId);
+            const dataPromiseOrganization= dataService.getData(URLS.baseUrl+URLS.organizations + vm.department.organizationId);
             dataPromiseOrganization.then(function (organization) {
                 vm.organization = organization;
 
-                const dataPromiseJob = dataService.getData('http://localhost:8080/jobs/' + person.jobTittleId);
+                const dataPromiseJob = dataService.getData(URLS.baseUrl+URLS.jobs + person.jobTittleId);
                 dataPromiseJob.then(function (job) {
                     vm.job = job;
                     let tabNo = person;

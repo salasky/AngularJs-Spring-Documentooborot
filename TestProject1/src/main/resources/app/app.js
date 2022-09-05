@@ -9,7 +9,7 @@ function config($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('home', {
             url: '/',
-            templateUrl: 'home/index.view.html',
+            templateUrl: 'home/index.html',
             controller: 'Home.IndexController',
             controllerAs: 'vm'
         })

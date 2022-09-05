@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('jobsModalController', jobsModalController);
 
-function jobsModalController($uibModalInstance, syncData, dataService, $rootScope) {
+function jobsModalController($uibModalInstance, syncData, dataService, $rootScope, URLS) {
 
     const vm = this;
     vm.data = syncData;
@@ -39,11 +39,11 @@ function jobsModalController($uibModalInstance, syncData, dataService, $rootScop
     vm.ok = function () {
         if (vm.jobsForm.id == -1) {
             vm.jobsForm.id = null
-            dataService.postData('http://localhost:8080/jobs/add', vm.jobsForm)
+            dataService.postData(URLS.baseUrl+URLS.jobAdd, vm.jobsForm)
                 .then(_refreshCustomerData)
                 .catch(error => console.error(error));
         } else {
-            dataService.putData('http://localhost:8080/jobs/update', vm.jobsForm)
+            dataService.putData(URLS.baseUrl+URLS.jobUpdate, vm.jobsForm)
                 .then(_refreshCustomerData)
                 .catch(error => console.error(error));
         }
@@ -55,14 +55,14 @@ function jobsModalController($uibModalInstance, syncData, dataService, $rootScop
     }
 
     vm.deleteJob = function () {
-        dataService.deleteData('http://localhost:8080/jobs/' + vm.data.id)
+        dataService.deleteData(URLS.baseUrl+URLS.jobs + vm.data.id)
             .then(_refreshCustomerData)
             .catch(error => console.error(error));
         $uibModalInstance.close();
     };
 
     function _refreshCustomerData() {
-        const dataPromise = dataService.getData('http://localhost:8080/jobs');
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.jobs);
         dataPromise.then(function (value) {
             $rootScope.rootJobs = value;
         }).catch(error => console.error(error));

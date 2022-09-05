@@ -6,6 +6,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.net.InetAddress;
+
 /**
  * Класс конфигурации для CrossOrigin
  *
@@ -19,7 +21,7 @@ public class CrossConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
+                        .allowedOrigins("http://localhost:63342")
                         .allowedMethods("*")
                         .maxAge(3600)
                         .allowedHeaders("*");

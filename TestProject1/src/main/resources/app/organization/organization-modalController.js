@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('modalController', modalController);
 
-function modalController($uibModalInstance, syncData, $rootScope, dataService) {
+function modalController($uibModalInstance, syncData, $rootScope, dataService, URLS) {
 
     const vm = this;
     vm.data = syncData;
@@ -33,7 +33,7 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService) {
     }
 
     function _refreshCustomerData() {
-        const dataPromise = dataService.getData('http://localhost:8080/organizations');
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.organizations);
         dataPromise.then(function (value) {
             $rootScope.rootOrganizations = value;
         }).catch(error => console.error(error));
@@ -44,14 +44,14 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService) {
         if (vm.organizationsForm.id == -1) {
             vm.organizationsForm.id = null
             vm.organizationsForm.contactNumbers = Array.of(vm.organizationsForm.contactNumbers);
-            dataService.postData('http://localhost:8080/organizations/add', vm.organizationsForm)
+            dataService.postData(URLS.baseUrl+URLS.organizationAdd, vm.organizationsForm)
                 .then(_refreshCustomerData)
                 .catch(error => console.error(error));
         } else {
             if (!Array.isArray(vm.organizationsForm.contactNumbers)) {
                 vm.organizationsForm.contactNumbers = Array.of(vm.organizationsForm.contactNumbers);
             }
-            dataService.putData('http://localhost:8080/organizations/update', vm.organizationsForm)
+            dataService.putData(URLS.baseUrl+URLS.organizationUpdate, vm.organizationsForm)
                 .then(_refreshCustomerData)
                 .catch(error => console.error(error));
         }
@@ -63,7 +63,7 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService) {
     }
 
     vm.deleteOrganization = function () {
-        dataService.deleteData('http://localhost:8080/organizations/' + vm.data.id)
+        dataService.deleteData(URLS.baseUrl+URLS.organizations + vm.data.id)
             .then(_refreshCustomerData)
             .catch(error => console.error(error));
         $uibModalInstance.close();

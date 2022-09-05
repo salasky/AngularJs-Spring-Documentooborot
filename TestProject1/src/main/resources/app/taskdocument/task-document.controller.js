@@ -2,21 +2,21 @@ angular
     .module('app')
     .controller('TaskDocumentController', TaskDocumentController);
 
-function TaskDocumentController(dataService, $uibModal, $rootScope) {
+function TaskDocumentController(dataService, $uibModal, $rootScope, URLS) {
     const vm = this;
     vm.activeTabNo = 0;
     vm.tabs = [];
     _refreshDocuments();
 
     function _refreshDocuments() {
-        const dataPromise = dataService.getData('http://localhost:8080/taskdocuments');
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.taskDocuments);
         dataPromise.then(function (taskDocuments) {
             $rootScope.rootTaskDocuments = taskDocuments;
         }).catch(error => console.error(error));
     }
 
     function personInfo(taskDocument) {
-        const dataPromise = dataService.getData('http://localhost:8080/persons/' + taskDocument.authorId);
+        const dataPromise = dataService.getData(URLS.baseUrl+URLS.persons + taskDocument.authorId);
         dataPromise.then(function (person) {
             vm.author = person;
             let tabNo = taskDocument;
