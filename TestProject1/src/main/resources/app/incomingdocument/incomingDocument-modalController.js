@@ -49,7 +49,7 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
     }
 
     function _refreshIncomingDocuments() {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.incomingDocuments);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.incomingDocuments);
         dataPromise.then(function (incomingDocuments) {
             $rootScope.rootIncomingDocuments = incomingDocuments;
         }).catch(error => console.error(error));
@@ -62,12 +62,12 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
 
         if (vm.incomingDocumentForm.id == -1) {
             vm.incomingDocumentForm.id = null
-            dataService.postData(URLS.baseUrl+URLS.incomingDocumentAdd, vm.incomingDocumentForm)
+            dataService.postData(URLS.baseUrl + URLS.incomingDocumentAdd, vm.incomingDocumentForm)
                 .then(_refreshIncomingDocuments)
                 .catch(error => console.error(error));
 
         } else {
-            dataService.putData(URLS.baseUrl+URLS.incomingDocumentUpdate, vm.incomingDocumentForm)
+            dataService.putData(URLS.baseUrl + URLS.incomingDocumentUpdate, vm.incomingDocumentForm)
                 .then(_refreshIncomingDocuments)
                 .catch(error => console.error(error));
         }
@@ -79,14 +79,14 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
     }
 
     vm.deleteIncomingDocuments = function () {
-        dataService.deleteData(URLS.baseUrl+URLS.incomingDocuments + vm.data.id)
+        dataService.deleteData(URLS.baseUrl + URLS.incomingDocuments + vm.data.id)
             .then(_refreshIncomingDocuments)
             .catch(error => console.error(error));
         $uibModalInstance.close();
     };
 
     function loadPersonData() {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.persons);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.persons);
         dataPromise.then(function (persons) {
             vm.persons = persons;
             for (const el of vm.persons) {

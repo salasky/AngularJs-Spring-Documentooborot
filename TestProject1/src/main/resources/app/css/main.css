@@ -9,10 +9,11 @@ body {
     background-color: #FFFFFF;
 }
 
-.wrapper{
+.wrapper {
     display: flex;
 }
-.table-person{
+
+.table-person {
     font-family: "Helvetica Neue", Helvetica, sans-serif;
     width: 100%;
     height: 100%;
@@ -22,59 +23,70 @@ body {
     padding: 0 20px;
     font-size: 20px;
 }
-.table-person-container{
+
+.table-person-container {
     border: 1px double black;
     width: 100%;
 }
-.tabs-info{
+
+.tabs-info {
     flex: 0 0 60%;
     font-size: 16px;
     padding: 0 3%;
 }
 
-.table-header-row{
+.table-header-row {
     background: SteelBlue;
     color: white;
     border: 1px double black;
 }
 
-.table-body-row{
+.table-body-row {
     text-align: center;
     border: 1px double black;
 }
 
-.table-body-row td{
+.table-body-row td {
     border: 1px double black;
 }
 
-.table-body-row td:nth-child(2){
+.table-body-row td:nth-child(2) {
     cursor: pointer;
     color: #1A87B9;
 }
 
-.table-body tr:nth-child(even){
+.table-body tr:nth-child(even) {
     background: WhiteSmoke;
     border: 1px solid black;
 }
-.label-table-info{
+
+.label-table-info {
     margin: 0 50%;
 }
-.table-info-button{
+
+.table-info-button {
     margin: 0 50%;
+
 }
-.table-person-container thead{
+
+.table-person-container thead {
     position: sticky;
     top: 0;
     border: 1px solid black;
 }
-.table-person-after-header{
+
+.table-person-after-header {
+    position: absolute;
     display: block;
-    height: 700px;
+    width: 40%;
+    height: 78%;
     overflow-y: scroll;
+    overflow-x: scroll;
 }
-.tab-scroll-box{
+
+.tab-scroll-box {
     height: 100px;
-    overflow-y:scroll ;
+    overflow-y: scroll;
 }
 
 .navbar-brand > img {
@@ -129,18 +141,18 @@ body {
     display: block;
 }
 
-.table-document th{
+.table-document th {
     background: SteelBlue;
     color: white;
     border: 1px double black;
 }
 
-.table-document tr:nth-child(even){
+.table-document tr:nth-child(even) {
     background: WhiteSmoke;
     border: 1px solid black;
 }
 
-.table-document tr td:nth-child(2){
+.table-document tr td:nth-child(2) {
     text-align: center;
     border: 1px solid black;
     text-decoration: underline;
@@ -148,17 +160,18 @@ body {
     color: #1A87B9;
 }
 
-.table-document tr td:nth-child(2){
+.table-document tr td:nth-child(2) {
     text-align: center;
     border: 1px solid black;
     text-decoration: underline;
 }
-.table-document tr td:nth-child(3),table-document tr td:nth-child(4),table-document tr td:nth-child(5){
+
+.table-document tr td:nth-child(3), table-document tr td:nth-child(4), table-document tr td:nth-child(5) {
     text-align: center;
     font-family: monospace;
 }
 
-.table-document td,th{
+.table-document td, th {
     border: 1px solid gray;
     width: 50px;
     height: 50px;
@@ -187,11 +200,12 @@ body {
 .info-button {
     background-color: #4CAF50; /* Green */
     color: white;
-    padding: 0px 30px;
+    padding: 0 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 13px;
+    margin-bottom: 1%;
 }
 
 

@@ -23,7 +23,7 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
 
     function editDepartment(department) {
         loadOrganizationData()
-        Object.assign( vm.departmentsForm, department)
+        Object.assign(vm.departmentsForm, department)
     }
 
     function addDepartment() {
@@ -38,7 +38,7 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
 
 
     function _refreshCustomerData() {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.departments);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.departments);
         dataPromise.then(function (departments) {
             $rootScope.rootDepartments = departments;
         }).catch(error => console.error(error));
@@ -49,11 +49,11 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
 
         if (vm.departmentsForm.id === -1) {
             vm.departmentsForm.id = null
-            dataService.postData(URLS.baseUrl+URLS.departmentAdd, vm.departmentsForm)
+            dataService.postData(URLS.baseUrl + URLS.departmentAdd, vm.departmentsForm)
                 .then(_refreshCustomerData)
                 .catch(error => console.error(error));
         } else {
-            dataService.putData(URLS.baseUrl+URLS.departmentUpdate, vm.departmentsForm)
+            dataService.putData(URLS.baseUrl + URLS.departmentUpdate, vm.departmentsForm)
                 .then(_refreshCustomerData)
                 .catch(error => console.error(error));
         }
@@ -65,7 +65,7 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
     }
 
     vm.deleteDepartment = function () {
-        dataService.deleteData(URLS.baseUrl+URLS.departments + vm.data.id)
+        dataService.deleteData(URLS.baseUrl + URLS.departments + vm.data.id)
             .then(_refreshCustomerData)
             .catch(error => console.error(error));
         $uibModalInstance.close();
@@ -73,7 +73,7 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
 
 
     function loadOrganizationData() {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.organizations);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.organizations);
         dataPromise.then(function (organizations) {
             vm.organizations = organizations;
             for (const el of vm.organizations) {

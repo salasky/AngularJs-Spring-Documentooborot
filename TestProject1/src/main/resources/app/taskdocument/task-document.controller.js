@@ -9,14 +9,14 @@ function TaskDocumentController(dataService, $uibModal, $rootScope, URLS) {
     _refreshDocuments();
 
     function _refreshDocuments() {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.taskDocuments);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.taskDocuments);
         dataPromise.then(function (taskDocuments) {
             $rootScope.rootTaskDocuments = taskDocuments;
         }).catch(error => console.error(error));
     }
 
     function personInfo(taskDocument) {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.persons + taskDocument.authorId);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.persons + taskDocument.authorId);
         dataPromise.then(function (person) {
             vm.author = person;
             let tabNo = taskDocument;

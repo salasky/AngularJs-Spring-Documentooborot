@@ -3,14 +3,14 @@ angular
     .controller('DepartmentController', DepartmentController);
 
 
-function DepartmentController( $uibModal, $rootScope, dataService,URLS) {
+function DepartmentController($uibModal, $rootScope, dataService, URLS) {
     const vm = this;
     vm.activeTabNo = 0;
     vm.tabs = [];
     _refreshCustomerData();
 
     function _refreshCustomerData() {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.departments);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.departments);
         dataPromise.then(function (departments) {
             $rootScope.rootDepartments = departments;
         }).catch(error => console.error(error));
@@ -43,7 +43,7 @@ function DepartmentController( $uibModal, $rootScope, dataService,URLS) {
     };
 
     function organizationInfo(department) {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.organizations+department.organizationId);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.organizations + department.organizationId);
         dataPromise.then(function (organization) {
             vm.organization = organization;
             let tabNo = department

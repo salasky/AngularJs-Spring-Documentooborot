@@ -8,7 +8,7 @@ function JobController($uibModal, $rootScope, dataService, URLS) {
     _refreshCustomerData();
 
     function _refreshCustomerData() {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.jobs);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.jobs);
         dataPromise.then(function (value) {
             $rootScope.rootJobs = value;
         }).catch(error => console.error(error));

@@ -1,6 +1,6 @@
-let app=angular.module('app');
+let app = angular.module('app');
 app.component('splitRight', {
-    transclude:true,
+    transclude: true,
     template: '<div class="splitright">\n' +
         '    <div class="centered2">\n' +
         '        <div class="tablebox">\n' +
@@ -12,7 +12,7 @@ app.component('splitRight', {
         '</div>'
 })
     .component('splitLeft', {
-        transclude:true,
+        transclude: true,
         template: '<div class="splitleft">\n' +
             '        <div class="centered">' +
             '           <ng-transclude></ng-transclude>' +

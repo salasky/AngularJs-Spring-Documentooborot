@@ -13,24 +13,24 @@
 </div>
 
 <split-left>
-        <table class="table-document">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Short Name</th>
-                <th>Supervisor</th>
-                <th>Contact Numbers</th>
-            </tr>
-            </thead>
-            <tr ng-repeat="organization in rootOrganizations">
-                <td>{{ $index + 1 }}</td>
-                <td><a ng-click="vm.openModal(organization)">{{ organization.fullName }}</a></td>
-                <td>{{ organization.shortName }}</td>
-                <td>{{ organization.supervisor }}</td>
-                <td>{{ organization.contactNumbers }}</td>
-            </tr>
-        </table>
+    <table class="table-document">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Short Name</th>
+            <th>Supervisor</th>
+            <th>Contact Numbers</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="organization in rootOrganizations">
+            <td>{{ $index + 1 }}</td>
+            <td><a ng-click="vm.openModal(organization)">{{ organization.fullName }}</a></td>
+            <td>{{ organization.shortName }}</td>
+            <td>{{ organization.supervisor }}</td>
+            <td>{{ organization.contactNumbers }}</td>
+        </tr>
+    </table>
 </split-left>
 </body>
 </html>

@@ -39,7 +39,7 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
     function editDocument(outgoingDocument) {
         loadPersonData()
         selectMyDeliveryType(outgoingDocument);
-        Object.assign(vm.outgoingDocumentForm,outgoingDocument)
+        Object.assign(vm.outgoingDocumentForm, outgoingDocument)
         vm.outgoingDocumentForm.creatingDate = new Date(outgoingDocument.creatingDate);
     }
 
@@ -56,7 +56,7 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
     }
 
     function _refreshOutgoingDocuments() {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.outgoingDocuments);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.outgoingDocuments);
         dataPromise.then(function (value) {
             $rootScope.rootOutgoingDocuments = value;
         }).catch(error => console.error(error));
@@ -68,12 +68,12 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
         vm.outgoingDocumentForm.deliveryType = vm.myDeliveryType.label;
         if (vm.outgoingDocumentForm.id == -1) {
             vm.outgoingDocumentForm.id = null
-            dataService.postData(URLS.baseUrl+URLS.outgoingDocumentAdd, vm.outgoingDocumentForm)
+            dataService.postData(URLS.baseUrl + URLS.outgoingDocumentAdd, vm.outgoingDocumentForm)
                 .then(_refreshOutgoingDocuments)
                 .catch(error => console.error(error));
             ;
         } else {
-            dataService.putData(URLS.baseUrl+URLS.outgoingDocumentUpdate, vm.outgoingDocumentForm)
+            dataService.putData(URLS.baseUrl + URLS.outgoingDocumentUpdate, vm.outgoingDocumentForm)
                 .then(_refreshOutgoingDocuments)
                 .catch(error => console.error(error));
         }
@@ -85,14 +85,14 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
     }
 
     vm.deleteOutgoingDocuments = function () {
-        dataService.deleteData(URLS.baseUrl+URLS.outgoingDocuments + vm.data.id)
+        dataService.deleteData(URLS.baseUrl + URLS.outgoingDocuments + vm.data.id)
             .then(_refreshOutgoingDocuments)
             .catch(error => console.error(error));
         $uibModalInstance.close();
     };
 
     function loadPersonData() {
-        let dataPromise = dataService.getData(URLS.baseUrl+URLS.persons);
+        let dataPromise = dataService.getData(URLS.baseUrl + URLS.persons);
         dataPromise.then(function (persons) {
             vm.persons = persons;
             for (const el of vm.persons) {

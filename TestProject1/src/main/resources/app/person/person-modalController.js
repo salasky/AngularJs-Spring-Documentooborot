@@ -31,7 +31,7 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
     function editPerson(person) {
         loadDepartmentData()
         loadJobData();
-        Object.assign( vm.personsForm, person);
+        Object.assign(vm.personsForm, person);
         vm.personsForm.birthDay = new Date(person.birthDay);
     }
 
@@ -48,7 +48,7 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
     }
 
     function _refreshCustomerData() {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.persons);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.persons);
         dataPromise.then(function (persons) {
             $rootScope.rootPersons = persons;
         }).catch(error => console.error(error));
@@ -60,11 +60,11 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
 
         if (vm.personsForm.id == -1) {
             vm.personsForm.id = null
-            dataService.postData(URLS.baseUrl+URLS.personAdd, vm.personsForm)
+            dataService.postData(URLS.baseUrl + URLS.personAdd, vm.personsForm)
                 .then(_refreshCustomerData)
                 .catch(error => console.error(error));
         } else {
-            dataService.putData(URLS.baseUrl+URLS.personUpdate, vm.personsForm)
+            dataService.putData(URLS.baseUrl + URLS.personUpdate, vm.personsForm)
                 .then(_refreshCustomerData)
                 .catch(error => console.error(error));
         }
@@ -76,14 +76,14 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
     }
 
     vm.deletePerson = function () {
-        dataService.deleteData(URLS.baseUrl+URLS.persons + vm.data.id)
+        dataService.deleteData(URLS.baseUrl + URLS.persons + vm.data.id)
             .then(_refreshCustomerData)
             .catch(error => console.error(error));
         $uibModalInstance.close();
     };
 
     function loadDepartmentData() {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.departments);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.departments);
         dataPromise.then(function (departments) {
             vm.departments = departments;
             for (const el of vm.departments) {
@@ -95,7 +95,7 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
     }
 
     function loadJobData() {
-        const dataPromise = dataService.getData(URLS.baseUrl+URLS.jobs);
+        const dataPromise = dataService.getData(URLS.baseUrl + URLS.jobs);
         dataPromise.then(function (jobs) {
             vm.jobs = jobs;
             for (const el of vm.jobs) {

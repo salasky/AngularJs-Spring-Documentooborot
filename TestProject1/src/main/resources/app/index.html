@@ -25,76 +25,77 @@
 
 <body>
 
-    <div class="containers">
+<div class="containers">
 
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
 
-                <div class="navbar-header">
-                    <a class="navbar-brand" ui-sref="home">
-                        <img alt="Brand" src="img/brand.png">
-                    </a>
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <div class="navbar-header">
+                <a class="navbar-brand" ui-sref="home">
+                    <img alt="Brand" src="img/brand.png">
+                </a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
 
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a ui-sref="home">Home <span class="sr-only">(current)</span></a></li>
-                        <li><a ui-sref="person">Persons</a></li>
-
-                        <li class="dropdown">
-                            <a ui-sref="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true"
-                               aria-expanded="false">Documents <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a ui-sref="incomingDocument">IncomingDocument</a></li>
-                                <li><a ui-sref="outgoingDocument">OutgoingDocument</a></li>
-                                <li><a ui-sref="taskDocument">TaskDocument</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a ui-sref="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true"
-                               aria-expanded="false">Staff <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a ui-sref="job">Job</a></li>
-                                <li><a ui-sref="department">Department</a></li>
-                                <li><a ui-sref="organization">Organization</a></li>
-                            </ul>
-                        </li>
-
-                        <li><a ui-sref="about">About</a></li>
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.coe.int/ru/web/help-country/home"><i
-                                    class="fa fa-info"
-                                    aria-hidden="true"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://citros.ru/contacts/"><i class="fa fa-address-book"
-                                                                                      aria-hidden="true"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://t.me/sall"><i class="fa fa-telegram"
-                                                                            aria-hidden="true"></i></a>
-                        </li>
-                        </li>
-                    </ul>
-                </div>
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
             </div>
-        </nav>
 
-    </div>
-    </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a ui-sref="home">Home <span class="sr-only">(current)</span></a></li>
+                    <li><a ui-sref="person">Persons</a></li>
+
+                    <li class="dropdown">
+                        <a ui-sref="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">Documents <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a ui-sref="incomingDocument">IncomingDocument</a></li>
+                            <li><a ui-sref="outgoingDocument">OutgoingDocument</a></li>
+                            <li><a ui-sref="taskDocument">TaskDocument</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a ui-sref="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">Staff <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a ui-sref="job">Job</a></li>
+                            <li><a ui-sref="department">Department</a></li>
+                            <li><a ui-sref="organization">Organization</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a ui-sref="about">About</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.coe.int/ru/web/help-country/home"><i
+                                class="fa fa-info"
+                                aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://citros.ru/contacts/"><i class="fa fa-address-book"
+                                                                                  aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://t.me/sall"><i class="fa fa-telegram"
+                                                                        aria-hidden="true"></i></a>
+                    </li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</div>
+</div>
 
 
 <div id="main">
@@ -120,7 +121,7 @@
 <script src="http://ui-grid.info/release/ui-grid.js"></script>
 
 <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="routing.js"></script>
+<script type="text/javascript" src="routing.js"></script>
 <script type="text/javascript" src="job/job-controller.js"></script>
 <script type="text/javascript" src="job/job-modalController.js"></script>
 <script type="text/javascript" src="organization/organization-modalController.js"></script>

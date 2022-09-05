@@ -5,7 +5,8 @@ angular
             const deferred = $q.defer();
             $http({
                 method: HTTP_METHOD.GET,
-                url: url})
+                url: url
+            })
                 .then(function success(response) {
                     deferred.resolve(response.data);
                 }, function error(response) {

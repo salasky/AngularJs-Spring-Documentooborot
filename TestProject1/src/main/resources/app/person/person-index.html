@@ -4,7 +4,6 @@
 </head>
 <body>
 
-
 <div class="wrapper">
     <div class="table-person">
         <h2>Persons
@@ -12,41 +11,41 @@
             <button ng-click="vm.openModal()" class="label label-success">Add</button>
         </h2>
         <div class="table-person-after-header">
-        <table class="table-person-container">
+            <table class="table-person-container">
 
-            <thead>
-            <tr class="table-header-row">
-                <th>Id</th>
-                <th>Second Name</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Staff info</th>
-            </tr>
-            </thead>
-            <tbody class="table-body">
-            <tr class="table-body-row" ng-repeat="person in rootPersons">
-                <td>{{ $index + 1 }}</td>
-                <td><a ng-click="vm.openModal(person)">{{ person.secondName }}</a></td>
-                <td><a ng-click="vm.openModal(person)">{{ person.firstName }}</a></td>
-                <td><a ng-click="vm.openModal(person)">{{ person.lastName }}</a></td>
-                <td>
-                    <button ng-click="vm.info(person)" class="info-button">info</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                <thead>
+                <tr class="table-header-row">
+                    <th>Id</th>
+                    <th>Second Name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Staff info</th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                <tr class="table-body-row" ng-repeat="person in rootPersons">
+                    <td>{{ $index + 1 }}</td>
+                    <td><a ng-click="vm.openModal(person)">{{ person.secondName }}</a></td>
+                    <td><a ng-click="vm.openModal(person)">{{ person.firstName }}</a></td>
+                    <td><a ng-click="vm.openModal(person)">{{ person.lastName }}</a></td>
+                    <td>
+                        <button ng-click="vm.info(person)" class="info-button">info</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
     <div class="tabs-info">
         <div class="tab-scroll-box">
-        <ul class="nav nav-tabs">
-            <li ng-repeat="tab in vm.tabs" ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
-                <a ng-click="vm.activateTab(tab)">{{tab.index}}
-                    <img style="max-height: 20px" src="/app/img/user.png"><i
-                            class="glyphicon glyphicon-remove" ng-click="vm.remove($index)"></i></a>
-            </li>
-        </ul>
+            <ul class="nav nav-tabs">
+                <li ng-repeat="tab in vm.tabs" ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
+                    <a ng-click="vm.activateTab(tab)">{{tab.index}}
+                        <img style="max-height: 20px" src="/app/img/user.png"><i
+                                class="glyphicon glyphicon-remove" ng-click="vm.remove($index)"></i></a>
+                </li>
+            </ul>
         </div>
         <div class="tab-content">
             <div class="tab-pane" ng-repeat="tab in vm.tabs"
@@ -84,10 +83,10 @@
                             </div>
                         </div>
                         <div class="table-info-button">
-                        <button ng-if="activeTabNo!=0" ng-click="vm.openOrganizationModal()"
-                                class="info-button">
-                            Edit
-                        </button>
+                            <button ng-if="activeTabNo!=0" ng-click="vm.openOrganizationModal()"
+                                    class="info-button">
+                                Edit
+                            </button>
                         </div>
                     </form>
 
@@ -139,7 +138,8 @@
                                        ng-model="tab.job.name "></div>
                         </div>
                         <div class="table-info-button">
-                            <button ng-if="activeTabNo!=0" ng-click="vm.openJobModal()" class="info-button">Edit </button>
+                            <button ng-if="activeTabNo!=0" ng-click="vm.openJobModal()" class="info-button">Edit
+                            </button>
                         </div>
 
                     </form>
