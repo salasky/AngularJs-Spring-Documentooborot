@@ -11,6 +11,7 @@ derby.log
 /src/main/java/META-INF/
 /src/main/java/javadoc/
 /src/main/resources/app/img
+/src/main/resources/app/lib
 .mvn
 **/package.html
 ### STS ###

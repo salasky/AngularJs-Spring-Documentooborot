@@ -12,15 +12,15 @@ function OutgoingDocumentController($compile, $sce, $window, $uibModal, dataServ
 
     function _refreshOutgoingDocuments() {
         const dataPromise = dataService.getData('http://localhost:8080/outgoingdocuments');
-        dataPromise.then(function (value) {
-            $rootScope.rootOutgoingDocuments = value;
+        dataPromise.then(function (outgoingDocuments) {
+            $rootScope.rootOutgoingDocuments = outgoingDocuments;
         }).catch(error => console.error(error));
     }
 
     function personInfo(outgoingDocument) {
         const dataPromise = dataService.getData('http://localhost:8080/persons/' + outgoingDocument.authorId);
-        dataPromise.then(function (value) {
-            vm.author = value;
+        dataPromise.then(function (person) {
+            vm.author = person;
             let tabNo = outgoingDocument;
             tabNo.author = vm.author;
             tabNo.index = outgoingDocument.name + ' ' + outgoingDocument.id.substring(0, 3)

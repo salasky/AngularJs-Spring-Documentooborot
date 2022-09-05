@@ -44,7 +44,7 @@
                 <div class="content-box">
                     <ul class="nav nav-tabs">
                         <li ng-repeat="tab in vm.tabs" ng-class="{true:'active',false:''}[tab==vm.activeTabNo]">
-                            <a href="javascript:void(0)" ng-click="vm.activateTab(tab)">{{tab.index}}
+                            <a ng-click="vm.activateTab(tab)">{{tab.index}}
                                 <img style="max-height: 20px" src="/app/img/document.png"><i
                                         class="glyphicon glyphicon-remove" ng-click="vm.remove($index)"></i></a>
                         </li>

@@ -57,8 +57,8 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
 
     function _refreshIncomingDocuments() {
         const dataPromise = dataService.getData('http://localhost:8080/incomingdocuments');
-        dataPromise.then(function (value) {
-            $rootScope.rootIncomingDocuments = value;
+        dataPromise.then(function (incomingDocuments) {
+            $rootScope.rootIncomingDocuments = incomingDocuments;
         }).catch(error => console.error(error));
     }
 
@@ -94,8 +94,8 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
 
     function loadPersonData() {
         const dataPromise = dataService.getData('http://localhost:8080/persons');
-        dataPromise.then(function (value) {
-            vm.persons = value;
+        dataPromise.then(function (persons) {
+            vm.persons = persons;
             for (const el of vm.persons) {
                 if (el.id == vm.data.authorId) {
                     vm.myAuthor = el;

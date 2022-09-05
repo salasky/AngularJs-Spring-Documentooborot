@@ -100,8 +100,8 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
 
     function loadPersonData() {
         let dataPromise = dataService.getData('http://localhost:8080/persons');
-        dataPromise.then(function (value) {
-            vm.persons = value;
+        dataPromise.then(function (persons) {
+            vm.persons = persons;
             for (const el of vm.persons) {
                 if (el.id == vm.data.authorId) {
                     vm.myAuthor = el;

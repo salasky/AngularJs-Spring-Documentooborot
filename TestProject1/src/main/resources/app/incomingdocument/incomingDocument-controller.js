@@ -11,15 +11,15 @@ function IncomingDocumentController($uibModal, $rootScope, dataService) {
 
     function _refreshIncomingDocuments() {
         const dataPromise = dataService.getData('http://localhost:8080/incomingdocuments');
-        dataPromise.then(function (value) {
-            $rootScope.rootIncomingDocuments = value;
+        dataPromise.then(function (incomingDocuments) {
+            $rootScope.rootIncomingDocuments = incomingDocuments;
         }).catch(error => console.error(error));
     }
 
     function personInfo(incomingDocument) {
         const dataPromise = dataService.getData('http://localhost:8080/persons/' + incomingDocument.authorId);
-        dataPromise.then(function (value) {
-            vm.author = value;
+        dataPromise.then(function (person) {
+            vm.author = person;
             let tabNo = incomingDocument;
             tabNo.author = vm.author;
             tabNo.index = incomingDocument.name + ' ' + incomingDocument.id.substring(0, 3)

@@ -55,8 +55,8 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
 
     function _refreshCustomerData() {
         const dataPromise = dataService.getData('http://localhost:8080/persons');
-        dataPromise.then(function (value) {
-            $rootScope.rootPersons = value;
+        dataPromise.then(function (persons) {
+            $rootScope.rootPersons = persons;
         }).catch(error => console.error(error));
     }
 
@@ -90,8 +90,8 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
 
     function loadDepartmentData() {
         const dataPromise = dataService.getData('http://localhost:8080/departments');
-        dataPromise.then(function (value) {
-            vm.departments = value;
+        dataPromise.then(function (departments) {
+            vm.departments = departments;
             for (const el of vm.departments) {
                 if (el.id == vm.data.departmentId) {
                     vm.myDepartment = el;
@@ -102,8 +102,8 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
 
     function loadJobData() {
         const dataPromise = dataService.getData('http://localhost:8080/jobs');
-        dataPromise.then(function (value) {
-            vm.jobs = value;
+        dataPromise.then(function (jobs) {
+            vm.jobs = jobs;
             for (const el of vm.jobs) {
                 if (el.id == vm.data.jobTittleId) {
                     vm.myJob = el;

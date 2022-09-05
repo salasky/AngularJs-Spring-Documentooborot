@@ -11,8 +11,8 @@ function DepartmentController( $uibModal, $rootScope, dataService) {
 
     function _refreshCustomerData() {
         const dataPromise = dataService.getData('http://localhost:8080/departments');
-        dataPromise.then(function (value) {
-            $rootScope.rootDepartments = value;
+        dataPromise.then(function (departments) {
+            $rootScope.rootDepartments = departments;
         }).catch(error => console.error(error));
     }
 
@@ -44,8 +44,8 @@ function DepartmentController( $uibModal, $rootScope, dataService) {
 
     function organizationInfo(department) {
         const dataPromise = dataService.getData('http://localhost:8080/organizations/' + department.organizationId);
-        dataPromise.then(function (value) {
-            vm.organization = value;
+        dataPromise.then(function (organization) {
+            vm.organization = organization;
             let tabNo = department
             tabNo.organization = vm.organization;
             tabNo.index = department.fullName + ' ' + department.id.substring(0, 3)
@@ -60,7 +60,6 @@ function DepartmentController( $uibModal, $rootScope, dataService) {
 
     vm.info = function (department) {
         organizationInfo(department);
-
     };
     vm.remove = function (index) {
         if (index === 0) {

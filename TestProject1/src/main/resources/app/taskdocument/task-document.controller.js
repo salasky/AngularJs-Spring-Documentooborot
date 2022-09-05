@@ -10,15 +10,15 @@ function TaskDocumentController(dataService, $uibModal, $rootScope) {
 
     function _refreshDocuments() {
         const dataPromise = dataService.getData('http://localhost:8080/taskdocuments');
-        dataPromise.then(function (value) {
-            $rootScope.rootTaskDocuments = value;
+        dataPromise.then(function (taskDocuments) {
+            $rootScope.rootTaskDocuments = taskDocuments;
         }).catch(error => console.error(error));
     }
 
     function personInfo(taskDocument) {
         const dataPromise = dataService.getData('http://localhost:8080/persons/' + taskDocument.authorId);
-        dataPromise.then(function (value) {
-            vm.author = value;
+        dataPromise.then(function (person) {
+            vm.author = person;
             let tabNo = taskDocument;
             tabNo.author = vm.author;
             tabNo.index = taskDocument.name + ' ' + taskDocument.id.substring(0, 3)

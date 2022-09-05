@@ -14,8 +14,8 @@ function PersonController(dataService, $uibModal, $rootScope) {
 
     function _refreshCustomerData() {
         const dataPromise = dataService.getData('http://localhost:8080/persons');
-        dataPromise.then(function (value) {
-            $rootScope.rootPersons = value;
+        dataPromise.then(function (persons) {
+            $rootScope.rootPersons = persons;
         }).catch(error => console.error(error));
     }
 
@@ -35,15 +35,15 @@ function PersonController(dataService, $uibModal, $rootScope) {
 
     function staffInfoGet(person) {
         const dataPromiseDepartment = dataService.getData('http://localhost:8080/departments/' + person.departmentId);
-        dataPromiseDepartment.then(function (value) {
-            vm.department = value;
+        dataPromiseDepartment.then(function (department) {
+            vm.department = department;
             const dataPromiseOrganization= dataService.getData('http://localhost:8080/organizations/' + vm.department.organizationId);
-            dataPromiseOrganization.then(function (value) {
-                vm.organization = value;
+            dataPromiseOrganization.then(function (organization) {
+                vm.organization = organization;
 
                 const dataPromiseJob = dataService.getData('http://localhost:8080/jobs/' + person.jobTittleId);
-                dataPromiseJob.then(function (value) {
-                    vm.job = value;
+                dataPromiseJob.then(function (job) {
+                    vm.job = job;
                     let tabNo = person;
                     tabNo.organization = vm.organization;
                     tabNo.department = vm.department;

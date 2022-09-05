@@ -44,8 +44,8 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
 
     function _refreshCustomerData() {
         const dataPromise = dataService.getData('http://localhost:8080/departments');
-        dataPromise.then(function (value) {
-            $rootScope.rootDepartments = value;
+        dataPromise.then(function (departments) {
+            $rootScope.rootDepartments = departments;
         }).catch(error => console.error(error));
     }
 
@@ -79,8 +79,8 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
 
     function loadOrganizationData() {
         const dataPromise = dataService.getData('http://localhost:8080/organizations');
-        dataPromise.then(function (value) {
-            vm.organizations = value;
+        dataPromise.then(function (organizations) {
+            vm.organizations = organizations;
             for (const el of vm.organizations) {
                 if (el.id == vm.data.organizationId) {
                     vm.myOrganization = el;
