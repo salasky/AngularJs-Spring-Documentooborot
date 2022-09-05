@@ -27,7 +27,6 @@ angular.module('app').constant('URLS', {
     jobs: 'jobs/',
     jobAdd: 'jobs/add',
     jobUpdate: 'jobs/update',
-
 })
     .constant('HTTP_METHOD', {
         GET: 'GET',

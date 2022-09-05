@@ -3,27 +3,34 @@
     <title>Jobs</title>
 </head>
 <body>
-
-<h2 class="spielbox">Jobs
-    <img class="imageHeader" src="/app/img/job.png">
-    <button ng-click="vm.openModal()" class="label label-success">Add</button>
-</h2>
-<split-left>
-    <table class="table-document">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>UUID</th>
-            <th>Name</th>
-        </tr>
-        </thead>
-        <tr ng-repeat="job in rootJobs" ng-class="{active : isSelected(job)}">
-            <td>{{ $index + 1 }}</td>
-            <td height=10px><a ng-click="vm.openModal(job)">{{ job.id }}</a></td>
-            <td><a ng-click="vm.openModal(job)">{{ job.name }}</a></td>
-        </tr>
-    </table>
-</split-left>
+<div class="wrapper">
+    <div class="table-person">
+        <h2>Jobs
+            <img class="imageHeader" src="/app/img/job.png">
+            <button ng-click="vm.openModal()" class="label label-success">Add</button>
+        </h2>
+        <div class="table-person-after-header">
+            <table class="table-person-container">
+                <thead>
+                <tr class="table-header-row">
+                    <th>Id</th>
+                    <th>UUID</th>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                <tr class="table-body-row" ng-repeat="job in rootJobs">
+                    <td>{{ $index + 1 }}</td>
+                    <td height=10px><a ng-click="vm.openModal(job)">{{ job.id }}</a></td>
+                    <td><a ng-click="vm.openModal(job)">{{ job.name }}</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tabs-info">
+    </div>
+</div>
 
 </body>
 </html>

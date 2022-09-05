@@ -35,10 +35,18 @@ body {
     padding: 0 3%;
 }
 
+
 .table-header-row {
     background: SteelBlue;
     color: white;
     border: 1px double black;
+}
+.table-header-row th{
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    padding: 5px 10px;
 }
 
 .table-body-row {
@@ -97,17 +105,6 @@ body {
 .imageHeader {
     max-height: 30px;
 }
-
-
-.spielbox {
-    width: 30%;
-    background: SteelBlue;
-    margin: 1.5% 3%;
-    padding: 0.5%;
-    color: white;
-
-}
-
 .blue-button {
     background: #25A6E1;
     padding: 3px 5px;
@@ -131,55 +128,6 @@ body {
     -webkit-border-radius: 4px;
     border: 1px solid #CD5C5C
 }
-
-.table-document {
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
-    width: 100%;
-    border: 2px double black;
-    height: 600px;
-    overflow-y: scroll;
-    display: block;
-}
-
-.table-document th {
-    background: SteelBlue;
-    color: white;
-    border: 1px double black;
-}
-
-.table-document tr:nth-child(even) {
-    background: WhiteSmoke;
-    border: 1px solid black;
-}
-
-.table-document tr td:nth-child(2) {
-    text-align: center;
-    border: 1px solid black;
-    text-decoration: underline;
-    cursor: pointer;
-    color: #1A87B9;
-}
-
-.table-document tr td:nth-child(2) {
-    text-align: center;
-    border: 1px solid black;
-    text-decoration: underline;
-}
-
-.table-document tr td:nth-child(3), table-document tr td:nth-child(4), table-document tr td:nth-child(5) {
-    text-align: center;
-    font-family: monospace;
-}
-
-.table-document td, th {
-    border: 1px solid gray;
-    width: 50px;
-    height: 50px;
-    text-align: left;
-    padding: 5px 10px;
-    border: 1px solid black;
-}
-
 
 .organization-form {
     margin-left: 75px;

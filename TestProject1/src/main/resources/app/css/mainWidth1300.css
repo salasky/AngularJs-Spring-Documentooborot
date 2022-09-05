@@ -1,7 +1,5 @@
 @media screen and (max-width: 1300px) {
-    .splitright {
-        width: 0;
-    }
+
 
     .splitleft {
         height: 70%;
@@ -154,8 +152,4 @@
         width: 100px;
     }
 
-    .spielbox {
-        width: 100%;
-        height: 30px;
-    }
 }
