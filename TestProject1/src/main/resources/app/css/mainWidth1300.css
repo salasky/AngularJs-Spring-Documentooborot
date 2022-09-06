@@ -35,7 +35,7 @@
     }
 
     .tabs-info {
-        padding-top:250px;
+        padding-top:270px;
         font-size: 10px;
     }
 
@@ -165,9 +165,4 @@
         height: 300px;
         overflow-y: scroll;
     }
-
-
-
-
-
 }
