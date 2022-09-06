@@ -70,9 +70,11 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
         const dataPromise = dataService.getData(URLS.baseUrl + URLS.organizations);
         dataPromise.then(function (organizations) {
             vm.organizations = organizations;
-            for (const el of vm.organizations) {
-                if (el.id == vm.data.organizationId) {
-                    vm.myOrganization = el;
+            if(vm.data){
+                for (const el of vm.organizations) {
+                    if (el.id == vm.data.organizationId) {
+                        vm.myOrganization = el;
+                    }
                 }
             }
         }).catch(error => console.error(error));

@@ -6,8 +6,6 @@ angular.module('app')
             .state('home', {
                 url: '/',
                 templateUrl: 'home/index.html',
-                controller: 'Home.IndexController',
-                controllerAs: 'vm'
             })
             .state('test-page', {
                 url: '/test-page',
@@ -17,9 +15,7 @@ angular.module('app')
             })
             .state('about', {
                 url: '/about',
-                templateUrl: 'about/aboutIndex.html',
-                controller: 'About.IndexController',
-                controllerAs: 'vm'
+                templateUrl: 'about/aboutIndex.html'
             })
             .state('job', {
                 url: '/job',

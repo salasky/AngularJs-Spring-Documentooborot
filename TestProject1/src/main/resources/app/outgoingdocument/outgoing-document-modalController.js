@@ -87,12 +87,14 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
         let dataPromise = dataService.getData(URLS.baseUrl + URLS.persons);
         dataPromise.then(function (persons) {
             vm.persons = persons;
-            for (const el of vm.persons) {
-                if (el.id == vm.data.authorId) {
-                    vm.myAuthor = el;
-                }
-                if (el.id == vm.data.senderId) {
-                    vm.mySender = el;
+            if(vm.data) {
+                for (const el of vm.persons) {
+                    if (el.id == vm.data.authorId) {
+                        vm.myAuthor = el;
+                    }
+                    if (el.id == vm.data.senderId) {
+                        vm.mySender = el;
+                    }
                 }
             }
         }).catch(error => console.error(error));

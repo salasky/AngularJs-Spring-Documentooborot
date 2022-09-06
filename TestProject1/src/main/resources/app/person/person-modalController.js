@@ -79,9 +79,11 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
         const dataPromise = dataService.getData(URLS.baseUrl + URLS.departments);
         dataPromise.then(function (departments) {
             vm.departments = departments;
-            for (const el of vm.departments) {
-                if (el.id == vm.data.departmentId) {
-                    vm.myDepartment = el;
+            if(vm.data) {
+                for (const el of vm.departments) {
+                    if (el.id == vm.data.departmentId) {
+                        vm.myDepartment = el;
+                    }
                 }
             }
         }).catch(error => console.error(error));
@@ -91,9 +93,11 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
         const dataPromise = dataService.getData(URLS.baseUrl + URLS.jobs);
         dataPromise.then(function (jobs) {
             vm.jobs = jobs;
-            for (const el of vm.jobs) {
-                if (el.id == vm.data.jobTittleId) {
-                    vm.myJob = el;
+            if(vm.data) {
+                for (const el of vm.jobs) {
+                    if (el.id == vm.data.jobTittleId) {
+                        vm.myJob = el;
+                    }
                 }
             }
         }).catch(error => console.error(error));
