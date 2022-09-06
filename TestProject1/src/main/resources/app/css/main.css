@@ -20,8 +20,8 @@ body {
     display: block;
     flex: 0 1 40%;
     margin: 0 auto;
-    padding: 0 20px;
-    font-size: 20px;
+    padding: 0 2%;
+    font-size: 16px;
 }
 
 .table-person-container {
@@ -43,8 +43,7 @@ body {
 }
 .table-header-row th{
     border: 1px solid black;
-    width: 50px;
-    height: 50px;
+    width: 1px;
     text-align: center;
     padding: 5px 10px;
 }
@@ -158,13 +157,7 @@ body {
 
 
 .tab-content {
-    width: 600px;
+    width: 80%;
 }
 
-.content-box {
-    width: 1150px;
-    height: 100px;
-    overflow-y: scroll;
-
-}
 
