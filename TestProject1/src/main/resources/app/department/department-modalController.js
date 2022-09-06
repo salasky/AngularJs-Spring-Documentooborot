@@ -28,7 +28,6 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
 
     function addDepartment() {
         loadOrganizationData()
-        vm.departmentsForm.id = -1;
     }
 
 

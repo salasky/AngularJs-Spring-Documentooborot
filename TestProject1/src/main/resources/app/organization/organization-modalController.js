@@ -16,17 +16,13 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService, U
     };
     if (vm.data) {
         editOrganization(vm.data);
-    } else {
-        addOrganization();
     }
 
     function editOrganization(organization) {
         vm.organizationsForm = organization;
     }
 
-    function addOrganization() {
-        vm.organizationsForm.id = -1;
-    }
+
 
     function _refreshCustomerData() {
         const dataPromise = dataService.getData(URLS.baseUrl + URLS.organizations);

@@ -34,8 +34,7 @@ function TaskDocumentModalController($uibModalInstance, dataService, syncData, $
     }
 
     function addDocument() {
-        loadPersonData()
-        vm.taskDocumentForm.id = -1;
+        loadPersonData();
     }
 
 

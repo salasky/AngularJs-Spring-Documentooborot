@@ -38,7 +38,6 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
     function addPerson() {
         loadDepartmentData()
         loadJobData();
-        vm.personsForm.id = -1;
     }
 
     function _refreshCustomerData() {

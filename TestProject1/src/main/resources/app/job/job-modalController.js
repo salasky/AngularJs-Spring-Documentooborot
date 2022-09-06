@@ -13,27 +13,12 @@ function jobsModalController($uibModalInstance, syncData, dataService, $rootScop
     };
     if (vm.data) {
         editJob(vm.data);
-    } else {
-        addJob();
     }
 
     function editJob(job) {
         vm.jobsForm = job;
     }
 
-    function addJob() {
-        vm.jobsForm.id = -1;
-    }
-
-    function _success(response) {
-        _refreshCustomerData();
-    }
-
-    function _error(response) {
-        console.log(response);
-        alert(vm.error_message = "Error! " + response.data.errorMessage + response.data.timestamp);
-
-    }
 
     vm.ok = function () {
         if (vm.jobsForm.id == -1) {

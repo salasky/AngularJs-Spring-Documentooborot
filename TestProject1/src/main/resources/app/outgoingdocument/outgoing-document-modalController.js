@@ -45,7 +45,6 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
 
     function addDocument() {
         loadPersonData()
-        vm.outgoingDocumentForm.id = -1;
     }
 
     function _refreshOutgoingDocuments() {

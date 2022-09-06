@@ -35,7 +35,6 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
 
     function addDocument() {
         loadPersonData()
-        vm.incomingDocumentForm.id = -1;
     }
 
     function _refreshIncomingDocuments() {
