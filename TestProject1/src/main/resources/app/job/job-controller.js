@@ -5,8 +5,10 @@ angular
 
 function JobController($uibModal, $rootScope, dataService, URLS) {
     const vm = this;
-    _refreshCustomerData();
 
+    vm.$onInit = function () {
+        _refreshCustomerData();
+    }
     function _refreshCustomerData() {
         const dataPromise = dataService.getData(URLS.baseUrl + URLS.jobs);
         dataPromise.then(function (value) {

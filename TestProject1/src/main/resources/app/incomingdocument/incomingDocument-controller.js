@@ -7,8 +7,10 @@ function IncomingDocumentController($uibModal, $rootScope, dataService, URLS) {
     const vm = this;
     vm.activeTabNo = 0;
     vm.tabs = [];
-    _refreshIncomingDocuments();
 
+    vm.$onInit = function () {
+        _refreshIncomingDocuments();
+    }
     function _refreshIncomingDocuments() {
         const dataPromise = dataService.getData(URLS.baseUrl + URLS.incomingDocuments);
         dataPromise.then(function (incomingDocuments) {

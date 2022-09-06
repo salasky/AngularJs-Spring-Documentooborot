@@ -6,8 +6,10 @@ function TaskDocumentController(dataService, $uibModal, $rootScope, URLS) {
     const vm = this;
     vm.activeTabNo = 0;
     vm.tabs = [];
-    _refreshDocuments();
 
+    vm.$onInit = function () {
+        _refreshDocuments();
+    }
     function _refreshDocuments() {
         const dataPromise = dataService.getData(URLS.baseUrl + URLS.taskDocuments);
         dataPromise.then(function (taskDocuments) {

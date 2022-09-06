@@ -10,8 +10,9 @@ function PersonController(dataService, $uibModal, $rootScope, URLS) {
     vm.activeTabNo = 0;
     vm.tabs = [];
 
-    _refreshCustomerData();
-
+    vm.$onInit = function () {
+        _refreshCustomerData();
+    }
     function _refreshCustomerData() {
         const dataPromise = dataService.getData(URLS.baseUrl + URLS.persons);
         dataPromise.then(function (persons) {

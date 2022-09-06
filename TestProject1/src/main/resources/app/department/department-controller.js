@@ -7,7 +7,10 @@ function DepartmentController($uibModal, $rootScope, dataService, URLS) {
     const vm = this;
     vm.activeTabNo = 0;
     vm.tabs = [];
-    _refreshCustomerData();
+
+    vm.$onInit = function () {
+        _refreshCustomerData();
+    }
 
     function _refreshCustomerData() {
         const dataPromise = dataService.getData(URLS.baseUrl + URLS.departments);

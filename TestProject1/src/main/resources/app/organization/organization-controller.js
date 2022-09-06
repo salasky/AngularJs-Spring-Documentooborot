@@ -4,8 +4,10 @@ angular
 
 function OrganizationController($uibModal, dataService, $rootScope, URLS) {
     const vm = this;
-    _refreshCustomerData();
 
+    vm.$onInit = function () {
+        _refreshCustomerData();
+    }
     function _refreshCustomerData() {
         const dataPromise = dataService.getData(URLS.baseUrl + URLS.organizations);
         dataPromise.then(function (value) {

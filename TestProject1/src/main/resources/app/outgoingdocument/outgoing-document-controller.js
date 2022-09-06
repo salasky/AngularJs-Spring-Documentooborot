@@ -8,8 +8,10 @@ function OutgoingDocumentController($compile, $sce, $window, $uibModal, dataServ
     vm.tabs = [];
     vm.outgoingDocument = "";
 
-    _refreshOutgoingDocuments();
 
+    vm.$onInit = function () {
+        _refreshOutgoingDocuments();
+    }
     function _refreshOutgoingDocuments() {
         const dataPromise = dataService.getData(URLS.baseUrl + URLS.outgoingDocuments);
         dataPromise.then(function (outgoingDocuments) {
