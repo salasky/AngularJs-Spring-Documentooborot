@@ -36,16 +36,6 @@ function TaskDocumentModalController($uibModalInstance, dataService, syncData, $
     function addDocument() {
         loadPersonData()
         vm.taskDocumentForm.id = -1;
-        vm.taskDocumentForm.name = "";
-        vm.taskDocumentForm.text = "";
-        vm.taskDocumentForm.regNumber = "";
-        vm.taskDocumentForm.creatingDate = "";
-        vm.taskDocumentForm.authorId = "";
-        vm.taskDocumentForm.execPeriod = "";
-        vm.taskDocumentForm.responsibleId = "";
-        vm.taskDocumentForm.controlPersonId = "";
-        vm.taskDocumentForm.signOfControl = "";
-        vm.taskDocumentForm.outDate = "";
     }
 
 

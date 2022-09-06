@@ -46,13 +46,6 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
     function addDocument() {
         loadPersonData()
         vm.outgoingDocumentForm.id = -1;
-        vm.outgoingDocumentForm.name = "";
-        vm.outgoingDocumentForm.text = "";
-        vm.outgoingDocumentForm.regNumber = "";
-        vm.outgoingDocumentForm.creatingDate = "";
-        vm.outgoingDocumentForm.authorId = "";
-        vm.outgoingDocumentForm.senderId = "";
-        vm.outgoingDocumentForm.deliveryType = "";
     }
 
     function _refreshOutgoingDocuments() {

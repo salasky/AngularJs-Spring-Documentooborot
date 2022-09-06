@@ -23,7 +23,6 @@ function jobsModalController($uibModalInstance, syncData, dataService, $rootScop
 
     function addJob() {
         vm.jobsForm.id = -1;
-        vm.jobsForm.name = "";
     }
 
     function _success(response) {

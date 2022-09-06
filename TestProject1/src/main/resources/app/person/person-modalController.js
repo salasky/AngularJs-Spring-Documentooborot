@@ -39,12 +39,6 @@ function PersonModalController($uibModalInstance, dataService, syncData, $rootSc
         loadDepartmentData()
         loadJobData();
         vm.personsForm.id = -1;
-        vm.personsForm.lastName = "";
-        vm.personsForm.secondName = "";
-        vm.personsForm.firstName = "";
-        vm.personsForm.photoRef = "";
-        vm.personsForm.birthDay = "";
-        vm.personsForm.phoneNumber = "";
     }
 
     function _refreshCustomerData() {

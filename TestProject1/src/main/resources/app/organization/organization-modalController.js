@@ -26,10 +26,6 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService, U
 
     function addOrganization() {
         vm.organizationsForm.id = -1;
-        vm.organizationsForm.fullName = "";
-        vm.organizationsForm.shortName = "";
-        vm.organizationsForm.supervisor = "";
-        vm.organizationsForm.contactNumbers = "";
     }
 
     function _refreshCustomerData() {

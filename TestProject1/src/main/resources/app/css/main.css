@@ -157,35 +157,6 @@ body {
 }
 
 
-.splitleft {
-    height: 70%;
-    width: 50%;
-    position: absolute;
-    left: 0;
-}
-
-.splitright {
-    height: 60%;
-    width: 60%;
-    position: absolute;
-    right: 0;
-}
-
-.centered {
-    position: absolute;
-    top: 42%;
-    left: 34%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.centered2 {
-    position: absolute;
-    top: -20%;
-    left: 0%;
-    text-align: center;
-}
-
 .tab-content {
     width: 600px;
 }

@@ -25,7 +25,6 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
     } else {
         addDocument();
     }
-    ;
 
     function editDocument(incomingDocument) {
         loadPersonData()
@@ -37,15 +36,6 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
     function addDocument() {
         loadPersonData()
         vm.incomingDocumentForm.id = -1;
-        vm.incomingDocumentForm.name = "";
-        vm.incomingDocumentForm.text = "";
-        vm.incomingDocumentForm.regNumber = "";
-        vm.incomingDocumentForm.creatingDate = "";
-        vm.incomingDocumentForm.authorId = "";
-        vm.incomingDocumentForm.senderId = "";
-        vm.incomingDocumentForm.destinationId = "";
-        vm.incomingDocumentForm.number = "";
-        vm.incomingDocumentForm.dateOfRegistration = "";
     }
 
     function _refreshIncomingDocuments() {

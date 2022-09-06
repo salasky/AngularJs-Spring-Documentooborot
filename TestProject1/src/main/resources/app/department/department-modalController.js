@@ -29,11 +29,6 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, data
     function addDepartment() {
         loadOrganizationData()
         vm.departmentsForm.id = -1;
-        vm.departmentsForm.fullName = "";
-        vm.departmentsForm.shortName = "";
-        vm.departmentsForm.supervisor = "";
-        vm.departmentsForm.contactNumber = "";
-        vm.departmentsForm.organizationId = "";
     }
 
 
