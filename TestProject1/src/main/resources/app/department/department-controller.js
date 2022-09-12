@@ -3,21 +3,33 @@ angular
     .controller('DepartmentController', DepartmentController);
 
 
-function DepartmentController($uibModal, $rootScope, dataService, URLS) {
+function DepartmentController($uibModal, departmentService, organizationService,$scope) {
     const vm = this;
     vm.activeTabNo = 0;
     vm.tabs = [];
+    vm.departments = [];
 
     vm.$onInit = function () {
         _refreshCustomerData();
     }
 
-    function _refreshCustomerData() {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.departments);
-        dataPromise.then(function (departments) {
-            $rootScope.rootDepartments = departments;
-        }).catch(error => console.error(error));
+
+    async function _refreshCustomerData() {
+        let response  = await departmentService.getDepartments();
+        vm.departments= response.data;
+        console.log( vm.departments)
     }
+
+    /*    function _refreshCustomerData() {
+        const dataPromise = departmentService.getDepartments();
+        dataPromise.then(function (departments) {
+            vm.departments = departments;
+        }).catch(error => console.error(error));
+    }*/
+
+    $scope.$on("refreshDepartment", function (evt, data) {
+        vm.departments = data;
+    });
 
     vm.openOrganizationModal = function () {
         return $uibModal.open({
@@ -46,7 +58,7 @@ function DepartmentController($uibModal, $rootScope, dataService, URLS) {
     };
 
     function organizationInfo(department) {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.organizations + department.organizationId);
+        const dataPromise = organizationService.getOrganization(department.organizationId);
         dataPromise.then(function (organization) {
             vm.organization = organization;
             let tabNo = department
@@ -79,5 +91,4 @@ function DepartmentController($uibModal, $rootScope, dataService, URLS) {
     vm.activateTab = function (tabNo) {
         vm.activeTabNo = tabNo;
     };
-
 };

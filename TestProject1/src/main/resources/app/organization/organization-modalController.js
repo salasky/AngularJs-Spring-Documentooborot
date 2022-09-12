@@ -15,7 +15,7 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService, U
         contactNumbers: ""
     };
     if (vm.data) {
-        vm.organizationsForm = organization;
+        vm.organizationsForm = vm.data;
     }
 
     function _refreshCustomerData() {

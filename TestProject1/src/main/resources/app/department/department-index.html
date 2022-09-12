@@ -25,7 +25,7 @@
                 </tr>
                 </thead>
                 <tbody class="table-body">
-                <tr class="table-body-row" ng-repeat="department in rootDepartments">
+                <tr class="table-body-row" ng-repeat="department in vm.departments">
                     <td>{{ $index + 1 }}</td>
                     <td><a ng-click="vm.openModal(department)">{{ department.fullName }}</a></td>
                     <td>{{ department.shortName }}</td>
