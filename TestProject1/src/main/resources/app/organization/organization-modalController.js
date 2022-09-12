@@ -15,21 +15,14 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService, U
         contactNumbers: ""
     };
     if (vm.data) {
-        editOrganization(vm.data);
-    }
-
-    function editOrganization(organization) {
         vm.organizationsForm = organization;
     }
-
-
 
     function _refreshCustomerData() {
         const dataPromise = dataService.getData(URLS.baseUrl + URLS.organizations);
         dataPromise.then(function (value) {
             $rootScope.rootOrganizations = value;
         }).catch(error => console.error(error));
-
     }
 
     vm.ok = function () {

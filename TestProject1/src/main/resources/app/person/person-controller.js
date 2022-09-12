@@ -41,7 +41,6 @@ function PersonController(dataService, $uibModal, $rootScope, URLS) {
             const dataPromiseOrganization = dataService.getData(URLS.baseUrl + URLS.organizations + vm.department.organizationId);
             dataPromiseOrganization.then(function (organization) {
                 vm.organization = organization;
-
                 const dataPromiseJob = dataService.getData(URLS.baseUrl + URLS.jobs + person.jobTittleId);
                 dataPromiseJob.then(function (job) {
                     vm.job = job;
