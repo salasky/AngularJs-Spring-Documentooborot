@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('jobsModalController', jobsModalController);
 
-function jobsModalController($uibModalInstance, syncData, dataService, $rootScope, URLS) {
+function jobsModalController($uibModalInstance, syncData, jobService, $rootScope) {
 
     const vm = this;
     vm.data = syncData;
@@ -18,18 +18,15 @@ function jobsModalController($uibModalInstance, syncData, dataService, $rootScop
     function editJob(job) {
         vm.jobsForm = job;
     }
-
-
-    vm.ok = function () {
+    
+    vm.ok = async function () {
         if (vm.jobsForm.id == -1) {
             vm.jobsForm.id = null
-            dataService.postData(URLS.baseUrl + URLS.jobAdd, vm.jobsForm)
-                .then(_refreshCustomerData)
-                .catch(error => console.error(error));
+            await jobService.postJob(vm.jobsForm).catch(err=>alert(err.data.errorMessage))
+            _refreshCustomerData()
         } else {
-            dataService.putData(URLS.baseUrl + URLS.jobUpdate, vm.jobsForm)
-                .then(_refreshCustomerData)
-                .catch(error => console.error(error));
+            await jobService.putJob(vm.jobsForm).catch(err=>alert(err.data.errorMessage))
+            _refreshCustomerData();
         }
         $uibModalInstance.close();
     }
@@ -38,18 +35,15 @@ function jobsModalController($uibModalInstance, syncData, dataService, $rootScop
         $uibModalInstance.close()
     }
 
-    vm.deleteJob = function () {
-        dataService.deleteData(URLS.baseUrl + URLS.jobs + vm.data.id)
-            .then(_refreshCustomerData)
-            .catch(error => console.error(error));
+    vm.deleteJob = async function () {
+        await jobService.deleteJob(vm.data.id).catch(err=>alert(err.data.errorMessage))
+        _refreshCustomerData();
         $uibModalInstance.close();
     };
 
-    function _refreshCustomerData() {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.jobs);
-        dataPromise.then(function (value) {
-            $rootScope.rootJobs = value;
-        }).catch(error => console.error(error));
+    async function _refreshCustomerData() {
+        let response = await jobService.getJobs().catch(err=>alert(err.data.errorMessage))
+        $rootScope.$broadcast("refreshJobs", response.data);
     }
 };
 

@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody class="table-body">
-                <tr class="table-body-row" ng-repeat="person in rootPersons">
+                <tr class="table-body-row" ng-repeat="person in vm.persons">
                     <td>{{ $index + 1 }}</td>
                     <td><a ng-click="vm.openModal(person)">{{ person.secondName }}</a></td>
                     <td><a ng-click="vm.openModal(person)">{{ person.firstName }}</a></td>

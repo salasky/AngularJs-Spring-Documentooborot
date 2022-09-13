@@ -3,18 +3,22 @@ angular
     .controller('JobController', JobController);
 
 
-function JobController($uibModal, $rootScope, dataService, URLS) {
+function JobController($uibModal, $rootScope, jobService, $scope) {
     const vm = this;
 
     vm.$onInit = function () {
         _refreshCustomerData();
     }
-    function _refreshCustomerData() {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.jobs);
-        dataPromise.then(function (value) {
-            $rootScope.rootJobs = value;
-        }).catch(error => console.error(error));
+
+    async function _refreshCustomerData() {
+        let response  = await jobService.getJobs();
+        vm.jobs= response.data;
+        $scope.$apply();
     }
+
+    $scope.$on("refreshJobs", function (evt, data) {
+        vm.jobs = data;
+    });
 
     vm.openModal = function (jobs) {
         return $uibModal.open({

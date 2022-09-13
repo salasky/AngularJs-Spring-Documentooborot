@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('OutgoingDocumentController', OutgoingDocumentController);
 
-function OutgoingDocumentController($compile, $sce, $window, $uibModal, dataService, $rootScope, URLS) {
+function OutgoingDocumentController($compile, $sce, $scope, $uibModal, $rootScope, outgoingDocumentService, personService) {
     const vm = this;
     vm.activeTabNo = 0;
     vm.tabs = [];
@@ -10,29 +10,31 @@ function OutgoingDocumentController($compile, $sce, $window, $uibModal, dataServ
 
 
     vm.$onInit = function () {
-        _refreshOutgoingDocuments();
+        _refreshCustomerData();
     }
-    function _refreshOutgoingDocuments() {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.outgoingDocuments);
-        dataPromise.then(function (outgoingDocuments) {
-            $rootScope.rootOutgoingDocuments = outgoingDocuments;
-        }).catch(error => console.error(error));
+    async function _refreshCustomerData() {
+        let response = await outgoingDocumentService.getOutgoingDocuments().catch(err=>alert(err.data.errorMessage))
+        vm.outgoingDocuments = response.data;
+        $scope.$apply();
     }
 
-    function personInfo(outgoingDocument) {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.persons + outgoingDocument.authorId);
-        dataPromise.then(function (person) {
-            vm.author = person;
-            let tabNo = outgoingDocument;
-            tabNo.author = vm.author;
-            tabNo.index = outgoingDocument.name + ' ' + outgoingDocument.id.substring(0, 3)
-            if (vm.tabs.includes(tabNo)) {
-                vm.activeTabNo = tabNo;
-            } else {
-                vm.tabs.push(tabNo);
-                vm.activeTabNo = tabNo;
-            }
-        }).catch(error => console.error(error));
+    $scope.$on("refreshOutgoingDocuments", function (evt, data) {
+        vm.outgoingDocuments = data;
+    });
+
+    async function personInfo(outgoingDocument) {
+        let response = await personService.getPerson(outgoingDocument.authorId).catch(err=>alert(err.data.errorMessage))
+        vm.author = response.data;
+        let tabNo = outgoingDocument;
+        tabNo.author = vm.author;
+        tabNo.index = outgoingDocument.name + ' ' + outgoingDocument.id.substring(0, 3)
+        if (vm.tabs.includes(tabNo)) {
+            vm.activeTabNo = tabNo;
+        } else {
+            vm.tabs.push(tabNo);
+            vm.activeTabNo = tabNo;
+        }
+        $scope.$apply();
     }
 
     vm.openModal = function (outgoingDocument) {
@@ -50,7 +52,6 @@ function OutgoingDocumentController($compile, $sce, $window, $uibModal, dataServ
 
     vm.info = function (outgoingDocument) {
         personInfo(outgoingDocument);
-
     };
 
     vm.remove = function (index) {

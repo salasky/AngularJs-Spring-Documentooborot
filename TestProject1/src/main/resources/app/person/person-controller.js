@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('PersonController', PersonController);
 
-function PersonController(dataService, $uibModal, $rootScope, URLS) {
+function PersonController(personService, $uibModal, $rootScope, $scope, departmentService, jobService, organizationService) {
     const vm = this;
     vm.department = "";
     vm.job = "";
@@ -13,12 +13,15 @@ function PersonController(dataService, $uibModal, $rootScope, URLS) {
     vm.$onInit = function () {
         _refreshCustomerData();
     }
-    function _refreshCustomerData() {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.persons);
-        dataPromise.then(function (persons) {
-            $rootScope.rootPersons = persons;
-        }).catch(error => console.error(error));
+    async function _refreshCustomerData() {
+        let response = await personService.getPersons().catch(err=>alert(err.data.errorMessage))
+        vm.persons = response.data;
+        $scope.$apply();
     }
+
+    $scope.$on("refreshPersons", function (evt, data) {
+        vm.persons = data;
+    });
 
     vm.openModal = function (person) {
         const modalInstance = $uibModal.open({
@@ -34,35 +37,34 @@ function PersonController(dataService, $uibModal, $rootScope, URLS) {
         return modalInstance;
     };
 
-    function staffInfoGet(person) {
-        const dataPromiseDepartment = dataService.getData(URLS.baseUrl + URLS.departments + person.departmentId);
-        dataPromiseDepartment.then(function (department) {
-            vm.department = department;
-            const dataPromiseOrganization = dataService.getData(URLS.baseUrl + URLS.organizations + vm.department.organizationId);
-            dataPromiseOrganization.then(function (organization) {
-                vm.organization = organization;
-                const dataPromiseJob = dataService.getData(URLS.baseUrl + URLS.jobs + person.jobTittleId);
-                dataPromiseJob.then(function (job) {
-                    vm.job = job;
-                    let tabNo = person;
-                    tabNo.organization = vm.organization;
-                    tabNo.department = vm.department;
-                    tabNo.job = vm.job;
-                    tabNo.index = person.secondName + ' ' + person.id.substring(0, 3)
-                    if (vm.tabs.includes(tabNo)) {
-                        vm.activeTabNo = tabNo;
-                    } else {
-                        vm.tabs.push(tabNo);
-                        vm.activeTabNo = tabNo;
-                    }
-                }).catch(error => console.error(error));
-            }).catch(error => console.error(error));
-        }).catch(error => console.error(error));
+    async function staffInfoGet(person) {
+        let responseDepartment = await departmentService.getDepartment(person.departmentId).catch(err=>alert(err.data.errorMessage))
+        vm.department = responseDepartment.data;
+
+        let responseOrganization= await organizationService.getOrganization(vm.department.organizationId).catch(err=>alert(err.data.errorMessage))
+        vm.organization = responseOrganization.data;
+
+        let responseJob= await jobService.getJob(person.jobTittleId);
+        vm.job = responseJob.data;
+
+        let tabNo = person;
+        tabNo.organization = vm.organization;
+        tabNo.department = vm.department;
+        tabNo.job = vm.job;
+        tabNo.index = person.secondName + ' ' + person.id.substring(0, 3)
+        if (vm.tabs.includes(tabNo)) {
+            vm.activeTabNo = tabNo;
+        } else {
+            vm.tabs.push(tabNo);
+            vm.activeTabNo = tabNo;
+        }
+        $scope.$apply();
     };
 
     vm.info = function (person) {
         staffInfoGet(person);
     };
+
     vm.remove = function (index) {
         if (index === 0) {
             if (vm.activeTabNo === vm.tabs[0]) {
@@ -118,7 +120,6 @@ function PersonController(dataService, $uibModal, $rootScope, URLS) {
             }
         });
     };
-
 }
 
 

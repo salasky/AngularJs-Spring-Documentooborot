@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('IncomingDocumentModalController', IncomingDocumentModalController);
 
-function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope, dataService, URLS) {
+function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope, incomingDocumentService, personService) {
 
     const vm = this;
     vm.data = syncData;
@@ -37,28 +37,24 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
         loadPersonData()
     }
 
-    function _refreshIncomingDocuments() {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.incomingDocuments);
-        dataPromise.then(function (incomingDocuments) {
-            $rootScope.rootIncomingDocuments = incomingDocuments;
-        }).catch(error => console.error(error));
+    async function _refreshIncomingDocuments() {
+        let response = await incomingDocumentService.getIncomingDocuments().catch(err=>alert(err.data.errorMessage))
+        $rootScope.$broadcast("refreshIncomingDocuments", response.data);
     }
 
-    vm.ok = function () {
+    vm.ok = async function () {
         vm.incomingDocumentForm.authorId = vm.myAuthor.id;
         vm.incomingDocumentForm.senderId = vm.mySender.id;
         vm.incomingDocumentForm.destinationId = vm.myDestination.id;
 
         if (vm.incomingDocumentForm.id == -1) {
             vm.incomingDocumentForm.id = null
-            dataService.postData(URLS.baseUrl + URLS.incomingDocumentAdd, vm.incomingDocumentForm)
-                .then(_refreshIncomingDocuments)
-                .catch(error => console.error(error));
+            await incomingDocumentService.postIncomingDocument(vm.incomingDocumentForm).catch(err=>alert(err.data.errorMessage))
+            _refreshIncomingDocuments()
 
         } else {
-            dataService.putData(URLS.baseUrl + URLS.incomingDocumentUpdate, vm.incomingDocumentForm)
-                .then(_refreshIncomingDocuments)
-                .catch(error => console.error(error));
+            await incomingDocumentService.putIncomingDocument(vm.incomingDocumentForm).catch(err=>alert(err.data.errorMessage))
+            _refreshIncomingDocuments()
         }
         $uibModalInstance.close();
     }
@@ -67,31 +63,29 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
         $uibModalInstance.close()
     }
 
-    vm.deleteIncomingDocuments = function () {
-        dataService.deleteData(URLS.baseUrl + URLS.incomingDocuments + vm.data.id)
-            .then(_refreshIncomingDocuments)
-            .catch(error => console.error(error));
+    vm.deleteIncomingDocuments = async function () {
+        await incomingDocumentService.deleteTaskDocument(vm.data.id).catch(err=>alert(err.data.errorMessage))
+        _refreshIncomingDocuments()
         $uibModalInstance.close();
     };
 
-    function loadPersonData() {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.persons);
-        dataPromise.then(function (persons) {
-            vm.persons = persons;
-            if(vm.data) {
-                for (const el of vm.persons) {
-                    if (el.id == vm.data.authorId) {
-                        vm.myAuthor = el;
-                    }
-                    if (el.id == vm.data.senderId) {
-                        vm.mySender = el;
-                    }
-                    if (el.id == vm.data.destinationId) {
-                        vm.myDestination = el;
-                    }
+    async function loadPersonData() {
+        let responsePersons = await personService.getPersons().catch(err=>alert(err.data.errorMessage))
+        vm.persons = responsePersons.data;
+
+        if (vm.data) {
+            for (const el of vm.persons) {
+                if (el.id == vm.data.authorId) {
+                    vm.myAuthor = el;
+                }
+                if (el.id == vm.data.senderId) {
+                    vm.mySender = el;
+                }
+                if (el.id == vm.data.destinationId) {
+                    vm.myDestination = el;
                 }
             }
-        }).catch(error => console.error(error));
+        }
     }
 }
 

@@ -30,26 +30,21 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, depa
         loadOrganizationData()
     }
 
-
-    function _refreshCustomerData() {
-        const dataPromise = departmentService.getDepartments();
-        dataPromise.then(function (departments) {
-            $rootScope.$broadcast("refreshDepartment", departments);
-        }).catch(error => console.error(error));
+    async function _refreshCustomerData() {
+        let response = await departmentService.getDepartments();
+        $rootScope.$broadcast("refreshDepartment", response.data);
     }
 
-    vm.ok = function () {
+    vm.ok = async function () {
         vm.departmentsForm.organizationId = vm.myOrganization.id;
         if (vm.departmentsForm.id === -1) {
             vm.departmentsForm.id = null
 
-            departmentService.postDepartment(vm.departmentsForm)
-                .then(_refreshCustomerData)
-                .catch(error => console.error(error));
+            await departmentService.postDepartment(vm.departmentsForm).catch(err=>alert(err.data.errorMessage))
+            _refreshCustomerData()
         } else {
-            departmentService.putDepartment(vm.departmentsForm)
-                .then(_refreshCustomerData)
-                .catch(error => console.error(error));
+            await departmentService.putDepartment(vm.departmentsForm).catch(err=>alert(err.data.errorMessage))
+            _refreshCustomerData();
         }
         $uibModalInstance.close();
     }
@@ -58,25 +53,22 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, depa
         $uibModalInstance.close()
     }
 
-    vm.deleteDepartment = function () {
-        departmentService.deleteDepartment(vm.data.id)
-            .then(_refreshCustomerData)
-            .catch(error => console.error(error));
+    vm.deleteDepartment = async function () {
+        await departmentService.deleteDepartment(vm.data.id).catch(err=>alert(err.data.errorMessage))
+        _refreshCustomerData();
         $uibModalInstance.close();
     };
 
-    function loadOrganizationData() {
-        const dataPromise = organizationService.getOrganizations();
-        dataPromise.then(function (organizations) {
-            vm.organizations = organizations;
-            if(vm.data){
-                for (const el of vm.organizations) {
-                    if (el.id == vm.data.organizationId) {
-                        vm.myOrganization = el;
-                    }
+    async function loadOrganizationData() {
+        let response = await organizationService.getOrganizations().catch(err=>alert(err.data.errorMessage))
+        vm.organizations = response.data;
+        if (vm.data) {
+            for (const el of vm.organizations) {
+                if (el.id == vm.data.organizationId) {
+                    vm.myOrganization = el;
                 }
             }
-        }).catch(error => console.error(error));
+        }
     }
 }
 

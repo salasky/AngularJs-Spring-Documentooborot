@@ -25,7 +25,7 @@
                 </tr>
                 </thead>
                 <tbody class="table-body">
-                <tr class="table-body-row" ng-repeat="incomingDocument in rootIncomingDocuments track by $index">
+                <tr class="table-body-row" ng-repeat="incomingDocument in vm.incomingDocuments">
                     <td>{{ $index + 1 }}</td>
                     <td><a ng-click="vm.openModal(incomingDocument)">{{ incomingDocument.name }}</a></td>
                     <td>{{ incomingDocument.text }}</td>

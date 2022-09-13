@@ -1,35 +1,17 @@
 angular
-        .module('app').factory('departmentService', function ($http, $q, HTTP_METHOD, URLS) {
+        .module('app').factory('departmentService',function ($http, HTTP_METHOD, URLS) {
         return {
-                getDepartments: async function () {
-                    return $http({
-                        method: HTTP_METHOD.GET,
-                        url: URLS.baseUrl + URLS.departments
-                    })
-/*                const deferred = $q.defer();
-                $http({
+            getDepartments: async function () {
+                return $http({
                     method: HTTP_METHOD.GET,
                     url: URLS.baseUrl + URLS.departments
                 })
-                    .then(function success(response) {
-                        deferred.resolve(response.data);
-                    }, function error(response) {
-                        deferred.reject(response.status);
-                    });
-                return deferred.promise;*/
             },
             getDepartment: function (id) {
-                const deferred = $q.defer();
-                $http({
+                return $http({
                     method: HTTP_METHOD.GET,
                     url: URLS.baseUrl + URLS.departments+id
                 })
-                    .then(function success(response) {
-                        deferred.resolve(response.data);
-                    }, function error(response) {
-                        deferred.reject(response.status);
-                    });
-                return deferred.promise;
             },
             postDepartment: function (dataForm) {
                 return $http({

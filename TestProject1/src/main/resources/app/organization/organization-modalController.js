@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('modalController', modalController);
 
-function modalController($uibModalInstance, syncData, $rootScope, dataService, URLS) {
+function modalController($uibModalInstance, syncData, $rootScope, organizationService) {
 
     const vm = this;
     vm.data = syncData;
@@ -13,32 +13,30 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService, U
         shortName: "",
         supervisor: "",
         contactNumbers: ""
-    };
+    }
+
     if (vm.data) {
         vm.organizationsForm = vm.data;
     }
 
-    function _refreshCustomerData() {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.organizations);
-        dataPromise.then(function (value) {
-            $rootScope.rootOrganizations = value;
-        }).catch(error => console.error(error));
+    async function _refreshCustomerData() {
+        let response = await organizationService.getOrganizations().catch(err=>alert(err.data.errorMessage))
+        $rootScope.$broadcast("refreshOrganizations", response.data);
     }
 
-    vm.ok = function () {
+    vm.ok = async function () {
         if (vm.organizationsForm.id == -1) {
             vm.organizationsForm.id = null
             vm.organizationsForm.contactNumbers = Array.of(vm.organizationsForm.contactNumbers);
-            dataService.postData(URLS.baseUrl + URLS.organizationAdd, vm.organizationsForm)
-                .then(_refreshCustomerData)
-                .catch(error => console.error(error));
+            await organizationService.postOrganization(vm.organizationsForm).catch(err=>alert(err.data.errorMessage))
+            _refreshCustomerData()
+
         } else {
             if (!Array.isArray(vm.organizationsForm.contactNumbers)) {
                 vm.organizationsForm.contactNumbers = Array.of(vm.organizationsForm.contactNumbers);
             }
-            dataService.putData(URLS.baseUrl + URLS.organizationUpdate, vm.organizationsForm)
-                .then(_refreshCustomerData)
-                .catch(error => console.error(error));
+            await organizationService.putOrganization(vm.organizationsForm).catch(err=>alert(err.data.errorMessage))
+            _refreshCustomerData();
         }
         $uibModalInstance.close();
     }
@@ -47,10 +45,9 @@ function modalController($uibModalInstance, syncData, $rootScope, dataService, U
         $uibModalInstance.close()
     }
 
-    vm.deleteOrganization = function () {
-        dataService.deleteData(URLS.baseUrl + URLS.organizations + vm.data.id)
-            .then(_refreshCustomerData)
-            .catch(error => console.error(error));
+    vm.deleteOrganization = async function () {
+        await organizationService.deleteOrganization(vm.data.id).catch(err=>alert(err.data.errorMessage))
+        _refreshCustomerData();
         $uibModalInstance.close();
     };
 };

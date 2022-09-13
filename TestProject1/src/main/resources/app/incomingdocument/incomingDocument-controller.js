@@ -2,36 +2,38 @@ angular
     .module('app')
     .controller('IncomingDocumentController', IncomingDocumentController);
 
-function IncomingDocumentController($uibModal, $rootScope, dataService, URLS) {
+function IncomingDocumentController($uibModal, $rootScope, incomingDocumentService, $scope, personService) {
 
     const vm = this;
     vm.activeTabNo = 0;
     vm.tabs = [];
 
     vm.$onInit = function () {
-        _refreshIncomingDocuments();
+        _refreshCustomerData();
     }
-    function _refreshIncomingDocuments() {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.incomingDocuments);
-        dataPromise.then(function (incomingDocuments) {
-            $rootScope.rootIncomingDocuments = incomingDocuments;
-        }).catch(error => console.error(error));
+    async function _refreshCustomerData() {
+        let response = await incomingDocumentService.getIncomingDocuments();
+        vm.incomingDocuments = response.data;
+        $scope.$apply();
     }
 
-    function personInfo(incomingDocument) {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.persons + incomingDocument.authorId);
-        dataPromise.then(function (person) {
-            vm.author = person;
-            let tabNo = incomingDocument;
-            tabNo.author = vm.author;
-            tabNo.index = incomingDocument.name + ' ' + incomingDocument.id.substring(0, 3)
-            if (vm.tabs.includes(tabNo)) {
-                vm.activeTabNo = tabNo;
-            } else {
-                vm.tabs.push(tabNo);
-                vm.activeTabNo = tabNo;
-            }
-        }).catch(error => console.error(error));
+    $scope.$on("refreshIncomingDocuments", function (evt, data) {
+        vm.incomingDocuments = data;
+    });
+
+    async function personInfo(incomingDocument) {
+        let responsePerson = await personService.getPerson(incomingDocument.authorId);
+        vm.author = responsePerson.data;
+        let tabNo = incomingDocument;
+        tabNo.author = vm.author;
+        tabNo.index = incomingDocument.name + ' ' + incomingDocument.id.substring(0, 3)
+        if (vm.tabs.includes(tabNo)) {
+            vm.activeTabNo = tabNo;
+        } else {
+            vm.tabs.push(tabNo);
+            vm.activeTabNo = tabNo;
+        }
+        $scope.$apply();
     }
 
     vm.openModal = function (incomingDocument) {

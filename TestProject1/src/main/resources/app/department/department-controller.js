@@ -10,22 +10,14 @@ function DepartmentController($uibModal, departmentService, organizationService,
     vm.departments = [];
 
     vm.$onInit = function () {
-        _refreshCustomerData();
+        _refreshCustomerData()
     }
-
 
     async function _refreshCustomerData() {
         let response  = await departmentService.getDepartments();
         vm.departments= response.data;
-        console.log( vm.departments)
+        $scope.$apply();
     }
-
-    /*    function _refreshCustomerData() {
-        const dataPromise = departmentService.getDepartments();
-        dataPromise.then(function (departments) {
-            vm.departments = departments;
-        }).catch(error => console.error(error));
-    }*/
 
     $scope.$on("refreshDepartment", function (evt, data) {
         vm.departments = data;
@@ -57,10 +49,9 @@ function DepartmentController($uibModal, departmentService, organizationService,
         });
     };
 
-    function organizationInfo(department) {
-        const dataPromise = organizationService.getOrganization(department.organizationId);
-        dataPromise.then(function (organization) {
-            vm.organization = organization;
+    async function organizationInfo(department) {
+        let response = await organizationService.getOrganization(department.organizationId).catch(err=>alert(err.data.errorMessage))
+        vm.organization = response.data;
             let tabNo = department
             tabNo.organization = vm.organization;
             tabNo.index = department.fullName + ' ' + department.id.substring(0, 3)
@@ -70,12 +61,13 @@ function DepartmentController($uibModal, departmentService, organizationService,
                 vm.tabs.push(tabNo);
                 vm.activeTabNo = tabNo;
             }
-        }).catch(error => console.error(error));
+        $scope.$apply();
     }
 
     vm.info = function (department) {
         organizationInfo(department);
     };
+
     vm.remove = function (index) {
         if (index === 0) {
             if (vm.activeTabNo === vm.tabs[0]) {

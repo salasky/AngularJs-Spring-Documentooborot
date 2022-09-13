@@ -25,7 +25,7 @@
                 </tr>
                 </thead>
                 <tbody class="table-body">
-                <tr class="table-body-row" ng-repeat="taskDocument in rootTaskDocuments track by $index">
+                <tr class="table-body-row" ng-repeat="taskDocument in vm.taskDocuments">
                     <td>{{ $index + 1 }}</td>
                     <td><a ng-click="vm.openModal(taskDocument)">{{ taskDocument.name }}</a></td>
                     <td>{{ taskDocument.text }}</td>

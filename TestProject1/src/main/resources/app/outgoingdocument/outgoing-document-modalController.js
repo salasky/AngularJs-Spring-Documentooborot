@@ -2,7 +2,7 @@ angular
     .module('app')
     .controller('OutgoingDocumentModalController', OutgoingDocumentModalController);
 
-function OutgoingDocumentModalController($uibModalInstance, dataService, syncData, $rootScope, URLS) {
+function OutgoingDocumentModalController($uibModalInstance, outgoingDocumentService, syncData, $rootScope, personService) {
     const vm = this;
     vm.data = syncData;
     vm.outgoingDocumentForm = {
@@ -46,28 +46,23 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
     function addDocument() {
         loadPersonData()
     }
-
-    function _refreshOutgoingDocuments() {
-        const dataPromise = dataService.getData(URLS.baseUrl + URLS.outgoingDocuments);
-        dataPromise.then(function (value) {
-            $rootScope.rootOutgoingDocuments = value;
-        }).catch(error => console.error(error));
+    async function _refreshOutgoingDocuments() {
+        let response = await outgoingDocumentService.getOutgoingDocuments();
+        $rootScope.$broadcast("refreshOutgoingDocuments", response.data);
     }
 
-    vm.ok = function () {
+
+    vm.ok = async function () {
         vm.outgoingDocumentForm.authorId = vm.myAuthor.id;
         vm.outgoingDocumentForm.senderId = vm.mySender.id;
         vm.outgoingDocumentForm.deliveryType = vm.myDeliveryType.label;
         if (vm.outgoingDocumentForm.id == -1) {
             vm.outgoingDocumentForm.id = null
-            dataService.postData(URLS.baseUrl + URLS.outgoingDocumentAdd, vm.outgoingDocumentForm)
-                .then(_refreshOutgoingDocuments)
-                .catch(error => console.error(error));
-            ;
+            await outgoingDocumentService.postOutgoingDocument(vm.outgoingDocumentForm).catch(err=>alert(err.data.errorMessage))
+            _refreshOutgoingDocuments()
         } else {
-            dataService.putData(URLS.baseUrl + URLS.outgoingDocumentUpdate, vm.outgoingDocumentForm)
-                .then(_refreshOutgoingDocuments)
-                .catch(error => console.error(error));
+            await outgoingDocumentService.putOutgoingDocument(vm.outgoingDocumentForm).catch(err=>alert(err.data.errorMessage))
+            _refreshOutgoingDocuments()
         }
         $uibModalInstance.close();
     }
@@ -76,28 +71,25 @@ function OutgoingDocumentModalController($uibModalInstance, dataService, syncDat
         $uibModalInstance.close()
     }
 
-    vm.deleteOutgoingDocuments = function () {
-        dataService.deleteData(URLS.baseUrl + URLS.outgoingDocuments + vm.data.id)
-            .then(_refreshOutgoingDocuments)
-            .catch(error => console.error(error));
+    vm.deleteOutgoingDocuments = async function () {
+        await outgoingDocumentService.deleteOutgoingDocument(vm.data.id).catch(err=>alert(err.data.errorMessage))
+        _refreshOutgoingDocuments()
         $uibModalInstance.close();
     };
 
-    function loadPersonData() {
-        let dataPromise = dataService.getData(URLS.baseUrl + URLS.persons);
-        dataPromise.then(function (persons) {
-            vm.persons = persons;
-            if(vm.data) {
-                for (const el of vm.persons) {
-                    if (el.id == vm.data.authorId) {
-                        vm.myAuthor = el;
-                    }
-                    if (el.id == vm.data.senderId) {
-                        vm.mySender = el;
-                    }
+    async function loadPersonData() {
+        let responsePersons = await personService.getPersons().catch(err=>alert(err.data.errorMessage))
+        vm.persons = responsePersons.data;
+        if (vm.data) {
+            for (const el of vm.persons) {
+                if (el.id == vm.data.authorId) {
+                    vm.myAuthor = el;
+                }
+                if (el.id == vm.data.senderId) {
+                    vm.mySender = el;
                 }
             }
-        }).catch(error => console.error(error));
+        }
     }
 };
 
