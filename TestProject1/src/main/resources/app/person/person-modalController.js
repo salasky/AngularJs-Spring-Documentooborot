@@ -38,8 +38,12 @@ function PersonModalController($uibModalInstance, personService, syncData, $root
     }
 
     async function _refreshCustomerData() {
-        let response = await personService.getPersons();
-        $rootScope.$broadcast("refreshPersons", response.data);
+        try {
+            let response = await personService.getPersons();
+            $rootScope.$broadcast("refreshPersons", response.data);
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
     }
 
     vm.ok = async function () {
@@ -48,11 +52,19 @@ function PersonModalController($uibModalInstance, personService, syncData, $root
 
         if (vm.personsForm.id == -1) {
             vm.personsForm.id = null
-            await personService.postPerson(vm.personsForm).catch(err=>alert(err.data.errorMessage))
-            _refreshCustomerData()
+            try {
+                await personService.postPerson(vm.personsForm)
+                _refreshCustomerData()
+            } catch (error) {
+                alert(err.data.errorMessage)
+            }
         } else {
-            await personService.putPerson(vm.personsForm).catch(err=>alert(err.data.errorMessage))
-            _refreshCustomerData()
+            try {
+                await personService.putPerson(vm.personsForm)
+                _refreshCustomerData()
+            } catch (error) {
+                alert(err.data.errorMessage)
+            }
         }
         $uibModalInstance.close();
     }
@@ -62,14 +74,22 @@ function PersonModalController($uibModalInstance, personService, syncData, $root
     }
 
     vm.deletePerson = async function () {
-        await personService.deletePerson(vm.data.id).catch(err=>alert(err.data.errorMessage))
-        _refreshCustomerData();
+        try {
+            await personService.deletePerson(vm.data.id)
+            _refreshCustomerData();
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         $uibModalInstance.close();
     };
 
     async function loadDepartmentData() {
-        let responseDepartments = await departmentService.getDepartments().catch(err=>alert(err.data.errorMessage))
-        vm.departments = responseDepartments.data;
+        try {
+            let responseDepartments = await departmentService.getDepartments()
+            vm.departments = responseDepartments.data;
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         if (vm.data) {
             for (const el of vm.departments) {
                 if (el.id == vm.data.departmentId) {
@@ -77,8 +97,12 @@ function PersonModalController($uibModalInstance, personService, syncData, $root
                 }
             }
         }
-        let responseJobs = await jobService.getJobs().catch(err=>alert(err.data.errorMessage))
-        vm.jobs = responseJobs.data;
+        try {
+            let responseJobs = await jobService.getJobs()
+            vm.jobs = responseJobs.data;
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         if (vm.data) {
             for (const el of vm.jobs) {
                 if (el.id == vm.data.jobTittleId) {

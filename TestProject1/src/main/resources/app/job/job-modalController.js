@@ -22,11 +22,20 @@ function jobsModalController($uibModalInstance, syncData, jobService, $rootScope
     vm.ok = async function () {
         if (vm.jobsForm.id == -1) {
             vm.jobsForm.id = null
-            await jobService.postJob(vm.jobsForm).catch(err=>alert(err.data.errorMessage))
-            _refreshCustomerData()
+            try {
+                await jobService.postJob(vm.jobsForm)
+                _refreshCustomerData()
+            } catch (error) {
+                alert(err.data.errorMessage)
+            }
+
         } else {
-            await jobService.putJob(vm.jobsForm).catch(err=>alert(err.data.errorMessage))
-            _refreshCustomerData();
+            try {
+                await jobService.putJob(vm.jobsForm)
+                _refreshCustomerData();
+            } catch (error) {
+                alert(err.data.errorMessage)
+            }
         }
         $uibModalInstance.close();
     }
@@ -36,14 +45,22 @@ function jobsModalController($uibModalInstance, syncData, jobService, $rootScope
     }
 
     vm.deleteJob = async function () {
-        await jobService.deleteJob(vm.data.id).catch(err=>alert(err.data.errorMessage))
-        _refreshCustomerData();
+        try {
+            await jobService.deleteJob(vm.data.id)
+            _refreshCustomerData();
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         $uibModalInstance.close();
     };
 
     async function _refreshCustomerData() {
-        let response = await jobService.getJobs().catch(err=>alert(err.data.errorMessage))
-        $rootScope.$broadcast("refreshJobs", response.data);
+        try {
+            let response = await jobService.getJobs()
+            $rootScope.$broadcast("refreshJobs", response.data);
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
     }
 };
 

@@ -38,8 +38,12 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
     }
 
     async function _refreshIncomingDocuments() {
-        let response = await incomingDocumentService.getIncomingDocuments().catch(err=>alert(err.data.errorMessage))
-        $rootScope.$broadcast("refreshIncomingDocuments", response.data);
+        try {
+            let response = await incomingDocumentService.getIncomingDocuments()
+            $rootScope.$broadcast("refreshIncomingDocuments", response.data);
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
     }
 
     vm.ok = async function () {
@@ -49,12 +53,19 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
 
         if (vm.incomingDocumentForm.id == -1) {
             vm.incomingDocumentForm.id = null
-            await incomingDocumentService.postIncomingDocument(vm.incomingDocumentForm).catch(err=>alert(err.data.errorMessage))
-            _refreshIncomingDocuments()
-
+            try {
+                await incomingDocumentService.postIncomingDocument(vm.incomingDocumentForm)
+                _refreshIncomingDocuments()
+            } catch (error) {
+                alert(err.data.errorMessage)
+            }
         } else {
-            await incomingDocumentService.putIncomingDocument(vm.incomingDocumentForm).catch(err=>alert(err.data.errorMessage))
-            _refreshIncomingDocuments()
+            try {
+                await incomingDocumentService.putIncomingDocument(vm.incomingDocumentForm)
+                _refreshIncomingDocuments()
+            } catch (error) {
+                alert(err.data.errorMessage)
+            }
         }
         $uibModalInstance.close();
     }
@@ -64,15 +75,22 @@ function IncomingDocumentModalController($uibModalInstance, syncData, $rootScope
     }
 
     vm.deleteIncomingDocuments = async function () {
-        await incomingDocumentService.deleteTaskDocument(vm.data.id).catch(err=>alert(err.data.errorMessage))
-        _refreshIncomingDocuments()
+        try {
+            await incomingDocumentService.deleteTaskDocument(vm.data.id)
+            _refreshIncomingDocuments()
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         $uibModalInstance.close();
     };
 
     async function loadPersonData() {
-        let responsePersons = await personService.getPersons().catch(err=>alert(err.data.errorMessage))
-        vm.persons = responsePersons.data;
-
+        try {
+            let responsePersons = await personService.getPersons()
+            vm.persons = responsePersons.data;
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         if (vm.data) {
             for (const el of vm.persons) {
                 if (el.id == vm.data.authorId) {

@@ -11,9 +11,13 @@ function JobController($uibModal, $rootScope, jobService, $scope) {
     }
 
     async function _refreshCustomerData() {
-        let response  = await jobService.getJobs();
-        vm.jobs= response.data;
-        $scope.$apply();
+        try {
+            let response  = await jobService.getJobs();
+            vm.jobs= response.data;
+            $scope.$apply();
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
     }
 
     $scope.$on("refreshJobs", function (evt, data) {

@@ -13,10 +13,15 @@ function DepartmentController($uibModal, departmentService, organizationService,
         _refreshCustomerData()
     }
 
+
     async function _refreshCustomerData() {
-        let response  = await departmentService.getDepartments();
-        vm.departments= response.data;
-        $scope.$apply();
+        try {
+            let response  = await departmentService.getDepartments();
+            vm.departments= response.data;
+            $scope.$apply();
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
     }
 
     $scope.$on("refreshDepartment", function (evt, data) {
@@ -50,8 +55,9 @@ function DepartmentController($uibModal, departmentService, organizationService,
     };
 
     async function organizationInfo(department) {
-        let response = await organizationService.getOrganization(department.organizationId).catch(err=>alert(err.data.errorMessage))
-        vm.organization = response.data;
+        try {
+            let response = await organizationService.getOrganization(department.organizationId).catch(err=>alert(err.data.errorMessage))
+            vm.organization = response.data;
             let tabNo = department
             tabNo.organization = vm.organization;
             tabNo.index = department.fullName + ' ' + department.id.substring(0, 3)
@@ -61,7 +67,10 @@ function DepartmentController($uibModal, departmentService, organizationService,
                 vm.tabs.push(tabNo);
                 vm.activeTabNo = tabNo;
             }
-        $scope.$apply();
+            $scope.$apply();
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
     }
 
     vm.info = function (department) {

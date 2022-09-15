@@ -40,11 +40,20 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, depa
         if (vm.departmentsForm.id === -1) {
             vm.departmentsForm.id = null
 
-            await departmentService.postDepartment(vm.departmentsForm).catch(err=>alert(err.data.errorMessage))
-            _refreshCustomerData()
+            try {
+                await departmentService.postDepartment(vm.departmentsForm)
+                _refreshCustomerData()
+            } catch (error) {
+                alert(err.data.errorMessage)
+            }
+
         } else {
-            await departmentService.putDepartment(vm.departmentsForm).catch(err=>alert(err.data.errorMessage))
-            _refreshCustomerData();
+            try {
+                await departmentService.putDepartment(vm.departmentsForm)
+                _refreshCustomerData();
+            } catch (error) {
+                alert(err.data.errorMessage)
+            }
         }
         $uibModalInstance.close();
     }
@@ -54,14 +63,22 @@ function DepartmentModalController($uibModalInstance, $rootScope, syncData, depa
     }
 
     vm.deleteDepartment = async function () {
-        await departmentService.deleteDepartment(vm.data.id).catch(err=>alert(err.data.errorMessage))
-        _refreshCustomerData();
+        try {
+            await departmentService.deleteDepartment(vm.data.id)
+            _refreshCustomerData();
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         $uibModalInstance.close();
     };
 
     async function loadOrganizationData() {
-        let response = await organizationService.getOrganizations().catch(err=>alert(err.data.errorMessage))
-        vm.organizations = response.data;
+        try {
+            let response = await organizationService.getOrganizations()
+            vm.organizations = response.data;
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         if (vm.data) {
             for (const el of vm.organizations) {
                 if (el.id == vm.data.organizationId) {

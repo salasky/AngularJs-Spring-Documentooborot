@@ -20,23 +20,34 @@ function modalController($uibModalInstance, syncData, $rootScope, organizationSe
     }
 
     async function _refreshCustomerData() {
-        let response = await organizationService.getOrganizations().catch(err=>alert(err.data.errorMessage))
-        $rootScope.$broadcast("refreshOrganizations", response.data);
+        try {
+            let response = await organizationService.getOrganizations()
+            $rootScope.$broadcast("refreshOrganizations", response.data);
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
     }
 
     vm.ok = async function () {
         if (vm.organizationsForm.id == -1) {
             vm.organizationsForm.id = null
             vm.organizationsForm.contactNumbers = Array.of(vm.organizationsForm.contactNumbers);
-            await organizationService.postOrganization(vm.organizationsForm).catch(err=>alert(err.data.errorMessage))
-            _refreshCustomerData()
-
+            try {
+                await organizationService.postOrganization(vm.organizationsForm)
+                _refreshCustomerData()
+            } catch (error) {
+                alert(err.data.errorMessage)
+            }
         } else {
             if (!Array.isArray(vm.organizationsForm.contactNumbers)) {
                 vm.organizationsForm.contactNumbers = Array.of(vm.organizationsForm.contactNumbers);
             }
-            await organizationService.putOrganization(vm.organizationsForm).catch(err=>alert(err.data.errorMessage))
-            _refreshCustomerData();
+            try {
+                await organizationService.putOrganization(vm.organizationsForm)
+                _refreshCustomerData();
+            } catch (error) {
+                alert(err.data.errorMessage)
+            }
         }
         $uibModalInstance.close();
     }
@@ -46,8 +57,12 @@ function modalController($uibModalInstance, syncData, $rootScope, organizationSe
     }
 
     vm.deleteOrganization = async function () {
-        await organizationService.deleteOrganization(vm.data.id).catch(err=>alert(err.data.errorMessage))
-        _refreshCustomerData();
+        try {
+            await organizationService.deleteOrganization(vm.data.id)
+            _refreshCustomerData();
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         $uibModalInstance.close();
     };
 };

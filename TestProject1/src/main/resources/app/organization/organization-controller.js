@@ -10,9 +10,13 @@ function OrganizationController($uibModal, $rootScope, organizationService, $sco
     }
 
     async function _refreshCustomerData() {
-        let response  = await organizationService.getOrganizations().catch(err=>alert(err.data.errorMessage))
-        vm.organizations= response.data;
-        $scope.$apply();
+        try {
+            let response = await organizationService.getOrganizations()
+            vm.organizations = response.data;
+            $scope.$apply();
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
     }
 
     $scope.$on("refreshOrganizations", function (evt, data) {

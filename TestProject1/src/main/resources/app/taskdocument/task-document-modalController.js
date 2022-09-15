@@ -39,8 +39,12 @@ function TaskDocumentModalController($uibModalInstance, taskDocumentService, syn
 
 
     async function _refreshDocuments() {
-        let response = await taskDocumentService.getTaskDocuments().catch(err=>alert(err.data.errorMessage))
-        $rootScope.$broadcast("refreshTaskDocuments", response.data);
+        try {
+            let response = await taskDocumentService.getTaskDocuments()
+            $rootScope.$broadcast("refreshTaskDocuments", response.data);
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
     }
 
     vm.ok = async function () {
@@ -49,11 +53,19 @@ function TaskDocumentModalController($uibModalInstance, taskDocumentService, syn
         vm.taskDocumentForm.controlPersonId = vm.myControlPerson.id;
         if (vm.taskDocumentForm.id === -1) {
             vm.taskDocumentForm.id = null
-            await taskDocumentService.postTaskDocument(vm.taskDocumentForm).catch(err=>alert(err.data.errorMessage))
-            _refreshDocuments()
+            try {
+                await taskDocumentService.postTaskDocument(vm.taskDocumentForm)
+                _refreshDocuments()
+            } catch (error) {
+                alert(err.data.errorMessage)
+            }
         } else {
-            await taskDocumentService.putTaskDocument(vm.taskDocumentForm).catch(err=>alert(err.data.errorMessage))
-            _refreshDocuments()
+            try {
+                await taskDocumentService.putTaskDocument(vm.taskDocumentForm)
+                _refreshDocuments()
+            } catch (error) {
+                alert(err.data.errorMessage)
+            }
         }
         $uibModalInstance.close();
     }
@@ -63,15 +75,22 @@ function TaskDocumentModalController($uibModalInstance, taskDocumentService, syn
     }
 
     vm.deleteTaskDocuments = async function () {
-        await taskDocumentService.deleteTaskDocument(vm.data.id).catch(err=>alert(err.data.errorMessage))
-        _refreshDocuments()
+        try {
+            await taskDocumentService.deleteTaskDocument(vm.data.id)
+            _refreshDocuments()
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         $uibModalInstance.close();
     };
 
     async function loadPersonData() {
-        let responsePersons = await personService.getPersons().catch(err=>alert(err.data.errorMessage))
-        vm.persons = responsePersons.data;
-
+        try {
+            let responsePersons = await personService.getPersons()
+            vm.persons = responsePersons.data;
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         if (vm.data) {
             for (const el of vm.persons) {
                 if (el.id == vm.data.authorId) {

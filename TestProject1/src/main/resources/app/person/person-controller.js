@@ -14,9 +14,13 @@ function PersonController(personService, $uibModal, $rootScope, $scope, departme
         _refreshCustomerData();
     }
     async function _refreshCustomerData() {
-        let response = await personService.getPersons().catch(err=>alert(err.data.errorMessage))
-        vm.persons = response.data;
-        $scope.$apply();
+        try {
+            let response = await personService.getPersons()
+            vm.persons = response.data;
+            $scope.$apply();
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
     }
 
     $scope.$on("refreshPersons", function (evt, data) {
@@ -38,15 +42,16 @@ function PersonController(personService, $uibModal, $rootScope, $scope, departme
     };
 
     async function staffInfoGet(person) {
-        let responseDepartment = await departmentService.getDepartment(person.departmentId).catch(err=>alert(err.data.errorMessage))
-        vm.department = responseDepartment.data;
-
-        let responseOrganization= await organizationService.getOrganization(vm.department.organizationId).catch(err=>alert(err.data.errorMessage))
-        vm.organization = responseOrganization.data;
-
-        let responseJob= await jobService.getJob(person.jobTittleId);
-        vm.job = responseJob.data;
-
+        try {
+            let responseDepartment = await departmentService.getDepartment(person.departmentId)
+            vm.department = responseDepartment.data;
+            let responseOrganization= await organizationService.getOrganization(vm.department.organizationId)
+            vm.organization = responseOrganization.data;
+            let responseJob= await jobService.getJob(person.jobTittleId);
+            vm.job = responseJob.data;
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         let tabNo = person;
         tabNo.organization = vm.organization;
         tabNo.department = vm.department;

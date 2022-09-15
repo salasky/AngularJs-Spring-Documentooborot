@@ -12,9 +12,13 @@ function TaskDocumentController(taskDocumentService, $uibModal, $rootScope, $sco
         _refreshCustomerData();
     }
     async function _refreshCustomerData() {
-        let response = await taskDocumentService.getTaskDocuments().catch(err=>alert(err.data.errorMessage))
-        vm.taskDocuments = response.data;
-        $scope.$apply();
+        try {
+            let response = await taskDocumentService.getTaskDocuments()
+            vm.taskDocuments = response.data;
+            $scope.$apply();
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
     }
 
     $scope.$on("refreshTaskDocuments", function (evt, data) {
@@ -22,8 +26,13 @@ function TaskDocumentController(taskDocumentService, $uibModal, $rootScope, $sco
     });
 
     async function personInfo(taskDocument) {
-        let responsePerson = await personService.getPerson(taskDocument.authorId).catch(err=>alert(err.data.errorMessage))
-        vm.author = responsePerson.data;
+        try {
+            let responsePerson = await personService.getPerson(taskDocument.authorId)
+            vm.author = responsePerson.data;
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
+
         let tabNo = taskDocument;
         tabNo.author = vm.author;
         tabNo.index = taskDocument.name + ' ' + taskDocument.id.substring(0, 3)

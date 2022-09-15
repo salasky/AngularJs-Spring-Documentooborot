@@ -13,9 +13,13 @@ function OutgoingDocumentController($compile, $sce, $scope, $uibModal, $rootScop
         _refreshCustomerData();
     }
     async function _refreshCustomerData() {
-        let response = await outgoingDocumentService.getOutgoingDocuments().catch(err=>alert(err.data.errorMessage))
-        vm.outgoingDocuments = response.data;
-        $scope.$apply();
+        try {
+            let response = await outgoingDocumentService.getOutgoingDocuments()
+            vm.outgoingDocuments = response.data;
+            $scope.$apply();
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
     }
 
     $scope.$on("refreshOutgoingDocuments", function (evt, data) {
@@ -23,8 +27,12 @@ function OutgoingDocumentController($compile, $sce, $scope, $uibModal, $rootScop
     });
 
     async function personInfo(outgoingDocument) {
-        let response = await personService.getPerson(outgoingDocument.authorId).catch(err=>alert(err.data.errorMessage))
-        vm.author = response.data;
+        try {
+            let response = await personService.getPerson(outgoingDocument.authorId)
+            vm.author = response.data;
+        } catch (error) {
+            alert(err.data.errorMessage)
+        }
         let tabNo = outgoingDocument;
         tabNo.author = vm.author;
         tabNo.index = outgoingDocument.name + ' ' + outgoingDocument.id.substring(0, 3)
